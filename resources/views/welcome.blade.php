@@ -95,7 +95,7 @@
 					</div>
 					<div id="Container">
 								<div class="filimg mix category-1 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="2">
-									<img src="img/fea1.jpg" class="img-responsive"> 
+									<img src="img/fea1.jpg" class="img-responsive">
 								</div>
 								<div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="4">
 									<img src="img/fea2.jpg" class="img-responsive">
@@ -204,7 +204,7 @@
 		</div>
 	</div>
 	<!--TEAM END-->
-    
+
 	<!--CTA2 START-->
 	<div class="cta2">
 		<div class="container">
@@ -228,7 +228,7 @@
 				</div>
                 <div id="sendmessage">Your message has been sent. Thank you!</div>
                 <div id="errormessage"></div>
-                
+
 				<div class="form-sec">
                 	<form action="" method="post" role="form" class="contactForm">
                     	<div class="col-md-4 form-group">
@@ -246,7 +246,7 @@
                         <div class="col-md-12 form-group">
                             <textarea class="form-control text-field-box" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                             <div class="validation"></div>
-            
+
                             <button class="button-medium" id="contact-submit" type="submit" name="contact">Submit Now</button>
                         </div>
                     </form>

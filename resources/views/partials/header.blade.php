@@ -1,4 +1,7 @@
 <header>
+  <style type="text/css">@font-face {
+    font-family:nav-font; src: url('{{ asset('../public/fonts/APJapanesefontH.ttf') }}');
+    }</style>
     <div class="main-navigation navbar-fixed-top">
 		<nav class="navbar navbar-default">
 			<div class="container">
