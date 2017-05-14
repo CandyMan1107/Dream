@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/lib', function () {
+    return view('load');
+});
+
+Route::get('/background', function(){
+    return view('background/background_main');
+});
