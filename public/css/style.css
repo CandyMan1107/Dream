@@ -54,6 +54,14 @@ Header
   background-color: #337ab7;
 }
 
+.background_set {
+    min-height: 87%;
+}
+
+.background_tag {
+    border-left: 2px solid #efefef;
+}
+
 .navbar-default {
     background-color: #fff;
     border-color: rgba(231, 231, 231, 0.33);
