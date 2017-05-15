@@ -28,7 +28,7 @@ Header
 **************************************/
 
 .section-padding {
-    padding: 40px 0px;
+    padding: 0px 0px;
 }
 
 .main-navigation {
@@ -38,7 +38,7 @@ Header
 .navbar-default {
     background-color: #fff;
     border-color: rgba(231, 231, 231, 0.33);
-    padding: 20px 0px;
+    padding: 10px 0px;
 }
 
 .navbar-default .navbar-nav>.active>a,
