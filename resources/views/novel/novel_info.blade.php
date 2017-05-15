@@ -8,7 +8,7 @@
             <!-- container class START -->
             <div class="container">
                 <div class="row">
-                    <div class="col-md-8 text-left">
+                    <div class="col-md-8 text-left" style="padding-top: 10px;">
                         <h3><strong>오베라는 남자</strong></h3>
                         <h5><small>글</small>&nbsp;글작가</h5>
                     </div>

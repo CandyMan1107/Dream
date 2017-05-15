@@ -17,13 +17,8 @@
 						</button>
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
-<<<<<<< HEAD
-						<a class="" href="#">
-							<img src="img/logo.png" style="width:10%">
-=======
 						<a class="" href="/">
 							<img alt="" src="/img/logo.png" style="width:10%">
->>>>>>> 62e1429be77c27697b5983508255319718fce6ae
 						</a>
 						<ul class="nav navbar-nav navbar-right">
 							
