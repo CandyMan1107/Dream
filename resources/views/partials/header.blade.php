@@ -17,7 +17,7 @@
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<a class="" href="#">
-							<img alt="" src="img/logo.png" style="width:15%">
+							<img alt="" src="img/logo.png" style="width:10%">
 						</a>
 						<ul class="nav navbar-nav navbar-right">
 							

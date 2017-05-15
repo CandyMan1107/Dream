@@ -31,8 +31,27 @@ Header
     padding: 0px 0px;
 }
 
+.default-padding {
+    padding : 27px 0px;
+}
+
 .main-navigation {
     border-bottom: 1px solid #eee;
+}
+
+.my-sub-navigation {
+    background-color: #EFEFEF;
+    font-family: 'Segoe UI';
+    font-size: 18px;
+    padding : 5px 0px;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  color: #fff;
+  font-style: bold;
+  background-color: #337ab7;
 }
 
 .navbar-default {
