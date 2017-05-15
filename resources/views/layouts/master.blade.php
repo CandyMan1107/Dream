@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="/css/slick.css">
         <link rel="stylesheet" type="text/css" href="/css/slick-team-slider.css"/>
         <link rel="stylesheet" href="/css/style.css">
+
+        <!--JHM STYLE-->
+        <link rel="stylesheet" href="/css/jhm-style.css">
     </head>
     <body>
       @include('partials.header')
