@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-    <p></p>
+    <div class="default-padding"></div>
+    
 @endsection
