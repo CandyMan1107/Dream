@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-<body>
 <!--BANNER START-->
 	<div id="banner" class="section-padding">
 		<div class="container">
@@ -261,5 +260,4 @@
 	<script src="/js/jquery.mixitup.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/js/slick.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
-</body>
 @endsection

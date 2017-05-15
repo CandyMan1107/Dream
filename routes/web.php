@@ -23,3 +23,27 @@ Route::get('/lib', function () {
 Route::get('/background', function(){
     return view('background/background_main');
 });
+
+Route::get('/background/historyTable', function(){
+    return view('background/historyTable/history_table_view');
+});
+
+Route::get('/background/character', function(){
+    return view('background/character/character_view');
+});
+
+Route::get('/background/things', function(){
+    return view('background/things/things_view');
+});
+
+Route::get('/background/relation', function(){
+    return view('background/relationship/relationship_view');
+});
+
+Route::get('/background/map', function(){
+    return view('background/map/map_view');
+});
+
+Route::get('/background/share', function(){
+    return view('background/share/set_share_view');
+});
