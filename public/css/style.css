@@ -110,6 +110,10 @@ Header
     padding: 0px;
 }
 
+.nav>li>a.sub {
+    padding : 0px 15px;
+}
+
 .jumbotron {
     background-color: transparent;
     padding-top: 90px;
