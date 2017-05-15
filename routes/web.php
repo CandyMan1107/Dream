@@ -23,3 +23,8 @@ Route::get('/lib', function () {
 Route::get('/background', function(){
     return view('background/background_main');
 });
+
+Route::get('/novel', function(){
+    return view('novel/novel_info');
+});
+
