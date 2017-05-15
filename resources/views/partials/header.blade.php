@@ -1,9 +1,11 @@
 <body>
 <article>
 	<header>
-		<style type="text/css">@font-face {
-			font-family:nav-font; src: url('{{ asset('../public/fonts/APJapanesefontH.ttf') }}');
-			}</style>
+		<style type="text/css">
+			@font-face {
+				font-family:nav-font; src: url('{{ asset('../public/fonts/APJapanesefontH.ttf') }}');
+			}
+		</style>
 			<div class="main-navigation navbar-fixed-top">
 			<nav class="navbar navbar-default">
 				<div class="container">
@@ -13,11 +15,10 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						{{-- <img src="img/logo.png" class="img-responsive" alt="Responsive image" style="width:25%"> --}}
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<a class="" href="#">
-							<img alt="" src="img/logo.png" style="width:10%">
+							<img src="img/logo.png" style="width:10%">
 						</a>
 						<ul class="nav navbar-nav navbar-right">
 							
