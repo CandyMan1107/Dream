@@ -24,7 +24,7 @@ Route::get('/background', function(){
     return view('background/background_main');
 });
 
-Route::get('/novel', function(){
+Route::get('/novel/novel_info', function(){
     return view('novel/novel_info');
 });
 

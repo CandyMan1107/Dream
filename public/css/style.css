@@ -54,10 +54,23 @@ Header
   background-color: #337ab7;
 }
 
+.height-max-set {
+    height: 80%;
+}
+
+.background_tag {
+    border-left: 2px solid #efefef;
+}
+
 .navbar-default {
     background-color: #fff;
     border-color: rgba(231, 231, 231, 0.33);
     padding: 10px 0px;
+}
+
+.img-things-size {
+    width : 70px;
+    height : 70px;
 }
 
 .navbar-default .navbar-nav>.active>a,
@@ -108,6 +121,10 @@ Header
 
 .nav>li>a {
     padding: 0px;
+}
+
+.nav>li>a.sub {
+    padding : 0px 15px;
 }
 
 .jumbotron {

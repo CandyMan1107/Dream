@@ -1,0 +1,64 @@
+/**************************************
+default-padding
+**************************************/
+#default-padding-small-0 {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+#default-padding-small {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#default-padding-small-1 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#default-padding-mid {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#default-padding-mid-1 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#default-padding-big {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+/**************************************
+/novel/novel_info.blade.php
+**************************************/
+#novel-info-1 .novel-info-upper-text {
+    padding-top: 30px;
+}
+#novel-info-1 .novel-info-upper-icon > i {
+    padding-top: 30px;
+    font-size: 40px;
+}
+#novel-info-1 .novel-info-upper-icon > h4 {
+    font-size: 16px;
+}
+
+#novel-info-2 .hit-icon {
+    font-size: 20px;
+}
+#novel-info-2 .novel-1st-read-Btn, .novel-background-read-Btn {
+    font-size: 22px;
+}
+
+#novel-info-3 .episode {
+    border: 1px solid rgba(149, 152, 154, .5) !important;
+}
+#novel-info-3 .episode-spec {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+#novel-info-3 .episode-spec > i {
+    font-size: 17px;
+}
