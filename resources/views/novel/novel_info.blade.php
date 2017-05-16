@@ -45,18 +45,18 @@
                     </div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-xs-2 col-sm-2">
+                            <div class="col-md-2">
                                 <i class="fa fa-user-o hit-icon" aria-hidden="true"></i>
                                 &nbsp;
                                 174,282
                             </div>
-                            <div class="col-xs-2 col-sm-2">
-                                수, 토 연재
+                            <div class="col-md-2 upload-day">
+                                <b>수, 토</b> 연재
                             </div>
-                            <div class="col-xs-2 col-sm-2">
+                            <div class="col-md-2">
                                 소설
                             </div>
-                            <div class="col-xs-3 col-sm-3">
+                            <div class="col-md-3">
                                 소설 | 현대 | 노인 | 괴짜
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                     <div id="default-padding-mid-1" class="col-md-9"></div>
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-xs-3 col-sm-3">
+                            <div class="col-md-3">
                                 <select class="form-control input-lg">
                                     <option>5</option>
                                     <option>4</option>
@@ -81,10 +81,10 @@
                                     <option>1</option>
                                 </select>
                             </div>
-                            <div class="col-xs-4 col-sm-4">
+                            <div class="col-md-4">
                                 <button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button>
                             </div>
-                            <div class="col-xs-4 col-sm-4">
+                            <div class="col-md-4">
                                 <button class="btn btn-default btn-block novel-background-read-Btn">소설 배경 설정 보기</button>
                             </div>
                         </div>
@@ -100,28 +100,35 @@
             <!-- container class START -->
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
-                        <h3>소설회차 <small>(120)</small></h3>
+                    <div class="col-md-6 text-left">
+                        <h3>소설회차 <small>(5)</small></h3>
+                    </div>
+                    <div class="col-md-6 text-right sort">
+                        <h5>
+                            <span class="sort-text">최신화부터</span> <span><i class="material-icons check-icon">check</i></span>
+                            &nbsp;&nbsp;&nbsp;
+                            <span class="sort-text">첫화부터</span> <span><i class="material-icons">check</i></span>
+                        </h5>
                     </div>
                     <div id="default-padding-small" class="col-md-12"></div>
                     <div class="col-md-12">
                         <div class="episode">
                             <div class="row">
-                                <div class="col-xs-3 col-sm-3">
+                                <div class="col-md-3">
                                     <div>
                                         <img src="/img/A_MAN_CALLED_OVE.jpg" width="261" height="160" />
                                     </div>
                                 </div>
-                                <div class="col-xs-9 col-sm-9">
-                                    <div class="episode-spec">
-                                        <div class="col-sm-12">
-                                            <h5>5. 오베라는 남자(5)</h5>
+                                <div class="col-md-9">
+                                    <div class="episode-list">
+                                        <div class="col-md-12">
+                                            <h4>1. 오베라는 남자(5)</h4>
                                         </div>
-                                        <div id="default-padding-small-0" class="col-sm-12"></div>
-                                        <div class="col-sm-2">
+                                        <div id="default-padding-small-0" class="col-md-12"></div>
+                                        <div class="col-md-2">
                                             <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;11,896
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-md-2">
                                             <small>댓글</small>&nbsp;<strong>52</strong>
                                         </div>
                                         <div class="col-sm-2">
@@ -131,17 +138,177 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="default-padding-small-1" class="col-xs-12"></div>
-                        
                     </div>
-                    <!-- row class END -->
-                    
-
+                    <div id="default-padding-small" class="col-md-12"></div>
+                    <div class="col-md-12">
+                        <div class="episode">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div>
+                                        <img src="/img/A_MAN_CALLED_OVE.jpg" width="261" height="160" />
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="episode-list">
+                                        <div class="col-md-12">
+                                            <h4>1. 오베라는 남자(4)</h4>
+                                        </div>
+                                        <div id="default-padding-small-0" class="col-md-12"></div>
+                                        <div class="col-md-2">
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;11,896
+                                        </div>
+                                        <div class="col-md-2">
+                                            <small>댓글</small>&nbsp;<strong>52</strong>
+                                        </div>
+                                        <div class="col-md-2">
+                                            2017.05.03
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="default-padding-small" class="col-md-12"></div>
+                    <div class="col-md-12">
+                        <div class="episode">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div>
+                                        <img src="/img/A_MAN_CALLED_OVE.jpg" width="261" height="160" />
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="episode-list">
+                                        <div class="col-md-12">
+                                            <h4>1. 오베라는 남자(3)</h4>
+                                        </div>
+                                        <div id="default-padding-small-0" class="col-md-12"></div>
+                                        <div class="col-md-2">
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;11,896
+                                        </div>
+                                        <div class="col-md-2">
+                                            <small>댓글</small>&nbsp;<strong>52</strong>
+                                        </div>
+                                        <div class="col-md-2">
+                                            2017.04.29
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="default-padding-small" class="col-md-12"></div>
+                    <div class="col-md-12">
+                        <div class="episode">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div>
+                                        <img src="/img/A_MAN_CALLED_OVE.jpg" width="261" height="160" />
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="episode-list">
+                                        <div class="col-md-12">
+                                            <h4>1. 오베라는 남자(2)</h4>
+                                        </div>
+                                        <div id="default-padding-small-0" class="col-md-12"></div>
+                                        <div class="col-md-2">
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;11,896
+                                        </div>
+                                        <div class="col-md-2">
+                                            <small>댓글</small>&nbsp;<strong>52</strong>
+                                        </div>
+                                        <div class="col-md-2">
+                                            2017.04.26
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="default-padding-small" class="col-md-12"></div>
+                    <div class="col-md-12">
+                        <div class="episode">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div>
+                                        <img src="/img/A_MAN_CALLED_OVE.jpg" width="261" height="160" />
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="episode-list">
+                                        <div class="col-md-12">
+                                            <h4>1. 오베라는 남자(1)</h4>
+                                        </div>
+                                        <div id="default-padding-small-0" class="col-md-12"></div>
+                                        <div class="col-md-2">
+                                            <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;11,896
+                                        </div>
+                                        <div class="col-md-2">
+                                            <small>댓글</small>&nbsp;<strong>52</strong>
+                                        </div>
+                                        <div class="col-md-2">
+                                            2017.04.23
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!--PAGE-->
                     <div id="default-padding-small-1" class="col-md-12"></div>
                 </div>
+                <!-- row class END -->
             </div>
             <!-- container class END -->
         </div>
         <!-- novel-info-3 END -->
+        <div id="default-padding-mid-1" class="col-md-12"></div>
+        <!-- novel-info-4 START -->
+        <div id="novel-info-4">
+            <!-- container class START -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <h3>소설리뷰 <small>(1)</small></h3>
+                    </div>
+                    <div class="col-md-6 text-right sort">
+                        <h5>
+                            <span class="sort-text">최신순</span> <span><i class="material-icons check-icon">check</i></span>
+                            &nbsp;&nbsp;&nbsp;
+                            <span class="sort-text">추천순</span> <span><i class="material-icons">check</i></span>
+                        </h5>
+                    </div>
+                    <div id="default-padding-mid" class="col-md-12"></div>
+                    <div class="col-md-12 review-list">
+                        <div class="row">
+                            <div class="col-md-9 text-left">
+                                <span><strong>이대감</strong></span>
+                                &nbsp;
+                                <span><small>2017-05-01 00:29:24</small></span>
+                            </div>
+                            <div class="col-md-3 text-right thumb-up">
+                                <span><i class="material-icons">thumb_up</i></span>
+                                <span class="thumb-text">12</span>
+                            </div>
+                            <div id="default-padding-small" class="col-md-12"></div>
+                            <div class="col-md-12">
+                                <span><small>5화</small></span>
+                                &nbsp;
+                                <span>엄청 재밌어요! 글작가님 글은 항상 재미있었지만 오베는 역대급!</span>
+                            </div>
+                            <div id="default-padding-small-1" class="col-md-12"></div>
+                            <div class="col-md-12 review">
+                                <span class="re-review-text"><small>답글</small></span>
+                                <span><i class="material-icons">keyboard_arrow_down</i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="default-padding-mid" class="col-md-12"></div>
+                </div>
+                <!-- row class END -->
+            </div>
+            <!-- container class END -->
+        </div>
+        <!-- novel-info-4 END -->
 @endsection
