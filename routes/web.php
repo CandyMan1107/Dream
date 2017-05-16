@@ -53,8 +53,13 @@ Route::get('/background/share', function(){
 });
 
 
-//  소설 작성부
+// 소설 작성부
+// 소설 정보 작성
+Route::get('/write_novel/set', function(){
+    return view('write_novel/write_novel_set');
+});
 
+// 회차 내용 작성
 Route::get('/write_novel/view', function(){
     return view('write_novel/write_novel_view');
 });

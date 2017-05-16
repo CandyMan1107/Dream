@@ -30,7 +30,19 @@ default-padding
     padding-top: 30px;
     padding-bottom: 30px;
 }
-
+/**************************************
+sort
+**************************************/
+.sort > h5 > span {
+    /*border: 1px solid #FF0000;*/
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    width: auto;
+}
+.sort > h5 > .sort-text {
+    height: 20px;
+}
 /**************************************
 /novel/novel_info.blade.php
 **************************************/
@@ -48,17 +60,57 @@ default-padding
 #novel-info-2 .hit-icon {
     font-size: 20px;
 }
+#novel-info-2 .upload-day > b {
+    color: #FA9600;
+}
 #novel-info-2 .novel-1st-read-Btn, .novel-background-read-Btn {
     font-size: 22px;
 }
 
+#novel-info-3 .check-icon {
+    color: #FA9600;
+}
 #novel-info-3 .episode {
     border: 1px solid rgba(149, 152, 154, .5) !important;
 }
-#novel-info-3 .episode-spec {
+#novel-info-3 .episode-list {
     padding-top: 40px;
     padding-bottom: 40px;
 }
-#novel-info-3 .episode-spec > i {
+#novel-info-3 .episode-list > i {
     font-size: 17px;
+}
+
+#novel-info-4 .check-icon {
+    color: #FA9600;
+}
+#novel-info-4 .review-list {
+    border-bottom: 1px solid rgba(149, 152, 154, .5) !important;
+}
+#novel-info-4 .thumb-up {
+    color: #FA9600;
+}
+#novel-info-4 .thumb-up > span {
+    /*border: 1px solid #FF0000;*/
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    width: auto;
+}
+#novel-info-4 .thumb-up > span > i {
+    color: #FA9600;
+    font-size: 16px;
+}
+#novel-info-4 .review > span {
+    /*border: 1px solid #FF0000;*/
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    width: auto;
+}
+#novel-info-4 .review .re-review-text {
+    height: 28px;
+}
+#novel-info-4 .review > span > i {
+    color: rgba(149, 152, 154, .5) !important;
 }

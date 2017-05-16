@@ -15,6 +15,9 @@
         <link rel="stylesheet" type="text/css" href="/css/slick-team-slider.css"/>
         <link rel="stylesheet" href="/css/style.css">
 
+        <!--GOOGLE MATERIAL ICON-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <!--JHM STYLE-->
         <link rel="stylesheet" href="/css/jhm-style.css">
     </head>
