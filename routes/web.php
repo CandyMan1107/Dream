@@ -63,6 +63,12 @@ Route::get('/write_novel/set', function(){
     return view('write_novel/write_novel_set');
 });
 
+// 표지 이미지 등록
+Route::get('/uploadImg/{copyDiv}', "UpImgController@popUploadImgWindow");
+
+// 이미지 업로드 및 DB 적용
+Route::post('/uploadImg/showUploaded', "UpImgController@showUploadFile");
+
 // 회차 내용 작성
 Route::get('/write_novel/view', function(){
     return view('write_novel/write_novel_view');

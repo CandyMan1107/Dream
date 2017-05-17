@@ -6,10 +6,16 @@
 
 
 @section('content') 
-		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-color : #e8d6b3" >.col-xs-12 .col-sm-6 .col-md-8</div>
-		<div class="col-xs-5 col-sm-5 col-md-5 height-max-set" >.col-xs-12 .col-sm-6 .col-md-8</div>
-		<div class="col-xs-3 col-sm-2 col-md-2 height-max-set background_tag" >.col-xs-12 .col-sm-6 .col-md-8</div>
-
+		<div class="col-xs-7 col-sm-3 col-md-3 height-max-set" style= "background-color : #e8d6b3" >
+			이미지 아이콘을 React로 드래그 앤 드롭 구현
+			<img src="/img/amanda.jpg" alt="..." class="img-circle img-things-size">
+			<br>
+			<br>
+			<img src="/img/dakota.jpg" alt="..." class="img-circle img-things-size">
+		</div>
+		<div class="col-xs-9 col-sm-8 col-md-8 height-max-set" >
+			D3로 드롭된 아이콘 관계도 그리기
+		</div>
 	{{-- 태그 div.row 닫는 태그 --}}
 	</div>
 @endsection
