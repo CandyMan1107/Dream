@@ -114,3 +114,22 @@ sort
 #novel-info-4 .review > span > i {
     color: rgba(149, 152, 154, .5) !important;
 }
+/**************************************
+/novel/read/read_novel_view.blade.php
+**************************************/
+#read-novel-info {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+h4 > span {
+    /*border: 1px solid #FF0000;*/
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    width: auto;
+}
+
+.novel-info-text {
+    height: 25px;
+}

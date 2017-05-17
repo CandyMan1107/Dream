@@ -28,6 +28,10 @@ Route::get('/novel/novel_info', function(){
     return view('novel/novel_info');
 });
 
+Route::get('/novel/read/novel_read_view', function(){
+    return view('novel/read/novel_read_view');
+});
+
 Route::get('/background/historyTable', function(){
     return view('background/historyTable/history_table_view');
 });

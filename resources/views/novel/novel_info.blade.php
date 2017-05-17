@@ -82,7 +82,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button>
+                                <a href="/novel/read/novel_read_view"><button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button></a>
                             </div>
                             <div class="col-md-4">
                                 <button class="btn btn-default btn-block novel-background-read-Btn">소설 배경 설정 보기</button>
