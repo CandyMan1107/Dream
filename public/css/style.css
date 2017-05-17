@@ -163,6 +163,8 @@ a.btn-banner {
     letter-spacing: 1px;
     display: inline-block;
     margin-top: 95px;
+    opacity: 0; 
+    /*2017-05-17 : opacity ADD By.JHM*/
 }
 
 a.btn-banner i {
