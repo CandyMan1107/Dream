@@ -264,8 +264,8 @@
         </div>
         <!-- novel-info-3 END -->
         <div id="default-padding-mid-1" class="col-md-12"></div>
-        <!-- novel-info-4 START -->
-        <div id="novel-info-4">
+        <!-- novel-review START -->
+        <div id="novel-review">
             <!-- container class START -->
             <div class="container">
                 <div class="row">
@@ -310,5 +310,5 @@
             </div>
             <!-- container class END -->
         </div>
-        <!-- novel-info-4 END -->
+        <!-- novel-review END -->
 @endsection
