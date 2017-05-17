@@ -18,7 +18,10 @@
   $(".novel_period_day").bind("click", function(){
     // 요일 선택이 활성화 된 경우에만 선택됨
     if($(".novel_period_day_table").hasClass("day_activate")){
-      $(this).addClass("selected_day");
+      if($(this).hasClass("selected_day"))
+        $(this).removeClass("selected_day");
+      else
+        $(this).addClass("selected_day");
     }
   });
   // 요일 선택 비활성화
@@ -50,7 +53,21 @@
 
   // 이미지 업로드 팝업
   $(".img_upload_btn").bind("click", function(){
-    popupLink("uploadImg", 300, 500);
+    popupLink($(".img_upload_btn").data('href'), 300, 500);
   });
 
+  // 이미지 리스트 슬릭
+  $('.image_list').slick({
+         autoplay: true, //자동슬라이드
+         slidesToShow: 1, //큰이미지 몇개 보여줄것인지
+         slidesToScroll: 1,
+         arrows: true,
+         fade: false
+      });
+
+
+
+
+
+  deactivateDayCell();
 })(jQuery);

@@ -69,7 +69,6 @@
     .image_list{
       height:200px;
       width:100%;
-      background-color: blue;
     }
     .image_cell {
       display: inline-block;
@@ -77,7 +76,6 @@
       height:100%;
       width:170px;
       text-align: center;
-      background-color: green;
     }
 
     .image_cell > img {
@@ -137,7 +135,6 @@
           <input class="menu_input" type="text" name="" placeholder="소설 제목을 입력해주세요." size=50>
         </div>
       </div>
-
       <div class="row set_row">
         <div class="col-md-6">
           <span class="menu_title">장르</span>
@@ -173,16 +170,11 @@
 
       <div class="row set_row">
         <div class="col-md-10 menu_title">표지 이미지</div>
-        <div class="col-md-2"><span class="img_upload_btn">이미지 업로드</span></div>
+        <div class="col-md-2"><span class="img_upload_btn" data-href="{{URL::to('uploadImg/image_list')}}">이미지 업로드</span></div>
       </div>
 
-      <div class="row set_row image_list">
-        <div class="image_cell"><h3>1</h3></div>
-        <div class="image_cell"><h3>2</h3></div>
-        <div class="image_cell"><h3>3</h3></div>
-        <div class="image_cell"><h3>4</h3></div>
-        <div class="image_cell"><h3>5</h3></div>
-        <div class="image_cell"><h3>6</h3></div>
+      <!--표지 이미지가 들어갈 리스트-->
+      <div class="row set_row image_list" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}' data-href="{{URL::to('upload/images')}}">
       </div>
 
       <div class="novel_intro">
@@ -207,5 +199,6 @@
   </div>
 
 <script src="{{URL::asset('js/jquery.min.js')}}"></script>
+<script src="{{URL::asset('js/slick.js')}}"></script>
 <script src="{{URL::asset('js/custom/write_novel.js')}}"></script>
 @endsection
