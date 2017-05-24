@@ -44,9 +44,7 @@ Route::get('/background/things', function(){
     return view('background/things/things_view');
 });
 
-Route::get('/background/relation', function(){
-    return view('background/relationship/relationship_view');
-});
+Route::get('/background/relation', "RelationController@index");
 
 Route::get('/background/map', function(){
     return view('background/map/map_view');

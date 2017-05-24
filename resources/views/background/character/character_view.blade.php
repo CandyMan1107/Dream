@@ -5,7 +5,7 @@
 @include('background.tag')
 
 
-@section('content') 
+@section('content')
 		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-color : #e8d6b3" >
 			아이콘 div값 주고 img값을 round로 출력. id값 줘서 on click시 캐릭터 등록 부분 캐릭터 상세 정보 페이지로 react로 변환
 		</div>
@@ -74,7 +74,7 @@
 		</div>
 
 
-		
+
 		<div class="col-xs-3 col-sm-2 col-md-2 height-max-set background_tag" >
 			{{-- add_tag.blade.php 구현하고, 컨트롤러로 div안에 불러오는 형식으로 변경 할 것. --}}
 			<form class="form-horizontal main-navigation">
