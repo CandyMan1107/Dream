@@ -1,4 +1,16 @@
 /**************************************
+autoplay top & event
+**************************************/
+#banner .autoplay-top a {
+    text-decoration: none;
+}
+#banner .autoplay-top, .autoplay-top * {
+    outline: none !important;
+}
+#event .autoplay, .autoplay * {
+    outline: none !important;
+}
+/**************************************
 default-padding
 **************************************/
 #default-padding-small-0 {
@@ -183,12 +195,3 @@ h4 > span {
 #episode-icon .move-text {
     padding: 0px 20px 0px 20px;
 }
-
-/**************************************
-btnListTab
-**************************************/
-#btnListTab ul, li {
-    list-style: none;
-}
-
-
