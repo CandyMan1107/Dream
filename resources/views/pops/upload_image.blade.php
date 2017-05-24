@@ -16,6 +16,3 @@
      </form>
   </body>
 </html>
-
-<script src="{{URL::asset('js/jquery.min.js')}}"></script>
-<script src="{{URL::asset('js/custom/upload_img.js')}}"></script>

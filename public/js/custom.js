@@ -1,4 +1,11 @@
 (function ($) {
+    // TOP Slider
+    $('.autoplay-top').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        arrows: false
+    });
 
     // Navigation scrolls
     $('.navbar-nav li a').bind('click', function(event) {

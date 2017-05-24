@@ -1,4 +1,16 @@
 /**************************************
+autoplay top & event
+**************************************/
+#banner .autoplay-top a {
+    text-decoration: none;
+}
+#banner .autoplay-top, .autoplay-top * {
+    outline: none !important;
+}
+#event .autoplay, .autoplay * {
+    outline: none !important;
+}
+/**************************************
 default-padding
 **************************************/
 #default-padding-small-0 {

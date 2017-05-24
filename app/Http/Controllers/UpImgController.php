@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
 use Storage;
 
 class UpImgController extends Controller
@@ -18,6 +19,17 @@ class UpImgController extends Controller
       $file = $request->file('image') ;
       $destinationPath = 'upload/images';
       $file->move($destinationPath,$file->getClientOriginalName() );
+      $copyDiv = Input::get('copyDiv');
+
+      $tasks = [
+        "copyDiv"     => $copyDiv,
+        "saveDir"     => $destinationPath,
+        "fileName"    => $file->getClientOriginalName(),
+        "inputClass"  => "image_cell"              // 해당 클래스에 태그 추가
+      ];
+
+      return view('pops/display_image')->with('tasks', $tasks);
+
 
     }
 }
