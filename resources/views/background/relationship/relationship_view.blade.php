@@ -40,7 +40,6 @@
 			<?php
 				}
 			?>
-			<img src="{{URL::to('/')}}/<?php echo 'img/background/characterImg/Bak.png'; ?>">
 
 		</div>
 		<div id="force-div" class="col-xs-9 col-sm-8 col-md-8 height-max-set droppable" >
@@ -117,20 +116,20 @@
 		.enter().append("svg:marker")
 			.attr("id", String)
 			.attr("viewBox", "0 -5 10 10")
-			.attr("refX", 22)
+			.attr("refX", 38)
 			.attr("refY", -1)
 			.attr("markerWidth", 8)
 			.attr("markerHeight", 8)
 			.attr("orient", "auto")
-		.append("svg:path")
+			.append("svg:path")
 			.attr("d", "M0,-5L10,0L0,5");
 
 	// add the links and the arrows
 	var path = svg.append("svg:g").selectAll("path")
 			.data(force.links())
-		.enter()
-	.append("svg:path")
-		 .attr("id", function(d) { return d.id; } )
+			.enter()
+			.append("svg:path")
+			.attr("id", function(d) { return d.id; } )
 			.attr("class", "link")
 			.attr("marker-end", "url(#end)");
 
@@ -148,44 +147,45 @@
 	// define the nodes
 	var node = svg.selectAll(".node")
 			.data(force.nodes())
-		.enter().append("g")
+			.enter().append("g")
 			.attr("class", "node")
 			.call(force.drag);
 
 
 	// define image
-	svg.append("defs")
-   .append("pattern")
-   .attr("id", "bg")
-   .append("image")
-   .attr("xlink:href", "{{URL::to('/')}}/<?php echo 'img/background/characterImg/Bak.png'; ?>");
+	var defs = svg.append("defs").attr("id", "imgdefs");
+
+	var catpattern = defs.append("pattern")
+                        .attr("id", "catpattern")
+                        .attr("height", 1)
+                        .attr("width", 1)
+                        .attr("x", "0")
+                        .attr("y", "0");
+	catpattern.append("image")
+
+     .attr("height", 70)
+     .attr("width", 70)
+     .attr("xlink:href", "{{URL::to('/')}}/<?php echo 'img/background/characterImg/Bak.png'; ?>")
+
+	// add image
+	// node.append("image")
+	// 			.attr("r", 30)
+	// 			.attr("width", 70)
+	// 			.attr("class", "img-circle img-things-size")
+	// 			.attr("xlink:href", "{{URL::to('/')}}/<?php echo 'img/background/characterImg/Bak.png'; ?>");
 
 	// add the nodes
 	node.append("circle")
-			.attr("r", 30)
-   		.attr("fill", "url(#bg)");
+			.attr("r", 34)
+			.attr("fill", "url(#catpattern)");
 
 	// add the text
 	node.append("text")
-			.attr("x", 12)
-			.attr("dy", ".35em")
+		 .attr("text-anchor", "middle")
 			.attr("style", "fill:blue; font-weight:bold; font-size:16")
 			.text(function(d) { return d.name; });
 
-	node.append("text")
-		 .attr("text-anchor", "middle")
-			// .attr("style", "font-weight:bold; font-size:12")
-			.attr("style", function(d) {
-				if (d.relcnt >= 3)
-				{
-					 return "font-weight:bold; font-size:12; fill:red"
-				}
-				else
-				{
-					 return "font-weight:bold; font-size:12"
-				}
-		 })
-		 .text(function(d) { return d.relcnt; });
+
 
 	// add the curvy lines
 	function tick() {
