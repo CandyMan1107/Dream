@@ -195,3 +195,9 @@ h4 > span {
 #episode-icon .move-text {
     padding: 0px 20px 0px 20px;
 }
+/**************************************
+btnListTab
+**************************************/
+#btnListTab ul, li {
+    list-style: none;
+}
