@@ -287,4 +287,5 @@
 	<script src="/js/jquery.mixitup.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/js/slick.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
+	<script type="text/javascript" src="/js/d3.layout.js"></script>
 @endsection
