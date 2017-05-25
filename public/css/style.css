@@ -284,7 +284,7 @@ p.cta-sub-title {
     display: inline-block;
 }
 
-.service-box .service-icon {
+.service-box .service-icon img {
     width: 198px;
     height: 286px;
     /*border-radius: 50px;*/

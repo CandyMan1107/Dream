@@ -55,7 +55,7 @@
 		</div>
 	</div>-->
 	<!--CTA1 END-->
-
+	<div id="default-padding-mid"></div>
 	<!--SERVICE START-->
 	<div id="today-novel" class="section-padding">
 		<div class="container">
