@@ -47,7 +47,9 @@ class BackgroundController extends Controller
      */
     public function show($id)
     {
-        return __METHOD__ . '은(는) 다음 기본 키를 가진 모델을 조회합니다.';
+        // return __METHOD__ . '은(는) 다음 기본 키를 가진 모델을 조회합니다.';
+        
+        
     }
 
     /**
