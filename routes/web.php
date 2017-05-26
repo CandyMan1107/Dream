@@ -20,9 +20,7 @@ Route::get('/lib', function () {
     return view('load');
 });
 
-Route::get('/background', function(){
-    return view('background/background_main');
-});
+Route::resource('/background', 'BackgroundController');
 
 Route::get('/novel/novel_info', function(){
     return view('novel/novel_info');
