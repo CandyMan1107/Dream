@@ -20,9 +20,9 @@ Route::get('/lib', function () {
     return view('load');
 });
 
-Route::get('/background', function(){
-    return view('background/background_main');
-});
+Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
+
+Route::resource('/background', 'BackgroundController');
 
 Route::get('/novel/novel_info', function(){
     return view('novel/novel_info');
@@ -34,10 +34,6 @@ Route::get('/novel/today_novel_by_day', function(){
 
 Route::get('/novel/read/novel_read_view', function(){
     return view('novel/read/novel_read_view');
-});
-
-Route::get('/background/historyTable', function(){
-    return view('background/historyTable/history_table_view');
 });
 
 Route::get('/background/character', function(){
