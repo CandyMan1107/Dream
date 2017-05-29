@@ -3,9 +3,9 @@
 @section('content')
     <div class="default-padding"></div>
 
-    <!-- novel-info-1 START -->
+    {{-- novel-info-1 START --}}
         <div id="novel-info-1" class="section-padding">
-            <!-- container class START -->
+            {{-- container class START --}}
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 text-left novel-info-upper-text">
@@ -31,17 +31,17 @@
                 </div>
                 <hr />
             </div>
-            <!-- container class END -->
+            {{-- container class END --}}
         </div>
-        <!-- novel-info-1 END -->
+        {{-- novel-info-1 END --}}
         <div id="default-padding-small"></div>
-        <!-- novel-info-2 START -->
+        {{-- novel-info-2 START --}}
         <div id="novel-info-2">
-            <!-- container class START -->
+            {{-- container class START --}}
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="/img/A_MAN_CALLED_OVE.jpg" width=225/>
+                        <img src="/img/A_MAN_CALLED_OVE.jpg" width="225" />
                     </div>
                     <div class="col-md-9">
                         <div class="row">
@@ -91,13 +91,13 @@
                     </div>
                 </div>
             </div>
-            <!-- container class END -->
+            {{-- container class END --}}
         </div>
-        <!-- novel-info-2 END -->
+        {{-- novel-info-2 END --}}
         <div id="default-padding-big" class="col-md-12"></div>
-        <!-- novel-info-3 START -->
+        {{-- novel-info-3 START --}}
         <div id="novel-info-3" class="section-padding">
-            <!-- container class START -->
+            {{-- container class START --}}
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-left">
@@ -255,18 +255,18 @@
                             </div>
                         </div>
                     </div>
-                    <!--PAGE-->
+                    {{--PAGE--}}
                     <div id="default-padding-small-1" class="col-md-12"></div>
                 </div>
-                <!-- row class END -->
+                {{-- row class END --}}
             </div>
-            <!-- container class END -->
+            {{-- container class END --}}
         </div>
-        <!-- novel-info-3 END -->
+        {{-- novel-info-3 END --}}
         <div id="default-padding-mid-1" class="col-md-12"></div>
-        <!-- novel-review START -->
+        {{-- novel-review START --}}
         <div id="novel-review">
-            <!-- container class START -->
+            {{-- container class START --}}
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-left">
@@ -306,9 +306,9 @@
                     </div>
                     <div id="default-padding-mid" class="col-md-12"></div>
                 </div>
-                <!-- row class END -->
+                {{-- row class END --}}
             </div>
-            <!-- container class END -->
+            {{-- container class END --}}
         </div>
-        <!-- novel-review END -->
+        {{-- novel-review END --}}
 @endsection

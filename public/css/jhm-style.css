@@ -1,5 +1,5 @@
 /**************************************
-autoplay top & event
+welcome.blade.php
 **************************************/
 #banner .autoplay-top a {
     text-decoration: none;
@@ -7,8 +7,14 @@ autoplay top & event
 #banner .autoplay-top, .autoplay-top * {
     outline: none !important;
 }
+
 #event .autoplay, .autoplay * {
     outline: none !important;
+}
+
+#today-novel .page-title a {
+    color: #002E40;
+    text-decoration: none;
 }
 /**************************************
 default-padding
@@ -194,4 +200,34 @@ h4 > span {
 }
 #episode-icon .move-text {
     padding: 0px 20px 0px 20px;
+}
+/**************************************
+/novel/today_novel_by_day.blade.php
+**************************************/
+#select-space {
+    font-size: 18px;
+}
+#select-space a {
+    color: #002E40;
+    text-decoration: none;
+}
+#select-space li {
+    width: 55px;
+    height: 55px;
+    padding: 15px;
+    /*border: 1px solid black;*/
+    border-radius: 100%;  
+}
+#select-space .fake-circle {
+    padding: 25px;
+    /*border: 1px solid blue;*/
+    border-radius: 100%;  
+}
+
+.selected {
+    background-color: #FA9600;
+}
+
+.selected > .circle-icon > a {
+    color: white;
 }
