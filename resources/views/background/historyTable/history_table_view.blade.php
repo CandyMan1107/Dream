@@ -6,7 +6,85 @@
 
 
 @section('content') 
-		<div class="col-xs-4 col-sm-3 col-md-3 height-max-set" style= "background-color : #e8d6b3" >D3.JS 트리 그리기 이용해서 그릴것.</div>
+		<div class="col-xs-4 col-sm-3 col-md-3 height-max-set" style= "background-color : #e8d6b3" >
+			<script type="text/javascript">
+
+		// 전체 width,height, 시작 좌표
+		var w = 200,
+		// 1120
+			h = 600,
+			x = d3.scale.linear().range([0, w]),
+			y = d3.scale.linear().range([0, h]);
+
+		var vis = d3.select("#body").append("div")
+			.attr("class", "chart")
+			.style("width", w + "px")
+			.style("height", h + "px")
+		.append("svg:svg")
+			.attr("width", w)
+			.attr("height", h);
+
+		var partition = d3.layout.partition()
+			.value(function(d) { return d.size; });
+
+		d3.json("flare.json", function(root) {
+		var g = vis.selectAll("g")
+			.data(partition.nodes(root))
+			.enter().append("svg:g")
+			.attr("transform", function(d) { return "translate(" + x(d.y) + "," + y(d.x) + ")"; })
+			.on("click", click);
+
+		var kx = w / root.dx,
+			//  kx = w / root.dx,
+			ky = h / 1;
+
+		g.append("svg:rect")
+			// 사각형 width
+			// .attr("width", root.dy*kx/4)
+			.attr("width", root.dy * kx)
+			// 사각형 height
+			.attr("height", function(d) { return d.dx * ky; })
+			.attr("class", function(d) { return d.children ? "parent" : "child"; });
+
+		g.append("svg:text")
+			.attr("transform", transform)
+			.attr("dy", ".35em")
+			.style("opacity", function(d) { return d.dx * ky > 12 ? 1 : 0; })
+			.text(function(d) { return d.name; })
+
+		d3.select(window)
+			.on("click", function() { click(root); })
+
+		function click(d) {
+			if (!d.children) return;
+
+			kx = (d.y ? w - 40 : w) / (1 - d.y);
+			// kx = (d.y ? w - 40 : w) / (1 - d.y) /4;
+			ky = h / d.dx;
+			x.domain([d.y, 1]).range([d.y ? 40 : 0, w]);
+			y.domain([d.x, d.x + d.dx]);
+
+			var t = g.transition()
+				.duration(d3.event.altKey ? 7500 : 750)
+				.attr("transform", function(d) { return "translate(" + x(d.y) + "," + y(d.x) + ")"; });
+
+			t.select("rect")
+				.attr("width", d.dy * kx)
+				.attr("height", function(d) { return d.dx * ky; });
+
+			t.select("text")
+				.attr("transform", transform)
+				.style("opacity", function(d) { return d.dx * ky > 12 ? 1 : 0; });
+
+			d3.event.stopPropagation();
+		}
+
+		function transform(d) {
+			return "translate(8," + d.dx * ky / 2 + ")";
+		}
+		});
+    </script>
+		</div>
 		<div class="col-xs-7 col-sm-6 col-md-6 height-max-set" >
 			<h3>사건추가</h3>
 			{{-- 사건 제목 등록 --}}

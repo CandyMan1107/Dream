@@ -15,7 +15,7 @@ class RelationController extends Controller
       "imgRoot" => $imgRoot,
       "chaInfos" => $chaInfos
     );
-    return view('background/relationship/relationship_view')->with('tasks', $tasks);
+    return view('background.relationship.relationship_view')->with('tasks', $tasks);
   }
 
 }
