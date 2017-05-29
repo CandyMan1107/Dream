@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-<!--BANNER START-->
+<div class="default-padding"></div>
+{{--BANNER START--}}
 	<div id="banner" class="section-padding">
 		<div class="container">
 			<div class="row">
@@ -43,25 +44,25 @@
 			</div>
 		</div>
 	</div>
-	<!--BANNER END-->
+	{{--BANNER END--}}
 
-	<!--CTA1 START-->
-	<!--<div class="cta-1">
+	{{--CTA1 START--}}
+	{{--<div class="cta-1">
 		<div class="container">
 			<div class="row text-center white">
 				<h1 class="cta-title">Say Hey to Tempo!!</h1>
 				<p class="cta-sub-title">Full Responsive HTML5 Bootstrap Template.</p>
 			</div>
 		</div>
-	</div>-->
-	<!--CTA1 END-->
+	</div>--}}
+	{{--CTA1 END--}}
 	<div id="default-padding-mid"></div>
-	<!--SERVICE START-->
+	{{-- SERVICE START --}}
 	<div id="today-novel" class="section-padding">
 		<div class="container">
 			<div class="row">
 				<div class="page-title text-center">
-					<h1>오늘의 웹소설</h1>
+					<h1><a class="noDeco" href="/novel/today_novel_by_day">오늘의 웹소설</a></h1>
 					<p>오늘의 <br>HOT한 소설! </p>
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
@@ -101,9 +102,9 @@
 			</div>
 		</div>
 	</div>
-	<!--SERVICE END-->
+	{{--SERVICE END--}}
 
-	<!--PORTFOLIO START-->
+	{{--PORTFOLIO START--}}
 	<div id="best-novel" class="section-padding">
 		<div class="container">
 			<div class="row">
@@ -141,9 +142,9 @@
 			</div>
 		</div>
 	</div>
-	<!--PORTFOLIO END-->
+	{{--PORTFOLIO END--}}
 
-	<!--EVENT START-->
+	{{--EVENT START--}}
 	<div id="event" class="section-padding">
 		<div class="container">
 			<div class="row">
@@ -229,9 +230,9 @@
 			</div>
 		</div>
 	</div>
-	<!--TEAM END-->
+	{{--TEAM END--}}
 
-	<!--CTA2 START-->
+	{{--CTA2 START--}}
 	<div class="cta2">
 		<div class="container">
 			<div class="row white text-center">
@@ -241,9 +242,9 @@
 			</div>
 		</div>
 	</div>
-	<!--CTA2 END-->
+	{{--CTA2 END--}}
 
-	<!--CONTACT START-->
+	{{--CONTACT START--}}
 	<div id="about" class="section-padding">
 		<div class="container">
 			<div class="row">
@@ -281,11 +282,11 @@
 		</div>
 	</div>
 	<!--CONTACT END-->
-	<script src="/js/jquery-3.2.0.js"></script>
+	<!--<script src="/js/jquery-3.2.0.js"></script>
 	<script src="/js/bootstrap.js"></script>
 	<script src="/js/jquery.easing.min.js" type="text/javascript"></script>
 	<script src="/js/jquery.mixitup.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/js/slick.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
-	<script type="text/javascript" src="/js/d3.layout.js"></script>
+	<script type="text/javascript" src="/js/d3.layout.js"></script>-->
 @endsection

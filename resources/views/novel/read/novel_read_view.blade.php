@@ -3,7 +3,7 @@
 @section('content')
     <div class="default-padding"></div>
 
-    <!-- read-novel-info START -->
+    {{-- read-novel-info START --}}
     <div id="read-novel-info" class="section-padding">
         <div id="default-padding-small"></div>
         <div class="row">
@@ -23,13 +23,13 @@
             </div>
         </div>
     </div>
-    <!-- read-novel-info END -->
-    <!-- read-novel-view START -->
+    {{-- read-novel-info END --}}
+    {{-- read-novel-view START --}}
     <div id="read-novel-view">
-        <!-- container class START -->
+        {{-- container class START --}}
         <div class="container">
             <div class="row">
-                <!--<div id="default-padding-mid" class="col-md-12"></div>-->
+                {{--<div id="default-padding-mid" class="col-md-12"></div>--}}
                 <div class="col-md-12 novel-viewer">
                     <p class=MsoNormal>사람들은 아버지를 난장이라고 불렀다<span lang=EN-US>. </span>사람들은 옳게 보았다<span
                     lang=EN-US>. </span>아버지는 <span class=SpellE>난장이였다</span><span lang=EN-US>. </span>불행하게도
@@ -613,12 +613,12 @@
                 <div id="default-padding-mid" class="col-md-12"></div>
             </div>
         </div>
-        <!-- container class END -->
+        {{-- container class END --}}
     </div>
-    <!-- read-novel-view END -->
-    <!-- writer-word START -->
+    {{-- read-novel-view END --}}
+    {{-- writer-word START --}}
     <div id="writer-word">
-        <!-- container class START -->
+        {{-- container class START --}}
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -639,13 +639,13 @@
                 </div>
             </div>
         </div>
-        <!-- container class END -->
+        {{-- container class END --}}
     </div>
-    <!-- writer-word END -->
+    {{-- writer-word END --}}
     <div id="default-padding-mid-1"></div>
-    <!-- episode-icon START -->
+    {{-- episode-icon START --}}
     <div id="episode-icon" class="section-padding">
-        <!-- container class START -->
+        {{-- container class START --}}
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-left">
@@ -662,13 +662,13 @@
                 </div>
             </div>
         </div>
-        <!-- container class END -->
+        {{-- container class END --}}
     </div>
-    <!-- episode-icon END -->
+    {{-- episode-icon END --}}
     <div id="default-padding-big"></div>
-    <!-- novel-review START -->
+    {{-- novel-review START --}}
         <div id="novel-review">
-            <!-- container class START -->
+            {{-- container class START --}}
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-left">
@@ -682,7 +682,7 @@
                         </h5>
                     </div>
                     <div id="default-padding-mid" class="col-md-12"></div>
-                    <!--소설 리뷰 작성 부분 View 만들기-->
+                    {{--소설 리뷰 작성 부분 View 만들기--}}
 
                     
                     <div class="col-md-12 review-list">
@@ -711,9 +711,9 @@
                     </div>
                     <div id="default-padding-mid" class="col-md-12"></div>
                 </div>
-                <!-- row class END -->
+                {{-- row class END --}}
             </div>
-            <!-- container class END -->
+            {{-- container class END --}}
         </div>
-        <!-- novel-review END -->
+        {{-- novel-review END --}}
 @endsection
