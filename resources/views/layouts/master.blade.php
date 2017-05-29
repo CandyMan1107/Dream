@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="/css/slick.css">
         <link rel="stylesheet" type="text/css" href="/css/slick-team-slider.css"/>
         <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="{{URL::asset('js/jquery-ui.min.css')}}">
 
         <!--GOOGLE MATERIAL ICON-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -23,15 +24,20 @@
     </head>
     <body>
       @include('partials.header')
+      <script type="text/javascript" src="/js/jquery-3.2.0.js"></script>
+      <script type="text/javascript" src="/js/jquery.easing.min.js" type="text/javascript"></script>
+      <script type="text/javascript" src="/js/jquery.mixitup.js" type="text/javascript"></script>
+      <script type="text/javascript" src="/js/bootstrap.js"></script>
+      <script type="text/javascript" src="/js/slick.js"></script>
+      <script type="text/javascript" src="/js/custom.js"></script>
+      <script type="text/javascript" src="/js/d3.v3.js"></script>
+      <!-- <script type="text/javascript" src="/js/d3.layout.js"></script> -->
+      <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
       @yield('content')
       @include('partials.footer')
         <!--CONTACT END-->
-        <script src="/js/jquery-3.2.0.js"></script>
-        <script src="/js/bootstrap.js"></script>
-        <script src="/js/jquery.easing.min.js" type="text/javascript"></script>
-        <script src="/js/jquery.mixitup.js" type="text/javascript"></script>
-        <script type="text/javascript" src="/js/slick.js"></script>
-        <script type="text/javascript" src="/js/custom.js"></script>
-        <script type="text/javascript" src="/js/d3.layout.js"></script>
+
+
+
     </body>
 </html>

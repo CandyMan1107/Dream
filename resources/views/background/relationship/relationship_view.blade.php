@@ -49,10 +49,10 @@
 	</div>
 
 	<!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
-	<link rel="stylesheet" href="{{URL::asset('js/jquery-ui.min.css')}}">
-	<script src="{{URL::asset('js/d3.v3.js')}}"></script>
-	<script src="{{URL::asset('js/jquery.min.js')}}"></script>
-	<script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
+	<!-- <link rel="stylesheet" href="{{URL::asset('js/jquery-ui.min.css')}}"> -->
+	<!-- <script src="{{URL::asset('js/d3.v3.js')}}"></script>
+	<script src="{{URL::asset('js/jquery.min.js')}}"></script> -->
+	<!-- <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script> -->
 	<script src="{{URL::asset('js/custom/relation.js')}}"></script>
 	<script>
 	d3.csv("<?php echo url("data/lsrel.csv")?>", function(error, links) {
