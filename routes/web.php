@@ -22,6 +22,14 @@ Route::get('/lib', function () {
 
 Route::get('/background/relation', "RelationController@index");
 
+Route::get('/background/map', function(){
+  return view('background/map/map_view');
+});
+
+Route::get('/background/map2', function(){
+  return view('background/map/map_view2');
+});
+
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
 Route::resource('/background', 'BackgroundController');
@@ -46,9 +54,6 @@ Route::get('/background/things', function(){
     return view('background/things/things_view');
 });
 
-Route::get('/background/map', function(){
-    return view('background/map/map_view');
-});
 
 Route::get('/background/share', function(){
     return view('background/share/set_share_view');
