@@ -7,7 +7,7 @@
 
         <title>作家のヘヤ</title>
 
-        <!-- Fonts -->
+        {{-- Fonts --}}
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600|Raleway:600,300|Josefin+Slab:400,700,600italic,600,400italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
@@ -15,17 +15,17 @@
         <link rel="stylesheet" type="text/css" href="/css/slick-team-slider.css"/>
         <link rel="stylesheet" href="/css/style.css">
 
-        <!--GOOGLE MATERIAL ICON-->
+        {{--GOOGLE MATERIAL ICON--}}
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <!--JHM STYLE-->
+        {{--JHM STYLE--}}
         <link rel="stylesheet" href="/css/jhm-style.css">
     </head>
     <body>
       @include('partials.header')
       @yield('content')
       @include('partials.footer')
-        <!--CONTACT END-->
+        {{--CONTACT END--}}
         <script src="/js/jquery-3.2.0.js"></script>
         <script src="/js/bootstrap.js"></script>
         <script src="/js/jquery.easing.min.js" type="text/javascript"></script>
@@ -33,5 +33,10 @@
         <script type="text/javascript" src="/js/slick.js"></script>
         <script type="text/javascript" src="/js/custom.js"></script>
         <script type="text/javascript" src="/js/d3.layout.js"></script>
+        {{-- JHM SCRIPT --}}
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="/js/jhm-custom.js"></script>
+        <script src="/js/jhm-quick.js"></script>
     </body>
 </html>
