@@ -7,7 +7,6 @@ use DB;
 
 class RelationController extends Controller
 {
-
   public function index(){
     $imgRoot = "img/background/characterImg/";
     $chaInfos = DB::select("select * from characters");
@@ -15,7 +14,6 @@ class RelationController extends Controller
       "imgRoot" => $imgRoot,
       "chaInfos" => $chaInfos
     );
-    return view('background/relationship/relationship_view')->with('tasks', $tasks);
+    return view('background.relationship.relationship_view')->with('tasks', $tasks);
   }
-
 }

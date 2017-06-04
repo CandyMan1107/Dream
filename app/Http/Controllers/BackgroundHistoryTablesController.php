@@ -13,7 +13,7 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function index()
     {
-        //
+        return view('background.historyTable.history_table_view');
     }
 
     /**
