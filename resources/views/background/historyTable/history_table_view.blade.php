@@ -9,6 +9,7 @@
 		 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		 <script type="text/javascript" src="/js/custom/history.js"></script>
 		 <script type="text/javascript" src="/js/custom/additional_items.js"></script>
+		 {{var_dump($data)}}
 		<div class="col-xs-16 col-sm-11 col-md-11" style= "background-color : #e8d6b3" >
 			<br>
 			<div id="timeline" style="height:180px;"></div>
@@ -56,25 +57,25 @@
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">기간</label>
 							<div class="col-xs-4">
-								<input type="text" name=""class="form-control" placeholder=".col-xs-3">
+								<input type="text" name="start_day" class="form-control" placeholder="2017.01.01">
 							</div>
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">~</label>
 							<div class="col-xs-4">
-								<input type="text" class="form-control" placeholder=".col-xs-3">
+								<input type="text" name="end_day" class="form-control" placeholder="2017.12.31">
 							</div>
 						</div>
 						{{-- 등장인물 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">등장 인물</label>
 							<div class="col-sm-10">
-							<input class="form-control" type="text" id="formGroupInputLarge" placeholder="Large input">
+							<input class="form-control" name="character" type="text" id="formGroupInputLarge" placeholder="Large input">
 							</div>
 						</div>
 						{{-- 기타 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">기타</label>
 							<div class="col-sm-10">
-							<textarea class="form-control" rows="3"></textarea>
+							<textarea class="form-control" name="other" rows="3"></textarea>
 							</div>
 						</div>
 						{{-- 등록 버튼 --}}

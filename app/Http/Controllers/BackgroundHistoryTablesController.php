@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Timetable;
 
 class BackgroundHistoryTablesController extends Controller
 {
@@ -13,7 +14,33 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function index()
     {
-        return view('background.historyTable.history_table_view');
+        $timeTable = new Timetable();
+        $dataSet = $timeTable->dataBringAll();
+        
+        // var_dump($dataSet);
+        // echo($dataSet[0]["event_names"]);
+        $data = array(array());
+        $i = 0;
+        foreach ($dataSet as $datas){
+            $data[$i]['event_name'] = $datas->event_names;
+            $data[$i]['event_content'] = $datas->event_contents;
+            $data[$i]['add_items'] = $datas->add_items;
+            $data[$i]['start_day'] = $datas->start_days;
+            $data[$i]['end_day'] = $datas->end_days;
+            $data[$i]['character'] = $datas->characters;
+            $data[$i]['other'] = $datas->others;
+
+            // echo $data[$i]['event_name'];
+            // echo $data[$i]['event_content'];
+            // echo $data[$i]['add_items'];
+            // echo $data[$i]['start_day'];
+            // echo $data[$i]['end_day'];
+            // echo $data[$i]['character'];
+            // echo $data[$i]['other'];
+            // echo $i;
+            $i++;
+        }
+        return view('background.historyTable.history_table_view', $data);
     }
 
     /**
@@ -34,21 +61,13 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function store(Request $request)
     {
-        // $rules = [
-        //     'event_name' => ['required'],
-        //     'event_content' => ['required','min:5'],
+        $table = $request->all();
 
-        // ];
-        // $validator = \Validator::make($request->all(), $rules);
-        // var_dump($request);
-        // if($request['time_table']){
-        //     echo($request['event_name']);
-        // }
-        // else {
-        //     echo("없다.");
-        // }
-        $var=$request->all();
-        var_dump($var);
+        $timeTable = new Timetable();
+
+        $timeTable->insert_table($table);
+        // var_dump($table);
+        return redirect(route('historyTable.index'));
     }
 
     /**
