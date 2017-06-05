@@ -63,7 +63,7 @@
 
 
 		</style>
-
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<div class="col-xs-7 col-sm-3 col-md-3 height-max-set charater-list" style= "background-color : #e8d6b3" >
 			<?php
 				$imgRoot 		= $tasks["imgRoot"];
@@ -276,13 +276,22 @@
 				}
 
 			}
+
 			// 관계 삭제
 			$("#removeRelationBtn").on("click", function(){
 
+				// links 내 관계 제거
 				var selectedRelation = d3.select(".selectedRelation").selectAll("textPath").attr("href");
 				links = links.filter(function(l){
 					return l.id != selectedRelation.replace("#", "");
 				});
+
+
+				var relnum = selectedRelation.replace("#rel", "");
+
+				// 데이터베이스 적용 제거된 관계 삭제
+				removeRelData(relnum);
+
 				path.remove();
 				restart();
 				restart();
@@ -291,8 +300,11 @@
 			// 관계 생성창
 			$("#createRelationBtn").on("click", function(){
 
+				// 선택 노드
 				var source = $(".sourceNode");
 			  var target = $(".targetNode");
+
+				// links , nodes 정보 수정
 				if(source.length == 0 || target.length == 0)
 				return;
 				 console.log(source);
@@ -305,6 +317,19 @@
 				obj.target = target.attr("href");
 				obj.target = nodes[obj.target] || (nodes[obj.target] = {chaId: obj.target});
 				obj.relationship = prompt();
+				console.log(obj);
+
+				// 데이터베이스 적용
+				var createdRel = new Object();
+				createdRel.relnum 			= obj.relnum;
+				createdRel.sourceId 		= obj.source.chaId;
+				createdRel.targetId 		= obj.target.chaId;
+				createdRel.relationship = obj.relationship;
+
+				console.log(createdRel);
+
+				// DB 관계 생성
+				createRelData(createdRel.relnum, createdRel.sourceId, createdRel.targetId, createdRel.relationship);
 
 				restart();
 				links.push(obj);
@@ -320,6 +345,10 @@
 				var selectedChaId = selectedNode.attr("href");
 				console.log(links);
 				links = links.filter(function(l){
+					if((l.source.chaId == selectedChaId) || (l.target.chaId == selectedChaId)){
+						removeRelData(l.relnum);
+					}
+
 					return (l.source.chaId != selectedChaId) && (l.target.chaId != selectedChaId)
 				});
 
@@ -328,8 +357,7 @@
 				path.remove();
 				node.remove();
 
-				// 캐릭터 리스트에 생성 ****
-
+				// 캐릭터 리스트에 생성
 				var newNode = document.createElement("img");
 
 				var imgSrc = getChaInfoById(selectedChaId).img_src;
@@ -557,6 +585,43 @@
 					}
 				});
 				return chaInfo;
+			}
+
+			// DB 관계 삭제
+			function removeRelData(relnum){
+				$.ajax({
+						type: "get",
+						url: "relation/rmRel",
+						data: {
+							relnum: relnum
+						},
+						success: function (data) {
+							//alert(data);
+						},
+						error: function (error) {
+							alert("오류발생");
+						}
+				});
+			}
+
+			// DB 관계 생성
+			function createRelData(relnum, sourceId, targetId, relationship){
+				$.ajax({
+            type: "get",
+            url: "relation/mkRel",
+            data: {
+							'relnum': relnum,
+							'sourceId': sourceId,
+							'targetId': targetId,
+							'relationship': relationship
+						},
+            success: function (data) {
+							console.log(data);
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
 			}
 
 	});
