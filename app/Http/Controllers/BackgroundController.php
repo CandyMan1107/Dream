@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class BackgroundController extends Controller
@@ -11,11 +13,21 @@ class BackgroundController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+     public function index()
+     {
+         // $background = \App\
+         // return __METHOD__ . '은(는) 컬렉션을 조회합니다.';
+         return view('background.background_main');
+     }
+
+    public function index_map()
     {
+        $maps = DB::select('maps');
+
         // $background = \App\
         // return __METHOD__ . '은(는) 컬렉션을 조회합니다.';
-        return view('background.background_main');
+        return view('background.map.map_view')->with('links', $maps);
     }
 
     /**
