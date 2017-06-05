@@ -704,58 +704,51 @@
                                     전라도 보성읍 밖의 한 한적한 길목 주막 왼쪽으로는 멀리 읍내 마을들을 내려다보면서 오른쪽으로는 해묵은 묘지들이 길가까지 바싹바싹 다가않은 가파른 공동 묘지-그 공동 묘지 사이를 뚫어 나가고 있는 한적한 고갯길목을 인근 사람들은 흔히 소릿재라 말하였다. 
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-md-3 text-left">
                                     <h5><strong>글꼴</strong></h5>
-                                </div>
-                                <div class="col-md-9">
-                                    <ul class="list-inline">
-                                        <li class="fontList on-font" value="NanumGothic"><h5>나눔고딕</h5></li>
-                                        {{-- <li><h5>맑은고딕</h5></li>
-                                        <li><h5>바탕고딕</h5></li>
-                                        <li><h5>굴림</h5></li>
-                                        <li><h5>돋움</h5></li> --}}
-                                        <li class="fontList off-font" value="Gungsuh"><h5>궁서</h5></li>
+                                    <ul class="list-group">
+                                        <li class="list-group-item fontList on-font" value="NanumGothic">나눔고딕</li>
+                                        <li class="list-group-item fontList off-font" value="Gulim">굴림</li>
+                                        <li class="list-group-item fontList off-font" value="Dotum">돋움</li>
+                                        <li class="list-group-item fontList off-font" value="Gungsuh">궁서</li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-3 text-left">
-                                    <h5><strong>글크기 / 줄간격</strong></h5>
-                                </div>
-                                <div class="col-md-9">
-                                    <ul class="list-inline">
-                                        <li>
-                                            <h5>10px</h5>
-                                        </li>
-                                        <li>
-                                            <h5>120px</h5>
-                                        </li>
+                                    <h5><strong>글크기</strong></h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item sizeList off-font">12px</li>
+                                        <li class="list-group-item sizeList on-font">14px</li>
+                                        <li class="list-group-item sizeList off-font">16px</li>
+                                        <li class="list-group-item sizeList off-font">18px</li>
+                                        <li class="list-group-item sizeList off-font">20px</li>
+                                        <li class="list-group-item sizeList off-font">26px</li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-3 text-left">
-                                    <h5><strong>글씨색</strong></h5>
-                                </div>
-                                <div class="col-md-9">
-                                    <ul class="list-inline">
-                                        <li class="colorBox on-colorBox font-color" value="black">{{-- 색1 검정 --}}</li>
-                                        <li class="colorBox off-colorBox font-color" value="white">{{-- 색5 흰색 --}}</li>
+                                    <h5><strong>줄간격</strong></h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item lineList off-font">120%</li>
+                                        <li class="list-group-item lineList off-font">150%</li>
+                                        <li class="list-group-item lineList off-font">160%</li>
+                                        <li class="list-group-item lineList on-font">170%</li>
+                                        <li class="list-group-item lineList off-font">180%</li>
+                                        <li class="list-group-item lineList off-font">200%</li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-3 text-left">
-                                    <h5><strong>배경색</strong></h5>
-                                </div>
-                                <div class="col-md-9">
-                                    <ul class="list-inline">
-                                        <li class="colorBox on-colorBox back-color" value="white">{{-- 색1 흰색 --}}</li>
-                                        {{-- <li class="colorBox font-black">색2 갈색 브라운</h5></li>
-                                        <li class="colorBox font-black">색3 민트</li>
-                                        <li class="colorBox font-black">색4 연보라+하늘</li> --}}
-                                        <li class="colorBox off-colorBox back-color" value="black">{{-- 색5 검정 --}}</li>
+                                    <h5><strong>색</strong></h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item colorBox on-colorBox font-color" value="black">{{-- 색1 검정 --}}</li>
+                                        <li class="list-group-item colorBox off-colorBox font-color" value="white">{{-- 색5 흰색 --}}</li>
+                                    </ul>
+                                    <ul class="list-group">
+                                        <li class="list-group-item colorBox on-colorBox back-color" value="white">{{-- 색1 흰색 --}}</li>
+                                        <li class="list-group-item colorBox off-colorBox font-black" value="rgb(255, 212, 128)"></h5></li>
+                                        <li class="list-group-item colorBox off-colorBox font-black" value="rgb(230, 255, 230)"></li>
+                                        <li class="list-group-item colorBox off-colorBox font-black" value="rgb(224, 204, 255)"></li>
+                                        <li class="list-group-item colorBox off-colorBox back-color" value="black">{{-- 색5 검정 --}}</li>
                                     </ul>
                                 </div>
                             </div>
