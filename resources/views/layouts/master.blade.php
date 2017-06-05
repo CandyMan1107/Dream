@@ -35,6 +35,7 @@
       <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
       @yield('content')
       @include('partials.footer')
+<<<<<<< HEAD
         {{--CONTACT END--}}
         <script src="/js/jquery-3.2.0.js"></script>
         <script src="/js/bootstrap.js"></script>
@@ -44,5 +45,8 @@
         <script type="text/javascript" src="/js/custom.js"></script>
         <script type="text/javascript" src="/js/d3.layout.js"></script>
         <!--CONTACT END-->
+=======
+
+>>>>>>> 1f33dd2ee98e754711347bfd423e1401e0539621
     </body>
 </html>
