@@ -896,7 +896,9 @@
         {{-- novel-review END --}}
 
         
-        {{-- <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        {{-- JHM SCRIPT --}}
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="/js/jhm-custom.js"></script> --}}
+        <script src="/js/jhm-custom.js"></script>
+        <script src="/js/jhm-quick.js"></script>
 @endsection
