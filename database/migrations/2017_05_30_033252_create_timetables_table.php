@@ -20,6 +20,8 @@ class CreateTimetablesTable extends Migration
             $table->string('add_items')->nullable();
             $table->string('start_days');
             $table->string('end_days');
+            $table->string('characters');
+            $table->string('others')->nullable();
             $table->integer('tag_ids')->nullable();
             $table->timestamps();
         });
