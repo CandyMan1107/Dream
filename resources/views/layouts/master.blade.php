@@ -7,7 +7,7 @@
 
         <title>作家のヘヤ</title>
 
-        <!-- Fonts -->
+        {{-- Fonts --}}
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,600|Raleway:600,300|Josefin+Slab:400,700,600italic,600,400italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
@@ -16,10 +16,10 @@
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="{{URL::asset('js/jquery-ui.min.css')}}">
 
-        <!--GOOGLE MATERIAL ICON-->
+        {{--GOOGLE MATERIAL ICON--}}
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <!--JHM STYLE-->
+        {{--JHM STYLE--}}
         <link rel="stylesheet" href="/css/jhm-style.css">
     </head>
     <body>
@@ -35,8 +35,6 @@
       <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
       @yield('content')
       @include('partials.footer')
-        <!--CONTACT END-->
-
 
     </body>
 </html>
