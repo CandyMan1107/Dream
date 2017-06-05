@@ -15,28 +15,25 @@
 		</div>
 		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set">
 			<div class="row">
-				<div class="col-xs-8 col-sm-5 col-md-5">
-					<h3>사건추가</h3>
-					{{-- 사건 제목 등록 --}}
-					<form class="form-horizontal">
+				<form class="form-horizontal" action="{{ route('historyTable.store') }}" method="POST">
+					{!! csrf_field() !!}
+					<div class="col-xs-8 col-sm-5 col-md-5">
+						<h3>사건추가</h3>
+						{{-- 사건 제목 등록 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">제목</label>
 							<div class="col-sm-10">
 							<input class="form-control" type="text" id="event_name" placeholder="사건 이름">
 							</div>
 						</div>
-					</form> 
-					{{-- 사건 내용 등록 --}}
-					<form class="form-horizontal">
+						{{-- 사건 내용 등록 --}}	
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">내용</label>
 							<div class="col-sm-10">
 							<textarea class="form-control" rows="3" id="event_content"></textarea>
 							</div>
 						</div>
-					</form>	
-					{{-- 사건 추가사항 추가 --}}
-					<form class="form-horizontal">
+						{{-- 사건 추가사항 추가 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-3 control-label" for="formGroupInputLarge">추가사항</label>
 							<div class="col-sm-7">
@@ -49,12 +46,12 @@
 								<i class="fa fa-plus-circle" aria-hidden="true" style="font-size:200%" id="additional_items"></i>
 							</div>
 						</div>
-					</form>
-				</div>
-				<div class="col-xs-7 col-sm-5 col-md-5 height-max-set background_tag">
-					{{-- 사건 기간 --}}
-					<br><br><br>
-					<form class="form-horizontal">
+					</div>
+
+					{{-- 화면 분할 오른쪽 --}}
+					<div class="col-xs-7 col-sm-5 col-md-5 height-max-set background_tag">
+						<br><br><br>
+						{{-- 사건 기간 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">기간</label>
 							<div class="col-xs-4">
@@ -65,28 +62,25 @@
 								<input type="text" class="form-control" placeholder=".col-xs-3">
 							</div>
 						</div>
-					</form>
-					{{-- 등장인물 --}}
-					<form class="form-horizontal">
+						{{-- 등장인물 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">등장 인물</label>
 							<div class="col-sm-10">
 							<input class="form-control" type="text" id="formGroupInputLarge" placeholder="Large input">
 							</div>
 						</div>
-					</form>
-					{{-- 기타 --}}
-					<form class="form-horizontal">
+						{{-- 기타 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">기타</label>
 							<div class="col-sm-10">
 							<textarea class="form-control" rows="3"></textarea>
 							</div>
 						</div>
-					</form>
-					<button type="submit" class="btn btn-default">등록</button>
-				</div>
-
+						{{-- 등록 버튼 --}}
+						<button type="submit" class="btn btn-default">등록</button>
+					</div>
+				</form> 
+					
 				<div class="col-xs-3 col-sm-2 col-md-2 height-max-set background_tag">
 					{{-- add_tag.blade.php 구현하고, 컨트롤러로 div안에 불러오는 형식으로 변경 할 것. --}}
 					<form class="form-horizontal main-navigation">

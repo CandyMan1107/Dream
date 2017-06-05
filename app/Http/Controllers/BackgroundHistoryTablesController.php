@@ -23,7 +23,7 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function create()
     {
-        //
+        return view('background.historyTable.history_table_view');
     }
 
     /**
@@ -34,7 +34,12 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'event_name' => ['required'],
+            'event_content' => ['required','min:5'],
+
+        ];
+        $validator = \Validator::make($request->all(), $rules);
     }
 
     /**
@@ -81,4 +86,5 @@ class BackgroundHistoryTablesController extends Controller
     {
         //
     }
+
 }
