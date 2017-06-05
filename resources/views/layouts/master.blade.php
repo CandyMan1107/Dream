@@ -35,18 +35,5 @@
       <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
       @yield('content')
       @include('partials.footer')
-<<<<<<< HEAD
-        {{--CONTACT END--}}
-        <script src="/js/jquery-3.2.0.js"></script>
-        <script src="/js/bootstrap.js"></script>
-        <script src="/js/jquery.easing.min.js" type="text/javascript"></script>
-        <script src="/js/jquery.mixitup.js" type="text/javascript"></script>
-        <script type="text/javascript" src="/js/slick.js"></script>
-        <script type="text/javascript" src="/js/custom.js"></script>
-        <script type="text/javascript" src="/js/d3.layout.js"></script>
-        <!--CONTACT END-->
-=======
-
->>>>>>> 1f33dd2ee98e754711347bfd423e1401e0539621
     </body>
 </html>
