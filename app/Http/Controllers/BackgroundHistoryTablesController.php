@@ -34,12 +34,21 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'event_name' => ['required'],
-            'event_content' => ['required','min:5'],
+        // $rules = [
+        //     'event_name' => ['required'],
+        //     'event_content' => ['required','min:5'],
 
-        ];
-        $validator = \Validator::make($request->all(), $rules);
+        // ];
+        // $validator = \Validator::make($request->all(), $rules);
+        // var_dump($request);
+        // if($request['time_table']){
+        //     echo($request['event_name']);
+        // }
+        // else {
+        //     echo("없다.");
+        // }
+        $var=$request->all();
+        var_dump($var);
     }
 
     /**

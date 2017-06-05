@@ -15,7 +15,7 @@
 		</div>
 		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set">
 			<div class="row">
-				<form class="form-horizontal" action="{{ route('historyTable.store') }}" method="POST">
+				<form class="form-horizontal" id="time_table" name="time_table" action="{{ route('historyTable.store') }}" method="POST">
 					{!! csrf_field() !!}
 					<div class="col-xs-8 col-sm-5 col-md-5">
 						<h3>사건추가</h3>
@@ -23,14 +23,14 @@
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">제목</label>
 							<div class="col-sm-10">
-							<input class="form-control" type="text" id="event_name" placeholder="사건 이름">
+							<input class="form-control" type="text" name="event_name" id="event_name" placeholder="사건 이름">
 							</div>
 						</div>
 						{{-- 사건 내용 등록 --}}	
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">내용</label>
 							<div class="col-sm-10">
-							<textarea class="form-control" rows="3" id="event_content"></textarea>
+							<textarea class="form-control" rows="3" name="event_content" id="event_content"></textarea>
 							</div>
 						</div>
 						{{-- 사건 추가사항 추가 --}}
@@ -39,6 +39,7 @@
 							<div class="col-sm-7">
 								<input class="form-control" id="add_item" name="add_items" list="browsers"> 
 								<datalist id="browsers">
+									<option value="추가 사항 입력"> 
 									<option value="추가 사항 입력"> 
 								</datalist>
 							</div>
@@ -55,7 +56,7 @@
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">기간</label>
 							<div class="col-xs-4">
-								<input type="text" class="form-control" placeholder=".col-xs-3">
+								<input type="text" name=""class="form-control" placeholder=".col-xs-3">
 							</div>
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">~</label>
 							<div class="col-xs-4">
