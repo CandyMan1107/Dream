@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Timetable;
+use DB;
 
-class BackgroundHistoryTablesController extends Controller
+class NovelEpisodeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,33 +14,10 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function index()
     {
-        $timeTable = new Timetable();
-        $dataSet = $timeTable->dataBringAll();
-        
-        // var_dump($dataSet);
-        // echo($dataSet[0]["event_names"]);
-        $data = array(array());
-        $i = 0;
-        foreach ($dataSet as $datas){
-            $data[$i]['event_name'] = $datas->event_names;
-            $data[$i]['event_content'] = $datas->event_contents;
-            $data[$i]['add_items'] = $datas->add_items;
-            $data[$i]['start_day'] = $datas->start_days;
-            $data[$i]['end_day'] = $datas->end_days;
-            $data[$i]['character'] = $datas->characters;
-            $data[$i]['other'] = $datas->others;
+        //
+        // Controller 으아아앍
 
-            // echo $data[$i]['event_name'];
-            // echo $data[$i]['event_content'];
-            // echo $data[$i]['add_items'];
-            // echo $data[$i]['start_day'];
-            // echo $data[$i]['end_day'];
-            // echo $data[$i]['character'];
-            // echo $data[$i]['other'];
-            // echo $i;
-            $i++;
-        }
-        return view('background.historyTable.history_table_view', $data);
+        return view('novel.read.novel_read_view');
     }
 
     /**
@@ -50,7 +27,7 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function create()
     {
-        return view('background.historyTable.history_table_view');
+        //
     }
 
     /**
@@ -61,13 +38,7 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function store(Request $request)
     {
-        $table = $request->all();
-
-        $timeTable = new Timetable();
-
-        $timeTable->insert_table($table);
-        // var_dump($table);
-        return redirect(route('historyTable.index'));
+        //
     }
 
     /**
@@ -114,5 +85,4 @@ class BackgroundHistoryTablesController extends Controller
     {
         //
     }
-
 }

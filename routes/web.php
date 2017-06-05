@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/lib', function () {
     return view('load');
 });
@@ -46,9 +45,10 @@ Route::get('/novel/today_novel_by_day', function(){
     return view('novel/today_novel_by_day');
 });
 
-Route::get('/novel/read/novel_read_view', function(){
-    return view('novel/read/novel_read_view');
-});
+// Route::get('/novel/read/novel_read_view', function(){
+//     return view('novel/read/novel_read_view');
+// });
+Route::resource('/novel/read/novel_read_view', 'NovelEpisodeController');
 
 Route::get('/background/character', function(){
     return view('background/character/character_view');
