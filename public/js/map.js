@@ -7,13 +7,14 @@
       getPropertyValue("height");
   svgWidth = parseFloat(svgWidth);
   svgHeight = parseFloat(svgHeight);
+
   var blockSize = 20;
   var heatMap;
   var color;
   var maxValue;
   var dataSet = [ ];
   //데이터 읽어오기
-  d3.text("mydata.txt", function(error, plainText){
+  d3.text("mydata2.txt", function(error, plainText){
     var temp = plainText.split(",");
     for(var i=0; i<temp.length; i++){
       dataSet[i] = parseInt(temp[i]);
