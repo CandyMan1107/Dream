@@ -35,5 +35,6 @@
       <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
       @yield('content')
       @include('partials.footer')
+
     </body>
 </html>

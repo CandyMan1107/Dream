@@ -64,41 +64,14 @@
 
 		</style>
 
-		<div class="col-xs-7 col-sm-3 col-md-3 height-max-set charater-list" style= "background-color : #e8d6b3" >
+		<div class="col-xs-7 col-sm-3 col-md-3 height-max-set" style= "background-color : #e8d6b3" >
 			<?php
-				$imgRoot 		= $tasks["imgRoot"];
-				$chaInfos 	= $tasks["chaInfos"];
-				$relInfos 	= $tasks["relInfos"];
-
-				// 관계에 참여하는 모든 캐릭터 아이디 출력
-				function getAllRelChaId($relInfos){
-					$chaIds = array();
-					foreach($relInfos as $relInfo){
-						if(!in_array($relInfo->source, $chaIds))
-							array_push($chaIds,$relInfo->source);
-						if(!in_array($relInfo->target, $chaIds))
-							array_push($chaIds,$relInfo->target);
-					}
-					return $chaIds;
-				}
-
-				// 해당 아이디에 해당하는 캐릭터 정보 출력
-				function getChaInfoById($chaInfos, $id){
-					foreach($chaInfos as $chaInfo){
-						if($chaInfo->cha_id == $id)
-							return $chaInfo;
-					}
-					return null;
-				}
-
 				// 데이터베이스에 있는 모든 캐릭터 이미지 호출
-				for($i=0; $i < count($chaInfos); $i++){
-					if(!in_array($chaInfos[$i]->cha_id,getAllRelChaId($relInfos))){
-						$imgSrc = $imgRoot.$chaInfos[$i]->img_src;
+				for($i=0; $i < count($tasks['chaInfos']); $i++){
+					$imgSrc = $tasks["imgRoot"].$tasks['chaInfos'][$i]->img_src;
 			?>
-			<img src={{URL::asset($imgSrc)}} id="chaNode<?=$chaInfos[$i]->cha_id?>" class="img-circle img-things-size draggable">
+			<img src={{URL::asset($imgSrc)}} id="chaNode<?=$tasks['chaInfos'][$i]->cha_id?>" class="img-circle img-things-size draggable">
 			<?php
-					}
 				}
 			?>
 
@@ -114,10 +87,10 @@
 
 	<script>
 	$(function() {
+		d3.csv("<?php echo url("data/lsrel.csv")?>", function(error, links) {
+
 			var nodes = {};
 			var rel = {};
-			var chaInfos = <?php echo json_encode($chaInfos) ?>;
-			var links = <?php echo json_encode($tasks["relInfos"])?>;
 
 			// 가져온 데이터를 기반으로 데이터 재해석
 			// link.id, link.source, link.target, link.relationship
@@ -125,15 +98,30 @@
 				link.id = "rel" + link.relnum;
 
 				link.source = nodes[link.source] ||
-						(nodes[link.source] = {chaId: link.source});
+						(nodes[link.source] = {chaId: link.source,x:1000,y:10});
 				link.target = nodes[link.target] ||
-						(nodes[link.target] = {chaId: link.target});
+						(nodes[link.target] = {chaId: link.target,x:1000,y:10});
 				link.relationship = link.relationship;
 			});
 
 			// svg크기 정의 div크기에서 어느정도 여백
 			var width = document.getElementById("force-div").offsetWidth-80;
 			var height = document.getElementById("force-div").offsetHeight-80;
+
+			console.log(links);
+
+			// //********************************************************************//
+			// //                            자료 추가 예시                           //
+			// var obj = new Object();
+			// obj.relnum=7;
+			// obj.id ="rel100";
+			// obj.source = "c";
+			// obj.source = nodes[obj.source] || (nodes[obj.source] = {name: obj.source});
+			// obj.target = "b";
+			// obj.target = nodes[obj.target] || (nodes[obj.target] = {name: obj.target});
+			// obj.relationship = "ffffffffffffffff";
+			// links.push(obj);
+			// //********************************************************************//
 
 
 			//********************************************************************//
@@ -157,22 +145,6 @@
 					.attr("height", height)
 					.attr("class", "mind-area")
 					.on("dragend", function(){alert("fu!!")});
-
-			// 노드의 이미지 패턴 정의
-			var defs = svg.append("defs").attr("id", "imgdefs");
-			chaInfos.forEach(function(chainfo){
-				var catpattern = defs.append("pattern")
-															.attr("id", "pattern" + chainfo.cha_id)
-															.attr("height", 1)
-															.attr("width", 1)
-															.attr("x", "0")
-															.attr("y", "0");
-				catpattern.append("image")
-					 .attr("height", 70)
-					 .attr("width", 70)
-					 .attr("xlink:href", "{{URL::to('/')}}/img/background/characterImg/" + chainfo.img_src);
-			});
-
 
 			//********************************************************************//
 			// 											노드, 링크 요소 추가
@@ -316,7 +288,6 @@
 			$("#removeChaNodeBtn").on("click", function(){
 
 				var selectedNode = $(".selectedNode");
-				if(selectedNode.length == 0) return;
 				var selectedChaId = selectedNode.attr("href");
 				console.log(links);
 				links = links.filter(function(l){
@@ -330,43 +301,6 @@
 
 				// 캐릭터 리스트에 생성 ****
 
-				var newNode = document.createElement("img");
-
-				var imgSrc = getChaInfoById(selectedChaId).img_src;
-
-				newNode.setAttribute("src", "{{URL::asset($imgRoot)}}/" + imgSrc);
-				newNode.setAttribute("id", "chaNode" + selectedChaId);
-				newNode.setAttribute("class","img-circle img-things-size draggable");
-
-				$(".charater-list").append(newNode);
-
-				$( ".draggable" ).draggable({
-				 revert: true,
-				 revertDuration: 500,
-
-
-				 // 드래그 시작 시 draggedObj에 값 적용
-				 start: function (e) {
-					 // draggable의 데이터 입력
-					 draggedObj = d3.select(e.target).attr("src");
-				 },
-				 // svg위에 드랍 시 오브젝트는 바로 돌아옴
-				 drag: function (e) {
-					 // stop까지의 속도
-					 $(e.target).draggable("option","revertDuration", isObjOnDroppable() ? 0 : 500)
-				 },
-				 // drag가 끝난 후 판단
-				 stop: function (e,ui) {
-					 if(isObjOnDroppable()){
-						 chaId = $(e.target).attr("id").replace("chaNode","");
-						 //alert("id : " + chaId + " position : " + "(" + e.pageX +"," + e.pageY + ")");
-						 $(this).remove();
-						 addNewNode(chaId,e.pageX,e.pageY);
-					 }
-						draggedObj = null;
-
-				 }
-				});
 				restart();
 				restart();
 			});
@@ -405,14 +339,18 @@
 			// 드래그 시작 시, 노드를 고정
 			function dragstart(d){
 				 d3.select(this).classed("fixed", d.fixed = true);
-				//  console.log("nodes↓");
-				//  console.log(nodes);
-				//  console.log("links↓");
-				//  console.log(links);
-				//  console.log("path↓");
-				//  console.log(path);
-				//  console.log("nodes↓");
-				//  console.log(rel);
+			} if (error){
+				 console.log(error);
+			}
+			else{
+				 console.log("nodes↓");
+				 console.log(nodes);
+				 console.log("links↓");
+				 console.log(links);
+				 console.log("path↓");
+				 console.log(path);
+				 console.log("nodes↓");
+				 console.log(rel);
 			}
 
 			function restart(){
@@ -451,18 +389,29 @@
 				.on("click", selectNode)
 				.call(force.drag);
 
+				// 노드의 이미지 패턴 정의
+				var defs = svg.append("defs").attr("id", "imgdefs");
+				var catpattern = defs.append("pattern")
+															.attr("id", "catpattern")
+															.attr("height", 1)
+															.attr("width", 1)
+															.attr("x", "0")
+															.attr("y", "0");
+				catpattern.append("image")
+					 .attr("height", 70)
+					 .attr("width", 70)
+					 .attr("xlink:href", "{{URL::to('/')}}/img/background/characterImg/Bak.png")
 
 				// 노드에 원형 추가
 				node.append("circle")
 						.attr("r", 35)
-						.attr("fill", function(d) { return "url(#pattern" + d.chaId +")"; });
+						.attr("fill", "url(#catpattern)");
 
 				// 노드에 텍스트 추가 (name 데이터)
 				node.append("text")
 					 .attr("text-anchor", "middle")
-					 .attr("dy","25")
 						.attr("style", "fill:blue; font-weight:bold; font-size:16")
-						.text(function(d) { return getChaInfoById(d.chaId).name; });
+						.text(function(d) { return d.chaId; });
 
 
 				// force 재시작
@@ -521,23 +470,21 @@
 					 chaId = $(e.target).attr("id").replace("chaNode","");
 					 //alert("id : " + chaId + " position : " + "(" + e.pageX +"," + e.pageY + ")");
 					 $(this).remove();
-					 addNewNode(chaId,e.pageX,e.pageY);
+					 addNewNode(e.pageX,e.pageY);
 				 }
 					draggedObj = null;
 
 			 }
 			});
 
-			function addNewNode(chaId,x,y){
-				// 추가 위치 조정 (마우스 + svg상대위치)
+			function addNewNode(x,y){
 				var parentOffset = $("svg").offset();
    			x -= parentOffset.left;
    			y -= parentOffset.top;
-				// 캐릭터 정보 호출
-				chaInfo = getChaInfoById(chaId);
+
 				// 캐릭터의 데이터 셋 추가
 				var nodeInfo = new Object();
-				nodeInfo.chaId = chaInfo.cha_id;
+				nodeInfo.chaId = "k";
 				nodeInfo.x = x;
 				nodeInfo.y = y;
 				restart();
@@ -546,19 +493,8 @@
 				restart();
 			}
 
-			// ID값으로 캐릭터의 정보를 가져옴
-			function getChaInfoById(id){
-				var chaInfos = <?php echo json_encode($chaInfos) ?>;
-				var chaInfo = null;
-				chaInfos.some(function(info){
-					if(info.cha_id == id){
-						chaInfo = info;
-						return;
-					}
-				});
-				return chaInfo;
-			}
 
+		});
 	});
 
 	</script>

@@ -10,10 +10,10 @@ class CreateRelationsTable extends Migration
     public function up()
     {
       Schema::create("relations", function (Blueprint $table){
-        $table->increments('rel_id');
-        $table->string('from_cha_id');
-        $table->string('to_cha_id');
-        $table->string('rel_info');
+        $table->increments('relnum');
+        $table->string('source');
+        $table->string('target');
+        $table->string('relationship');
       });
     }
 
