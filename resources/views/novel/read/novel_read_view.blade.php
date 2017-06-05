@@ -592,6 +592,183 @@
                     얼굴은 눈물로 젖었다<span lang=EN-US>. </span>우리는 그때 주머니 없는 옷을 입고 있었다<span lang=EN-US>.</span></p>
                 </div>
                 <div id="default-padding-big" class="col-md-12"></div>
+
+                {{-- collapse in 추가하기! page 이동 제이쿼리 추가하기! --}}
+                <div id="quickMenu">
+                    <div class="row">
+                        <div class="col-md-2 text-left">
+                            {{-- + - Button --}}
+                            <a class="remoteButton" href="#"><i id="remoteMenu" class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+                            {{-- PAGE-UP Button --}}
+                            <a class="remoteArrow" href="#"><i id="remoteUp" class="fa fa-arrow-up" aria-hidden="true"></i></a>
+                            {{-- PAGE-DOWN Button --}}
+                            <a class="remoteArrow" href="#"><i id="remoteDown" class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="col-md-10 remote-button">
+                            {{-- REMOTE TITLE & X Button --}}
+                            {{-- Novel TITLE --}}
+                            {{-- Novel EPISODSE MOVE --}}
+                            {{-- Viewer Settings --}}
+                            {{-- Novel BACKGROUND --}}
+                            <table class="table text-center">
+                                <tr>
+                                    <th>
+                                        <strong>리모콘</strong>
+                                        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select class="form-control">
+                                            <option>5화. 오베라는 남자(5)</option>
+                                            <option>4화. 오베라는 남자(4)</option>
+                                            <option>3화. 오베라는 남자(3)</option>
+                                            <option>2화. 오베라는 남자(2)</option>
+                                            <option>1화. 오베라는 남자(1)</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td data-toggle="modal" data-target="#myModal">
+                                        <p class="remote">
+                                            <a class="setView" href="#">
+                                                <i class="material-icons">settings</i>&nbsp;<span>뷰어설정</span>
+                                            </a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p class="remote">
+                                            <a class="novelBackground" href="#">
+                                                <i class="material-icons">remove_red_eye</i>&nbsp;<span>배경보기</span>
+                                            </a>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {{-- quickMenu END --}}
+
+                {{-- Modal --}}
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><i class="material-icons">settings</i>&nbsp;<span>뷰어 설정</span></h4>
+                    </div>
+                    <div class="modal-body">
+
+                        {{-- Screen MODE --}}
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-2 text-left">
+                                    <h5><strong>화면 모드</strong></h5>
+                                </div>
+                                <div class="col-md-7 text-left">
+                                    {{-- 50px x 50px 화면 모드 이미지 버튼 2개 --}}
+                                    <ul class="list-inline">
+                                        <li class="viewScreen viewOn">
+                                            <a href="#">
+                                                <span></span>
+                                            </a>
+                                        </li>
+                                        <li class="viewScreen viewOff">
+                                            <a href="#">
+                                                <span></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 text-right">
+                                    <button type="button" class="btn btn-default" disabled="disabled"><i class="material-icons">settings_backup_restore</i>원래대로</button>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Setting --}}
+                        <div class="container-fluid">
+
+
+                            <div class="row">
+                                <div class="col-md-12 text-left">
+                                    <h5><strong>열람 설정</strong></h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 example-text">
+                                    여인은 초저녁부터 목이 아픈 줄도 모르고 줄창 소리를 뽑아대고, 사내는 그 여인의 소리로 하여 끊임없이 어떤 예감 같은 것을 견디고 있는 듯한 표정으로 북장단을 잡고 있었다. 
+                                    소리를 쉬지 않는 여인이나, 묵묵히 장단 가락만 잡고 있는 사내나 양쪽 다 이마에 힘든 땀방울이 솟고 있었다.
+                                    전라도 보성읍 밖의 한 한적한 길목 주막 왼쪽으로는 멀리 읍내 마을들을 내려다보면서 오른쪽으로는 해묵은 묘지들이 길가까지 바싹바싹 다가않은 가파른 공동 묘지-그 공동 묘지 사이를 뚫어 나가고 있는 한적한 고갯길목을 인근 사람들은 흔히 소릿재라 말하였다. 
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 text-left">
+                                    <h5><strong>글꼴</strong></h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item fontList on-font" value="NanumGothic">나눔고딕</li>
+                                        <li class="list-group-item fontList off-font" value="Gulim">굴림</li>
+                                        <li class="list-group-item fontList off-font" value="Dotum">돋움</li>
+                                        <li class="list-group-item fontList off-font" value="Gungsuh">궁서</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 text-left">
+                                    <h5><strong>글크기</strong></h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item sizeList off-font">12px</li>
+                                        <li class="list-group-item sizeList on-font">14px</li>
+                                        <li class="list-group-item sizeList off-font">16px</li>
+                                        <li class="list-group-item sizeList off-font">18px</li>
+                                        <li class="list-group-item sizeList off-font">20px</li>
+                                        <li class="list-group-item sizeList off-font">26px</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 text-left">
+                                    <h5><strong>줄간격</strong></h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item lineList off-font">120%</li>
+                                        <li class="list-group-item lineList off-font">150%</li>
+                                        <li class="list-group-item lineList off-font">160%</li>
+                                        <li class="list-group-item lineList on-font">170%</li>
+                                        <li class="list-group-item lineList off-font">180%</li>
+                                        <li class="list-group-item lineList off-font">200%</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 text-left">
+                                    <h5><strong>색</strong></h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item colorBox on-colorBox font-color" value="black">{{-- 색1 검정 --}}</li>
+                                        <li class="list-group-item colorBox off-colorBox font-color" value="white">{{-- 색5 흰색 --}}</li>
+                                    </ul>
+                                    <ul class="list-group">
+                                        <li class="list-group-item colorBox on-colorBox back-color" value="white">{{-- 색1 흰색 --}}</li>
+                                        <li class="list-group-item colorBox off-colorBox font-black" value="rgb(255, 212, 128)"></h5></li>
+                                        <li class="list-group-item colorBox off-colorBox font-black" value="rgb(230, 255, 230)"></li>
+                                        <li class="list-group-item colorBox off-colorBox font-black" value="rgb(224, 204, 255)"></li>
+                                        <li class="list-group-item colorBox off-colorBox back-color" value="black">{{-- 색5 검정 --}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+
+
                 <div class="col-md-12 text-center mark-icon">
                     <ul class="list-inline">
                         <li>
@@ -714,6 +891,12 @@
                 {{-- row class END --}}
             </div>
             {{-- container class END --}}
+            
         </div>
         {{-- novel-review END --}}
+
+        
+        {{-- <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="/js/jhm-custom.js"></script> --}}
 @endsection
