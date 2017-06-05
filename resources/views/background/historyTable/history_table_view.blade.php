@@ -56,7 +56,7 @@
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">기간</label>
 							<div class="col-xs-4">
-								<input type="text" name=""class="form-control" placeholder=".col-xs-3">
+								<input type="text" name="" class="form-control" placeholder=".col-xs-3">
 							</div>
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">~</label>
 							<div class="col-xs-4">
