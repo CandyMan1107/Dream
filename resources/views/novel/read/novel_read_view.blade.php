@@ -7,14 +7,24 @@
     <div id="read-novel-info" class="section-padding">
         <div id="default-padding-small"></div>
         <div class="row">
-            <div class="col-md-8 info-text">
+            <div class="col-md-5 info-text">
                 <h4 class="text-left">
                     <span class="novel-info-text"><strong>오베라는 남자</strong></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
                     <span class="novel-info-text">1화 오베라는 남자(1)</span>
                 </h4>
             </div>
-            <div class="col-md-4 text-right info-icon">
+            <div class="col-md-4 text-right">
+                <ul class="list-inline" name="bookMode">
+                    <li class="setView" data-toggle="modal" data-target="#myModal">
+                        <i class="material-icons">settings</i>&nbsp;<span>뷰어설정</span>
+                    </li>
+                    <li class="novelBackground">
+                        <i class="material-icons">remove_red_eye</i>&nbsp;<span>배경보기</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3 text-right info-icon">
                 <ul class="list-inline">
                     <li><i class="material-icons">bookmark_border</i></li>
                     <li><i class="material-icons">star_border</i></li>
@@ -624,7 +634,7 @@
                                             <option>4화. 오베라는 남자(4)</option>
                                             <option>3화. 오베라는 남자(3)</option>
                                             <option>2화. 오베라는 남자(2)</option>
-                                            <option>1화. 오베라는 남자(1)</option>
+                                            <option selected="selected">1화. 오베라는 남자(1)</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -671,15 +681,11 @@
                                 <div class="col-md-7 text-left">
                                     {{-- 50px x 50px 화면 모드 이미지 버튼 2개 --}}
                                     <ul class="list-inline">
-                                        <li class="viewScreen viewOn">
-                                            <a href="#">
-                                                <span></span>
-                                            </a>
+                                        <li class="viewScreen webMode viewOn">
+                                            {{-- WEB MODE --}}
                                         </li>
-                                        <li class="viewScreen viewOff">
-                                            <a href="#">
-                                                <span></span>
-                                            </a>
+                                        <li class="viewScreen bookMode viewOff">
+                                            {{-- E-Book MODE --}}
                                         </li>
                                     </ul>
                                 </div>
