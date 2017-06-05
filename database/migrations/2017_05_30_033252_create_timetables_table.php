@@ -17,10 +17,10 @@ class CreateTimetablesTable extends Migration
             $table->increments('id');
             $table->string('event_names');
             $table->string('event_contents');
+            $table->string('add_items')->nullable();
             $table->string('start_days');
             $table->string('end_days');
-            $table->integer('tag_ids');
-            $table->string('images');
+            $table->integer('tag_ids')->nullable();
             $table->timestamps();
         });
     }

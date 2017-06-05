@@ -56,25 +56,25 @@
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">기간</label>
 							<div class="col-xs-4">
-								<input type="text" name="" class="form-control" placeholder=".col-xs-3">
+								<input type="text" name="start_day" class="form-control" placeholder="2017.01.01">
 							</div>
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">~</label>
 							<div class="col-xs-4">
-								<input type="text" class="form-control" placeholder=".col-xs-3">
+								<input type="text" name="end_day" class="form-control" placeholder="2017.12.31">
 							</div>
 						</div>
 						{{-- 등장인물 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">등장 인물</label>
 							<div class="col-sm-10">
-							<input class="form-control" type="text" id="formGroupInputLarge" placeholder="Large input">
+							<input class="form-control" name="character" type="text" id="formGroupInputLarge" placeholder="Large input">
 							</div>
 						</div>
 						{{-- 기타 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">기타</label>
 							<div class="col-sm-10">
-							<textarea class="form-control" rows="3"></textarea>
+							<textarea class="form-control" name="others" rows="3"></textarea>
 							</div>
 						</div>
 						{{-- 등록 버튼 --}}

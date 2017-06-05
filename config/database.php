@@ -42,17 +42,10 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'host' => 'localhost',
-<<<<<<< HEAD
-            'port' => 3306,
-            'database' => 'test',
-            'username' => 'root',
-            'password' => '',
-=======
             'port' => env('DB_PORT', '3306'),
             'database' => 'homestead',
             'username' => 'root',
             'password' => '1234',
->>>>>>> 1f33dd2ee98e754711347bfd423e1401e0539621
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
