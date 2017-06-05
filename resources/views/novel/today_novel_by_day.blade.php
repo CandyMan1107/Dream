@@ -59,7 +59,7 @@
             <div class="row">
 
 				
-				<div class="cd-md-12 text-center">
+				<div class="col-md-12 text-center">
 					<ul class="list-inline">
 						<span class="text-left">ALL &nbsp;</span>
 						<span class="text-left">완결 &nbsp;</span>
@@ -107,12 +107,50 @@
                         </li>
 						<span class="fake-circle"></span>
 
-						<span class="text-right">&nbsp; 장르 &nbsp;</span>
+						<span class="text-right">
+							<a data-toggle="collapse" href="#collapseGenreMenu" aria-expanded="false" aria-controls="collapseGenreMenu">
+								&nbsp; 장르 &nbsp;
+							</a>
+						</span>
 						<span class="text-right"> 정렬</span>
+						
+<!-- Single button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+    Action <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
 					</ul>
+
 				</div>
-				
-				
+
+				<div id="default-padding-small"></div>
+
+				<div class="col-md-12 collapse" id="collapseGenreMenu">
+					<table class="table text-center">
+						<tr>
+							<td>
+								<a href="#Romance">로맨스</a>
+							</td>
+							<td>
+								<a href="#Fantasy">판타지</a>
+							</td>
+							<td>
+								<a href="#RF">로맨스 판타지</a>
+							</td>
+							<td>
+								<a href="#SF">SF</a>
+							</td>
+						</tr>
+					</table>
+				</div>
 
             </div>
 			{{--row END--}}
@@ -123,15 +161,9 @@
 	
 	<div id="default-padding-mid"></div>
 
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script>
-		$(document).ready(function (){
-			$("li").each(function (){
-				$(this).click(function (){
-					$(this).addClass("selected");
-					$(this).siblings().removeClass("selected");
-				});
-			});
-		});
-	</script>
+	{{-- JHM SCRIPT --}}
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/jhm-custom.js"></script>
+    <script src="/js/jhm-quick.js"></script>
 @endsection

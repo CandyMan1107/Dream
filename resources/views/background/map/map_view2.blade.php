@@ -13,13 +13,12 @@
 					<svg id="myGraph"></svg>
 				</div>
 			</div>
-
+			
 			<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
 			<style>
-				svg { width: 160px; height: 240px; border: 1px solid black; }
-				.block { stroke: black; fill: none; }
+			svg { width: 160px; height: 240px; border: 1px solid black; }
+			.block { stroke: black; fill: none; }
 			</style>
-
-			<script src="{{URL::asset('js/map.js')}}"></script>
+			<svg id="myGraph"></svg>
+			<script src="{{URL::asset('js/map2.js')}}"></script>
 @endsection

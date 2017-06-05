@@ -166,6 +166,7 @@ h4 > span {
     height: 25px;
 }
 #read-novel-view .container {
+    width: 1080px; 
     border-right: 1px solid rgba(149, 152, 154, .2) !important;
     border-left: 1px solid rgba(149, 152, 154, .2) !important;
 }
@@ -189,6 +190,7 @@ h4 > span {
 }
 
 #writer-word .container {
+    width: 1080px;
     padding: 20px 80px 0px 80px;
     background-color: rgba(149, 152, 154, .2) !important;
 }
@@ -200,6 +202,98 @@ h4 > span {
 }
 #episode-icon .move-text {
     padding: 0px 20px 0px 20px;
+}
+
+#quickMenu {
+    position: absolute;
+    top: 200px; 
+    /*border:solid 3px #002E40;*/
+    width: 225px; 
+    height: auto;
+}
+#quickMenu a {
+    color: #002E40;
+}
+#quickMenu .remoteButton {
+    font-size: 35px;
+}
+#quickMenu .remoteArrow {
+    font-size: 30px;
+}
+#quickMenu table {
+    border-bottom: none;
+}
+#quickMenu th {
+    padding-left: 60px;
+    padding-top: 13px;
+    color: white;
+    background: gray;
+}
+/*#quickMenu th > button {
+    font-size: 19px;
+    color: white;
+}*/
+/*#quickMenu th, td {
+    border: 1px solid black;
+}*/
+#quickMenu select {
+    width: 160px;
+}
+
+#quickMenu table a {
+    text-decoration: none;
+    color: white;
+}
+#quickMenu tr .remote {
+    background: #002E40;
+    border-radius: 4px;
+    padding-top: 5px;
+    padding-bottom:3px;
+}
+#quickMenu span {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    width: auto;
+    /*border: 1px solid red;*/
+}
+
+#myModal .viewScreen {
+    /*background: red;*/
+    width: 40px;
+    height: 40px;
+}
+.viewOn {
+    border: 1px solid #FA9600;
+    background: #FA9600;
+}
+.viewOff {
+    border: 1px solid gray;
+    background: gray;
+}
+
+#myModal .example-text {
+    border: 1px solid black;
+}
+.on-font {
+    color: #FA9600;
+}
+.off-font {
+    color: black;
+}
+
+
+#myModal .colorBox {
+    /*background: black;*/
+    /*border: 1px solid rgba(149, 152, 154, .9);*/
+    width: 30px;
+    height: 30px;
+}
+.on-colorBox {
+    border: 1.5px solid #FA9600;
+}
+.off-colorBox {
+    border: 1px solid rgba(149, 152, 154, .9);
 }
 /**************************************
 /novel/today_novel_by_day.blade.php
@@ -224,10 +318,25 @@ h4 > span {
     border-radius: 100%;  
 }
 
+
+/**************************************
+selected
+**************************************/
 .selected {
     background-color: #FA9600;
 }
 
 .selected > .circle-icon > a {
     color: white;
+}
+
+table {
+    border-spacing: 15px;
+}
+
+td {
+    padding: 50px;
+}
+td:hover {
+    color: #FA9600;
 }
