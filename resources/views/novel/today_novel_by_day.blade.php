@@ -161,22 +161,9 @@
 	
 	<div id="default-padding-mid"></div>
 
-	{{-- <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script>
-		$(document).ready(function (){
-			$("li").each(function (){
-				$(this).click(function (){
-					$(this).addClass("selected");
-					$(this).siblings().removeClass("selected");
-				});
-			});
-
-			$("td").each(function (){
-				$(this).click(function (){
-					$(this).addClass("selected");
-					$(this).siblings().removeClass("selected");
-				});
-			});
-		});
-	</script> --}}
+	{{-- JHM SCRIPT --}}
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/jhm-custom.js"></script>
+    <script src="/js/jhm-quick.js"></script>
 @endsection

@@ -35,7 +35,6 @@
       <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
       @yield('content')
       @include('partials.footer')
-<<<<<<< HEAD
         {{--CONTACT END--}}
         <script src="/js/jquery-3.2.0.js"></script>
         <script src="/js/bootstrap.js"></script>
@@ -44,16 +43,6 @@
         <script type="text/javascript" src="/js/slick.js"></script>
         <script type="text/javascript" src="/js/custom.js"></script>
         <script type="text/javascript" src="/js/d3.layout.js"></script>
-        {{-- JHM SCRIPT --}}
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="/js/jhm-custom.js"></script>
-        <script src="/js/jhm-quick.js"></script>
-=======
         <!--CONTACT END-->
-
-
-
->>>>>>> 6b0513c4ba7b8e5562a3285622fff454c0f193ce
     </body>
 </html>
