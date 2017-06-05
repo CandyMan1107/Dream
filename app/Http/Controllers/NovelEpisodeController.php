@@ -2,32 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
 
-class BackgroundController extends Controller
+class NovelEpisodeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-     public function index()
-     {
-         // $background = \App\
-         // return __METHOD__ . '은(는) 컬렉션을 조회합니다.';
-         return view('background.background_main');
-     }
-
-    public function index_map()
+    public function index()
     {
-        $maps = DB::select('maps');
+        //
+        // Controller 으아아앍
 
-        // $background = \App\
-        // return __METHOD__ . '은(는) 컬렉션을 조회합니다.';
-        return view('background.map.map_view')->with('links', $maps);
+        return view('novel.read.novel_read_view');
     }
 
     /**
@@ -37,7 +27,7 @@ class BackgroundController extends Controller
      */
     public function create()
     {
-        return __METHOD__ . '은(는) 컬랙션을 만들기 위한 폼을 담은 뷰를 반환.';
+        //
     }
 
     /**
@@ -48,7 +38,7 @@ class BackgroundController extends Controller
      */
     public function store(Request $request)
     {
-        return __METHOD__ . '은(는) 사용자으 ㅣ입력한 폼 데이터를 새로운 컬렉션으로 만듬';
+        //
     }
 
     /**
@@ -59,9 +49,7 @@ class BackgroundController extends Controller
      */
     public function show($id)
     {
-        // return __METHOD__ . '은(는) 다음 기본 키를 가진 모델을 조회합니다.';
-
-
+        //
     }
 
     /**
@@ -96,9 +84,5 @@ class BackgroundController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function abc($id){
-        return __METHOD__ . '은(는) 실험.';
     }
 }
