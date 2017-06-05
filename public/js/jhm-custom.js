@@ -2,11 +2,22 @@ $(document).ready(function () {
     /**************************************
     /novel/read/novel_read_view.blade.php
     **************************************/
+    // 기본 설정은 Web
+    $("ul[name=bookMode]").hide();
+
     $("li").filter(".viewScreen").each(function() {
         $(this).click(function () {
             if($(this).hasClass("viewOff")) {
                 $(this).removeClass("viewOff").addClass("viewOn");
                 $(this).siblings().removeClass("viewOn").addClass("viewOff");
+
+                if($(this).hasClass("webMode")) {
+                    // alert("WEB");
+                    $("ul[name=bookMode]").hide();
+                } else if($(this).hasClass("bookMode")) {
+                    // alert("BOOK");
+                    $("ul[name=bookMode]").show();
+                }
             }
         });
     });
