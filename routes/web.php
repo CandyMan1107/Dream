@@ -22,6 +22,10 @@ Route::get('/lib', function () {
 
 Route::get('/background/relation', "RelationController@index");
 
+Route::get('/background/relation/rmRel', "RelationController@removeRelation");
+
+Route::get('/background/relation/mkRel', "RelationController@createRelation");
+
 Route::get('/background/map', function(){
   return view('background/map/map_view');
 });
