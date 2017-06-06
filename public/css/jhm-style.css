@@ -192,7 +192,7 @@ h4 > span {
     border-right: 1px solid rgba(149, 152, 154, .2) !important;
     border-left: 1px solid rgba(149, 152, 154, .2) !important;
 }
-#read-novel-view .container .novel-viewer {
+#read-novel-view .container .novel-viewer-web {
     padding: 30px 80px 30px 80px;
     /*border: 1px solid rgba(149, 152, 154, .2) !important;*/
 }
@@ -348,7 +348,7 @@ selected
     background-color: #FA9600;
 }
 
-.selected > .circle-icon > a {
+.selected > strong {
     color: white;
 }
 
