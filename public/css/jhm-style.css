@@ -173,7 +173,21 @@ h4 > span {
 .novel-info-text {
     height: 25px;
 }
-#read-novel-view .container {
+#read-novel-view .bookContainer {
+    /*border: 1px solid red;*/
+    width: 1500px;
+    height: 600px;
+}
+#read-novel-view .bookContainer .leftPage {
+    /*border-right: 1px solid blue;*/
+    padding: 30px 40px 30px 50px;
+}
+#read-novel-view .bookContainer .rightPage {
+    /*border-left: 1px solid blue;*/
+    padding: 30px 50px 30px 40px;
+}
+
+#read-novel-view .webContainer {
     width: 1080px; 
     border-right: 1px solid rgba(149, 152, 154, .2) !important;
     border-left: 1px solid rgba(149, 152, 154, .2) !important;

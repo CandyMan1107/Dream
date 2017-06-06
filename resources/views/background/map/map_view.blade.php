@@ -15,11 +15,55 @@
 			</div>
 
 			<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+			<script>
+					var svgWidth = 160;
+					var svgHeight = 240;
+					var blockSize = 20;
+
+					var links = <?=json_encode($links)?>;
+					console.log(links);
+					var color = d3.interpolateHsl("blue", "yellow");
+					var maxValue = d3.max(links);
+
+					var heatMap = d3.select("#myGraph")
+					.selectAll("rect")
+					.data(links)
+					heatMap.enter()
+					.append("rect")
+					.attr("class", "block")
+					.attr("x", function(d, i) {
+						return (i % 8) * blockSize;
+					})
+					.attr("y", function(d, i) {
+						return Math.floor(i/8) * blockSize;
+					})
+					.attr("width", function(d, i) {
+						return blockSize;
+					})
+					.attr("height", function(d, i) {
+						return blockSize;
+					})
+					.style("fill", function(d, i) {
+						return color(d/maxValue);
+					})
+
+					setInterval(function() {
+						for(var i=0; i<links.length; i++) {
+							var n = ((Math.random() * 3.5) | 0) - 2;
+							links[i] = links[i] + n;
+							if(links[i] < 0) { links[i] = 0; }
+							if(links[i] > maxValue ) { links[i] = maxValue; }
+						}
+						heatMap.data(links)
+						.style("fill", function(d, i){
+							return color(d/maxValue)
+						})
+					}, 1000);
+			</script>
 
 			<style>
 				svg { width: 160px; height: 240px; border: 1px solid black; }
 				.block { stroke: black; fill: none; }
 			</style>
-
-			<script src="{{URL::asset('js/map.js')}}"></script>
+			{{-- <script src="{{URL::asset('js/map2.js')}}"></script> --}}
 @endsection

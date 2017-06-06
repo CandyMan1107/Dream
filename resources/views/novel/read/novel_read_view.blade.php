@@ -37,10 +37,27 @@
     {{-- read-novel-view START --}}
     <div id="read-novel-view">
         {{-- container class START --}}
-        <div class="container">
+        <div class="container bookContainer" name="bookMode">
+            <div class="row">
+                <div class="col-md-6 leftPage" name="bookPage">
+                    <i class="material-icons arrowLeft" name="pageArrow">keyboard_arrow_left</i>
+                    사람들은 아버지를 난쟁이라고 불렀다. 사람들은 옳게 보았다. 
+                    아버지는 난쟁이였다. 불행하게도 사람들은 아버지를 보는 것 하나만 옳았다. 그 밖의 것들은 하나도 옳지 않았다. 
+                    나는 아버지, 어머니, 영호, 영희, 그리고 나를 포함한 다섯 식구의 모든 것을 걸고 그들이 옳지 않다는 것을 언제나 말할 수 있다. 나의 ‘모든 것’이라는 표현에는 ‘다섯 식구의 목숨’이 포함되어 있다. 
+                    천국에 사는 사람들은 지옥을 생각할 필요가 없다. 그러나 우리 다섯 식구는 지옥에 살면서 천국을 생각했다. 단 하루라도 천국을 생각해 보지 않은 날이 없다. 
+                    하루하루의 생활이 지겨웠기 때문이다. 우리의 생활은 전쟁과 같았다. 우리는 그 전쟁에서 날마다 지기만 했다. 
+                    그런데도 어머니는 모든 것을 잘 참았다. 그러나 그날 아침 일만은 참기 어려웠던 것 같다.
+                </div>
+                <div class="col-md-6 rightPage" name="bookPage">
+                    <i class="material-icons arrowRight" name="pageArrow">keyboard_arrow_right</i>
+                    사람들은 아버지를 난쟁이라고 불렀다. 사람들은 옳게 보았다.
+                </div>
+            </div>
+        </div>
+        <div class="container webContainer">
             <div class="row">
                 {{--<div id="default-padding-mid" class="col-md-12"></div>--}}
-                <div class="col-md-12 novel-viewer">
+                <div class="col-md-12 novel-viewer" name="webMode">
                     <p class=MsoNormal>사람들은 아버지를 난장이라고 불렀다<span lang=EN-US>. </span>사람들은 옳게 보았다<span
                     lang=EN-US>. </span>아버지는 <span class=SpellE>난장이였다</span><span lang=EN-US>. </span>불행하게도
                     사람들은 아버지를 보는 것 하나만 옳았다<span lang=EN-US>. </span>그 밖의 것들은 하나도 옳지 않았다<span

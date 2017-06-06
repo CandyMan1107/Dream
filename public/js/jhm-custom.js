@@ -4,6 +4,8 @@ $(document).ready(function () {
     **************************************/
     // 기본 설정은 Web
     $("ul[name=bookMode]").hide();
+    $("div[name=bookMode]").hide();
+    $("i[name=pageArrow]").hide();
 
     $("li").filter(".viewScreen").each(function() {
         $(this).click(function () {
@@ -14,12 +16,40 @@ $(document).ready(function () {
                 if($(this).hasClass("webMode")) {
                     // alert("WEB");
                     $("ul[name=bookMode]").hide();
+
+                    $("div[name=bookMode]").hide();
+                    $("div[name=webMode]").show();
                 } else if($(this).hasClass("bookMode")) {
                     // alert("BOOK");
                     $("ul[name=bookMode]").show();
+
+                    $("div[name=webMode]").hide();
+                    $("div[name=bookMode]").show();
                 }
             }
         });
+    });
+
+    $("div[name=bookPage]").each(function() {
+        if($(this).hasClass("leftPage")) {
+            $(this).mouseenter(function() {
+                // alert("LEFT");
+                $("i[name=pageArrow]").filter(".arrowLeft").show();
+            });
+            $(this).mouseleave(function() {
+                $("i[name=pageArrow]").filter(".arrowLeft").hide();
+            });
+        } else if($(this).hasClass("rightPage")) {
+            $(this).mouseenter(function() {
+                // alert("RIGHT");
+                $("i[name=pageArrow]").filter(".arrowRight").show();
+            });
+            $(this).mouseleave(function() {
+                // alert("RIGHT");
+                $("i[name=pageArrow]").filter(".arrowRight").hide();
+            });
+        }
+        
     });
 
     $("li").filter(".fontList").each(function() {
