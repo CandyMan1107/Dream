@@ -15,7 +15,6 @@ class CreateNovelEpisodesTable extends Migration
     {
         Schema::create('novel_episodes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('episode_num');
             $table->string('episode_title');
             $table->string('episode');
             $table->timestamps();
