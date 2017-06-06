@@ -61,72 +61,60 @@
 				
 				<div class="col-md-12 text-center">
 					<ul class="list-inline">
-						<span class="text-left">ALL &nbsp;</span>
+						<span class="text-left">ALL &nbsp;&nbsp;&nbsp;</span>
 						<span class="text-left">완결 &nbsp;</span>
 						<li class="fake-circle"></li>
-						<li>
+						<li name="dayCircle">
 							<strong class="circle-icon">
-								<a href="#mon" class="btn-link-tab" data-day="mon">월</a>
+								월
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
-                        <li>
+                        <li name="dayCircle">
 							<strong class="circle-icon">
-                            	<a href="#mon" class="btn-link-tab" data-day="tue">화</a>
+                            	화
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
-                        <li>
+                        <li name="dayCircle">
 							<strong class="circle-icon">
-                            	<a href="#mon" class="btn-link-tab" data-day="wed">수</a>
+								{{-- <a href="#wed" class="btn-link-tab" data-day="wed">수</a> --}}
+                            	수
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
-                        <li>
+                        <li name="dayCircle">
 							<strong class="circle-icon">
-                            	<a href="#mon" class="btn-link-tab" data-day="thu">목</a>
+                            	목
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
-                        <li>
+                        <li name="dayCircle">
 							<strong class="circle-icon">
-                            	<a href="#mon" class="btn-link-tab" data-day="fri">금</a>
+                            	금
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
-                        <li>
+                        <li name="dayCircle">
 							<strong class="circle-icon">
-                            	<a href="#mon" class="btn-link-tab" data-day="sat">토</a>
+                            	토
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
-                        <li>
+                        <li name="dayCircle">
 							<strong class="circle-icon">
-                            	<a href="#mon" class="btn-link-tab" data-day="sun">일</a>
+                            	일
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
 
 						<span class="text-right">
 							<a data-toggle="collapse" href="#collapseGenreMenu" aria-expanded="false" aria-controls="collapseGenreMenu">
-								&nbsp; 장르 &nbsp;
+								&nbsp; 장르 &nbsp;&nbsp;&nbsp;
 							</a>
 						</span>
 						<span class="text-right"> 정렬</span>
-						
-<!-- Single button -->
-<div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-    Action <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
-</div>
+
 					</ul>
 
 				</div>
@@ -166,4 +154,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/js/jhm-custom.js"></script>
     <script src="/js/jhm-quick.js"></script>
+	<script src="/js/jquery-3.2.0.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="/js/jquery.easing.min.js" type="text/javascript"></script>
+	<script src="/js/jquery.mixitup.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/js/slick.js"></script>
+	<script type="text/javascript" src="/js/custom.js"></script>
+	<script type="text/javascript" src="/js/d3.layout.js"></script>
 @endsection

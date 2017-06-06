@@ -38,7 +38,7 @@
     <div id="read-novel-view">
         {{-- container class START --}}
         <div class="container bookContainer" name="bookMode">
-            <div class="row">
+            <div class="row novel-viewer-book">
                 <div class="col-md-6 leftPage" name="bookPage">
                     <i class="material-icons arrowLeft" name="pageArrow">keyboard_arrow_left</i>
                     사람들은 아버지를 난쟁이라고 불렀다. 사람들은 옳게 보았다. 
@@ -57,7 +57,7 @@
         <div class="container webContainer">
             <div class="row">
                 {{--<div id="default-padding-mid" class="col-md-12"></div>--}}
-                <div class="col-md-12 novel-viewer" name="webMode">
+                <div class="col-md-12 novel-viewer-web" name="webMode">
                     <p class=MsoNormal>사람들은 아버지를 난장이라고 불렀다<span lang=EN-US>. </span>사람들은 옳게 보았다<span
                     lang=EN-US>. </span>아버지는 <span class=SpellE>난장이였다</span><span lang=EN-US>. </span>불행하게도
                     사람들은 아버지를 보는 것 하나만 옳았다<span lang=EN-US>. </span>그 밖의 것들은 하나도 옳지 않았다<span
