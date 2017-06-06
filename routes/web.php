@@ -70,6 +70,11 @@ Route::get('/write_novel/set', function(){
     return view('write_novel/write_novel_set');
 });
 
+// 회차 내용 작성
+Route::get('/write_novel/view', function(){
+    return view('write_novel/write_novel_view');
+});
+
 // 표지 이미지 등록
 Route::get('/uploadImg/{copyDiv}', "UpImgController@popUploadImgWindow");
 

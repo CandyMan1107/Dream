@@ -23,7 +23,7 @@ class UpImgController extends Controller
 
       $tasks = [
         "copyDiv"     => $copyDiv,
-        "saveDi0r"     => $destinationPath,
+        "saveDir"     => $destinationPath,
         "fileName"    => $file->getClientOriginalName(),
         "inputClass"  => "image_cell"              // 해당 클래스에 태그 추가
       ];
