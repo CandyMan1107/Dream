@@ -16,9 +16,9 @@ class CreateNovelEpisodesTable extends Migration
         // 회차에 대한 테이블
         Schema::create('novel_episodes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer("belong_to_novel");
+            $table->integer("belong_to_novel"); // 에피소드가 어느 소설에 속하는지?
             $table->boolean('is_charge'); // 유무료
-            $table->boolean('is_notice'); // 공지 참/거짓, 참 = 공지
+            $table->boolean('is_notice'); // 공지 참(TRUE)/거짓(FALSE), 참 = 공지
             $table->string('cover_img_src');
             $table->string('episode_title');
             $table->string('episode');
