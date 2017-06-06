@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use App\Episode;
 
 class NovelEpisodeController extends Controller
 {
@@ -15,7 +15,10 @@ class NovelEpisodeController extends Controller
     public function index()
     {
         //
-        // Controller 으아아앍
+        $episodeTable = new Episode();
+        $episodeData = $episodeTable->dataSelectAll();
+
+        // var_dump($episodeData);
 
         return view('novel.read.novel_read_view');
     }

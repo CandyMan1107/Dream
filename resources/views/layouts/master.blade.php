@@ -21,6 +21,7 @@
 
         {{--JHM STYLE--}}
         <link rel="stylesheet" href="/css/jhm-style.css">
+        
     </head>
     <body>
       @include('partials.header')

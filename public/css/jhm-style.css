@@ -352,10 +352,10 @@ selected
     color: white;
 }
 
-table {
+.genreMenu {
     border-spacing: 15px;
 }
 
-td {
+.genreMenu > td {
     padding: 50px;
 }
