@@ -17,8 +17,10 @@ class Timetable extends Model
             'add_items' => $table['add_items'],
             'start_days' => $table['start_day'],
             'end_days' => $table['end_day'],
-            'characters' => $table['character'],
             'others' => $table['other'],
+            'characters' => $table['character'],
+            'items' => $table['item'],
+            'places' => $table['place'],
             // 'tag_ids' => $table[''],
         ];
         // data insert
