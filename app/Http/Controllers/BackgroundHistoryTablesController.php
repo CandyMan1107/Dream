@@ -28,8 +28,10 @@ class BackgroundHistoryTablesController extends Controller
             $data[$i]['add_items'] = $datas->add_items;
             $data[$i]['start_day'] = $datas->start_days;
             $data[$i]['end_day'] = $datas->end_days;
-            $data[$i]['character'] = $datas->characters;
             $data[$i]['other'] = $datas->others;
+            $data[$i]['character'] = $datas->characters;
+            $data[$i]['items'] = $datas->items;
+            $data[$i]['places'] = $datas->places;
 
             // echo $data[$i]['event_name'];
             // echo $data[$i]['event_content'];

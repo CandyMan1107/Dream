@@ -12,7 +12,7 @@ class Episode extends Model
     // TABLE : novel_episodes SELECT ALL
     public function dataSelectAll() {
         $episodeData = DB::table('novel_episodes')->get();
-        // var_dump($episodeData);
+        var_dump($episodeData);
 
         return $episodeData;
     }

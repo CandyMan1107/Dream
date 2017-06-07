@@ -32,6 +32,7 @@ class CreateCoverImagesTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('cover_images');
         //
     }
 }

@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Episode;
 
-class NovelEpisodeController extends Controller
+class TagsAddController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +14,6 @@ class NovelEpisodeController extends Controller
     public function index()
     {
         //
-        $episodeTable = new Episode();
-        $episodeData = $episodeTable->dataSelectAll();
-
-        var_dump($episodeData);
-
-        return view('novel.read.novel_read_view');
     }
 
     /**
