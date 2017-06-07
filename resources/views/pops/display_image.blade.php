@@ -18,9 +18,8 @@ document.write("divName : " + divName+ "<br>");
 document.write("contentDiv : " + contentDiv + "<br>");
 document.write("inputClass : " + inputClass+ "<br>");
 document.write("imgRoot : " +imgRoot + "<br>");
-document.write("divName : " + divName+ "<br>");
+
 
 contentDiv.html(contentDiv.html() + "<div class='"+ inputClass+ "'><img src='" +imgRoot + "/" + fileName + "'></div>");
 
-window.close();
 </script>
