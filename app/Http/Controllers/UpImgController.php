@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Storage;
+use DB;
 
 class UpImgController extends Controller
 {
@@ -18,13 +19,19 @@ class UpImgController extends Controller
       //파일 이동
       $file = $request->file('image') ;
       $destinationPath = 'upload/images';
-      $file->move($destinationPath,$file->getClientOriginalName() );
+      $fileName = date("Y").date("m").date("d").date("s").$file->getClientOriginalName();
+      $file->move($destinationPath, $fileName);
       $copyDiv = Input::get('copyDiv');
+
+      DB::table("cover_images")->insert([
+        "user_id" => 1,     // 유저 아이디는 임의값
+        "cover_img_src" => $fileName
+      ]);
 
       $tasks = [
         "copyDiv"     => $copyDiv,
         "saveDir"     => $destinationPath,
-        "fileName"    => $file->getClientOriginalName(),
+        "fileName"    => $fileName,
         "inputClass"  => "image_cell"              // 해당 클래스에 태그 추가
       ];
 
