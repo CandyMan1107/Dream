@@ -9,13 +9,29 @@
 		 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		 <script type="text/javascript" src="/js/custom/history.js"></script>
 		 <script type="text/javascript" src="/js/custom/additional_items.js"></script>
-		 {{var_dump($data)}}
+		 {{-- <script type="text/javascript" src="/js/custom/timetable_event_list.js"></script> --}}
+		 <script> ready(  <?=json_encode($data)?>  ) </script>
 		<div class="col-xs-16 col-sm-11 col-md-11" style= "background-color : #e8d6b3" >
 			<br>
-			<div id="timeline" style="height:180px;"></div>
+			<div class="row" id="timeline" style="height:180px;">
+			</div>
+			<nav aria-label="...">
+				<ul class="pager" id="timetableList">
+					<!-- <script> timetableList( <?=json_encode($data) ?>)</script>  -->
+					<?php
+						for($i = 0 ; $i < count($data) ; $i++){
+							?>
+								<li id="{{$i}}"><a href="#">{{$data[$i]['event_name']}}</a></li>
+							<?php
+						}
+					?>
+				</ul>
+			</nav>
 		</div>
+		
 		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set">
 			<div class="row">
+			{{-- {{ var_dump($data) }} --}}
 				<form class="form-horizontal" id="time_table" name="time_table" action="{{ route('historyTable.store') }}" method="POST">
 					{!! csrf_field() !!}
 					<div class="col-xs-8 col-sm-5 col-md-5">

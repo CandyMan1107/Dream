@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+
 <div class="default-padding"></div>
 {{--BANNER START--}}
 	<div id="banner" class="section-padding">

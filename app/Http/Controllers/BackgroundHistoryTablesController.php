@@ -22,6 +22,7 @@ class BackgroundHistoryTablesController extends Controller
         $data = array(array());
         $i = 0;
         foreach ($dataSet as $datas){
+            $data[$i]['id'] = $datas->id;
             $data[$i]['event_name'] = $datas->event_names;
             $data[$i]['event_content'] = $datas->event_contents;
             $data[$i]['add_items'] = $datas->add_items;
@@ -40,7 +41,7 @@ class BackgroundHistoryTablesController extends Controller
             // echo $i;
             $i++;
         }
-        return view('background.historyTable.history_table_view', $data);
+        return view('background.historyTable.history_table_view')->with("data", $data);
     }
 
     /**
