@@ -18,7 +18,7 @@ class NovelEpisodeController extends Controller
         $episodeTable = new Episode();
         $episodeData = $episodeTable->dataSelectAll();
 
-        // var_dump($episodeData);
+        var_dump($episodeData);
 
         return view('novel.read.novel_read_view');
     }
