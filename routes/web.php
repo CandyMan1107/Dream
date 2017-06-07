@@ -15,12 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/lib', function () {
     return view('load');
 });
 
 Route::get('/background/relation', "RelationController@index");
+
+Route::get('/background/relation/rmRel', "RelationController@removeRelation");
+
+Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
 Route::get('/background/map', function(){
   return view('background/map/map_view');
@@ -42,9 +45,10 @@ Route::get('/novel/today_novel_by_day', function(){
     return view('novel/today_novel_by_day');
 });
 
-Route::get('/novel/read/novel_read_view', function(){
-    return view('novel/read/novel_read_view');
-});
+// Route::get('/novel/read/novel_read_view', function(){
+//     return view('novel/read/novel_read_view');
+// });
+Route::resource('/novel/read/novel_read_view', 'NovelEpisodeController');
 
 Route::get('/background/character', function(){
     return view('background/character/character_view');
@@ -64,6 +68,11 @@ Route::get('/background/share', function(){
 // 소설 정보 작성
 Route::get('/write_novel/set', function(){
     return view('write_novel/write_novel_set');
+});
+
+// 회차 내용 작성
+Route::get('/write_novel/view', function(){
+    return view('write_novel/write_novel_view');
 });
 
 // 표지 이미지 등록

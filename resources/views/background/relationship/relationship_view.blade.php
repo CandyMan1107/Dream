@@ -58,13 +58,38 @@
 				stroke-width:1;
 			}
 
+			.function-div{
+				margin-top: 12px;
+				background-color: #BDBDBD;
+				text-align: center;
+			}
 
-
+			.form-control{
+				width:auto;
+			}
 
 
 		</style>
-
-		<div class="col-xs-7 col-sm-3 col-md-3 height-max-set charater-list" style= "background-color : #e8d6b3" >
+		<div class="function-div form-group">
+			<form class="form-inline">
+				<div class="form-group">
+			    <label>선택자</label>
+			    <input type="text" id="selectedNameInput" class="form-control" id="exampleInputName2" placeholder="선택자" readonly="readonly">
+			  </div>
+			  <div class="form-group">
+			    <label>주체</label>
+			    <input type="text" id="sourceNameInput" class="form-control" id="exampleInputName2" placeholder="주체 이름" readonly="readonly">
+			  </div>
+			  <div class="form-group">
+			    <label>대상</label>
+			    <input type="email" id="targetNameInput" class="form-control" id="exampleInputEmail2" placeholder="대상 이름" readonly="readonly">
+			  </div>
+			  <button type="button" class="btn btn-default" id="createRelationBtn">관계 형성</button>
+				<button type="button" class="btn btn-default" id="removeRelationBtn">관계 삭제</button>
+				<button type="button" class="btn btn-default" id="removeChaNodeBtn">캐릭터 삭제</button>
+			</form>
+		</div>
+		<div class="col-xs-7 col-sm-3 col-md-3 height-max-set character-list" style= "background-color : #e8d6b3" >
 			<?php
 				$imgRoot 		= $tasks["imgRoot"];
 				$chaInfos 	= $tasks["chaInfos"];
@@ -103,11 +128,12 @@
 			?>
 
 		</div>
-		<div id="force-div" class="col-xs-9 col-sm-8 col-md-8 height-max-set" >
-			<button type="button" name="button" id="createRelationBtn">관계형성</button>
-			<button type="button" name="button" id="removeRelationBtn">관계삭제</button>
-			<button type="button" name="button" id="removeChaNodeBtn">캐릭터삭제</button>
+
+		<div id="force-div" class="col-xs-9 col-sm-8 col-md-8 height-max-set force-box" >
+
 		</div>
+
+
 	{{-- 태그 div.row 닫는 태그 --}}
 	</div>
 
@@ -219,7 +245,12 @@
 			var selectedText;
 			var sourceText;
 			var targetText;
+
 			function selectNode(d){
+				var selectedNameInput 	= $('#selectedNameInput');
+				var sourceNameInput 		= $('#sourceNameInput');
+				var targetNameInput 		= $('#targetNameInput');
+
 				var node = svg.selectAll(".node");
 				var selectedInThisEvent = d3.select(this);	// 이번에 선택된 노드
 				// 삭제 등으로 selected 노드가 없어졌을 경우
@@ -229,6 +260,7 @@
 				if(selectedInThisEvent.classed("selectedNode"))
 					return;
 
+				// 노드를 처음 선택할 경우
 				if(selectedCount == 0){
 					selectedStorage[0] = selectedInThisEvent;
 					selectedInThisEvent.classed("selectedNode", true);
@@ -239,7 +271,15 @@
 					.attr("style", "fill:green; font-weight:bold; font-size:16")
 					.text(function(d) { return "선택"} );
 
+					// Input 내용 입력
+					var selectedChaId = selectedInThisEvent.attr("href");
+					var selectedName = getChaInfoById(selectedChaId).name;
+					resetInput();
+					selectedNameInput.val(selectedName);
+
 					selectedCount++;
+
+				// 노드를 두번째로 선택할 경우
 				} else if (selectedCount == 1) {
 					selectedStorage[1] = selectedInThisEvent;
 					selectedStorage[0].classed("selectedNode", false);
@@ -260,6 +300,17 @@
 
 					selectedInThisEvent.classed("targetNode", true);
 					selectedCount++;
+
+					// Input 내용 입력
+					resetInput();
+					var sourceChaId = selectedStorage[0].attr("href");
+					var sourceName = getChaInfoById(sourceChaId).name;
+					sourceNameInput.val(sourceName);
+					var targetChaId = selectedStorage[1].attr("href");
+					var targetName = getChaInfoById(targetChaId).name;
+					targetNameInput.val(targetName);
+
+				// 노드를 세번째로 선택한 경우
 				} else {
 					node.classed("sourceNode",false);
 					node.classed("targetNode",false);
@@ -273,16 +324,36 @@
 					.attr("dy", "-45")
 					.attr("style", "fill:green; font-weight:bold; font-size:16")
 					.text(function(d) { return "선택"} );
+
+					// Input 내용 입력
+					var selectedChaId = selectedInThisEvent.attr("href");
+					var selectedName = getChaInfoById(selectedChaId).name;
+					resetInput();
+					selectedNameInput.val(selectedName);
 				}
 
+
 			}
+
+
+
 			// 관계 삭제
 			$("#removeRelationBtn").on("click", function(){
 
+				// links 내 관계 제거
+				if($(".selectedRelation").length == 0) return;
 				var selectedRelation = d3.select(".selectedRelation").selectAll("textPath").attr("href");
+
 				links = links.filter(function(l){
 					return l.id != selectedRelation.replace("#", "");
 				});
+
+
+				var relnum = selectedRelation.replace("#rel", "");
+
+				// 데이터베이스 적용 제거된 관계 삭제
+				removeRelData(relnum);
+
 				path.remove();
 				restart();
 				restart();
@@ -291,8 +362,11 @@
 			// 관계 생성창
 			$("#createRelationBtn").on("click", function(){
 
+				// 선택 노드
 				var source = $(".sourceNode");
 			  var target = $(".targetNode");
+
+				// links , nodes 정보 수정
 				if(source.length == 0 || target.length == 0)
 				return;
 				 console.log(source);
@@ -305,6 +379,19 @@
 				obj.target = target.attr("href");
 				obj.target = nodes[obj.target] || (nodes[obj.target] = {chaId: obj.target});
 				obj.relationship = prompt();
+				console.log(obj);
+
+				// 데이터베이스 적용
+				var createdRel = new Object();
+				createdRel.relnum 			= obj.relnum;
+				createdRel.sourceId 		= obj.source.chaId;
+				createdRel.targetId 		= obj.target.chaId;
+				createdRel.relationship = obj.relationship;
+
+				console.log(createdRel);
+
+				// DB 관계 생성
+				createRelData(createdRel.relnum, createdRel.sourceId, createdRel.targetId, createdRel.relationship);
 
 				restart();
 				links.push(obj);
@@ -320,6 +407,10 @@
 				var selectedChaId = selectedNode.attr("href");
 				console.log(links);
 				links = links.filter(function(l){
+					if((l.source.chaId == selectedChaId) || (l.target.chaId == selectedChaId)){
+						removeRelData(l.relnum);
+					}
+
 					return (l.source.chaId != selectedChaId) && (l.target.chaId != selectedChaId)
 				});
 
@@ -328,8 +419,7 @@
 				path.remove();
 				node.remove();
 
-				// 캐릭터 리스트에 생성 ****
-
+				// 캐릭터 리스트에 생성
 				var newNode = document.createElement("img");
 
 				var imgSrc = getChaInfoById(selectedChaId).img_src;
@@ -338,7 +428,7 @@
 				newNode.setAttribute("id", "chaNode" + selectedChaId);
 				newNode.setAttribute("class","img-circle img-things-size draggable");
 
-				$(".charater-list").append(newNode);
+				$(".character-list").append(newNode);
 
 				$( ".draggable" ).draggable({
 				 revert: true,
@@ -557,6 +647,50 @@
 					}
 				});
 				return chaInfo;
+			}
+
+			// Input의 내용 삭제
+			function resetInput(){
+				$('#selectedNameInput').val("");
+				$('#sourceNameInput').val("");
+				$('#targetNameInput').val("");
+			}
+
+			// DB 관계 삭제
+			function removeRelData(relnum){
+				$.ajax({
+						type: "get",
+						url: "relation/rmRel",
+						data: {
+							relnum: relnum
+						},
+						success: function (data) {
+							//alert(data);
+						},
+						error: function (error) {
+							alert("오류발생");
+						}
+				});
+			}
+
+			// DB 관계 생성
+			function createRelData(relnum, sourceId, targetId, relationship){
+				$.ajax({
+            type: "get",
+            url: "relation/mkRel",
+            data: {
+							'relnum': relnum,
+							'sourceId': sourceId,
+							'targetId': targetId,
+							'relationship': relationship
+						},
+            success: function (data) {
+							console.log(data);
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
 			}
 
 	});

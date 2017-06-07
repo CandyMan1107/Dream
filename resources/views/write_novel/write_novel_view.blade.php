@@ -126,7 +126,7 @@
   <div class="write_novel_set">
     <div class="container">
       <div class="row set_row">
-        <div class="col-md-12 main_title">새 소설 쓰기</div>
+        <div class="col-md-12 main_title">회차 / 공지 쓰기</div>
       </div>
 
       <div class="row set_row">
@@ -190,8 +190,9 @@
       </div>
 
       <div class="row set_row">
-        <div class="col-md-6 btn_div"><div class="func_btn">취소</div></div>
-        <div class="col-md-6 btn_div"><div class="func_btn">저장</div></div>
+        <div class="col-md-4 btn_div"><div class="func_btn">취소</div></div>
+        <div class="col-md-4 btn_div"><div class="func_btn">저장</div></div>
+        <div class="col-md-4 btn_div"><div class="func_btn">저장 후 1회 쓰기</div></div>
       </div>
 
     </div>

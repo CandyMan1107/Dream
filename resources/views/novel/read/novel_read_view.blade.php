@@ -7,14 +7,24 @@
     <div id="read-novel-info" class="section-padding">
         <div id="default-padding-small"></div>
         <div class="row">
-            <div class="col-md-8 info-text">
+            <div class="col-md-5 info-text">
                 <h4 class="text-left">
                     <span class="novel-info-text"><strong>오베라는 남자</strong></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
                     <span class="novel-info-text">1화 오베라는 남자(1)</span>
                 </h4>
             </div>
-            <div class="col-md-4 text-right info-icon">
+            <div class="col-md-4 text-right">
+                <ul class="list-inline" name="bookMode">
+                    <li class="setView" data-toggle="modal" data-target="#myModal">
+                        <i class="material-icons">settings</i>&nbsp;<span>뷰어설정</span>
+                    </li>
+                    <li class="novelBackground">
+                        <i class="material-icons">remove_red_eye</i>&nbsp;<span>배경보기</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3 text-right info-icon">
                 <ul class="list-inline">
                     <li><i class="material-icons">bookmark_border</i></li>
                     <li><i class="material-icons">star_border</i></li>
@@ -27,10 +37,27 @@
     {{-- read-novel-view START --}}
     <div id="read-novel-view">
         {{-- container class START --}}
-        <div class="container">
+        <div class="container bookContainer" name="bookMode">
+            <div class="row novel-viewer-book">
+                <div class="col-md-6 leftPage" name="bookPage">
+                    <i class="material-icons arrowLeft" name="pageArrow">keyboard_arrow_left</i>
+                    사람들은 아버지를 난쟁이라고 불렀다. 사람들은 옳게 보았다. 
+                    아버지는 난쟁이였다. 불행하게도 사람들은 아버지를 보는 것 하나만 옳았다. 그 밖의 것들은 하나도 옳지 않았다. 
+                    나는 아버지, 어머니, 영호, 영희, 그리고 나를 포함한 다섯 식구의 모든 것을 걸고 그들이 옳지 않다는 것을 언제나 말할 수 있다. 나의 ‘모든 것’이라는 표현에는 ‘다섯 식구의 목숨’이 포함되어 있다. 
+                    천국에 사는 사람들은 지옥을 생각할 필요가 없다. 그러나 우리 다섯 식구는 지옥에 살면서 천국을 생각했다. 단 하루라도 천국을 생각해 보지 않은 날이 없다. 
+                    하루하루의 생활이 지겨웠기 때문이다. 우리의 생활은 전쟁과 같았다. 우리는 그 전쟁에서 날마다 지기만 했다. 
+                    그런데도 어머니는 모든 것을 잘 참았다. 그러나 그날 아침 일만은 참기 어려웠던 것 같다.
+                </div>
+                <div class="col-md-6 rightPage" name="bookPage">
+                    <i class="material-icons arrowRight" name="pageArrow">keyboard_arrow_right</i>
+                    사람들은 아버지를 난쟁이라고 불렀다. 사람들은 옳게 보았다.
+                </div>
+            </div>
+        </div>
+        <div class="container webContainer">
             <div class="row">
                 {{--<div id="default-padding-mid" class="col-md-12"></div>--}}
-                <div class="col-md-12 novel-viewer">
+                <div class="col-md-12 novel-viewer-web" name="webMode">
                     <p class=MsoNormal>사람들은 아버지를 난장이라고 불렀다<span lang=EN-US>. </span>사람들은 옳게 보았다<span
                     lang=EN-US>. </span>아버지는 <span class=SpellE>난장이였다</span><span lang=EN-US>. </span>불행하게도
                     사람들은 아버지를 보는 것 하나만 옳았다<span lang=EN-US>. </span>그 밖의 것들은 하나도 옳지 않았다<span
@@ -624,7 +651,7 @@
                                             <option>4화. 오베라는 남자(4)</option>
                                             <option>3화. 오베라는 남자(3)</option>
                                             <option>2화. 오베라는 남자(2)</option>
-                                            <option>1화. 오베라는 남자(1)</option>
+                                            <option selected="selected">1화. 오베라는 남자(1)</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -671,15 +698,11 @@
                                 <div class="col-md-7 text-left">
                                     {{-- 50px x 50px 화면 모드 이미지 버튼 2개 --}}
                                     <ul class="list-inline">
-                                        <li class="viewScreen viewOn">
-                                            <a href="#">
-                                                <span></span>
-                                            </a>
+                                        <li class="viewScreen webMode viewOn">
+                                            {{-- WEB MODE --}}
                                         </li>
-                                        <li class="viewScreen viewOff">
-                                            <a href="#">
-                                                <span></span>
-                                            </a>
+                                        <li class="viewScreen bookMode viewOff">
+                                            {{-- E-Book MODE --}}
                                         </li>
                                     </ul>
                                 </div>

@@ -155,6 +155,14 @@ novel-review
     width: auto;
     font-size: 38px;
 }
+
+.bookMode .setView {
+    color: #002E40;
+}
+.bookMode .novelBackground {
+    color: #2A5769;
+}
+
 h4 > span {
     /*border: 1px solid #FF0000;*/
     display: inline-block;
@@ -165,12 +173,26 @@ h4 > span {
 .novel-info-text {
     height: 25px;
 }
-#read-novel-view .container {
+#read-novel-view .bookContainer {
+    /*border: 1px solid red;*/
+    width: 1500px;
+    height: 600px;
+}
+#read-novel-view .bookContainer .leftPage {
+    /*border-right: 1px solid blue;*/
+    padding: 30px 40px 30px 50px;
+}
+#read-novel-view .bookContainer .rightPage {
+    /*border-left: 1px solid blue;*/
+    padding: 30px 50px 30px 40px;
+}
+
+#read-novel-view .webContainer {
     width: 1080px; 
     border-right: 1px solid rgba(149, 152, 154, .2) !important;
     border-left: 1px solid rgba(149, 152, 154, .2) !important;
 }
-#read-novel-view .container .novel-viewer {
+#read-novel-view .container .novel-viewer-web {
     padding: 30px 80px 30px 80px;
     /*border: 1px solid rgba(149, 152, 154, .2) !important;*/
 }
@@ -326,17 +348,14 @@ selected
     background-color: #FA9600;
 }
 
-.selected > .circle-icon > a {
+.selected > strong {
     color: white;
 }
 
-table {
+.genreMenu {
     border-spacing: 15px;
 }
 
-td {
+.genreMenu > td {
     padding: 50px;
-}
-td:hover {
-    color: #FA9600;
 }

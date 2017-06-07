@@ -2,19 +2,20 @@ var svgWidth = 160;
 var svgHeight = 240;
 var blockSize = 20;
 
-var dataSet = [
-  0, 1, 2, 3, 3, 4, 5, 4,
-  0, 0, 0, 3, 4, 4, 5, 3,
-  1, 0, 0, 0, 0, 0, 0, 0,
-  2, 6, 8, 7, 0, 0, 0, 2,
-  4, 8, 9, 8, 0, 0, 1, 0
-];
+// var dataSet = [
+//   0, 1, 2, 3, 3, 4, 5, 4,
+//   0, 0, 0, 3, 4, 4, 5, 3,
+//   1, 0, 0, 0, 0, 0, 0, 0,
+//   2, 6, 8, 7, 0, 0, 0, 2,
+//   4, 8, 9, 8, 0, 0, 1, 0
+// ];
+var links = json_encode($maps["links"]);
 var color = d3.interpolateHsl("blue", "yellow");
-var maxValue = d3.max(dataSet);
+var maxValue = d3.max(links);
 
 var heatMap = d3.select("#myGraph")
   .selectAll("rect")
-  .data(dataSet)
+  .data(links)
 heatMap.enter()
   .append("rect")
   .attr("class", "block")
@@ -35,13 +36,13 @@ heatMap.enter()
   })
 
 setInterval(function() {
-  for(var i=0; i<dataSet.length; i++) {
+  for(var i=0; i<links.length; i++) {
     var n = ((Math.random() * 3.5) | 0) - 2;
-    dataSet[i] = dataSet[i] + n;
-    if(dataSet[i] < 0) { dataSet[i] = 0; }
-    if(dataSet[i] > maxValue ) { dataSet[i] = maxValue; }
+    links[i] = links[i] + n;
+    if(links[i] < 0) { links[i] = 0; }
+    if(links[i] > maxValue ) { links[i] = maxValue; }
   }
-  heatMap.data(dataSet)
+  heatMap.data(links)
     .style("fill", function(d, i){
       return color(d/maxValue)
     })
