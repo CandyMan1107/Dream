@@ -650,18 +650,19 @@
     </div>
     {{-- read-novel-view END --}}
     {{-- quickMenu START --}}
-    {{-- collapse in 추가하기! page 이동 제이쿼리 추가하기! --}}
     <div id="quickMenu">
         <div class="row">
             <div class="col-md-2 text-left">
-                {{-- + - Button --}}
-                <a class="remoteButton" href="#"><i id="remoteMenu" class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+                {{-- + - Button COLLAPSE --}}
+                <a class="remoteButton" data-toggle="collapse" href="#collapseRemote" aria-expanded="true" aria-controls="collapseRemote">
+                    <i id="remoteMenu" class="fa fa-minus-square-o" aria-hidden="true"></i>
+                </a>
                 {{-- PAGE-UP Button --}}
                 <a class="remoteArrow" href="#"><i id="remoteUp" class="fa fa-arrow-up" aria-hidden="true"></i></a>
                 {{-- PAGE-DOWN Button --}}
                 <a class="remoteArrow" href="#"><i id="remoteDown" class="fa fa-arrow-down" aria-hidden="true"></i></a>
             </div>
-            <div class="col-md-10 remote-button">
+            <div class="col-md-10 collapse in remote-button" id="collapseRemote">
                 {{-- REMOTE TITLE & X Button --}}
                 {{-- Novel TITLE --}}
                 {{-- Novel EPISODSE MOVE --}}
