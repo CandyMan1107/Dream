@@ -110,17 +110,17 @@ $(document).ready(function () {
             }
 
             if ($(this).hasClass("font-color")) {
-                var fontColor = $(this).attr("value");
+                // var fontColor = $(this).attr("value");
                 // alert(fontColor);
-                $("div").filter(".example-text").css("color", fontColor);
-                $("div").filter(".novel-viewer-web").css("color", fontColor);
-                $("div").filter(".novel-viewer-book").css("color", fontColor);
+                $("div").filter(".example-text").css("color", color);
+                $("div").filter(".novel-viewer-web").css("color", color);
+                $("div").filter(".novel-viewer-book").css("color", color);
             } else if ($(this).hasClass("back-color")) {
-                var backColor = $(this).attr("value");
+                // var backColor = $(this).attr("value");
                 // alert(backColor);
-                $("div").filter(".example-text").css("background", backColor);
-                $("div").filter(".novel-viewer-web").css("background", backColor);
-                $("div").filter(".novel-viewer-book").css("background", backColor);
+                $("div").filter(".example-text").css("background", color);
+                $("div").filter(".novel-viewer-web").css("background", color);
+                $("div").filter(".novel-viewer-book").css("background", color);
             }
         });
     });
