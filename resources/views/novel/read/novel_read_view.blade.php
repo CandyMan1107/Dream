@@ -619,12 +619,7 @@
                     얼굴은 눈물로 젖었다<span lang=EN-US>. </span>우리는 그때 주머니 없는 옷을 입고 있었다<span lang=EN-US>.</span></p>
                 </div>
                 <div id="default-padding-big" class="col-md-12"></div>
-
                 
-
-                
-
-
                 <div class="col-md-12 text-center mark-icon">
                     <ul class="list-inline">
                         <li>
@@ -790,15 +785,15 @@
                             <div class="col-md-3 text-left">
                                 <h5><strong>색</strong></h5>
                                 <ul class="list-group">
-                                    <li class="list-group-item colorBox on-colorBox font-color" value="black">{{-- 색1 검정 --}}</li>
-                                    <li class="list-group-item colorBox off-colorBox font-color" value="white">{{-- 색5 흰색 --}}</li>
+                                    <li class="list-group-item colorBox on-colorBox font-color" value="#000000">{{-- 색1 검정 --}}</li>
+                                    <li class="list-group-item colorBox off-colorBox font-color" value="#ffffff">{{-- 색5 흰색 --}}</li>
                                 </ul>
                                 <ul class="list-group">
-                                    <li class="list-group-item colorBox on-colorBox back-color" value="white">{{-- 색1 흰색 --}}</li>
-                                    <li class="list-group-item colorBox off-colorBox font-black" value="rgb(255, 212, 128)"></h5></li>
-                                    <li class="list-group-item colorBox off-colorBox font-black" value="rgb(230, 255, 230)"></li>
-                                    <li class="list-group-item colorBox off-colorBox font-black" value="rgb(224, 204, 255)"></li>
-                                    <li class="list-group-item colorBox off-colorBox back-color" value="black">{{-- 색5 검정 --}}</li>
+                                    <li class="list-group-item colorBox on-colorBox back-color" value="#ffffff">{{-- 색1 흰색 --}}</li>
+                                    <li class="list-group-item colorBox off-colorBox back-color" value="#ffd480">{{-- rgb(255, 212, 128) --}}</h5></li>
+                                    <li class="list-group-item colorBox off-colorBox back-color" value="#e6ffe6">{{-- rgb(230, 255, 230) --}}</li>
+                                    <li class="list-group-item colorBox off-colorBox back-color" value="#e0ccff">{{-- rgb(224, 204, 255) --}}</li>
+                                    <li class="list-group-item colorBox off-colorBox back-color" value="#000000">{{-- 색5 검정 --}}</li>
                                 </ul>
                             </div>
                         </div>
