@@ -11,14 +11,14 @@
 		 <script type="text/javascript" src="/js/custom/additional_items.js"></script>
 		 <script type="text/javascript" src="/js/custom/timetable_event.js"></script>
 		 <script> ready(  <?=json_encode($data)?>  ) </script>
-		 <script> timetableEvent( <?=json_encode($data)?> ) </script>
-		<div class="col-xs-16 col-sm-11 col-md-11" style= "background-color : #e8d6b3" >
+		 <script> timetableEvent( <?=json_encode($data)?> );</script>
+		 
+		 <div class="col-xs-16 col-sm-11 col-md-11" style= "background-color : #e8d6b3" >
 			<br>
 			<div class="row" id="timeline" style="height:180px;">
 			</div>
 			<nav aria-label="...">
 				<ul class="pager" id="timetableList">
-					{{-- <script> timetableList( <?=json_encode($data) ?>)</script>  --}}
 					<?php
 						if($data[0]){
 							for($i = 0 ; $i < count($data) ; $i++){
@@ -131,7 +131,14 @@
 						</div>
 					</form>
 					{{-- add_tag.blade.php 구현하고, 컨트롤러로 div안에 불러오는 형식으로 변경 할 것. --}}
-					 
+					 <div class="row">
+					 {{-- $page에 태그 값이 참조할 테이블의 이름을 넣어준다. --}}
+					 	 <?php 
+						  	$page = "timetables";
+						  	use App\Http\Controllers\TagsAddController;
+							echo TagsAddController::view_return($page,$data);
+						  ?>
+					 </div>
 				</div>
 			</div>
 		</div>}	

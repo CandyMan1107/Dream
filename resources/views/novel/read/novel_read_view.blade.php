@@ -619,12 +619,7 @@
                     얼굴은 눈물로 젖었다<span lang=EN-US>. </span>우리는 그때 주머니 없는 옷을 입고 있었다<span lang=EN-US>.</span></p>
                 </div>
                 <div id="default-padding-big" class="col-md-12"></div>
-
                 
-
-                
-
-
                 <div class="col-md-12 text-center mark-icon">
                     <ul class="list-inline">
                         <li>
@@ -650,18 +645,19 @@
     </div>
     {{-- read-novel-view END --}}
     {{-- quickMenu START --}}
-    {{-- collapse in 추가하기! page 이동 제이쿼리 추가하기! --}}
     <div id="quickMenu">
         <div class="row">
             <div class="col-md-2 text-left">
-                {{-- + - Button --}}
-                <a class="remoteButton" href="#"><i id="remoteMenu" class="fa fa-minus-square-o" aria-hidden="true"></i></a>
+                {{-- + - Button COLLAPSE --}}
+                <a class="remoteButton" data-toggle="collapse" href="#collapseRemote" aria-expanded="true" aria-controls="collapseRemote">
+                    <i id="remoteMenu" class="fa fa-minus-square-o" aria-hidden="true"></i>
+                </a>
                 {{-- PAGE-UP Button --}}
                 <a class="remoteArrow" href="#"><i id="remoteUp" class="fa fa-arrow-up" aria-hidden="true"></i></a>
                 {{-- PAGE-DOWN Button --}}
                 <a class="remoteArrow" href="#"><i id="remoteDown" class="fa fa-arrow-down" aria-hidden="true"></i></a>
             </div>
-            <div class="col-md-10 remote-button">
+            <div class="col-md-10 collapse in remote-button" id="collapseRemote">
                 {{-- REMOTE TITLE & X Button --}}
                 {{-- Novel TITLE --}}
                 {{-- Novel EPISODSE MOVE --}}
@@ -789,15 +785,15 @@
                             <div class="col-md-3 text-left">
                                 <h5><strong>색</strong></h5>
                                 <ul class="list-group">
-                                    <li class="list-group-item colorBox on-colorBox font-color" value="black">{{-- 색1 검정 --}}</li>
-                                    <li class="list-group-item colorBox off-colorBox font-color" value="white">{{-- 색5 흰색 --}}</li>
+                                    <li class="list-group-item colorBox on-colorBox font-color" value="#000000">{{-- 색1 검정 --}}</li>
+                                    <li class="list-group-item colorBox off-colorBox font-color" value="#ffffff">{{-- 색5 흰색 --}}</li>
                                 </ul>
                                 <ul class="list-group">
-                                    <li class="list-group-item colorBox on-colorBox back-color" value="white">{{-- 색1 흰색 --}}</li>
-                                    <li class="list-group-item colorBox off-colorBox font-black" value="rgb(255, 212, 128)"></h5></li>
-                                    <li class="list-group-item colorBox off-colorBox font-black" value="rgb(230, 255, 230)"></li>
-                                    <li class="list-group-item colorBox off-colorBox font-black" value="rgb(224, 204, 255)"></li>
-                                    <li class="list-group-item colorBox off-colorBox back-color" value="black">{{-- 색5 검정 --}}</li>
+                                    <li class="list-group-item colorBox on-colorBox back-color" value="#ffffff">{{-- 색1 흰색 --}}</li>
+                                    <li class="list-group-item colorBox off-colorBox back-color" value="#ffd480">{{-- rgb(255, 212, 128) --}}</h5></li>
+                                    <li class="list-group-item colorBox off-colorBox back-color" value="#e6ffe6">{{-- rgb(230, 255, 230) --}}</li>
+                                    <li class="list-group-item colorBox off-colorBox back-color" value="#e0ccff">{{-- rgb(224, 204, 255) --}}</li>
+                                    <li class="list-group-item colorBox off-colorBox back-color" value="#000000">{{-- 색5 검정 --}}</li>
                                 </ul>
                             </div>
                         </div>
