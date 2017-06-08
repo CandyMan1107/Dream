@@ -13,7 +13,21 @@ class TagsAddController extends Controller
      */
     public function index()
     {
-        //
+        return view('background.add_tag');
+    }
+
+    public static function view_return($page,$data){
+        return view('background.add_tag')->with("data",$data);
+    }
+
+    public function getData(){
+        // if(isset($_GET['event_id'])){
+        //     $event_num = $_GET['event_id'];
+        // }
+        // else{
+        //     $event_num = false;
+        // }
+        return view('background.add_tag')->with("event_num",$event_num);
     }
 
     /**
@@ -34,7 +48,7 @@ class TagsAddController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -68,6 +82,7 @@ class TagsAddController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         //
     }
 
