@@ -33,14 +33,6 @@ class BackgroundHistoryTablesController extends Controller
             $data[$i]['items'] = $datas->items;
             $data[$i]['places'] = $datas->places;
 
-            // echo $data[$i]['event_name'];
-            // echo $data[$i]['event_content'];
-            // echo $data[$i]['add_items'];
-            // echo $data[$i]['start_day'];
-            // echo $data[$i]['end_day'];
-            // echo $data[$i]['character'];
-            // echo $data[$i]['other'];
-            // echo $i;
             $i++;
         }
         return view('background.historyTable.history_table_view')->with("data", $data);

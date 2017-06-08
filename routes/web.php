@@ -86,4 +86,6 @@ Route::get('/write_novel/view', function(){
     return view('write_novel/write_novel_view');
 });
 
+Route::get('/background/tagsAdd/get', "TagsAddController@getData");
+
 Route::resource('/tagsAdd', 'TagsAddController');
