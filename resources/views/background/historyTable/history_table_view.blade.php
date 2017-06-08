@@ -19,7 +19,6 @@
 			</div>
 			<nav aria-label="...">
 				<ul class="pager" id="timetableList">
-					{{-- <script> timetableList( <?=json_encode($data) ?>)</script>  --}}
 					<?php
 						if($data[0]){
 							for($i = 0 ; $i < count($data) ; $i++){

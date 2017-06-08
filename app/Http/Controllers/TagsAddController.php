@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Tag;
 
 class TagsAddController extends Controller
 {
@@ -13,11 +14,18 @@ class TagsAddController extends Controller
      */
     public function index()
     {
-        return view('background.add_tag');
+        
     }
 
     public static function view_return($page,$data){
-        return view('background.add_tag')->with("data",$data);
+        $tag = new Tag();
+        $tag_data = $tag->tagBring($page);
+
+        $datas = array(
+            'page' => $page, 
+            'data' => $data);
+        echo $datas['page'];
+        return view('background.add_tag')->with("datas",$datas);
     }
 
     public function getData(){
@@ -48,7 +56,15 @@ class TagsAddController extends Controller
      */
     public function store(Request $request)
     {
+        $tag = new Tag();
         
+        $tag_data = $request->all();
+
+        $result = $tag->insertTag($tag_data);
+        // echo ($tag_data['tag_name']);
+        // echo ($tag_data['page']);
+        // echo ($tag_data['tag_color']);
+        // echo ($tag_data['object_id']);
     }
 
     /**
