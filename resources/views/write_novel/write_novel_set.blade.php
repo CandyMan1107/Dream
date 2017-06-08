@@ -66,22 +66,34 @@
       color: #00D8FF;
     }
 
+    .image_list_box {
+      background-color:#EAEAEA;
+    }
     .image_list{
       height:200px;
-      width:100%;
+      width:80%;
+      margin-left: auto;
+      margin-right: auto;
     }
     .image_cell {
       display: inline-block;
-      border:black 2px solid;
       height:100%;
-      width:170px;
+      width:50px;
       text-align: center;
     }
+
 
     .image_cell > img {
       background-color: yellow;
       height:100%;
-      width:75%;
+      width:65%;
+      margin-left: auto;
+    	margin-right: auto;
+    	display: block;
+    }
+
+    .selected-image {
+      border:2px solid #5CD1E5;
     }
 
     .img_upload_btn{
@@ -123,6 +135,7 @@
     }
 
   </style>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <div class="write_novel_set">
     <div class="container">
       <div class="row set_row">
@@ -132,7 +145,7 @@
       <div class="row set_row">
         <div class="col-md-12">
           <span class="menu_title">소설 제목</span>
-          <input class="menu_input" type="text" name="" placeholder="소설 제목을 입력해주세요." size=50>
+          <input class="menu_input" type="text" placeholder="소설 제목을 입력해주세요." size=50>
         </div>
       </div>
       <div class="row set_row">
@@ -169,27 +182,34 @@
       </div>
 
       <div class="row set_row">
-        <div class="col-md-10 menu_title">표지 이미지</div>
+        <div class="col-md-10 menu_title">표지 이미지
+          <form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="">
+            <input id="imgFile" name="imgFile" type='file'>
+          </form></div>
         <div class="col-md-2"><span class="img_upload_btn" data-href="{{URL::to('uploadImg/image_list')}}">이미지 업로드</span></div>
       </div>
 
+
       <!--표지 이미지가 들어갈 리스트-->
-      <div class="row set_row image_list" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}' data-href="{{URL::to('upload/images')}}">
+      <div class="row set_row image_list_box">
+        <div class="image_list center-slick" data-href="{{URL::to('upload/images')}}">
+
+        </div>
       </div>
 
-      <div class="novel_intro">
-        <div class="row set_row">
-          <div class="col-md-12 menu_title">소설 소개</div>
-        </div>
-        <div class="intro_box detail_intro_box" contenteditable="true">
-          detail intro box
-        </div>
-        <div class="intro_box summary_intro_box" contenteditable="true">
-          summary intro box
-        </div>
-      </div>
+
 
       <div class="row set_row">
+        <div class="col-md-12 menu_title">소설 소개</div>
+      </div>
+      <div class="intro_box detail_intro_box" contenteditable="true">
+        detail intro box
+      </div>
+      <div class="intro_box summary_intro_box" contenteditable="true">
+        summary intro box
+      </div>
+
+      <div class="row set_row modal-dialog modal-sm">
         <div class="col-md-6 btn_div"><div class="func_btn">취소</div></div>
         <div class="col-md-6 btn_div"><div class="func_btn">저장</div></div>
       </div>
@@ -197,7 +217,113 @@
     </div>
   </div>
 
-<script src="{{URL::asset('js/jquery.min.js')}}"></script>
-<script src="{{URL::asset('js/slick.js')}}"></script>
-<script src="{{URL::asset('js/custom/write_novel.js')}}"></script>
+<script>
+  (function ($) {
+    // 자유/요일연재 선택
+    $('.check_novel_period').bind("click", function(){
+      // 체크 되어 있지 않다면
+      $('.check_novel_period').removeClass("selected_period");
+      $(this).addClass("selected_period");
+
+      // 요일 연재의 경우 요일 활성화
+      if($(this).hasClass("day_publish")){
+        activateDayCell();
+      // 요일연재가 아닐경우 요일 비활성화
+      } else {
+        deactivateDayCell();
+      }
+    });
+
+    // 요일 선택
+    $(".novel_period_day").bind("click", function(){
+      // 요일 선택이 활성화 된 경우에만 선택됨
+      if($(".novel_period_day_table").hasClass("day_activate")){
+        if($(this).hasClass("selected_day"))
+          $(this).removeClass("selected_day");
+        else
+          $(this).addClass("selected_day");
+      }
+    });
+    // 요일 선택 비활성화
+    function deactivateDayCell(){
+      $(".novel_period_day_table").removeClass("day_activate");
+      $(".novel_period_day").removeClass("selected_day");
+      $(".novel_period_day_table").hide();
+    }
+
+    // 요일 선택 활성화
+    function activateDayCell(){
+      if(!$(".novel_period_day_table").hasClass("day_activate")){
+        $(".novel_period_day_table").addClass("day_activate");
+        $(".novel_period_day_table").show();
+      }
+    }
+
+    // 메뉴없는 윈도우를 현재 윈도우 중간에 팝업
+    function popupLink(link,popHeight,popWidth){
+      var winHeight = document.body.clientHeight;	// 현재창의 높이
+      var winWidth  = document.body.clientWidth;	// 현재창의 너비
+      var winX      = window.screenLeft;	// 현재창의 x좌표
+      var winY      = window.screenTop;	// 현재창의 y좌표
+
+      var popX = winX + (winWidth - popWidth)/2;
+      var popY = winY + (winHeight - popHeight)/2;
+      window.open(link,"","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX+",menubar=1,scrollbars=no,resizable=no");
+    }
+
+    // 이미지 업로드 팝업
+    $(".img_upload_btn").bind("click", function(){
+      popupLink($(".img_upload_btn").data('href'), 300, 500);
+    });
+
+
+    $('.center-slick').slick({
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 3
+    });
+
+    // 업로드한 이미지 이벤트
+    $('.image_cell').on('click',function(){
+      alert("what");
+
+    });
+
+
+    $("#imgFile").change(function () {
+        // 파일이 있을경우
+        if (this.files && this.files[0]) {
+
+            // ajax로 DB추가
+            var input = $("#imgFile");
+            console.log(new FormData($("#imgFile")[0]));
+            $.ajaxSetup({
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            $.ajax({
+              url: "addCover",
+              type: "post",
+              data: new FormData($("#upload_form")[0]),
+              processData: false,
+              contentType: false,
+              success: function(data){
+                  //슬릭 생성
+                  $(".image_list").slick('slickAdd', "<div class='image_cell'><img class='cover-img' src={{URL::asset('upload/images')}}/"+data+" data-href="+data+"></div>")
+                  $(".image_cell").on('click',function(){
+                    $('.image_cell').removeClass("selected-image");
+                    $(this).addClass("selected-image");
+                  });
+              }
+            });
+        }
+    });
+
+
+    deactivateDayCell();
+  })(jQuery);
+
+
+</script>
 @endsection
