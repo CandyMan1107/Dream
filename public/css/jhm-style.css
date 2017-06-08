@@ -295,7 +295,9 @@ h4 > span {
 }
 
 #myModal .example-text {
-    border: 1px solid black;
+    height: 142px;
+    border: 1px solid rgba(149, 152, 154, .5);
+    overflow: auto;
 }
 .on-font {
     color: #FA9600;
