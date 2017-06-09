@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="default-padding"></div>
-	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBanner" aria-expanded="false" aria-controls="collapseBanner">
+	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBanner" aria-expanded="true" aria-controls="collapseBanner">
 		X
 	</a>
 	<div class="collapse in" id="collapseBanner">
@@ -160,10 +160,12 @@
 	
 	<div id="default-padding-mid"></div>
 
+    {{-- JHM STYLE --}}
+    <link rel="stylesheet" href="/css/jhm-style.css">
 	{{-- JHM SCRIPT --}}
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/js/jhm-custom.js"></script>
+    <script src="/js/JHM-Custom/jhm-todayNovel-custom.js"></script>
 	<script src="/js/jquery-3.2.0.js"></script>
 	<script src="/js/jquery.easing.min.js" type="text/javascript"></script>
 	<script src="/js/jquery.mixitup.js" type="text/javascript"></script>

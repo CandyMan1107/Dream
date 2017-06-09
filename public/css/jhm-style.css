@@ -1,3 +1,14 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+/**************************************
+cursor
+**************************************/
+i {
+    cursor: default;
+}
+
 /**************************************
 welcome.blade.php
 **************************************/
@@ -85,9 +96,6 @@ sort
     font-size: 22px;
 }
 
-#novel-info-3 .check-icon {
-    color: #FA9600;
-}
 #novel-info-3 .episode {
     border: 1px solid rgba(149, 152, 154, .5) !important;
 }
@@ -107,7 +115,10 @@ novel-review
 #novel-review .review-list {
     border-bottom: 1px solid rgba(149, 152, 154, .5) !important;
 }
-#novel-review .thumb-up {
+/*#novel-review .thumb-up {
+    color: #FA9600;
+}*/
+i[name=thumb]:hover {
     color: #FA9600;
 }
 #novel-review .thumb-up > span {
@@ -118,7 +129,7 @@ novel-review
     width: auto;
 }
 #novel-review .thumb-up > span > i {
-    color: #FA9600;
+    /*color: #FA9600;*/
     font-size: 16px;
 }
 #novel-review .review > span {
@@ -156,10 +167,10 @@ novel-review
     font-size: 38px;
 }
 
-.bookMode .setView {
+ul[name=bookMode] .setView {
     color: #002E40;
 }
-.bookMode .novelBackground {
+ul[name=bookMode] .novelBackground {
     color: #2A5769;
 }
 
@@ -173,6 +184,13 @@ h4 > span {
 .novel-info-text {
     height: 25px;
 }
+
+/*#read-novel-view .novel-viewer {
+    font-size: 14px;
+    font-family: 'Nanum Gothic';
+    line-height: 170%;
+}*/
+
 #read-novel-view .bookContainer {
     /*border: 1px solid red;*/
     width: 1500px;
@@ -360,4 +378,28 @@ selected
 
 .genreMenu > td {
     padding: 50px;
+}
+
+/**************************************
+selectedIcon
+**************************************/
+.selectedBookmark {
+    color: #2A5769;
+}
+.selectedIcon {
+    color: #FA9600;
+}
+.selectedFavorite {
+    color: rgba(255, 0, 0, 0.5);;
+}
+
+/**************************************
+novel comment
+**************************************/
+.userComment > input {
+    height: 100px !important;
+}
+
+.commentReply > input {
+    height: 60px !important;
 }

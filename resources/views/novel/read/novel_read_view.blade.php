@@ -26,8 +26,8 @@
             </div>
             <div class="col-md-3 text-right info-icon">
                 <ul class="list-inline">
-                    <li><i class="material-icons">bookmark_border</i></li>
-                    <li><i class="material-icons">star_border</i></li>
+                    <li><i class="material-icons" name="bookmark">bookmark_border</i></li>
+                    <li><i class="material-icons" name="star">star_border</i></li>
                     <li><i class="material-icons">menu</i></li>
                 </ul>
             </div>
@@ -38,7 +38,7 @@
     <div id="read-novel-view">
         {{-- container class START --}}
         <div class="container bookContainer" name="bookMode">
-            <div class="row novel-viewer-book">
+            <div class="row novel-viewer novel-viewer-book">
                 <div class="col-md-6 leftPage" name="bookPage">
                     <i class="material-icons arrowLeft" name="pageArrow">keyboard_arrow_left</i>
                     사람들은 아버지를 난쟁이라고 불렀다. 사람들은 옳게 보았다. 
@@ -57,7 +57,7 @@
         <div class="container webContainer">
             <div class="row">
                 {{--<div id="default-padding-mid" class="col-md-12"></div>--}}
-                <div class="col-md-12 novel-viewer-web" name="webMode">
+                <div class="col-md-12 novel-viewer novel-viewer-web" name="webMode">
                     <p class=MsoNormal>사람들은 아버지를 난장이라고 불렀다<span lang=EN-US>. </span>사람들은 옳게 보았다<span
                     lang=EN-US>. </span>아버지는 <span class=SpellE>난장이였다</span><span lang=EN-US>. </span>불행하게도
                     사람들은 아버지를 보는 것 하나만 옳았다<span lang=EN-US>. </span>그 밖의 것들은 하나도 옳지 않았다<span
@@ -623,12 +623,12 @@
                 <div class="col-md-12 text-center mark-icon">
                     <ul class="list-inline">
                         <li>
-                            <span><i class="material-icons">favorite_border</i></span> 
+                            <span><i class="material-icons" name="favorite">favorite_border</i></span> 
                             <span class="mark-text"> 11,896</span>
                         </li>
                         <li>&nbsp;</li>
                         <li>
-                            <span><i class="material-icons">star_border</i></span>
+                            <span><i class="material-icons" name="star">star_border</i></span>
                             <span class="mark-text"> 관심등록</span>
                         </li>
                         <li>&nbsp;</li>
@@ -649,7 +649,7 @@
         <div class="row">
             <div class="col-md-2 text-left">
                 {{-- + - Button COLLAPSE --}}
-                <a class="remoteButton" data-toggle="collapse" href="#collapseRemote" aria-expanded="true" aria-controls="collapseRemote">
+                <a class="remoteButton" data-toggle="collapse" href="#collapseRemote" aria-expanded="false" aria-controls="collapseRemote">
                     <i id="remoteMenu" class="fa fa-minus-square-o" aria-hidden="true"></i>
                 </a>
                 {{-- PAGE-UP Button --}}
@@ -743,7 +743,7 @@
                             </div>
                         </div>
                         <div class="row">
-                        <div class="col-md-12 example-text">
+                            <div class="col-md-12 example-text">
                                 여인은 초저녁부터 목이 아픈 줄도 모르고 줄창 소리를 뽑아대고, 사내는 그 여인의 소리로 하여 끊임없이 어떤 예감 같은 것을 견디고 있는 듯한 표정으로 북장단을 잡고 있었다. 
                                 소리를 쉬지 않는 여인이나, 묵묵히 장단 가락만 잡고 있는 사내나 양쪽 다 이마에 힘든 땀방울이 솟고 있었다.
                                 전라도 보성읍 밖의 한 한적한 길목 주막 왼쪽으로는 멀리 읍내 마을들을 내려다보면서 오른쪽으로는 해묵은 묘지들이 길가까지 바싹바싹 다가않은 가파른 공동 묘지-그 공동 묘지 사이를 뚫어 나가고 있는 한적한 고갯길목을 인근 사람들은 흔히 소릿재라 말하였다. 
@@ -755,9 +755,9 @@
                                 <h5><strong>글꼴</strong></h5>
                                 <ul class="list-group">
                                     <li class="list-group-item fontList on-font" value="NanumGothic">나눔고딕</li>
-                                    <li class="list-group-item fontList off-font" value="Gulim">굴림</li>
-                                    <li class="list-group-item fontList off-font" value="Dotum">돋움</li>
-                                    <li class="list-group-item fontList off-font" value="Gungsuh">궁서</li>
+                                    <li class="list-group-item fontList off-font" value="Jeju Myeongjo">제주명조</li>
+                                    <li class="list-group-item fontList off-font" value="Hanna">한나</li>
+                                    {{-- <li class="list-group-item fontList off-font" value="Gungsuh">궁서</li> --}}
                                 </ul>
                             </div>
                             <div class="col-md-3 text-left">
@@ -869,9 +869,9 @@
                     </div>
                     <div class="col-md-6 text-right sort">
                         <h5>
-                            <span class="sort-text">최신순</span> <span><i class="material-icons check-icon">check</i></span>
+                            <span class="sort-text">최신순</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
                             &nbsp;&nbsp;&nbsp;
-                            <span class="sort-text">추천순</span> <span><i class="material-icons">check</i></span>
+                            <span class="sort-text">추천순</span> <span><i class="material-icons" name="check">check</i></span>
                         </h5>
                     </div>
                     <div id="default-padding-mid" class="col-md-12"></div>
@@ -880,13 +880,21 @@
                     
                     <div class="col-md-12 review-list">
                         <div class="row">
+                            <div class="col-md-12">
+                                {{-- USER COMMENT --}}
+                                <div class="input-group input-group-lg userComment">
+                                    <input type="text" class="form-control" placeholder="로그인 후 이용해주세요.">
+                                    <span class="input-group-addon">등록</span>
+                                </div>
+                            </div>
+                            <div id="default-padding-big" class="col-md-12"></div>
                             <div class="col-md-9 text-left">
                                 <span><strong>이대감</strong></span>
                                 &nbsp;
                                 <span><small>2017-05-01 00:29:24</small></span>
                             </div>
                             <div class="col-md-3 text-right thumb-up">
-                                <span><i class="material-icons">thumb_up</i></span>
+                                <span><i class="material-icons" name="thumb">thumb_up</i></span>
                                 <span class="thumb-text">12</span>
                             </div>
                             <div id="default-padding-small" class="col-md-12"></div>
@@ -896,10 +904,20 @@
                                 <span>엄청 재밌어요! 글작가님 글은 항상 재미있었지만 오베는 역대급!</span>
                             </div>
                             <div id="default-padding-small-1" class="col-md-12"></div>
-                            <div class="col-md-12 review">
+                            <div class="col-md-12 review" data-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
                                 <span class="re-review-text"><small>답글</small></span>
-                                <span><i class="material-icons">keyboard_arrow_down</i></span>
+                                <span><i class="material-icons" name="arrow">keyboard_arrow_down</i></span>
                             </div>
+                            <div class="col-md-12 collapse" id="collapseComment">
+                                <div class="input-group input-group-mg commentReply">
+                                    <input type="text" class="form-control" placeholder="로그인 후 이용해주세요.">
+                                    <span class="input-group-addon">등록</span>
+                                    {{-- <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">등록</button>
+                                    </span> --}}
+                                </div>
+                            </div>
+                            <div id="default-padding-small-1" class="col-md-12"></div>
                         </div>
                     </div>
                     <div id="default-padding-mid" class="col-md-12"></div>
@@ -911,10 +929,13 @@
         </div>
         {{-- novel-review END --}}
 
-        
+        {{-- JHM STYLE --}}
+        <link rel="stylesheet" href="/css/jhm-style.css">
         {{-- JHM SCRIPT --}}
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="/js/jhm-custom.js"></script>
-        <script src="/js/jhm-quick.js"></script>
+        <script src="/js/JHM-Custom/jhm-selectIcon-custom.js"></script>
+        <script src="/js/JHM-Custom/jhm-readNovel-custom.js"></script>
+        <script src="/js/JHM-Custom/jhm-quick.js"></script>
+        <script src="/js/JHM-Custom/jhm-comment.js"></script>
 @endsection
