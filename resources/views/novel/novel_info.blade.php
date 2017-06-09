@@ -312,9 +312,10 @@
         </div>
         {{-- novel-review END --}}
 
+        {{-- JHM STYLE --}}
+        <link rel="stylesheet" href="/css/jhm-style.css">
         {{-- JHM SCRIPT --}}
+        <script src="/js/JHM-Custom/jhm-selectIcon-custom.js"></script>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="/js/jhm-custom.js"></script>
-        <script src="/js/jhm-quick.js"></script>
 @endsection

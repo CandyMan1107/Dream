@@ -283,6 +283,8 @@
 		</div>
 	</div>
 	<!--CONTACT END-->
+	<link rel="stylesheet" href="/css/jhm-style.css">
+	
 	<script src="/js/jquery-3.2.0.js"></script>
 	<script src="/js/bootstrap.js"></script>
 	<script src="/js/jquery.easing.min.js" type="text/javascript"></script>

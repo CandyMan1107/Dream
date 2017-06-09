@@ -8,11 +8,21 @@ use Illuminate\Support\Facades\DB;
 class Tag extends Model
 {
     public function insertTag($tag_data){
-        echo ("df");
         echo ($tag_data['tag_name']);
         echo ($tag_data['page']);
         echo ($tag_data['tag_color']);
         echo ($tag_data['object_id']);
+
+        $dataSet = [];
+        $dataSet = [
+            'kind' => $tag_data['page'],
+            'object_id' => $tag_data['object_id'],
+            'color' => $tag_data['tag_color'],
+            'tag_name' => $tag_data['tag_name'],
+        ];
+        // data insert
+        DB::table('tags')->insert($dataSet);
+        // var_dump($table);
     }
 
     public function tagBring($page){
