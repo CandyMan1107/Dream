@@ -392,3 +392,14 @@ selectedIcon
 .selectedFavorite {
     color: rgba(255, 0, 0, 0.5);;
 }
+
+/**************************************
+novel comment
+**************************************/
+.userComment > input {
+    height: 100px !important;
+}
+
+.commentReply > input {
+    height: 60px !important;
+}

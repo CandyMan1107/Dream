@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="default-padding"></div>
-	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBanner" aria-expanded="false" aria-controls="collapseBanner">
+	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBanner" aria-expanded="true" aria-controls="collapseBanner">
 		X
 	</a>
 	<div class="collapse in" id="collapseBanner">
