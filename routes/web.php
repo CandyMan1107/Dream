@@ -66,12 +66,19 @@ Route::get('/background/share', function(){
 
 // 소설 작성부
 // 소설 정보 작성
-Route::get('/write_novel/set', function(){
-    return view('write_novel/write_novel_set');
-});
+Route::get('/write_novel/set', "writeNovelController@setNovelView");
+// 소설 정보 등록
+Route::get('/write_novel/create_novel', "writeNovelController@createNovel");
 
+// 나의소설
+Route::get('/write_novel/my_novel', "writeNovelController@myNovelView");
+
+// 이미지 등록부
 // 커버 이미지 등록
 Route::post('/write_novel/addCover', "UpImgController@uploadImg");
+
+// 커버 이미지 삭제
+Route::get('/write_novel/removeCover', "UpImgController@removeImg");
 
 // 회차 내용 작성
 Route::get('/write_novel/view', function(){

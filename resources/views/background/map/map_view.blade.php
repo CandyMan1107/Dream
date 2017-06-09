@@ -10,8 +10,8 @@
 		<div class="col-xs-13 col-sm-10 col-md-10" style="width:10px;"></div>
 		<div class="col-xs-13 col-sm-10 col-md-10">
 			<h1>지이도</h1>
-			<div id="map"></div>
-			<div id="paint"></div>
+			<svg id="map" width="900px" height="450px"></svg>
+			<svg id="paint" width="250px" height="400px"></svg>
 		</div>
 	</div>
 
@@ -59,10 +59,19 @@
 
 		.border {
 			fill: none;
-			stroke: #000;
-			stroke-width: 2px;
+			/*stroke: #000;*/
+			/*stroke-width: 2px;*/
 			pointer-events: none;
 		}
+
+		.custom-menu {
+    		z-index:1000;
+    		position: absolute;
+    		background-color:#C0C0C0;
+    		border: 1px solid black;
+    		padding: 2px;
+			pointer-events: all;
+}
 
 	</style>
 
@@ -71,56 +80,10 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.js"></script>
 	<script src="http://d3js.org/topojson.v1.min.js"></script>
 
-	<!--<script>
-		var margin = {
-			top: 50,
-			right: 20,
-			bottom: 20,
-			left: 20
-		};
-
-		var width = 890;
-		var height = 350;
-
-		var MapColumns = 44,
-			MapRows = 22;
-
-		var hexRadius = d3.min([width/((MapColumns + 0.5) * Math.sqrt(3)), 
-			height/((MapRows + 1/3) * 1.5)]);
-
-		var hexbin = d3.hexbin()
-					 .radius(hexRadius);
-
-		var points = [];
-		for (var i = 0; i < MapRows; i++) {
-			for(var j=0; j<MapColumns; j++) {
-				points.push([hexRadius * j * 1.75, hexRadius * i * 1.5]);
-			}
-		}
-
-		var svg = d3.select("#chart").append("svg")
-			.attr("width", width + margin.left + margin.right)
-			.attr("height", height + margin.top + margin.bottom)
-			.append("g")
-			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-		
-		
-		svg.append("g")
-			.selectAll(".hexagon")
-			.data(hexbin(points))
-			.enter().append("path")
-			.attr("class", "hexagon")
-			.attr("d", function (d) {
-				return "M" + d.x + "," + d.y + hexbin.hexagon();
-			})
-			.attr("stroke", "black")
-			.attr("stroke-width", "1px")
-			.style("fill", "none");
-	</script>-->
 <script>
 		var width = 960,
-    height = 500,
-    radius = 20;
+   			height = 450,
+    		radius = 20;
 
 		var topology = hexTopology(radius, width, height);
 
@@ -133,13 +96,17 @@
 				.attr("width", width)
 				.attr("height", height);
 
-		svg.append("g")
-				.attr("class", "hexagon")
-			.selectAll("path")
+		var svg_g = svg.append("g")
+				.attr("class", "hexagon");
+
+		var paths =	svg_g.selectAll("path")
 				.data(topology.objects.hexagons.geometries)
 			.enter().append("path")
 				.attr("d", function(d) { return path(topojson.feature(topology, d)); })
 				.attr("class", function(d) { return d.fill ? "fill" : null; })
+				
+				// .attr("data-yongsin","good")
+
 				.on("mousedown", mousedown)
 				.on("mousemove", mousemove)
 				.on("mouseup", mouseup);
@@ -163,7 +130,9 @@
 		function mousemove(d) {
 			if (mousing) {
 				d3.select(this).classed("fill", d.fill = mousing > 0);
+				//var fill_id = d3.select(this).attr("data-yongsin");
 				border.call(redraw);
+				
 			}
 		}
 
@@ -173,7 +142,9 @@
 		}
 
 		function redraw(border) {
-			border.attr("d", path(topojson.mesh(topology, topology.objects.hexagons, function(a, b) { return a.fill ^ b.fill; })));
+			border.attr("d", path(topojson.mesh(topology, topology.objects.hexagons,
+			 function(a, b) { return a.fill ^ b.fill; })));
+			 // 이미지 패턴 생성 후 적용 
 		}
 
 		function hexTopology(radius, width, height) {
@@ -222,5 +193,68 @@
 				}
 			};
 		}
+
+		$("#map").bind("contextmenu", function(event) { 
+    		event.preventDefault();
+    	
+		$("div.custom-menu").hide();
+
+		$("<div class='custom-menu'>Erase</div>")
+			.bind("click",function(){
+				// $(".hexagon").removeClass("fill");
+				paths.classed("fill", false);
+			})
+	        .appendTo("body")
+        	.css({top: event.pageY + "px", left: event.pageX + "px"});
+		}).bind("click", function(event) {
+			$("div.custom-menu").hide();
+		});
+</script>
+
+<script>
+	var SWATCH_D, active_color, active_line, canvas, drag, drawing_data, lines_layer, palette, redraw, render_line, swatches, trash_btn, ui;
+
+	palette = ui.append('g').attr({
+    	transform: "translate(" + (4 + SWATCH_D / 2) + "," + (4 + SWATCH_D / 2) + ")"
+  	});
+
+	swatches = palette.selectAll('swatch').data(["#333333", "#ffffff", "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666"]);
+
+	trash_btn = ui.append('text').html('&#xf1f8;').attr({
+    "class": 'btn',
+    dy: '0.35em',
+    transform: 'translate(940,20)'
+  }).on('click', function() {
+    drawing_data.lines = [];
+    return redraw();
+  });
+
+  swatches.enter().append('circle').attr({
+    "class": 'swatch',
+    cx: function(d, i) {
+      return i * (SWATCH_D + 4) / 2;
+    },
+    cy: function(d, i) {
+      if (i % 2) {
+        return SWATCH_D;
+      } else {
+        return 0;
+      }
+    },
+    r: SWATCH_D / 2,
+    fill: function(d) {
+      return d;
+    }
+  }).on('click', function(d) {
+    active_color = d;
+    swatches.classed('active', false);
+    return d3.select(this).classed('active', true);
+  });
+
+   swatches.each(function(d) {
+    if (d === active_color) {
+      return d3.select(this).classed('active', true);
+    }
+  });
 </script>
 @endsection
