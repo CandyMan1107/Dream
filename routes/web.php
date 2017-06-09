@@ -68,6 +68,9 @@ Route::get('/write_novel/set', "writeNovelController@setNovelView");
 // 소설 정보 등록
 Route::get('/write_novel/create_novel', "writeNovelController@createNovel");
 
+//소설 정보 getter
+Route::get('/write_novel/getNovelInfo', "writeNovelController@getNovelInfo");
+
 // 나의소설
 Route::get('/write_novel/my_novel', "writeNovelController@myNovelView");
 

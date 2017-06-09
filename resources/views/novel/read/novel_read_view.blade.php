@@ -26,8 +26,8 @@
             </div>
             <div class="col-md-3 text-right info-icon">
                 <ul class="list-inline">
-                    <li><i class="material-icons">bookmark_border</i></li>
-                    <li><i class="material-icons">star_border</i></li>
+                    <li><i class="material-icons" name="bookmark">bookmark_border</i></li>
+                    <li><i class="material-icons" name="star">star_border</i></li>
                     <li><i class="material-icons">menu</i></li>
                 </ul>
             </div>
@@ -623,12 +623,12 @@
                 <div class="col-md-12 text-center mark-icon">
                     <ul class="list-inline">
                         <li>
-                            <span><i class="material-icons">favorite_border</i></span> 
+                            <span><i class="material-icons" name="favorite">favorite_border</i></span> 
                             <span class="mark-text"> 11,896</span>
                         </li>
                         <li>&nbsp;</li>
                         <li>
-                            <span><i class="material-icons">star_border</i></span>
+                            <span><i class="material-icons" name="star">star_border</i></span>
                             <span class="mark-text"> 관심등록</span>
                         </li>
                         <li>&nbsp;</li>
@@ -869,9 +869,9 @@
                     </div>
                     <div class="col-md-6 text-right sort">
                         <h5>
-                            <span class="sort-text">최신순</span> <span><i class="material-icons check-icon">check</i></span>
+                            <span class="sort-text">최신순</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
                             &nbsp;&nbsp;&nbsp;
-                            <span class="sort-text">추천순</span> <span><i class="material-icons">check</i></span>
+                            <span class="sort-text">추천순</span> <span><i class="material-icons" name="check">check</i></span>
                         </h5>
                     </div>
                     <div id="default-padding-mid" class="col-md-12"></div>
@@ -886,7 +886,7 @@
                                 <span><small>2017-05-01 00:29:24</small></span>
                             </div>
                             <div class="col-md-3 text-right thumb-up">
-                                <span><i class="material-icons">thumb_up</i></span>
+                                <span><i class="material-icons" name="thumb">thumb_up</i></span>
                                 <span class="thumb-text">12</span>
                             </div>
                             <div id="default-padding-small" class="col-md-12"></div>
