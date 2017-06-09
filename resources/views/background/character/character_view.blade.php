@@ -10,27 +10,24 @@
 			아이콘 div값 주고 img값을 round로 출력. id값 줘서 on click시 캐릭터 등록 부분 캐릭터 상세 정보 페이지로 react로 변환
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 height-max-set" >
-			<h3>캐릭터 등록</h3>
-			{{-- 캐릭터 이름 등록 --}}
 			<form class="form-horizontal">
+				<h3>캐릭터 등록</h3>
+				{{-- 캐릭터 이름 등록 --}}
 				<div class="form-group form-group-lg">
 					<label class="col-sm-2 control-label" for="formGroupInputLarge">이름</label>
 					<div class="col-sm-10">
-					<input class="form-control" type="text" id="formGroupInputLarge" placeholder="Large input">
+					<input class="form-control" type="text" id="character_name" name="character_name" placeholder="캐릭터 이름" value="">
 					</div>
 				</div>
-			</form>
-			{{-- 캐릭터 내용 등록 --}}
-			<form class="form-horizontal">
+				{{-- 캐릭터 내용 등록 --}}
+
 				<div class="form-group form-group-lg">
 					<label class="col-sm-2 control-label" for="formGroupInputLarge">내용</label>
 					<div class="col-sm-10">
-					<textarea class="form-control" rows="3"></textarea>
+					<textarea class="form-control" rows="3" id="character_content" name="character_contetn"></textarea>
 					</div>
 				</div>
-			</form>
-			{{-- 캐릭터 추가사항 --}}
-			<form class="form-horizontal">
+				{{-- 캐릭터 추가사항 --}}
 				<div class="form-group form-group-lg">
 					<label class="col-sm-3 control-label" for="formGroupInputLarge">추가사항</label>
 					<div class="col-sm-5">
@@ -40,18 +37,14 @@
 						<i class="fa fa-plus-circle" aria-hidden="true" style="font-size:200%"></i>
 					</div>
 				</div>
-			</form>
-			{{-- 이미지 등록 --}}
-			<form class="form-horizontal">
+				{{-- 이미지 등록 --}}
 				<div class="form-group form-group-lg">
 					<label class="col-sm-3 control-label" for="formGroupInputLarge">이미지 등록</label>
 					<div class="col-sm-10">
 						<input type="file" id="exampleInputFile">
 					</div>
 				</div>
-			</form>
-			{{-- 캐릭터 나이, 성별 등록 --}}
-			<form class="form-horizontal">
+				{{-- 캐릭터 나이, 성별 등록 --}}
 				<div class="form-group form-group-lg">
 					<label class="col-sm-2 control-label" for="formGroupInputLarge">나이</label>
 					<div class="col-xs-4">
@@ -62,15 +55,14 @@
 						<input type="text" class="form-control" placeholder=".col-xs-3">
 					</div>
 				</div>
-			</form>
-			{{-- 캐릭터 소유 사물 등록 --}}
-			<form class="form-horizontal">
+				{{-- 캐릭터 소유 사물 등록 --}}
 				<div class="form-group form-group-lg">
 					<label class="col-sm-4 control-label" for="formGroupInputLarge">소유 사물</label>
 				</div>
 				<img src="/img/fea1.jpg" alt="..." class="img-circle img-things-size">
+				
+				<button type="submit" class="btn btn-default">등록</button>
 			</form >
-			<button type="submit" class="btn btn-default">등록</button>
 		</div>
 
 

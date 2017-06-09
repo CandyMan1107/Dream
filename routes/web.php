@@ -33,6 +33,8 @@ Route::get('/background/map2', function(){
   return view('background/map/map_view2');
 });
 
+Route::resource('/background/character', 'BackgroundCharactersController');
+
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
 Route::resource('/background', 'BackgroundController');
@@ -50,10 +52,6 @@ Route::get('/novel/today_novel_by_day', function(){
 // });
 Route::resource('/novel/read/novel_read_view', 'NovelEpisodeController');
 
-Route::get('/background/character', function(){
-    return view('background/character/character_view');
-});
-
 Route::get('/background/things', function(){
     return view('background/things/things_view');
 });
@@ -69,6 +67,9 @@ Route::get('/background/share', function(){
 Route::get('/write_novel/set', "writeNovelController@setNovelView");
 // 소설 정보 등록
 Route::get('/write_novel/create_novel', "writeNovelController@createNovel");
+
+//소설 정보 getter
+Route::get('/write_novel/getNovelInfo', "writeNovelController@getNovelInfo");
 
 // 나의소설
 Route::get('/write_novel/my_novel', "writeNovelController@myNovelView");
@@ -93,3 +94,4 @@ Route::get('/write_novel/view', function(){
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
+

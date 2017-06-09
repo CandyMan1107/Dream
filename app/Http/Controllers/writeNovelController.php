@@ -48,4 +48,11 @@ class writeNovelController extends Controller
 
       return $novelId;
     }
+
+    // 소설 정보 가져옴
+    public function getNovelInfo(Request $request){
+      $userId = $request->input('userId');
+
+      return $userId;
+    }
 }
