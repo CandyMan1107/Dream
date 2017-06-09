@@ -18,6 +18,7 @@ class CreateNovelsTable extends Migration
           $table->increments('id');
           $table->string('title');
           $table->string('intro');
+          $table->string('summary_intro');
           $table->string('cover_img_src');
           $table->string('publish_case');
           $table->string('period')->nullable();

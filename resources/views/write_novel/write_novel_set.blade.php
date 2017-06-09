@@ -4,6 +4,7 @@
 
 @section('content')
   <style>
+
     .set_row {
       border-top: #EAEAEA 2px solid;
       padding: 10px;
@@ -82,25 +83,60 @@
       text-align: center;
     }
 
-
-    .image_cell > img {
-      background-color: yellow;
+    .cover-img {
+      position:relative;
       height:100%;
       width:65%;
       margin-left: auto;
-    	margin-right: auto;
-    	display: block;
+      margin-right: auto;
+      display: block;
+    }
+
+    .cover-img > img {
+      height:100%;
+      width:100%;
+
+    }
+    .quitBox {
+      display: inline-block;
+      position:absolute;
+      right:0;
+      margin-right:auto;
+      background: #f90;
+      color: #fff;
+      font-family: 'Helvetica', 'Arial', sans-serif;
+      font-size: 2em;
+      font-weight: bold;
+      text-align: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
     }
 
     .selected-image {
       border:2px solid #5CD1E5;
     }
 
+    .img_upload_label{
+      display: inline-block;
+      padding: .5em .75em;
+      color: #00D8FF;;
+      font-size: inherit;
+      line-height: normal;
+      vertical-align: middle;
+      background-color: #fdfdfd;
+      cursor: pointer;
+      border: 2px solid #00D8FF;;
+      border-radius: .25em;
+
+    }
     .img_upload_btn{
-      color:#00D8FF;
-      border: #00D8FF 2px solid;
-      border-radius: 5px;
-      padding:2px;
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip:rect(0,0,0,0);
+      border: 0;
     }
     .intro_box {
       border:#EAEAEA 2px solid;
@@ -145,37 +181,37 @@
       <div class="row set_row">
         <div class="col-md-12">
           <span class="menu_title">소설 제목</span>
-          <input class="menu_input" type="text" placeholder="소설 제목을 입력해주세요." size=50>
+          <input id="novel-title" class="menu_input" type="text" placeholder="소설 제목을 입력해주세요." size=50>
         </div>
       </div>
       <div class="row set_row">
         <div class="col-md-6">
           <span class="menu_title">장르</span>
-          <select class="menu_select" name="">
-            <option value="">로맨스</option>
-            <option value="">판타지</option>
-            <option value="">SF</option>
-            <option value="">무협</option>
-            <option value="">추리</option>
-            <option value="">호러</option>
-            <option value="">시대극</option>
+          <select id="genre" class="menu_select" name="">
+            <option value="romance">로맨스</option>
+            <option value="fantasy">판타지</option>
+            <option value="scifi">SF</option>
+            <option value="martial">무협</option>
+            <option value="detective">추리</option>
+            <option value="horror">호러</option>
+            <option value="agenovel">시대극</option>
           </select>
         </div>
 
         <div class="col-md-6">
           <span class="menu_title">연재 주기</span>
-          <span class="check_novel_period free_publish selected_period"><img src="{{URL::asset('img/write_novel/check.png')}}" class="check_circle">자유 연재</span>
-          <span class="check_novel_period day_publish"><img src="{{URL::asset('img/write_novel/check.png')}}" class="check_circle">요일 연재</span>
+          <span class="check_novel_period free_publish selected_period" data-case="free-publish"><img src="{{URL::asset('img/write_novel/check.png')}}" class="check_circle">자유 연재</span>
+          <span class="check_novel_period day_publish" data-case="day-publish"><img src="{{URL::asset('img/write_novel/check.png')}}" class="check_circle">요일 연재</span>
 
           <table class="novel_period_day_table day_activate">
             <tr>
-              <td class="novel_period_day selected_day">월</td>
-              <td class="novel_period_day">화</td>
-              <td class="novel_period_day">수</td>
-              <td class="novel_period_day">목</td>
-              <td class="novel_period_day">금</td>
-              <td class="novel_period_day">토</td>
-              <td class="novel_period_day">일</td>
+              <td class="novel_period_day" data-day="mon">월</td>
+              <td class="novel_period_day" data-day="tue">화</td>
+              <td class="novel_period_day" data-day="wed">수</td>
+              <td class="novel_period_day" data-day="thr">목</td>
+              <td class="novel_period_day" data-day="fri">금</td>
+              <td class="novel_period_day" data-day="sat">토</td>
+              <td class="novel_period_day" data-day="sun">일</td>
             </tr>
           </table>
         </div>
@@ -183,21 +219,24 @@
 
       <div class="row set_row">
         <div class="col-md-10 menu_title">표지 이미지
+
+        </div>
+        <div class="col-md-2">
           <form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="">
-            <input id="imgFile" name="imgFile" type='file'>
-          </form></div>
-        <div class="col-md-2"><span class="img_upload_btn" data-href="{{URL::to('uploadImg/image_list')}}">이미지 업로드</span></div>
+            <label class="img_upload_label">이미지 업로드
+              <input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
+            </label>
+          </form>
+        </div>
       </div>
 
 
       <!--표지 이미지가 들어갈 리스트-->
       <div class="row set_row image_list_box">
         <div class="image_list center-slick" data-href="{{URL::to('upload/images')}}">
-
+          <?php  ?>
         </div>
       </div>
-
-
 
       <div class="row set_row">
         <div class="col-md-12 menu_title">소설 소개</div>
@@ -209,9 +248,9 @@
         summary intro box
       </div>
 
-      <div class="row set_row modal-dialog modal-sm">
-        <div class="col-md-6 btn_div"><div class="func_btn">취소</div></div>
-        <div class="col-md-6 btn_div"><div class="func_btn">저장</div></div>
+      <div class="row set_row">
+        <div class="col-md-6 btn_div"><div class="func_btn novel-cancel">취소</div></div>
+        <div class="col-md-6 btn_div"><div class="func_btn novel-save">저장</div></div>
       </div>
 
     </div>
@@ -244,6 +283,7 @@
           $(this).addClass("selected_day");
       }
     });
+
     // 요일 선택 비활성화
     function deactivateDayCell(){
       $(".novel_period_day_table").removeClass("day_activate");
@@ -259,24 +299,7 @@
       }
     }
 
-    // 메뉴없는 윈도우를 현재 윈도우 중간에 팝업
-    function popupLink(link,popHeight,popWidth){
-      var winHeight = document.body.clientHeight;	// 현재창의 높이
-      var winWidth  = document.body.clientWidth;	// 현재창의 너비
-      var winX      = window.screenLeft;	// 현재창의 x좌표
-      var winY      = window.screenTop;	// 현재창의 y좌표
-
-      var popX = winX + (winWidth - popWidth)/2;
-      var popY = winY + (winHeight - popHeight)/2;
-      window.open(link,"","width="+popWidth+"px,height="+popHeight+"px,top="+popY+",left="+popX+",menubar=1,scrollbars=no,resizable=no");
-    }
-
-    // 이미지 업로드 팝업
-    $(".img_upload_btn").bind("click", function(){
-      popupLink($(".img_upload_btn").data('href'), 300, 500);
-    });
-
-
+    // 표지 이미지 리스트 슬릭 설정
     $('.center-slick').slick({
       infinite: true,
       slidesToShow: 3,
@@ -289,7 +312,77 @@
 
     });
 
+    // 기존의 표지 이미지 출력
+    getCoverImage();
+    function getCoverImage(){
+      <?php for($i=0; $i < count($tasks); $i++){?>
 
+        var addSlickEle = "";
+        addSlickEle += "<div class='image_cell'>";
+        addSlickEle += "  <div class='cover-img' data-href={{ $tasks[$i]->cover_img_src }} >";
+        addSlickEle += "    <div class='quitBox'>";
+        addSlickEle += "      <span id='x'>X</span>";
+        addSlickEle += "    </div>";
+        addSlickEle += "    <img draggable='false' src={{URL::asset('upload/images')}}/{{ $tasks[$i]->cover_img_src }}";
+        addSlickEle += "  </div>";
+        addSlickEle += "</div>";
+        $(".image_list").slick('slickAdd',addSlickEle);
+        $(".image_cell").find(".quitBox").hide();
+
+        // 클릭이벤트
+        $(".image_cell").off().on('click',function(){
+          $('.image_cell').removeClass("selected-image");
+          $(this).addClass("selected-image");
+        });
+
+        // 마우스오버 : 삭제버튼 show
+        $(".image_cell").on('mouseover',function(){
+          $(this).find(".quitBox").show();
+        });
+        // 마우스아웃 : 삭제버튼 hide
+        $(".image_cell").on('mouseout',function(){
+          $(this).find(".quitBox").hide();
+        });
+
+        // X박스 클릭 : 이미지 삭제
+        $(".image_cell").find(".quitBox").off().on("click",function(){
+          var imageCell = $(this).parent().parent();
+
+          var coverImg = $(this).parent();
+          var index = imageCell.attr("data-slick-index");
+
+          coverImg.animate({
+            opacity:0.25,
+            width:"0",
+            height:"0",
+            top:"50%"
+          }, 500, function(){
+            $(".image_list").slick('slickRemove',index);
+            $(".image_list").slick('slickAdd',"");
+          });
+
+          // DB처리
+          $.ajax({
+              type: "get",
+              url: "removeCover",
+              data: {
+                "userId" : '1',
+                "removeFile" : coverImg.attr("data-href")
+              },
+              success: function (data) {
+                console.log(data);
+              },
+              error: function (error) {
+                alert("오류발생");
+              }
+          });
+
+        });
+
+      <?php } ?>
+    }
+
+    // 커버 이미지 업로드 이벤트
     $("#imgFile").change(function () {
         // 파일이 있을경우
         if (this.files && this.files[0]) {
@@ -310,17 +403,125 @@
               contentType: false,
               success: function(data){
                   //슬릭 생성
-                  $(".image_list").slick('slickAdd', "<div class='image_cell'><img class='cover-img' src={{URL::asset('upload/images')}}/"+data+" data-href="+data+"></div>")
-                  $(".image_cell").on('click',function(){
+                  var addSlickEle = "";
+                  addSlickEle += "<div class='image_cell'>";
+                  addSlickEle += "  <div class='cover-img' data-href="+data+">";
+                  addSlickEle += "    <div class='quitBox'>";
+                  addSlickEle += "      <span id='x'>X</span>";
+                  addSlickEle += "    </div>";
+                  addSlickEle += "    <img draggable='false' src={{URL::asset('upload/images')}}/"+data+">";
+                  addSlickEle += "  </div>";
+                  addSlickEle += "</div>";
+                  $(".image_list").slick('slickAdd',addSlickEle);
+                  $(".image_cell").find(".quitBox").hide();
+
+                  // 클릭이벤트
+                  $(".image_cell").off().on('click',function(){
                     $('.image_cell').removeClass("selected-image");
                     $(this).addClass("selected-image");
                   });
+
+                  // 마우스오버 : 삭제버튼 show
+                  $(".image_cell").on('mouseover',function(){
+                    $(this).find(".quitBox").show();
+                  });
+                  // 마우스아웃 : 삭제버튼 hide
+                  $(".image_cell").on('mouseout',function(){
+                    $(this).find(".quitBox").hide();
+                  });
+
+                  // X박스 클릭 : 이미지 삭제
+                  $(".image_cell").find(".quitBox").off().on("click",function(){
+                    var imageCell = $(this).parent().parent();
+
+                    var coverImg = $(this).parent();
+                    var index = imageCell.attr("data-slick-index");
+
+                    coverImg.animate({
+                      opacity:0.25,
+                      width:"0",
+                      height:"0",
+                      top:"50%"
+                    }, 500, function(){
+                      $(".image_list").slick('slickRemove',index);
+                      $(".image_list").slick('slickAdd',"");
+                    });
+
+                    // DB처리
+                    $.ajax({
+                        type: "get",
+                        url: "removeCover",
+                        data: {
+                          "userId" : '1',
+                          "removeFile" : coverImg.attr("data-href")
+                        },
+                        success: function (data) {
+            							console.log(data);
+                        },
+                        error: function (error) {
+                          alert("오류발생");
+                        }
+                    });
+
+                  });
+
               }
             });
         }
     });
 
+    // 취소 버튼
+    $(".novel-cancel").on("click",function(){
+      history.go(-1);
+    });
 
+    // 저장 버튼
+    $(".novel-save").on("click",function(){
+      // 소설 정보 변수화
+      var title = $("#novel-title").val();
+      var genre = $("#genre").val();
+      var publishPeriod = $(".selected_period").attr("data-case");
+      var publishDay = $(".selected_day");
+      var publishDays = "";
+      var coverImg = $(".selected-image").find(".cover-img").attr("data-href");
+      var detailIntro = $(".detail_intro_box").html();
+      var summaryIntro = $(".summary_intro_box").html();
+
+      // 요일 연재의 경우 요일 데이터를 가져옴
+      if(publishPeriod == "day-publish")
+        publishDay.each(function(index){
+          publishDays += "/" + publishDay.eq(index).attr("data-day");
+        });
+
+      // ajax 소설 저장 요청
+      createNovel(title, genre, publishPeriod, publishDays, coverImg, detailIntro, summaryIntro);
+      // 마이페이지 - 소설 목록 페이지 이동
+
+
+    });
+
+    // DB 소설 생성
+    function createNovel(title, genre, publishPeriod, publishDays, coverImg, detailIntro, summaryIntro){
+      $.ajax({
+          type: "get",
+          url: "create_novel",
+          data: {
+            'title': title,
+            'genre': genre,
+            'publishPeriod': publishPeriod,
+            'publishDays': publishDays,
+            'coverImg': coverImg,
+            'detailIntro': detailIntro,
+            'summaryIntro': summaryIntro
+          },
+          success: function (data) {
+            alert(data);
+          },
+          error: function (error) {
+            alert("오류발생");
+          }
+      });
+    }
     deactivateDayCell();
   })(jQuery);
 
