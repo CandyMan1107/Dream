@@ -9,31 +9,105 @@
 	<div class="row">
 		<div class="col-xs-13 col-sm-10 col-md-10" style="width:10px;"></div>
 		<div class="col-xs-13 col-sm-10 col-md-10">
-			<h1>지이도</h1>
-			<svg id="map" width="900px" height="450px"></svg>
-			<svg id="paint" width="250px" height="400px"></svg>
+			<h1>지도</h1>
+			<div>
+				<svg id="map" width="900px" height="450px">
+					<pattern id="image" x="0" y="0" height="40" width="40">
+        				<image x="0" y="0" width="40" height="40" xlink:href="http://www.e-pint.com/epint.jpg"></image>
+      				</pattern>
+	  			</svg>
+			</div>
+			
+			<div id="paint" width="200px" height="350px">
+				<table>
+					<tr>
+						<div id="erase_btn">
+							<font size="16">지우기</font>
+						</div>
+					</tr>
+					<tr>
+						<td>
+							<div id="ex1" class="cell">
+							</div>
+						</td>
+
+						<td>
+							<div id="ex2" class="cell">
+							</div>
+						</td>
+
+						<td>
+							<div id="ex3" class="cell">
+							</div>
+						</td>
+
+						<td>
+							<div id="ex4" class="cell">
+							</div>
+						</td>
+
+						<td>
+							<div id="ex5" class="cell">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 
 	<style type="text/css">
-
-		#map{
+		
+		#map {
+			/*background-image : url(http://thumbnail.egloos.net/750x0/http://pds21.egloos.com/pds/201701/11/10/f0091810_5875a9df037d5.jpg);*/
 			display: inline-block;
 			margin-right: 30px;
+			float: left;
 		}
 		
 		#paint {
-			border: 1px;
-			border-style: solid;
-			width: 250px;
-			height: 400px;
-			background-color: #fff;
+			user-drag: none; 
+			user-select: none;
 			display: inline-block;
-			margin-bottom: 60px;
+		}
+
+		#ex1 {
+			width: 30px;
+			height: 30px;
+			pointer-events: all;
+			background-color: black;
+		}
+
+		#ex2 {
+			width: 30px;
+			height: 30px;
+			pointer-events: all;
+			background-color: blue;
+		}
+
+		#ex3 {
+			width: 30px;
+			height: 30px;
+			pointer-events: all;
+			background-color: green;
+		}
+
+		#ex4 {
+			width: 30px;
+			height: 30px;
+			pointer-events: all;
+			background-color: pink;
+		}
+		
+		#ex5 {
+			width: 30px;
+			height: 30px;
+			pointer-events: all;
+			background-color: yellow;
 		}
 
 		.hexagon {
-			fill: white;
+			fill: none;
 			pointer-events: all;
 		}
 
@@ -47,7 +121,27 @@
 		}
 
 		.hexagon .fill {
-			fill: red;
+			fill: none;
+		}
+
+		path.fill.ex1{
+			fill: black;
+		}
+
+		path.fill.ex2{
+			fill: blue;
+		}
+
+		path.fill.ex3{
+			fill: green;
+		}
+
+		path.fill.ex4{
+			fill: pink;
+		}
+
+		path.fill.ex5{
+			fill: yellow;
 		}
 
 		.mesh {
@@ -71,14 +165,40 @@
     		border: 1px solid black;
     		padding: 2px;
 			pointer-events: all;
-}
-
+		}
 	</style>
 
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	<script type="text/javascript" src="http://d3js.org/d3.hexbin.v0.min.js"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.js"></script>
 	<script src="http://d3js.org/topojson.v1.min.js"></script>
+
+<script>	// 직접 만든거
+	//오른쪽 팔레트 부분 기능
+	$(function() {
+		// $('#erase_btn').bind('click', erase_map);
+		$('#erase_btn').bind('click', refresh);
+		$('.cell').bind('click', ex);
+	});
+
+	function refresh() {
+		location.reload();
+	}
+
+	function erase_map() {	// fill 삭제
+		//paths.classed("fill", false);
+		paths.attr("class",null);
+		// $(".cell").forEach(function(cell){
+		// 	paths.classed(cell.attr("id"), false);
+		// });
+	}
+
+	function ex() {		// 색상 변경
+		// alert($(this).attr("id"));
+		$(".cell").removeClass("selected_cell");
+		$(this).addClass("selected_cell");
+	}
+</script>
 
 <script>
 		var width = 960,
@@ -96,8 +216,24 @@
 				.attr("width", width)
 				.attr("height", height);
 
+		var defs = svg.append("defs").attr("id", "imgdefs");
+        var catpattern = defs.append("pattern")
+                        .attr("id", "hosPattern")
+                        .attr("height", 1)
+                        .attr("width", 1)
+                        .attr("x", "0")
+                    	.attr("y", "-25");
+
+        catpattern.append("image")
+				  .attr("height", 50)
+            	  .attr("width", 50)
+         	      .attr("xlink:href", "http://thumbnail.egloos.net/750x0/http://pds21.egloos.com/pds/201701/11/10/f0091810_5875a9df037d5.jpg");
+
 		var svg_g = svg.append("g")
 				.attr("class", "hexagon");
+		
+
+		var path_fill = svg.select("path.fill");
 
 		var paths =	svg_g.selectAll("path")
 				.data(topology.objects.hexagons.geometries)
@@ -122,6 +258,7 @@
 
 		var mousing = 0;
 
+
 		function mousedown(d) {
 			mousing = d.fill ? -1 : +1;
 			mousemove.apply(this, arguments);
@@ -129,10 +266,11 @@
 
 		function mousemove(d) {
 			if (mousing) {
-				d3.select(this).classed("fill", d.fill = mousing > 0);
-				//var fill_id = d3.select(this).attr("data-yongsin");
+				d3.select(this).attr("class",null);
+				//d3.select(this).classed("fill", d.fill = mousing > 0);
+				d3.select(this).classed($(".selected_cell").attr("id"), d.fill);
+				d3.select(this).attr("fill", "url(#hosPattern)");
 				border.call(redraw);
-				
 			}
 		}
 
@@ -178,6 +316,7 @@
 			};
 		}
 
+		// 육각형 크기 계산식
 		function hexProjection(radius) {
 			var dx = radius * 2 * Math.sin(Math.PI / 3),
 					dy = radius * 1.5;
@@ -194,67 +333,24 @@
 			};
 		}
 
-		$("#map").bind("contextmenu", function(event) { 
-    		event.preventDefault();
+		/* map에서 오른쪽 버튼 메뉴 변경 */
+
+		// $("#map").bind("contextmenu", function(event) { 
+    	// 	event.preventDefault();
     	
-		$("div.custom-menu").hide();
+		// $("div.custom-menu").hide();
 
-		$("<div class='custom-menu'>Erase</div>")
-			.bind("click",function(){
-				// $(".hexagon").removeClass("fill");
-				paths.classed("fill", false);
-			})
-	        .appendTo("body")
-        	.css({top: event.pageY + "px", left: event.pageX + "px"});
-		}).bind("click", function(event) {
-			$("div.custom-menu").hide();
-		});
-</script>
+		// $("<div class='custom-menu'>지우기</div>")
+		// 	.bind("click",function(){
+		// 		paths.attr("class",null);
+		// 		$("div.custom-menu").hide();
+		// 	})
+	    //     .appendTo("body")
+        // 	.css({top: event.pageY + "px", left: event.pageX + "px"});
+		// }).bind("click", function(event) {
+		// 	$("div.custom-menu").hide();
+		// });
 
-<script>
-	var SWATCH_D, active_color, active_line, canvas, drag, drawing_data, lines_layer, palette, redraw, render_line, swatches, trash_btn, ui;
-
-	palette = ui.append('g').attr({
-    	transform: "translate(" + (4 + SWATCH_D / 2) + "," + (4 + SWATCH_D / 2) + ")"
-  	});
-
-	swatches = palette.selectAll('swatch').data(["#333333", "#ffffff", "#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02", "#a6761d", "#666666"]);
-
-	trash_btn = ui.append('text').html('&#xf1f8;').attr({
-    "class": 'btn',
-    dy: '0.35em',
-    transform: 'translate(940,20)'
-  }).on('click', function() {
-    drawing_data.lines = [];
-    return redraw();
-  });
-
-  swatches.enter().append('circle').attr({
-    "class": 'swatch',
-    cx: function(d, i) {
-      return i * (SWATCH_D + 4) / 2;
-    },
-    cy: function(d, i) {
-      if (i % 2) {
-        return SWATCH_D;
-      } else {
-        return 0;
-      }
-    },
-    r: SWATCH_D / 2,
-    fill: function(d) {
-      return d;
-    }
-  }).on('click', function(d) {
-    active_color = d;
-    swatches.classed('active', false);
-    return d3.select(this).classed('active', true);
-  });
-
-   swatches.each(function(d) {
-    if (d === active_color) {
-      return d3.select(this).classed('active', true);
-    }
-  });
+		/* 변경 끝 */
 </script>
 @endsection
