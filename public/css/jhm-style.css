@@ -3,6 +3,13 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 /**************************************
+cursor
+**************************************/
+i {
+    cursor: default;
+}
+
+/**************************************
 welcome.blade.php
 **************************************/
 #banner .autoplay-top a {
@@ -89,9 +96,6 @@ sort
     font-size: 22px;
 }
 
-#novel-info-3 .check-icon {
-    color: #FA9600;
-}
 #novel-info-3 .episode {
     border: 1px solid rgba(149, 152, 154, .5) !important;
 }
@@ -111,7 +115,10 @@ novel-review
 #novel-review .review-list {
     border-bottom: 1px solid rgba(149, 152, 154, .5) !important;
 }
-#novel-review .thumb-up {
+/*#novel-review .thumb-up {
+    color: #FA9600;
+}*/
+i[name=thumb]:hover {
     color: #FA9600;
 }
 #novel-review .thumb-up > span {
@@ -122,7 +129,7 @@ novel-review
     width: auto;
 }
 #novel-review .thumb-up > span > i {
-    color: #FA9600;
+    /*color: #FA9600;*/
     font-size: 16px;
 }
 #novel-review .review > span {
@@ -371,4 +378,17 @@ selected
 
 .genreMenu > td {
     padding: 50px;
+}
+
+/**************************************
+selectedIcon
+**************************************/
+.selectedBookmark {
+    color: #2A5769;
+}
+.selectedIcon {
+    color: #FA9600;
+}
+.selectedFavorite {
+    color: rgba(255, 0, 0, 0.5);;
 }
