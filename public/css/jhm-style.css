@@ -1,3 +1,7 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
 /**************************************
 welcome.blade.php
 **************************************/
@@ -156,10 +160,10 @@ novel-review
     font-size: 38px;
 }
 
-.bookMode .setView {
+ul[name=bookMode] .setView {
     color: #002E40;
 }
-.bookMode .novelBackground {
+ul[name=bookMode] .novelBackground {
     color: #2A5769;
 }
 
@@ -173,6 +177,13 @@ h4 > span {
 .novel-info-text {
     height: 25px;
 }
+
+/*#read-novel-view .novel-viewer {
+    font-size: 14px;
+    font-family: 'Nanum Gothic';
+    line-height: 170%;
+}*/
+
 #read-novel-view .bookContainer {
     /*border: 1px solid red;*/
     width: 1500px;

@@ -38,7 +38,7 @@
     <div id="read-novel-view">
         {{-- container class START --}}
         <div class="container bookContainer" name="bookMode">
-            <div class="row novel-viewer-book">
+            <div class="row novel-viewer novel-viewer-book">
                 <div class="col-md-6 leftPage" name="bookPage">
                     <i class="material-icons arrowLeft" name="pageArrow">keyboard_arrow_left</i>
                     사람들은 아버지를 난쟁이라고 불렀다. 사람들은 옳게 보았다. 
@@ -57,7 +57,7 @@
         <div class="container webContainer">
             <div class="row">
                 {{--<div id="default-padding-mid" class="col-md-12"></div>--}}
-                <div class="col-md-12 novel-viewer-web" name="webMode">
+                <div class="col-md-12 novel-viewer novel-viewer-web" name="webMode">
                     <p class=MsoNormal>사람들은 아버지를 난장이라고 불렀다<span lang=EN-US>. </span>사람들은 옳게 보았다<span
                     lang=EN-US>. </span>아버지는 <span class=SpellE>난장이였다</span><span lang=EN-US>. </span>불행하게도
                     사람들은 아버지를 보는 것 하나만 옳았다<span lang=EN-US>. </span>그 밖의 것들은 하나도 옳지 않았다<span
@@ -755,9 +755,9 @@
                                 <h5><strong>글꼴</strong></h5>
                                 <ul class="list-group">
                                     <li class="list-group-item fontList on-font" value="NanumGothic">나눔고딕</li>
-                                    <li class="list-group-item fontList off-font" value="Gulim">굴림</li>
-                                    <li class="list-group-item fontList off-font" value="Dotum">돋움</li>
-                                    <li class="list-group-item fontList off-font" value="Gungsuh">궁서</li>
+                                    <li class="list-group-item fontList off-font" value="Jeju Myeongjo">제주명조</li>
+                                    <li class="list-group-item fontList off-font" value="Hanna">한나</li>
+                                    {{-- <li class="list-group-item fontList off-font" value="Gungsuh">궁서</li> --}}
                                 </ul>
                             </div>
                             <div class="col-md-3 text-left">
@@ -911,10 +911,12 @@
         </div>
         {{-- novel-review END --}}
 
-        
+        {{-- JHM STYLE --}}
+        <link rel="stylesheet" href="/css/jhm-style.css">
         {{-- JHM SCRIPT --}}
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="/js/jhm-custom.js"></script>
-        <script src="/js/jhm-quick.js"></script>
+        <script src="/js/JHM-Custom/jhm-selectIcon-custom.js"></script>
+        <script src="/js/JHM-Custom/jhm-readNovel-custom.js"></script>
+        <script src="/js/JHM-Custom/jhm-quick.js"></script>
 @endsection
