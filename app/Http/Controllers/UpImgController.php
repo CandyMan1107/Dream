@@ -37,5 +37,4 @@ class UpImgController extends Controller
       return $removeFile;
 
     }
-
 }
