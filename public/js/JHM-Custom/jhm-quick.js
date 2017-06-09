@@ -2,6 +2,9 @@ $(document).ready(function() {
     // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
     var floatPosition = parseInt($("#quickMenu").css('top'));
 
+    // 현재 ((윈도우넓이/2) +510) 을 left로 지정
+    $("#quickMenu").css("left", ($(window).width() / 2) + 510);
+
     $(window).scroll(function() {
         // 현재 스크롤 위치를 가져온다.
         var scrollTop = $(window).scrollTop();
@@ -42,8 +45,4 @@ $(document).ready(function() {
         // $("body").animate({ "bottom": "-=150px" }, 100);
         $("html, body").scrollTop(document.body.scrollHeight);
     });
-
-    // 현재 ((윈도우넓이/2) +510) 을 left로 지정
-    $("#quickMenu").css("left", ($(window).width() / 2) + 510);
-
 });

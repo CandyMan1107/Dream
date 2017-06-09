@@ -51,8 +51,12 @@ class writeNovelController extends Controller
 
     // 소설 정보 가져옴
     public function getNovelInfo(Request $request){
-      $userId = $request->input('userId');
 
-      return $userId;
+      $userId = 1;
+      $pageNum = 2; // 페이지당 보일 수
+      // novels + novel_writers 조인 후 유저와 일치하는 값 호출
+      $novelInfo = DB::table("novels")->join("novel_writers","novels.id", "=", "novel_writers.novel_id")->where("novel_writers.user_id", "=",$userId)->paginate($pageNum);
+
+      return $novelInfo;
     }
 }

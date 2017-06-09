@@ -69,7 +69,7 @@ Route::get('/write_novel/set', "writeNovelController@setNovelView");
 Route::get('/write_novel/create_novel', "writeNovelController@createNovel");
 
 //소설 정보 getter
-Route::get('/write_novel/getNovelInfo', "writeNovelController@getNovelInfo");
+Route::get('/write_novel/get_novel_info', "writeNovelController@getNovelInfo");
 
 // 나의소설
 Route::get('/write_novel/my_novel', "writeNovelController@myNovelView");
@@ -94,4 +94,3 @@ Route::get('/write_novel/view', function(){
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
-
