@@ -33,12 +33,12 @@
 	}
 
 	.novel-container{
-		background-color: #E4F7BA;
 	}
 
 	.novel-list{
-		background-color: #B2EBF4;
 		text-align: center;
+		background-color: #EAEAEA;
+		padding: 1px;
 	}
 
 	.btn-group{
@@ -53,7 +53,8 @@
 	.novel-table{
 		background-color: white;
 		width:80%;
-		margin-bottom: 50px;
+		margin-top: 50px;
+		margin-bottom: 30px;
 	}
 
 	.novel-table th{
@@ -145,7 +146,7 @@
 
 	<script>
 	$(function() {
-		getNovelInfo(3);
+		getNovelInfo(1);
 		// ajax 소설값 가져옴, 입력값 없을 시 1페이지
 		function getNovelInfo(curPage = 1){
 			// DB처리
@@ -189,7 +190,10 @@
 				tableEle += "		<td>"+ d.title +"</td>";
 				tableEle += "		<td>"+ "글반죽 "+"</td>";
 				tableEle += "		<td>"+ d.genre +"</td>";
-				tableEle += "		<td>회차관리 작품수정</td>";
+				tableEle += "		<td>"
+				tableEle += "			<button type='button' class='btn btn-default episode-mng-btn' data-novel-id='"+d.id+"'>회차관리</button>";
+				tableEle += " 		<button type='button' class='btn btn-default novel-modify-btn' data-novel-id='"+d.id+"'>작품수정</button>";
+				tableEle += " 	</td>";
 				tableEle += "	</tr>";
 				tableEle += "	<tr>";
 				tableEle += "		<td colspan='4' class='novel-info'>";
@@ -200,6 +204,11 @@
 				tableEle += "</table>";
 
 				$(".novel-list").append(tableEle);
+
+				$(".episode-mng-btn").off().on("click",function(){
+					var novelId = $(this).attr("data-novel-id");
+					document.location.href="/write_novel/my_episode/" + novelId;
+				})
 			})
 		}
 
@@ -220,6 +229,8 @@
 				start = curPage - unit;
 				end = curPage + unit
 			}
+			if(start < 1) start =1;
+			if(end > lastPage) end = lastPage;
 			showPagination(start, end, curPage, lastPage);
 			function showPagination(start,end, curPage, lastPage){
 				//alert(start + "부터" + end);

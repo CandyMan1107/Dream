@@ -74,6 +74,9 @@ Route::get('/write_novel/get_novel_info', "writeNovelController@getNovelInfo");
 // 나의소설
 Route::get('/write_novel/my_novel', "writeNovelController@myNovelView");
 
+// 나의소설-에피소드
+Route::get('/write_novel/novel_episode/{data}', "writeNovelController@novelEpisodeView")->with("data",$data);
+
 // 이미지 등록부
 // 커버 이미지 등록
 Route::post('/write_novel/addCover', "UpImgController@uploadImg");
