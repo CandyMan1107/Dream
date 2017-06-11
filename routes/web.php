@@ -33,6 +33,8 @@ Route::get('/background/map2', function(){
   return view('background/map/map_view2');
 });
 
+Route::resource('/background/things', 'BackgroundItemsController');
+
 Route::resource('/background/character', 'BackgroundCharactersController');
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
@@ -51,11 +53,6 @@ Route::get('/novel/today_novel_by_day', function(){
 //     return view('novel/read/novel_read_view');
 // });
 Route::resource('/novel/read/novel_read_view', 'NovelEpisodeController');
-
-Route::get('/background/things', function(){
-    return view('background/things/things_view');
-});
-
 
 Route::get('/background/share', function(){
     return view('background/share/set_share_view');
