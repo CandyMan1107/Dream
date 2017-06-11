@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-use App\Character;
+use App\Item;
 
-class BackgroundCharactersController extends Controller
+class BackgroundItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,23 +16,21 @@ class BackgroundCharactersController extends Controller
      */
     public function index()
     {
-        $character = new Character();
-        $dataSet = $character->dataBringAll();
+        $item = new Item();
+        $dataSet = $item->dataBringAll();
         $data = array(array());
         $i = 0;
 
         foreach($dataSet as $datas){
-            $data[$i]['id'] = $datas->cha_id;
+            $data[$i]['id'] = $datas->id;
             $data[$i]['name'] = $datas->name;
             $data[$i]['info'] = $datas->info;
-            $data[$i]['age'] = $datas->age;
-            $data[$i]['gender'] = $datas->gender;
+            $data[$i]['category'] = $datas->category;
             $data[$i]['refer_info'] = $datas->refer_info;
             $data[$i]['img_src'] = $datas->img_src;    
             $i++;
         }
-
-        return view('background.character.character_view')->with("data", $data);
+        return view('background.things.things_view')->with("data", $data);;
     }
 
     /**
@@ -53,12 +51,12 @@ class BackgroundCharactersController extends Controller
      */
     public function store(Request $request)
     {
-        $character = new Character();
+        $item = new Item();
+        $imgUpLoad = new BackgroundItemsController();
 
-        $imgUpLoad = new BackgroundCharactersController();
-
-        $file = Input::file('character_img_upload');
+        $file = Input::file('item_img_upload');
         $data = $request->all();
+        // var_dump($data);
 
         if($file){
             $img_name = $imgUpLoad->backgroundImgUpload($file);
@@ -67,14 +65,14 @@ class BackgroundCharactersController extends Controller
             $img_name = null;
         }
 
-        $character->insert_character($data,$img_name);
+        $item->insert_item($data,$img_name);
 
-        return redirect(route('character.index'));
+        return redirect(route('things.index'));
     }
 
     //소설 설정 이미지 업로드
     public function backgroundImgUpload($file){
-        $destinationPath = 'img/background/characterImg';
+        $destinationPath = 'img/background/itemImg';
         $fileName = date("Y").date("m").date("d").date("s").$file->getClientOriginalName();
         $file->move($destinationPath, $fileName);
 
@@ -125,31 +123,4 @@ class BackgroundCharactersController extends Controller
     {
         //
     }
-
-    public function showUploadFile(Request $request) {
-    //   $file = $request->file('image') ;
-      $file = Input::file('image');
-      //Display File Name
-      echo 'File Name: '.$file->getClientOriginalName() ;
-      echo '<br>';
-   
-      //Display File Extension
-      echo 'File Extension: '.$file->getClientOriginalExtension() ;
-      echo '<br>';
-   
-      //Display File Real Path
-      echo 'File Real Path: '.$file->getRealPath() ;
-      echo '<br>';
-   
-      //Display File Size
-      echo 'File Size: '.$file->getSize() ;
-      echo '<br>';
-   
-      //Display File Mime Type
-      echo 'File Mime Type: '.$file->getMimeType() ;
-   
-      //Move Uploaded File
-      $destinationPath = 'uploads';
-      $file->move($destinationPath,$file->getClientOriginalName() );
-   }
 }
