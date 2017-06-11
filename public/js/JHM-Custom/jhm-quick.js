@@ -23,7 +23,7 @@ $(document).ready(function() {
         } else {
             $("#quickMenu").stop().animate({
                 "top": newPosition
-            }, 500);
+            }, 200);
         }
 
     });
