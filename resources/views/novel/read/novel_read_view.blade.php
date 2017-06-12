@@ -2,9 +2,6 @@
 
 @section('content')
     <div class="default-padding"></div>
-@php
-{{-- var_dump($data); --}}
-@endphp
 
     {{-- read-novel-info START --}}
     <div id="read-novel-info" class="section-padding">
@@ -14,7 +11,7 @@
                 <h4 class="text-left">
                     <span class="novel-info-text"><strong>오베라는 남자</strong></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
-                    <span class="novel-info-text">{{$data[0]['id']}}화 {{$data[0]['episode_title']}}</span>
+                    <span class="novel-info-text">{{$data['id']}}화 {{$data['episode_title']}}</span>
                 </h4>
             </div>
             <div class="col-md-4 text-right">

@@ -52,6 +52,7 @@ Route::get('/novel/today_novel_by_day', function(){
 // Route::get('/novel/read/novel_read_view', function(){
 //     return view('novel/read/novel_read_view');
 // });
+// Route::get('/novel/read/novel_read_view/{novel_id}/{episode_id}', "NovelEpisodeController@show");
 Route::resource('/novel/read/novel_read_view', 'NovelEpisodeController');
 
 Route::get('/background/share', function(){

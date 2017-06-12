@@ -124,6 +124,11 @@
     </div>
   </div>
 
+{{-- @php
+use App\Http\Controllers\NovelEpisodeController;
+echo NovelEpisodeController::show($novelId, $d.id); 
+@endphp --}}
+
 	<script>
 	$(function() {
 		getNovelInfo(1);
@@ -194,6 +199,7 @@
 				$(".write-episode-btn").off().on("click",function(){
 					var novelId = $(this).attr("data-novel-id");
 					document.location.href="/write_novel/write_episode/" + novelId;
+					
 				})
 			})
 		}
@@ -208,6 +214,7 @@
 					},
 					success: function (data) {
 						console.log(data);// 회차 테이블
+						
 						var episodeCollapse = "";
 						episodeCollapse += "<div class='panel panel-default'>";
 						episodeCollapse += "	<div id='collapse" + novelId + "' class='panel-collapse collapse'>";
@@ -220,13 +227,12 @@
 						episodeCollapse += "				<div class='col-md-2'>최근 수정</div>";
 						episodeCollapse += "			</div>";
 						episodeCollapse += "		</ul>"
-
 						data.forEach(function(d){
 							episodeCollapse += "		<ul class='list-group'>";
 							episodeCollapse += "			<div class='col-md-12 list-group-item'>";
 							episodeCollapse += "				<div class='col-md-1'>" + (d.is_notice ? "공지" : "회차") + "</div>";
 							episodeCollapse += "				<div class='col-md-1'>" + (d.is_charge ? "유료" : "무료") + "</div>";
-							episodeCollapse += "				<div class='col-md-6'>" + (data.indexOf(d)+1) + "회. " +d.episode_title + "</div>";
+							episodeCollapse += "				<a href='/novel/read/novel_read_view/" + novelId+":"+d.id + "'><div class='col-md-6'>" + (data.indexOf(d)+1) + "회. " +d.episode_title + "</div></a>";
 							episodeCollapse += "				<div class='col-md-2'>" + d.created_at + "</div>";
 							episodeCollapse += "				<div class='col-md-2'>" + (d.updated_at != null ? d.update_at : "0000-00-00") + "</div>";
 							episodeCollapse += "			</div>";
@@ -244,6 +250,7 @@
 						alert("에피소드 호출 오류발생");
 					}
 			});
+			
 		}
 		// 소설 목록 페이지네이션
 		function setPagination(curPage, lastPage){
