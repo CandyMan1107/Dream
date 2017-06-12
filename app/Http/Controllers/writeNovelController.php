@@ -56,12 +56,20 @@ class writeNovelController extends Controller
       $pageNum = 2; // 페이지당 보일 수
       // novels + novel_writers 조인 후 유저와 일치하는 값 호출
       $novelInfo = DB::table("novels")->join("novel_writers","novels.id", "=", "novel_writers.novel_id")->where("novel_writers.user_id", "=",$userId)->paginate($pageNum);
-
       return $novelInfo;
     }
 
-    // 에피소드 정보 가져옴
-    public function novelEpisodeView(Request $request){
-      echo $data;
+    // 해당 소설의 아이디에 대한 회차 정보 호출
+    public function getEpisodeInfo(Request $request){
+
+      $novelId = $request->input('novelId');
+      $episodeInfo = DB::table("novel_episodes")->where("belong_to_novel", "=",$novelId)->get();
+      return $episodeInfo;
     }
+
+    // 회차 작성 뷰
+    public function writeNovelEpisodeView ($data, Request $request){
+      return $data;
+    }
+
 }

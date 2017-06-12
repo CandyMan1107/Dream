@@ -67,14 +67,17 @@ Route::get('/write_novel/set', "writeNovelController@setNovelView");
 // 소설 정보 등록
 Route::get('/write_novel/create_novel', "writeNovelController@createNovel");
 
-//소설 정보 getter
+// 소설 정보 getter
 Route::get('/write_novel/get_novel_info', "writeNovelController@getNovelInfo");
+
+// 회차 정보 getter
+Route::get('/write_novel/get_episode_info', "writeNovelController@getEpisodeInfo");
 
 // 나의소설
 Route::get('/write_novel/my_novel', "writeNovelController@myNovelView");
 
 // 나의소설-에피소드
-Route::get('/write_novel/novel_episode/{data}', "writeNovelController@novelEpisodeView");
+Route::get('/write_novel/write_episode/{data}', "writeNovelController@writeNovelEpisodeView");
 
 // 이미지 등록부
 // 커버 이미지 등록
