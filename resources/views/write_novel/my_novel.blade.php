@@ -207,7 +207,7 @@
 
 				$(".episode-mng-btn").off().on("click",function(){
 					var novelId = $(this).attr("data-novel-id");
-					document.location.href="/write_novel/my_episode/" + novelId;
+					document.location.href="/write_novel/novel_episode/" + novelId;
 				})
 			})
 		}

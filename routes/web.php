@@ -58,6 +58,8 @@ Route::get('/background/share', function(){
     return view('background/share/set_share_view');
 });
 
+// 코도바 뷰어부
+Route::get('/get_novel', "cordoController@getNovelInfo");
 
 // 소설 작성부
 // 소설 정보 작성
