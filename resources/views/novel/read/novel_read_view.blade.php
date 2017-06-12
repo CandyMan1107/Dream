@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="default-padding"></div>
+@php
+{{-- var_dump($data); --}}
+@endphp
 
     {{-- read-novel-info START --}}
     <div id="read-novel-info" class="section-padding">
@@ -11,12 +14,12 @@
                 <h4 class="text-left">
                     <span class="novel-info-text"><strong>오베라는 남자</strong></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
-                    <span class="novel-info-text">1화 오베라는 남자(1)</span>
+                    <span class="novel-info-text">{{$data[0]['id']}}화 {{$data[0]['episode_title']}}</span>
                 </h4>
             </div>
             <div class="col-md-4 text-right">
                 <ul class="list-inline" name="bookMode">
-                    <li class="setView" data-toggle="modal" data-target="#myModal">
+                    <li class="setView" data-toggle="modal" data-target="#viewerModal">
                         <i class="material-icons">settings</i>&nbsp;<span>뷰어설정</span>
                     </li>
                     <li class="novelBackground">
@@ -682,7 +685,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td data-toggle="modal" data-target="#myModal">
+                        <td data-toggle="modal" data-target="#viewerModal">
                             <p class="remote">
                                 <a class="setView" href="#">
                                     <i class="material-icons">settings</i>&nbsp;<span>뷰어설정</span>
@@ -691,7 +694,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td data-toggle="modal" data-target="#backgroundModal">
                             <p class="remote">
                                 <a class="novelBackground" href="#">
                                     <i class="material-icons">remove_red_eye</i>&nbsp;<span>배경보기</span>
@@ -704,13 +707,13 @@
         </div>
     </div>
     {{-- quickMenu END --}}
-    {{-- Modal --}}
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    {{-- Viewer Setting Modal START --}}
+    <div class="modal fade" id="viewerModal" tabindex="-1" role="dialog" aria-labelledby="backgroundModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel"><i class="material-icons">settings</i>&nbsp;<span>뷰어 설정</span></h4>
+                    <h4 class="modal-title" id="viewerModalLabel"><i class="material-icons">settings</i>&nbsp;<span>뷰어 설정</span></h4>
                 </div>
                 <div class="modal-body">
                     {{-- Screen MODE --}}
@@ -808,7 +811,92 @@
         </div>
         {{-- modal-dialog END --}}
     </div>
-    {{-- modal END --}}
+    {{-- Viewer Setting Modal END --}}
+    {{-- Background Modal START --}}
+    <div class="modal fade" id="backgroundModal" tabindex="-1" role="dialog" aria-labelledby="backgroundModalLabel" aria-hidden="true">
+        <div class="modal-dialog huge-size">
+            <div class="modal-content huge-size">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="backgroundModalLabel"><i class="material-icons">remove_red_eye</i>&nbsp;<span>소설 배경</span></h4>
+                </div>
+                <div class="modal-body">
+                    {{-- Novel History --}}
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2 text-left">
+                                <a href="/background/historyTable">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-10 text-left">
+                                {{-- CONTEXT --}}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Novel Character-Set --}}
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2 text-left">
+                                <a href="/background/character">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-10 text-left">
+                                {{-- CONTEXT --}}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Novel Objects --}}
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2 text-left">
+                                <a href="/background/things">
+                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-10 text-left">
+                                {{-- CONTEXT --}}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Novel Character-Map --}}
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2 text-left">
+                                <a href="/background/relation">
+                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-10 text-left">
+                                {{-- CONTEXT --}}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Novel Map --}}
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-2 text-left">
+                                <a href="/background/map">
+                                    <i class="fa fa-map" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-10 text-left">
+                                {{-- CONTEXT --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            {{-- modal-content END --}}
+        </div>
+        {{-- modal-dialog END --}}
+    </div>
+    {{-- Background Modal END --}}
     {{-- writer-word START --}}
     <div id="writer-word">
         {{-- container class START --}}
@@ -938,4 +1026,5 @@
         <script src="/js/JHM-Custom/jhm-readNovel-custom.js"></script>
         <script src="/js/JHM-Custom/jhm-quick.js"></script>
         <script src="/js/JHM-Custom/jhm-comment.js"></script>
+        <script src="/js/JHM-Custom/jhm-episode-event.js"></script>
 @endsection

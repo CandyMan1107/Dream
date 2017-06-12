@@ -298,7 +298,7 @@ h4 > span {
     /*border: 1px solid red;*/
 }
 
-#myModal .viewScreen {
+#viewerModal .viewScreen {
     /*background: red;*/
     width: 40px;
     height: 40px;
@@ -312,7 +312,7 @@ h4 > span {
     background: gray;
 }
 
-#myModal .example-text {
+#viewerModal .example-text {
     height: 142px;
     border: 1px solid rgba(149, 152, 154, .5);
     overflow: auto;
@@ -325,7 +325,7 @@ h4 > span {
 }
 
 
-#myModal .colorBox {
+#viewerModal .colorBox {
     /*background: black;*/
     /*border: 1px solid rgba(149, 152, 154, .9);*/
     width: 30px;
@@ -336,6 +336,14 @@ h4 > span {
 }
 .off-colorBox {
     border: 1px solid rgba(149, 152, 154, .9);
+}
+
+#backgroundModal .huge-size {
+    width: 1000px;
+}
+#backgroundModal i {
+    color: #555555;
+    
 }
 /**************************************
 /novel/today_novel_by_day.blade.php
