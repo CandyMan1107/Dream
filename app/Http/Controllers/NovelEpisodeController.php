@@ -15,29 +15,7 @@ class NovelEpisodeController extends Controller
     public function index()
     {
         //
-        $episodeTable = new Episode();
-        $episodeData = $episodeTable->dataSelectAll();
-
-        // var_dump($episodeData);
-
-        $data = array(array());
-        $i = 0;
-
-        foreach($episodeData as $datas) {
-            $data[$i]['id'] = $datas->id;
-            $data[$i]['belong_to_novel'] = $datas->belong_to_novel;
-            $data[$i]['is_charge'] = $datas->is_charge;
-            $data[$i]['is_notice'] = $datas->is_notice;
-            $data[$i]['cover_img_src'] = $datas->cover_img_src;
-            $data[$i]['episode_title'] = $datas->episode_title;
-            $data[$i]['episode'] = $datas->episode;
-            $data[$i]['writers_postscript'] = $datas->writers_postscript;
-            $data[$i]['char_count'] = $datas->char_count;
-
-            $i++;
-        }
-
-        return view('novel.read.novel_read_view')->with("data", $data);
+        
     }
 
     /**
@@ -76,9 +54,43 @@ class NovelEpisodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public static function show($id)
     {
         //
+        $string = explode(":", $id);
+        // var_dump($string);
+
+        $episodeTable = new Episode();
+        $episodeData = $episodeTable->dataSelectAll();
+
+        // var_dump($episodeData);
+
+        $data = array(array());
+        $i = 0;     
+        $num = 0;
+
+        foreach($episodeData as $datas) {
+            $data[$i]['id'] = $datas->id;
+            $data[$i]['belong_to_novel'] = $datas->belong_to_novel;
+            $data[$i]['is_charge'] = $datas->is_charge;
+            $data[$i]['is_notice'] = $datas->is_notice;
+            $data[$i]['cover_img_src'] = $datas->cover_img_src;
+            $data[$i]['episode_title'] = $datas->episode_title;
+            $data[$i]['episode'] = $datas->episode;
+            $data[$i]['writers_postscript'] = $datas->writers_postscript;
+            $data[$i]['char_count'] = $datas->char_count;
+
+            if ($string[0] == $data[$i]['belong_to_novel']) {
+                $num = $i;
+
+                break;
+            }
+
+            $i++;
+        }
+
+        return view('novel.read.novel_read_view')->with("data", $data[$num]);
+
     }
 
     /**

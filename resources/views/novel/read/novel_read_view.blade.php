@@ -2,9 +2,6 @@
 
 @section('content')
     <div class="default-padding"></div>
-@php
-{{-- var_dump($data); --}}
-@endphp
 
     {{-- read-novel-info START --}}
     <div id="read-novel-info" class="section-padding">
@@ -14,7 +11,7 @@
                 <h4 class="text-left">
                     <span class="novel-info-text"><strong>오베라는 남자</strong></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
-                    <span class="novel-info-text">{{$data[0]['id']}}화 {{$data[0]['episode_title']}}</span>
+                    <span class="novel-info-text">{{$data['id']}}화 {{$data['episode_title']}}</span>
                 </h4>
             </div>
             <div class="col-md-4 text-right">
@@ -824,25 +821,26 @@
                     {{-- Novel History --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-2 text-left">
-                                <a href="/background/historyTable">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseHistory" aria-expanded="false" aria-controls="collapseHistory">
+                                <a href="#">
+                                    <h1><i class="fa fa-clock-o" aria-hidden="true"></i></h1>
                                 </a>
                             </div>
-                            <div class="col-md-10 text-left">
+                            <div class="col-md-11 text-left collapse in" id="collapseHistory">
                                 {{-- CONTEXT --}}
+                                
                             </div>
                         </div>
                     </div>
                     {{-- Novel Character-Set --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-2 text-left">
-                                <a href="/background/character">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                            <div class="col-md-1 text-center">
+                                <a href="#">
+                                    <h1><i class="fa fa-user" aria-hidden="true"></i></h1>
                                 </a>
                             </div>
-                            <div class="col-md-10 text-left">
+                            <div class="col-md-11 text-left">
                                 {{-- CONTEXT --}}
                             </div>
                         </div>
@@ -850,12 +848,12 @@
                     {{-- Novel Objects --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-2 text-left">
-                                <a href="/background/things">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <div class="col-md-1 text-center">
+                                <a href="#">
+                                    <h1><i class="fa fa-shopping-cart" aria-hidden="true"></i></h1>
                                 </a>
                             </div>
-                            <div class="col-md-10 text-left">
+                            <div class="col-md-11 text-left">
                                 {{-- CONTEXT --}}
                             </div>
                         </div>
@@ -863,12 +861,12 @@
                     {{-- Novel Character-Map --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-2 text-left">
-                                <a href="/background/relation">
-                                    <i class="fa fa-users" aria-hidden="true"></i>
+                            <div class="col-md-1 text-center">
+                                <a href="#">
+                                    <h1><i class="fa fa-users" aria-hidden="true"></i></h1>
                                 </a>
                             </div>
-                            <div class="col-md-10 text-left">
+                            <div class="col-md-11 text-left">
                                 {{-- CONTEXT --}}
                             </div>
                         </div>
@@ -876,12 +874,12 @@
                     {{-- Novel Map --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-2 text-left">
-                                <a href="/background/map">
-                                    <i class="fa fa-map" aria-hidden="true"></i>
+                            <div class="col-md-1 text-center">
+                                <a href="#">
+                                    <h1><i class="fa fa-map" aria-hidden="true"></i></h1>
                                 </a>
                             </div>
-                            <div class="col-md-10 text-left">
+                            <div class="col-md-11 text-left">
                                 {{-- CONTEXT --}}
                             </div>
                         </div>
@@ -889,7 +887,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
             {{-- modal-content END --}}

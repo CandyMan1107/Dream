@@ -341,9 +341,8 @@ h4 > span {
 #backgroundModal .huge-size {
     width: 1000px;
 }
-#backgroundModal i {
+#backgroundModal .modal-body i {
     color: #555555;
-    
 }
 /**************************************
 /novel/today_novel_by_day.blade.php
