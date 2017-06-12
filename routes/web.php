@@ -66,6 +66,8 @@ Route::get('/get_novel', "cordoController@getNovelInfo");
 Route::get('/write_novel/set', "writeNovelController@setNovelView");
 // 소설 정보 등록
 Route::get('/write_novel/create_novel', "writeNovelController@createNovel");
+// 소설 회차 등록
+Route::get('/write_novel/create_episode', "writeNovelController@createEpisode");
 
 // 소설 정보 getter
 Route::get('/write_novel/get_novel_info', "writeNovelController@getNovelInfo");
@@ -76,8 +78,8 @@ Route::get('/write_novel/get_episode_info', "writeNovelController@getEpisodeInfo
 // 나의소설
 Route::get('/write_novel/my_novel', "writeNovelController@myNovelView");
 
-// 나의소설-에피소드
-Route::get('/write_novel/write_episode/{data}', "writeNovelController@writeNovelEpisodeView");
+// 회차 내용 작성
+Route::get('/write_novel/write_episode/{novelId}', "writeNovelController@writeNovelEpisodeView");
 
 // 이미지 등록부
 // 커버 이미지 등록
@@ -86,15 +88,6 @@ Route::post('/write_novel/addCover', "UpImgController@uploadImg");
 // 커버 이미지 삭제
 Route::get('/write_novel/removeCover', "UpImgController@removeImg");
 
-// 회차 내용 작성
-Route::get('/write_novel/view', function(){
-    return view('write_novel/write_novel_view');
-});
-
-// 회차 내용 작성
-Route::get('/write_novel/view', function(){
-    return view('write_novel/write_novel_view');
-});
 
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 

@@ -49,6 +49,37 @@ class writeNovelController extends Controller
       return $novelId;
     }
 
+    // DB 회차 생성
+    public function createEpisode(Request $request){
+      $novelId    = $request->input("novelId");
+      $isNotice   = $request->input('isNotice');
+      $isCharge   = $request->input('isCharge');
+      $coverImg   = $request->input('coverImg');
+      $title      = $request->input('title');
+      $episode    = $request->input('episode');
+      $charCount = strlen($episode);
+      $postScript = $request->input('postScript');
+      $mytime     = date('Y-m-d H:i:s');
+
+      DB::table("novel_episodes")->insert([
+        "belong_to_novel"     => $novelId,
+        "is_charge"           => $isCharge,
+        "is_notice"           => $isNotice,
+        "cover_img_src"       => $coverImg,
+        "episode_title"       => $title,
+        "episode"             => $episode,
+        "char_count"          => $charCount,
+        "writers_postscript"  => $postScript,
+        "created_at"          => $mytime
+      ]);
+
+      // $test = array(
+      //   $novelId, $isCharge, $isNotice, $coverImg, $title, $episode, $charCount, $postScript, $mytime
+      // );
+
+      return "success";
+    }
+
     // 소설 정보 가져옴
     public function getNovelInfo(Request $request){
 
@@ -61,15 +92,25 @@ class writeNovelController extends Controller
 
     // 해당 소설의 아이디에 대한 회차 정보 호출
     public function getEpisodeInfo(Request $request){
-
       $novelId = $request->input('novelId');
       $episodeInfo = DB::table("novel_episodes")->where("belong_to_novel", "=",$novelId)->get();
       return $episodeInfo;
     }
 
     // 회차 작성 뷰
-    public function writeNovelEpisodeView ($data, Request $request){
-      return $data;
+    public function writeNovelEpisodeView ($novelId, Request $request){
+      $coverImg = DB::table("cover_images")->select("cover_img_src")->get();
+      $novelTitle = DB::table("novels")->select("title")->where("id", "=",$novelId)->get();
+      $novelTitle = $novelTitle[0]->title;
+
+      $tasks = array(
+        "coverImg" => $coverImg,
+        "novelTitle" => $novelTitle,
+        "novelId"   => $novelId
+
+      );
+
+      return view('write_novel/write_episode_view')->with("tasks",$tasks);
     }
 
 }
