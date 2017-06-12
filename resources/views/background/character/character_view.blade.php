@@ -6,15 +6,23 @@
 
 
 @section('content')
+		<script type="text/javascript" src="/js/custom/character_event.js"></script>
+		<script>character_event( <?=json_encode($data)?> )</script>
 		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-color : #e8d6b3" >
-			아이콘 div값 주고 img값을 round로 출력. id값 줘서 on click시 캐릭터 등록 부분 캐릭터 상세 정보 페이지로 react로 변환
+			<div class="row">
+				@foreach ($data as $character)
+					<?php $img_src = "/img/background/characterImg/".$character['img_src']; ?>
+					
+					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list" id="{{$character['id']}}" style="margin : 17px">
+				@endforeach
+			</div>
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 height-max-set" >
 			<form class="form-horizontal" id="character" name="character" action="{{ route('character.store') }}" method="POST" enctype="multipart/form-data">
 			{!! csrf_field() !!}
 			{{-- <input type="hidden" name="page" value="{{$datas['page']}}"> --}}
 			<input type="hidden" name="page" value="character">
-				<h3>캐릭터 등록</h3>
+				<h3 id="name">캐릭터 등록</h3>
 				{{-- 캐릭터 이름 등록 --}}
 				<div class="form-group form-group-lg">
 					<label class="col-sm-2 control-label" for="formGroupInputLarge">이름</label>

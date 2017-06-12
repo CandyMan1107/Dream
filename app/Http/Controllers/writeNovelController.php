@@ -59,4 +59,9 @@ class writeNovelController extends Controller
 
       return $novelInfo;
     }
+
+    // 에피소드 정보 가져옴
+    public function novelEpisodeView(Request $request){
+      echo $data;
+    }
 }
