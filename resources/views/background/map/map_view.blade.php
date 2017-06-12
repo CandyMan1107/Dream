@@ -269,9 +269,9 @@
 		function mousemove(d) {
 			if (mousing) {
 				d3.select(this).attr("class",null);
-				//d3.select(this).classed("fill", d.fill = mousing > 0);
+				d3.select(this).classed("fill", d.fill = mousing > 0);
 				d3.select(this).classed($(".selected_cell").attr("id"), d.fill);
-				d3.select(this).attr("fill", "url(#hosPattern)");	// 이미지 드래그
+				// d3.select(this).attr("fill", "url(#hosPattern)");	// 이미지 드래그
 				border.call(redraw);
 			}
 		}
