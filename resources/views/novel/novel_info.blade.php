@@ -19,7 +19,7 @@
                         <h4>11,896</h4>
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
-                        <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                        <i class="material-icons">chat</i>
                         <h4>소설리뷰</h4>
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
@@ -67,10 +67,10 @@
                     <div class="col-md-9">
                         <p class="lead">
                             <strong>
-                                {{$data['summary_intro']}}
+                                {!! $data['summary_intro'] !!}
                             </strong>
                         </p>
-                        <p>{{$data['intro']}}</p>
+                        <p>{!! $data['intro'] !!}</p>
                         {{-- <p>하지만 오베가 막 천장에 고리를 박으려는 순간, 건너편 집에 지상 최대의 얼간이가 이사를 오고 엄청나게 귀찮고 성가신 소리를 내기 시작한다. 오베가 딱 싫어하는 타입의 이 인간들로 인해 오베의 계획은 시작 단계에 이르기도 어려운 지경이다. 사람을 다방면으로 귀찮게 하는 인간들은 오베가 자살을 기도할 때마다 기막힌 타이밍에 오베가 자살을 포기하고 싶게 만들 만큼 방해를 하기 시작하는데…….</p> --}}
                     </div>
                     <div id="default-padding-mid-1" class="col-md-9"></div>
@@ -78,10 +78,6 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <select class="form-control input-lg">
-                                    <option>5</option>
-                                    <option>4</option>
-                                    <option>3</option>
-                                    <option>2</option>
                                     <option>1</option>
                                 </select>
                             </div>
