@@ -22,7 +22,6 @@ class NovelEpisodeController extends Controller
 
         $episodeTable = new Episode();
         $episodeData = $episodeTable->selectWithNovel();
-        // $episodeData = DB::table("novel_episodes")->select("belong_to_novel", "episode_title", "created_at")->get();
         
         $epiData[] = [];
         $data[] = [];
@@ -111,7 +110,7 @@ class NovelEpisodeController extends Controller
         // var_dump($string);
 
         $novelTable = new Novel();
-        $novelData = $novelTable->dataSelectAll();
+        $novelData = $novelTable->titleSelect();
 
         $episodeTable = new Episode();
         $episodeData = $episodeTable->dataSelectAll();
@@ -119,9 +118,18 @@ class NovelEpisodeController extends Controller
         // var_dump($episodeData);
 
         // $data = array(array());
+        $novelTitle[] = [];
         $data[] = [];
+        $n = 0;
         $i = 0;     
         $num = 0;
+
+        foreach($novelData as $novels) {
+            $novelTitle[$n]['id'] = $novels->id;
+            $novelTitle[$n]['title'] = $novels->title;
+
+            $n++;
+        }
 
         foreach($episodeData as $datas) {
             $data[$i]['id'] = $datas->id;
@@ -137,6 +145,10 @@ class NovelEpisodeController extends Controller
 
             if ($string[0] == $data[$i]['belong_to_novel']) {
                 $num = $i;
+
+                if($string[0] == $novelTitle[$num]['id']) {
+                    $data[$num]['title'] = $novelTitle[$num]['title'];
+                }
 
                 break;
             }
