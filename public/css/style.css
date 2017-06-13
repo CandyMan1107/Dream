@@ -332,6 +332,10 @@ p.cta-sub-title {
 #Container .mix {
     display: none;
 }
+#Container img {
+    width: 390px;
+    height: 270px;
+}
 
 .fil-btn {
     margin-bottom: 30px;

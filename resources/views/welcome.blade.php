@@ -117,26 +117,26 @@
 				<div class="port-sec">
 					<div class="col-md-12 fil-btn text-center">
 							<div class="filter wrk-title active" data-filter="all">전체</div>
-							<div class="filter wrk-title" data-filter=".category-1">판타지</div>
-							<div class="filter wrk-title" data-filter=".category-2">로맨스</div>
-							<div class="filter wrk-title lst-cld" data-filter=".category-3">소설</div>
+							<div class="filter wrk-title" data-filter=".category-1">로맨스</div>
+							<div class="filter wrk-title" data-filter=".category-2">판타지</div>
+							<div class="filter wrk-title lst-cld" data-filter=".category-3">호러</div>
 					</div>
 					<div id="Container">
-								<div class="filimg mix category-1 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="2">
-									<img src="img/fea1.jpg" class="img-responsive">
+								<div class="filimg mix category-1 col-md-4 col-sm-4 col-xs-12" data-myorder="2">
+									<img src="img/OVE.jpg" class="img-responsive">
 								</div>
 								<div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="4">
-									<img src="img/fea2.jpg" class="img-responsive">
+									<img src="img/SEA.jpg" class="img-responsive">
 								</div>
-								<div class="filimg mix category-1 col-md-4 col-sm-4 col-xs-12" data-myorder="1">
-									<img src="img/fea3.jpg" class="img-responsive">								</div>
+								<div class="filimg mix category-1 category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="1">
+									<img src="img/SLEEP.jpg" class="img-responsive">								</div>
 								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
 									<img src="img/fea4.jpg" class="img-responsive">								</div>
 								<div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
 									<img src="img/fea5.jpg" class="img-responsive">
 								</div>
 								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
-									<img src="img/fea6.jpg" class="img-responsive">
+									<img src="img/DEAD.jpg" class="img-responsive">
 								</div>
 					</div>
 				</div>
