@@ -11,12 +11,14 @@
           use App\Http\Controllers\BackgroundCharactersController;
           $list = BackgroundCharactersController::show_item();
         @endphp
-        @foreach ($list as $item)
-            @php
-              $img_src = "/img/background/itemImg/".$item['img_src'];
-            @endphp
-            <img src="{{$img_src}}" alt="item image" class="img-circle img-things-size ownership_list" id="{{$item['id']}}" style="margin : 17px">
-        @endforeach
+        @if($list[0])
+          @foreach ($list as $item)
+              @php
+                $img_src = "/img/background/itemImg/".$item['img_src'];
+              @endphp
+              <img src="{{$img_src}}" alt="item image" class="img-circle img-things-size ownership_list" id="{{$item['id']}}" style="margin : 17px">
+          @endforeach
+        @endif
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script type="text/javascript" src="/js/custom/ownership_add.js"></script>
       </div>
