@@ -16,8 +16,42 @@ class NovelEpisodeController extends Controller
     public function index()
     {
         //
-        $data = DB::table("novels")->dataSelectAll();
-        return view('novel.novel_info')->with("data", $data);
+        $novelData = DB::table("novels")->get();
+        $episodeData = DB::table("novel_episodes")->select("belong_to_novel")->get();
+        
+        $eData;
+        $data[] = [];
+        $i = 0;     
+        $num = 0;
+
+        // var_dump($episodeData);
+
+        foreach($episodeData as $episodes) {
+            $eData = $episodes->belong_to_novel;
+        }
+
+        foreach($novelData as $datas) {
+            $data[$i]['id'] = $datas->id;
+            $data[$i]['title'] = $datas->title;
+            $data[$i]['intro'] = $datas->intro;
+            $data[$i]['summary_intro'] = $datas->summary_intro;
+            $data[$i]['cover_img_src'] = $datas->cover_img_src;
+            $data[$i]['publish_case'] = $datas->publish_case;
+            $data[$i]['period'] = $datas->period;
+            $data[$i]['genre'] = $datas->genre;
+
+            if ($eData == $data[$i]['id']) {
+                $num = $i;
+
+                break;
+            }
+
+            $i++;
+        }
+
+        // echo ($data[0]['id']);
+
+        return view('novel.novel_info')->with("data", $data[$num]);
     }
 
     /**

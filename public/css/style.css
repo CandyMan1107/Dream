@@ -357,6 +357,8 @@ p.cta-sub-title {
 .img-sec,
 .fig-caption {
     width: 50%;
+    height: 400px;
+    overflow: hidden;
     float: left;
 }
 
