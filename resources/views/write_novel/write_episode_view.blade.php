@@ -20,6 +20,10 @@
       padding-right: 8px;
     }
 
+    .novel-title{
+      font-size:18;
+      font-weight: bold;
+    }
     .menu_input {
       border:none;
     }
@@ -66,6 +70,47 @@
       border:#00D8FF 2px solid;
       color: #00D8FF;
     }
+
+    /*회색 #BDBDBD  파랑 #fdfdfd*/
+    .set-notice-btn{
+      display: inline-block;
+      text-align: center;
+      padding: 4px;
+      width:100px;
+      color: #BDBDBD;
+      font-size: 16px;
+      line-height: normal;
+      background-color: #fdfdfd;
+      cursor: pointer;
+      border: 2px solid #BDBDBD;
+      margin: 0 auto;
+    }
+
+    .selected-notice{
+      color: #00D8FF;
+      border: 2px solid #00D8FF;
+    }
+
+    .set-charge-btn{
+      display: inline-block;
+      text-align: center;
+      padding: 4px;
+      width:100px;
+      color: #BDBDBD;
+      font-size: 16px;
+      line-height: normal;
+      background-color: #fdfdfd;
+      cursor: pointer;
+      border: 2px solid #BDBDBD;
+      margin: 0 auto;
+    }
+
+    .selected-charge{
+      color: #00D8FF;
+      border: 2px solid #00D8FF;
+    }
+
+    /* 커버 이미지 */
 
     .image_list_box {
       background-color:#EAEAEA;
@@ -138,18 +183,21 @@
       clip:rect(0,0,0,0);
       border: 0;
     }
-    .intro_box {
+
+    /*에디터 부*/
+    .edit-box {
       border:#EAEAEA 2px solid;
       margin-bottom: 10px;
       overflow-y: scroll;
       padding-left: 5px;
     }
 
-    .detail_intro_box {
-      height:250px;
+    .episode-editor-div {
+      height:500px;
+      width:85%;
     }
 
-    .summary_intro_box {
+    .writers-postscript-div {
       height:100px;
     }
 
@@ -159,6 +207,7 @@
       height: 100px;
     }
     .func_btn {
+      cursor: pointer;
       vertical-align: middle;
       border: #7CC8C9 2px solid;
       color: #7CC8C9;
@@ -175,52 +224,36 @@
   <div class="write_novel_set">
     <div class="container">
       <div class="row set_row">
-        <div class="col-md-12 main_title">새 소설 쓰기</div>
+        <div class="col-md-12 main_title">회차 / 공지 쓰기</div>
       </div>
 
       <div class="row set_row">
         <div class="col-md-12">
           <span class="menu_title">소설 제목</span>
-          <input id="novel-title" class="menu_input" type="text" placeholder="소설 제목을 입력해주세요." size=50>
+          <span class="novel-title">{{ $tasks['novelTitle'] }}</span>
         </div>
       </div>
+
       <div class="row set_row">
-        <div class="col-md-6">
-          <span class="menu_title">장르</span>
-          <select id="genre" class="menu_select" name="">
-            <option value="romance">로맨스</option>
-            <option value="fantasy">판타지</option>
-            <option value="scifi">SF</option>
-            <option value="martial">무협</option>
-            <option value="detective">추리</option>
-            <option value="horror">호러</option>
-            <option value="agenovel">시대극</option>
-          </select>
+        <div class="col-md-12">
+          <label class="set-notice-btn selected-notice" data-notice="episode">회차</label>
+          <label class="set-notice-btn" data-notice="notice">공지</label>
+          <label class="set-charge-btn selected-charge" data-charge="free">무료</label>
+          <label class="set-charge-btn" data-charge="charge">유료</label>
         </div>
+      </div>
 
-        <div class="col-md-6">
-          <span class="menu_title">연재 주기</span>
-          <span class="check_novel_period free_publish selected_period" data-case="free-publish"><img src="{{URL::asset('img/write_novel/check.png')}}" class="check_circle">자유 연재</span>
-          <span class="check_novel_period day_publish" data-case="day-publish"><img src="{{URL::asset('img/write_novel/check.png')}}" class="check_circle">요일 연재</span>
-
-          <table class="novel_period_day_table day_activate">
-            <tr>
-              <td class="novel_period_day" data-day="mon">월</td>
-              <td class="novel_period_day" data-day="tue">화</td>
-              <td class="novel_period_day" data-day="wed">수</td>
-              <td class="novel_period_day" data-day="thr">목</td>
-              <td class="novel_period_day" data-day="fri">금</td>
-              <td class="novel_period_day" data-day="sat">토</td>
-              <td class="novel_period_day" data-day="sun">일</td>
-            </tr>
-          </table>
+      <div class="row set_row">
+        <div class="col-md-12">
+          <span class="menu_title">회차 제목</span>
+          <input id="episode-title" class="menu_input" type="text" placeholder="회차 제목을 입력해주세요." size=50>
         </div>
       </div>
 
       <div class="row set_row">
         <div class="col-md-10 menu_title">표지 이미지
-
         </div>
+
         <div class="col-md-2">
           <form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="">
             <label class="img_upload_label">이미지 업로드
@@ -230,27 +263,26 @@
         </div>
       </div>
 
-
-      <!--표지 이미지가 들어갈 리스트-->
       <div class="row set_row image_list_box">
         <div class="image_list center-slick" data-href="{{URL::to('upload/images')}}">
-          <?php  ?>
         </div>
       </div>
 
       <div class="row set_row">
-        <div class="col-md-12 menu_title">소설 소개</div>
+        <div class="col-md-12 menu_title">내용</div>
       </div>
-      <div class="intro_box detail_intro_box" contenteditable="true">
-        detail intro box
+      <div class="edit-box episode-editor-div" contenteditable="true">
+        episode content
       </div>
-      <div class="intro_box summary_intro_box" contenteditable="true">
-        summary intro box
+      <div class="edit-box writers-postscript-div" contenteditable="true">
+        writers postscript
       </div>
 
       <div class="row set_row">
-        <div class="col-md-6 btn_div"><div class="func_btn novel-cancel">취소</div></div>
-        <div class="col-md-6 btn_div"><div class="func_btn novel-save">저장</div></div>
+        <div class="col-md-3 btn_div"><div class="func_btn episode-cancel">취소</div></div>
+        <div class="col-md-3 btn_div"><div class="func_btn episode-temp-save">임시저장</div></div>
+        <div class="col-md-3 btn_div"><div class="func_btn episode-preview">미리보기</div></div>
+        <div class="col-md-3 btn_div"><div class="func_btn episode-save">저장</div></div>
       </div>
 
     </div>
@@ -258,46 +290,17 @@
 
 <script>
   (function ($) {
-    // 자유/요일연재 선택
-    $('.check_novel_period').bind("click", function(){
-      // 체크 되어 있지 않다면
-      $('.check_novel_period').removeClass("selected_period");
-      $(this).addClass("selected_period");
-
-      // 요일 연재의 경우 요일 활성화
-      if($(this).hasClass("day_publish")){
-        activateDayCell();
-      // 요일연재가 아닐경우 요일 비활성화
-      } else {
-        deactivateDayCell();
-      }
+    // 회차/공지 선택
+    $('.set-notice-btn').on("click", function(){
+      $(".set-notice-btn").removeClass("selected-notice");
+      $(this).addClass("selected-notice");
     });
 
-    // 요일 선택
-    $(".novel_period_day").bind("click", function(){
-      // 요일 선택이 활성화 된 경우에만 선택됨
-      if($(".novel_period_day_table").hasClass("day_activate")){
-        if($(this).hasClass("selected_day"))
-          $(this).removeClass("selected_day");
-        else
-          $(this).addClass("selected_day");
-      }
+    // 유.무료 선택
+    $('.set-charge-btn').on("click", function(){
+      $(".set-charge-btn").removeClass("selected-charge");
+      $(this).addClass("selected-charge");
     });
-
-    // 요일 선택 비활성화
-    function deactivateDayCell(){
-      $(".novel_period_day_table").removeClass("day_activate");
-      $(".novel_period_day").removeClass("selected_day");
-      $(".novel_period_day_table").hide();
-    }
-
-    // 요일 선택 활성화
-    function activateDayCell(){
-      if(!$(".novel_period_day_table").hasClass("day_activate")){
-        $(".novel_period_day_table").addClass("day_activate");
-        $(".novel_period_day_table").show();
-      }
-    }
 
     // 표지 이미지 리스트 슬릭 설정
     $('.center-slick').slick({
@@ -306,19 +309,18 @@
       slidesToScroll: 3
     });
 
-
     // 기존의 표지 이미지 출력
     getCoverImage();
     function getCoverImage(){
-      <?php for($i=0; $i < count($tasks); $i++){?>
+      <?php for($i=0; $i < count($tasks['coverImg']); $i++){?>
 
         var addSlickEle = "";
         addSlickEle += "<div class='image_cell'>";
-        addSlickEle += "  <div class='cover-img' data-href={{ $tasks[$i]->cover_img_src }} >";
+        addSlickEle += "  <div class='cover-img' data-href={{ $tasks['coverImg'][$i]->cover_img_src }} >";
         addSlickEle += "    <div class='quitBox'>";
         addSlickEle += "      <span id='x'>X</span>";
         addSlickEle += "    </div>";
-        addSlickEle += "    <img draggable='false' src={{URL::asset('upload/images')}}/{{ $tasks[$i]->cover_img_src }}";
+        addSlickEle += "    <img draggable='false' src={{URL::asset('upload/images')}}/{{ $tasks['coverImg'][$i]->cover_img_src }}";
         addSlickEle += "  </div>";
         addSlickEle += "</div>";
         $(".image_list").slick('slickAdd',addSlickEle);
@@ -359,7 +361,7 @@
           // DB처리
           $.ajax({
               type: "get",
-              url: "removeCover",
+              url: "/write_novel/removeCover",
               data: {
                 "userId" : '1',
                 "removeFile" : coverImg.attr("data-href")
@@ -371,9 +373,7 @@
                 alert("오류발생");
               }
           });
-
         });
-
       <?php } ?>
     }
 
@@ -391,7 +391,7 @@
               }
             });
             $.ajax({
-              url: "addCover",
+              url: "/write_novel/addCover",
               type: "post",
               data: new FormData($("#upload_form")[0]),
               processData: false,
@@ -451,7 +451,7 @@
                           "removeFile" : coverImg.attr("data-href")
                         },
                         success: function (data) {
-            							console.log(data);
+                          console.log(data);
                         },
                         error: function (error) {
                           alert("오류발생");
@@ -466,48 +466,42 @@
     });
 
     // 취소 버튼
-    $(".novel-cancel").on("click",function(){
+    $(".episode-cancel").on("click",function(){
       history.go(-1);
     });
 
     // 저장 버튼
-    $(".novel-save").on("click",function(){
+    $(".episode-save").on("click",function(){
       // 소설 정보 변수화
-      var title = $("#novel-title").val();
-      var genre = $("#genre").val();
-      var publishPeriod = $(".selected_period").attr("data-case");
-      var publishDay = $(".selected_day");
-      var publishDays = "";
+      var novelId  = {{ $tasks['novelId']}};
+      var isNotice = $(".selected-notice").attr("data-notice")=="notice" ? 1 : 0 ;
+      var isCharge = $(".selected-charge").attr("data-charge")=="charge" ? 1 : 0;
       var coverImg = $(".selected-image").find(".cover-img").attr("data-href");
-      var detailIntro = $(".detail_intro_box").html();
-      var summaryIntro = $(".summary_intro_box").html();
+      var title    = $("#episode-title").val();
+      var episode  = $(".episode-editor-div").html();
+      var postScript = $(".writers-postscript-div").html();
 
-      // 요일 연재의 경우 요일 데이터를 가져옴
-      if(publishPeriod == "day-publish")
-        publishDay.each(function(index){
-          publishDays += "/" + publishDay.eq(index).attr("data-day");
-        });
 
       // ajax 소설 저장 요청
-      createNovel(title, genre, publishPeriod, publishDays, coverImg, detailIntro, summaryIntro);
+      createEpisode(novelId, isNotice, isCharge, coverImg, title, episode, postScript);
       // 마이페이지 - 소설 목록 페이지 이동
 
 
     });
 
     // DB 소설 생성
-    function createNovel(title, genre, publishPeriod, publishDays, coverImg, detailIntro, summaryIntro){
+    function createEpisode(novelId, isNotice, isCharge, coverImg, title, episode, postScript){
       $.ajax({
           type: "get",
-          url: "create_novel",
+          url: "/write_novel/create_episode",
           data: {
-            'title': title,
-            'genre': genre,
-            'publishPeriod': publishPeriod,
-            'publishDays': publishDays,
-            'coverImg': coverImg,
-            'detailIntro': detailIntro,
-            'summaryIntro': summaryIntro
+            "novelId"  : novelId,
+            "isNotice" : isNotice,
+            "isCharge" : isCharge,
+            "coverImg" : coverImg,
+            "title"    : title,
+            "episode"  : episode,
+            "postScript": postScript
           },
           success: function (data) {
             alert(data);
@@ -517,7 +511,7 @@
           }
       });
     }
-    deactivateDayCell();
+
   })(jQuery);
 
 
