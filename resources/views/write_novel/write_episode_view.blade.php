@@ -185,16 +185,69 @@
     }
 
     /*에디터 부*/
+
+    .edit-div {
+      padding: 0;
+      padding-bottom: 10px;
+      height:500px;
+    }
+
     .edit-box {
       border:#EAEAEA 2px solid;
       margin-bottom: 10px;
       overflow-y: scroll;
       padding-left: 5px;
+
     }
 
     .episode-editor-div {
-      height:500px;
-      width:85%;
+      display: inline-block;
+      vertical-align: middle;
+      height:100%;
+    }
+
+    .background-box {
+      padding: 4px;
+      display: inline-block;
+      height:100%;
+      background-color: #cefff5;
+      vertical-align: middle;
+      margin-bottom: 5px;
+    }
+
+    .background-div {
+      border-bottom: #D8D8D8 2px solid;
+    }
+
+    .background-top{
+      height:6%;
+      /*background-color: red;*/
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+
+    }
+
+    .background-search{
+      padding-top: 2px;
+      padding-bottom: 2px;
+      height:16%;
+      /*background-color:purple;*/
+    }
+
+    btn-group > button {
+      margin:0;
+      padding:0;
+      width: 50px;
+    }
+    .background-content{
+      height:71%;
+      /*background-color: blue;*/
+
+    }
+    .background-footer{
+      height:7%;
+      /*background-color: green;*/
     }
 
     .writers-postscript-div {
@@ -271,9 +324,39 @@
       <div class="row set_row">
         <div class="col-md-12 menu_title">내용</div>
       </div>
-      <div class="edit-box episode-editor-div" contenteditable="true">
-        episode content
+      <div class="col-md-12 edit-div">
+        <div class="col-md-10 edit-box episode-editor-div" contenteditable="true">
+          episode content
+        </div>
+        <div class="col-md-2 background-box">
+          <div class="background-div background-top">
+            &nbsp;&nbsp;&nbsp;소설 배경 설정
+            <span class="pull-right glyphicon glyphicon-resize-full"></span>
+          </div>
+          <div class="background-div background-search">
+
+            <div class="input-group">
+      				<div id="radioBtn" class="btn-group">
+      					<a class="case-btn btn btn-primary btn-sm notActive"    data-title="characters">인물</a>
+                <a class="case-btn btn btn-primary btn-sm notActive" data-title="items">사물</a>
+      					<a class="case-btn btn btn-primary btn-sm notActive" data-title="maps">장소</a>
+                <a class="case-btn btn btn-primary btn-sm notActive" data-title="timetables">사건</a>
+      				</div>
+    			  </div>
+            <div class="ui-widget">
+              <label for="tags"></label>
+              <input id="tags" class="form-control">
+            </div>
+          </div>
+          <div class="background-div background-content">
+
+          </div>
+          <div class="pull-down background-div background-footer">
+            asd
+          </div>
+        </div>
       </div>
+
       <div class="edit-box writers-postscript-div" contenteditable="true">
         writers postscript
       </div>
@@ -290,6 +373,96 @@
 
 <script>
   (function ($) {
+    var charactersSource = [
+      {value:"human1",data:"111"},
+      {value:"human2",data:"222"}
+    ];
+
+    var itemsSource = [
+      "things1",
+      "things2"
+    ];
+
+    var mapsSource = [
+      "place1",
+      "place2"
+    ];
+
+    var timetablesSource = [
+      "event1",
+      "event2"
+    ];
+
+    // 인물,사물,장소,사건 분류 버튼
+    $(".case-btn").on('click',function(){
+      if($(this).hasClass("active")){
+        $(this).removeClass("active");
+        $(this).addClass("notActive");
+      } else {
+        $(this).removeClass("notActive");
+        $(this).addClass("active");
+      }
+      setAutocomplete();
+    });
+
+    // characetrs, thing, place, event여부에 따른 자동완성
+    function setAutocomplete(){
+      var source = Array();
+      $("a.active").map(function(d){
+        // if($(this).data("title") == "characters")
+        //   source = source.concat(charactersSource)
+        // if($(this).data("title") == "items")
+        //   source = source.concat(itemsSource)
+        // if($(this).data("title") == "maps")
+        //   source = source.concat(mapsSource)
+        // if($(this).data("title") == "timetables")
+        //   source = source.concat(timetablesSource)
+        source = source.concat(getTags($(this).data("title")));
+      });
+      console.log(source);
+
+      $( "#tags" ).autocomplete({
+        source: source,
+        select: function (event,ui) {
+          setBackgroundContent(ui.item);
+          alert('You selected: ' + ui.item.value + ', ' + ui.item.kind + ', ' + ui.item.object_id + ', ' + ui.item.color);
+        }
+      }).data("ui-autocomplete")._renderItem = function (ul, item) {
+        var kind = "";
+        if(item.kind == "characters") kind = "인물";
+        else if(item.kind == "items") kind = "사물";
+        else if(item.kind == "maps")  kind = "지도";
+        else if(item.kind == "timetables") kind ="사건";
+        else kind = "미분류";
+
+         return $("<li></li>")
+             .data("item.autocomplete", item)
+             .append("<a class='col-md-12'>" + item.value+ "<div class='pull-right' style='background-color:"+item.color+"'>TC</div>" + "<div class='pull-right'>"+ kind + "</div>"  + "</a>")
+             .appendTo(ul);
+     };
+    }
+
+    // 서버로부터 characters, items, timetables, maps 대한 데이터를 불러옴
+    var sourceData = Array();
+    function setSourceData(data){ sourceData = data; return sourceData;};
+    function getTags(tagCase){
+      $.ajax({
+          type: "get",
+          async: false,
+          url: "/write_novel/get_tags",
+          data: {
+            "tagCase" : tagCase
+          }
+      }).done(function(data){
+        setSourceData(data);
+      });
+      return sourceData;
+    };
+
+    // tag에 정보에 따른 정보 출력
+    function setBackgroundContent(item){
+      $(".background-content")
+    }
     // 회차/공지 선택
     $('.set-notice-btn').on("click", function(){
       $(".set-notice-btn").removeClass("selected-notice");
