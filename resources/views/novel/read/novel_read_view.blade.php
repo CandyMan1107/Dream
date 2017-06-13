@@ -283,12 +283,12 @@
                     {{-- Novel Character-Set --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-1 text-center">
+                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseCharacter" aria-expanded="false" aria-controls="collapseCharacter">
                                 <a href="#">
                                     <h1><i class="fa fa-user" aria-hidden="true"></i></h1>
                                 </a>
                             </div>
-                            <div class="col-md-11 text-left">
+                            <div class="col-md-11 text-left collapse" id="collapseCharacter">
                                 {{-- CONTEXT --}}
                             </div>
                         </div>
@@ -296,12 +296,12 @@
                     {{-- Novel Objects --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-1 text-center">
+                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseObject" aria-expanded="false" aria-controls="collapseObject">
                                 <a href="#">
                                     <h1><i class="fa fa-shopping-cart" aria-hidden="true"></i></h1>
                                 </a>
                             </div>
-                            <div class="col-md-11 text-left">
+                            <div class="col-md-11 text-left collapse" id="collapseObject">
                                 {{-- CONTEXT --}}
                             </div>
                         </div>
@@ -309,12 +309,12 @@
                     {{-- Novel Character-Map --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-1 text-center">
+                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseCharMap" aria-expanded="false" aria-controls="collapseCharMap">
                                 <a href="#">
                                     <h1><i class="fa fa-users" aria-hidden="true"></i></h1>
                                 </a>
                             </div>
-                            <div class="col-md-11 text-left">
+                            <div class="col-md-11 text-left collapse" id="collapseCharMap">
                                 {{-- CONTEXT --}}
                             </div>
                         </div>
@@ -322,12 +322,12 @@
                     {{-- Novel Map --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-1 text-center">
+                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">
                                 <a href="#">
                                     <h1><i class="fa fa-map" aria-hidden="true"></i></h1>
                                 </a>
                             </div>
-                            <div class="col-md-11 text-left">
+                            <div class="col-md-11 text-left collapse" id="collapseMap">
                                 {{-- CONTEXT --}}
                             </div>
                         </div>
