@@ -121,4 +121,15 @@ class writeNovelController extends Controller
        return $tagInfo;
     }
 
+    // 소설 배경설정 정보 호출
+    public function callBackgroundInfo(Request $request){
+      $bgCase = $request->input('bgCase');
+      $bgId   = $request->input('bgId');
+      $idName = ($bgCase == "characters" ? "cha_id" : "id");
+
+      $bgInfo = DB::table($bgCase)->where($idName,"=",$bgId)->get();
+
+      return $bgInfo;
+    }
+
 }

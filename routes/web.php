@@ -85,6 +85,9 @@ Route::get('/write_novel/my_novel', "writeNovelController@myNovelView");
 // 회차 내용 작성
 Route::get('/write_novel/write_episode/{novelId}', "writeNovelController@writeNovelEpisodeView");
 
+// 소설 배경 정보 호출
+Route::get('/write_novel/call_background_info', "writeNovelController@callBackgroundInfo");
+
 // 태그 정보 호출
 Route::get('/write_novel/get_tags', "writeNovelController@getTags");
 

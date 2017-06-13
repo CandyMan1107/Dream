@@ -41,35 +41,6 @@
       padding-right: 10px;
     }
 
-    .check_circle {
-      vertical-align: middle;
-      width: 13px;
-      height: 13px;
-      background: #BDBDBD;
-      -moz-border-radius: 50px;
-      -webkit-border-radius: 50px;
-      border-radius: 50px;
-    }
-
-    .selected_period > img {
-      background: #00D8FF;
-    }
-    .novel_period_day_table {
-      display: inline-block;
-      border-collapse:separate;
-      border-spacing:1px;
-      vertical-align: middle;
-    }
-    .novel_period_day {
-      border:#BDBDBD 2px solid;
-      width:30px;
-      height:30px;
-      text-align:center;
-    }
-    .selected_day {
-      border:#00D8FF 2px solid;
-      color: #00D8FF;
-    }
 
     /*회색 #BDBDBD  파랑 #fdfdfd*/
     .set-notice-btn{
@@ -240,11 +211,76 @@
       padding:0;
       width: 50px;
     }
+    /* 배경설정 컨텐츠 */
     .background-content{
       height:71%;
       /*background-color: blue;*/
-
     }
+
+    .basic-info-div{
+      padding-top: 3px;
+      /*background-color: yellow;*/
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .basic-cha-img{
+      /*background-color: blue;*/
+      text-align: center;
+      padding-right: 10px;
+      min-height: 30%;
+    }
+    .basic-cha-img > img {
+    }
+    .basic-cha-info{
+      display:inline-block;
+      padding:0;
+      padding-left: 2px;
+      text-align: left;
+      /*background-color: green;*/
+      min-height: 30%;
+    }
+
+    .info-div{
+      padding-left: 0px;
+      padding-right: 0px;
+      height: 25%;
+    }
+
+    .info-header{
+      text-align: center;
+      font-weight: bold;
+    }
+    .info-content{
+      overflow-y: scroll;
+      padding : 1px;
+      background-color: white;
+      height: 70%;
+    }
+
+    .tag-info-div{
+
+      padding-left: 0px;
+      padding-right: 0px;
+      height: 18%;
+    }
+
+    .tag-info-header{
+      text-align: center;
+      font-weight: bold;
+    }
+    .tag-info-content{
+      padding : 1px;
+      height: 70%;
+    }
+    .tag-info-color{
+      padding:10px;
+      height:32px;
+      width:32px;
+      padding-left: 10px;
+      border: 2px solid #BDBDBD;
+    }
+
+    /* 배경설정 푸터 */
     .background-footer{
       height:7%;
       /*background-color: green;*/
@@ -269,10 +305,13 @@
       height: 60px;
       padding-top: 10px;
       margin: 0 auto;
-
     }
 
+
+
   </style>
+
+
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <div class="write_novel_set">
     <div class="container">
@@ -337,7 +376,7 @@
 
             <div class="input-group">
       				<div id="radioBtn" class="btn-group">
-      					<a class="case-btn btn btn-primary btn-sm notActive"    data-title="characters">인물</a>
+      					<a class="case-btn btn btn-primary btn-sm notActive"  data-title="characters">인물</a>
                 <a class="case-btn btn btn-primary btn-sm notActive" data-title="items">사물</a>
       					<a class="case-btn btn btn-primary btn-sm notActive" data-title="maps">장소</a>
                 <a class="case-btn btn btn-primary btn-sm notActive" data-title="timetables">사건</a>
@@ -349,6 +388,44 @@
             </div>
           </div>
           <div class="background-div background-content">
+
+            <!-- <div class="col-md-12 basic-info-div background-div">
+              <div class="col-md-6 basic-cha-img">
+                <img class="img-circle img-things-size" src="http://tveta.naver.net/libs/1153/1153234/a1eaa6891808026e29d9_20170613112309575.jpg" alt="">
+                <span>정재훈</span>
+              </div>
+              <div class="col-md-6 basic-cha-info">
+                <br>
+                <span>
+                이름 | 이름<br>
+                나이 | 나이<br>
+                성별 | 성별<br>
+                </span>
+              </div>
+            </div>
+
+            <div class="col-md-12 info-div background-div">
+              <div class="col-md-12 info-header">
+                주요 정보
+              </div>
+              <div class="col-md-12 info-content">
+                ㅁㄴㅇㅁㄴㅇㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻ
+              </div>
+            </div>
+
+            <div class="col-md-12 tag-info-div">
+              <div class="col-md-12 tag-info-header">
+                bluediv
+              </div>
+              <div class="col-md-9 tag-info-content">
+                <select class="form-control">
+                  <option style="background:blue;">Mustard</option>
+                  <option>Ketchup</option>
+                  <option>Relish</option>
+                </select>
+              </div>
+              <div class="col-md-3 tag-info-color"></div>
+            </div> -->
 
           </div>
           <div class="pull-down background-div background-footer">
@@ -373,25 +450,6 @@
 
 <script>
   (function ($) {
-    var charactersSource = [
-      {value:"human1",data:"111"},
-      {value:"human2",data:"222"}
-    ];
-
-    var itemsSource = [
-      "things1",
-      "things2"
-    ];
-
-    var mapsSource = [
-      "place1",
-      "place2"
-    ];
-
-    var timetablesSource = [
-      "event1",
-      "event2"
-    ];
 
     // 인물,사물,장소,사건 분류 버튼
     $(".case-btn").on('click',function(){
@@ -409,14 +467,6 @@
     function setAutocomplete(){
       var source = Array();
       $("a.active").map(function(d){
-        // if($(this).data("title") == "characters")
-        //   source = source.concat(charactersSource)
-        // if($(this).data("title") == "items")
-        //   source = source.concat(itemsSource)
-        // if($(this).data("title") == "maps")
-        //   source = source.concat(mapsSource)
-        // if($(this).data("title") == "timetables")
-        //   source = source.concat(timetablesSource)
         source = source.concat(getTags($(this).data("title")));
       });
       console.log(source);
@@ -459,9 +509,107 @@
       return sourceData;
     };
 
+    // soureData로 부터 케이스, 아이디에 해당하는 태그만 추출
+    function filterSourceData(tagCase, tagId){
+      var filter = sourceData;
+      filter = filter.filter(function(data){
+        return (data.kind == tagCase) && (data.object_id == tagId)
+      });
+      return filter;
+    }
+
     // tag에 정보에 따른 정보 출력
     function setBackgroundContent(item){
-      $(".background-content")
+      // 케이스별로 정보 출력 $(".background-content")
+      callBackgroundInfo(item.kind, item.object_id);
+
+      // 케이스 + 아이디로 정보 호출
+      function callBackgroundInfo(bgCase, bgId){
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_background_info",
+            async: false,
+            data: {
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              data = data[0];
+              console.log(data);
+              var div = $(".background-content");
+              // 캐릭터 정보 출력
+              if(bgCase == "characters"){
+                var appendEle = "";
+                var filterTag = filterSourceData("characters", bgId);
+                //appendEle += data.cha_id + data.name + data.info + data.age + data.gender + data.img_src;
+                appendEle += "<div class='col-md-12 basic-info-div background-div'>";
+                appendEle += "  <div class='col-md-6 basic-cha-img'>";
+                appendEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
+                appendEle += "    <span>" + data.name + "</span>";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-6 basic-cha-info'>";
+                appendEle += "    <br>";
+                appendEle += "    <span>";
+                appendEle += "    이름 | " + data.name + "<br>";
+                appendEle += "    나이 | " + data.age + "<br>";
+                appendEle += "    성별 | " + data.gender + "<br>";
+                appendEle += "    </span>";
+                appendEle += "  </div>";
+                appendEle += "</div>";
+
+                appendEle += "<div class='col-md-12 info-div background-div'>";
+                appendEle += "  <div class='col-md-12 info-header'>";
+                appendEle += "    주요 정보";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-12 info-content'>";
+                appendEle += data.info;
+                appendEle += "  </div>";
+                appendEle += "</div>";
+
+                appendEle += "<div class='col-md-12 tag-info-div'>";
+                appendEle += "  <div class='col-md-12 tag-info-header'>";
+                appendEle += "    태그 정보";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-9 tag-info-content'>";
+                appendEle += "    <select class='form-control tag-list-select'>";
+                filterTag.forEach(function(d){
+                  appendEle += "      <option data-kind='" + d.kind + "' data-id='" + d.object_id + "' data-color='" + d.color + "'>" + d.value + "</option>";
+                });
+                appendEle += "    </select>";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-3 tag-info-color'></div>";
+                appendEle += "</div>";
+              // 사물 정보 출력
+              }else if (bgCase == "items"){
+
+              // 사건 정보 출력
+              }else if (bgCase == "timetables"){
+
+              // 맵 정보 출력
+              }else if (bgCase == "maps"){
+
+              }else{
+                alert("미분류 에러로 정보 출력 불가");
+              }
+              div.empty();
+              div.append(appendEle);
+              setTagColor();
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+
+        function setTagColor(){
+          var color = $(".tag-list-select option:selected").attr("data-color");
+          $(".tag-info-color").css("background-color",color);
+
+          $(".tag-list-select").change(function(){
+            color = $(".tag-list-select option:selected").attr("data-color");
+            $(".tag-info-color").css("background-color",color);
+          });
+        }
+      }
     }
     // 회차/공지 선택
     $('.set-notice-btn').on("click", function(){
@@ -684,6 +832,7 @@
           }
       });
     }
+
 
   })(jQuery);
 
