@@ -28,6 +28,6 @@ class CreateNovelWritersTable extends Migration
      */
     public function down()
     {
-          Schema::dropIfExists('tags');
+          Schema::dropIfExists('novel_writers');
     }
 }
