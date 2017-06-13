@@ -11,7 +11,7 @@
                 <h4 class="text-left">
                     <span class="novel-info-text"><strong>오베라는 남자</strong></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
-                    <span class="novel-info-text">{{$data['id']}}화 {{$data['episode_title']}}</span>
+                    <span class="novel-info-text">{!! $data['id'] !!}화 {!! $data['episode_title'] !!}</span>
                 </h4>
             </div>
             <div class="col-md-4 text-right">
@@ -41,16 +41,11 @@
             <div class="row novel-viewer novel-viewer-book">
                 <div class="col-md-6 leftPage" name="bookPage">
                     <i class="material-icons arrowLeft" name="pageArrow">keyboard_arrow_left</i>
-                    사람들은 아버지를 난쟁이라고 불렀다. 사람들은 옳게 보았다. 
-                    아버지는 난쟁이였다. 불행하게도 사람들은 아버지를 보는 것 하나만 옳았다. 그 밖의 것들은 하나도 옳지 않았다. 
-                    나는 아버지, 어머니, 영호, 영희, 그리고 나를 포함한 다섯 식구의 모든 것을 걸고 그들이 옳지 않다는 것을 언제나 말할 수 있다. 나의 ‘모든 것’이라는 표현에는 ‘다섯 식구의 목숨’이 포함되어 있다. 
-                    천국에 사는 사람들은 지옥을 생각할 필요가 없다. 그러나 우리 다섯 식구는 지옥에 살면서 천국을 생각했다. 단 하루라도 천국을 생각해 보지 않은 날이 없다. 
-                    하루하루의 생활이 지겨웠기 때문이다. 우리의 생활은 전쟁과 같았다. 우리는 그 전쟁에서 날마다 지기만 했다. 
-                    그런데도 어머니는 모든 것을 잘 참았다. 그러나 그날 아침 일만은 참기 어려웠던 것 같다.
+                    {!! $data['episode'] !!}
                 </div>
                 <div class="col-md-6 rightPage" name="bookPage">
                     <i class="material-icons arrowRight" name="pageArrow">keyboard_arrow_right</i>
-                    사람들은 아버지를 난쟁이라고 불렀다. 사람들은 옳게 보았다.
+                    {!! $data['episode'] !!}
                 </div>
             </div>
         </div>
@@ -121,11 +116,7 @@
                     <tr>
                         <td>
                             <select class="form-control">
-                                <option>5화. 오베라는 남자(5)</option>
-                                <option>4화. 오베라는 남자(4)</option>
-                                <option>3화. 오베라는 남자(3)</option>
-                                <option>2화. 오베라는 남자(2)</option>
-                                <option selected="selected">1화. 오베라는 남자(1)</option>
+                                <option selected="selected">{!! $data['id'] !!}화. {!! $data['episode_title'] !!}</option>
                             </select>
                         </td>
                     </tr>
@@ -350,11 +341,11 @@
                 <div class="col-md-12">
                     <ul class="list-inline">
                         <li><h5><strong>글작가님의 한마디</strong></h5></li>
-                        <li><small>2017-04-23</small></li>
+                        <li><small>{!! $data['created_at'] !!}</small></li>
                     </ul>
                 </div>
                 <div class="col-md-12">
-                    <h5>바람이 쌩쌩 부네요. 독자님들 감기 조심하세요~</h5>
+                    <h5>{!! $data['writers_postscript'] !!}</h5>
                 </div>
                 <div id="default-padding-small" class="col-md-12"></div>
                 <div class="col-md-12 text-right">
@@ -432,7 +423,7 @@
                             </div>
                             <div id="default-padding-small" class="col-md-12"></div>
                             <div class="col-md-12">
-                                <span><small>5화</small></span>
+                                <span><small>{!! $data['id'] !!}화</small></span>
                                 &nbsp;
                                 <span>엄청 재밌어요! 글작가님 글은 항상 재미있었지만 오베는 역대급!</span>
                             </div>

@@ -29,4 +29,6 @@ class Novel extends Model
 
         return $novelData;
     }
+
+    
 }
