@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-md-8 text-left novel-info-upper-text">
                         <h3><strong>
-                            {{$data['title']}}
+                            {!! $data['title'] !!}
                         </strong></h3>
                         <h5><small>글</small>&nbsp;글작가</h5>
                     </div>
@@ -105,7 +105,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-left">
-                        <h3>소설회차 <small>(5)</small></h3>
+                        <h3>소설회차 <small>(1)</small></h3>
                     </div>
                     <div class="col-md-6 text-right sort">
                         <h5>
