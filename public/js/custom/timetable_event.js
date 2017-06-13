@@ -18,21 +18,6 @@ function timetableEvent(data){
                 $('#other').val(data[event_id]['other']);
                 $('#submit_history').text("수정");
                 $('#submit_delete').show();
-
-                // $.ajax({
-                //     type: "GET",
-                //     url : "tagsAdd/get",
-                //     data : { event_id : event_id },
-                    
-                //     success:function(data){
-                //         // alert("data success:" + data );
-                //     },
-                //     error:function(){
-                //         // alert("ㅅㅂ");
-                //     }
-                // });
         });
     });
 }
-
-

@@ -25,7 +25,6 @@ class TagsAddController extends Controller
             'tag_data' => $tag_data,
             'page' => $page, 
             'data' => $data);
-        echo $datas['page'];
         return view('background.add_tag')->with("datas",$datas);
     }
 
@@ -66,6 +65,15 @@ class TagsAddController extends Controller
         // echo ($tag_data['page']);
         // echo ($tag_data['tag_color']);
         // echo ($tag_data['object_id']);
+        if ($tag_data['page'] == "items"){
+            return redirect(route('things.index')); 
+        }
+        else if($tag_data['page'] == "characters"){
+            return redirect(route('character.index')); 
+        }
+        else if($tag_data['page'] == "timetables"){
+            return redirect(route('timetable.index'));
+        }
     }
 
     /**

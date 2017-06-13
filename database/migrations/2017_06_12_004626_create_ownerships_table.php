@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNovelWritersTable extends Migration
+class CreateOwnershipsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateNovelWritersTable extends Migration
      */
     public function up()
     {
-      // 회원별 보유 커버 이미지 리스트 테이블
-      Schema::create('novel_writers', function (Blueprint $table) {
-        $table->increments('id');
-        $table->integer('user_id');
-        $table->integer('novel_id');
-      });
+        Schema::create('ownerships', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('character_id');
+            $table->string('item_id');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateNovelWritersTable extends Migration
      */
     public function down()
     {
-          Schema::dropIfExists('novel_writers');
+        Schema::dropIfExists('ownerships');
     }
 }

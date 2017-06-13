@@ -36,6 +36,8 @@ Route::get('/background/map2', function(){
 
 Route::resource('/background/things', 'BackgroundItemsController');
 
+Route::post('/background/character/ownership', "BackgroundCharactersController@ownership");
+
 Route::resource('/background/character', 'BackgroundCharactersController');
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');

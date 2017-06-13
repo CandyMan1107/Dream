@@ -130,7 +130,6 @@
 							<button type="submit" class="btn btn-default">검색</button>
 						</div>
 					</form>
-					{{-- add_tag.blade.php 구현하고, 컨트롤러로 div안에 불러오는 형식으로 변경 할 것. --}}
 					 <div class="row">
 					 {{-- $page에 태그 값이 참조할 테이블의 이름을 넣어준다. --}}
 					 	 <?php 
