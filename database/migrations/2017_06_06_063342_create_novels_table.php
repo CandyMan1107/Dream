@@ -17,8 +17,8 @@ class CreateNovelsTable extends Migration
       Schema::create('novels', function (Blueprint $table) {
           $table->increments('id');
           $table->string('title');
-          $table->string('intro');
-          $table->string('summary_intro');
+          $table->mediumText('intro');
+          $table->mediumText('summary_intro');
           $table->string('cover_img_src');
           $table->string('publish_case');
           $table->string('period')->nullable();

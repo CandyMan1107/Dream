@@ -124,6 +124,12 @@
     </div>
   </div>
 
+{{-- @php
+use App\Http\Controllers\NovelEpisodeController;
+echo NovelEpisodeController::show($novelId, $d.id);
+@endphp --}}
+
+
 	<script>
 	$(function() {
 		getNovelInfo(1);
@@ -194,7 +200,7 @@
 				$(".write-episode-btn").off().on("click",function(){
 					var novelId = $(this).attr("data-novel-id");
 					document.location.href="/write_novel/write_episode/" + novelId;
-					
+
 				})
 			})
 		}
@@ -209,7 +215,7 @@
 					},
 					success: function (data) {
 						console.log(data);// 회차 테이블
-						
+
 						var episodeCollapse = "";
 						episodeCollapse += "<div class='panel panel-default'>";
 						episodeCollapse += "	<div id='collapse" + novelId + "' class='panel-collapse collapse'>";
@@ -245,7 +251,7 @@
 						alert("에피소드 호출 오류발생");
 					}
 			});
-			
+
 		}
 		// 소설 목록 페이지네이션
 		function setPagination(curPage, lastPage){

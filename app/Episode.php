@@ -32,4 +32,11 @@ class Episode extends Model
 
         return $episodeData;
     }
+
+    // TABLE : novels SELECT belong_to_novel, episode_title, created_at
+    public function selectWithNovel() {
+        $episodeData = DB::table("novel_episodes")->select("belong_to_novel", "episode_title", "created_at")->get();
+
+        return $episodeData;
+    }
 }

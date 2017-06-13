@@ -83,6 +83,9 @@ Route::get('/write_novel/my_novel', "writeNovelController@myNovelView");
 // 회차 내용 작성
 Route::get('/write_novel/write_episode/{novelId}', "writeNovelController@writeNovelEpisodeView");
 
+// 태그 정보 호출
+Route::get('/write_novel/get_tags', "writeNovelController@getTags");
+
 // 이미지 등록부
 // 커버 이미지 등록
 Route::post('/write_novel/addCover', "UpImgController@uploadImg");

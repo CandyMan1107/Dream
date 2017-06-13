@@ -113,4 +113,12 @@ class writeNovelController extends Controller
       return view('write_novel/write_episode_view')->with("tasks",$tasks);
     }
 
+    // 태그 정보 호출
+    // 해당 소설의 아이디에 대한 회차 정보 호출
+    public function getTags(Request $request){
+       $tagCase = $request->input('tagCase');
+       $tagInfo = DB::table("tags")->select("kind","object_id","color","tag_name as value")->where("kind", "=",$tagCase)->get();
+       return $tagInfo;
+    }
+
 }
