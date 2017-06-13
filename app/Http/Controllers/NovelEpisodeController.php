@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use App\Episode;
 
 class NovelEpisodeController extends Controller
@@ -15,7 +16,8 @@ class NovelEpisodeController extends Controller
     public function index()
     {
         //
-        
+        $data = DB::table("novels")->dataSelectAll();
+        return view('novel.novel_info')->with("data", $data);
     }
 
     /**
@@ -26,7 +28,6 @@ class NovelEpisodeController extends Controller
     public function create()
     {
         //
-        return view('novel.read.novel_read_view');
     }
 
     /**
@@ -38,14 +39,14 @@ class NovelEpisodeController extends Controller
     public function store(Request $request)
     {
         //
-        $table = $request->all();
+        // $table = $request->all();
 
-        $episodeTable = new Episode();
+        // $episodeTable = new Episode();
 
-        $episodeTable->insert_table($table);
-        // var_dump($table);
+        // $episodeTable->insert_table($table);
+        // // var_dump($table);
 
-        return redirect(route('novel_read_view.index'));
+        // return redirect(route('novel_read_view.index'));
     }
 
     /**
@@ -57,7 +58,7 @@ class NovelEpisodeController extends Controller
     public static function show($id)
     {
         //
-        $string = explode(":", $id);
+        $string = explode("&", $id);
         // var_dump($string);
 
         $episodeTable = new Episode();
@@ -65,7 +66,8 @@ class NovelEpisodeController extends Controller
 
         // var_dump($episodeData);
 
-        $data = array(array());
+        // $data = array(array());
+        $data[] = [];
         $i = 0;     
         $num = 0;
 

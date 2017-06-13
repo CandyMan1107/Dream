@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="default-padding"></div>
-
     {{-- novel-info-1 START --}}
         <div id="novel-info-1" class="section-padding">
             {{-- container class START --}}
@@ -82,7 +81,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <a href="/novel/read/novel_read_view"><button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button></a>
+                                <a href="/novel/read/novel_read_view/{id}"><button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button></a>
                             </div>
                             <div class="col-md-4">
                                 <button class="btn btn-default btn-block novel-background-read-Btn">소설 배경 설정 보기</button>

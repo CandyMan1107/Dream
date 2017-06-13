@@ -124,11 +124,6 @@
     </div>
   </div>
 
-{{-- @php
-use App\Http\Controllers\NovelEpisodeController;
-echo NovelEpisodeController::show($novelId, $d.id); 
-@endphp --}}
-
 	<script>
 	$(function() {
 		getNovelInfo(1);
@@ -232,7 +227,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 							episodeCollapse += "			<div class='col-md-12 list-group-item'>";
 							episodeCollapse += "				<div class='col-md-1'>" + (d.is_notice ? "공지" : "회차") + "</div>";
 							episodeCollapse += "				<div class='col-md-1'>" + (d.is_charge ? "유료" : "무료") + "</div>";
-							episodeCollapse += "				<a href='/novel/read/novel_read_view/" + novelId+":"+d.id + "'><div class='col-md-6'>" + (data.indexOf(d)+1) + "회. " +d.episode_title + "</div></a>";
+							episodeCollapse += "				<a href='/novel/read/novel_read_view/" + novelId+"&"+d.id + "'><div class='col-md-6'>" + (data.indexOf(d)+1) + "회. " +d.episode_title + "</div></a>";
 							episodeCollapse += "				<div class='col-md-2'>" + d.created_at + "</div>";
 							episodeCollapse += "				<div class='col-md-2'>" + (d.updated_at != null ? d.update_at : "0000-00-00") + "</div>";
 							episodeCollapse += "			</div>";

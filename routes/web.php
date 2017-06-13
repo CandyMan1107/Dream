@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+// Route::get('/', "MainController@index");
 
 Route::get('/lib', function () {
     return view('load');
@@ -41,9 +42,10 @@ Route::resource('/background/historyTable', 'BackgroundHistoryTablesController')
 
 Route::resource('/background', 'BackgroundController');
 
-Route::get('/novel/novel_info', function(){
-    return view('novel/novel_info');
-});
+// Route::get('/novel/novel_info', function(){
+//     return view('novel/novel_info');
+// });
+Route::resource('novel/novel_info', 'NovelEpisodeController');
 
 Route::get('/novel/today_novel_by_day', function(){
     return view('novel/today_novel_by_day');
@@ -52,7 +54,6 @@ Route::get('/novel/today_novel_by_day', function(){
 // Route::get('/novel/read/novel_read_view', function(){
 //     return view('novel/read/novel_read_view');
 // });
-// Route::get('/novel/read/novel_read_view/{novel_id}/{episode_id}', "NovelEpisodeController@show");
 Route::resource('/novel/read/novel_read_view', 'NovelEpisodeController');
 
 Route::get('/background/share', function(){
