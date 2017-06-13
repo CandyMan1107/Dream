@@ -54,11 +54,17 @@
 				</tr>
 			</table>
 		</div>
+		
+		<!--업로드 된 이미지 띄우는 영역 -->
+		<div id="img_cell" class="img_cell">
+		<br>
+		<br>
+			<img src="/img/background/mapImg/201706135915057330_198233723961407_7595485728369278976_n.jpg" width="50" height="50">
+			업로드 된 이미지
+		</div>
 
 		<div>
 			<p>
-			<br>
-			<br>
 			<form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="">
 				<label class="img_upload_label">이미지 업로드
 				<input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
@@ -106,7 +112,8 @@
 			height: 30px;
 			border: 1px solid black;
 			pointer-events: all;
-			background-color: #FFFFFF;
+			/*background-color: #FFFFFF;*/
+			background-color: green;
 		}
 
 		#ex4 {
@@ -144,11 +151,11 @@
 		}
 
 		path.fill.ex1{
-			fill: black;
+			fill: #002E40;
 		}
 
 		path.fill.ex2{
-			fill: blue;
+			fill: #2A5769;
 		}
 
 		path.fill.ex3{
@@ -156,11 +163,11 @@
 		}
 
 		path.fill.ex4{
-			fill: pink;
+			fill: #FABD4A;
 		}
 
 		path.fill.ex5{
-			fill: yellow;
+			fill: #FA9600;
 		}
 
 		.mesh {
