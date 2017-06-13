@@ -11,8 +11,6 @@ function character_event(data){
             $('#refer_info').val(data[event_id]['refer_info']);
             $('#age').val(data[event_id]['age']);
             $('#gender').val(data[event_id]['gender']);
-
-
         });
     });
 }
