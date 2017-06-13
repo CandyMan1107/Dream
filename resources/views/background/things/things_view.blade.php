@@ -13,7 +13,7 @@
 				@foreach ($data as $item)
 					<?php $img_src = "/img/background/itemImg/".$item['img_src']; ?>
 					
-					<img src="{{$img_src}}" alt="item image" class="img-circle img-things-size item_list" id="{{$item['id']}}" style="margin : 17px">
+					<img src="{{$img_src}}" alt="item image" class="img-circle img-things-size item_list event_list" id="{{$item['id']}}" style="margin : 17px">
 				@endforeach
 			</div>
 		</div>
@@ -77,28 +77,14 @@
 				</div>
 			</form>
 			<div class="row">
-				<h3>태그 등록</h3>
-				<div class="panel panel-warning">
-					<div class="panel-heading">
-						<h3 class="panel-title">태그 이름</h3>
-					</div>
-					<div class="panel-body">
-						<input type="text" class="form-control" placeholder="Text input">
-					</div>
-				</div>
-
-				<div class="panel panel-warning">
-					<div class="panel-heading">
-						<h3 class="panel-title">태그 내용</h3>
-					</div>
-					<div class="panel-body">
-						<textarea class="form-control" rows="3"></textarea>
-					</div>
-				</div>
-				<button type="submit" class="btn btn-default">등록</button>
+				{{-- $page에 태그 값이 참조할 테이블의 이름을 넣어준다. --}}
+						<?php 
+						$page = "items";
+						use App\Http\Controllers\TagsAddController;
+						echo TagsAddController::view_return($page,$data);
+						?>
 			</div>
 		</div>
-
 	{{-- 태그 div.row 닫는 태그 --}}
 	</div>
 @endsection

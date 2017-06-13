@@ -28,4 +28,10 @@ class Item extends Model
 
         return $dataSet;
     }
+
+    public function itemListBringAll(){
+        $dataSet = DB::table('items')->select('id','name','img_src')->get();
+
+        return $dataSet;
+    }
 }
