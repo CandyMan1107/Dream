@@ -10,13 +10,13 @@
 		<script>item_event( <?=json_encode($data)?> )</script>
 		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-image:url('/img/cork.jpg')" >
 			<div class="row">
-				if($data[0]){
+				@if($data[0])
 					@foreach ($data as $item)
 					<?php $img_src = "/img/background/itemImg/".$item['img_src']; ?>
 					
 					<img src="{{$img_src}}" alt="item image" class="img-circle img-things-size item_list event_list" id="{{$item['id']}}" style="margin : 17px">
 					@endforeach
-				}
+				@endif
 			</div>
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 height-max-set" >
