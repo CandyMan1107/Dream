@@ -30,9 +30,7 @@ Route::get('/background/map', function(){
   return view('background/map/map_view');
 });
 
-Route::get('/background/map2', function(){
-  return view('background/map/map_view2');
-});
+Route::post('/background/addMapImg', "MapController@MapImgStore");
 
 Route::resource('/background/things', 'BackgroundItemsController');
 
