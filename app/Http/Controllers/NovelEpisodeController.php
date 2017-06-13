@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use App\Novel;
 use App\Episode;
 
 class NovelEpisodeController extends Controller
@@ -15,7 +17,42 @@ class NovelEpisodeController extends Controller
     public function index()
     {
         //
+        $novelData = DB::table("novels")->get();
+        $episodeData = DB::table("novel_episodes")->select("belong_to_novel")->get();
         
+        $eData;
+        $data[] = [];
+        $i = 0;     
+        $num = 0;
+
+        // var_dump($episodeData);
+
+        foreach($episodeData as $episodes) {
+            $eData = $episodes->belong_to_novel;
+        }
+
+        foreach($novelData as $datas) {
+            $data[$i]['id'] = $datas->id;
+            $data[$i]['title'] = $datas->title;
+            $data[$i]['intro'] = $datas->intro;
+            $data[$i]['summary_intro'] = $datas->summary_intro;
+            $data[$i]['cover_img_src'] = $datas->cover_img_src;
+            $data[$i]['publish_case'] = $datas->publish_case;
+            $data[$i]['period'] = $datas->period;
+            $data[$i]['genre'] = $datas->genre;
+
+            if ($eData == $data[$i]['id']) {
+                $num = $i;
+
+                break;
+            }
+
+            $i++;
+        }
+
+        // echo ($data[0]['id']);
+
+        return view('novel.novel_info')->with("data", $data[$num]);
     }
 
     /**
@@ -26,7 +63,6 @@ class NovelEpisodeController extends Controller
     public function create()
     {
         //
-        return view('novel.read.novel_read_view');
     }
 
     /**
@@ -38,14 +74,14 @@ class NovelEpisodeController extends Controller
     public function store(Request $request)
     {
         //
-        $table = $request->all();
+        // $table = $request->all();
 
-        $episodeTable = new Episode();
+        // $episodeTable = new Episode();
 
-        $episodeTable->insert_table($table);
-        // var_dump($table);
+        // $episodeTable->insert_table($table);
+        // // var_dump($table);
 
-        return redirect(route('novel_read_view.index'));
+        // return redirect(route('novel_read_view.index'));
     }
 
     /**
@@ -57,7 +93,7 @@ class NovelEpisodeController extends Controller
     public static function show($id)
     {
         //
-        $string = explode(":", $id);
+        $string = explode("&", $id);
         // var_dump($string);
 
         $episodeTable = new Episode();
@@ -65,7 +101,8 @@ class NovelEpisodeController extends Controller
 
         // var_dump($episodeData);
 
-        $data = array(array());
+        // $data = array(array());
+        $data[] = [];
         $i = 0;     
         $num = 0;
 

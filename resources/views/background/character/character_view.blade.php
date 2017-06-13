@@ -4,24 +4,27 @@
 
 @include('background.tag')
 
-
 @section('content')
 		<script type="text/javascript" src="/js/custom/character_event.js"></script>
 		<script>character_event( <?=json_encode($data)?> )</script>
 		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-color : #e8d6b3" >
 			<div class="row">
-				@foreach ($data as $character)
+				@if($data[0])
+					@foreach ($data as $character)
 					<?php $img_src = "/img/background/characterImg/".$character['img_src']; ?>
 					
-					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list" id="{{$character['id']}}" style="margin : 17px">
-				@endforeach
+					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list event_list" id="{{$character['id']}}" style="margin : 17px">
+					@endforeach
+				@endif
 			</div>
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 height-max-set" >
 			<form class="form-horizontal" id="character" name="character" action="{{ route('character.store') }}" method="POST" enctype="multipart/form-data">
 			{!! csrf_field() !!}
 			{{-- <input type="hidden" name="page" value="{{$datas['page']}}"> --}}
-			<input type="hidden" name="page" value="character">
+			<input type="hidden" name="page" id="" value="character">
+				{{-- 캐릭터 id를 저장하기 위한 공간 --}}
+				<div id="character_id" value="charcter_value"></div>
 				<h3 id="name">캐릭터 등록</h3>
 				{{-- 캐릭터 이름 등록 --}}
 				<div class="form-group form-group-lg">
@@ -71,7 +74,20 @@
 				<div class="form-group form-group-lg">
 					<label class="col-sm-4 control-label" for="formGroupInputLarge">소유 사물</label>
 				</div>
-				<img src="/img/fea1.jpg" alt="..." class="img-circle img-things-size">
+				<div>
+					@php 
+						use App\Http\Controllers\BackgroundCharactersController;
+						echo BackgroundCharactersController::ownership_modal();
+					@endphp
+					<div data-toggle="modal" data-target="#abc">
+						<p class="remote">
+							<a class="setView" href="#">
+								<i class="fa fa-plus-square-o fa-3x"></i>
+							</a>
+						</p>
+					</div>
+				</div>
+				
 				
 				<button type="submit" class="btn btn-default">등록</button>
 			</form >
@@ -94,28 +110,13 @@
 				</div>
 			</form>
 			<div class="row">
-				<h3>태그 등록</h3>
-				<div class="panel panel-warning">
-					<div class="panel-heading">
-						<h3 class="panel-title">태그 이름</h3>
-					</div>
-					<div class="panel-body">
-						<input type="text" class="form-control" placeholder="Text input">
-					</div>
-				</div>
-
-				<div class="panel panel-warning">
-					<div class="panel-heading">
-						<h3 class="panel-title">태그 내용</h3>
-					</div>
-					<div class="panel-body">
-						<textarea class="form-control" rows="3"></textarea>
-					</div>
-				</div>
-				<button type="submit" class="btn btn-default">등록</button>
+				{{-- $page에 태그 값이 참조할 테이블의 이름을 넣어준다. --}}
+					@php 
+						$page = "characters";
+						use App\Http\Controllers\TagsAddController;
+						echo TagsAddController::view_return($page,$data);
+					@endphp
 			</div>
 		</div>
-
-	{{-- 태그 div.row 닫는 태그 --}}
 	</div>
 @endsection

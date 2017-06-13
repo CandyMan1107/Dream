@@ -15,7 +15,7 @@
 								<h2 class="small">왠만하면 마주치고 싶지 않은 까칠한 이웃 남자,<br/>오베가 나타났다!</h2>
 								<br/>
 								<p class="big">오베라는 남자</p>
-								<a href="/novel/novel_info" class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
+								<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
 							</div>
 						</a>
 					</div>
@@ -23,9 +23,9 @@
 						<a href="/novel/novel_info">
 							<div class="jumbotron">
 								<h3 class="novel">소설</h3>
-								<h2 class="small">왠만하면 마주치고 싶지 않은 까칠한 이웃 남자,<br/>오베가 나타났다!</h2>
+								<h2 class="small">이제까지 아무도 밝히지 못한 6단계 잠의 비밀</h2>
 								<br/>
-								<p class="big">오베라는 남자</p>
+								<p class="big">잠.</p>
 								<a href="/novel/novel_info" class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
 							</div>
 						</a>
@@ -33,10 +33,10 @@
 					<div class="col-md-12">
 						<a href="/novel/novel_info">
 							<div class="jumbotron">
-								<h3 class="novel">소설</h3>
-								<h2 class="small">왠만하면 마주치고 싶지 않은 까칠한 이웃 남자,<br/>오베가 나타났다!</h2>
+								<h3 class="novel">호러</h3>
+								<h2 class="small">스스로 막다른 길로 걸어 들어간 한 남자의 이야기</h2>
 								<br/>
-								<p class="big">오베라는 남자</p>
+								<p class="big">데드 하트</p>
 								<a href="/novel/novel_info" class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
 							</div>
 						</a>
@@ -69,7 +69,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="service-box">
-						<div class="service-icon"><img src="img/A_MAN_CALLED_OVE.jpg" /></div>
+						<div class="service-icon"><img src="img/OVE.jpg" /></div>
 						<div class="service-text">
 							<h5>소설</h5>
 							<h3>오베라는 남자</h3>
@@ -80,23 +80,23 @@
 				</div>
 				<div class="col-md-4">
 					<div class="service-box">
-						<div class="service-icon"><img src="img/A_MAN_CALLED_OVE.jpg" /></div>
+						<div class="service-icon"><img src="img/SLEEP.jpg" /></div>
 						<div class="service-text">
 							<h5>소설</h5>
-							<h3>오베라는 남자</h3>
-							<p> <i class="fa fa-pencil"></i> 글반죽</p>
-							<p> <b>왠만하면 마주치고 싶지 않은 까칠한 이웃 남자, 오베가 나타났다!</b><br/> 오베와 이웃 이야기</p>
+							<h3>잠.</h3>
+							<p> <i class="fa fa-pencil"></i> 베르베르</p>
+							<p> <b>이제까지 아무도 밝히지 못한 6단계 잠의 비밀, 미지의 잠</b><br/> 미지의 이야기</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="service-box">
-						<div class="service-icon"><img src="img/A_MAN_CALLED_OVE.jpg" /></div>
+						<div class="service-icon"><img src="img/DEAD.jpg" /></div>
 						<div class="service-text">
-							<h5>소설</h5>
-							<h3>오베라는 남자</h3>
-							<p> <i class="fa fa-pencil"></i> 글반죽</p>
-							<p> <b>왠만하면 마주치고 싶지 않은 까칠한 이웃 남자, 오베가 나타났다!</b><br/> 오베와 이웃 이야기</p>
+							<h5>호러</h5>
+							<h3>데드 하트</h3>
+							<p> <i class="fa fa-pencil"></i> 데네디</p>
+							<p> <b>스스로 막다른 길로 걸어 들어간 한 남자의 이야기에서 살아남아라</b><br/> 강력한 삶의 에너지</p>
 						</div>
 					</div>
 				</div>
@@ -117,26 +117,26 @@
 				<div class="port-sec">
 					<div class="col-md-12 fil-btn text-center">
 							<div class="filter wrk-title active" data-filter="all">전체</div>
-							<div class="filter wrk-title" data-filter=".category-1">판타지</div>
-							<div class="filter wrk-title" data-filter=".category-2">로맨스</div>
-							<div class="filter wrk-title lst-cld" data-filter=".category-3">소설</div>
+							<div class="filter wrk-title" data-filter=".category-1">로맨스</div>
+							<div class="filter wrk-title" data-filter=".category-2">판타지</div>
+							<div class="filter wrk-title lst-cld" data-filter=".category-3">호러</div>
 					</div>
 					<div id="Container">
-								<div class="filimg mix category-1 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="2">
-									<img src="img/fea1.jpg" class="img-responsive">
+								<div class="filimg mix category-1 col-md-4 col-sm-4 col-xs-12" data-myorder="2">
+									<img src="img/OVE.jpg" class="img-responsive">
 								</div>
 								<div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="4">
-									<img src="img/fea2.jpg" class="img-responsive">
+									<img src="img/SEA.jpg" class="img-responsive">
 								</div>
-								<div class="filimg mix category-1 col-md-4 col-sm-4 col-xs-12" data-myorder="1">
-									<img src="img/fea3.jpg" class="img-responsive">								</div>
+								<div class="filimg mix category-1 category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="1">
+									<img src="img/SLEEP.jpg" class="img-responsive">								</div>
 								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
 									<img src="img/fea4.jpg" class="img-responsive">								</div>
 								<div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
 									<img src="img/fea5.jpg" class="img-responsive">
 								</div>
 								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
-									<img src="img/fea6.jpg" class="img-responsive">
+									<img src="img/DEAD.jpg" class="img-responsive">
 								</div>
 					</div>
 				</div>
@@ -151,79 +151,58 @@
 			<div class="row">
 				<div class="page-title text-center">
 					<h1>2017 공모전</h1>
-					<p>누구도 예상치 못한 공모전 개최! <br>작가의 방이 작가님들과 함께합니다. </p>
+					<p>누구나 참가 가능한 공모전 개최! <br>작가의 방이 작가님들과 함께합니다. </p>
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
 				<div class="autoplay">
 					<div class="col-md-6">
 						<div class="team-info">
 							<div class="img-sec">
-								<img src="img/A_MAN_CALLED_OVE.jpg" class="img-responsive">
+								<img src="img/OVE.jpg" class="img-responsive">
 							</div>
 							<div class="fig-caption">
 								<h3>오베라는 남자</h3>
 								<p class="marb-20">작가 글반죽</p>
-								<p>Follow me:</p>
+								{{-- <p>Follow me:</p>
 								<ul class="team-social">
 									<li class="bgblue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
 								    <li class="bgred"><a href="#"><i class="fa fa-google-plus"></i></a></li>
 								    <li class="bgblue-light"><a href="#"><i class="fa fa-twitter"></i></a></li>
 								    <li class="bgblue-dark"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								</ul>
+								</ul> --}}
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="team-info">
 							<div class="img-sec">
-								<img src="img/A_MAN_CALLED_OVE.jpg" class="img-responsive">
+								<img src="img/SLEEP.jpg" class="img-responsive">
 							</div>
 							<div class="fig-caption">
-								<h3>오베라는 남자</h3>
-								<p class="marb-20">작가 글반죽</p>
-								<p>Follow me:</p>
-								<ul class="team-social">
-									<li class="blue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
-								    <li class="red"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								    <li class="blue-light"><a href="#"><i class="fa fa-twitter"></i></a></li>
-								    <li class="blue-dark"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								</ul>
+								<h3>잠.</h3>
+								<p class="marb-20">작가 베르베르</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="team-info">
 							<div class="img-sec">
-								<img src="img/A_MAN_CALLED_OVE.jpg" class="img-responsive">
+								<img src="img/DEAD.jpg" class="img-responsive">
 							</div>
 							<div class="fig-caption">
-								<h3>오베라는 남자</h3>
-								<p class="marb-20">작가 글반죽</p>
-								<p>Follow me:</p>
-								<ul class="team-social">
-									<li class="blue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
-								    <li class="red"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								    <li class="blue-light"><a href="#"><i class="fa fa-twitter"></i></a></li>
-								    <li class="blue-dark"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								</ul>
+								<h3>데드 하트</h3>
+								<p class="marb-20">작가 데네디</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="team-info">
 							<div class="img-sec">
-								<img src="img/A_MAN_CALLED_OVE.jpg" class="img-responsive">
+								<img src="img/SEA.jpg" class="img-responsive">
 							</div>
 							<div class="fig-caption">
-								<h3>오베라는 남자</h3>
-								<p class="marb-20">작가 글반죽</p>
-								<p>Follow me:</p>
-								<ul class="team-social">
-									<li class="blue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
-								    <li class="red"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								    <li class="blue-light"><a href="#"><i class="fa fa-twitter"></i></a></li>
-								    <li class="blue-dark"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								</ul>
+								<h3>바다가 보이는 이발소</h3>
+								<p class="marb-20">작가 오오</p>
 							</div>
 						</div>
 					</div>
@@ -254,7 +233,7 @@
 					<p>작가의 안식처, <br>작가의 방 </p>
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
-                <div id="sendmessage">Your message has been sent. Thank you!</div>
+                {{-- <div id="sendmessage">Your message has been sent. Thank you!</div>
                 <div id="errormessage"></div>
 
 				<div class="form-sec">
@@ -278,7 +257,7 @@
                             <button class="button-medium" id="contact-submit" type="submit" name="contact">Submit Now</button>
                         </div>
                     </form>
-                </div>
+                </div> --}}
 			</div>
 		</div>
 	</div>

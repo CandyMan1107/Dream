@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use App\Character;
+use App\Item;
+use App\Ownership;
 
 class BackgroundCharactersController extends Controller
 {
@@ -43,6 +45,25 @@ class BackgroundCharactersController extends Controller
     public function create()
     {
         //
+    }
+
+    public function ownership(Request $request){
+        $ownership = new Ownership();
+        $data = $request->all();
+
+        $character_id = $data['character_id'];
+
+        $item_list = "";
+        $i = 0;
+        for($i = 0 ; $i < count($data['item_id']) ; $i++){
+            if( $i == 0 ){
+                $item_list = $data['item_id'][$i];
+            }
+            else {
+                $item_list = $item_list."+".$data['item_id'][$i];
+            }
+        }
+        $ownership->insert_ownership($character_id, $item_list);
     }
 
     /**
@@ -89,7 +110,7 @@ class BackgroundCharactersController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -126,30 +147,23 @@ class BackgroundCharactersController extends Controller
         //
     }
 
-    public function showUploadFile(Request $request) {
-    //   $file = $request->file('image') ;
-      $file = Input::file('image');
-      //Display File Name
-      echo 'File Name: '.$file->getClientOriginalName() ;
-      echo '<br>';
-   
-      //Display File Extension
-      echo 'File Extension: '.$file->getClientOriginalExtension() ;
-      echo '<br>';
-   
-      //Display File Real Path
-      echo 'File Real Path: '.$file->getRealPath() ;
-      echo '<br>';
-   
-      //Display File Size
-      echo 'File Size: '.$file->getSize() ;
-      echo '<br>';
-   
-      //Display File Mime Type
-      echo 'File Mime Type: '.$file->getMimeType() ;
-   
-      //Move Uploaded File
-      $destinationPath = 'uploads';
-      $file->move($destinationPath,$file->getClientOriginalName() );
+   public static function ownership_modal(){
+       return view('background.character.ownership');
+   }
+
+   public static function show_item(){
+        $item = new Item();
+
+        $item_list = $item->itemListBringAll();
+        $list = array(array());
+        $i = 0;
+        foreach($item_list as $lists){
+            $list[$i]["id"] = $lists->id;
+            $list[$i]["name"] = $lists->name;
+            $list[$i]["img_src"] = $lists->img_src;    
+            $i++;
+        }
+
+        return $list; 
    }
 }

@@ -7,6 +7,11 @@ $(document).ready(function () {
     $("div[name=bookMode]").hide();
     $("i[name=pageArrow]").hide();
 
+    $("div[name=webMode]").css("font-size", 14);
+    $("div[name=webMode]").css("font-family", "Nanum Gothic");
+    $("div[name=webMode]").css("line-height", "170%");
+    $("div").filter(".example-text").css("line-height", "170%");
+
     $("li").filter(".viewScreen").each(function () {
         $(this).click(function () {
             if ($(this).hasClass("viewOff")) {
