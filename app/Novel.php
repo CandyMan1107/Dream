@@ -29,4 +29,11 @@ class Novel extends Model
 
         return $novelData;
     }
+
+    // TABLE : novels SELECT title
+    public function titleSelect() {
+        $novelData = DB::table('novels')->select("id", "title")->get();
+
+        return $novelData;
+    }
 }

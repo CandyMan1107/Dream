@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
                         <i class="material-icons" name="favorite">favorite_border</i>
-                        <h4>11,896</h4>
+                        <h4>1</h4>
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
                         <i class="material-icons">chat</i>
@@ -27,7 +27,7 @@
                         <h4>관심등록</h4>
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
-                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                        <i class="material-icons">share</i>
                         <h4>공유하기</h4>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                             <div class="col-md-2">
                                 <i class="fa fa-user-o hit-icon" aria-hidden="true"></i>
                                 &nbsp;
-                                174,282
+                                1
                             </div>
                             <div class="col-md-2 upload-day">
                                 <b>수, 토</b> 연재
@@ -125,17 +125,17 @@
                                     <div class="col-md-9">
                                         <div class="episode-list">
                                             <div class="col-md-12">
-                                                <h4>1. 오베라는 남자(1)</h4>
+                                                <h4>1. {{ $data['episode_title'] }}</h4>
                                             </div>
                                             <div id="default-padding-small-0" class="col-md-12"></div>
                                             <div class="col-md-2">
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;11,896
+                                                <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;1
                                             </div>
                                             <div class="col-md-2">
-                                                <small>댓글</small>&nbsp;<strong>52</strong>
+                                                <small>댓글</small>&nbsp;<strong>1</strong>
                                             </div>
-                                            <div class="col-md-2">
-                                                2017.04.23
+                                            <div class="col-md-8">
+                                                {{ $data['created_at'] }}
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +182,7 @@
                             </div>
                             <div id="default-padding-small" class="col-md-12"></div>
                             <div class="col-md-12">
-                                <span><small>5화</small></span>
+                                <span><small>1화</small></span>
                                 &nbsp;
                                 <span>엄청 재밌어요! 글작가님 글은 항상 재미있었지만 오베는 역대급!</span>
                             </div>

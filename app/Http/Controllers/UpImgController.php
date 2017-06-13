@@ -14,7 +14,7 @@ class UpImgController extends Controller
 {
     // File 형식으로 받은 이미지 업로드
     public function uploadImg(Request $request){
-      $file = $request->file('imgFile') ;
+      $file = $request->file('imgFile');
       $destinationPath = 'upload/images';
       $fileName = date("Y").date("m").date("d").date("s").$file->getClientOriginalName();
       $file->move($destinationPath, $fileName);
