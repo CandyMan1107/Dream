@@ -429,7 +429,7 @@
 
           </div>
           <div class="pull-down background-div background-footer">
-            asd
+            <button type="button" id="applyTag">태그 적용</button>
           </div>
         </div>
       </div>
@@ -610,6 +610,53 @@
           });
         }
       }
+    }
+
+    // 태그 적용 버튼
+    var sel;
+    $("#applyTag").on('click',function(){
+      var tagColor = $(".tag-list-select option:selected").attr("data-color");
+      var tagCase  = $(".tag-list-select option:selected").attr("data-kind");
+      var tagId    = $(".tag-list-select option:selected").attr("data-id");
+
+      // alert(tagColor + tagCase + tagId);
+
+      var curSel = window.getSelection();
+      // 한글자 이상 선택하였을 경우
+      if(curSel.toString().length > 0){
+        sel = curSel;
+        surroundSelection(tagColor, tagCase, tagId);
+      }
+    });
+
+    // 마지막 선택한 텍스트를 전역 변수에 전달.
+    // function setLastSelection(){
+    //   // ++++++++++++++++이후 셀렉션이 내용 div안의 내용인지 판단 !!!!
+    //   if(window.getSelection){
+    //     var curSel = window.getSelection();
+    //     if(curSel.toString().length > 0)
+    //       sel = curSel;
+    //   }
+    // }
+
+    // 선택한 구분에 태그 적용
+    function surroundSelection(tagColor, tagCase, tagId) {
+        var span = document.createElement("span");
+        span.style.fontWeight = "bold";
+        span.style.backgroundColor = tagColor;
+
+        // span.setAttribute("onmouseover","popChaInfo(\'" + chaName+ "\')");
+        // span.setAttribute("onmouseout","removeChaInfo()");
+        span.setAttribute("data-color",tagColor);
+        span.setAttribute("data-case",tagCase);
+        span.setAttribute("data-id",tagId);
+            if (sel.rangeCount) {
+                var range = sel.getRangeAt(0).cloneRange();
+                range.surroundContents(span);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+
     }
     // 회차/공지 선택
     $('.set-notice-btn').on("click", function(){
