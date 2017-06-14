@@ -59,12 +59,13 @@
 		<div id="img_cell" class="img_cell">
 		<br>
 		<br>
-			<img src="/img/background/mapImg/201706135915057330_198233723961407_7595485728369278976_n.jpg" width="50" height="50">
+			{{-- <img src=" {{ $tasks['img_src'] }}" width="50" height="50"> --}}
 			업로드 된 이미지
 		</div>
 
 		<div>
 			<p>
+			<br>
 			<form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="">
 				<label class="img_upload_label">이미지 업로드
 				<input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
