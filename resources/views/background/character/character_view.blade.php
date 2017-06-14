@@ -9,14 +9,11 @@
 		<script>character_event( <?=json_encode($data)?> )</script>
 		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-color : #e8d6b3" >
 			<div class="row">
-<<<<<<< HEAD
-				if(isset($data)){
-=======
+
 				@if($data[0])
->>>>>>> 5c96e93eeec632b4ececa8c535595b4fd709094f
 					@foreach ($data as $character)
 					<?php $img_src = "/img/background/characterImg/".$character['img_src']; ?>
-					
+
 					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list event_list" id="{{$character['id']}}" name="character_icon" style="margin : 17px">
 					@endforeach
 				@endif
@@ -59,7 +56,7 @@
 				<div class="form-group form-group-lg">
 					<label class="col-sm-3 control-label" for="formGroupInputLarge">이미지 등록</label>
 					<div class="col-sm-10">
-						
+
 						<input type="file" name="character_img_upload" id="character_img_upload">
 					</div>
 				</div>
@@ -79,7 +76,7 @@
 					<label class="col-sm-4 control-label" for="formGroupInputLarge">소유 사물</label>
 				</div>
 				<div>
-					@php 
+					@php
 						use App\Http\Controllers\BackgroundCharactersController;
 						echo BackgroundCharactersController::ownership_modal();
 					@endphp
@@ -91,8 +88,8 @@
 						</p>
 					</div>
 				</div>
-				
-				
+
+
 				<button type="submit" class="btn btn-default">등록</button>
 			</form >
 		</div>
@@ -115,7 +112,7 @@
 			</form>
 			<div class="row">
 				{{-- $page에 태그 값이 참조할 테이블의 이름을 넣어준다. --}}
-					@php 
+					@php
 						$page = "characters";
 						use App\Http\Controllers\TagsAddController;
 						echo TagsAddController::view_return($page,$data);
