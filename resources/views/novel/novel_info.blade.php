@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-md-8 text-left novel-info-upper-text">
                         <h3><strong>
-                            {!! $data['title'] !!}
+                            {!! $data[0]['title'] !!}
                         </strong></h3>
                         <h5><small>글</small>&nbsp;글작가</h5>
                     </div>
@@ -67,10 +67,10 @@
                     <div class="col-md-9">
                         <p class="lead">
                             <strong>
-                                {!! $data['summary_intro'] !!}
+                                {!! $data[0]['summary_intro'] !!}
                             </strong>
                         </p>
-                        <p>{!! $data['intro'] !!}</p>
+                        <p>{!! $data[0]['intro'] !!}</p>
                     </div>
                     <div id="default-padding-mid-1" class="col-md-9"></div>
                     <div class="col-md-9">
@@ -81,7 +81,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <a href="/novel/read/novel_read_view/{{$data['id']}}&1"><button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button></a>
+                                <a href="/novel/read/novel_read_view/{{$data[0]['belong_to_novel']}}&1"><button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button></a>
                             </div>
                             <div class="col-md-4">
                                 <button class="btn btn-default btn-block novel-background-read-Btn">소설 배경 설정 보기</button>
@@ -112,37 +112,40 @@
                     
                     <div id="default-padding-small" class="col-md-12"></div>
 
-                    <div class="col-md-12">
-                        <div class="episode">
-                            <div class="row">
-                                <a href="/novel/read/novel_read_view/{{$data['id']}}&1">
-                                    <div class="col-md-3">
-                                        <div>
-                                            <img src="/img/OVE.jpg" width="261" height="160" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="episode-list">
-                                            <div class="col-md-12">
-                                                <h4>1. {{ $data['episode_title'] }}</h4>
-                                            </div>
-                                            <div id="default-padding-small-0" class="col-md-12"></div>
-                                            <div class="col-md-2">
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;1
-                                            </div>
-                                            <div class="col-md-2">
-                                                <small>댓글</small>&nbsp;<strong>1</strong>
-                                            </div>
-                                            <div class="col-md-8">
-                                                {{ $data['created_at'] }}
+                    @foreach ($data as $d)
+                        <div class="col-md-12">
+                            <div class="episode">
+                                <div class="row">
+                                    <a href="/novel/read/novel_read_view/{{$d['belong_to_novel']}}&{{ $d['episode_count'] }}">
+                                        <div class="col-md-3">
+                                            <div>
+                                                <img src="/img/OVE.jpg" width="261" height="160" />
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                        <div class="col-md-9">
+                                            <div class="episode-list">
+                                                <div class="col-md-12">
+                                                    <h4>{{ $d['episode_count'] }}. {{ $d['episode_title'] }}</h4>
+                                                </div>
+                                                <div id="default-padding-small-0" class="col-md-12"></div>
+                                                <div class="col-md-2">
+                                                    <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;1
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <small>댓글</small>&nbsp;<strong>1</strong>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    {{ $d['created_at'] }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="default-padding-small" class="col-md-12"></div>
+                        <div id="default-padding-small" class="col-md-12"></div>
+                    @endforeach
+                    
                     {{--PAGE--}}
                     <div id="default-padding-small-1" class="col-md-12"></div>
                 </div>
