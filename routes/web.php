@@ -30,7 +30,14 @@ Route::get('/background/map', function(){
   return view('background/map/map_view');
 });
 
+// 지도 이미지 등록
 Route::post('/background/addMapImg', "MapController@MapImgStore");
+
+// 지도 이미지 띄우기
+Route::get('/background/map', "MapController@index");
+
+// 지도 이미지 삭제
+Route::get('/background/removeMapImg', "MapController@removeImg");
 
 Route::resource('/background/things', 'BackgroundItemsController');
 
