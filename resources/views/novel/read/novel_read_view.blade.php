@@ -2,14 +2,13 @@
 
 @section('content')
     <div class="default-padding"></div>
-
     {{-- read-novel-info START --}}
     <div id="read-novel-info" class="section-padding">
         <div id="default-padding-small"></div>
         <div class="row">
             <div class="col-md-5 info-text">
                 <h4 class="text-left">
-                    {{-- <span class="novel-info-text"><a href="{{ url()->previous() }}"><strong>{!! $data['title'] !!}</strong></a></span> --}}
+                    <span class="novel-info-text"><a href="{{ url()->previous() }}"><strong></strong></a></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
                     <span class="novel-info-text">{!! $data['id'] !!}화 {!! $data['episode_title'] !!}</span>
                 </h4>

@@ -51,7 +51,7 @@ Route::resource('/background', 'BackgroundController');
 
 // NOVEL VIEW START
 // Novel Info
-Route::get('novel/novel_info/{id}', "NovelController@novelInfo");
+Route::get('/novel/novel_info/{id}', "NovelController@novelInfo");
 
 // Novel Episode
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");

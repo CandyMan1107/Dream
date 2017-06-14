@@ -11,32 +11,20 @@ class NovelController extends Controller
     //
     public function novelInfo($id) 
     {
-        $novelTable = new Novel();
-        $novelData = $novelTable->dataSelectAll();
+        // echo $id;
 
         $episodeTable = new Episode();
-        $episodeData = $episodeTable->selectWithNovel();
-        
-        $epiData[] = [];
-        $data[] = [];
+        $episodeData = $episodeTable->selectWithNovel($id);
 
-        $e = 0;
-
-        $i = 0;     
-        $num = 0;
+        $novelTable = new Novel();
+        $novelData = $novelTable->dataIdSelect($id);
 
         // var_dump($episodeData);
 
-        foreach($episodeData as $episodes) {
-            $epiData[$e]['belong_to_novel'] = $episodes->belong_to_novel;
-            $epiData[$e]['episode_title'] = $episodes->episode_title;
-            $epiData[$e]['created_at'] = $episodes->created_at;
-
-            $e++;
-        }
+        $data[] = [];
+        $i = 0;
 
         foreach($novelData as $datas) {
-            $data[$i]['id'] = $datas->id;
             $data[$i]['title'] = $datas->title;
             $data[$i]['intro'] = $datas->intro;
             $data[$i]['summary_intro'] = $datas->summary_intro;
@@ -45,21 +33,24 @@ class NovelController extends Controller
             $data[$i]['period'] = $datas->period;
             $data[$i]['genre'] = $datas->genre;
 
-            if ($epiData[$i]['belong_to_novel'] == $data[$i]['id']) {
-                $num = $i;
+            $i++;
+        }
 
-                $data[$num]['episode_title'] = $epiData[$num]['episode_title'];
-                $data[$num]['created_at'] = $epiData[$num]['created_at'];
+        $i = 0;
 
-                break;
-            }
+        foreach($episodeData as $datas) {
+            $data[$i]['belong_to_novel'] = $datas->belong_to_novel;
+            $data[$i]['episode_title'] = $datas->episode_title;
+            $data[$i]['created_at'] = $datas->created_at;
 
             $i++;
         }
 
-        // echo ($data[0]['id']);
+        // var_dump($novelData);
 
-        return view('novel.novel_info')->with("data", $data[$num]);
+        // var_dump($data);
+
+        return view('novel.novel_info')->with("data", $data[$i]);
     }
 
     public static function episodeShow($id) 
@@ -75,11 +66,12 @@ class NovelController extends Controller
 
         // var_dump($episodeData);
 
-        // $data = array(array());
         $novelD[] = [];
         $data[] = [];
+
         $n = 0;
-        $i = 0;     
+        $i = 0; 
+
         $num = 0;
 
         foreach($novelData as $novels) {
@@ -101,12 +93,10 @@ class NovelController extends Controller
             $data[$i]['char_count'] = $datas->char_count;
             $data[$i]['created_at'] = $datas->created_at;
 
-            if ($string[0] == $data[$i]['belong_to_novel']) {
+            if ($string[0] == $data[$i]['belong_to_novel'] && $data[$i]['belong_to_novel'] == $novelD[$num]['id']) {
                 $num = $i;
 
-                if($string[0] == $novelD[$num]['id']) {
-                    $data[$num]['title'] = $novelD[$num]['title'];
-                }
+                $data[$num]['title'] = $novelD[$num]['title'];
 
                 break;
             }

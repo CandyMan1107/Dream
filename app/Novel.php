@@ -23,9 +23,11 @@ class Novel extends Model
         DB::table('novels')->insert($novelData);
     }
 
-    // TABLE : novels SELECT ALL
-    public function dataSelectAll() {
-        $novelData = DB::table('novels')->get();
+    // TABLE : novels SELECT
+    public function dataIdSelect($id) {
+        $novelData = DB::table('novels')
+        ->where('id', '=', $id)
+        ->get();
 
         return $novelData;
     }
