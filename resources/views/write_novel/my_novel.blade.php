@@ -173,7 +173,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				tableEle += "		<th>관리</th>";
 				tableEle += "	</tr>";
 				tableEle += "	<tr>";
-				tableEle += "		<td rowspan='2'><img class='cover-img' src='{{URL::asset('upload/images')}}/"+ d.cover_img_src+ "' width='80%' height='100%'></td>";
+				tableEle += "		<td rowspan='2'><img class='cover-img' src='{{URL::asset('upload/images')}}/"+ d.cover_img_src+ "' width='100px' height='144px'></td>";
 				tableEle += "		<td>"+ d.title +"</td>";
 				tableEle += "		<td>"+ "글반죽 "+"</td>";
 				tableEle += "		<td>"+ d.genre +"</td>";

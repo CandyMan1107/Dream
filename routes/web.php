@@ -49,19 +49,19 @@ Route::resource('/background/historyTable', 'BackgroundHistoryTablesController')
 
 Route::resource('/background', 'BackgroundController');
 
-// Route::get('/novel/novel_info', function(){
-//     return view('novel/novel_info');
-// });
-Route::resource('novel/novel_info', 'NovelEpisodeController');
+// Novel Info
+Route::get('novel/novel_info/{id}', "NovelController@novelInfo");
+// Route::resource('novel/novel_info', 'NovelEpisodeController');
+
+// Novel Episode
+Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
+// Route::resource('/novel/read/novel_read_view', 'NovelEpisodeController');
 
 Route::get('/novel/today_novel_by_day', function(){
     return view('novel/today_novel_by_day');
 });
 
-// Route::get('/novel/read/novel_read_view', function(){
-//     return view('novel/read/novel_read_view');
-// });
-Route::resource('/novel/read/novel_read_view', 'NovelEpisodeController');
+
 
 Route::get('/background/share', function(){
     return view('background/share/set_share_view');

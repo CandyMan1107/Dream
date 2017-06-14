@@ -9,7 +9,7 @@
 			<div class="row">
 				<div class="autoplay-top">
 					<div class="col-md-12">
-						<a href="/novel/novel_info">
+						<a href="/novel/novel_info/1">
 							<div class="jumbotron">
 								<h3 class="novel">소설</h3>
 								<h2 class="small">왠만하면 마주치고 싶지 않은 까칠한 이웃 남자,<br/>오베가 나타났다!</h2>
@@ -129,11 +129,7 @@
 									<img src="img/SEA.jpg" class="img-responsive">
 								</div>
 								<div class="filimg mix category-1 category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="1">
-									<img src="img/SLEEP.jpg" class="img-responsive">								</div>
-								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
-									<img src="img/fea4.jpg" class="img-responsive">								</div>
-								<div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
-									<img src="img/fea5.jpg" class="img-responsive">
+									<img src="img/SLEEP.jpg" class="img-responsive">								
 								</div>
 								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
 									<img src="img/DEAD.jpg" class="img-responsive">

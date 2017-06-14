@@ -6,16 +6,11 @@ use Illuminate\Http\Request;
 use App\Novel;
 use App\Episode;
 
-class NovelEpisodeController extends Controller
+class NovelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    //
+    public function novelInfo($id) 
     {
-        //
         $novelTable = new Novel();
         $novelData = $novelTable->dataSelectAll();
 
@@ -67,44 +62,8 @@ class NovelEpisodeController extends Controller
         return view('novel.novel_info')->with("data", $data[$num]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public static function episodeShow($id) 
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-        // $table = $request->all();
-
-        // $episodeTable = new Episode();
-
-        // $episodeTable->insert_table($table);
-        // // var_dump($table);
-
-        // return redirect(route('novel_read_view.index'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public static function show($id)
-    {
-        //
         $string = explode("&", $id);
         // var_dump($string);
 
@@ -156,40 +115,5 @@ class NovelEpisodeController extends Controller
         }
 
         return view('novel.read.novel_read_view')->with("data", $data[$num]);
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

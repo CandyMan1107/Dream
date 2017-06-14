@@ -27,6 +27,10 @@ h1 {
 Header
 **************************************/
 
+.selected {
+    border : 2px solid red;
+}
+
 .section-padding {
     padding: 0px 0px;
 }
