@@ -9,7 +9,7 @@
 			<div class="row">
 				<div class="autoplay-top">
 					<div class="col-md-12">
-						<a href="/novel/novel_info">
+						<a href="/novel/novel_info/1">
 							<div class="jumbotron">
 								<h3 class="novel">소설</h3>
 								<h2 class="small">왠만하면 마주치고 싶지 않은 까칠한 이웃 남자,<br/>오베가 나타났다!</h2>
@@ -20,7 +20,7 @@
 						</a>
 					</div>
 					<div class="col-md-12">
-						<a href="/novel/novel_info">
+						<a href="/novel/novel_info/2">
 							<div class="jumbotron">
 								<h3 class="novel">소설</h3>
 								<h2 class="small">이제까지 아무도 밝히지 못한 6단계 잠의 비밀</h2>
@@ -33,10 +33,10 @@
 					<div class="col-md-12">
 						<a href="/novel/novel_info/3">
 							<div class="jumbotron">
-								<h3 class="novel">호러</h3>
+								<h3 class="novel">판타지</h3>
 								<h2 class="small">스스로 막다른 길로 걸어 들어간 한 남자의 이야기</h2>
 								<br/>
-								<p class="big">데드 하트</p>
+								<p class="big">Harry Potter</p>
 								<a href="/novel/novel_info" class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
 							</div>
 						</a>

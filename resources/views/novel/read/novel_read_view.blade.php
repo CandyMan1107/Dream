@@ -8,9 +8,9 @@
         <div class="row">
             <div class="col-md-5 info-text">
                 <h4 class="text-left">
-                    <span class="novel-info-text"><a href="{{ url()->previous() }}"><strong></strong></a></span>
+                    <span class="novel-info-text"><a href="{{ url()->previous() }}"><strong>{!! $data['novel_title'] !!}</strong></a></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
-                    <span class="novel-info-text">{!! $data['id'] !!}화 {!! $data['episode_title'] !!}</span>
+                    <span class="novel-info-text">{!! $data['episode_count'] !!}화 {!! $data['episode_title'] !!}</span>
                 </h4>
             </div>
             <div class="col-md-4 text-right">
@@ -115,7 +115,7 @@
                     <tr>
                         <td>
                             <select class="form-control">
-                                <option selected="selected">{!! $data['id'] !!}화. {!! $data['episode_title'] !!}</option>
+                                <option selected="selected">{!! $data['episode_count'] !!}화. {!! $data['episode_title'] !!}</option>
                             </select>
                         </td>
                     </tr>
@@ -422,7 +422,7 @@
                             </div>
                             <div id="default-padding-small" class="col-md-12"></div>
                             <div class="col-md-12">
-                                <span><small>{!! $data['id'] !!}화</small></span>
+                                <span><small>{!! $data['episode_count'] !!}화</small></span>
                                 &nbsp;
                                 <span>엄청 재밌어요! 글작가님 글은 항상 재미있었지만 오베는 역대급!</span>
                             </div>
