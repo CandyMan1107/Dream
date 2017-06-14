@@ -23,6 +23,13 @@ class Novel extends Model
         DB::table('novels')->insert($novelData);
     }
 
+    // TABLE : novels SELECT
+    public function mainData() {
+        $novelData = DB::table('novels')->get();
+
+        return $novelData;
+    }
+
     // TABLE : novels SELECT // JOIN TABLE : novel_episodes
     public function dataJoinEpisode($id) {
 

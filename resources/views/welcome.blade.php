@@ -8,39 +8,21 @@
 		<div class="container">
 			<div class="row">
 				<div class="autoplay-top">
-					<div class="col-md-12">
-						<a href="/novel/novel_info/1">
-							<div class="jumbotron">
-								<h3 class="novel">소설</h3>
-								<h2 class="small">왠만하면 마주치고 싶지 않은 까칠한 이웃 남자,<br/>오베가 나타났다!</h2>
-								<br/>
-								<p class="big">오베라는 남자</p>
-								<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-12">
-						<a href="/novel/novel_info/2">
-							<div class="jumbotron">
-								<h3 class="novel">소설</h3>
-								<h2 class="small">이제까지 아무도 밝히지 못한 6단계 잠의 비밀</h2>
-								<br/>
-								<p class="big">잠.</p>
-								<a href="/novel/novel_info" class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-12">
-						<a href="/novel/novel_info/3">
-							<div class="jumbotron">
-								<h3 class="novel">판타지</h3>
-								<h2 class="small">스스로 막다른 길로 걸어 들어간 한 남자의 이야기</h2>
-								<br/>
-								<p class="big">Harry Potter</p>
-								<a href="/novel/novel_info" class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
-							</div>
-						</a>
-					</div>
+
+					@for ($i = 0; $i < 3; $i++)
+						<div class="col-md-12">
+							<a href="/novel/novel_info/{{ $data[$i]['id'] }}">
+								<div class="jumbotron">
+									<h3 class="novel">{!! $data[$i]['genre'] !!}</h3>
+									<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
+									<br/>
+									<p class="big">{!! $data[$i]['title'] !!}</p>
+									<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
+								</div>
+							</a>
+						</div>
+					@endfor
+			
 				</div>
 			</div>
 		</div>
@@ -67,39 +49,23 @@
 					<p>오늘의 <br>HOT한 소설! </p>
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
-				<div class="col-md-4">
-					<div class="service-box">
-						<div class="service-icon"><img src="img/OVE.jpg" /></div>
-						<div class="service-text">
-							<h5>소설</h5>
-							<h3>오베라는 남자</h3>
-							<p> <i class="fa fa-pencil"></i> 글반죽</p>
-							<p> <b>왠만하면 마주치고 싶지 않은 까칠한 이웃 남자, 오베가 나타났다!</b><br/> 오베와 이웃 이야기</p>
-						</div>
+
+				@for ($i = 0; $i < 3; $i++)
+					<div class="col-md-4">
+						<a href="/novel/novel_info/{{ $data[$i]['id'] }}">
+							<div class="service-box">
+								<div class="service-icon"><img src="upload/images/{{ $data[$i]['cover_img_src'] }}" /></div>
+								<div class="service-text">
+									<h5>{!! $data[$i]['genre'] !!}</h5>
+									<h3>{!! $data[$i]['title'] !!}</h3>
+									<p> <i class="fa fa-pencil"></i> 글반죽</p>
+									<p> <b>{!! $data[$i]['summary_intro'] !!}</b></p>
+								</div>
+							</div>
+						</a>
 					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="service-box">
-						<div class="service-icon"><img src="img/SLEEP.jpg" /></div>
-						<div class="service-text">
-							<h5>소설</h5>
-							<h3>잠.</h3>
-							<p> <i class="fa fa-pencil"></i> 베르베르</p>
-							<p> <b>이제까지 아무도 밝히지 못한 6단계 잠의 비밀, 미지의 잠</b><br/> 미지의 이야기</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="service-box">
-						<div class="service-icon"><img src="img/DEAD.jpg" /></div>
-						<div class="service-text">
-							<h5>호러</h5>
-							<h3>데드 하트</h3>
-							<p> <i class="fa fa-pencil"></i> 데네디</p>
-							<p> <b>스스로 막다른 길로 걸어 들어간 한 남자의 이야기에서 살아남아라</b><br/> 강력한 삶의 에너지</p>
-						</div>
-					</div>
-				</div>
+				@endfor
+
 			</div>
 		</div>
 	</div>
@@ -117,23 +83,21 @@
 				<div class="port-sec">
 					<div class="col-md-12 fil-btn text-center">
 							<div class="filter wrk-title active" data-filter="all">전체</div>
-							<div class="filter wrk-title" data-filter=".category-1">로맨스</div>
-							<div class="filter wrk-title" data-filter=".category-2">판타지</div>
-							<div class="filter wrk-title lst-cld" data-filter=".category-3">호러</div>
+							<div class="filter wrk-title" data-filter=".romance">로맨스</div>
+							<div class="filter wrk-title" data-filter=".fantasy">판타지</div>
+							<div class="filter wrk-title lst-cld" data-filter="horror">호러</div>
 					</div>
 					<div id="Container">
-								<div class="filimg mix category-1 col-md-4 col-sm-4 col-xs-12" data-myorder="2">
-									<img src="img/OVE.jpg" class="img-responsive">
-								</div>
-								<div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="4">
-									<img src="img/SEA.jpg" class="img-responsive">
-								</div>
-								<div class="filimg mix category-1 category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="1">
-									<img src="img/SLEEP.jpg" class="img-responsive">								
-								</div>
-								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
-									<img src="img/DEAD.jpg" class="img-responsive">
-								</div>
+					
+						@for ($i = 0; $i < count($data); $i++)
+							<div class="filimg mix {{ $data[$i]['genre'] }} col-md-4 col-sm-4 col-xs-12" data-myorder="2">
+								<a href="/novel/novel_info/{{ $data[$i]['id'] }}">
+									<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
+								</a>
+							</div>
+						@endfor
+
+
 					</div>
 				</div>
 			</div>
@@ -151,57 +115,30 @@
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
 				<div class="autoplay">
-					<div class="col-md-6">
-						<div class="team-info">
-							<div class="img-sec">
-								<img src="img/OVE.jpg" class="img-responsive">
-							</div>
-							<div class="fig-caption">
-								<h3>오베라는 남자</h3>
-								<p class="marb-20">작가 글반죽</p>
-								{{-- <p>Follow me:</p>
-								<ul class="team-social">
-									<li class="bgblue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
-								    <li class="bgred"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								    <li class="bgblue-light"><a href="#"><i class="fa fa-twitter"></i></a></li>
-								    <li class="bgblue-dark"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-								</ul> --}}
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="team-info">
-							<div class="img-sec">
-								<img src="img/SLEEP.jpg" class="img-responsive">
-							</div>
-							<div class="fig-caption">
-								<h3>잠.</h3>
-								<p class="marb-20">작가 베르베르</p>
+
+					@for ($i = 0; $i < count($data); $i++)
+						<div class="col-md-6">
+							<div class="team-info">
+								<a href="/novel/novel_info/{{ $data[$i]['id'] }}">
+									<div class="img-sec">
+										<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
+									</div>
+									<div class="fig-caption">
+										<h3>{!! $data[$i]['title'] !!}</h3>
+										<p class="marb-20">작가 글반죽</p>
+										{{-- <p>Follow me:</p>
+										<ul class="team-social">
+											<li class="bgblue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
+											<li class="bgred"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+											<li class="bgblue-light"><a href="#"><i class="fa fa-twitter"></i></a></li>
+											<li class="bgblue-dark"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+										</ul> --}}
+									</div>
+								</a>
 							</div>
 						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="team-info">
-							<div class="img-sec">
-								<img src="img/DEAD.jpg" class="img-responsive">
-							</div>
-							<div class="fig-caption">
-								<h3>데드 하트</h3>
-								<p class="marb-20">작가 데네디</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="team-info">
-							<div class="img-sec">
-								<img src="img/SEA.jpg" class="img-responsive">
-							</div>
-							<div class="fig-caption">
-								<h3>바다가 보이는 이발소</h3>
-								<p class="marb-20">작가 오오</p>
-							</div>
-						</div>
-					</div>
+					@endfor
+					
 				</div>
 			</div>
 		</div>

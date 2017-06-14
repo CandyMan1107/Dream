@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('/', "MainController@index");
+Route::get('/', "MainController@index");
 
 Route::get('/lib', function () {
     return view('load');

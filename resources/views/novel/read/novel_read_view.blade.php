@@ -53,12 +53,6 @@
                 {{--<div id="default-padding-mid" class="col-md-12"></div>--}}
                 <div class="col-md-12 novel-viewer novel-viewer-web" name="webMode">
                     {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
                 </div>
                 <div id="default-padding-big" class="col-md-12"></div>
                 

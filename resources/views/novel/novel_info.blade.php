@@ -112,38 +112,38 @@
                     
                     <div id="default-padding-small" class="col-md-12"></div>
 
-                    @foreach($data as $d)
-                    <div class="col-md-12">
-                        <div class="episode">
-                            <div class="row">
-                                <a href="/novel/read/novel_read_view/{{$d['belong_to_novel']}}&{{ $d['episode_count'] }}">
-                                    <div class="col-md-3">
-                                        <div>
-                                            <img src="/img/OVE.jpg" width="261" height="160" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="episode-list">
-                                            <div class="col-md-12">
-                                                <h4>{{ $d['episode_count'] }}. {{ $d['episode_title'] }}</h4>
-                                            </div>
-                                            <div id="default-padding-small-0" class="col-md-12"></div>
-                                            <div class="col-md-2">
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;1
-                                            </div>
-                                            <div class="col-md-2">
-                                                <small>댓글</small>&nbsp;<strong>1</strong>
-                                            </div>
-                                            <div class="col-md-8">
-                                                {{ $d['created_at'] }}
+                    @foreach ($data as $d)
+                        <div class="col-md-12">
+                            <div class="episode">
+                                <div class="row">
+                                    <a href="/novel/read/novel_read_view/{{$d['belong_to_novel']}}&{{ $d['episode_count'] }}">
+                                        <div class="col-md-3">
+                                            <div>
+                                                <img src="/img/OVE.jpg" width="261" height="160" />
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                        <div class="col-md-9">
+                                            <div class="episode-list">
+                                                <div class="col-md-12">
+                                                    <h4>{{ $d['episode_count'] }}. {{ $d['episode_title'] }}</h4>
+                                                </div>
+                                                <div id="default-padding-small-0" class="col-md-12"></div>
+                                                <div class="col-md-2">
+                                                    <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;1
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <small>댓글</small>&nbsp;<strong>1</strong>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    {{ $d['created_at'] }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="default-padding-small" class="col-md-12"></div>
+                        <div id="default-padding-small" class="col-md-12"></div>
                     @endforeach
                     
                     {{--PAGE--}}
