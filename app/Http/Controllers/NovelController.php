@@ -76,15 +76,15 @@ class NovelController extends Controller
         // var_dump($episodeData);
 
         // $data = array(array());
-        $novelTitle[] = [];
+        $novelD[] = [];
         $data[] = [];
         $n = 0;
         $i = 0;     
         $num = 0;
 
         foreach($novelData as $novels) {
-            $novelTitle[$n]['id'] = $novels->id;
-            $novelTitle[$n]['title'] = $novels->title;
+            $novelD[$n]['id'] = $novels->id;
+            $novelD[$n]['title'] = $novels->title;
 
             $n++;
         }
@@ -104,8 +104,8 @@ class NovelController extends Controller
             if ($string[0] == $data[$i]['belong_to_novel']) {
                 $num = $i;
 
-                if($string[0] == $novelTitle[$num]['id']) {
-                    $data[$num]['title'] = $novelTitle[$num]['title'];
+                if($string[0] == $novelD[$num]['id']) {
+                    $data[$num]['title'] = $novelD[$num]['title'];
                 }
 
                 break;

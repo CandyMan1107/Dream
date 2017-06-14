@@ -28,7 +28,7 @@
 							<li><a href="#event">이벤트</a></li>
 							<li><a href="#about">고객센터</a></li>
 							<li><a href="/write_novel/set">로그인</a></li>
-							<li><a href="#signin">회원가입</a></li>
+							<li><a href="/background">회원가입</a></li>
 						</ul>
 					</div>
 				</div>
