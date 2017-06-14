@@ -72,7 +72,7 @@ class TagsAddController extends Controller
             return redirect(route('character.index')); 
         }
         else if($tag_data['page'] == "timetables"){
-            return redirect(route('timetable.index'));
+            return redirect(route('historyTable.index'));
         }
     }
 

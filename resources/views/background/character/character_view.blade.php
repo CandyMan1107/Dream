@@ -13,7 +13,7 @@
 					@foreach ($data as $character)
 					<?php $img_src = "/img/background/characterImg/".$character['img_src']; ?>
 					
-					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list event_list" id="{{$character['id']}}" style="margin : 17px">
+					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list event_list" id="{{$character['id']}}" name="character_icon" style="margin : 17px">
 					@endforeach
 				@endif
 			</div>
