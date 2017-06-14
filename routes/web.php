@@ -68,7 +68,21 @@ Route::get('/background/share', function(){
 
 // 코도바 뷰어부
 Route::get('/get_novel', "cordoController@getNovelInfo");
-
+Route::get('/get_novel/today_best', "cordoController@getTodayBestNovelInfo");
+Route::get('/get_novel/fantasy_best', "cordoController@getFantasyBestNovelInfo");
+Route::get('/get_novel/romance_best', "cordoController@getRomanceBestNovelInfo");
+Route::get('/get_novel/monday', "cordoController@getMondayNovelInfo");
+Route::get('/get_novel/tuesday', "cordoController@getTuesdayNovelInfo");
+Route::get('/get_novel/wednesday', "cordoController@getWednesdayNovelInfo");
+Route::get('/get_novel/thursday', "cordoController@getThursdayNovelInfo");
+Route::get('/get_novel/friday', "cordoController@getFridayNovelInfo");
+Route::get('/get_novel/saturday', "cordoController@getSaturdayNovelInfo");
+Route::get('/get_novel/sunday', "cordoController@getSundayNovelInfo");
+Route::get('/get_novel/search',"cordoController@getNovelFromSearch");
+Route::get('/get_novel/show_main_novel',"cordoController@getNovelById");
+Route::get('/get_novel/get_episodes',"cordoController@getNovelEpisodes");
+Route::get('/get_novel/get_episode_id',"cordoController@getNovelEpisodeById");
+//Route::get('/get_novel/get_notices',"cordoController@getNovelNotices");
 // 소설 작성부
 // 소설 정보 작성
 Route::get('/write_novel/set', "writeNovelController@setNovelView");
