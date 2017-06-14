@@ -30,9 +30,7 @@ Route::get('/background/map', function(){
   return view('background/map/map_view');
 });
 
-Route::get('/background/map2', function(){
-  return view('background/map/map_view2');
-});
+Route::post('/background/addMapImg', "MapController@MapImgStore");
 
 Route::resource('/background/things', 'BackgroundItemsController');
 
@@ -84,6 +82,12 @@ Route::get('/write_novel/my_novel', "writeNovelController@myNovelView");
 
 // 회차 내용 작성
 Route::get('/write_novel/write_episode/{novelId}', "writeNovelController@writeNovelEpisodeView");
+
+// 소설 배경 정보 호출
+Route::get('/write_novel/call_background_info', "writeNovelController@callBackgroundInfo");
+
+// 태그 정보 호출
+Route::get('/write_novel/get_tags', "writeNovelController@getTags");
 
 // 이미지 등록부
 // 커버 이미지 등록

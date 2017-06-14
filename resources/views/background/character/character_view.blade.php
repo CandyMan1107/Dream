@@ -9,7 +9,11 @@
 		<script>character_event( <?=json_encode($data)?> )</script>
 		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-color : #e8d6b3" >
 			<div class="row">
+<<<<<<< HEAD
+				if(isset($data)){
+=======
 				@if($data[0])
+>>>>>>> 5c96e93eeec632b4ececa8c535595b4fd709094f
 					@foreach ($data as $character)
 					<?php $img_src = "/img/background/characterImg/".$character['img_src']; ?>
 					

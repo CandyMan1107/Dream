@@ -41,35 +41,6 @@
       padding-right: 10px;
     }
 
-    .check_circle {
-      vertical-align: middle;
-      width: 13px;
-      height: 13px;
-      background: #BDBDBD;
-      -moz-border-radius: 50px;
-      -webkit-border-radius: 50px;
-      border-radius: 50px;
-    }
-
-    .selected_period > img {
-      background: #00D8FF;
-    }
-    .novel_period_day_table {
-      display: inline-block;
-      border-collapse:separate;
-      border-spacing:1px;
-      vertical-align: middle;
-    }
-    .novel_period_day {
-      border:#BDBDBD 2px solid;
-      width:30px;
-      height:30px;
-      text-align:center;
-    }
-    .selected_day {
-      border:#00D8FF 2px solid;
-      color: #00D8FF;
-    }
 
     /*회색 #BDBDBD  파랑 #fdfdfd*/
     .set-notice-btn{
@@ -185,16 +156,134 @@
     }
 
     /*에디터 부*/
+
+    .edit-div {
+      padding: 0;
+      padding-bottom: 10px;
+      height:500px;
+    }
+
     .edit-box {
       border:#EAEAEA 2px solid;
       margin-bottom: 10px;
       overflow-y: scroll;
       padding-left: 5px;
+
     }
 
     .episode-editor-div {
-      height:500px;
-      width:85%;
+      display: inline-block;
+      vertical-align: middle;
+      height:100%;
+    }
+
+    .background-box {
+      padding: 4px;
+      display: inline-block;
+      height:100%;
+      background-color: #cefff5;
+      vertical-align: middle;
+      margin-bottom: 5px;
+    }
+
+    .background-div {
+      border-bottom: #D8D8D8 2px solid;
+    }
+
+    .background-top{
+      height:6%;
+      /*background-color: red;*/
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+
+    }
+
+    .background-search{
+      padding-top: 2px;
+      padding-bottom: 2px;
+      height:16%;
+      /*background-color:purple;*/
+    }
+
+    btn-group > button {
+      margin:0;
+      padding:0;
+      width: 50px;
+    }
+    /* 배경설정 컨텐츠 */
+    .background-content{
+      height:71%;
+      /*background-color: blue;*/
+    }
+
+    .basic-info-div{
+      padding-top: 3px;
+      /*background-color: yellow;*/
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .basic-cha-img{
+      /*background-color: blue;*/
+      text-align: center;
+      padding-right: 10px;
+      min-height: 30%;
+    }
+    .basic-cha-img > img {
+    }
+    .basic-cha-info{
+      display:inline-block;
+      padding:0;
+      padding-left: 2px;
+      text-align: left;
+      /*background-color: green;*/
+      min-height: 30%;
+    }
+
+    .info-div{
+      padding-left: 0px;
+      padding-right: 0px;
+      height: 25%;
+    }
+
+    .info-header{
+      text-align: center;
+      font-weight: bold;
+    }
+    .info-content{
+      overflow-y: scroll;
+      padding : 1px;
+      background-color: white;
+      height: 70%;
+    }
+
+    .tag-info-div{
+
+      padding-left: 0px;
+      padding-right: 0px;
+      height: 18%;
+    }
+
+    .tag-info-header{
+      text-align: center;
+      font-weight: bold;
+    }
+    .tag-info-content{
+      padding : 1px;
+      height: 70%;
+    }
+    .tag-info-color{
+      padding:10px;
+      height:32px;
+      width:32px;
+      padding-left: 10px;
+      border: 2px solid #BDBDBD;
+    }
+
+    /* 배경설정 푸터 */
+    .background-footer{
+      height:7%;
+      /*background-color: green;*/
     }
 
     .writers-postscript-div {
@@ -216,10 +305,13 @@
       height: 60px;
       padding-top: 10px;
       margin: 0 auto;
-
     }
 
+
+
   </style>
+
+
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <div class="write_novel_set">
     <div class="container">
@@ -271,9 +363,77 @@
       <div class="row set_row">
         <div class="col-md-12 menu_title">내용</div>
       </div>
-      <div class="edit-box episode-editor-div" contenteditable="true">
-        episode content
+      <div class="col-md-12 edit-div">
+        <div class="col-md-10 edit-box episode-editor-div" contenteditable="true">
+          episode content
+        </div>
+        <div class="col-md-2 background-box">
+          <div class="background-div background-top">
+            &nbsp;&nbsp;&nbsp;소설 배경 설정
+            <span class="pull-right glyphicon glyphicon-resize-full"></span>
+          </div>
+          <div class="background-div background-search">
+
+            <div class="input-group">
+      				<div id="radioBtn" class="btn-group">
+      					<a class="case-btn btn btn-primary btn-sm notActive"  data-title="characters">인물</a>
+                <a class="case-btn btn btn-primary btn-sm notActive" data-title="items">사물</a>
+      					<a class="case-btn btn btn-primary btn-sm notActive" data-title="maps">장소</a>
+                <a class="case-btn btn btn-primary btn-sm notActive" data-title="timetables">사건</a>
+      				</div>
+    			  </div>
+            <div class="ui-widget">
+              <label for="tags"></label>
+              <input id="tags" class="form-control">
+            </div>
+          </div>
+          <div class="background-div background-content">
+
+            <!-- <div class="col-md-12 basic-info-div background-div">
+              <div class="col-md-6 basic-cha-img">
+                <img class="img-circle img-things-size" src="http://tveta.naver.net/libs/1153/1153234/a1eaa6891808026e29d9_20170613112309575.jpg" alt="">
+                <span>정재훈</span>
+              </div>
+              <div class="col-md-6 basic-cha-info">
+                <br>
+                <span>
+                이름 | 이름<br>
+                나이 | 나이<br>
+                성별 | 성별<br>
+                </span>
+              </div>
+            </div>
+
+            <div class="col-md-12 info-div background-div">
+              <div class="col-md-12 info-header">
+                주요 정보
+              </div>
+              <div class="col-md-12 info-content">
+                ㅁㄴㅇㅁㄴㅇㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻ
+              </div>
+            </div>
+
+            <div class="col-md-12 tag-info-div">
+              <div class="col-md-12 tag-info-header">
+                bluediv
+              </div>
+              <div class="col-md-9 tag-info-content">
+                <select class="form-control">
+                  <option style="background:blue;">Mustard</option>
+                  <option>Ketchup</option>
+                  <option>Relish</option>
+                </select>
+              </div>
+              <div class="col-md-3 tag-info-color"></div>
+            </div> -->
+
+          </div>
+          <div class="pull-down background-div background-footer">
+            <button type="button" id="applyTag">태그 적용</button>
+          </div>
+        </div>
       </div>
+
       <div class="edit-box writers-postscript-div" contenteditable="true">
         writers postscript
       </div>
@@ -290,6 +450,214 @@
 
 <script>
   (function ($) {
+
+    // 인물,사물,장소,사건 분류 버튼
+    $(".case-btn").on('click',function(){
+      if($(this).hasClass("active")){
+        $(this).removeClass("active");
+        $(this).addClass("notActive");
+      } else {
+        $(this).removeClass("notActive");
+        $(this).addClass("active");
+      }
+      setAutocomplete();
+    });
+
+    // characetrs, thing, place, event여부에 따른 자동완성
+    function setAutocomplete(){
+      var source = Array();
+      $("a.active").map(function(d){
+        source = source.concat(getTags($(this).data("title")));
+      });
+      console.log(source);
+
+      $( "#tags" ).autocomplete({
+        source: source,
+        select: function (event,ui) {
+          setBackgroundContent(ui.item);
+          alert('You selected: ' + ui.item.value + ', ' + ui.item.kind + ', ' + ui.item.object_id + ', ' + ui.item.color);
+        }
+      }).data("ui-autocomplete")._renderItem = function (ul, item) {
+        var kind = "";
+        if(item.kind == "characters") kind = "인물";
+        else if(item.kind == "items") kind = "사물";
+        else if(item.kind == "maps")  kind = "지도";
+        else if(item.kind == "timetables") kind ="사건";
+        else kind = "미분류";
+
+         return $("<li></li>")
+             .data("item.autocomplete", item)
+             .append("<a class='col-md-12'>" + item.value+ "<div class='pull-right' style='background-color:"+item.color+"'>TC</div>" + "<div class='pull-right'>"+ kind + "</div>"  + "</a>")
+             .appendTo(ul);
+     };
+    }
+
+    // 서버로부터 characters, items, timetables, maps 대한 데이터를 불러옴
+    var sourceData = Array();
+    function setSourceData(data){ sourceData = data; return sourceData;};
+    function getTags(tagCase){
+      $.ajax({
+          type: "get",
+          async: false,
+          url: "/write_novel/get_tags",
+          data: {
+            "tagCase" : tagCase
+          }
+      }).done(function(data){
+        setSourceData(data);
+      });
+      return sourceData;
+    };
+
+    // soureData로 부터 케이스, 아이디에 해당하는 태그만 추출
+    function filterSourceData(tagCase, tagId){
+      var filter = sourceData;
+      filter = filter.filter(function(data){
+        return (data.kind == tagCase) && (data.object_id == tagId)
+      });
+      return filter;
+    }
+
+    // tag에 정보에 따른 정보 출력
+    function setBackgroundContent(item){
+      // 케이스별로 정보 출력 $(".background-content")
+      callBackgroundInfo(item.kind, item.object_id);
+
+      // 케이스 + 아이디로 정보 호출
+      function callBackgroundInfo(bgCase, bgId){
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_background_info",
+            async: false,
+            data: {
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              data = data[0];
+              console.log(data);
+              var div = $(".background-content");
+              // 캐릭터 정보 출력
+              if(bgCase == "characters"){
+                var appendEle = "";
+                var filterTag = filterSourceData("characters", bgId);
+                //appendEle += data.cha_id + data.name + data.info + data.age + data.gender + data.img_src;
+                appendEle += "<div class='col-md-12 basic-info-div background-div'>";
+                appendEle += "  <div class='col-md-6 basic-cha-img'>";
+                appendEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
+                appendEle += "    <span>" + data.name + "</span>";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-6 basic-cha-info'>";
+                appendEle += "    <br>";
+                appendEle += "    <span>";
+                appendEle += "    이름 | " + data.name + "<br>";
+                appendEle += "    나이 | " + data.age + "<br>";
+                appendEle += "    성별 | " + data.gender + "<br>";
+                appendEle += "    </span>";
+                appendEle += "  </div>";
+                appendEle += "</div>";
+
+                appendEle += "<div class='col-md-12 info-div background-div'>";
+                appendEle += "  <div class='col-md-12 info-header'>";
+                appendEle += "    주요 정보";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-12 info-content'>";
+                appendEle += data.info;
+                appendEle += "  </div>";
+                appendEle += "</div>";
+
+                appendEle += "<div class='col-md-12 tag-info-div'>";
+                appendEle += "  <div class='col-md-12 tag-info-header'>";
+                appendEle += "    태그 정보";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-9 tag-info-content'>";
+                appendEle += "    <select class='form-control tag-list-select'>";
+                filterTag.forEach(function(d){
+                  appendEle += "      <option data-kind='" + d.kind + "' data-id='" + d.object_id + "' data-color='" + d.color + "'>" + d.value + "</option>";
+                });
+                appendEle += "    </select>";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-3 tag-info-color'></div>";
+                appendEle += "</div>";
+              // 사물 정보 출력
+              }else if (bgCase == "items"){
+
+              // 사건 정보 출력
+              }else if (bgCase == "timetables"){
+
+              // 맵 정보 출력
+              }else if (bgCase == "maps"){
+
+              }else{
+                alert("미분류 에러로 정보 출력 불가");
+              }
+              div.empty();
+              div.append(appendEle);
+              setTagColor();
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+
+        function setTagColor(){
+          var color = $(".tag-list-select option:selected").attr("data-color");
+          $(".tag-info-color").css("background-color",color);
+
+          $(".tag-list-select").change(function(){
+            color = $(".tag-list-select option:selected").attr("data-color");
+            $(".tag-info-color").css("background-color",color);
+          });
+        }
+      }
+    }
+
+    // 태그 적용 버튼
+    var sel;
+    $("#applyTag").on('click',function(){
+      var tagColor = $(".tag-list-select option:selected").attr("data-color");
+      var tagCase  = $(".tag-list-select option:selected").attr("data-kind");
+      var tagId    = $(".tag-list-select option:selected").attr("data-id");
+
+      // alert(tagColor + tagCase + tagId);
+
+      var curSel = window.getSelection();
+      // 한글자 이상 선택하였을 경우
+      if(curSel.toString().length > 0){
+        sel = curSel;
+        surroundSelection(tagColor, tagCase, tagId);
+      }
+    });
+
+    // 마지막 선택한 텍스트를 전역 변수에 전달.
+    // function setLastSelection(){
+    //   // ++++++++++++++++이후 셀렉션이 내용 div안의 내용인지 판단 !!!!
+    //   if(window.getSelection){
+    //     var curSel = window.getSelection();
+    //     if(curSel.toString().length > 0)
+    //       sel = curSel;
+    //   }
+    // }
+
+    // 선택한 구분에 태그 적용
+    function surroundSelection(tagColor, tagCase, tagId) {
+        var span = document.createElement("span");
+        span.style.fontWeight = "bold";
+        span.style.backgroundColor = tagColor;
+
+        // span.setAttribute("onmouseover","popChaInfo(\'" + chaName+ "\')");
+        // span.setAttribute("onmouseout","removeChaInfo()");
+        span.setAttribute("data-color",tagColor);
+        span.setAttribute("data-case",tagCase);
+        span.setAttribute("data-id",tagId);
+            if (sel.rangeCount) {
+                var range = sel.getRangeAt(0).cloneRange();
+                range.surroundContents(span);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+
+    }
     // 회차/공지 선택
     $('.set-notice-btn').on("click", function(){
       $(".set-notice-btn").removeClass("selected-notice");
@@ -511,6 +879,7 @@
           }
       });
     }
+
 
   })(jQuery);
 

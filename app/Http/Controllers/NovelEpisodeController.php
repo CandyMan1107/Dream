@@ -17,18 +17,28 @@ class NovelEpisodeController extends Controller
     public function index()
     {
         //
-        $novelData = DB::table("novels")->get();
-        $episodeData = DB::table("novel_episodes")->select("belong_to_novel")->get();
+        $novelTable = new Novel();
+        $novelData = $novelTable->dataSelectAll();
+
+        $episodeTable = new Episode();
+        $episodeData = $episodeTable->selectWithNovel();
         
-        $eData;
+        $epiData[] = [];
         $data[] = [];
+
+        $e = 0;
+
         $i = 0;     
         $num = 0;
 
         // var_dump($episodeData);
 
         foreach($episodeData as $episodes) {
-            $eData = $episodes->belong_to_novel;
+            $epiData[$e]['belong_to_novel'] = $episodes->belong_to_novel;
+            $epiData[$e]['episode_title'] = $episodes->episode_title;
+            $epiData[$e]['created_at'] = $episodes->created_at;
+
+            $e++;
         }
 
         foreach($novelData as $datas) {
@@ -41,8 +51,11 @@ class NovelEpisodeController extends Controller
             $data[$i]['period'] = $datas->period;
             $data[$i]['genre'] = $datas->genre;
 
-            if ($eData == $data[$i]['id']) {
+            if ($epiData[$i]['belong_to_novel'] == $data[$i]['id']) {
                 $num = $i;
+
+                $data[$num]['episode_title'] = $epiData[$num]['episode_title'];
+                $data[$num]['created_at'] = $epiData[$num]['created_at'];
 
                 break;
             }
@@ -96,15 +109,27 @@ class NovelEpisodeController extends Controller
         $string = explode("&", $id);
         // var_dump($string);
 
+        $novelTable = new Novel();
+        $novelData = $novelTable->titleSelect();
+
         $episodeTable = new Episode();
         $episodeData = $episodeTable->dataSelectAll();
 
         // var_dump($episodeData);
 
         // $data = array(array());
+        $novelTitle[] = [];
         $data[] = [];
+        $n = 0;
         $i = 0;     
         $num = 0;
+
+        foreach($novelData as $novels) {
+            $novelTitle[$n]['id'] = $novels->id;
+            $novelTitle[$n]['title'] = $novels->title;
+
+            $n++;
+        }
 
         foreach($episodeData as $datas) {
             $data[$i]['id'] = $datas->id;
@@ -116,9 +141,14 @@ class NovelEpisodeController extends Controller
             $data[$i]['episode'] = $datas->episode;
             $data[$i]['writers_postscript'] = $datas->writers_postscript;
             $data[$i]['char_count'] = $datas->char_count;
+            $data[$i]['created_at'] = $datas->created_at;
 
             if ($string[0] == $data[$i]['belong_to_novel']) {
                 $num = $i;
+
+                if($string[0] == $novelTitle[$num]['id']) {
+                    $data[$num]['title'] = $novelTitle[$num]['title'];
+                }
 
                 break;
             }
