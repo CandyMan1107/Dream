@@ -129,11 +129,7 @@
 									<img src="img/SEA.jpg" class="img-responsive">
 								</div>
 								<div class="filimg mix category-1 category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="1">
-									<img src="img/SLEEP.jpg" class="img-responsive">								</div>
-								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
-									<img src="img/fea4.jpg" class="img-responsive">								</div>
-								<div class="filimg mix category-2 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
-									<img src="img/fea5.jpg" class="img-responsive">
+									<img src="img/SLEEP.jpg" class="img-responsive">								
 								</div>
 								<div class="filimg mix category-2 category-3 col-md-4 col-sm-4 col-xs-12" data-myorder="8">
 									<img src="img/DEAD.jpg" class="img-responsive">
