@@ -18,4 +18,11 @@ class Ownership extends Model
         // data insert
         DB::table('ownerships')->insert($dataSet);
     }
+
+    public function get_ownership($character_id){
+        $ownership_item = DB::table('ownerships')->select('item_id')->where('character_id',$character_id)->get();
+
+        // echo $ownership_item;
+        return $ownership_item;
+    }
 }
