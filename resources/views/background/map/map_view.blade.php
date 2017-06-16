@@ -53,6 +53,7 @@
 						</div>
 					</td>
 				</tr>
+				<div><input id="picker" type="color"></div>
 			</table>
 		</div>
 		
@@ -61,8 +62,9 @@
 		<div>
 			<br><b>업로드된 이미지</b><br>
 			<br>
+			
 				@foreach($data as $d)
-					<div class="selected_cell" style="float:left">
+					<div style="float:left">
 						<img id="img_cell" src=" {{ url(asset($d['img_src'])) }}" size="2%">
 					</div>
 				@endforeach
@@ -82,12 +84,31 @@
 			
 		<div class="row">
 		<div id="MaplistShowbtn">맵 목록</div>
-		@foreach($data as $d)
+		{{-- @foreach($data as $d)
 			<div id="map_list">
 				{{ $d['id'] }}
 			</div>
-		@endforeach
+		@endforeach --}}
 		</div>
+
+		<script>
+		$('#colorSelector').ColorPicker({
+			color: '#0000ff',
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+					return false;
+				},
+				
+				onHide: function (colpkr) {
+					$(colpkr).fadeOut(500);
+					return false;
+				},
+			onChange: function (hsb, hex, rgb) {
+				$('#colorSelector div').css('backgroundColor', '#' + hex);
+			}
+		});
+	</script>
+
 	</div>
 	</div>
 
@@ -249,20 +270,17 @@
 
 		// 색상 변경
         function map_color_change() {		
-            // alert($(this).attr("id"));
+            alert($(this).attr("{{$d['id']}}"));
             $(".cell").removeClass("selected_cell");
             $(this).addClass("selected_cell");
-
         }
 
 		function MaplistShowbtn() {
 			alert("눌렷다");
-			$('#map_list').hidden();
 			// $('#map_list').show();
 		}
 
 
-		// $(function(){
      	// 	$("#uploadbutton").click(function(){
         //  		var form = $('form')[0];
         //  		var formData = new FormData(form);
@@ -364,11 +382,13 @@
                     	.attr("y", "0");
 
         catpattern.append("image")
-				  .attr("height", 40)
-            	  .attr("width", 78)
+				//   .attr("height", 40)
+            	//   .attr("width", 78)
+				  .attr("height", 100)
+            	  .attr("width", 100)
 				  .attr("x", "0")
                   .attr("y", "0")
-         	      .attr("xlink:href", "http://thumbnail.egloos.net/750x0/http://pds21.egloos.com/pds/201701/11/10/f0091810_5875a9df037d5.jpg");
+         	      .attr("xlink:href", "{{ url(asset($d['img_src'])) }}");	// DB 이미지 주소 가져옴
 
 		var svg_g = svg.append("g")
 				.attr("class", "hexagon");
@@ -391,6 +411,7 @@
 				.attr("class", "mesh")
 				.attr("d", path);
 
+
 		var border = svg.append("path")
 				.attr("class", "border")
 				.call(redraw);
@@ -408,12 +429,12 @@
 				d3.select(this).attr("class",null);
 				// d3.select(this).classed("fill", d.fill = mousing > 0);
 				// d3.select(this).classed($(".selected_cell").attr("id"), d.fill);
-				// d3.select(this).attr("fill", "url(#hosPattern)");	// 이미지 드래그
+				d3.select(this).attr("fill", "url(#hosPattern)");	// 이미지 드래그
 				
 				// if() {	// 이미지인지 색인지
 					// d3.select(this).attr("fill", $id);
 					// else {
-						d3.select(this).attr("fill", "black");
+						// d3.select(this).attr("fill", "black");
 					// }
 				// }
 				border.call(redraw);
