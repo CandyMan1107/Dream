@@ -10,10 +10,10 @@ $(document).ready(function(){
         // alert(item_id);
         // alert($("#character_id").val());
         $.ajaxSetup({
-              headers: {
+            headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
+            }
+        });
         $.ajax({
             type: "POST",
             url : "character/ownership",
@@ -23,7 +23,7 @@ $(document).ready(function(){
                 window.location.reload(true);
             },
             error:function(){
-                alert("ㅅㅂ");
+                alert("실패");
             }
         });
     });

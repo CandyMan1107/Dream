@@ -44,6 +44,10 @@ Route::resource('/background/things', 'BackgroundItemsController');
 
 Route::post('/background/character/ownership', "BackgroundCharactersController@ownership");
 
+Route::post('/background/character/ownership_icon', "BackgroundCharactersController@ownership_icon");
+
+Route::post('/background/character/ownership_img', "BackgroundCharactersController@ownership_img");
+
 Route::resource('/background/character', 'BackgroundCharactersController');
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');

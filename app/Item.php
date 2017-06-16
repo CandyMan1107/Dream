@@ -34,4 +34,10 @@ class Item extends Model
 
         return $dataSet;
     }
+
+    public function get_item_src($item_id){
+        $item_src = DB::table('items')->select('img_src')->where('id',$item_id)->get();
+
+        return $item_src;
+    }
 }
