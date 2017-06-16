@@ -26,9 +26,6 @@ Route::get('/background/relation/rmRel', "RelationController@removeRelation");
 
 Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
-Route::get('/background/map', function(){
-  return view('background/map/map_view');
-});
 
 // 지도 이미지 등록
 Route::post('/background/addMapImg', "MapController@MapImgStore");
