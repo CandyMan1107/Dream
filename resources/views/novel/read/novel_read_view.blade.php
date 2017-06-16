@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-9 text-left info-text">
                 <h4>
-                    <span class="novel-info-text"><a href="/novel/novel_info/{{$data['belong_to_novel']}}"><strong>{!! $data['novel_title'] !!}</strong></a></span>
+                    <span class="novel-info-text"><a href="/novel/info/novel_info/{{$data['belong_to_novel']}}"><strong>{!! $data['novel_title'] !!}</strong></a></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
                     <span class="novel-info-text">{!! $data['episode_count'] !!}화 {!! $data['episode_title'] !!}</span>
                 </h4>
@@ -369,7 +369,7 @@
                     </a>
                 </div>
                 <div class="col-md-4 text-center">
-                    <a href="/novel/novel_info/{{$data['belong_to_novel']}}">
+                    <a href="/novel/info/novel_info/{{$data['belong_to_novel']}}">
                         <p><i class="material-icons move-icon">menu</i></p>
                         <h4>목록으로</h4>
                     </a>

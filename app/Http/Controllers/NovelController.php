@@ -41,7 +41,7 @@ class NovelController extends Controller
 
         //echo $data[$i]['title'];
 
-        return view('novel.novel_info')->with("data", $data);
+        return view('novel.info.novel_info')->with("data", $data);
     }
 
     public static function episodeShow($id) 

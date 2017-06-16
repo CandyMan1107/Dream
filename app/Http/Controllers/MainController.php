@@ -10,6 +10,7 @@ class MainController extends Controller
     //
 
     public function index() {
+
         $novelTable = new Novel();
         $novelData = $novelTable->mainData();
 
@@ -31,6 +32,15 @@ class MainController extends Controller
 
         // var_dump($data);
 
+        
         return view('welcome')->with('data', $data);
+    }
+
+    public static function todayNovel($data) {
+        return view('novel.welcome.todayMin')->with('data', $data);
+    }
+
+    public static function bestNovel($data) {
+        return view('novel.welcome.bestMin')->with('data', $data);
     }
 }

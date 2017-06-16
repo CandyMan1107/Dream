@@ -55,8 +55,8 @@
                             <div class="col-md-2 upload-day">
                                 <b>수, 토</b> 연재
                             </div>
-                            <div class="col-md-2">
-                                소설
+                            <div class="col-md-2 genre-default">
+                                {{ $data[0]['genre'] }}
                             </div>
                             <div class="col-md-3">
                                 소설 | 판타지
@@ -76,10 +76,12 @@
                     <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-3">
-                                <select class="form-control input-lg">
-                                    @foreach ($i = 0; $i < {{ $data[0]['episode_count'] }})
-                                        <option>{{ $i }}</option>
-                                    @endforeach
+                                <select class="form-control input-lg" onchange="location = this.value;">
+                                    @for ($i = count($data); $i > 0; $i--)
+                                    <option value="/novel/read/novel_read_view/{{$data[0]['belong_to_novel']}}&{{$i}}">
+                                        {{$i}}
+                                    </option>
+                                    @endfor
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -104,7 +106,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-left">
-                        <h3>소설회차 <small>(1)</small></h3>
+                        <h3>소설회차 <small>({{count($data)}})</small></h3>
                     </div>
                     <div class="col-md-6 text-right sort">
                         <h5>
