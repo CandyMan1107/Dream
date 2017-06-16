@@ -25,17 +25,14 @@ class Episode extends Model
         // var_dump($table);
     }
 
-    // TABLE : novel_episodes SELECT ALL
-    public function dataSelectAll() {
-        $episodeData = DB::table('novel_episodes')->get();
-        // var_dump($episodeData);
-
-        return $episodeData;
-    }
-
-    // TABLE : novels SELECT belong_to_novel, episode_title, created_at
-    public function selectWithNovel() {
-        $episodeData = DB::table("novel_episodes")->select("belong_to_novel", "episode_title", "created_at")->get();
+    // TABLE : novel_episodes SELECT // JOIN TABLE : novels
+    public function dataJoinNovel($id) {
+        $episodeData = DB::table('novel_episodes')
+            ->join('novels', 'novel_episodes.belong_to_novel', '=', 'novels.id')
+            ->select('novel_episodes.*', 'novels.title')
+            ->where('novel_episodes.belong_to_novel', '=', $id)
+            ->where('novels.id', '=', $id)
+            ->get();
 
         return $episodeData;
     }
