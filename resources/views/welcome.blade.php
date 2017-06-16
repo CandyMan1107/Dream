@@ -56,7 +56,7 @@
 							<div class="service-box">
 								<div class="service-icon"><img src="upload/images/{{ $data[$i]['cover_img_src'] }}" /></div>
 								<div class="service-text">
-									<h5>{!! $data[$i]['genre'] !!}</h5>
+									<h5 class="genre">{!! $data[$i]['genre'] !!}</h5>
 									<h3>{!! $data[$i]['title'] !!}</h3>
 									<p> <i class="fa fa-pencil"></i> 글반죽</p>
 									<p> <b>{!! $data[$i]['summary_intro'] !!}</b></p>

@@ -1,4 +1,3 @@
-<body>
 <article>
 	<header>
 		<style type="text/css">
