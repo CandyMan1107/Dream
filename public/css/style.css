@@ -27,6 +27,10 @@ h1 {
 Header
 **************************************/
 
+.selected {
+    border : 2px solid red;
+}
+
 .section-padding {
     padding: 0px 0px;
 }
@@ -279,9 +283,20 @@ p.cta-sub-title {
     background-color: #FA9600;
 }
 
+#today-novel a {
+    text-decoration: none;
+    color: black;
+}
+
+#today-novel i {
+    color: #002E40;
+}
+
 .service-box {
     margin: 0 0 60px;
     display: inline-block;
+    width: 360px;
+    height: 286px;
 }
 
 .service-box .service-icon img {
@@ -352,6 +367,8 @@ p.cta-sub-title {
 
 .filimg {
     margin-bottom: 30px;
+    width: 198px;
+    height: 286px;
 }
 
 .fil-btn .active {
@@ -364,6 +381,11 @@ p.cta-sub-title {
     height: 400px;
     overflow: hidden;
     float: left;
+}
+
+.autoplay .team-info a {
+    text-decoration: none;
+    color: #002E40;
 }
 
 .team-info {

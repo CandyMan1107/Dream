@@ -2,16 +2,15 @@
 
 @section('content')
     <div class="default-padding"></div>
-
     {{-- read-novel-info START --}}
     <div id="read-novel-info" class="section-padding">
         <div id="default-padding-small"></div>
         <div class="row">
             <div class="col-md-5 info-text">
                 <h4 class="text-left">
-                    <span class="novel-info-text"><a href="{{ url()->previous() }}"><strong>{!! $data['title'] !!}</strong></a></span>
+                    <span class="novel-info-text"><a href="{{ url()->previous() }}"><strong>{!! $data['novel_title'] !!}</strong></a></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
-                    <span class="novel-info-text">{!! $data['id'] !!}화 {!! $data['episode_title'] !!}</span>
+                    <span class="novel-info-text">{!! $data['episode_count'] !!}화 {!! $data['episode_title'] !!}</span>
                 </h4>
             </div>
             <div class="col-md-4 text-right">
@@ -54,15 +53,12 @@
                 {{--<div id="default-padding-mid" class="col-md-12"></div>--}}
                 <div class="col-md-12 novel-viewer novel-viewer-web" name="webMode">
                     {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
-                    {!! $data['episode'] !!}
                 </div>
-                <div id="default-padding-big" class="col-md-12"></div>
-                
+            </div>
+        </div>
+        <div id="default-padding-big" class="col-md-12"></div>
+        <div class="container">
+            <div class="row">
                 <div class="col-md-12 text-center mark-icon">
                     <ul class="list-inline">
                         <li>
@@ -81,9 +77,10 @@
                         </li>
                     </ul>
                 </div>
-                <div id="default-padding-mid" class="col-md-12"></div>
             </div>
         </div>
+                
+        <div id="default-padding-mid" class="col-md-12"></div>
         {{-- container class END --}}
     </div>
     {{-- read-novel-view END --}}
@@ -116,7 +113,7 @@
                     <tr>
                         <td>
                             <select class="form-control">
-                                <option selected="selected">{!! $data['id'] !!}화. {!! $data['episode_title'] !!}</option>
+                                <option selected="selected">{!! $data['episode_count'] !!}화. {!! $data['episode_title'] !!}</option>
                             </select>
                         </td>
                     </tr>
@@ -423,7 +420,7 @@
                             </div>
                             <div id="default-padding-small" class="col-md-12"></div>
                             <div class="col-md-12">
-                                <span><small>{!! $data['id'] !!}화</small></span>
+                                <span><small>{!! $data['episode_count'] !!}화</small></span>
                                 &nbsp;
                                 <span>엄청 재밌어요! 글작가님 글은 항상 재미있었지만 오베는 역대급!</span>
                             </div>
@@ -452,6 +449,8 @@
 
         {{-- JHM STYLE --}}
         <link rel="stylesheet" href="/css/jhm-style.css">
+        {{-- BOOK STYLE --}}
+        {{-- <link rel="icon" type="image/png" href="/pics/favicon.png" /> --}}
         {{-- JHM SCRIPT --}}
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -459,4 +458,10 @@
         <script src="/js/JHM-Custom/jhm-readNovel-custom.js"></script>
         <script src="/js/JHM-Custom/jhm-quick.js"></script>
         <script src="/js/JHM-Custom/jhm-comment.js"></script>
+        {{-- BOOK SCRIPT --}}
+        {{-- <script type="text/javascript" src="/js/book-custom/jquery.min.1.7.js"></script>
+        <script type="text/javascript" src="/js/book-custom/jquery-ui-1.8.20.custom.min.js"></script>
+        <script type="text/javascript" src="/js/book-custom/modernizr.2.5.3.min.js"></script>
+        <script type="text/javascript" src="/js/book-custom/hash.js"></script>
+        <script type="text/javascript" src="/js/book-custom/book.js"></script> --}}
 @endsection

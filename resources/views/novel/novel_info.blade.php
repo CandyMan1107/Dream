@@ -10,7 +10,7 @@
                 <div class="row">
                     <div class="col-md-8 text-left novel-info-upper-text">
                         <h3><strong>
-                            {!! $data['title'] !!}
+                            {!! $data[0]['title'] !!}
                         </strong></h3>
                         <h5><small>글</small>&nbsp;글작가</h5>
                     </div>
@@ -59,7 +59,7 @@
                                 소설
                             </div>
                             <div class="col-md-3">
-                                소설 | 현대 | 노인 | 괴짜
+                                소설 | 판타지
                             </div>
                         </div>
                     </div>
@@ -67,11 +67,10 @@
                     <div class="col-md-9">
                         <p class="lead">
                             <strong>
-                                {!! $data['summary_intro'] !!}
+                                {!! $data[0]['summary_intro'] !!}
                             </strong>
                         </p>
-                        <p>{!! $data['intro'] !!}</p>
-                        {{-- <p>하지만 오베가 막 천장에 고리를 박으려는 순간, 건너편 집에 지상 최대의 얼간이가 이사를 오고 엄청나게 귀찮고 성가신 소리를 내기 시작한다. 오베가 딱 싫어하는 타입의 이 인간들로 인해 오베의 계획은 시작 단계에 이르기도 어려운 지경이다. 사람을 다방면으로 귀찮게 하는 인간들은 오베가 자살을 기도할 때마다 기막힌 타이밍에 오베가 자살을 포기하고 싶게 만들 만큼 방해를 하기 시작하는데…….</p> --}}
+                        <p>{!! $data[0]['intro'] !!}</p>
                     </div>
                     <div id="default-padding-mid-1" class="col-md-9"></div>
                     <div class="col-md-9">
@@ -82,7 +81,7 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <a href="/novel/read/novel_read_view/{{$data['id']}}&1"><button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button></a>
+                                <a href="/novel/read/novel_read_view/{{$data[0]['belong_to_novel']}}&1"><button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button></a>
                             </div>
                             <div class="col-md-4">
                                 <button class="btn btn-default btn-block novel-background-read-Btn">소설 배경 설정 보기</button>
@@ -113,37 +112,40 @@
                     
                     <div id="default-padding-small" class="col-md-12"></div>
 
-                    <div class="col-md-12">
-                        <div class="episode">
-                            <div class="row">
-                                <a href="/novel/read/novel_read_view/{{$data['id']}}&1">
-                                    <div class="col-md-3">
-                                        <div>
-                                            <img src="/img/OVE.jpg" width="261" height="160" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="episode-list">
-                                            <div class="col-md-12">
-                                                <h4>1. {{ $data['episode_title'] }}</h4>
-                                            </div>
-                                            <div id="default-padding-small-0" class="col-md-12"></div>
-                                            <div class="col-md-2">
-                                                <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;1
-                                            </div>
-                                            <div class="col-md-2">
-                                                <small>댓글</small>&nbsp;<strong>1</strong>
-                                            </div>
-                                            <div class="col-md-8">
-                                                {{ $data['created_at'] }}
+                    @foreach ($data as $d)
+                        <div class="col-md-12">
+                            <div class="episode">
+                                <div class="row">
+                                    <a href="/novel/read/novel_read_view/{{$d['belong_to_novel']}}&{{ $d['episode_count'] }}">
+                                        <div class="col-md-3">
+                                            <div>
+                                                <img src="/img/OVE.jpg" width="261" height="160" />
                                             </div>
                                         </div>
-                                    </div>
-                                </a>
+                                        <div class="col-md-9">
+                                            <div class="episode-list">
+                                                <div class="col-md-12">
+                                                    <h4>{{ $d['episode_count'] }}. {{ $d['episode_title'] }}</h4>
+                                                </div>
+                                                <div id="default-padding-small-0" class="col-md-12"></div>
+                                                <div class="col-md-2">
+                                                    <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;1
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <small>댓글</small>&nbsp;<strong>1</strong>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    {{ $d['created_at'] }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="default-padding-small" class="col-md-12"></div>
+                        <div id="default-padding-small" class="col-md-12"></div>
+                    @endforeach
+                    
                     {{--PAGE--}}
                     <div id="default-padding-small-1" class="col-md-12"></div>
                 </div>

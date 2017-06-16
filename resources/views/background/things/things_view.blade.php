@@ -14,7 +14,7 @@
 					@foreach ($data as $item)
 					<?php $img_src = "/img/background/itemImg/".$item['img_src']; ?>
 					
-					<img src="{{$img_src}}" alt="item image" class="img-circle img-things-size item_list event_list" id="{{$item['id']}}" style="margin : 17px">
+					<img src="{{$img_src}}" alt="item image" class="img-circle img-things-size item_list event_list" id="{{$item['id']}}" name="item_icon" style="margin : 17px">
 					@endforeach
 				@endif
 			</div>

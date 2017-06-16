@@ -125,11 +125,11 @@ class writeNovelController extends Controller
     public function callBackgroundInfo(Request $request){
       $bgCase = $request->input('bgCase');
       $bgId   = $request->input('bgId');
-      $idName = ($bgCase == "characters" ? "cha_id" : "id");
+      $idName = ($bgCase == "characters" ? "cha_id" : "id")
 
       $bgInfo = DB::table($bgCase)->where($idName,"=",$bgId)->get();
 
-      return $bgInfo;
+      return "asd";
     }
 
 }
