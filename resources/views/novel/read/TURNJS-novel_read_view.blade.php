@@ -450,7 +450,7 @@
         {{-- JHM STYLE --}}
         <link rel="stylesheet" href="/css/jhm-style.css">
         {{-- BOOK STYLE --}}
-        {{-- <link rel="icon" type="image/png" href="/pics/favicon.png" /> --}}
+        <link rel="icon" type="image/png" href="/pics/favicon.png" />
         {{-- JHM SCRIPT --}}
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -459,9 +459,9 @@
         <script src="/js/JHM-Custom/jhm-quick.js"></script>
         <script src="/js/JHM-Custom/jhm-comment.js"></script>
         {{-- BOOK SCRIPT --}}
-        {{-- <script type="text/javascript" src="/js/book-custom/jquery.min.1.7.js"></script>
+        <script type="text/javascript" src="/js/book-custom/jquery.min.1.7.js"></script>
         <script type="text/javascript" src="/js/book-custom/jquery-ui-1.8.20.custom.min.js"></script>
         <script type="text/javascript" src="/js/book-custom/modernizr.2.5.3.min.js"></script>
         <script type="text/javascript" src="/js/book-custom/hash.js"></script>
-        <script type="text/javascript" src="/js/book-custom/book.js"></script> --}}
+        <script type="text/javascript" src="/js/book-custom/book.js"></script>
 @endsection
