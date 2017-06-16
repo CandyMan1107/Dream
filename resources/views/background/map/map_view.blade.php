@@ -65,7 +65,7 @@
 			
 				@foreach($data as $d)
 					<div style="float:left">
-						<img id="img_cell" src=" {{ url(asset($d['img_src'])) }}" size="2%">
+						<img id="img_src" src=" {{ url(asset($d['img_src'])) }}" size="2%">
 					</div>
 				@endforeach
 			<br><br>
@@ -90,24 +90,6 @@
 			</div>
 		@endforeach --}}
 		</div>
-
-		<script>
-		$('#colorSelector').ColorPicker({
-			color: '#0000ff',
-			onShow: function (colpkr) {
-				$(colpkr).fadeIn(500);
-					return false;
-				},
-				
-				onHide: function (colpkr) {
-					$(colpkr).fadeOut(500);
-					return false;
-				},
-			onChange: function (hsb, hex, rgb) {
-				$('#colorSelector div').css('backgroundColor', '#' + hex);
-			}
-		});
-	</script>
 
 	</div>
 	</div>
@@ -164,7 +146,7 @@
 		}
 
 
-		#img_cell {
+		#img_src {
     		width: 50px;
     		height: auto;
 		}
@@ -187,7 +169,7 @@
 			fill: none;
 		}
 
-		/*path.fill.ex1{
+		path.fill.ex1{
 			fill: #002E40;
 		}
 
@@ -205,7 +187,7 @@
 
 		path.fill.ex5{
 			fill: #FA9600;
-		}*/
+		}
 
 		.mesh {
 			fill: none;
@@ -247,17 +229,24 @@
             // $('#erase_btn').bind('click', erase_map);
             $('#erase_btn').bind('click', refresh);
             $('.cell').bind('click', map_color_change);
-			$('#img_cell').bind('click', map_img_fill);
+			$('#img_src').bind('click', map_img_fill);
 			$('#MaplistShowbtn').bind('click', MaplistShowbtn);
+
+			$('#map').bind('click', map_img_fill);
         });
 
         function refresh() {
             location.reload();
         }
 
+		function MapClickevent() {
+			alert("맵눌럿다");
+			// d3.select(this).attr("fill", "red");
+		}
+
 		function map_img_fill() {
-			$(this).addClass("selected_cell");
-			alert($(this).attr("id"));
+			// $(this).addClass("selected_cell");
+			// alert($(this).attr("id"));
 		}
 
         function erase_map() {	// fill 삭제
@@ -270,9 +259,15 @@
 
 		// 색상 변경
         function map_color_change() {		
-            alert($(this).attr("{{$d['id']}}"));
             $(".cell").removeClass("selected_cell");
             $(this).addClass("selected_cell");
+			
+
+			$(".selected").attr("id");
+			
+			// d3.select(this).attr("fill", $("selected_cell").attr("id"));
+
+            // alert($(this).attr("id"));
         }
 
 		function MaplistShowbtn() {
@@ -375,20 +370,20 @@
 		var defs = svg.append("defs").attr("id", "imgdefs");
         
 		var catpattern = defs.append("pattern")
-                        .attr("id", "hosPattern")
-                        .attr("height", 100)
-                        .attr("width", 100)
-                        .attr("x", "0")
-                    	.attr("y", "0");
+					.attr("id", "hosPattern")
+					.attr("height", 15)
+					.attr("width", 10)
+					.attr("x", "0")
+					.attr("y", "0");
 
-        catpattern.append("image")
-				//   .attr("height", 40)
-            	//   .attr("width", 78)
-				  .attr("height", 100)
-            	  .attr("width", 100)
-				  .attr("x", "0")
-                  .attr("y", "0")
-         	      .attr("xlink:href", "{{ url(asset($d['img_src'])) }}");	// DB 이미지 주소 가져옴
+			catpattern.append("image")
+					//   .attr("height", 40)
+					//   .attr("width", 78)
+					.attr("height", "40")
+					.attr("width", "40")
+					.attr("x", "0")
+					.attr("y", "0")
+					.attr("xlink:href", "{{ url(asset($d['img_src'])) }}");	// DB 이미지 주소 가져옴
 
 		var svg_g = svg.append("g")
 				.attr("class", "hexagon");
@@ -398,14 +393,17 @@
 
 		var paths =	svg_g.selectAll("path")
 				.data(topology.objects.hexagons.geometries)
-			.enter().append("path")
+				.enter().append("path")
 				.attr("d", function(d) { return path(topojson.feature(topology, d)); })
 				.attr("class", function(d) { return d.fill ? "fill" : null; })
 
 				.on("mousedown", mousedown)
+
 				.on("mousemove", mousemove)
+
 				.on("mouseup", mouseup);
 
+				
 		svg.append("path")
 				.datum(topojson.mesh(topology, topology.objects.hexagons))
 				.attr("class", "mesh")
@@ -425,14 +423,18 @@
 		}
 
 		function mousemove(d) {
+					// d3.select(this).attr("fill", $id);
+			
 			if (mousing) {
 				d3.select(this).attr("class",null);
-				// d3.select(this).classed("fill", d.fill = mousing > 0);
-				// d3.select(this).classed($(".selected_cell").attr("id"), d.fill);
-				d3.select(this).attr("fill", "url(#hosPattern)");	// 이미지 드래그
+
+				// if("class == true") {
+					// d3.select(this).classed("fill", d.fill = mousing > 0);
+					d3.select(this).attr("fill", "url(#hosPattern)");
+					// d3.select(this).classed($(".selected_cell").attr("id"), d.fill);
+				// }
+				// d3.select(this).attr("fill", "url(#hosPattern)");	// 이미지 드래그
 				
-				// if() {	// 이미지인지 색인지
-					// d3.select(this).attr("fill", $id);
 					// else {
 						// d3.select(this).attr("fill", "black");
 					// }

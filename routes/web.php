@@ -36,6 +36,12 @@ Route::get('/background/map', "MapController@index");
 // 지도 이미지 삭제
 Route::get('/background/removeMapImg', "MapController@removeImg");
 
+
+Route::get('/login', function () {
+    return view('auth/login');
+});
+
+
 Route::resource('/background/things', 'BackgroundItemsController');
 
 Route::post('/background/character/ownership', "BackgroundCharactersController@ownership");
@@ -117,3 +123,7 @@ Route::get('/write_novel/removeCover', "UpImgController@removeImg");
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
