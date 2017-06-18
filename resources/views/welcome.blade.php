@@ -22,7 +22,7 @@
 							</a>
 						</div>
 					@endfor
-			
+
 				</div>
 			</div>
 		</div>
@@ -88,7 +88,7 @@
 							<div class="filter wrk-title lst-cld" data-filter="horror">호러</div>
 					</div>
 					<div id="Container">
-					
+
 						@for ($i = 0; $i < count($data); $i++)
 							<div class="filimg mix {{ $data[$i]['genre'] }} col-md-4 col-sm-4 col-xs-12" data-myorder="2">
 								<a href="/novel/novel_info/{{ $data[$i]['id'] }}">
@@ -138,7 +138,7 @@
 							</div>
 						</div>
 					@endfor
-					
+
 				</div>
 			</div>
 		</div>
@@ -196,7 +196,7 @@
 	</div>
 	<!--CONTACT END-->
 	<link rel="stylesheet" href="/css/jhm-style.css">
-	
+
 	<script src="/js/jquery-3.2.0.js"></script>
 	<script src="/js/bootstrap.js"></script>
 	<script src="/js/jquery.easing.min.js" type="text/javascript"></script>

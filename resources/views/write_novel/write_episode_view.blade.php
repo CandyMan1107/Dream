@@ -514,6 +514,7 @@
             },
             success: function (data) {
               data = data[0];
+              console.log("asdasd");
               console.log(data);
               var div = $(".background-content");
               // 캐릭터 정보 출력
@@ -707,6 +708,16 @@
         removeAddTagMenu();
         if(curSel.toString().length > 0 && curSel.baseNode.parentNode.id=="editdiv" && tagId != null)
         popAddTagMenu(event, curSel);
+      }
+    });
+
+    // 에디트 박스 엔터
+    $('div[contenteditable]').keydown(function(e) {
+
+      if (e.keyCode === 13) {
+        document.execCommand('insertHTML', false, '<br><br>');
+
+        return false;
       }
     });
     // 선택한 구분에 태그 적용

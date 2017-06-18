@@ -28,13 +28,15 @@ Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
 
 // 지도 이미지 등록
-Route::post('/background/addMapImg', "MapController@MapImgStore");
+Route::post('/background/addMapImg', "MapController@mapImgStore");
 
+// 지도 이미지 호출
+Route::get('/background/getImgCellList', "MapController@getImgCellList");
 // 지도 이미지 띄우기
 Route::get('/background/map', "MapController@index");
 
 // 지도 이미지 삭제
-Route::get('/background/removeMapImg', "MapController@removeImg");
+Route::get('/background/removeImg', "MapController@removeImg");
 
 
 Route::get('/login', function () {

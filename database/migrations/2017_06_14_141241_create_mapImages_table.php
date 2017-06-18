@@ -15,6 +15,7 @@ class CreateMapImagesTable extends Migration
     {
         Schema::create('map_images', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer("user_id");
             $table->string("img_src")->nullable();
         });
     }
