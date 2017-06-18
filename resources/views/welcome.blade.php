@@ -41,12 +41,14 @@
 	{{--CTA1 END--}}
 	<div id="default-padding-mid"></div>
 	
+	{{--today & best NOVEL START--}}
 	@php
 	use App\Http\Controllers\MainController;
 	
 	echo MainController::todayNovel($data);
 	echo MainController::bestNovel($data);
 	@endphp
+	{{--today & best NOVEL END--}}
 
 	{{--EVENT START--}}
 	<div id="event" class="section-padding">
