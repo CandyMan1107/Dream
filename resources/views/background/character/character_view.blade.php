@@ -6,14 +6,20 @@
 
 @section('content')
 		<script type="text/javascript" src="/js/custom/character_event.js"></script>
+		<script type="text/javascript" src="/js/custom/additional_items.js"></script>
 		<script>character_event( <?=json_encode($data)?> )</script>
 		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-color : #e8d6b3" >
 			<div class="row">
 				@if($data[0])
 					@foreach ($data as $character)
 					<?php $img_src = "/img/background/characterImg/".$character['img_src']; ?>
+<<<<<<< HEAD
 
 					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list event_list" id="{{$character['id']}}" style="margin : 17px">
+=======
+					
+					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list event_list" id="{{$character['id']}}" name="character_icon" style="margin : 17px">
+>>>>>>> 0b166776d036af4c5af214d087a5271948ca6173
 					@endforeach
 				@endif
 			</div>
@@ -44,18 +50,18 @@
 				{{-- 캐릭터 추가사항 --}}
 				<div class="form-group form-group-lg">
 					<label class="col-sm-3 control-label" for="formGroupInputLarge">추가사항</label>
-					<div class="col-sm-5">
+					<div class="col-sm-5 refer_info_div">
 						<input class="form-control" type="text" id="refer_info" name="refer_info" placeholder="추가사항">
 					</div>
 					<div class="col-sm-2">
-						<i class="fa fa-plus-circle" aria-hidden="true" style="font-size:200%"></i>
+						<i class="fa fa-plus-circle" aria-hidden="true" id="additional_items" style="font-size:200%"></i>
 					</div>
 				</div>
 				{{-- 이미지 등록 --}}
 				<div class="form-group form-group-lg">
 					<label class="col-sm-3 control-label" for="formGroupInputLarge">이미지 등록</label>
 					<div class="col-sm-10">
-
+						
 						<input type="file" name="character_img_upload" id="character_img_upload">
 					</div>
 				</div>
@@ -75,7 +81,10 @@
 					<label class="col-sm-4 control-label" for="formGroupInputLarge">소유 사물</label>
 				</div>
 				<div>
-					@php
+					{{-- 소유 사물 아이콘 목록 --}}
+					<div class="inner"></div>
+					{{-- 소유 사물 등록 아이콘, 모달 호출 --}}
+					@php 
 						use App\Http\Controllers\BackgroundCharactersController;
 						echo BackgroundCharactersController::ownership_modal();
 					@endphp
@@ -87,8 +96,8 @@
 						</p>
 					</div>
 				</div>
-
-
+				
+				
 				<button type="submit" class="btn btn-default">등록</button>
 			</form >
 		</div>
@@ -111,7 +120,7 @@
 			</form>
 			<div class="row">
 				{{-- $page에 태그 값이 참조할 테이블의 이름을 넣어준다. --}}
-					@php
+					@php 
 						$page = "characters";
 						use App\Http\Controllers\TagsAddController;
 						echo TagsAddController::view_return($page,$data);

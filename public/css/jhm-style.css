@@ -6,11 +6,11 @@
 cursor
 **************************************/
 i {
-    cursor: default;
+    cursor: pointer;
 }
 
 /**************************************
-welcome.blade.php
+AUTOPLAY BANNER
 **************************************/
 #banner .autoplay-top a {
     text-decoration: none;
@@ -26,6 +26,18 @@ welcome.blade.php
 #today-novel .page-title a {
     color: #002E40;
     text-decoration: none;
+}
+/**************************************
+GENRE
+**************************************/
+.genre {
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.genre-default {
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 /**************************************
 default-padding
@@ -73,7 +85,7 @@ sort
     height: 20px;
 }
 /**************************************
-/novel/novel_info.blade.php
+NOVEL-INFO
 **************************************/
 #novel-info-1 .novel-info-upper-text {
     padding-top: 30px;
@@ -95,7 +107,15 @@ sort
 #novel-info-2 .novel-1st-read-Btn, .novel-background-read-Btn {
     font-size: 22px;
 }
+#novel-info-2 a {
+    text-decoration: none;
+    color: #000000;
+}
 
+#novel-info-3 a {
+    text-decoration: none;
+    color: #000000;
+}
 #novel-info-3 .episode {
     border: 1px solid rgba(149, 152, 154, .5) !important;
 }
@@ -106,8 +126,12 @@ sort
 #novel-info-3 .episode-list > i {
     font-size: 17px;
 }
+#novel-info-3 .fa-star {
+    color: #FA9600;
+}
+
 /**************************************
-novel-review
+NOVEL-REVIEW
 **************************************/
 #novel-review .check-icon {
     color: #FA9600;
@@ -146,10 +170,14 @@ i[name=thumb]:hover {
     color: rgba(149, 152, 154, .5) !important;
 }
 /**************************************
-/novel/read/read_novel_view.blade.php
+READ-NOVEL-INFO
 **************************************/
 #read-novel-info {
     border-bottom: 1px solid rgba(149, 152, 154, .2) !important;
+}
+#read-novel-info a {
+    text-decoration: none;
+    color: #002E40;
 }
 #read-novel-info .info-text {
     padding-left: 220px;
@@ -166,14 +194,6 @@ i[name=thumb]:hover {
     width: auto;
     font-size: 38px;
 }
-
-ul[name=bookMode] .setView {
-    color: #002E40;
-}
-ul[name=bookMode] .novelBackground {
-    color: #2A5769;
-}
-
 h4 > span {
     /*border: 1px solid #FF0000;*/
     display: inline-block;
@@ -184,7 +204,19 @@ h4 > span {
 .novel-info-text {
     height: 25px;
 }
+/**************************************
+BookMode : READ-NOVEL-INFO
+**************************************/
+ul[name=bookMode] .setView {
+    color: #002E40;
+}
+ul[name=bookMode] .novelBackground {
+    color: #2A5769;
+}
 
+/**************************************
+READ-NOVEL-VIEW
+**************************************/
 /*#read-novel-view .novel-viewer {
     font-size: 14px;
     font-family: 'Nanum Gothic';
@@ -228,7 +260,9 @@ h4 > span {
     height: 35px;
     font-size: 18px;
 }
-
+/**************************************
+READ-NOVEL-VIEW : WRITER WORD
+**************************************/
 #writer-word .container {
     width: 1080px;
     padding: 20px 80px 0px 80px;
@@ -244,6 +278,14 @@ h4 > span {
     padding: 0px 20px 0px 20px;
 }
 
+#episode-icon a {
+    text-decoration: none;
+    color: #000000;
+}
+
+/**************************************
+QUICKMENU
+**************************************/
 #quickMenu {
     position: absolute;
     top: 200px; 
@@ -297,7 +339,9 @@ h4 > span {
     width: auto;
     /*border: 1px solid red;*/
 }
-
+/**************************************
+QUICKMENU : MODAL
+**************************************/
 #viewerModal .viewScreen {
     /*background: red;*/
     width: 40px;
@@ -313,7 +357,7 @@ h4 > span {
 }
 
 #viewerModal .example-text {
-    height: 142px;
+    height: 100px;
     border: 1px solid rgba(149, 152, 154, .5);
     overflow: auto;
 }
@@ -345,7 +389,7 @@ h4 > span {
     color: #555555;
 }
 /**************************************
-/novel/today_novel_by_day.blade.php
+TODAY NOVEL : DAY SELECT
 **************************************/
 #select-space {
     font-size: 18px;
@@ -388,7 +432,7 @@ selected
 }
 
 /**************************************
-selectedIcon
+selectedIcon : jhm.js
 **************************************/
 .selectedBookmark {
     color: #2A5769;
@@ -401,7 +445,7 @@ selectedIcon
 }
 
 /**************************************
-novel comment
+NOVEL COMMENT
 **************************************/
 .userComment > input {
     height: 100px !important;

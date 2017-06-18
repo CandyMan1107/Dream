@@ -11,7 +11,7 @@
 
 					@for ($i = 0; $i < 3; $i++)
 						<div class="col-md-12">
-							<a href="/novel/novel_info/{{ $data[$i]['id'] }}">
+							<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
 								<div class="jumbotron">
 									<h3 class="novel">{!! $data[$i]['genre'] !!}</h3>
 									<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
@@ -40,6 +40,7 @@
 	</div>--}}
 	{{--CTA1 END--}}
 	<div id="default-padding-mid"></div>
+<<<<<<< HEAD
 	{{-- SERVICE START --}}
 	<div id="today-novel" class="section-padding">
 		<div class="container">
@@ -104,6 +105,17 @@
 		</div>
 	</div>
 	{{--PORTFOLIO END--}}
+=======
+	
+	{{--today & best NOVEL START--}}
+	@php
+	use App\Http\Controllers\MainController;
+	
+	echo MainController::todayNovel($data);
+	echo MainController::bestNovel($data);
+	@endphp
+	{{--today & best NOVEL END--}}
+>>>>>>> 0b166776d036af4c5af214d087a5271948ca6173
 
 	{{--EVENT START--}}
 	<div id="event" class="section-padding">
@@ -119,7 +131,7 @@
 					@for ($i = 0; $i < count($data); $i++)
 						<div class="col-md-6">
 							<div class="team-info">
-								<a href="/novel/novel_info/{{ $data[$i]['id'] }}">
+								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
 									<div class="img-sec">
 										<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
 									</div>
@@ -143,7 +155,7 @@
 			</div>
 		</div>
 	</div>
-	{{--TEAM END--}}
+	{{--EVENT END--}}
 
 	{{--CTA2 START--}}
 	<div class="cta2">

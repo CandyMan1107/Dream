@@ -39,9 +39,9 @@ class NovelController extends Controller
 
         // return var_dump($data);
 
-        // echo $data[$i]['title'];
+        //echo $data[$i]['title'];
 
-        return view('novel.novel_info')->with("data", $data);
+        return view('novel.info.novel_info')->with("data", $data);
     }
 
     public static function episodeShow($id) 
@@ -60,24 +60,46 @@ class NovelController extends Controller
 
         // var_dump($episodeData);
 
-        $data = array();
+        $data = array(array());
+        $i = 0;
 
         foreach($episodeData as $datas) {
-            $data['episode_count'] = $episodeCount;
+            $data[$i]['episode_count'] = $episodeCount;
 
-            $data['belong_to_novel'] = $datas->belong_to_novel;
-            $data['is_charge'] = $datas->is_charge;
-            $data['is_notice'] = $datas->is_notice;
-            $data['cover_img_src'] = $datas->cover_img_src;
-            $data['episode_title'] = $datas->episode_title;
-            $data['episode'] = $datas->episode;
-            $data['writers_postscript'] = $datas->writers_postscript;
-            $data['char_count'] = $datas->char_count;
-            $data['created_at'] = $datas->created_at;
+            $data[$i]['belong_to_novel'] = $datas->belong_to_novel;
+            $data[$i]['is_charge'] = $datas->is_charge;
+            $data[$i]['is_notice'] = $datas->is_notice;
+            $data[$i]['cover_img_src'] = $datas->cover_img_src;
+            $data[$i]['episode_title'] = $datas->episode_title;
+            $data[$i]['episode'] = $datas->episode;
+            $data[$i]['writers_postscript'] = $datas->writers_postscript;
+            $data[$i]['char_count'] = $datas->char_count;
+            $data[$i]['created_at'] = $datas->created_at;
 
-            $data['novel_title'] = $datas->title;
+            $data[$i]['novel_title'] = $datas->title;
+
+            if ($i == $episodeCount - 1) {
+                $i = $episodeCount - 1;
+
+                break;
+            }
+
+            $i++;
         }
 
-        return view('novel.read.novel_read_view')->with("data", $data);
+        // var_dump($episodeData);
+
+        // echo($episodeCount);
+        // var_dump($data[$i]);
+
+        return view('novel.read.novel_read_view')->with("data", $data[$i]);
+    }
+
+    public static function viewerModal() {
+        return view('novel.read.viewer_modal');
+    }
+
+    public static function backgroundModal($data) {
+        return view('novel.read.background_modal')->with("data", $data);
     }
 }

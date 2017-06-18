@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/', "MainController@index");
+
 
 Route::get('/lib', function () {
     return view('load');
@@ -48,6 +46,10 @@ Route::resource('/background/things', 'BackgroundItemsController');
 
 Route::post('/background/character/ownership', "BackgroundCharactersController@ownership");
 
+Route::post('/background/character/ownership_icon', "BackgroundCharactersController@ownership_icon");
+
+Route::post('/background/character/ownership_img', "BackgroundCharactersController@ownership_img");
+
 Route::resource('/background/character', 'BackgroundCharactersController');
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
@@ -56,14 +58,14 @@ Route::resource('/background', 'BackgroundController');
 
 // NOVEL VIEW START
 // Novel Info
-Route::get('/novel/novel_info/{id}', "NovelController@novelInfo");
+Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
 
 // Novel Episode
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
 // Today Novel
-Route::get('/novel/today_novel_by_day', function(){
-    return view('novel/today_novel_by_day');
+Route::get('/novel/kind/today_novel_by_day', function(){
+    return view('novel/kind/today_novel_by_day');
 });
 // NOVEL VIEW END
 

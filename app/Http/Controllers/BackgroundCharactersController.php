@@ -66,6 +66,29 @@ class BackgroundCharactersController extends Controller
         $ownership->insert_ownership($character_id, $item_list);
     }
 
+    public static function ownership_icon(Request $request){
+        $data = $request->all();
+        $character_id = $data['character_id'];
+        // echo $character_id;
+        $ownership = new Ownership();
+
+        $item_data = $ownership->get_ownership($character_id);
+        return $item_data;
+    } 
+
+    public static function ownership_img(Request $request){
+        $data = $request->all();
+        $count = count($data['item_id']);
+        $item_id = $data['item_id'];
+        $item = new Item();
+        // $img_src= array();
+        // 이미지 주소 받아오기
+        for ($i = 0; $i< $count ; $i++){
+            $img_src[$i] = $item->get_item_src($item_id[$i]);
+        }
+        return $img_src;
+    } 
+
     /**
      * Store a newly created resource in storage.
      *
