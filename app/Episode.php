@@ -36,4 +36,16 @@ class Episode extends Model
 
         return $episodeData;
     }
+
+    // TABLE : novel_episodes SELECT // SELECT episode_title
+    public function episodeTitle($id) {
+        $episodeData = DB::table('novel_episodes')
+            ->join('novels', 'novel_episodes.belong_to_novel', '=', 'novels.id')
+            ->select('novel_episodes.episode_title')
+            ->where('novel_episodes.belong_to_novel', '=', $id)
+            ->where('novels.id', '=', $id)
+            ->get();
+
+        return $episodeData;
+    }
 }

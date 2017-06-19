@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="default-padding"></div>
 {{--BANNER START--}}
 	<div id="banner" class="section-padding">
@@ -22,7 +23,6 @@
 							</a>
 						</div>
 					@endfor
-
 				</div>
 			</div>
 		</div>

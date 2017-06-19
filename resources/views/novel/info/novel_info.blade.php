@@ -1,9 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-
     <div class="default-padding"></div>
-    {{-- novel-info-1 START --}}
+        {{-- novel-info-1 START --}}
         <div id="novel-info-1" class="section-padding">
             {{-- container class START --}}
             <div class="container">
@@ -58,9 +57,9 @@
                             <div class="col-md-2 genre-default">
                                 {{ $data[0]['genre'] }}
                             </div>
-                            <div class="col-md-3">
+                            {{-- <div class="col-md-3">
                                 소설 | 판타지
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div id="default-padding-mid" class="col-md-9"></div>
