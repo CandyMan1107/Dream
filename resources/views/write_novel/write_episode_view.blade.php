@@ -307,6 +307,22 @@
       margin: 0 auto;
     }
 
+    /* 마우스 오버 시 캐릭터 팝업 */
+    .pop-menu {
+      z-index:1000;
+      position: absolute;
+      background-color:#C0C0C0;
+      border: 1px solid black;
+      padding: 2px;
+    }
+
+    .pop-menu > img {
+      z-index:1000;
+      position: absolute;
+      width:150px;
+      height:150px;
+    }
+
 
 
   </style>
@@ -364,7 +380,7 @@
         <div class="col-md-12 menu_title">내용</div>
       </div>
       <div class="col-md-12 edit-div">
-        <div class="col-md-10 edit-box episode-editor-div" contenteditable="true">
+        <div id="editdiv" class="col-md-10 edit-box episode-editor-div" contenteditable="true">
           episode content
         </div>
         <div class="col-md-2 background-box">
@@ -388,44 +404,6 @@
             </div>
           </div>
           <div class="background-div background-content">
-
-            <!-- <div class="col-md-12 basic-info-div background-div">
-              <div class="col-md-6 basic-cha-img">
-                <img class="img-circle img-things-size" src="http://tveta.naver.net/libs/1153/1153234/a1eaa6891808026e29d9_20170613112309575.jpg" alt="">
-                <span>정재훈</span>
-              </div>
-              <div class="col-md-6 basic-cha-info">
-                <br>
-                <span>
-                이름 | 이름<br>
-                나이 | 나이<br>
-                성별 | 성별<br>
-                </span>
-              </div>
-            </div>
-
-            <div class="col-md-12 info-div background-div">
-              <div class="col-md-12 info-header">
-                주요 정보
-              </div>
-              <div class="col-md-12 info-content">
-                ㅁㄴㅇㅁㄴㅇㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻ
-              </div>
-            </div>
-
-            <div class="col-md-12 tag-info-div">
-              <div class="col-md-12 tag-info-header">
-                bluediv
-              </div>
-              <div class="col-md-9 tag-info-content">
-                <select class="form-control">
-                  <option style="background:blue;">Mustard</option>
-                  <option>Ketchup</option>
-                  <option>Relish</option>
-                </select>
-              </div>
-              <div class="col-md-3 tag-info-color"></div>
-            </div> -->
 
           </div>
           <div class="pull-down background-div background-footer">
@@ -462,10 +440,10 @@
       }
       setAutocomplete();
     });
-
+    var source = Array();
     // characetrs, thing, place, event여부에 따른 자동완성
     function setAutocomplete(){
-      var source = Array();
+      source = Array();
       $("a.active").map(function(d){
         source = source.concat(getTags($(this).data("title")));
       });
@@ -475,7 +453,6 @@
         source: source,
         select: function (event,ui) {
           setBackgroundContent(ui.item);
-          alert('You selected: ' + ui.item.value + ', ' + ui.item.kind + ', ' + ui.item.object_id + ', ' + ui.item.color);
         }
       }).data("ui-autocomplete")._renderItem = function (ul, item) {
         var kind = "";
@@ -511,10 +488,12 @@
 
     // soureData로 부터 케이스, 아이디에 해당하는 태그만 추출
     function filterSourceData(tagCase, tagId){
-      var filter = sourceData;
+      var filter = source;
+      console.log(filter);
       filter = filter.filter(function(data){
         return (data.kind == tagCase) && (data.object_id == tagId)
       });
+      console.log(filter);
       return filter;
     }
 
@@ -535,6 +514,7 @@
             },
             success: function (data) {
               data = data[0];
+              console.log("asdasd");
               console.log(data);
               var div = $(".background-content");
               // 캐릭터 정보 출력
@@ -581,10 +561,86 @@
                 appendEle += "</div>";
               // 사물 정보 출력
               }else if (bgCase == "items"){
+                var appendEle = "";
+                var filterTag = filterSourceData("items", bgId);
+                //appendEle += data.cha_id + data.name + data.info + data.age + data.gender + data.img_src;
+                appendEle += "<div class='col-md-12 basic-info-div background-div'>";
+                appendEle += "  <div class='col-md-6 basic-cha-img'>";
+                appendEle += "    <img class='img-circle img-things-size' src='/img/background/itemImg/"+ data.img_src +"'>";
+                appendEle += "    <span>" + data.name + "</span>";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-6 basic-cha-info'>";
+                appendEle += "    <br>";
+                appendEle += "    <span>";
+                appendEle += "    이름 | " + data.name + "<br>";
+                appendEle += "    종류 | " + data.category + "<br>";
+                appendEle += "    </span>";
+                appendEle += "  </div>";
+                appendEle += "</div>";
 
+                appendEle += "<div class='col-md-12 info-div background-div'>";
+                appendEle += "  <div class='col-md-12 info-header'>";
+                appendEle += "    주요 정보";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-12 info-content'>";
+                appendEle += data.info;
+                appendEle += "  </div>";
+                appendEle += "</div>";
+
+                appendEle += "<div class='col-md-12 tag-info-div'>";
+                appendEle += "  <div class='col-md-12 tag-info-header'>";
+                appendEle += "    태그 정보";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-9 tag-info-content'>";
+                appendEle += "    <select class='form-control tag-list-select'>";
+                filterTag.forEach(function(d){
+                  appendEle += "      <option data-kind='" + d.kind + "' data-id='" + d.object_id + "' data-color='" + d.color + "'>" + d.value + "</option>";
+                });
+                appendEle += "    </select>";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-3 tag-info-color'></div>";
+                appendEle += "</div>";
               // 사건 정보 출력
               }else if (bgCase == "timetables"){
+                var appendEle = "";
+                var filterTag = filterSourceData("timetables", bgId);
+                //appendEle += data.cha_id + data.name + data.info + data.age + data.gender + data.img_src;
+                appendEle += "<div class='col-md-12 basic-info-div background-div'>";
+                appendEle += "  <div class='col-md-6 basic-cha-img'>";
+                //appendEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
+                appendEle += "    <span>" + data.event_names + "</span>";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-6 basic-cha-info'>";
+                appendEle += "    <br>";
+                appendEle += "    <span>";
+                appendEle += "    이름 | " + data.event_names + "<br>";
+                appendEle += "    도구 | " + data.add_items + "<br>";
+                appendEle += "    </span>";
+                appendEle += "  </div>";
+                appendEle += "</div>";
 
+                appendEle += "<div class='col-md-12 info-div background-div'>";
+                appendEle += "  <div class='col-md-12 info-header'>";
+                appendEle += "    주요 정보";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-12 info-content'>";
+                appendEle += data.event_contents;
+                appendEle += "  </div>";
+                appendEle += "</div>";
+
+                appendEle += "<div class='col-md-12 tag-info-div'>";
+                appendEle += "  <div class='col-md-12 tag-info-header'>";
+                appendEle += "    태그 정보";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-9 tag-info-content'>";
+                appendEle += "    <select class='form-control tag-list-select'>";
+                filterTag.forEach(function(d){
+                  appendEle += "      <option data-kind='" + d.kind + "' data-id='" + d.object_id + "' data-color='" + d.color + "'>" + d.value + "</option>";
+                });
+                appendEle += "    </select>";
+                appendEle += "  </div>";
+                appendEle += "  <div class='col-md-3 tag-info-color'></div>";
+                appendEle += "</div>";
               // 맵 정보 출력
               }else if (bgCase == "maps"){
 
@@ -612,38 +668,65 @@
       }
     }
 
+
+    //**********************************************************************************//
+    //                               오른쪽 마우스 액션                                  //
+    //**********************************************************************************//
     // 태그 적용 버튼
     var sel;
-    $("#applyTag").on('click',function(){
+    $("#applyTag").on('click',function(){applyTag()});
+
+    function applyTag(selection = null){
       var tagColor = $(".tag-list-select option:selected").attr("data-color");
       var tagCase  = $(".tag-list-select option:selected").attr("data-kind");
       var tagId    = $(".tag-list-select option:selected").attr("data-id");
 
       // alert(tagColor + tagCase + tagId);
-
-      var curSel = window.getSelection();
+      var curSel = selection;
+      if(selection == null)
+        curSel = window.getSelection();
       // 한글자 이상 선택하였을 경우
-      if(curSel.toString().length > 0){
+      if(curSel.toString().length > 0 && curSel.baseNode.parentNode.id=="editdiv" && tagId != null){
         sel = curSel;
         surroundSelection(tagColor, tagCase, tagId);
       }
+    }
+
+    //에디트 박스 클릭시
+    $("#editdiv").on("click",function(){
+      removeAllContextMenu();
     });
 
-    // 마지막 선택한 텍스트를 전역 변수에 전달.
-    // function setLastSelection(){
-    //   // ++++++++++++++++이후 셀렉션이 내용 div안의 내용인지 판단 !!!!
-    //   if(window.getSelection){
-    //     var curSel = window.getSelection();
-    //     if(curSel.toString().length > 0)
-    //       sel = curSel;
-    //   }
-    // }
+    //에디트 박스 오른쪽 마우스 클릭 시
+    $("#editdiv").on("contextmenu",function(event){
+      event.preventDefault();
+      var curSel = window.getSelection();
+      var tagId    = $(".tag-list-select option:selected").attr("data-id");
+      // span 태그 충돌 방지
+      if(!$(".popTag-menu").is(":visible")){
 
+        removeAddTagMenu();
+        if(curSel.toString().length > 0 && curSel.baseNode.parentNode.id=="editdiv" && tagId != null)
+        popAddTagMenu(event, curSel);
+      }
+    });
+
+    // 에디트 박스 엔터
+    $('div[contenteditable]').keydown(function(e) {
+
+      if (e.keyCode === 13) {
+        document.execCommand('insertHTML', false, '<br><br>');
+
+        return false;
+      }
+    });
     // 선택한 구분에 태그 적용
     function surroundSelection(tagColor, tagCase, tagId) {
         var span = document.createElement("span");
         span.style.fontWeight = "bold";
         span.style.backgroundColor = tagColor;
+        span.className = "tag-span";
+        span.contentEditable = "true";
 
         // span.setAttribute("onmouseover","popChaInfo(\'" + chaName+ "\')");
         // span.setAttribute("onmouseout","removeChaInfo()");
@@ -651,12 +734,163 @@
         span.setAttribute("data-case",tagCase);
         span.setAttribute("data-id",tagId);
             if (sel.rangeCount) {
+
                 var range = sel.getRangeAt(0).cloneRange();
-                range.surroundContents(span);
+                var startNode = range.startContainer
+                var startOffset = range.startOffset;
+
+                var endElement = document.createTextNode("\u200b");
+                try {
+                    range.surroundContents(span);
+                } catch (e) {
+                  alert("태그를 중복하여 사용할 수 없습니다.");
+                }
+
+                range.collapse(false);
+                range.insertNode(endElement);
+
+
                 sel.removeAllRanges();
                 sel.addRange(range);
             }
+        $(".tag-span").off().on("mouseover",function(event){
+          var bgCase = $(this).attr("data-case");
+          var bgId =$(this).attr("data-id")
+          if(!$(".popTag-menu").is(":visible")){
+            popBackgroundInfo(event,bgCase,bgId);
+          }
+        });
 
+        $(".tag-span").on("mouseout",function(event){
+          removeChaInfo();
+        });
+
+        $(".tag-span").on("contextmenu",function(event){
+          event.preventDefault();
+          removeAllContextMenu();
+          popTagMenu(event,$(this));
+        });
+    }
+
+    // 태그 마우스 오버 시 정보 출력
+    function popBackgroundInfo(event, bgCase, bgId){
+      $.ajax({
+          type: "get",
+          url: "/write_novel/call_background_info",
+          async: false,
+          data: {
+            "bgCase"  : bgCase,
+            "bgId"    : bgId
+          },
+          success: function (data) {
+             data = data[0];
+            // console.log(data);
+            var addEle = "";
+            switch(bgCase){
+              case "characters":
+                addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
+                addEle += "  <div class='col-md-6 basic-cha-img'>";
+                addEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
+                addEle += "    <span>" + data.name + "</span>";
+                addEle += "  </div>";
+                addEle += "  <div class='col-md-6 basic-cha-info'>";
+                addEle += "    <br>";
+                addEle += "    <span>";
+                addEle += "    이름 | " + data.name + "<br>";
+                addEle += "    나이 | " + data.age + "<br>";
+                addEle += "    성별 | " + data.gender + "<br>";
+                addEle += "    </span>";
+                addEle += "  </div>";
+                addEle += "</div>";
+                //addEle += "<div class=''>asd</div>";
+              break;
+              case "items":
+              addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
+              addEle += "  <div class='col-md-6 basic-cha-img'>";
+              addEle += "    <img class='img-circle img-things-size' src='/img/background/itemImg/"+ data.img_src +"'>";
+              addEle += "    <span>" + data.name + "</span>";
+              addEle += "  </div>";
+              addEle += "  <div class='col-md-6 basic-cha-info'>";
+              addEle += "    <br>";
+              addEle += "    <span>";
+              addEle += "    이름 | " + data.name + "<br>";
+              addEle += "    종류 | " + data.category + "<br>";
+              addEle += "    </span>";
+              addEle += "  </div>";
+              addEle += "</div>";
+              break;
+
+              case "timetables":
+              addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
+              addEle += "  <div class='col-md-6 basic-cha-img'>";
+              //addEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
+              addEle += "    <span>" + data.event_names + "</span>";
+              addEle += "  </div>";
+              addEle += "  <div class='col-md-6 basic-cha-info'>";
+              addEle += "    <br>";
+              addEle += "    <span>";
+              addEle += "    이름 | " + data.event_names + "<br>";
+              addEle += "    도구 | " + data.add_items + "<br>";
+              addEle += "    </span>";
+              addEle += "  </div>";
+              addEle += "</div>";
+              break;
+              case "maps":
+              break;
+            }
+            $(addEle).appendTo("body")
+                .css({top: event.pageY + "px", left: event.pageX + "px"});
+          },
+          error:function(){
+            alert("no!");
+          }
+      });
+    }
+
+    // 태그 적용 메뉴 오른쪽마우스
+    function popTagMenu(event,removeEle){
+      //alert("스판 로느쪽");
+      $("<div class='pop-menu popTag-menu'><button>태그 제거</button></div>")
+          .appendTo("body")
+          .css({top: event.pageY + "px", left: event.pageX + "px"});
+
+          $(".popTag-menu").off().on("click",function(){
+            removeEle.contents().unwrap();
+            removeTagMenu();
+          });
+    }
+
+    // editDiv 오른쪽 마우스 클릭시 메뉴
+    function popAddTagMenu(event, selection = null){
+      $("<div class='pop-menu popAddTag-menu'><button>태그 적용</button></div>")
+          .appendTo("body")
+          .css({top: event.pageY + "px", left: event.pageX + "px"});
+      $(".popAddTag-menu > button").on("click", function(){
+        applyTag(selection);
+        removeAddTagMenu();
+      });
+    }
+
+    // 태그 마우스 아웃 시 정보 삭제
+    function removeChaInfo(){
+      $(".popChaInfo-menu").hide();
+    }
+
+    // 오른쪽 마우스 태그 메뉴 삭제
+    function removeTagMenu(){
+      $(".popTag-menu").hide();
+    }
+
+    // editDiv 오른쪽 마우스 메뉴 삭제
+    function removeAddTagMenu(){
+      $(".popAddTag-menu").hide();
+    }
+
+    // 모든 contextmenu 삭제
+    function removeAllContextMenu(){
+      removeChaInfo();
+      removeTagMenu();
+      removeAddTagMenu();
     }
     // 회차/공지 선택
     $('.set-notice-btn').on("click", function(){

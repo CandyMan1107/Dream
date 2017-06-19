@@ -1,5 +1,5 @@
 $(document).ready(function(){
     $('#additional_items').click(function() {
-        $('#browsers').append('<option value="Safari"> ');
+        $('.refer_info_div').append('<input type="text" class="form-control" name="refer_info[]" placeholder="추가사항1">');    
     });
 });

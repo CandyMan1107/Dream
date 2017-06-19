@@ -43,7 +43,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="/img/OVE.jpg" width="225" />
+                        <img src="/upload/images/{{ $data[0]['cover_img_src'] }}" width="225" />
                     </div>
                     <div class="col-md-9">
                         <div class="row">
@@ -55,8 +55,8 @@
                             <div class="col-md-2 upload-day">
                                 <b>수, 토</b> 연재
                             </div>
-                            <div class="col-md-2">
-                                소설
+                            <div class="col-md-2 genre-default">
+                                {{ $data[0]['genre'] }}
                             </div>
                             <div class="col-md-3">
                                 소설 | 판타지
@@ -76,12 +76,18 @@
                     <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-3">
-                                <select class="form-control input-lg">
-                                    <option>1</option>
+                                <select class="form-control input-lg" onchange="location = this.value;">
+                                    @for ($i = count($data); $i > 0; $i--)
+                                    <option value="/novel/read/novel_read_view/{{$data[0]['belong_to_novel']}}&{{$i}}">
+                                        {{$i}}
+                                    </option>
+                                    @endfor
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <a href="/novel/read/novel_read_view/{{$data[0]['belong_to_novel']}}&1"><button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button></a>
+                                <a href="/novel/read/novel_read_view/{{$data[0]['belong_to_novel']}}&1">
+                                    <button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button>
+                                </a>
                             </div>
                             <div class="col-md-4">
                                 <button class="btn btn-default btn-block novel-background-read-Btn">소설 배경 설정 보기</button>
@@ -100,7 +106,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-left">
-                        <h3>소설회차 <small>(1)</small></h3>
+                        <h3>소설회차 <small>({{count($data)}})</small></h3>
                     </div>
                     <div class="col-md-6 text-right sort">
                         <h5>
@@ -119,7 +125,7 @@
                                     <a href="/novel/read/novel_read_view/{{$d['belong_to_novel']}}&{{ $d['episode_count'] }}">
                                         <div class="col-md-3">
                                             <div>
-                                                <img src="/img/OVE.jpg" width="261" height="160" />
+                                                <img src="/upload/images/{{ $d['cover_img_src'] }}" width="261" height="160" />
                                             </div>
                                         </div>
                                         <div class="col-md-9">
@@ -129,7 +135,7 @@
                                                 </div>
                                                 <div id="default-padding-small-0" class="col-md-12"></div>
                                                 <div class="col-md-2">
-                                                    <i class="fa fa-star-o" aria-hidden="true"></i>&nbsp;1
+                                                    <i class="fa fa-star" aria-hidden="true"></i>&nbsp;1
                                                 </div>
                                                 <div class="col-md-2">
                                                     <small>댓글</small>&nbsp;<strong>1</strong>

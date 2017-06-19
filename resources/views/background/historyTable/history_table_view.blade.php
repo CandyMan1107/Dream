@@ -10,6 +10,7 @@
 		 <script type="text/javascript" src="/js/custom/history.js"></script>
 		 <script type="text/javascript" src="/js/custom/additional_items.js"></script>
 		 <script type="text/javascript" src="/js/custom/timetable_event.js"></script>
+		 <script type="text/javascript" src="/js/custom/effect_get_click.js"></script>
 		 <script> ready(  <?=json_encode($data)?>  ) </script>
 		 <script> timetableEvent( <?=json_encode($data)?> );</script>
 		 
@@ -56,15 +57,11 @@
 						{{-- 사건 추가사항 추가 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-3 control-label" for="formGroupInputLarge">추가사항</label>
-							<div class="col-sm-7">
-								<input class="form-control" id="add_item" name="add_items" list="browsers"> 
-								<datalist id="browsers">
-									<option value="추가 사항 입력"> 
-									<option value="추가 사항 입력"> 
-								</datalist>
+							<div class="col-sm-5 refer_info_div">
+								<input type="text" class="form-control refer_info" name="refer_info[]" placeholder="추가사항">
 							</div>
 							<div class="col-sm-2">
-								<i class="fa fa-plus-circle" aria-hidden="true" style="font-size:200%" id="additional_items"></i>
+								<i class="fa fa-plus-circle" aria-hidden="true" id="additional_items" style="font-size:200%"></i>
 							</div>
 						</div>
 						{{-- 사건 기간 --}}
@@ -80,6 +77,8 @@
 						</div>
 					</div>
 
+					{{-- 추가사항 등록 스크립트 --}}
+					
 					{{-- 화면 분할 오른쪽 --}}
 					<div class="col-xs-7 col-sm-5 col-md-5 height-max-set background_tag">
 						<br><br><br>
@@ -87,21 +86,48 @@
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">등장 인물</label>
 							<div class="col-sm-10">
-							<input class="form-control" name="character" type="text" id="character" placeholder="Large input">
+								{{-- 인물 아이콘 목록 --}}
+								<div class="inner"></div>
+								{{-- 인물 등록 아이콘, 모달 호출 --}}
+								<div data-toggle="modal" data-target="#abc">
+									<p class="remote">
+										<a class="setView" href="#">
+											<i class="fa fa-plus-square-o fa-3x" id="characters" value="0"></i>
+										</a>
+									</p>
+								</div>
 							</div>
 						</div>
 						{{-- 등장사물 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">등장 사물</label>
 							<div class="col-sm-10">
-							<input class="form-control" name="item" id="item" type="text" id="formGroupInputLarge" placeholder="Large input">
+							{{-- 사물 아이콘 목록 --}}
+								<div class="inner"></div>
+								{{-- 사물 등록 아이콘, 모달 호출 --}}
+								<div data-toggle="modal" data-target="#abc">
+									<p class="remote">
+										<a class="setView" href="#">
+											<i class="fa fa-plus-square-o fa-3x effect" id="items"></i>
+										</a>
+									</p>
+								</div>
 							</div>
 						</div>
 						{{-- 배경장소 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">배경 장소</label>
 							<div class="col-sm-10">
-							<input class="form-control" name="place" id="place" type="text" id="formGroupInputLarge" placeholder="Large input">
+							{{-- 장소 아이콘 목록 --}}
+								<div class="inner"></div>
+								{{-- 장소 등록 아이콘, 모달 호출 --}}
+								<div data-toggle="modal" data-target="#abc">
+									<p class="remote">
+										<a class="setView" href="#">
+											<i class="fa fa-plus-square-o fa-3x effect" id="maps"></i>
+										</a>
+									</p>
+								</div>
 							</div>
 						</div>
 						{{-- 기타 --}}

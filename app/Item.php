@@ -13,7 +13,7 @@ class Item extends Model
             'name' => $item_info['item_name'],
             'info' => $item_info['item_content'],
             'category' => $item_info['item_cate'],
-            'refer_info' => $item_info['item_refer_info'],
+            'refer_info' => $item_info['refer_info'],
             'img_src' => $img_src,
         ];
         // data insert
@@ -33,5 +33,11 @@ class Item extends Model
         $dataSet = DB::table('items')->select('id','name','img_src')->get();
 
         return $dataSet;
+    }
+
+    public function get_item_src($item_id){
+        $item_src = DB::table('items')->select('img_src')->where('id',$item_id)->get();
+
+        return $item_src;
     }
 }

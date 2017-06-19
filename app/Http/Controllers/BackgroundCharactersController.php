@@ -30,9 +30,12 @@ class BackgroundCharactersController extends Controller
             $data[$i]['age'] = $datas->age;
             $data[$i]['gender'] = $datas->gender;
             $data[$i]['refer_info'] = $datas->refer_info;
-            $data[$i]['img_src'] = $datas->img_src;    
+            $data[$i]['img_src'] = $datas->img_src;   
+            $data[$i]['refer_info'] = explode('^',$data[$i]['refer_info']);
+
             $i++;
         }
+        $refer_info = array();
 
         return view('background.character.character_view')->with("data", $data);
     }
@@ -66,6 +69,29 @@ class BackgroundCharactersController extends Controller
         $ownership->insert_ownership($character_id, $item_list);
     }
 
+    public static function ownership_icon(Request $request){
+        $data = $request->all();
+        $character_id = $data['character_id'];
+        // echo $character_id;
+        $ownership = new Ownership();
+
+        $item_data = $ownership->get_ownership($character_id);
+        return $item_data;
+    } 
+
+    public static function ownership_img(Request $request){
+        $data = $request->all();
+        $count = count($data['item_id']);
+        $item_id = $data['item_id'];
+        $item = new Item();
+        // $img_src= array();
+        // 이미지 주소 받아오기
+        for ($i = 0; $i< $count ; $i++){
+            $img_src[$i] = $item->get_item_src($item_id[$i]);
+        }
+        return $img_src;
+    } 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -81,6 +107,18 @@ class BackgroundCharactersController extends Controller
         $file = Input::file('character_img_upload');
         $data = $request->all();
 
+        $refer_info = "";
+
+        for($i= 0; $i < count($data['refer_info']); $i++){
+            if($i==0){
+                $refer_info = $data['refer_info'][$i];
+            }   
+            else{
+                $refer_info = $refer_info."^".$data['refer_info'][$i];
+            }
+            
+        }
+        $data['refer_info'] = $refer_info;
         if($file){
             $img_name = $imgUpLoad->backgroundImgUpload($file);
         }

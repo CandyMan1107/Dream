@@ -7,6 +7,7 @@
 
 @section('content') 
 		<script type="text/javascript" src="/js/custom/item_event.js"></script>
+		<script type="text/javascript" src="/js/custom/additional_items.js"></script>
 		<script>item_event( <?=json_encode($data)?> )</script>
 		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-image:url('/img/cork.jpg')" >
 			<div class="row">
@@ -47,11 +48,11 @@
 				{{-- 사물 추가사항 --}}
 				<div class="form-group form-group-lg">
 					<label class="col-sm-3 control-label" for="formGroupInputLarge">추가사항</label>
-					<div class="col-sm-7">
-						<input class="form-control" type="text" id="item_refer_info" name="item_refer_info" placeholder="Small input">
+					<div class="col-sm-5 refer_info_div">
+						<input type="text" class="form-control refer_info" name="refer_info[]" placeholder="추가사항">
 					</div>
 					<div class="col-sm-2">
-						<i class="fa fa-plus-circle" aria-hidden="true" style="font-size:200%"></i>
+						<i class="fa fa-plus-circle" aria-hidden="true" id="additional_items" style="font-size:200%"></i>
 					</div>
 				</div>
 				{{-- 이미지 등록 --}}
