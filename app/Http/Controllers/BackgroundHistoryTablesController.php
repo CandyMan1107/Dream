@@ -25,14 +25,12 @@ class BackgroundHistoryTablesController extends Controller
             $data[$i]['id'] = $datas->id;
             $data[$i]['event_name'] = $datas->event_names;
             $data[$i]['event_content'] = $datas->event_contents;
-            $data[$i]['add_items'] = $datas->add_items;
             $data[$i]['start_day'] = $datas->start_days;
             $data[$i]['end_day'] = $datas->end_days;
             $data[$i]['other'] = $datas->others;
-            $data[$i]['character'] = $datas->characters;
-            $data[$i]['items'] = $datas->items;
-            $data[$i]['places'] = $datas->places;
-
+            $data[$i]['refer_info'] = $datas->refer_info;
+            $data[$i]['refer_info'] = explode('^',$data[$i]['refer_info']);
+            
             $i++;
         }
         return view('background.historyTable.history_table_view')->with("data", $data);
@@ -60,9 +58,31 @@ class BackgroundHistoryTablesController extends Controller
 
         $timeTable = new Timetable();
 
+        $refer_info = "";
+
+        for($i= 0; $i < count($table['refer_info']); $i++){
+            if($i==0){
+                $refer_info = $table['refer_info'][$i];
+            }   
+            else{
+                $refer_info = $refer_info."^".$table['refer_info'][$i];
+            }
+            
+        }
+        $table['refer_info'] = $refer_info;
+
         $timeTable->insert_table($table);
-        // var_dump($table);
         return redirect(route('historyTable.index'));
+    }
+
+    public static function characters_effect_modal(){
+        
+    }
+    public static function items_effect_modal(){
+        
+    }
+    public static function maps_effect_modal(){
+        
     }
 
     /**
@@ -73,7 +93,7 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function show($id)
     {
-        //
+    
     }
 
     /**

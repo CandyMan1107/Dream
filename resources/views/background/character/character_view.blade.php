@@ -43,10 +43,10 @@
 					</div>
 				</div>
 				{{-- 캐릭터 추가사항 --}}
-				<div class="form-group form-group-lg">
+				<div class="form-group form-group-lg" scroll="auto" style="overflow-x:hidden; height:100px">
 					<label class="col-sm-3 control-label" for="formGroupInputLarge">추가사항</label>
 					<div class="col-sm-5 refer_info_div">
-						<input class="form-control" type="text" id="refer_info" name="refer_info" placeholder="추가사항">
+						<input type="text" class="form-control refer_info" name="refer_info[]" placeholder="추가사항">
 					</div>
 					<div class="col-sm-2">
 						<i class="fa fa-plus-circle" aria-hidden="true" id="additional_items" style="font-size:200%"></i>
