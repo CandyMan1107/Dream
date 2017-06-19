@@ -84,79 +84,17 @@
         {{-- container class END --}}
     </div>
     {{-- read-novel-view END --}}
-    {{-- quickMenu START --}}
-    <div id="quickMenu">
-        <div class="row">
-            <div class="col-md-2 text-left">
-                {{-- + - Button COLLAPSE --}}
-                <a class="remoteButton" data-toggle="collapse" href="#collapseRemote" aria-expanded="false" aria-controls="collapseRemote">
-                    <i id="remoteMenu" class="fa fa-minus-square-o" aria-hidden="true"></i>
-                </a>
-                {{-- PAGE-UP Button --}}
-                <a class="remoteArrow" href="#"><i id="remoteUp" class="fa fa-arrow-up" aria-hidden="true"></i></a>
-                {{-- PAGE-DOWN Button --}}
-                <a class="remoteArrow" href="#"><i id="remoteDown" class="fa fa-arrow-down" aria-hidden="true"></i></a>
-            </div>
-            <div class="col-md-10 collapse in remote-button" id="collapseRemote">
-                {{-- REMOTE TITLE & X Button --}}
-                {{-- Novel TITLE --}}
-                {{-- Novel EPISODSE MOVE --}}
-                {{-- Viewer Settings --}}
-                {{-- Novel BACKGROUND --}}
-                
-                <table class="table text-center">
-                    <tr>
-                        <th>
-                            <strong>리모콘</strong>
-                            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select class="form-control" onchange="location = this.value;">
-                                @for ($i = count($data); $i > 0; $i--)
-                                    <option value="/novel/read/novel_read_view/{{$data['belong_to_novel']}}&{{$i}}">
-                                        {{$i}}
-                                    </option>
-                                @endfor
-                            </select>
-                            <select class="form-control">
-                                <option selected="selected">{!! $data['episode_count'] !!}화. {!! $data['episode_title'] !!}</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-toggle="modal" data-target="#viewerModal">
-                            <p class="remote">
-                                <a class="setView" href="#">
-                                    <i class="material-icons">settings</i>&nbsp;<span>뷰어설정</span>
-                                </a>
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td data-toggle="modal" data-target="#backgroundModal">
-                            <p class="remote">
-                                <a class="novelBackground" href="#">
-                                    <i class="material-icons">remove_red_eye</i>&nbsp;<span>배경보기</span>
-                                </a>
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    {{-- quickMenu END --}}
     
-    {{--viewer & background MODAL START--}}
+    
+    {{--quickMenu & viewer & background MODAL START--}}
     @php
 	use App\Http\Controllers\NovelController;
 	
+    echo NovelController::quickMenu($data);
 	echo NovelController::viewerModal();
 	echo NovelController::backgroundModal($data);
 	@endphp
-    {{--viewer & background MODAL END--}}
+    {{--quickMenu & viewer & background MODAL END--}}
     
     {{-- writer-word START --}}
     <div id="writer-word">

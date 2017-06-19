@@ -17,15 +17,13 @@
 							<div class="filter wrk-title lst-cld" data-filter="horror">호러</div>
 					</div>
 					<div id="Container">
-					
-						@for ($i = 0; $i < count($data); $i++)
-							<div class="filimg mix {{ $data[$i]['genre'] }} col-md-4 col-sm-4 col-xs-12" data-myorder="2">
-								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
-									<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
-								</a>
-							</div>
-						@endfor
-
+							@for ($i = 0; $i < count($data); $i++)
+								<div class="filimg mix {{ $data[$i]['genre'] }} col-md-4 col-sm-4 col-xs-12" data-myorder="2">
+									<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
+										<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
+									</a>
+								</div>
+							@endfor
 
 					</div>
 				</div>
