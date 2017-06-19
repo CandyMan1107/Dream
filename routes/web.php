@@ -37,9 +37,9 @@ Route::get('/background/map', "MapController@index");
 Route::get('/background/removeMapImg', "MapController@removeImg");
 
 
-Route::get('/login', function () {
-    return view('auth/login');
-});
+// Route::get('/login', function () {
+//     return view('auth/login');
+// });
 
 
 Route::resource('/background/things', 'BackgroundItemsController');
@@ -124,6 +124,8 @@ Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
 
+// 로그인 인증
 Auth::routes();
 
+// 로그인
 Route::get('/home', 'HomeController@index')->name('home');
