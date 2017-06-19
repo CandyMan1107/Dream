@@ -10,7 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/**************************************
+MAIN
+**************************************/
 Route::get('/', "MainController@index");
 
 
@@ -18,13 +20,18 @@ Route::get('/lib', function () {
     return view('load');
 });
 
+/**************************************
+RELATION - BACKGROUND
+**************************************/
 Route::get('/background/relation', "RelationController@index");
 
 Route::get('/background/relation/rmRel', "RelationController@removeRelation");
 
 Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
-
+/**************************************
+MAP - BACKGROUND
+**************************************/
 // 지도 이미지 등록
 Route::post('/background/addMapImg', "MapController@mapImgStore");
 
@@ -41,7 +48,9 @@ Route::get('/background/removeImg', "MapController@removeImg");
 //     return view('auth/login');
 // });
 
-
+/**************************************
+CHARACTER & HISTORY - BACKGROUND
+**************************************/
 Route::resource('/background/things', 'BackgroundItemsController');
 
 Route::post('/background/character/ownership', "BackgroundCharactersController@ownership");
@@ -56,7 +65,9 @@ Route::resource('/background/historyTable', 'BackgroundHistoryTablesController')
 
 Route::resource('/background', 'BackgroundController');
 
-// NOVEL VIEW START
+/**************************************
+NOVEL VIEW
+**************************************/
 // Novel Info
 Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
 
@@ -67,12 +78,16 @@ Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 Route::get('/novel/kind/today_novel_by_day', function(){
     return view('novel/kind/today_novel_by_day');
 });
-// NOVEL VIEW END
 
+
+// Background SHARE
 Route::get('/background/share', function(){
     return view('background/share/set_share_view');
 });
 
+/**************************************
+CORDOVA VIEWER
+**************************************/
 // 코도바 뷰어부
 Route::get('/get_novel', "cordoController@getNovelInfo");
 Route::get('/get_novel/today_best', "cordoController@getTodayBestNovelInfo");

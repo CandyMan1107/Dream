@@ -35,7 +35,7 @@ class Novel extends Model
 
         $novelData = DB::table('novels')
             ->join('novel_episodes', 'novels.id', '=', 'novel_episodes.belong_to_novel')
-            ->select('novels.*', 'novel_episodes.id','novel_episodes.belong_to_novel', 'novel_episodes.episode_title', 'novel_episodes.created_at')
+            ->select('novels.*', 'novel_episodes.belong_to_novel', 'novel_episodes.episode_title', 'novel_episodes.created_at')
             ->where('novels.id', '=', $id)
             ->where('novel_episodes.belong_to_novel', '=', $id)
             ->get();
