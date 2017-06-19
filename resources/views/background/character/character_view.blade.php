@@ -13,13 +13,7 @@
 				@if($data[0])
 					@foreach ($data as $character)
 					<?php $img_src = "/img/background/characterImg/".$character['img_src']; ?>
-<<<<<<< HEAD
-
-					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list event_list" id="{{$character['id']}}" style="margin : 17px">
-=======
-					
 					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list event_list" id="{{$character['id']}}" name="character_icon" style="margin : 17px">
->>>>>>> 0b166776d036af4c5af214d087a5271948ca6173
 					@endforeach
 				@endif
 			</div>
