@@ -9,22 +9,6 @@
 		<div class="container">
 			<div class="row">
 				<div class="autoplay-top">
-<<<<<<< HEAD
-						@for ($i = 0; $i < 3; $i++)
-							<div class="col-md-12">
-								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
-									<div class="jumbotron">
-										<h3 class="novel">{!! $data[$i]['genre'] !!}</h3>
-										<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
-										<br/>
-										<p class="big">{!! $data[$i]['title'] !!}</p>
-										<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
-									</div>
-								</a>
-							</div>
-						@endfor
-			
-=======
 
 					@for ($i = 0; $i < 3; $i++)
 						<div class="col-md-12">
@@ -39,8 +23,6 @@
 							</a>
 						</div>
 					@endfor
-
->>>>>>> 19302b43750c29a990aa22708eebceb771a35cac
 				</div>
 			</div>
 		</div>
