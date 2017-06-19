@@ -13,8 +13,13 @@
 				@if($data[0])
 					@foreach ($data as $character)
 					<?php $img_src = "/img/background/characterImg/".$character['img_src']; ?>
+<<<<<<< HEAD
+
+					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list event_list" id="{{$character['id']}}" style="margin : 17px">
+=======
 					
 					<img src="{{$img_src}}" alt="character image" class="img-circle img-things-size character_list event_list" id="{{$character['id']}}" name="character_icon" style="margin : 17px">
+>>>>>>> 0b166776d036af4c5af214d087a5271948ca6173
 					@endforeach
 				@endif
 			</div>
@@ -43,10 +48,10 @@
 					</div>
 				</div>
 				{{-- 캐릭터 추가사항 --}}
-				<div class="form-group form-group-lg">
+				<div class="form-group form-group-lg" scroll="auto" style="overflow-x:hidden; height:100px">
 					<label class="col-sm-3 control-label" for="formGroupInputLarge">추가사항</label>
 					<div class="col-sm-5 refer_info_div">
-						<input class="form-control" type="text" id="refer_info" name="refer_info" placeholder="추가사항">
+						<input type="text" class="form-control refer_info" name="refer_info[]" placeholder="추가사항">
 					</div>
 					<div class="col-sm-2">
 						<i class="fa fa-plus-circle" aria-hidden="true" id="additional_items" style="font-size:200%"></i>

@@ -26,18 +26,20 @@ Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
 
 // 지도 이미지 등록
-Route::post('/background/addMapImg', "MapController@MapImgStore");
+Route::post('/background/addMapImg', "MapController@mapImgStore");
 
+// 지도 이미지 호출
+Route::get('/background/getImgCellList', "MapController@getImgCellList");
 // 지도 이미지 띄우기
 Route::get('/background/map', "MapController@index");
 
 // 지도 이미지 삭제
-Route::get('/background/removeMapImg', "MapController@removeImg");
+Route::get('/background/removeImg', "MapController@removeImg");
 
 
-Route::get('/login', function () {
-    return view('auth/login');
-});
+// Route::get('/login', function () {
+//     return view('auth/login');
+// });
 
 
 Route::resource('/background/things', 'BackgroundItemsController');
@@ -126,6 +128,8 @@ Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
 
+// 로그인 인증
 Auth::routes();
 
+// 로그인
 Route::get('/home', 'HomeController@index')->name('home');

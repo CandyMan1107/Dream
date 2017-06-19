@@ -9,6 +9,8 @@
 
                 <div class="panel-body">
                     You are logged in!
+                    로그인 성공하면 보이는 페이지
+                    ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ
                 </div>
             </div>
         </div>

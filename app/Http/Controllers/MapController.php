@@ -20,7 +20,7 @@ class MapController extends Controller
             $d_arr = [
                 "id"        => $datas->id,
                 "img_src"   => $imgRoot."/".$datas->img_src
-            ];    
+            ];
             array_push($data, $d_arr);
         }
 
@@ -35,18 +35,17 @@ class MapController extends Controller
         foreach ($map_src as $datas) {
             $d_arr = [
                 "id"        => $datas->id
-            ];    
+            ];
             array_push($data, $d_arr);
         }
-        
+
         return view('background.map.map_view')->with("data", $data);
     }
 
 
 
     //지도 이미지 업로드
-    public function MapImgStore(Request $request) {
-        $data = array(array());
+    public function mapImgStore(Request $request) {
         $file = $request->file('imgFile');
         $destinationPath = 'img/background/mapImg';
         $fileName = date("Y").date("m").date("d").date("s").$file->getClientOriginalName();
@@ -54,19 +53,35 @@ class MapController extends Controller
 
         DB::table("map_images")->insert([
             // "id" => 1,     // 유저 아이디는 임의값
+            "user_id" => 1,
             "img_src" => $fileName
         ]);
+        $imgId = DB::table("map_images")->select("id")->where("user_id","=",1)->orderBy('id', 'DESC')->first();
+        $data = [
+          "imgId" => $imgId->id,
+          "imgPath" => $destinationPath."/".$fileName
+        ];
 
-        return $fileName;
+        return $data;
     }
 
-    // 저장된 이미지 삭제
-    // public function removeImg(Request $request){
-    //     $userId = $request->input('id');
-    //     $removeFile = $request->input('removeFile');
+    //지도 이미지 호출
+    public function getImgCellList(Request $request){
+      $userId = $request->input('userId');
+      $data = DB::table("map_images")->select("id","img_src")->where("user_id","=",$userId)->get();
+      return $data;
+    }
 
-    //     File::delete(public_path()."/upload/images/".$removeFile);
-    //     DB::table("maps")->where('id','=',$userId)->where('cover_img_src','=',$removeFile)->delete();
-    //     return $removeFile;
-    // }
+    //저장된 이미지 삭제
+    public function removeImg(Request $request){
+        $imgId = $request->input('imgId');
+        $destinationPath = '/img/background/mapImg';
+        $removeFile = DB::table("map_images")->select("img_src")->where('id','=',$imgId)->get();
+        $removeFile = $removeFile[0]->img_src;
+
+        DB::table("map_images")->where('id','=',$imgId)->delete();
+        File::delete(public_path().$destinationPath.$removeFile);
+
+        return $removeFile;
+    }
 }

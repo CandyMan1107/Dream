@@ -14,14 +14,10 @@ class Timetable extends Model
         $dataSet = [
             'event_names' => $table['event_name'],
             'event_contents' => $table['event_content'],
-            'add_items' => $table['add_items'],
             'start_days' => $table['start_day'],
             'end_days' => $table['end_day'],
             'others' => $table['other'],
-            'characters' => $table['character'],
-            'items' => $table['item'],
-            'places' => $table['place'],
-            // 'tag_ids' => $table[''],
+            'refer_info' => $table['refer_info'],
         ];
         // data insert
         DB::table('timetables')->insert($dataSet);

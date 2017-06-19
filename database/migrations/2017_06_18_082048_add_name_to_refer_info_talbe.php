@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMapImagesTable extends Migration
+class AddNameToReferInfoTalbe extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateMapImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('map_images', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer("user_id");
-            $table->string("img_src")->nullable();
+        Schema::table('timetables', function (Blueprint $table) {
+            $table->string("refer_info")->nullable();
         });
     }
 
@@ -27,6 +25,8 @@ class CreateMapImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('map_images');
+        Schema::table('timetables', function (Blueprint $table) {
+            //
+        });
     }
 }

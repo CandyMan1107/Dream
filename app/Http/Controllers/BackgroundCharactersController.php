@@ -30,9 +30,12 @@ class BackgroundCharactersController extends Controller
             $data[$i]['age'] = $datas->age;
             $data[$i]['gender'] = $datas->gender;
             $data[$i]['refer_info'] = $datas->refer_info;
-            $data[$i]['img_src'] = $datas->img_src;    
+            $data[$i]['img_src'] = $datas->img_src;   
+            $data[$i]['refer_info'] = explode('^',$data[$i]['refer_info']);
+
             $i++;
         }
+        $refer_info = array();
 
         return view('background.character.character_view')->with("data", $data);
     }
@@ -104,6 +107,18 @@ class BackgroundCharactersController extends Controller
         $file = Input::file('character_img_upload');
         $data = $request->all();
 
+        $refer_info = "";
+
+        for($i= 0; $i < count($data['refer_info']); $i++){
+            if($i==0){
+                $refer_info = $data['refer_info'][$i];
+            }   
+            else{
+                $refer_info = $refer_info."^".$data['refer_info'][$i];
+            }
+            
+        }
+        $data['refer_info'] = $refer_info;
         if($file){
             $img_name = $imgUpLoad->backgroundImgUpload($file);
         }

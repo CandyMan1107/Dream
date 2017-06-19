@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMapImagesTable extends Migration
+class CreateEffectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateMapImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('map_images', function (Blueprint $table) {
+        Schema::create('effects', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer("user_id");
-            $table->string("img_src")->nullable();
+            $table->integer('timetable_id');
+            $table->string('affect_table');
+            $table->integer('affect_id');
+            $table->string('affect_content');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ class CreateMapImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('map_images');
+        Schema::dropIfExists('effects');
     }
 }

@@ -13,7 +13,7 @@ class Item extends Model
             'name' => $item_info['item_name'],
             'info' => $item_info['item_content'],
             'category' => $item_info['item_cate'],
-            'refer_info' => $item_info['item_refer_info'],
+            'refer_info' => $item_info['refer_info'],
             'img_src' => $img_src,
         ];
         // data insert
