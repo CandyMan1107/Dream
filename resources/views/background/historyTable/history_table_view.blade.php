@@ -32,7 +32,8 @@
 				</ul>
 			</nav>
 		</div>
-		
+		{{-- timetable Id 를 저장하기 위한 공간 --}}
+		<div id="timetable_id" value="timetable_value"></div>
 		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set">
 			<div class="row" id="list">
 			{{-- {{ var_dump($data) }} --}}
@@ -89,6 +90,10 @@
 								{{-- 인물 아이콘 목록 --}}
 								<div class="inner"></div>
 								{{-- 인물 등록 아이콘, 모달 호출 --}}
+								@php 
+									use App\Http\Controllers\BackgroundHistoryTablesController;
+									echo BackgroundHistoryTablesController::characters_effect_modal();
+								@endphp
 								<div data-toggle="modal" data-target="#abc">
 									<p class="remote">
 										<a class="setView" href="#">

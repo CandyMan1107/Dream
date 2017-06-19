@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Timetable;
+use App\Character;
+use App\Item;
 
 class BackgroundHistoryTablesController extends Controller
 {
@@ -76,7 +78,23 @@ class BackgroundHistoryTablesController extends Controller
     }
 
     public static function characters_effect_modal(){
-        
+        return view('background.historyTable.character_effect_modal');
+    }
+
+    public static function show_characters(){
+        $character = new Character();
+
+        $character_list = $character->dataBringAll();
+        $list = array(array());
+        $i = 0;
+        foreach($character_list as $lists){
+            $list[$i]["id"] = $lists->cha_id;
+            $list[$i]["name"] = $lists->name;
+            $list[$i]["img_src"] = $lists->img_src;    
+            $i++;
+        }
+
+        return $list; 
     }
     public static function items_effect_modal(){
         
