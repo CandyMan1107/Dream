@@ -41,7 +41,7 @@ class NovelController extends Controller
 
         //echo $data[$i]['title'];
 
-        return view('novel.novel_info')->with("data", $data);
+        return view('novel.info.novel_info')->with("data", $data);
     }
 
     public static function episodeShow($id) 
@@ -87,9 +87,19 @@ class NovelController extends Controller
             $i++;
         }
 
+        // var_dump($episodeData);
+
         // echo($episodeCount);
         // var_dump($data[$i]);
 
         return view('novel.read.novel_read_view')->with("data", $data[$i]);
+    }
+
+    public static function viewerModal() {
+        return view('novel.read.viewer_modal');
+    }
+
+    public static function backgroundModal($data) {
+        return view('novel.read.background_modal')->with("data", $data);
     }
 }

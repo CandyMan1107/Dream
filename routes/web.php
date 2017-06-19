@@ -11,10 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/', "MainController@index");
+
 
 Route::get('/lib', function () {
     return view('load');
@@ -28,13 +26,15 @@ Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
 
 // 지도 이미지 등록
-Route::post('/background/addMapImg', "MapController@MapImgStore");
+Route::post('/background/addMapImg', "MapController@mapImgStore");
 
+// 지도 이미지 호출
+Route::get('/background/getImgCellList', "MapController@getImgCellList");
 // 지도 이미지 띄우기
 Route::get('/background/map', "MapController@index");
 
 // 지도 이미지 삭제
-Route::get('/background/removeMapImg', "MapController@removeImg");
+Route::get('/background/removeImg', "MapController@removeImg");
 
 
 Route::get('/login', function () {
@@ -58,14 +58,14 @@ Route::resource('/background', 'BackgroundController');
 
 // NOVEL VIEW START
 // Novel Info
-Route::get('/novel/novel_info/{id}', "NovelController@novelInfo");
+Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
 
 // Novel Episode
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
 // Today Novel
-Route::get('/novel/today_novel_by_day', function(){
-    return view('novel/today_novel_by_day');
+Route::get('/novel/kind/today_novel_by_day', function(){
+    return view('novel/kind/today_novel_by_day');
 });
 // NOVEL VIEW END
 
