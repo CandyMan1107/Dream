@@ -37,7 +37,6 @@ class NovelController extends Controller
                 array_push($data, $datas);
             }
         } else {
-            for($i = 0; $i < count($novelData); $i++){
                 $datas = [
                     'title' => "",
                     'intro' => "",
@@ -53,7 +52,6 @@ class NovelController extends Controller
                 ];
 
                 array_push($data, $datas);
-            }
         }
 
         // var_dump($novelData);

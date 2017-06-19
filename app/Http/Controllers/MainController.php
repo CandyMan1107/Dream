@@ -31,7 +31,6 @@ class MainController extends Controller
                 $i++;
             }
         } else {
-            foreach($novelData as $datas) {
                 $data[$i]['id'] = "";
                 $data[$i]['title'] = "";
                 $data[$i]['intro'] = "";
@@ -40,9 +39,6 @@ class MainController extends Controller
                 $data[$i]['publish_case'] = "";
                 // $data[$i]['period'] = "";
                 $data[$i]['genre'] = "";
-
-                $i++;
-            }
         }
 
         // var_dump($data);
