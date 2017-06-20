@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Timetable;
 use App\Character;
 use App\Item;
+use App\Effect;
 
 class BackgroundHistoryTablesController extends Controller
 {
@@ -71,10 +72,12 @@ class BackgroundHistoryTablesController extends Controller
             }
             
         }
-        $table['refer_info'] = $refer_info;
+        var_dump($table['item_id']);
+        var_dump($table['effect_item']);
+        // $table['refer_info'] = $refer_info;
 
         $timeTable->insert_table($table);
-        return redirect(route('historyTable.index'));
+        // return redirect(route('historyTable.index'));
     }
 
     public static function characters_effect_modal(){
@@ -96,9 +99,35 @@ class BackgroundHistoryTablesController extends Controller
 
         return $list; 
     }
-    public static function items_effect_modal(){
-        
+
+    public function character_effect_insert(){
+        $table = "characters";
+        $data = $request->all();
+        $effect = new Effect();
+        $effect->insert_effect($table, $data);
+        return "success";
     }
+
+    public static function items_effect_modal(){
+        return view('background.historyTable.items_effect_modal');
+    }
+
+    public static function show_items(){
+        $item = new Item();
+
+        $item_list = $item->dataBringAll();
+        $list = array(array());
+        $i = 0;
+        foreach($item_list as $lists){
+            $list[$i]["id"] = $lists->id;
+            $list[$i]["name"] = $lists->name;
+            $list[$i]["img_src"] = $lists->img_src;    
+            $i++;
+        }
+
+        return $list; 
+    }
+
     public static function maps_effect_modal(){
         
     }
