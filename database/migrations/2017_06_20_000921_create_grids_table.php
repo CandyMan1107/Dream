@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMapTable extends Migration
+class CreateGridsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateMapTable extends Migration
      */
     public function up()
     {
-        Schema::create('maps', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string("cover_src");
-            $table->string("title");
-            $table->timestamps();
-        });
+      Schema::create('grids', function (Blueprint $table) {
+          $table->increments('id');
+          $table->integer("belong_to_map");
+          $table->string("grid_id");
+          $table->string("fill_info");
+      });
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateMapTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('maps');
+        Schema::dropIfExists('grids');
     }
 }

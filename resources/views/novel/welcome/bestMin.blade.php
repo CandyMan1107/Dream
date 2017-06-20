@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="page-title text-center">
-					@if (empty($data['null']))
+					@if (empty($data[0]['title']))
 						<h1>베스트 웹소설</h1>
 					@else
 						<h1>베스트 웹소설</h1>
@@ -21,7 +21,7 @@
 							<div class="filter wrk-title lst-cld" data-filter="horror">호러</div>
 					</div>
 					<div id="Container">
-						@if (empty($data['null']))
+						@if (empty($data[0]['title']))
 							<h1>기다려보아</h1>
 						@else
 							@for ($i = 0; $i < count($data); $i++)

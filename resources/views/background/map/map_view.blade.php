@@ -5,442 +5,457 @@
 @include('background.tag')
 
 @section('content')
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<div class="row" style="height:20px;"></div>
-	<div class="row">
-	<div class="col-xs-13 col-sm-10 col-md-10" style="width:10px;"></div>
-	<div class="col-xs-13 col-sm-10 col-md-10">
-		<h1>지도</h1>
-		<div>
-			<svg id="map" width="900px" height="450px">
-				<pattern id="image" x="0" y="0" height="40" width="40">
-					<image x="0" y="0" width="40" height="40" xlink:href="http://www.e-pint.com/epint.jpg"></image>
-				</pattern>
-			</svg>
-		</div>
-		
-		<div id="paint" width="200px" height="350px">
-		<!--<div class='custom-menu'>지우기</div>-->
-			<table>
-				<tr>
-					<div id="erase_btn">
-						<font size="16">새로고침</font>
-					</div>
-				</tr>
-				<tr>
-					<td>
-						<div id="ex1" class="cell">
-						</div>
-					</td>
 
-					<td>
-						<div id="ex2" class="cell">
-						</div>
-					</td>
-
-					<td>
-						<div id="ex3" class="cell">
-						</div>
-					</td>
-
-					<td>
-						<div id="ex4" class="cell">
-						</div>
-					</td>
-
-					<td>
-						<div id="ex5" class="cell">
-						</div>
-					</td>
-				</tr>
-				<div><input id="picker" type="color"></div>
-			</table>
-		</div>
-		
-
-		<!-- DB 내 이미지 띄우는 영역 -->
-		<div>
-			<br><b>업로드된 이미지</b><br>
-			<br>
-			
-				@foreach($data as $d)
-					<div style="float:left">
-						<img id="img_src" src=" {{ url(asset($d['img_src'])) }}" size="2%">
-					</div>
-				@endforeach
-			<br><br>
-		</div>
-
-		<div>
-			<p>
-			<br><br>
-			<form enctype="multipart/form-data" id="upload_form" role="form" method="get" action="">
-				<label class="img_upload_label">이미지 업로드
-				<input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
-				</label>
-			</form>
-			</p>
-		</div>
-			
-		<div class="row">
-		<div id="MaplistShowbtn">맵 목록</div>
-		{{-- @foreach($data as $d)
-			<div id="map_list">
-				{{ $d['id'] }}
-			</div>
-		@endforeach --}}
-		</div>
-
-	</div>
-	</div>
 
 	<style type="text/css">
-		
-		#map {
-			/*background-image : url(http://thumbnail.egloos.net/750x0/http://pds21.egloos.com/pds/201701/11/10/f0091810_5875a9df037d5.jpg);*/
-			display: inline-block;
-			margin-right: 30px;
-			float: left;
-		}
-		
-		#paint {
-			user-drag: none; 
-			user-select: none;
-			display: inline-block;
-		}
 
-		#ex1 {
-			width: 30px;
-			height: 30px;
-			pointer-events: all;
-			background-color: #002E40;
-		}
+	.hexagon {
+		cursor: pointer;
+	}
 
-		#ex2 {
-			width: 30px;
-			height: 30px;
-			pointer-events: all;
-			background-color: #2A5769;
-		}
+	/* 맵 레이아웃 css */
 
-		#ex3 {
-			width: 30px;
-			height: 30px;
-			pointer-events: all;
-			/*background-color: #FFFFFF;*/
-			background-color: green;
-		}
-
-		#ex4 {
-			width: 30px;
-			height: 30px;
-			pointer-events: all;
-			background-color: #FABD4A;
-		}
-		
-		#ex5 {
-			width: 30px;
-			height: 30px;
-			pointer-events: all;
-			background-color: #FA9600;
-		}
+	#allDiv {
+		height:80%;
+	}
+	#mapDiv {
+		height:80%;
+	}
+	#paletteDiv {
+		height:80%;
+	}
+	#colorPalette{
+		height:20%;
+		/*background-color: blue;*/
+	}
+	#imagePalette{
+		height:35%;
+		/*background-color: red;*/
+	}
+	#funcPalette{
+		height:20%;
+		/*background-color: green;*/
+	}
 
 
-		#img_src {
-    		width: 50px;
-    		height: auto;
-		}
+	/* 이미지 팔레트 */
+	.portfolio {
+	  padding: 0 !important;
+		overflow-y: scroll;
+		height:50%
+	}
+	.portfolio img {
+	  height: auto;
+	  width: 100%;
+		height:
+		margin:0;
+		padding: 0;
+	}
 
-		.hexagon {
-			fill: none;
-			pointer-events: all;
-		}
+	@media (min-width: 481px)  { .portfolio img { height: 50%; } }
+	@media (min-width: 768px)  { .portfolio img { height: 33.33%; } }
+	@media (min-width: 992px)  { .portfolio img { height: 25%; } }
+	@media (min-width: 1200px) { .portfolio img { height: 25%; } }
 
-		.hexagon path {
-			-webkit-transition: fill 250ms linear;
-			transition: fill 250ms linear;
-		}
+	@media (min-width: 481px)  { .portfolio img { width: 50%; } }
+	@media (min-width: 768px)  { .portfolio img { width: 33.33%; } }
+	@media (min-width: 992px)  { .portfolio img { width: 25%; } }
+	@media (min-width: 1200px) { .portfolio img { width: 20%; } }
 
-		.hexagon :hover {
-			fill: pink;
-		}
+	/* 이미지 팔레트 버튼 */
+	.img_upload_label{
+		display: inline-block;
+		padding: .5em .75em;
+		color: #00D8FF;;
+		font-size: inherit;
+		line-height: normal;
+		vertical-align: middle;
+		background-color: #fdfdfd;
+		cursor: pointer;
+		border: 2px solid #00D8FF;;
+		border-radius: .25em;
 
-		.hexagon .fill {
-			fill: none;
-		}
+	}
+	.img_upload_btn{
+		position: absolute;
+		width: 1px; height: 1px;
+		padding: 0; margin: -1px;
+		overflow: hidden;
+		clip:rect(0,0,0,0);
+		border: 0;
+	}
 
-		path.fill.ex1{
-			fill: #002E40;
-		}
+	#deleteImgBtn{
+		display: inline-block;
+	}
 
-		path.fill.ex2{
-			fill: #2A5769;
-		}
+	/* 선택 셀 (색상 or 이미지)*/
+	.selected-cell{
+		outline: 2px solid red;
+  	outline-offset: -2px;
+	}
+	.selected-map-content{
+		outline: 2px solid red;
+		outline-offset: -2px;
+	}
 
-		path.fill.ex3{
-			fill: green;
-		}
+	/* 드랍다운 css*/
+	.dropdown.dropdown-lg .dropdown-menu {
+	    margin-top: -1px;
+	    padding: 6px 20px;
+	}
+	.input-group-btn .btn-group {
+	    display: flex !important;
+	}
+	.btn-group .btn {
+	    border-radius: 0;
+	    margin-left: -1px;
+	}
+	.btn-group .btn:last-child {
+	    border-top-right-radius: 4px;
+	    border-bottom-right-radius: 4px;
+	}
+	.btn-group .form-horizontal .btn[type="submit"] {
+	  border-top-left-radius: 4px;
+	  border-bottom-left-radius: 4px;
+	}
+	.form-horizontal .form-group {
+	    margin-left: 0;
+	    margin-right: 0;
+	}
+	.form-group .form-control:last-child {
+	    border-top-left-radius: 4px;
+	    border-bottom-left-radius: 4px;
+	}
 
-		path.fill.ex4{
-			fill: #FABD4A;
-		}
+	.form-group {
+		padding:7px;
+	}
 
-		path.fill.ex5{
-			fill: #FA9600;
-		}
+	select{
+    -webkit-appearance: none;
+    appearance: none;
+	}
 
-		.mesh {
-			fill: none;
-			stroke: #000;
-			stroke-opacity: .1;
-			pointer-events: none;
-		}
+	.map-text{
+		-webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	}
 
-		.border {
-			fill: none;
-			stroke: #000;
-			stroke-width: 2px;
-			pointer-events: none;
-		}
+	/* 멥 리스트 css */
 
-		.custom-menu {
-    		z-index:1000;
-    		position: absolute;
-    		background-color:#C0C0C0;
-    		border: 1px solid black;
-    		padding: 2px;
-			pointer-events: all;
-		}
+	.map-list{
+		height:300px;
+		overflow-y: scroll;
+	}
+
+	.map-list-content {
+		height:120px;
+		width:100%;
+		margin-bottom: 4px;
+		border:3px solid blue;
+	}
+
+	.map-list-img-div{
+		background-color: purple;
+		height:100%;
+		padding: 0;
+	}
+	.map-list-img-div img{
+		background-color: blue;
+		width: 100%;
+		height:100%;
+	}
+
+	.map-list-content-div{
+		padding: 4px;
+		padding-left: 10px;
+		background-color: green;
+		height:100%;
+	}
+
+	#titleWarning{
+		top:210px;
+	}
+
+	#titleWarningHeader{
+		background-color: #FFE6DE;
+		text-align: center;
+	}
+
+
+
 	</style>
 
-	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<div id="allDiv" class="container">
+		지도 그리기<br>
+
+		<div id="mapDiv" class="col-md-9">
+		</div>
+
+		<div id="paletteDiv" class="col-md-2">
+			<div id="colorPalette">
+				색상 지정 팔레트 <br>
+				<button class="color-palette jscolor {valueElement:'chosen-value'}">색깔 dlqslek</button><br>
+				HEX value: <input id="chosen-value" value="000000" size = 6>
+			</div>
+
+
+			<div id="textPalette">
+				function Zone<br>
+				<!--  -->
+				<div class="dropdown dropdown-lg">
+          <button type="button" class="btn btn-default dropdown-toggle font-set-btn" data-open="false">생성</button>
+          <div class="dropdown-menu dropdown-menu-right" role="menu">
+              <form class="form-horizontal" role="form">
+                <div class="form-group col-md-12">
+                  <label for="filter">글꼴</label>
+                  <select id="font-style-set" class="form-control">
+                      <option value="NanumGothic" selected>나눔고딕</option>
+                      <option value="Jeju Myeongjo">제주명조</option>
+                      <option value="Hanna">한나</option>
+                      <option value="Gungsuh">궁서</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="contain">크기</label>
+									<select id="font-size-set" class="form-control">
+										@for($i = 20; $i < 61; $i++)
+                      <option value="{{$i}}">{{$i}}</option>
+
+										@endfor
+                  </select>
+									<label for="contain">글자색</label>
+									<input class="jscolor {valueElement:'font-color-set'}" type="button" name="" value="TC">
+									<input type="hidden" id="font-color-set" value="000000" size = 6>
+                </div>
+                <div class="form-group col-md-6">
+									<label for="contain">자간</label>
+									<select id="letter-spacing-set" class="form-control">
+										@for($i = 1; $i < 21; $i++)
+											<option value="{{$i}}">{{$i}}</option>
+										@endfor
+                  </select>
+                </div>
+								<div class="form-group col-md-12">
+									<label for="contain">컨텐츠</label>
+									<input id="font-content-set" class="form-control" type="text" />
+                </div>
+              </form>
+          </div>
+        </div>
+				<!--  -->
+				<button id="deleteTextBtn"type="button" name="button">삭제</button>
+			</div>
+
+			<div id="imagePalette">
+				imageZone
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-6 col-md-12 portfolio">
+						</div>
+					</div>
+				</div>
+				<form enctype="multipart/form-data" id="upload_form" role="form" method="POST">
+					<label class="img_upload_label">업로드
+						<input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
+					</label>
+					<button type="button" id="deleteImgBtn" name="button">삭제</button>
+				</form>
+			</div>
+
+
+			<div id="funcPalette">
+				function Zone<br>
+				<!-- Modal Div -->
+				<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">리스트</button></div>
+				<!-- line modal -->
+				<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+								<h3 class="modal-title" id="lineModalLabel">지도 리스트</h3>
+							</div>
+							<div class="modal-body">
+								<div class="map-list">
+
+								</div>
+							</div>
+							<div class="modal-footer">
+								<div class="btn-group btn-group-justified" role="group" aria-label="group button">
+									<div class="btn-group" role="group">
+										<input type="text" class="form-control" id="saveMapTitle" placeholder="제목입력">
+									</div>
+									<div class="btn-group" role="group">
+										<button type="button" id="saveMapBtn" class="btn btn-default" role="button">Save</button>
+									</div>
+									<div class="btn-group" role="group">
+										<button type="button" id="deleteMapBtn" class="btn btn-default" role="button">Delete</button>
+									</div>
+									<div class="btn-group" role="group">
+										<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+				  </div>
+				</div>
+				<!-- warning Modal -->
+
+				<div class="modal fade" id="titleWarning" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+						<div class="modal-content">
+							<div id="titleWarningHeader" class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+								<h3 class="modal-title">제목을 입력하세요</h3>
+							</div>
+						</div>
+				  </div>
+				</div>
+				<button id="removeAllBtn" type="button" name="button">초기화</button>
+				<!-- Modal End -->
+			</div>
+		</div>
+		<br>
+	</div>
+
+
 	<script type="text/javascript" src="http://d3js.org/d3.hexbin.v0.min.js"></script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.js"></script>
-	<script src="http://d3js.org/topojson.v1.min.js"></script>
+	<script src ="{{url(asset('js/jscolor.js?ver=1'))}}"></script>
+
+
 
 	<script>
-
 	$(function() {
-        // 직접 만든거
-		$("div.custom-menu").hide();
 
-        // 클릭 이벤트 모아놓은 곳
-        $(function() {
-            // $('#erase_btn').bind('click', erase_map);
-            $('#erase_btn').bind('click', refresh);
-            $('.cell').bind('click', map_color_change);
-			$('#img_src').bind('click', map_img_fill);
-			$('#MaplistShowbtn').bind('click', MaplistShowbtn);
+		/*
+					데이터 구성 조건
+					1. filled 어떤 요소던 색칠이 되어있는가.
+					2. data-code 색칠된 타입
 
-			$('#map').bind('click', map_img_fill);
-        });
+					DB저장시 반드시 filled 체크후 true 인 값만 code를 확인
+		*/
+		//svg sizes and margins
+		var margin = {
+		    top: 50,
+		    right: 20,
+		    bottom: 20,
+		    left: 50
+		},
+		width = 800,
+		height = 450;
 
-        function refresh() {
-            location.reload();
-        }
+		//The number of columns and rows of the heatmap
+		var MapColumns = 30,
+		    MapRows = 20;
 
-		function MapClickevent() {
-			alert("맵눌럿다");
-			// d3.select(this).attr("fill", "red");
-		}
+		//The maximum radius the hexagons can have to still fit the screen
+		var hexRadius = d3.min([width/((MapColumns + 0.5) * Math.sqrt(3)),
+		   height/((MapRows + 1/3) * 1.5)]);
 
-		function map_img_fill() {
-			// $(this).addClass("selected_cell");
-			// alert($(this).attr("id"));
-		}
+		// 기본색상
+		var baseColor = "teal";
 
-        function erase_map() {	// fill 삭제
-            //paths.classed("fill", false);
-            paths.attr("class",null);
-            // $(".cell").forEach(function(cell){
-            // 	paths.classed(cell.attr("id"), false);
-            // });
-        }
-
-		// 색상 변경
-        function map_color_change() {		
-            $(".cell").removeClass("selected_cell");
-            $(this).addClass("selected_cell");
-			
-
-			$(".selected").attr("id");
-			
-			// d3.select(this).attr("fill", $("selected_cell").attr("id"));
-
-            // alert($(this).attr("id"));
-        }
-
-		function MaplistShowbtn() {
-			alert("눌렷다");
-			// $('#map_list').show();
-		}
+		var points = [];
+		for (var i = 0; i < MapRows; i++) {
+		    for (var j = 0; j < MapColumns; j++) {
+		        points.push([hexRadius * j * 1.75, hexRadius * i * 1.5]);
+		    }//for j
+		}//for i
 
 
-     	// 	$("#uploadbutton").click(function(){
-        //  		var form = $('form')[0];
-        //  		var formData = new FormData(form);
-        //      		$.ajax({
-        //         		url: 'img/background/mapImg',
-        //         		processData: false,
-        //             	contentType: false,
-        //         		data: formData,
-        //         		type: 'POST',
-        //         		success: function(result){
-        //             		alert("업로드 성공!!");
-        //         		}
-        //     		});
-        //  	});
-		// });
+		var svg = d3.select("#mapDiv").append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.attr("id","map-svg")
+				.append("g")
+				.attr("id","map-g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		var hexbin = d3.hexbin()
+		            .radius(hexRadius);
 
 
-		// 이미지 업로드 이벤트
-		$("#imgFile").change(function () {
-			// 파일이 있을경우
-			if (this.files && this.files[0]) {
-				// ajax로 DB추가
-				var input = $("#imgFile");
-				console.log(new FormData($("#imgFile")[0]));
-
-				$.ajaxSetup({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
-				});
-				
-				$.ajax({
-					url: "addMapImg",
-					type: "post",
-					data: new FormData($("#upload_form")[0]),
-					processData: false,
-              		contentType: false,
-					success: function(data) {
-						alert("업로드 성공");
-						location.reload();
-						$.ajax({
-                        	type: "get",
-                        	url: "removeCover",
-                        	data: {
-                          		"id" : '1'
-                        	},
-                        	success: function (data) {
-            			  		console.log(data);
-                        	},
-                        	error: function (error) {
-                          		alert("오류발생");
-                        	}
-                    	});
-					}
-				});
-			}
-		});
-
-		/* map에서 오른쪽 버튼 메뉴 변경 */
-		$("#map").bind("contextmenu", function(event) { 
-    		event.preventDefault();
-    	
-		$("div.custom-menu").hide();
-
-		$("<div class='custom-menu'>지우기</div>")
-			.bind("click",function(){
-				paths.attr("class",null);
-				$("div.custom-menu").hide();
-			})
-	        .appendTo("body")
-        	.css({top: event.pageY + "px", left: event.pageX + "px"});
-		}).bind("click", function(event) {
-			$("div.custom-menu").hide();
-		});
-		/* 변경 끝 */
-
-		var width = 960,
-   			height = 450,
-    		radius = 20;
-
-		var topology = hexTopology(radius, width, height);
-
-		var projection = hexProjection(radius);
-
-		var path = d3.geo.path()
-				.projection(projection);
-
-		var svg = d3.select("#map").append("svg")
-				.attr("width", width)
-				.attr("height", height);
-
-		var defs = svg.append("defs").attr("id", "imgdefs");
-        
-		var catpattern = defs.append("pattern")
-					.attr("id", "hosPattern")
-					.attr("height", 15)
-					.attr("width", 10)
-					.attr("x", "0")
-					.attr("y", "0");
-
-			catpattern.append("image")
-					//   .attr("height", 40)
-					//   .attr("width", 78)
-					.attr("height", "40")
-					.attr("width", "40")
-					.attr("x", "0")
-					.attr("y", "0")
-					.attr("xlink:href", "{{ url(asset($d['img_src'])) }}");	// DB 이미지 주소 가져옴
-
-		var svg_g = svg.append("g")
-				.attr("class", "hexagon");
-		
-
-		var path_fill = svg.select("path.fill");
-
-		var paths =	svg_g.selectAll("path")
-				.data(topology.objects.hexagons.geometries)
-				.enter().append("path")
-				.attr("d", function(d) { return path(topojson.feature(topology, d)); })
-				.attr("class", function(d) { return d.fill ? "fill" : null; })
-
+		svg.append("g")
+		    .selectAll(".hexagon")
+		    .data(hexbin(points))
+		    .enter().append("path")
+		    .attr("class", "hexagon")
+		    .attr("d", function (d) {
+		  		return "M" + d.x + "," + d.y + hexbin.hexagon();
+		 		})
+				.attr("id", function(d){
+					return "grid" + (d.j * MapColumns + d.i);
+				})
+				.classed("grids","true")	// jquery 선택자 $(".grids").find(그리드아이디)
+		    .attr("stroke", "white")
+		    .attr("stroke-width", "1px")
+		    .style("fill", baseColor)
 				.on("mousedown", mousedown)
-
 				.on("mousemove", mousemove)
-
 				.on("mouseup", mouseup);
 
-				
-		svg.append("path")
-				.datum(topojson.mesh(topology, topology.objects.hexagons))
-				.attr("class", "mesh")
-				.attr("d", path);
-
-
-		var border = svg.append("path")
-				.attr("class", "border")
-				.call(redraw);
-
-		var mousing = 0;
-
-
+		var mousing = 0
+		var startWithFilled = 0;
 		function mousedown(d) {
-			mousing = d.fill ? -1 : +1;
+			mousing = 1;
+			startWithFilled = d3.select(this).classed("filled") ? -1 : +1;
+
+			// 글자 입력 시
+			if($(".selected-cell").hasClass("font-set-btn") && $("#font-content-set").val().length > 0){
+				var data = d3.select(this).data()[0];
+				var id = d3.select(this).attr("id").replace("grid","text");
+				svg.append("text")
+					 .attr("x",data.x)
+					 .attr("y",data.y)
+					 .style("font-family",$("#font-style-set").val())
+					 .style("font-size",$("#font-size-set").val() + "px")
+					 .style("letter-spacing", $("#letter-spacing-set").val() + "px")
+					 .style("fill", "#" + $("#font-color-set").val())
+					 .style("font-weight","bold")
+					 .attr("id", id)
+					 .attr("data-code","#" + $("#font-color-set").val())
+					 .attr("data-letter-spacing",$("#letter-spacing-set").val() + "px")
+					 .classed("map-text","true")
+					 .text($("#font-content-set").val());
+				$(".map-text").off().on("click",function(){
+					removeSelection();
+					$(this).addClass("selected-cell");
+				});
+			}
+			// console.log(getTextsInfo());
 			mousemove.apply(this, arguments);
 		}
 
 		function mousemove(d) {
-					// d3.select(this).attr("fill", $id);
-			
-			if (mousing) {
-				d3.select(this).attr("class",null);
+			var colorCode = "#"+$("#chosen-value").val();
+			var value;
+			// 이미지 일 경우
+			if($(".selected-cell").hasClass("img-cell")){
+				var imgId = $(".selected-cell").attr("id");
+				imgId = imgId.replace("img","#pattern");
+				value = "url(" + imgId + ")";
+			// 텍스트 일 경우
+			} else if($(".selected-cell").hasClass("font-set-btn")){
+				//아무일도 일어나지 않음
+				///alert("!!");
+			// 색깔일 경우
+			} else if($(".selected-cell").hasClass("color-palette")){
+				value = "#"+$("#chosen-value").val();
 
-				// if("class == true") {
-					// d3.select(this).classed("fill", d.fill = mousing > 0);
-					d3.select(this).attr("fill", "url(#hosPattern)");
-					// d3.select(this).classed($(".selected_cell").attr("id"), d.fill);
-				// }
-				// d3.select(this).attr("fill", "url(#hosPattern)");	// 이미지 드래그
-				
-					// else {
-						// d3.select(this).attr("fill", "black");
-					// }
-				// }
-				border.call(redraw);
 			}
+
+			if(mousing > 0 && ( $(".selected-cell").hasClass("img-cell") || $(".selected-cell").hasClass("color-palette"))) {
+				d3.select(this).classed("filled", startWithFilled > 0);
+				d3.select(this).style("fill",startWithFilled > 0 ? value : baseColor);
+				d3.select(this).attr("data-code",startWithFilled > 0 ? value : "");
+			}
+			//console.log(getGridsInfo());
+
 		}
 
 		function mouseup() {
@@ -448,59 +463,397 @@
 			mousing = 0;
 		}
 
-		function redraw(border) {
-			border.attr("d", path(topojson.mesh(topology, topology.objects.hexagons,
-			 function(a, b) { return a.fill ^ b.fill; })));
-			 // 이미지 패턴 생성 후 적용 
+
+		/****************************************************************/
+		/*											이미지 등록, 삭제 												*/
+		/****************************************************************/
+
+		// 이미지 등록 이벤트
+    $("#imgFile").change(function () {
+        // 파일이 있을경우
+        if (this.files && this.files[0]) {
+            // ajax로 DB추가
+            var input = $("#imgFile");
+            //console.log(new FormData($("#imgFile")[0]));
+            $.ajaxSetup({
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            $.ajax({
+              url: "addMapImg",
+              type: "post",
+              data: new FormData($("#upload_form")[0]),
+              processData: false,
+              contentType: false,
+              success: function(data){
+								var imgEle = "";
+								var imgSrc = "{{URL::asset('/')}}/" + data.imgPath
+								imgEle += "<img id='img" + data.imgId + "' class='img-cell' src='" + imgSrc + "'>";
+								defImagePattern(data.imgId, imgSrc)
+								$(".portfolio").append(imgEle);
+
+								$(".img-cell").off().on("click",function(){
+									removeSelection();
+									$(this).addClass("selected-cell");
+								});
+              }
+            });
+        }
+    });
+
+		// 이미지 셀 정보 호출
+		getImgCellList();
+		function getImgCellList(){
+			// DB처리
+			$.ajax({
+					type: "get",
+					url: "getImgCellList",
+					data: {
+						"userId" : 1
+					},
+					success: function (data) {
+						var imgEle = "";
+						data.forEach(function(d){
+							var imgSrc = "{{URL::asset('/img/background/mapImg/')}}/" + d.img_src;
+							imgEle += "<img id='img" + d.id+"'class='img-cell' src='"+ imgSrc + "'>";
+							defImagePattern(d.id, imgSrc);
+						});
+
+						$(".portfolio").append(imgEle);
+						$(".img-cell").off().on("click",function(){
+							removeSelection();
+							$(this).addClass("selected-cell");
+						});
+
+					},
+					error: function (error) {
+						alert("오류발생");
+					}
+			});
 		}
 
-		function hexTopology(radius, width, height) {
-			var dx = radius * 2 * Math.sin(Math.PI / 3),
-					dy = radius * 1.5,
-					m = Math.ceil((height + radius) / dy) + 1,
-					n = Math.ceil(width / dx) + 1,
-					geometries = [],
-					arcs = [];
+		/****************************************************************/
+		/*									색깔, 이미지 셀 선택													*/
+		/****************************************************************/
 
-			for (var j = -1; j <= m; ++j) {
-				for (var i = -1; i <= n; ++i) {
-					var y = j * 2, x = (i + (j & 1) / 2) * 2;
-					arcs.push([[x, y - 1], [1, 1]], [[x + 1, y], [0, 1]], [[x + 1, y + 1], [-1, 1]]);
-				}
+		$(".color-palette").on("click",function(){
+			removeSelection();
+			$(this).addClass("selected-cell");
+		});
+
+		$(".font-set-btn").on("click",function(){
+			removeSelection();
+			$(this).addClass("selected-cell");
+		});
+
+		function removeSelection(){
+			$(".selected-cell").removeClass("selected-cell");
+		}
+
+		/****************************************************************/
+		/*									이미지 패턴 정의 														*/
+		/****************************************************************/
+		var defs = svg.append("defs").attr("id", "imgdefs");
+		function defImagePattern(id, imgSrc){
+			var catpattern = defs.append("pattern")
+														.attr("id", "pattern" + id)
+														.attr("height", hexRadius*2)
+														.attr("width", hexRadius*2)
+														.attr("x", "0")
+														.attr("y", "0");
+			catpattern.append("image")
+				 .attr("x", 0)
+				 .attr("y", 0)
+				 .attr("height", hexRadius*2)
+				 .attr("width", hexRadius*2)
+				 .attr("xlink:href", imgSrc);
 			}
 
-			for (var j = 0, q = 3; j < m; ++j, q += 6) {
-				for (var i = 0; i < n; ++i, q += 3) {
-					geometries.push({
-						type: "Polygon",
-						arcs: [[q, q + 1, q + 2, ~(q + (n + 2 - (j & 1)) * 3), ~(q - 2), ~(q - (n + 2 + (j & 1)) * 3 + 2)]],
+			// 이미지 삭제
+			$("#deleteImgBtn").on("click",function(){
+				var selection = $(".selected-cell");
+				var imgId = selection.attr("id").replace("img","");
+				if(selection.hasClass("img-cell")){
+					selection.remove();
+					$.ajax({
+							type: "get",
+							url: "removeImg",
+							data: {
+								"imgId" : imgId
+							},
+							success: function (data) {
+								//console.log(data);
+							},
+							error: function (error) {
+								alert("오류발생");
+							}
 					});
 				}
+			})
+
+			/* 텍스트 생성 토글 */
+			$(".dropdown-toggle").on("click",function(){
+				if($(this).attr("data-open") == "false"){
+					$(this).attr("data-open","open");
+					$(".dropdown-menu").show();
+				} else {
+					$(this).attr("data-open","false");
+					$(".dropdown-menu").hide();
+				}
+			});
+
+			// 텍스트 삭제
+			$("#deleteTextBtn").on("click",function(){
+				if($(".selected-cell").hasClass("map-text"))
+					$(".selected-cell").remove();
+			});
+
+			// 모든 셀, 텍스트 정보 초기화
+			$("#removeAllBtn").on("click",function(){
+				removeAllGrid();
+				removeAllText();
+			});
+			// 모든 그리드 fill 삭제
+			function removeAllGrid(){
+				var grids = d3.selectAll("path")[0];
+				//console.log(grids);
+				grids.forEach(function(g){
+					d3.select("#"+g.id).classed("filled",false);
+					d3.select("#"+g.id).style("fill", baseColor);
+					d3.select("#"+g.id).attr("data-code","");
+				});
 			}
 
-			return {
-				transform: {translate: [0, 0], scale: [1, 1]},
-				objects: {hexagons: {type: "GeometryCollection", geometries: geometries}},
-				arcs: arcs
-			};
-		}
+			// 모든 텍스트 요소 삭제
+			function removeAllText(){
+				$(".map-text").remove()
+			}
 
-		// 육각형 크기 계산식
-		function hexProjection(radius) {
-			var dx = radius * 2 * Math.sin(Math.PI / 3),
-					dy = radius * 1.5;
-			return {
-				stream: function(stream) {
-					return {
-						point: function(x, y) { stream.point(x * dx / 2, (y - (2 - (y & 1)) / 3) * dy / 2); },
-						lineStart: function() { stream.lineStart(); },
-						lineEnd: function() { stream.lineEnd(); },
-						polygonStart: function() { stream.polygonStart(); },
-						polygonEnd: function() { stream.polygonEnd(); }
-					};
+			// 맵 정보 저장 + 맵 리스트에 요소 형성
+			$("#saveMapBtn").on("click",function(){
+				var title = $("#saveMapTitle").val();
+				if(title.length <= 0){
+					$("#titleWarning").modal("show");
+				} else {
+					var createdAt = "asdasdasdasdas";
+					var updatedAt = "asdasdsadadsads";
+
+					// 이미지 blob 생성
+					var doctype = '<?xml version="1.0" standalone="no"?>'
+					  + '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
+					var source = (new XMLSerializer()).serializeToString(d3.select('#map-svg').node());
+					var blob = new Blob([ doctype + source], { type: 'image/svg+xml;charset=utf-8' });
+					var url = window.URL.createObjectURL(blob);
+
+					// Put the svg into an image tag so that the Canvas element can read it in.
+					var img = d3.select('body').append('img')
+					 .attr('width', 0)
+					 .attr('height', 0)
+					 .node();
+
+					img.onload = function(){
+					  // Now that the image has loaded, put the image into a canvas element.
+					  var canvas = d3.select('body').append('canvas').classed("cavs",true).node();
+					  canvas.width = width+50;
+					  canvas.height = height+50;
+					  var ctx = canvas.getContext('2d');
+					  ctx.drawImage(img, 0, 0);
+					  var canvasUrl = canvas.toDataURL("image/png");
+						$(".cavs").hide();
+						// 맵 등록 요청
+
+						var gridInfos = getGridsInfo();
+						var textInfos = getTextsInfo();
+						$.ajaxSetup({
+							headers: {
+								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							}
+						});
+						$.ajax({
+							url: "addMap",
+							type: "post",
+							async: false,
+							data: {
+								"canvasUrl" : canvasUrl,
+								"title"			: title,
+								"gridInfos" : JSON.stringify(gridInfos),
+								"textInfos" : JSON.stringify(textInfos)
+							},
+							success: function(data){
+								//console.log(data);
+								var mapId = data.split("/")[0];
+								var createdAt = data.split("/")[1]
+								var createEle = createMapEle(mapId, title, canvasUrl, createdAt);
+								$(".map-list").append(createEle);
+								setMapListEvent()
+							}
+						});
+					}
+					img.src = url;
 				}
-			};
-		}
+			});
+
+			// 맵 정보 삭제 + 맵 리스트에 요소 삭제
+			$("#deleteMapBtn").on("click",function(){
+				var mapId = $(".selected-map-content").attr("data-map-id");
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+				$.ajax({
+					url: "removeMap",
+					type: "post",
+					async: false,
+					data: {
+						"mapId" : mapId
+					},
+					success: function(data){
+						//alert(data);
+						$(".selected-map-content").remove();
+					}
+				});
+			});
+
+			// 맵 리스트 호출
+			getMapList();
+			function getMapList(){
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+				$.ajax({
+					url: "getMapList",
+					type: "post",
+					async: false,
+					data: {},
+					success: function(data){
+						data.forEach(function(d){
+							var coverSrc = "{{URL::asset('/')}}/" + "img/background/mapImg/mapCover/" + d.cover_src;
+							var createEle = createMapEle(d.id, d.title, coverSrc, d.created_at);
+							$(".map-list").append(createEle);
+						});
+						setMapListEvent();
+					}
+				});
+			}
+
+			// 그리드 정보 반환
+			function getGridsInfo(){
+				var grids = d3.selectAll("path")[0];
+				var gridObjs = new Array();
+				grids.forEach(function(g){
+					var gridObj = {
+						"grid_id" 	: g.id,
+						"fill_info" : $("#"+g.id).attr("data-code") ? $("#"+g.id).attr("data-code") : "none"
+					};
+					if(gridObj.fill_info != "none")
+						gridObjs.push(gridObj);
+				})
+				return gridObjs;
+			}
+
+			// 맵 리스트 선택 시, 정보 호출 후 맵에 적용
+			function setMapListEvent(){
+				$(".map-list-content").off().on("dblclick",function(){
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
+					$.ajax({
+						url: "getGridsContent",
+						type: "post",
+						data: {
+							"id" : $(this).attr("data-map-id")
+						},
+						success: function(data){
+							// console.log(data.gridInfo);
+							// console.log(data.textInfo);
+
+							removeAllText();
+							removeAllGrid();
+
+							var gridInfo = data.gridInfo;
+							var textInfo = data.textInfo;
+
+							gridInfo.forEach(function(gi){
+								grid = d3.select("#"+gi.grid_id);
+								grid.classed("filled", true);
+								grid.style("fill", gi.fill_info);
+								grid.attr("data-code",gi.fill_info);
+							});
+
+							textInfo.forEach(function(ti){
+								var gridId = ti.text_id.replace("text","#grid");
+								var textGrid = d3.select(gridId).data()[0];
+								//console.log(ti["letter-spacing"]);
+								svg.append("text")
+									 .attr("x",textGrid.x)
+									 .attr("y",textGrid.y)
+									 .style("font-family",ti.font_family)
+									 .style("font-size", ti.font_size)
+									 .style("letter-spacing", ti["letter-spacing"])
+									 .style("fill", ti.fill_color)
+									 .style("font-weight","bold")
+									 .attr("id", ti.text_id)
+									 .attr("data-code", ti.fill_color)
+									 .attr("data-letter-spacing",ti["letter-spacing"])
+									 .classed("map-text","true")
+									 .text(ti.content);
+								$(".map-text").off().on("click",function(){
+									removeSelection();
+									$(this).addClass("selected-cell");
+								});
+							})
+						}
+					});
+				});
+
+				$(".map-list-content").on("click",function(){
+					$(".selected-map-content").removeClass("selected-map-content");
+					$(this).addClass("selected-map-content");
+				});
+
+			}
+
+			// Title, ImgUrl, Date로 맵 리스트 리턴
+			 function createMapEle(mapId, title, canvasUrl, data){
+				 var createEle = "";
+				 createEle += "<div class='map-list-content' data-map-id='" + mapId +"'>"
+				 createEle += "	<div class='col-md-3 map-list-img-div'>"
+				 createEle += "		<img src='" + canvasUrl + "'>"
+				 createEle += "	</div>"
+				 createEle += "	<div class='col-md-9 map-list-content-div'>"
+				 createEle += "		제목 : " 	 + title + "<br>"
+				 createEle += "		생성일 : " + data +"<br>"
+				 createEle += "		수정일 : 0000-00-00<br>"
+				 createEle += "	</div>"
+				 createEle += "</div>"
+
+				 return createEle;
+			 }
+
+			// 텍스트 정보 반환
+			function getTextsInfo(){
+				var texts = d3.selectAll(".map-text")[0];
+				var textObjs = new Array();
+				texts.forEach(function(t){
+					var textObj = {
+						"text_id" 				: t.id,
+						"content"					: $("#"+t.id).text(),
+						"font_family" 		: $("#"+t.id).css("font-family"),
+						"font_size"				: $("#"+t.id).css("font-size"),
+					 	"letter_spacing" 	: $("#"+t.id).attr("data-letter-spacing"),
+						"fill_color" 			: $("#"+t.id).attr("data-code")
+					}
+					textObjs.push(textObj);
+				});
+				return textObjs;
+			}
+
 	});
 	</script>
 @endsection

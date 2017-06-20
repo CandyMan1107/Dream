@@ -32,13 +32,30 @@ Route::get('/background/relation/mkRel', "RelationController@createRelation");
 /**************************************
 MAP - BACKGROUND
 **************************************/
+
+// 지도 등록
+Route::post('/background/addMap', "MapController@mapStore");
+
+//지도 삭제
+Route::post('/background/removeMap', "MapController@removeMap");
+
+
+
 // 지도 이미지 등록
 Route::post('/background/addMapImg', "MapController@mapImgStore");
+
+//지도 리스트 호출
+Route::post('/background/getMapList', "MapController@getMapList");
+
+//지도 아이디의 그리드, 텍스트 정보 호출
+Route::post('/background/getGridsContent', "MapController@getGridsContent");
 
 // 지도 이미지 호출
 Route::get('/background/getImgCellList', "MapController@getImgCellList");
 // 지도 이미지 띄우기
 Route::get('/background/map', "MapController@index");
+
+
 
 // 지도 이미지 삭제
 Route::get('/background/removeImg', "MapController@removeImg");
@@ -129,6 +146,7 @@ Route::get('/write_novel/write_episode/{novelId}', "writeNovelController@writeNo
 Route::get('/write_novel/call_background_info', "writeNovelController@callBackgroundInfo");
 
 // 태그 정보 호출
+Route::get('/write_novel/get_tags', "writeNovelController@getTags");
 Route::get('/write_novel/get_tags', "writeNovelController@getTags");
 
 // 이미지 등록부
