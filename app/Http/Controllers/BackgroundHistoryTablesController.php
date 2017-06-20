@@ -1,5 +1,7 @@
 <?php
 
+// 타임테이블 연산 처리를 위한 컨트롤러
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -55,12 +57,13 @@ class BackgroundHistoryTablesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //  데이터 저장. post값으로 넘어온 값을 데이터베이스에 저장하는 메소드
     public function store(Request $request)
     {
         $table = $request->all();
 
         $timeTable = new Timetable();
-
+        $effect = new Effect();
         $refer_info = "";
 
         for($i= 0; $i < count($table['refer_info']); $i++){
@@ -76,7 +79,22 @@ class BackgroundHistoryTablesController extends Controller
         var_dump($table['effect_item']);
         // $table['refer_info'] = $refer_info;
 
-        $timeTable->insert_table($table);
+        // affect 데이터를 저장하기 위한 배열
+        // characters, items, maps 아래 각각 id 와 content를 가지고 있음.
+        $data = array(array(array()));
+        $data['characters']['id'] = $table['character_id'];
+        $data['characters']['content'] = $table['effect_character'];
+        $data['items']['id'] = $table['item_id'];
+        $data['items']['content'] = $table['effect_item'];
+        // 차후 지도 정보 입력 시 연동
+        // $data['maps']['id'] = $table['map_id'];
+        // $data['maps']['content'] = $table['effect_map'];
+
+        // 새로 입력 한 연대표 아이디값 반환
+        $table_id = $timeTable->insert_table($table);
+
+        // 관계 테이블에 데이터 저장
+        $effect->insert_effect($table_id,$data);
         // return redirect(route('historyTable.index'));
     }
 
