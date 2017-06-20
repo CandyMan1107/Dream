@@ -1,4 +1,4 @@
-@extends('layouts.master')
+rant @extends('layouts.master')
 
 @include('partials.mySubNavi')
 
@@ -13,28 +13,136 @@
 		cursor: pointer;
 	}
 
+	/* 타이틀 레이아웃 */
+
+	.title {
+		z-index:100;
+		left: 200px;
+		top:30%;
+	  position: absolute;
+	  -webkit-perspective: 400;
+	          perspective: 400;
+	  padding-left: 17px;
+	  font-family: Arial;
+	  font-weight: bold;
+	  font-size: 52px;
+	  text-transform: uppercase;
+	  color: #fff;
+	}
+
+	.title:before {
+	  content: '';
+	  display: block;
+	  position: absolute;
+	  height: 100%;
+	  width: 6px;
+	  background: #ff1212;
+	  top: 0;
+	  left: 0;
+	  opacity: 0;
+	  -webkit-transform: translateX(-150px);
+	          transform: translateX(-150px);
+	  -webkit-animation: title-border-slide-in 0.35s ease-out forwards;
+	          animation: title-border-slide-in 0.35s ease-out forwards;
+	}
+	.title .title-word {
+	  opacity: 0;
+	  -webkit-transform-origin: bottom center;
+	          transform-origin: bottom center;
+	  -webkit-transform: rotateX(-90deg);
+	          transform: rotateX(-90deg);
+	}
+	.title .title-word:nth-child(1) {
+	  -webkit-animation: roll-in 0.7s 0s ease-out forwards;
+	          animation: roll-in 0.7s 0s ease-out forwards;
+	}
+
+	@-webkit-keyframes title-border-slide-in {
+	  0% {
+	    -webkit-transform: translateX(-150px);
+	            transform: translateX(-150px);
+	    opacity: 0;
+	  }
+	  100% {
+	    -webkit-transform: translateX(0);
+	            transform: translateX(0);
+	    opacity: 1;
+	  }
+	}
+	@keyframes title-border-slide-in {
+	  0% {
+	    -webkit-transform: translateX(-150px);
+	            transform: translateX(-150px);
+	    opacity: 0;
+	  }
+	  100% {
+	    -webkit-transform: translateX(0);
+	            transform: translateX(0);
+	    opacity: 1;
+	  }
+	}
+	@-webkit-keyframes roll-in {
+	  0% {
+	    -webkit-transform: rotateX(-90deg);
+	            transform: rotateX(-90deg);
+	    opacity: 1;
+	  }
+	  100% {
+	    -webkit-transform: rotateX(0deg);
+	            transform: rotateX(0deg);
+	    opacity: 1;
+	  }
+	}
+	@keyframes roll-in {
+	  0% {
+	    -webkit-transform: rotateX(-90deg);
+	            transform: rotateX(-90deg);
+	    opacity: 1;
+	  }
+	  100% {
+	    -webkit-transform: rotateX(0deg);
+	            transform: rotateX(0deg);
+	    opacity: 1;
+	  }
+	}
 	/* 맵 레이아웃 css */
 
 	#allDiv {
-		height:80%;
+		width:100%;
+		background-color: #D4D4D4;
 	}
 	#mapDiv {
 		height:80%;
 	}
+	#mapCover{
+		z-index: 99;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		background-color: black;
+		opacity: 0.7;
+	}
 	#paletteDiv {
-		height:80%;
+		width:230px;
+		position:absolute;
+		padding:0;
+		right:10%;
+		background-color: #F0F4FF;
+		box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+		border-radius:3px;
 	}
 	#colorPalette{
-		height:20%;
 		/*background-color: blue;*/
 	}
 	#imagePalette{
-		height:35%;
 		/*background-color: red;*/
 	}
+	#textPalette{
+		margin:5px;
+	}
 	#funcPalette{
-		height:20%;
 		/*background-color: green;*/
+		padding-bottom: 5px;
 	}
 
 
@@ -42,7 +150,7 @@
 	.portfolio {
 	  padding: 0 !important;
 		overflow-y: scroll;
-		height:50%
+		height:100px
 	}
 	.portfolio img {
 	  height: auto;
@@ -52,10 +160,10 @@
 		padding: 0;
 	}
 
-	@media (min-width: 481px)  { .portfolio img { height: 50%; } }
-	@media (min-width: 768px)  { .portfolio img { height: 33.33%; } }
-	@media (min-width: 992px)  { .portfolio img { height: 25%; } }
-	@media (min-width: 1200px) { .portfolio img { height: 25%; } }
+	@media (min-width: 481px)  { .portfolio img { height: 35%; } }
+	@media (min-width: 768px)  { .portfolio img { height: 35%; } }
+	@media (min-width: 992px)  { .portfolio img { height: 35%; } }
+	@media (min-width: 1200px) { .portfolio img { height: 35%; } }
 
 	@media (min-width: 481px)  { .portfolio img { width: 50%; } }
 	@media (min-width: 768px)  { .portfolio img { width: 33.33%; } }
@@ -65,15 +173,7 @@
 	/* 이미지 팔레트 버튼 */
 	.img_upload_label{
 		display: inline-block;
-		padding: .5em .75em;
-		color: #00D8FF;;
-		font-size: inherit;
-		line-height: normal;
-		vertical-align: middle;
-		background-color: #fdfdfd;
 		cursor: pointer;
-		border: 2px solid #00D8FF;;
-		border-radius: .25em;
 
 	}
 	.img_upload_btn{
@@ -155,25 +255,31 @@
 		height:120px;
 		width:100%;
 		margin-bottom: 4px;
-		border:3px solid blue;
+		border:3px solid #707070;
+		border-radius: 3px;
 	}
 
 	.map-list-img-div{
-		background-color: purple;
+		background-color: #878787;
 		height:100%;
 		padding: 0;
 	}
 	.map-list-img-div img{
-		background-color: blue;
+
 		width: 100%;
 		height:100%;
 	}
-
+	.modal-body{
+		background-color: #CFCFCF;
+	}
 	.map-list-content-div{
+
 		padding: 4px;
+		background-color: #FAFAFA;
 		padding-left: 10px;
-		background-color: green;
+		padding-top: 20px;
 		height:100%;
+		font-size:17px;
 	}
 
 	#titleWarning{
@@ -185,30 +291,64 @@
 		text-align: center;
 	}
 
+	/* 팔레트 css */
+	.paletteHeader {
+		margin: 0px;
+		margin-bottom: 5px;
+		background-color:#8C8C8C;
+		text-align: center;
+		font-size:23px;
+		font-weight: bold;
+	}
+
+	.palette{
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	#chosen-value{
+		margin-bottom: 5px;
+	}
+	.color-palette {
+		margin-bottom: 5px;
+	}
+
+	.portfolio {
+		border:2px solid #9E9E9E;
+		margin-bottom: 3px;
+	}
 
 
 	</style>
 
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<div id="allDiv" class="container">
-		지도 그리기<br>
+		<div id="mapCover">
+		</div>
+		<div class="title">
+		  <div class="title-word">Map Drawing</div>
+		</div>
 
 		<div id="mapDiv" class="col-md-9">
+
 		</div>
 
 		<div id="paletteDiv" class="col-md-2">
-			<div id="colorPalette">
-				색상 지정 팔레트 <br>
-				<button class="color-palette jscolor {valueElement:'chosen-value'}">색깔 dlqslek</button><br>
-				HEX value: <input id="chosen-value" value="000000" size = 6>
+			<div class="paletteHeader">
+				색상 지정 팔레트
+			</div>
+			<div id="colorPalette" class="palette">
+				&nbsp;HEX value: <button class="color-palette jscolor {valueElement:'chosen-value'}">Color Picker</button>
+				<input class="form-control" id="chosen-value" value="000000" size = 6>
 			</div>
 
-
+			<div class="paletteHeader" class="palette">
+				글자 생성 팔레트
+			</div>
 			<div id="textPalette">
-				function Zone<br>
 				<!--  -->
 				<div class="dropdown dropdown-lg">
-          <button type="button" class="btn btn-default dropdown-toggle font-set-btn" data-open="false">생성</button>
+          <button type="button" class="btn btn-default dropdown-toggle form-control font-set-btn" data-open="false">글자 입력</button>
+
           <div class="dropdown-menu dropdown-menu-right" role="menu">
               <form class="form-horizontal" role="form">
                 <div class="form-group col-md-12">
@@ -246,13 +386,16 @@
                 </div>
               </form>
           </div>
+					<button id="deleteTextBtn" type="button" class="form-control" name="button">선택 글자 삭제</button>
         </div>
 				<!--  -->
-				<button id="deleteTextBtn"type="button" name="button">삭제</button>
+
 			</div>
 
-			<div id="imagePalette">
-				imageZone
+			<div class="paletteHeader">
+				이미지 입력 팔레트
+			</div>
+			<div id="imagePalette" class="palette">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-6 col-md-12 portfolio">
@@ -260,18 +403,18 @@
 					</div>
 				</div>
 				<form enctype="multipart/form-data" id="upload_form" role="form" method="POST">
-					<label class="img_upload_label">업로드
-						<input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
-					</label>
-					<button type="button" id="deleteImgBtn" name="button">삭제</button>
+					<input type="button" class="form-control" onclick="document.getElementById('imgFile').click();" value="이미지 생성">
+					<input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
+					<button type="button" id="deleteImgBtn" class="form-control" name="button">선택 이미지 삭제</button>
 				</form>
 			</div>
 
-
-			<div id="funcPalette">
-				function Zone<br>
+			<div class="paletteHeader">
+				편집 팔레트
+			</div>
+			<div id="funcPalette" class="palette">
 				<!-- Modal Div -->
-				<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary center-block">리스트</button></div>
+				<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="form-control">지도 리스트</button></div>
 				<!-- line modal -->
 				<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
@@ -316,7 +459,7 @@
 						</div>
 				  </div>
 				</div>
-				<button id="removeAllBtn" type="button" name="button">초기화</button>
+				<button id="removeAllBtn" type="button" class="form-control" name="button">맵 초기화</button>
 				<!-- Modal End -->
 			</div>
 		</div>
@@ -853,6 +996,11 @@
 				});
 				return textObjs;
 			}
+
+			$("#mapCover").on("click",function(){
+				$(this).remove();
+				$(".title").remove();
+			})
 
 	});
 	</script>
