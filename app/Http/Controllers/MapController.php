@@ -8,6 +8,7 @@ use DB;
 use File;
 use App\Map;
 
+
 class MapController extends Controller
 {
     public function index() {
@@ -28,21 +29,92 @@ class MapController extends Controller
     }
 
     // 맵 목록
-    public function mapList() {
-        $data = array();
-        $map_src = DB::select("select * from maps");
-
-        foreach ($map_src as $datas) {
-            $d_arr = [
-                "id"        => $datas->id
-            ];
-            array_push($data, $d_arr);
-        }
-
-        return view('background.map.map_view')->with("data", $data);
+    public function getMapList() {
+      $mapsInfos = DB::table("maps")->get();
+      return $mapsInfos;
     }
 
+    public function getGridsContent(Request $request){
+      $mapId = $request->input('id');
 
+      $gridInfo = DB::table("grids")->where("belong_to_map","=",$mapId)->get();
+      $textInfo = DB::table("map_texts")->where("belong_to_map","=",$mapId)->get();
+
+      $mapInfos = [
+        "gridInfo"=>$gridInfo,
+        "textInfo"=>$textInfo
+      ];
+      return $mapInfos;
+    }
+
+    // 지도 등록
+    public function mapStore(Request $request){
+      // 맵 , 그리드, 텍스트 정보
+      $title = $request->input('title');
+      $gridInfos = json_decode($request->input('gridInfos'));
+
+      $textInfos = json_decode($request->input('textInfos'));
+      // 이미지 커버 저장
+      $canvasUrl = $request->input('canvasUrl');
+
+
+      $destinationPath = 'img/background/mapImg/mapCover/';
+      $fileName = date("Y").date("m").date("d").date("s")."_".$title.".png";
+      $outputFile = $destinationPath.$fileName;
+      $ifp = fopen( $outputFile, 'wb' );
+
+      $data = explode( ',', $canvasUrl);
+      fwrite( $ifp, base64_decode( $data[ 1 ] ) );
+      fclose( $ifp );
+
+      // 맵 데이터 추가
+      $mytime = date('Y-m-d H:i:s');
+      DB::table("maps")->insert([
+          "cover_src"  => $fileName,
+          "title"      => $title,
+          "created_at" => $mytime
+      ]);
+
+      // 등록한 맵 아이디 호출
+      $mapsInfo = DB::table("maps")->select("id","created_at","updated_at")->orderBy('id', 'DESC')->first();
+      $mapsId = $mapsInfo->id;
+      $createdAt = $mapsInfo->created_at;
+      $updatedAt = $mapsInfo->updated_at;
+
+      // 그리드 테이블 등록
+      foreach($gridInfos as $gridInfo){
+        DB::table("grids")->insert([
+            "belong_to_map"  => $mapsId,
+            "grid_id"        => $gridInfo->grid_id,
+            "fill_info"      => $gridInfo->fill_info
+        ]);
+      }
+
+      // 텍스트 테이블 등록
+      foreach($textInfos as $textInfo){
+        DB::table("map_texts")->insert([
+            "belong_to_map"  => $mapsId,
+            "text_id"        => $textInfo->text_id,
+            "content"        => $textInfo->content,
+            "font_family"    => $textInfo->font_family,
+            "font_size"      => $textInfo->font_size,
+            "letter-spacing" => $textInfo->letter_spacing,
+            "fill_color"     => $textInfo->fill_color
+        ]);
+      }
+
+      return $mapsId."/".$createdAt;
+    }
+
+    // 지도 삭제
+
+    public function removeMap(Request $request){
+      $mapId = $request->input('mapId');
+      DB::table("maps")->where('id','=',$mapId)->delete();
+      DB::table("grids")->where('belong_to_map','=',$mapId)->delete();
+      DB::table("map_texts")->where('belong_to_map','=',$mapId)->delete();
+      return $mapId;
+    }
 
     //지도 이미지 업로드
     public function mapImgStore(Request $request) {
