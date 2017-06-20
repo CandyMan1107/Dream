@@ -5,7 +5,11 @@
 		<div class="container">
 			<div class="row">
 				<div class="page-title text-center">
-					<h1>베스트 웹소설</h1>
+					@if (empty($data['null']))
+						<h1>베스트 웹소설</h1>
+					@else
+						<h1>베스트 웹소설</h1>
+					@endif
 					<p>장르별로 다양한 웹소설 <br>독자들이 선택한 베스트 웹소설은? </p>
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
@@ -17,6 +21,9 @@
 							<div class="filter wrk-title lst-cld" data-filter="horror">호러</div>
 					</div>
 					<div id="Container">
+						@if (empty($data['null']))
+							<h1>기다려보아</h1>
+						@else
 							@for ($i = 0; $i < count($data); $i++)
 								<div class="filimg mix {{ $data[$i]['genre'] }} col-md-4 col-sm-4 col-xs-12" data-myorder="2">
 									<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
@@ -24,7 +31,7 @@
 									</a>
 								</div>
 							@endfor
-
+						@endif
 					</div>
 				</div>
 			</div>

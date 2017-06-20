@@ -31,17 +31,14 @@ class MainController extends Controller
                 $i++;
             }
         } else {
-            $data[$i]['id'] = 0;
-            $data[$i]['title'] = "";
-            $data[$i]['intro'] = "";
-            $data[$i]['summary_intro'] = "";
-            $data[$i]['cover_img_src'] = "";
-            $data[$i]['publish_case'] = 0;
-            // $data[$i]['period'] = $datas->period;
-            $data[$i]['genre'] = "";
+            $data['null'] = "";
         }
 
         // var_dump($data);
+
+        // if (empty($data['null'])) {
+        //     echo "YES IT IS EMPTY!";
+        // }
 
         
         return view('welcome')->with('data', $data);

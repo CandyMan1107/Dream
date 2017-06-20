@@ -9,20 +9,35 @@
 		<div class="container">
 			<div class="row">
 				<div class="autoplay-top">
-
-					@for ($i = 0; $i < 3; $i++)
+					@if (empty($data['null']))
 						<div class="col-md-12">
-							<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
-								<div class="jumbotron">
-									<h3 class="novel">{!! $data[$i]['genre'] !!}</h3>
-									<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
-									<br/>
-									<p class="big">{!! $data[$i]['title'] !!}</p>
-									<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
-								</div>
-							</a>
+								<a href="#">
+									<div class="jumbotron">
+										<h3 class="novel">조금만</h3>
+										<h2 class="small">기다려보아</h2>
+										<br/>
+										<p class="big">우하하하하하</p>
+										<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
+									</div>
+								</a>
 						</div>
-					@endfor
+					@else
+					
+						@for ($i = 0; $i < 3; $i++)
+							<div class="col-md-12">
+								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
+									<div class="jumbotron">
+										<h3 class="novel">{!! $data[$i]['genre'] !!}</h3>
+										<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
+										<br/>
+										<p class="big">{!! $data[$i]['title'] !!}</p>
+										<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
+									</div>
+								</a>
+							</div>
+						@endfor
+
+					@endif
 					
 				</div>
 			</div>
@@ -61,29 +76,33 @@
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
 				<div class="autoplay">
-
-					@for ($i = 0; $i < count($data); $i++)
-						<div class="col-md-6">
-							<div class="team-info">
-								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
-									<div class="img-sec">
-										<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
-									</div>
-									<div class="fig-caption">
-										<h3>{!! $data[$i]['title'] !!}</h3>
-										<p class="marb-20">작가 글반죽</p>
-										{{-- <p>Follow me:</p>
-										<ul class="team-social">
-											<li class="bgblue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li class="bgred"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-											<li class="bgblue-light"><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li class="bgblue-dark"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-										</ul> --}}
-									</div>
-								</a>
+					@if (empty($data['null']))
+					 <h1>곧 소설이 업로드됩니다.</h1>
+					@else
+						@for ($i = 0; $i < count($data); $i++)
+							<div class="col-md-6">
+								<div class="team-info">
+									<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
+										<div class="img-sec">
+											<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
+										</div>
+										<div class="fig-caption">
+											<h3>{!! $data[$i]['title'] !!}</h3>
+											<p class="marb-20">작가 글반죽</p>
+											{{-- <p>Follow me:</p>
+											<ul class="team-social">
+												<li class="bgblue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
+												<li class="bgred"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+												<li class="bgblue-light"><a href="#"><i class="fa fa-twitter"></i></a></li>
+												<li class="bgblue-dark"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+											</ul> --}}
+										</div>
+									</a>
+								</div>
 							</div>
-						</div>
-					@endfor
+						@endfor
+					@endif
+					
 
 				</div>
 			</div>
