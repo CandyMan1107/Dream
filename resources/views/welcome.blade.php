@@ -9,7 +9,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="autoplay-top">
-					@if (empty($data['null']))
+				
+					@if (empty($data))
 						<div class="col-md-12">
 								<a href="#">
 									<div class="jumbotron">
@@ -23,7 +24,7 @@
 						</div>
 					@else
 					
-						@for ($i = 0; $i < 3; $i++)
+						@for ($i = 0; $i < count($data); $i++)
 							<div class="col-md-12">
 								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
 									<div class="jumbotron">
@@ -66,6 +67,8 @@
 	@endphp
 	{{--today & best NOVEL END--}}
 
+	<div id="default-padding-big"></div>
+
 	{{--EVENT START--}}
 	<div id="event" class="section-padding">
 		<div class="container">
@@ -76,7 +79,7 @@
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
 				<div class="autoplay">
-					@if (empty($data['null']))
+					@if (empty($data))
 					 <h1>곧 소설이 업로드됩니다.</h1>
 					@else
 						@for ($i = 0; $i < count($data); $i++)

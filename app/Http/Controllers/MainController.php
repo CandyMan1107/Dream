@@ -17,28 +17,33 @@ class MainController extends Controller
         $data[] = [];
         $i = 0;
 
-        if (!empty($novelData)) {
-            foreach($novelData as $datas) {
-                $data[$i]['id'] = $datas->id;
-                $data[$i]['title'] = $datas->title;
-                $data[$i]['intro'] = $datas->intro;
-                $data[$i]['summary_intro'] = $datas->summary_intro;
-                $data[$i]['cover_img_src'] = $datas->cover_img_src;
-                $data[$i]['publish_case'] = $datas->publish_case;
-                // $data[$i]['period'] = $datas->period;
-                $data[$i]['genre'] = $datas->genre;
+        // var_dump($novelData);
 
-                $i++;
+        foreach($novelData as $datas) {
+            $data[$i]['id'] = $datas->id;
+            $data[$i]['title'] = $datas->title;
+            $data[$i]['intro'] = $datas->intro;
+            $data[$i]['summary_intro'] = $datas->summary_intro;
+            $data[$i]['cover_img_src'] = $datas->cover_img_src;
+            $data[$i]['publish_case'] = $datas->publish_case;
+            // $data[$i]['period'] = $datas->period;
+            $data[$i]['genre'] = $datas->genre;
+
+            $i++;
+        }
+        // } else {
+        //     $data['null'] = "";
+        // }
+
+        // var_dump($novelData);
+
+        if (empty($novelData)) {
+            foreach($novelData as $datas) {
+                $data[$i]['null'] = "";
             }
-        } else {
-            $data['null'] = "";
         }
 
         // var_dump($data);
-
-        // if (empty($data['null'])) {
-        //     echo "YES IT IS EMPTY!";
-        // }
 
         
         return view('welcome')->with('data', $data);
