@@ -4,8 +4,8 @@ $(document).ready(function () {
     **************************************/
     $("li[name=dayCircle]").each(function () {
         $(this).click(function () {
-            $(this).addClass("selected");
-            $(this).siblings().removeClass("selected");
+            $(this).addClass("selectedDay");
+            $(this).siblings().removeClass("selectedDay");
             // alert("CLICK");
         });
     });

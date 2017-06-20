@@ -23,6 +23,7 @@
 							</a>
 						</div>
 					@endfor
+					
 				</div>
 			</div>
 		</div>
@@ -45,8 +46,8 @@
 	@php
 	use App\Http\Controllers\MainController;
 	
-	echo MainController::todayNovel($data);
-	echo MainController::bestNovel($data);
+	echo MainController::todayNovelView($data);
+	echo MainController::bestNovelView($data);
 	@endphp
 	{{--today & best NOVEL END--}}
 
