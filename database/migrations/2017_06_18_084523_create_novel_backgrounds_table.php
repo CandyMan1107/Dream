@@ -30,6 +30,6 @@ class CreateNovelBackgroundsTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('novel_backgorunds');
+        Schema::dropIfExists('novel_backgrounds');
     }
 }

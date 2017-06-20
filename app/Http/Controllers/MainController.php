@@ -31,17 +31,6 @@ class MainController extends Controller
 
             $i++;
         }
-        // } else {
-        //     $data['null'] = "";
-        // }
-
-        // var_dump($novelData);
-
-        if (empty($novelData)) {
-            foreach($novelData as $datas) {
-                $data[$i]['null'] = "";
-            }
-        }
 
         // var_dump($data);
 

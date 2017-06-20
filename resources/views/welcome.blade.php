@@ -9,8 +9,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="autoplay-top">
-				
-					@if (empty($data))
+					@if (empty($data[0]['title']))
 						<div class="col-md-12">
 								<a href="#">
 									<div class="jumbotron">
@@ -79,7 +78,7 @@
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
 				<div class="autoplay">
-					@if (empty($data))
+					@if (empty($data[0]['title']))
 					 <h1>곧 소설이 업로드됩니다.</h1>
 					@else
 						@for ($i = 0; $i < count($data); $i++)
