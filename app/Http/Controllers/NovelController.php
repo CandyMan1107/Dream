@@ -72,7 +72,7 @@ class NovelController extends Controller
 
         $data = array(array());
         $i = 0;
-
+        
         foreach($episodeData as $datas) {
             $data[$i]['episode_count'] = $episodeCount;
 

@@ -27,7 +27,7 @@
                 <ul class="list-inline">
                     <li><i class="material-icons" name="bookmark">bookmark_border</i></li>
                     <li><i class="material-icons" name="star">star_border</i></li>
-                    <li><i class="material-icons"><a href="{{ url()->previous() }}">menu</a></i></li>
+                    <li><i class="material-icons"><a href="/novel/info/novel_info/{{$data['belong_to_novel']}}">menu</a></i></li>
                 </ul>
             </div>
         </div>
@@ -129,7 +129,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-left">
-                    <a href="/novel/read/novel_read_view/{{$data['belong_to_novel']}}&{{ $data['episode_count']-1 }}">
+                    <a name="arrow-back" data-id="{{ $data['episode_count']-1 }}" href="/novel/read/novel_read_view/{{$data['belong_to_novel']}}&{{ $data['episode_count']-1 }}">
                         <p><i class="material-icons move-icon">arrow_back</i></p>
                         <h4 class="move-text">이전화</h4>
                     </a>
@@ -141,7 +141,7 @@
                     </a>
                 </div>
                 <div class="col-md-4 text-right">
-                    <a href="/novel/read/novel_read_view/{{$data['belong_to_novel']}}&{{ $data['episode_count']+1 }}">
+                    <a name="arrow-forward" data-id="{{ $data['episode_count']+1 }}" href="/novel/read/novel_read_view/{{$data['belong_to_novel']}}&{{ $data['episode_count']+1 }}">
                         <p><i class="material-icons move-icon">arrow_forward</i></p>
                         <h4 class="move-text">다음화</h4>
                     </a>
@@ -229,6 +229,7 @@
         <script src="/js/JHM-Custom/jhm-selectIcon-custom.js"></script>
         <script src="/js/JHM-Custom/jhm-readNovel-custom.js"></script>
         <script src="/js/JHM-Custom/jhm-quick.js"></script>
+        <script src="/js/JHM-Custom/jhm-arrow.js"></script>
         <script src="/js/JHM-Custom/jhm-comment.js"></script>
         {{-- BOOK SCRIPT --}}
         {{-- <script type="text/javascript" src="/js/book-custom/jquery.min.1.7.js"></script>

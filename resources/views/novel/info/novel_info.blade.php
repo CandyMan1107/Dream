@@ -89,7 +89,7 @@
                                 </a>
                             </div>
                             <div class="col-md-4">
-                                <button class="btn btn-default btn-block novel-background-read-Btn">소설 배경 설정 보기</button>
+                                <button class="btn btn-default btn-block novel-background-read-Btn" data-toggle="modal" data-target="#backgroundModal">소설 배경 설정 보기</button>
                             </div>
                         </div>
                     </div>
@@ -97,6 +97,13 @@
             </div>
             {{-- container class END --}}
         </div>
+        {{--quickMenu & viewer & background MODAL START--}}
+        @php
+        use App\Http\Controllers\NovelController;
+        
+        echo NovelController::backgroundModal($data);
+        @endphp
+        {{--quickMenu & viewer & background MODAL END--}}
         {{-- novel-info-2 END --}}
         <div id="default-padding-big" class="col-md-12"></div>
         {{-- novel-info-3 START --}}
@@ -118,11 +125,6 @@
                     </div>
                     
                     <div id="default-padding-small" class="col-md-12"></div>
-                    @if ($data[0]['belong_to_novel'] == 0)
-                        <div class="col-md-12">
-                            <h4>업로드된 소설 회차가 없습니다.</h4>
-                        </div>
-                    @else
                         @foreach ($data as $d)
                             <div class="col-md-12">
                                 <div class="episode">
@@ -156,7 +158,6 @@
                             </div>
                             <div id="default-padding-small" class="col-md-12"></div>
                         @endforeach
-                    @endif
                     
                     {{--PAGE--}}
                     <div id="default-padding-small-1" class="col-md-12"></div>

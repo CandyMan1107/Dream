@@ -75,9 +75,7 @@ Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
 // Today Novel
-Route::get('/novel/kind/today_novel_by_day', function(){
-    return view('novel/kind/today_novel_by_day');
-});
+Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
 
 
 // Background SHARE
