@@ -20,8 +20,9 @@ class Timetable extends Model
             'refer_info' => $table['refer_info'],
         ];
         // data insert
-        DB::table('timetables')->insert($dataSet);
+        $id = DB::table('timetables')->insertGetId($dataSet);
         // var_dump($table);
+        return $id;
     }
 
     public function dataBringAll(){
