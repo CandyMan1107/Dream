@@ -1,6 +1,5 @@
 $(document).ready(function(){
     var item_id = [];
-    var character_id = $("#character_id").val();
     $('.ownership_list').click(function(){
         item_id.push($(this).attr("id"));
         $(this).css("border","2px solid red");

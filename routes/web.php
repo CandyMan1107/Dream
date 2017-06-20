@@ -61,6 +61,8 @@ Route::post('/background/character/ownership_img', "BackgroundCharactersControll
 
 Route::resource('/background/character', 'BackgroundCharactersController');
 
+Route::post('/background/historyTable/effectCharacter',"BackgroundHistoryTablesController@character_effect_insert");
+
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
 Route::resource('/background', 'BackgroundController');
