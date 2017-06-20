@@ -25,7 +25,7 @@
                                 </ul>
                             </div>
                             <div class="col-md-3 text-right">
-                                <button type="button" class="btn btn-default" disabled="disabled"><i class="material-icons">settings_backup_restore</i>원래대로</button>
+                                <button type="button" class="btn btn-default" name="reset"><i class="material-icons">settings_backup_restore</i>원래대로</button>
                             </div>
                         </div>
                     </div>

@@ -11,11 +11,21 @@ function character_event(data){
                     $(this).siblings().removeClass("selected");
                 }
                 event_id = $(this).attr("id")-1;
+                $('.refer_info').remove();
                 $('#name').text("캐릭터 정보");
                 $('#character_id').val(data[event_id]['id']);
                 $('#character_name').val(data[event_id]['name']);
+                if(data[event_id]['refer_info'].length>1){
+                    // alert(data[event_id]['refer_info'][1]);
+                    for( var i = 0; data[event_id]['refer_info'].length > i ; i++){
+                        // alert(data[event_id]['refer_info'][i]);
+                        $('.refer_info_div').append('<input type="text" class="form-control refer_info" name="refer_info[]" id='+i+' value="'+data[event_id]['refer_info'][i]+'">');
+                    }
+                }
+                else {
+                    $('.refer_info_div').append('<input type="text" class="form-control refer_info" name="refer_info[]" id='+i+' value="'+data[event_id]['refer_info']+'">');
+                }
                 $('#character_content').val(data[event_id]['info']);
-                $('#refer_info').val(data[event_id]['refer_info']);
                 $('#age').val(data[event_id]['age']);
                 $('#gender').val(data[event_id]['gender']);
                 $.ajaxSetup({

@@ -398,28 +398,28 @@ TODAY NOVEL : DAY SELECT
     color: #002E40;
     text-decoration: none;
 }
-#select-space li {
+#select-space li[name=dayCircle] {
     width: 55px;
     height: 55px;
     padding: 15px;
     /*border: 1px solid black;*/
     border-radius: 100%;  
 }
+#select-space li[name=dayCircle] > strong {
+    margin: auto;
+}
+    
 #select-space .fake-circle {
     padding: 25px;
     /*border: 1px solid blue;*/
     border-radius: 100%;  
 }
 
-
-/**************************************
-selected
-**************************************/
-.selected {
+.selectedDay {
     background-color: #FA9600;
 }
 
-.selected > strong {
+.selectedDay > strong {
     color: white;
 }
 

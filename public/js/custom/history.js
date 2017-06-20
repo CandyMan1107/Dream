@@ -3,8 +3,7 @@ google.charts.load('current', {'packages':['timeline']});
 function ready(data){
 	var datas = data;
 
-	// console.log(datas[0]['event_name']);
-	// alert(datas);
+	console.log(datas[0]['event_name']);
 	google.charts.setOnLoadCallback(drawChart);
 
 	function drawChart() {

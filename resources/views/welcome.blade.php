@@ -2,27 +2,44 @@
 
 @section('content')
 
+
 <div class="default-padding"></div>
 {{--BANNER START--}}
 	<div id="banner" class="section-padding">
 		<div class="container">
 			<div class="row">
 				<div class="autoplay-top">
-
-					@for ($i = 0; $i < 3; $i++)
+				
+					@if (empty($data))
 						<div class="col-md-12">
-							<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
-								<div class="jumbotron">
-									<h3 class="novel">{!! $data[$i]['genre'] !!}</h3>
-									<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
-									<br/>
-									<p class="big">{!! $data[$i]['title'] !!}</p>
-									<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
-								</div>
-							</a>
+								<a href="#">
+									<div class="jumbotron">
+										<h3 class="novel">조금만</h3>
+										<h2 class="small">기다려보아</h2>
+										<br/>
+										<p class="big">우하하하하하</p>
+										<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
+									</div>
+								</a>
 						</div>
-					@endfor
+					@else
+					
+						@for ($i = 0; $i < count($data); $i++)
+							<div class="col-md-12">
+								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
+									<div class="jumbotron">
+										<h3 class="novel">{!! $data[$i]['genre'] !!}</h3>
+										<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
+										<br/>
+										<p class="big">{!! $data[$i]['title'] !!}</p>
+										<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
+									</div>
+								</a>
+							</div>
+						@endfor
 
+					@endif
+					
 				</div>
 			</div>
 		</div>
@@ -40,82 +57,17 @@
 	</div>--}}
 	{{--CTA1 END--}}
 	<div id="default-padding-mid"></div>
-<<<<<<< HEAD
-	{{-- SERVICE START --}}
-	<div id="today-novel" class="section-padding">
-		<div class="container">
-			<div class="row">
-				<div class="page-title text-center">
-					<h1><a class="noDeco" href="/novel/today_novel_by_day">오늘의 웹소설</a></h1>
-					<p>오늘의 <br>HOT한 소설! </p>
-					<hr class="pg-titl-bdr-btm"></hr>
-				</div>
-
-				@for ($i = 0; $i < 3; $i++)
-					<div class="col-md-4">
-						<a href="/novel/novel_info/{{ $data[$i]['id'] }}">
-							<div class="service-box">
-								<div class="service-icon"><img src="upload/images/{{ $data[$i]['cover_img_src'] }}" /></div>
-								<div class="service-text">
-									<h5>{!! $data[$i]['genre'] !!}</h5>
-									<h3>{!! $data[$i]['title'] !!}</h3>
-									<p> <i class="fa fa-pencil"></i> 글반죽</p>
-									<p> <b>{!! $data[$i]['summary_intro'] !!}</b></p>
-								</div>
-							</div>
-						</a>
-					</div>
-				@endfor
-
-			</div>
-		</div>
-	</div>
-	{{--SERVICE END--}}
-
-	{{--PORTFOLIO START--}}
-	<div id="best-novel" class="section-padding">
-		<div class="container">
-			<div class="row">
-				<div class="page-title text-center">
-					<h1>베스트 웹소설</h1>
-					<p>장르별로 다양한 웹소설 <br>독자들이 선택한 베스트 웹소설은? </p>
-					<hr class="pg-titl-bdr-btm"></hr>
-				</div>
-				<div class="port-sec">
-					<div class="col-md-12 fil-btn text-center">
-							<div class="filter wrk-title active" data-filter="all">전체</div>
-							<div class="filter wrk-title" data-filter=".romance">로맨스</div>
-							<div class="filter wrk-title" data-filter=".fantasy">판타지</div>
-							<div class="filter wrk-title lst-cld" data-filter="horror">호러</div>
-					</div>
-					<div id="Container">
-
-						@for ($i = 0; $i < count($data); $i++)
-							<div class="filimg mix {{ $data[$i]['genre'] }} col-md-4 col-sm-4 col-xs-12" data-myorder="2">
-								<a href="/novel/novel_info/{{ $data[$i]['id'] }}">
-									<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
-								</a>
-							</div>
-						@endfor
-
-
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	{{--PORTFOLIO END--}}
-=======
 	
 	{{--today & best NOVEL START--}}
 	@php
 	use App\Http\Controllers\MainController;
 	
-	echo MainController::todayNovel($data);
-	echo MainController::bestNovel($data);
+	echo MainController::todayNovelView($data);
+	echo MainController::bestNovelView($data);
 	@endphp
 	{{--today & best NOVEL END--}}
->>>>>>> 0b166776d036af4c5af214d087a5271948ca6173
+
+	<div id="default-padding-big"></div>
 
 	{{--EVENT START--}}
 	<div id="event" class="section-padding">
@@ -127,29 +79,33 @@
 					<hr class="pg-titl-bdr-btm"></hr>
 				</div>
 				<div class="autoplay">
-
-					@for ($i = 0; $i < count($data); $i++)
-						<div class="col-md-6">
-							<div class="team-info">
-								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
-									<div class="img-sec">
-										<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
-									</div>
-									<div class="fig-caption">
-										<h3>{!! $data[$i]['title'] !!}</h3>
-										<p class="marb-20">작가 글반죽</p>
-										{{-- <p>Follow me:</p>
-										<ul class="team-social">
-											<li class="bgblue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
-											<li class="bgred"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-											<li class="bgblue-light"><a href="#"><i class="fa fa-twitter"></i></a></li>
-											<li class="bgblue-dark"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-										</ul> --}}
-									</div>
-								</a>
+					@if (empty($data))
+					 <h1>곧 소설이 업로드됩니다.</h1>
+					@else
+						@for ($i = 0; $i < count($data); $i++)
+							<div class="col-md-6">
+								<div class="team-info">
+									<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
+										<div class="img-sec">
+											<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
+										</div>
+										<div class="fig-caption">
+											<h3>{!! $data[$i]['title'] !!}</h3>
+											<p class="marb-20">작가 글반죽</p>
+											{{-- <p>Follow me:</p>
+											<ul class="team-social">
+												<li class="bgblue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
+												<li class="bgred"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+												<li class="bgblue-light"><a href="#"><i class="fa fa-twitter"></i></a></li>
+												<li class="bgblue-dark"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+											</ul> --}}
+										</div>
+									</a>
+								</div>
 							</div>
-						</div>
-					@endfor
+						@endfor
+					@endif
+					
 
 				</div>
 			</div>
