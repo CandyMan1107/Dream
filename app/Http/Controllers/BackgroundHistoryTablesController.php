@@ -75,27 +75,31 @@ class BackgroundHistoryTablesController extends Controller
             }
             
         }
-        var_dump($table['item_id']);
-        var_dump($table['effect_item']);
-        // $table['refer_info'] = $refer_info;
+        // var_dump($table);
+        // var_dump($table['effect_item']);
+        $table['refer_info'] = $refer_info;
 
         // affect 데이터를 저장하기 위한 배열
         // characters, items, maps 아래 각각 id 와 content를 가지고 있음.
         $data = array(array(array()));
-        $data['characters']['id'] = $table['character_id'];
-        $data['characters']['content'] = $table['effect_character'];
-        $data['items']['id'] = $table['item_id'];
-        $data['items']['content'] = $table['effect_item'];
+        if(isset($table['character_id'])){
+            $data['characters']['id'] = $table['character_id'];
+            $data['characters']['content'] = $table['effect_character'];
+        }
+        if(isset($table['item_id'])){
+            $data['items']['id'] = $table['item_id'];
+            $data['items']['content'] = $table['effect_item'];
+        }
         // 차후 지도 정보 입력 시 연동
         // $data['maps']['id'] = $table['map_id'];
         // $data['maps']['content'] = $table['effect_map'];
-
+        
         // 새로 입력 한 연대표 아이디값 반환
         $table_id = $timeTable->insert_table($table);
-
+        // $table_id = 6;
         // 관계 테이블에 데이터 저장
         $effect->insert_effect($table_id,$data);
-        // return redirect(route('historyTable.index'));
+        return redirect(route('historyTable.index'));
     }
 
     public static function characters_effect_modal(){
