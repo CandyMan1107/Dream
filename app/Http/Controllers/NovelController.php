@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Novel;
 use App\Episode;
+use App\Background;
 
 class NovelController extends Controller
 {
-    //
+    // NOVEL INFO
     public function novelInfo($id) 
     {
         // echo $id;
@@ -36,16 +37,6 @@ class NovelController extends Controller
             ];
             
             array_push($data, $datas);
-
-            // $sliceData = array_slice($datas[$i], 9);
-
-            // var_dump($sliceData);
-        
-            // if (!$sliceData) {
-            //     array_splice($data[$i], 9, 3, array(0, "", ""));
-
-            //     break;
-            // }
         }
         
         // var_dump($novelData);
@@ -55,6 +46,7 @@ class NovelController extends Controller
         return view('novel.info.novel_info')->with("data", $data);
     }
 
+    // NOVEL EPISODE
     public static function episodeShow($id) 
     {
         $string = explode("&", $id);
@@ -106,6 +98,12 @@ class NovelController extends Controller
         return view('novel.read.novel_read_view')->with("data", $data[$i]);
     }
 
+    // NOVEL BACKGROUND : CHARACTER
+    public static function backgroundCharacter() {
+        
+    }
+
+    // VIEWER QUICK MENU
     public static function quickMenu($data) {
         $novelId = $data['belong_to_novel'];
 

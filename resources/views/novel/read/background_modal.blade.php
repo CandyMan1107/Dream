@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-md-11 text-left collapse in" id="collapseHistory">
                                 {{-- CONTEXT --}}
-                                
+                                History
                             </div>
                         </div>
                     </div>
@@ -31,6 +31,7 @@
                             </div>
                             <div class="col-md-11 text-left collapse" id="collapseCharacter">
                                 {{-- CONTEXT --}}
+                                Character
                             </div>
                         </div>
                     </div>
@@ -44,19 +45,21 @@
                             </div>
                             <div class="col-md-11 text-left collapse" id="collapseObject">
                                 {{-- CONTEXT --}}
+                                Object
                             </div>
                         </div>
                     </div>
-                    {{-- Novel Character-Map --}}
+                    {{-- Novel Relation --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseCharMap" aria-expanded="false" aria-controls="collapseCharMap">
+                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseRelation" aria-expanded="false" aria-controls="collapseRelation">
                                 <a href="#">
                                     <h1><i class="fa fa-users" aria-hidden="true"></i></h1>
                                 </a>
                             </div>
-                            <div class="col-md-11 text-left collapse" id="collapseCharMap">
+                            <div class="col-md-11 text-left collapse" id="collapseRelation">
                                 {{-- CONTEXT --}}
+                                Relation
                             </div>
                         </div>
                     </div>
@@ -70,6 +73,7 @@
                             </div>
                             <div class="col-md-11 text-left collapse" id="collapseMap">
                                 {{-- CONTEXT --}}
+                                Map
                             </div>
                         </div>
                     </div>
