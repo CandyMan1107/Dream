@@ -26,6 +26,7 @@ class NovelController extends Controller
                 'intro' => $novelData[$i]->intro,
                 'summary_intro' => $novelData[$i]->summary_intro,
                 'cover_img_src' => $novelData[$i]->cover_img_src,
+                'episode_cover_src' => $novelData[$i]->episode_cover_src,
                 'publish_case' => $novelData[$i]->publish_case,
                 'period' => $novelData[$i]->period,
                 'genre' => $novelData[$i]->genre,

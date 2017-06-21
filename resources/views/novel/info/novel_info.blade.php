@@ -132,7 +132,7 @@
                                         <a href="/novel/read/novel_read_view/{{$d['belong_to_novel']}}&{{ $d['episode_count'] }}">
                                             <div class="col-md-3">
                                                 <div>
-                                                    <img src="/upload/images/{{ $d['cover_img_src'] }}" width="261" height="160" />
+                                                    <img src="/upload/images/{{ $d['episode_cover_src'] }}" width="261" height="160" />
                                                 </div>
                                             </div>
                                             <div class="col-md-9">
