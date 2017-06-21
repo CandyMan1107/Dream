@@ -510,7 +510,8 @@
             'summaryIntro': summaryIntro
           },
           success: function (data) {
-            alert(data);
+            alert("소설이 생성 되었습니다!");
+            location.href= "my_novel";
           },
           error: function (error) {
             alert("오류발생");
