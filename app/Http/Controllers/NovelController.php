@@ -99,8 +99,13 @@ class NovelController extends Controller
     }
 
     // NOVEL BACKGROUND : CHARACTER
-    public static function backgroundCharacter() {
+    public static function backgroundCharacter($data) {
+        $backgroundId = $data['belong_to_novel'];
+
+        $backgroundTable = new Background();
+        $characterData = $backgroundTable->selectCharacter($backgroundId);
         
+        // return view('novel.read.background.character')->with("dataC", $dataC);
     }
 
     // VIEWER QUICK MENU
