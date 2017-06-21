@@ -1,3 +1,4 @@
+<script src ="{{url(asset('js/jscolor.js?ver=1'))}}"></script>
 <script type="text/javascript" src="/js/custom/tag_event.js"></script>
 <script> var a = tag_click( <?=json_encode($datas['tag_data'])?>, <?=json_encode($datas['page'])?> ); </script>
 
@@ -23,6 +24,10 @@
         <div class="panel-body">
             <input type="text" id="tag_color" name="tag_color" class="form-control" placeholder="Text input">
         </div>
+        <div id="colorPalette" class="palette">
+				&nbsp;HEX value: <button class="color-palette jscolor {valueElement:'chosen-value'}">Color Picker</button>
+				<input class="form-control" id="chosen-value" value="000000" size = "6">
+		</div>
     </div>
     <button type="submit" name="tag_submit" id="tag_submit" class="btn btn-default">등록</button>   
 </form>
