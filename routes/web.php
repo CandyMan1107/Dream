@@ -61,9 +61,9 @@ Route::get('/background/map', "MapController@index");
 Route::get('/background/removeImg', "MapController@removeImg");
 
 
-// Route::get('/login', function () {
-//     return view('auth/login');
-// });
+Route::get('/login', function () {
+    return view('auth/login');
+});
 
 /**************************************
 CHARACTER & HISTORY - BACKGROUND
@@ -78,7 +78,7 @@ Route::post('/background/character/ownership_img', "BackgroundCharactersControll
 
 Route::resource('/background/character', 'BackgroundCharactersController');
 
-Route::post('/background/historyTable/effectCharacter',"BackgroundHistoryTablesController@character_effect_insert");
+Route::post('/background/historyTable/getEffect',"BackgroundHistoryTablesController@getEffect");
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
@@ -95,7 +95,6 @@ Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
 // Today Novel
 Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
-
 
 // Background SHARE
 Route::get('/background/share', function(){
@@ -155,13 +154,12 @@ Route::post('/write_novel/addCover', "UpImgController@uploadImg");
 
 // 커버 이미지 삭제
 Route::get('/write_novel/removeCover', "UpImgController@removeImg");
-
+ 
 
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
 
-// 로그인 인증
 Auth::routes();
 
 // 로그인

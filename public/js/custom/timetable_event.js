@@ -30,6 +30,47 @@ function timetableEvent(data){
                 $('#other').val(data[event_id]['other']);
                 $('#submit_history').text("수정");
                 $('#submit_delete').show();
+                alert(data[event_id]['id']);
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url : "historyTable/getEffect",
+                    data : { 
+                            timetable_id : data[event_id]['id'] 
+                        },
+                    success:function(data){
+                        $('.affect').remove();
+                        for(var i = 0; i < data.length; i++){
+                            // console.log(data[i]['img_src']);
+                            if(data[i]['affect_table']=="characters"){
+                                var img_path = "/img/background/characterImg/"+data[i]['img_src'];
+                                $('.inner_character').append('<img src='+img_path+' alt="character image" class="img-circle img-things-size affect" style="margin : 17px">');
+                                $('.inner_character').append('<input type="text" class="form-control affect" id="cha'+data[i]['affect_id']+'" name="effect_character[]" placeholder="내용" style="width:70%; float:right; margin-top:25px">');
+                                $('#cha'+data[i]['affect_id']+'').val(data[i]['affect_content']);
+                            }
+                            if(data[i]['affect_table']=="items"){
+                                var img_path = "/img/background/ItemImg/"+data[i]['img_src'];
+                                $('.inner_items').append('<img src='+img_path+' alt="character image" class="img-circle img-things-size affect" style="margin : 17px">');
+                                $('.inner_items').append('<input type="text" class="form-control affect" id="item'+data[i]['affect_id']+'" name="effect_item[]" placeholder="내용" style="width:70%; float:right; margin-top:25px">');
+                                $('#item'+data[i]['affect_id']+'').val(data[i]['affect_content']);
+                            }
+                            // maps
+                            // if(data[i]['affect_table']=="maps"){
+                            //     var img_path = "/img/background/ItemImg/"+data[i]['img_src'];
+                            //     $('.inner_maps').append('<img src='+img_path+' alt="character image" class="img-circle img-things-size affect" style="margin : 17px">');
+                            //     $('.inner_maps').append('<input type="text" class="form-control affect" id="map'+data[i]['affect_id']+'" name="effect_character[]" placeholder="내용" style="width:70%; float:right; margin-top:25px">');
+                            //     $('#map'+data[i]['affect_id']+'').val(data[i]['affect_content']);
+                            // }
+                        }
+                    },
+                    error:function(){
+                        alert("실패");
+                    }
+                });
         });
     });
 }

@@ -417,10 +417,8 @@
       </div>
 
       <div class="row set_row">
-        <div class="col-md-3 btn_div"><div class="func_btn episode-cancel">취소</div></div>
-        <div class="col-md-3 btn_div"><div class="func_btn episode-temp-save">임시저장</div></div>
-        <div class="col-md-3 btn_div"><div class="func_btn episode-preview">미리보기</div></div>
-        <div class="col-md-3 btn_div"><div class="func_btn episode-save">저장</div></div>
+        <div class="col-md-6 btn_div"><div class="func_btn episode-cancel">취소</div></div>
+        <div class="col-md-6 btn_div"><div class="func_btn episode-save">저장</div></div>
       </div>
 
     </div>

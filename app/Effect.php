@@ -49,4 +49,13 @@ class Effect extends Model
         //     DB::table('effects')->insert($dataSet);
         // }
     }
+
+    public function get_effect_data($table_id){
+        $effect_data = DB::table('effects')
+        ->select('affect_table','affect_id','affect_content')
+        ->where('timetable_id',$table_id)
+        ->get();
+
+        return $effect_data;
+    }
 }
