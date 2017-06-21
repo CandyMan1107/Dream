@@ -1,4 +1,10 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app') --}}
+
+@extends('layouts.master') 
+
+@include('partials.mySubNavi')
+
+@include('background.tag')
 
 @section('content')
 <div class="container">

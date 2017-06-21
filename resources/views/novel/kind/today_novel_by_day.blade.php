@@ -12,7 +12,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="autoplay-top">
-							@for ($i = 0; $i < 3; $i++)
+							@for ($i = 0; $i < count($data); $i++)
 								<div class="col-md-12">
 									<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
 										<div class="jumbotron">

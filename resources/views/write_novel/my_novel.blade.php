@@ -160,7 +160,8 @@ echo NovelEpisodeController::show($novelId, $d.id);
 		// 소설값을 테이블에 적용
 		function setNovelInfo(data){
 
-			$(".novel-list .novel-table").remove();
+			$(".novel-table").remove();
+			$(".episode-collapse").remove();
 			data.forEach(function(d){
 				// 소설 테이블
 				var tableEle ="";
@@ -180,6 +181,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				tableEle += "		<td>"
 				tableEle += "			<button  data-toggle='collapse' href='#collapse" + d.id + "' type='button' class='btn btn-default episode-mng-btn' data-novel-id='"+d.id+"'>회차관리</button>";
 				tableEle += "			<button type='button' class='btn btn-default write-episode-btn' data-novel-id='"+d.id+"'>회차작성</button>";
+				tableEle += "			<button type='button' class='btn btn-default background-set-btn' data-novel-id='"+d.id+"'>배경설정</button>";
 				tableEle += " 		<button type='button' class='btn btn-default novel-modify-btn' data-novel-id='"+d.id+"'>작품수정</button>";
 				tableEle += " 	</td>";
 				tableEle += "	</tr>";
@@ -190,7 +192,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				tableEle += "		</td>";
 				tableEle += "	</tr>";
 				tableEle += "</table>";
-				tableEle += "<div class='collapseDiv"+ d.id +"'></div>";
+				tableEle += "<div class='episode-collapse collapseDiv"+ d.id +"'></div>";
 
 				$(".novel-list").append(tableEle);
 
@@ -200,13 +202,17 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				$(".write-episode-btn").off().on("click",function(){
 					var novelId = $(this).attr("data-novel-id");
 					document.location.href="/write_novel/write_episode/" + novelId;
-
 				})
+
+				$(".background-set-btn").off().on("click",function(){
+					location.href="/background";
+				});
 			})
 		}
 
 		// 소설 아이디에 따른 회차 목록
 		function setEpisodeInfo(novelId){
+
 			$.ajax({
 					type: "get",
 					url: "get_episode_info",
@@ -288,6 +294,8 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				//alert(pageEle);
 				 $(".pagination").append(pageEle);
 			}
+
+
 		}
 
 		goJsGetNovelInfo = getNovelInfo;

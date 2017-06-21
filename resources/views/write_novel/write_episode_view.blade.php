@@ -1093,8 +1093,13 @@
 
     // DB 소설 생성
     function createEpisode(novelId, isNotice, isCharge, coverImg, title, episode, postScript){
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
       $.ajax({
-          type: "get",
+          type: "post",
           url: "/write_novel/create_episode",
           data: {
             "novelId"  : novelId,

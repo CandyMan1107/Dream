@@ -61,9 +61,9 @@ Route::get('/background/map', "MapController@index");
 Route::get('/background/removeImg', "MapController@removeImg");
 
 
-// Route::get('/login', function () {
-//     return view('auth/login');
-// });
+Route::get('/login', function () {
+    return view('auth/login');
+});
 
 /**************************************
 CHARACTER & HISTORY - BACKGROUND
@@ -97,10 +97,21 @@ Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
 
 
+<<<<<<< HEAD
+// share페이지 원본
+// Route::get('/background/share', function(){
+//     return view('background/share/set_share_view');
+// });
+
+// Route::get('background/share', function(){
+//     return view('/auth/login');
+// });
+=======
 // Background SHARE
 Route::get('/background/share', function(){
     return view('background/share/set_share_view');
 });
+>>>>>>> 0917f799caa91d2a6fa0addad1b8e7d2408a0ed7
 
 /**************************************
 CORDOVA VIEWER
@@ -128,7 +139,7 @@ Route::get('/write_novel/set', "writeNovelController@setNovelView");
 // 소설 정보 등록
 Route::get('/write_novel/create_novel', "writeNovelController@createNovel");
 // 소설 회차 등록
-Route::get('/write_novel/create_episode', "writeNovelController@createEpisode");
+Route::post('/write_novel/create_episode', "writeNovelController@createEpisode");
 
 // 소설 정보 getter
 Route::get('/write_novel/get_novel_info', "writeNovelController@getNovelInfo");
@@ -155,14 +166,20 @@ Route::post('/write_novel/addCover', "UpImgController@uploadImg");
 
 // 커버 이미지 삭제
 Route::get('/write_novel/removeCover', "UpImgController@removeImg");
-
+ 
 
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
 
-// 로그인 인증
 Auth::routes();
 
 // 로그인
 Route::get('/home', 'HomeController@index')->name('home');
+<<<<<<< HEAD
+
+// Route::get('/home', function() {
+//     return view ('background/background_main');
+// });
+=======
+>>>>>>> 0917f799caa91d2a6fa0addad1b8e7d2408a0ed7

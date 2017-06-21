@@ -32,7 +32,7 @@
 		<br><br>
 
 		&nbsp;&nbsp;&nbsp;&nbsp;
-		<a href="/background/share" style="color:#555555">
+		<a href="/login" style="color:#555555">
 			<i class="fa fa-share-alt" aria-hidden="true" style="font-size : 60px"></i>
 		</a>
 		<br><br>
