@@ -96,22 +96,10 @@ Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 // Today Novel
 Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
 
-
-<<<<<<< HEAD
-// share페이지 원본
-// Route::get('/background/share', function(){
-//     return view('background/share/set_share_view');
-// });
-
-// Route::get('background/share', function(){
-//     return view('/auth/login');
-// });
-=======
 // Background SHARE
 Route::get('/background/share', function(){
     return view('background/share/set_share_view');
 });
->>>>>>> 0917f799caa91d2a6fa0addad1b8e7d2408a0ed7
 
 /**************************************
 CORDOVA VIEWER
@@ -176,10 +164,3 @@ Auth::routes();
 
 // 로그인
 Route::get('/home', 'HomeController@index')->name('home');
-<<<<<<< HEAD
-
-// Route::get('/home', function() {
-//     return view ('background/background_main');
-// });
-=======
->>>>>>> 0917f799caa91d2a6fa0addad1b8e7d2408a0ed7
