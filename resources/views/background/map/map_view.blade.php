@@ -324,11 +324,7 @@ rant @extends('layouts.master')
 
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<div id="allDiv" class="container">
-		<div id="mapCover">
-		</div>
-		<div class="title">
-		  <div class="title-word">Map Drawing</div>
-		</div>
+
 
 		<div id="mapDiv" class="col-md-9">
 
