@@ -491,7 +491,7 @@
       // ajax 소설 저장 요청
       createNovel(title, genre, publishPeriod, publishDays, coverImg, detailIntro, summaryIntro);
       // 마이페이지 - 소설 목록 페이지 이동
-      location.href= "my_novel";
+
 
     });
 
@@ -511,6 +511,7 @@
           },
           success: function (data) {
             alert("소설이 생성 되었습니다!");
+            location.href= "my_novel";
           },
           error: function (error) {
             alert("오류발생");

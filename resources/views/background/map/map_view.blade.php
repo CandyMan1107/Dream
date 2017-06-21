@@ -1003,6 +1003,7 @@ rant @extends('layouts.master')
 				$(this).remove();
 				$(".title").remove();
 			})
+				$("#paletteDiv").draggable();
 
 	});
 	</script>

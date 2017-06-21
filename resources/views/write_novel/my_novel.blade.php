@@ -160,7 +160,8 @@ echo NovelEpisodeController::show($novelId, $d.id);
 		// 소설값을 테이블에 적용
 		function setNovelInfo(data){
 
-			$(".novel-list .novel-table").remove();
+			$(".novel-table").remove();
+			$(".episode-collapse").remove();
 			data.forEach(function(d){
 				// 소설 테이블
 				var tableEle ="";
@@ -191,7 +192,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				tableEle += "		</td>";
 				tableEle += "	</tr>";
 				tableEle += "</table>";
-				tableEle += "<div class='collapseDiv"+ d.id +"'></div>";
+				tableEle += "<div class='episode-collapse collapseDiv"+ d.id +"'></div>";
 
 				$(".novel-list").append(tableEle);
 
@@ -211,6 +212,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 
 		// 소설 아이디에 따른 회차 목록
 		function setEpisodeInfo(novelId){
+
 			$.ajax({
 					type: "get",
 					url: "get_episode_info",
@@ -292,6 +294,8 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				//alert(pageEle);
 				 $(".pagination").append(pageEle);
 			}
+
+
 		}
 
 		goJsGetNovelInfo = getNovelInfo;
