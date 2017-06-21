@@ -252,7 +252,7 @@ rant @extends('layouts.master')
 	}
 
 	.map-list-content {
-		height:120px;
+		padding:0;
 		width:100%;
 		margin-bottom: 4px;
 		border:3px solid #707070;
@@ -260,8 +260,9 @@ rant @extends('layouts.master')
 	}
 
 	.map-list-img-div{
+		border-bottom: 3px solid #707070;
+		height:120px;
 		background-color: #878787;
-		height:100%;
 		padding: 0;
 	}
 	.map-list-img-div img{
@@ -273,13 +274,18 @@ rant @extends('layouts.master')
 		background-color: #CFCFCF;
 	}
 	.map-list-content-div{
-
+		border-bottom: 3px solid #707070;
 		padding: 4px;
 		background-color: #FAFAFA;
 		padding-left: 10px;
 		padding-top: 20px;
-		height:100%;
+		height:120px;
 		font-size:17px;
+	}
+
+	.map-tag-div{
+		background-color:#FAFAFA;
+		height:100px;
 	}
 
 	#titleWarning{
@@ -318,6 +324,10 @@ rant @extends('layouts.master')
 	}
 	.material-icons{
 		vertical-align: middle;
+	}
+	.tag-toggle-btn{
+		display: inline-block;
+		width:100px;
 	}
 
 	</style>
@@ -898,6 +908,10 @@ rant @extends('layouts.master')
 
 			// 맵 리스트 선택 시, 정보 호출 후 맵에 적용
 			function setMapListEvent(){
+				$(".map-tag-div").attr("data-toggle","hide");
+				$(".map-tag-div").hide();
+
+
 				$(".map-list-content").off().on("dblclick",function(){
 					$.ajaxSetup({
 						headers: {
@@ -958,20 +972,37 @@ rant @extends('layouts.master')
 					$(this).addClass("selected-map-content");
 				});
 
+				$(".tag-toggle-btn").off().on("click",function(){
+					var tagDivId = "tagDiv" + $(this).attr("data-map-id");
+					var tagDiv = $("#" + tagDivId);
+					if(tagDiv.attr("data-toggle") == "hide"){
+						tagDiv.attr("data-toggle", "show");
+						tagDiv.show();
+					} else {
+						tagDiv.attr("data-toggle","hide");
+						tagDiv.hide();
+					}
+
+				});
+
 			}
 
 			// Title, ImgUrl, Date로 맵 리스트 리턴
 			 function createMapEle(mapId, title, canvasUrl, data){
 				 var createEle = "";
-				 createEle += "<div class='map-list-content' data-map-id='" + mapId +"'>"
+				 createEle += "<div class='col-md-12 map-list-content' data-map-id='" + mapId +"'>"
 				 createEle += "	<div class='col-md-3 map-list-img-div'>"
 				 createEle += "		<img src='" + canvasUrl + "'>"
 				 createEle += "	</div>"
 				 createEle += "	<div class='col-md-9 map-list-content-div'>"
-				 createEle += "		제목 : " 	 + title + "<br>"
+				 createEle += "		제목 : " 	 + title
+				 createEle += "		<button data-map-id='"+mapId+"' class='tag-toggle-btn form-control'>태그 입력</button><br>"
 				 createEle += "		생성일 : " + data +"<br>"
-				 createEle += "		수정일 : 0000-00-00<br>"
+				 createEle += "		수정일 : 0000-00-00"
 				 createEle += "	</div>"
+				 // 정재훈 DIV
+				 createEle += "		<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div'>this is Tag Div</div>"
+				 // 정재훈 DIV END
 				 createEle += "</div>"
 
 				 return createEle;
