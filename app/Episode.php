@@ -25,7 +25,7 @@ class Episode extends Model
         // var_dump($table);
     }
 
-    // TABLE : novel_episodes SELECT // JOIN TABLE : novels
+    // TABLE : novel_episodes SELECT * // JOIN TABLE : novels
     public function dataJoinNovel($id) {
         $episodeData = DB::table('novel_episodes')
             ->join('novels', 'novel_episodes.belong_to_novel', '=', 'novels.id')
@@ -37,7 +37,7 @@ class Episode extends Model
         return $episodeData;
     }
 
-    // TABLE : novel_episodes SELECT // SELECT episode_title
+    // TABLE : novel_episodes SELECT episode_title
     public function episodeTitle($id) {
         $episodeData = DB::table('novel_episodes')
             ->join('novels', 'novel_episodes.belong_to_novel', '=', 'novels.id')

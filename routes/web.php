@@ -139,7 +139,7 @@ Route::get('/write_novel/set', "writeNovelController@setNovelView");
 // 소설 정보 등록
 Route::get('/write_novel/create_novel', "writeNovelController@createNovel");
 // 소설 회차 등록
-Route::get('/write_novel/create_episode', "writeNovelController@createEpisode");
+Route::post('/write_novel/create_episode', "writeNovelController@createEpisode");
 
 // 소설 정보 getter
 Route::get('/write_novel/get_novel_info', "writeNovelController@getNovelInfo");
