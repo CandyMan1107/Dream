@@ -316,7 +316,9 @@ rant @extends('layouts.master')
 		border:2px solid #9E9E9E;
 		margin-bottom: 3px;
 	}
-
+	.material-icons{
+		vertical-align: middle;
+	}
 
 	</style>
 
@@ -347,7 +349,7 @@ rant @extends('layouts.master')
 			<div id="textPalette">
 				<!--  -->
 				<div class="dropdown dropdown-lg">
-          <button type="button" class="btn btn-default dropdown-toggle form-control font-set-btn" data-open="false">글자 입력</button>
+          <button type="button" class="btn btn-default dropdown-toggle form-control font-set-btn" data-open="false"><i class="material-icons">create</i>글자 입력</button>
 
           <div class="dropdown-menu dropdown-menu-right" role="menu">
               <form class="form-horizontal" role="form">
@@ -386,7 +388,7 @@ rant @extends('layouts.master')
                 </div>
               </form>
           </div>
-					<button id="deleteTextBtn" type="button" class="form-control" name="button">선택 글자 삭제</button>
+					<button id="deleteTextBtn" type="button" class="form-control" name="button"><i class="material-icons">delete</i>선택 글자 삭제</button>
         </div>
 				<!--  -->
 
@@ -403,9 +405,9 @@ rant @extends('layouts.master')
 					</div>
 				</div>
 				<form enctype="multipart/form-data" id="upload_form" role="form" method="POST">
-					<input type="button" class="form-control" onclick="document.getElementById('imgFile').click();" value="이미지 생성">
+					<button type="button" class="form-control" onclick="document.getElementById('imgFile').click();"><i class="material-icons">picture_in_picture</i> 이미지 생성</button>
 					<input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
-					<button type="button" id="deleteImgBtn" class="form-control" name="button">선택 이미지 삭제</button>
+					<button type="button" id="deleteImgBtn" class="form-control" name="button"><i class="material-icons">delete</i>선택 이미지 삭제</button>
 				</form>
 			</div>
 
@@ -414,7 +416,7 @@ rant @extends('layouts.master')
 			</div>
 			<div id="funcPalette" class="palette">
 				<!-- Modal Div -->
-				<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="form-control">지도 리스트</button></div>
+				<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="form-control"><i class="material-icons">list</i>지도 리스트</button></div>
 				<!-- line modal -->
 				<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
@@ -459,7 +461,7 @@ rant @extends('layouts.master')
 						</div>
 				  </div>
 				</div>
-				<button id="removeAllBtn" type="button" class="form-control" name="button">맵 초기화</button>
+				<button id="removeAllBtn" type="button" class="form-control" name="button"><i class="material-icons">settings_backup_restore</i>맵 초기화</button>
 				<!-- Modal End -->
 			</div>
 		</div>

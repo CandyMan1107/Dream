@@ -250,7 +250,7 @@
 
       <div class="row set_row">
         <div class="col-md-6 btn_div"><div class="func_btn novel-cancel">취소</div></div>
-        <div class="col-md-6 btn_div"><div class="func_btn novel-save"><a href="/write_novel/my_novel">저장</a></div></div>
+        <div class="col-md-6 btn_div"><div class="func_btn novel-save">저장</div></div>
       </div>
 
     </div>
@@ -491,7 +491,7 @@
       // ajax 소설 저장 요청
       createNovel(title, genre, publishPeriod, publishDays, coverImg, detailIntro, summaryIntro);
       // 마이페이지 - 소설 목록 페이지 이동
-
+      location.href= "my_novel";
 
     });
 
@@ -510,7 +510,7 @@
             'summaryIntro': summaryIntro
           },
           success: function (data) {
-            alert(data);
+            alert("소설이 생성 되었습니다!");
           },
           error: function (error) {
             alert("오류발생");

@@ -180,6 +180,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				tableEle += "		<td>"
 				tableEle += "			<button  data-toggle='collapse' href='#collapse" + d.id + "' type='button' class='btn btn-default episode-mng-btn' data-novel-id='"+d.id+"'>회차관리</button>";
 				tableEle += "			<button type='button' class='btn btn-default write-episode-btn' data-novel-id='"+d.id+"'>회차작성</button>";
+				tableEle += "			<button type='button' class='btn btn-default background-set-btn' data-novel-id='"+d.id+"'>배경설정</button>";
 				tableEle += " 		<button type='button' class='btn btn-default novel-modify-btn' data-novel-id='"+d.id+"'>작품수정</button>";
 				tableEle += " 	</td>";
 				tableEle += "	</tr>";
@@ -200,8 +201,11 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				$(".write-episode-btn").off().on("click",function(){
 					var novelId = $(this).attr("data-novel-id");
 					document.location.href="/write_novel/write_episode/" + novelId;
-
 				})
+
+				$(".background-set-btn").off().on("click",function(){
+					location.href="/background";
+				});
 			})
 		}
 
