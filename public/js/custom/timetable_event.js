@@ -20,6 +20,8 @@ function timetableEvent(data){
                 else {
                     $('.refer_info_div').append('<input type="text" class="form-control refer_info" name="refer_info[]" id='+i+' value="'+data[event_id]['refer_info']+'">');
                 }
+                $('#timetable_id').val(data[event_id]['id']);
+                // alert($("#timetable_id").val());
                 $('#start_day').val(data[event_id]['start_day']);
                 $('#end_day').val(data[event_id]['end_day']);
                 // $('#character').val(data[event_id]['character']);

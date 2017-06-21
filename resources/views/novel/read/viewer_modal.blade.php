@@ -25,7 +25,7 @@
                                 </ul>
                             </div>
                             <div class="col-md-3 text-right">
-                                <button type="button" class="btn btn-default" disabled="disabled"><i class="material-icons">settings_backup_restore</i>원래대로</button>
+                                <button type="button" class="btn btn-default" name="reset"><i class="material-icons">settings_backup_restore</i>원래대로</button>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                                 <h5><strong>배경색</strong></h5>
                                 <ul class="list-inline">
                                     <li class="colorBox on-colorBox back-color" value="#ffffff">{{-- 색1 흰색 --}}</li>
-                                    <li class="colorBox off-colorBox back-color" value="#ffd480">{{-- rgb(255, 212, 128) --}}</h5></li>
+                                    <li class="colorBox off-colorBox back-color" value="#ffd480">{{-- rgb(255, 212, 128) --}}</li>
                                     <li class="colorBox off-colorBox back-color" value="#e6ffe6">{{-- rgb(230, 255, 230) --}}</li>
                                     <li class="colorBox off-colorBox back-color" value="#e0ccff">{{-- rgb(224, 204, 255) --}}</li>
                                     <li class="colorBox off-colorBox back-color" value="#000000">{{-- 색5 검정 --}}</li>

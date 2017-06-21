@@ -17,29 +17,40 @@ class NovelController extends Controller
         $novelData = $novelTable->dataJoinEpisode($id);
 
         $data = array();
-        for($i = 0; $i < count($novelData); $i++){
+
+        for($i = 0; $i < count($novelData); $i++) {
             $datas = [
+                'novelId' => $novelData[$i]->id,
+                'episode_count' => $i+1,
                 'title' => $novelData[$i]->title,
                 'intro' => $novelData[$i]->intro,
                 'summary_intro' => $novelData[$i]->summary_intro,
                 'cover_img_src' => $novelData[$i]->cover_img_src,
+                'episode_cover_src' => $novelData[$i]->episode_cover_src,
                 'publish_case' => $novelData[$i]->publish_case,
                 'period' => $novelData[$i]->period,
                 'genre' => $novelData[$i]->genre,
                 'belong_to_novel' => $novelData[$i]->belong_to_novel,
                 'episode_title' => $novelData[$i]->episode_title,
-                'created_at' => $novelData[$i]->created_at,
-                'episode_count' => $i+1
+                'created_at' => $novelData[$i]->created_at
             ];
-
+            
             array_push($data, $datas);
-        }
 
+            // $sliceData = array_slice($datas[$i], 9);
+
+            // var_dump($sliceData);
+        
+            // if (!$sliceData) {
+            //     array_splice($data[$i], 9, 3, array(0, "", ""));
+
+            //     break;
+            // }
+        }
+        
         // var_dump($novelData);
 
-        // return var_dump($data);
-
-        //echo $data[$i]['title'];
+        // echo $data[$i]['title'];
 
         return view('novel.info.novel_info')->with("data", $data);
     }
@@ -62,7 +73,7 @@ class NovelController extends Controller
 
         $data = array(array());
         $i = 0;
-
+        
         foreach($episodeData as $datas) {
             $data[$i]['episode_count'] = $episodeCount;
 
@@ -93,6 +104,31 @@ class NovelController extends Controller
         // var_dump($data[$i]);
 
         return view('novel.read.novel_read_view')->with("data", $data[$i]);
+    }
+
+    public static function quickMenu($data) {
+        $novelId = $data['belong_to_novel'];
+
+        $episodeTable = new Episode();
+        $episodeData = $episodeTable->episodeTitle($novelId);
+
+        // var_dump($episodeData);
+
+        // $episodeCount = count($episodeData);
+        // echo $episodeCount;
+
+        $i = 0;
+
+        foreach ($episodeData as $datas) {
+            $dataE[$i]['novel_id'] = $novelId;
+            $dataE[$i]['episode_title'] = $datas->episode_title;
+
+            $i++;
+        }
+
+        // var_dump($dataE);
+
+        return view('novel.read.quick_menu')->with("dataE", $dataE);
     }
 
     public static function viewerModal() {

@@ -3,14 +3,37 @@ $(document).ready(function () {
     /novel/read/novel_read_view.blade.php
     **************************************/
     // 기본 설정은 Web
-    $("ul[name=bookMode]").hide();
-    $("div[name=bookMode]").hide();
-    $("i[name=pageArrow]").hide();
+    // $("ul[name=bookMode]").hide();
+    // $("div[name=bookMode]").hide();
+    // $("i[name=pageArrow]").hide();
+
+    // span 태그에 걸려있는 속성값 모두 지우기
+    $("div[name=webMode]").find("span").removeAttr("class");
+    $("div[name=webMode]").find("span").removeAttr("style");
+    $("div[name=webMode]").find("span").removeAttr("contenteditable");
+    $("div[name=webMode]").find("span").removeAttr("data-color");
+    $("div[name=webMode]").find("span").removeAttr("data-id");
+    $("div[name=webMode]").find("span").removeAttr("data-case");
 
     $("div[name=webMode]").css("font-size", 14);
     $("div[name=webMode]").css("font-family", "Nanum Gothic");
     $("div[name=webMode]").css("line-height", "170%");
+    
     $("div").filter(".example-text").css("line-height", "170%");
+
+    $("button[name=reset]").click(function () {
+        $("div[name=webMode]").css("line-height", "170%");
+        $("div[name=webMode]").css("font-family", "Nanum Gothic");
+        $("div[name=webMode]").css("font-size", 14);
+        $("div[name=webMode]").css("background", "white");
+        $("div[name=webMode]").css("color", "black");
+
+        $("div").filter(".example-text").css("line-height", "170%");
+        $("div").filter(".example-text").css("font-family", "Nanum Gothic");
+        $("div").filter(".example-text").css("font-size", 14);
+        $("div").filter(".example-text").css("background", "white");
+        $("div").filter(".example-text").css("color", "black");
+    });
 
     $("li").filter(".viewScreen").each(function () {
         $(this).click(function () {
@@ -130,5 +153,5 @@ $(document).ready(function () {
         });
     });
 
-    
+
 });

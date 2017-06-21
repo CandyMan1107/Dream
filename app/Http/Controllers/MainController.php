@@ -17,6 +17,8 @@ class MainController extends Controller
         $data[] = [];
         $i = 0;
 
+        // var_dump($novelData);
+
         foreach($novelData as $datas) {
             $data[$i]['id'] = $datas->id;
             $data[$i]['title'] = $datas->title;
@@ -36,11 +38,49 @@ class MainController extends Controller
         return view('welcome')->with('data', $data);
     }
 
-    public static function todayNovel($data) {
+    public static function todayNovelView($data) {
         return view('novel.welcome.todayMin')->with('data', $data);
     }
 
-    public static function bestNovel($data) {
+    public static function bestNovelView($data) {
         return view('novel.welcome.bestMin')->with('data', $data);
+    }
+
+    public function todayNovelShow () {
+        $novelTable = new Novel();
+        $novelData = $novelTable->mainData();
+
+        $data[] = [];
+        $i = 0;
+
+        $currentDate = date('Y-m-d H:i:s');
+        // echo $dt;
+
+        foreach($novelData as $datas) {
+            $data[$i]['id'] = $datas->id;
+            $data[$i]['title'] = $datas->title;
+            $data[$i]['intro'] = $datas->intro;
+            $data[$i]['summary_intro'] = $datas->summary_intro;
+            $data[$i]['cover_img_src'] = $datas->cover_img_src;
+            $data[$i]['publish_case'] = $datas->publish_case;
+
+            $data[$i]['currentDate'] = $currentDate;
+
+            $data[$i]['period'] = $datas->period;
+            
+            if ($data[$i]['period']) {
+                $data[$i]['string']  = explode('/', $data[$i]['period']);
+                $data[$i]['periodStr'] = array_slice($data[$i]['string'], 1);
+            }
+
+            $data[$i]['genre'] = $datas->genre;
+
+            $i++;
+        }
+
+        // print_r($data[0]['periodStr']);
+        // var_dump($data);
+
+        return view('novel.kind.today_novel_by_day')->with('data', $data);
     }
 }

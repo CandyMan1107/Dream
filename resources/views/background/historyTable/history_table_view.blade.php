@@ -81,15 +81,23 @@
 					
 					{{-- 화면 분할 오른쪽 --}}
 					<div class="col-xs-7 col-sm-5 col-md-5 height-max-set background_tag">
+						{{-- timetable Id 를 저장하기 위한 공간 --}}
+						<div id="timetable_id" value="timetable_value"></div>
 						<br><br><br>
 						{{-- 등장인물 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">등장 인물</label>
 							<div class="col-sm-10">
 								{{-- 인물 아이콘 목록 --}}
-								<div class="inner"></div>
+								<div class="inner_character">
+
+								</div>
 								{{-- 인물 등록 아이콘, 모달 호출 --}}
-								<div data-toggle="modal" data-target="#abc">
+								@php 
+									use App\Http\Controllers\BackgroundHistoryTablesController;
+									echo BackgroundHistoryTablesController::characters_effect_modal();
+								@endphp
+								<div data-toggle="modal" data-target="#character">
 									<p class="remote">
 										<a class="setView" href="#">
 											<i class="fa fa-plus-square-o fa-3x" id="characters" value="0"></i>
@@ -103,9 +111,12 @@
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">등장 사물</label>
 							<div class="col-sm-10">
 							{{-- 사물 아이콘 목록 --}}
-								<div class="inner"></div>
+								<div class="inner_items"></div>
 								{{-- 사물 등록 아이콘, 모달 호출 --}}
-								<div data-toggle="modal" data-target="#abc">
+								@php 
+									echo BackgroundHistoryTablesController::items_effect_modal();
+								@endphp
+								<div data-toggle="modal" data-target="#items">
 									<p class="remote">
 										<a class="setView" href="#">
 											<i class="fa fa-plus-square-o fa-3x effect" id="items"></i>
@@ -119,7 +130,7 @@
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">배경 장소</label>
 							<div class="col-sm-10">
 							{{-- 장소 아이콘 목록 --}}
-								<div class="inner"></div>
+								<div class="inner_mpas"></div>
 								{{-- 장소 등록 아이콘, 모달 호출 --}}
 								<div data-toggle="modal" data-target="#abc">
 									<p class="remote">
