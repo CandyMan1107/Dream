@@ -37,9 +37,9 @@ Route::get('/background/map', "MapController@index");
 Route::get('/background/removeImg', "MapController@removeImg");
 
 
-// Route::get('/login', function () {
-//     return view('auth/login');
-// });
+Route::get('/login', function () {
+    return view('auth/login');
+});
 
 
 Route::resource('/background/things', 'BackgroundItemsController');
@@ -69,9 +69,14 @@ Route::get('/novel/kind/today_novel_by_day', function(){
 });
 // NOVEL VIEW END
 
-Route::get('/background/share', function(){
-    return view('background/share/set_share_view');
-});
+// share페이지 원본
+// Route::get('/background/share', function(){
+//     return view('background/share/set_share_view');
+// });
+
+// Route::get('background/share', function(){
+//     return view('/auth/login');
+// });
 
 // 코도바 뷰어부
 Route::get('/get_novel', "cordoController@getNovelInfo");
@@ -122,14 +127,17 @@ Route::post('/write_novel/addCover', "UpImgController@uploadImg");
 
 // 커버 이미지 삭제
 Route::get('/write_novel/removeCover', "UpImgController@removeImg");
-
+ 
 
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
 
-// 로그인 인증
 Auth::routes();
 
 // 로그인
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('/home', function() {
+//     return view ('background/background_main');
+// });
