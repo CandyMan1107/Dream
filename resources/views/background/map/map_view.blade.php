@@ -639,7 +639,7 @@ rant @extends('layouts.master')
               contentType: false,
               success: function(data){
 								var imgEle = "";
-								alert(data.imgPath);
+								//alert(data.imgPath);
 								var imgSrc = "{{URL::asset('/')}}" + data.imgPath;
 								imgEle += "<img id='img" + data.imgId + "' class='img-cell' src='" + imgSrc + "'>";
 								defImagePattern(data.imgId, imgSrc)
