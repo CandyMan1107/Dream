@@ -1,89 +1,74 @@
 {{-- Background Modal START --}}
-    <div class="modal fade" id="backgroundModal" tabindex="-1" role="dialog" aria-labelledby="backgroundModalLabel" aria-hidden="true">
-        <div class="modal-dialog huge-size">
-            <div class="modal-content huge-size">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="backgroundModalLabel"><i class="material-icons">remove_red_eye</i>&nbsp;<span>소설 배경</span></h4>
-                </div>
-                <div class="modal-body">
-                    {{-- Novel History --}}
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseHistory" aria-expanded="false" aria-controls="collapseHistory">
-                                <a href="#">
-                                    <h1><i class="fa fa-clock-o" aria-hidden="true"></i></h1>
-                                </a>
-                            </div>
-                            <div class="col-md-11 text-left collapse in" id="collapseHistory">
-                                {{-- CONTEXT --}}
-                                History
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Novel Character-Set --}}
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseCharacter" aria-expanded="false" aria-controls="collapseCharacter">
-                                <a href="#">
-                                    <h1><i class="fa fa-user" aria-hidden="true"></i></h1>
-                                </a>
-                            </div>
-                            <div class="col-md-11 text-left collapse" id="collapseCharacter">
-                                {{-- CONTEXT --}}
-                                Character
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Novel Objects --}}
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseObject" aria-expanded="false" aria-controls="collapseObject">
-                                <a href="#">
-                                    <h1><i class="fa fa-shopping-cart" aria-hidden="true"></i></h1>
-                                </a>
-                            </div>
-                            <div class="col-md-11 text-left collapse" id="collapseObject">
-                                {{-- CONTEXT --}}
-                                Object
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Novel Relation --}}
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseRelation" aria-expanded="false" aria-controls="collapseRelation">
-                                <a href="#">
-                                    <h1><i class="fa fa-users" aria-hidden="true"></i></h1>
-                                </a>
-                            </div>
-                            <div class="col-md-11 text-left collapse" id="collapseRelation">
-                                {{-- CONTEXT --}}
-                                Relation
-                            </div>
-                        </div>
-                    </div>
-                    {{-- Novel Map --}}
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-1 text-center" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">
-                                <a href="#">
-                                    <h1><i class="fa fa-map" aria-hidden="true"></i></h1>
-                                </a>
-                            </div>
-                            <div class="col-md-11 text-left collapse" id="collapseMap">
-                                {{-- CONTEXT --}}
-                                Map
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+<div class="modal fade" id="backgroundModal" tabindex="-1" role="dialog" aria-labelledby="backgroundModalLabel" aria-hidden="true">
+    <div class="modal-dialog huge-size">
+        <div class="modal-content huge-size">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="backgroundModalLabel"><i class="material-icons">remove_red_eye</i>&nbsp;<span>소설 배경</span></h4>
             </div>
-            {{-- modal-content END --}}
+            <div class="modal-body">
+                    
+                <div class="container-fluid">
+                    <div class="row">
+                        {{-- BACKGROUND ICON --}}
+                        <div class="col-md-1 text-center">
+                            {{-- Novel History --}}
+                            <div data-toggle="collapse" href="#collapseHistory" aria-expanded="false" aria-controls="collapseHistory">
+                                <h1><i class="fa fa-clock-o" aria-hidden="true"></i></h1>
+                            </div>
+                            {{-- Novel Character-Set --}}
+                            <div data-toggle="collapse" href="#collapseCharacter" aria-expanded="false" aria-controls="collapseCharacter">
+                                <h1><i class="fa fa-user" aria-hidden="true"></i></h1>
+                            </div>
+                            {{-- Novel Items --}}
+                            <div data-toggle="collapse" href="#collapseItem" aria-expanded="false" aria-controls="collapseItem">
+                                <h1><i class="fa fa-shopping-cart" aria-hidden="true"></i></h1>
+                            </div>
+                            {{-- Novel Relation --}}
+                            <div data-toggle="collapse" href="#collapseRelation" aria-expanded="false" aria-controls="collapseRelation">
+                                <h1><i class="fa fa-users" aria-hidden="true"></i></h1>
+                            </div>
+                            {{-- Novel Map --}}
+                            <div data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">
+                                <h1><i class="fa fa-map" aria-hidden="true"></i></h1>
+                            </div>
+                        </div>
+
+                        {{-- HISTORY CONTEXT --}}
+                        <div class="col-md-11 collapse in" id="collapseHistory">
+                            History
+                            {{-- @php
+                            use App\Http\Controllers\NovelController;
+                                
+                            echo NovelController::backgroundCharacter($data);
+                            @endphp --}}
+                        </div>
+                        {{-- CAHRACTER CONTEXT --}}
+                        <div class="col-md-11 collapse" name="backgroundCollapse" id="collapseCharacter">
+                            Character
+                        </div>
+                        {{-- ITEM CONTEXT --}}
+                        <div class="col-md-11 collapse" id="collapseItem">
+                            Item
+                        </div>
+                        {{-- RELATION CONTEXT --}}
+                        <div class="col-md-11 collapse" id="collapseRelation">
+                            Relation
+                        </div>
+                        {{-- MAP CONTEXT --}}
+                        <div class="col-md-11 collapse" id="collapseMap">
+                            Map
+                        </div>
+                    </div>
+                </div>
+                    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
-        {{-- modal-dialog END --}}
+        {{-- modal-content END --}}
     </div>
-    {{-- Background Modal END --}}
+    {{-- modal-dialog END --}}
+</div>
+{{-- Background Modal END --}}
