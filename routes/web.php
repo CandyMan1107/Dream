@@ -96,10 +96,11 @@ Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 // Today Novel
 Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
 
-// Background SHARE
+
 Route::get('/background/share', function(){
     return view('background/share/set_share_view');
 });
+
 
 /**************************************
 CORDOVA VIEWER
@@ -121,6 +122,22 @@ Route::get('/get_novel/show_main_novel',"cordoController@getNovelById");
 Route::get('/get_novel/get_episodes',"cordoController@getNovelEpisodes");
 Route::get('/get_novel/get_episode_id',"cordoController@getNovelEpisodeById");
 //Route::get('/get_novel/get_notices',"cordoController@getNovelNotices");
+// users 정보 get & 로그인
+Route::get('/get_novel/userInfo', "cordoController@getUsersInfo");
+
+//아이디 중복체크
+Route::get('/get_novel/idCheck', "cordoController@idCheck");
+//아이디 찾기
+Route::get('/get_novel/idSearch', "cordoController@idSearch");
+//비밀번호 찾기
+Route::get('/get_novel/pwSearch', "cordoController@pwSearch");
+// 회원가입
+Route::get('/get_novel/writeJoin', "cordoController@insertUserInfo");
+//캐릭터 목록 가져오기
+Route::get('/get_novel/CharactersList', 'cordoController@getCharacters');
+//캐릭터 정보 가져오기
+Route::get('/get_novel/CharacterInfo', 'cordoController@getCharactersInfo');
+
 // 소설 작성부
 // 소설 정보 작성
 Route::get('/write_novel/set', "writeNovelController@setNovelView");
@@ -154,7 +171,7 @@ Route::post('/write_novel/addCover', "UpImgController@uploadImg");
 
 // 커버 이미지 삭제
 Route::get('/write_novel/removeCover', "UpImgController@removeImg");
- 
+
 
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
