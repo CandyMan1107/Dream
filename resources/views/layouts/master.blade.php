@@ -19,10 +19,15 @@
         {{--GOOGLE MATERIAL ICON--}}
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        
+        <style>
+            html,body {
+                height : 100%;
+                margin : 0
+            }
+        </style>
 
     </head>
-    <body>
+    <body class="height-max-set">
       @include('partials.header')
       <script type="text/javascript" src="/js/jquery-3.2.0.js"></script>
       <script type="text/javascript" src="/js/jquery.easing.min.js" type="text/javascript"></script>

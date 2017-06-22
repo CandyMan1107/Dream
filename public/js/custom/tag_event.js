@@ -14,7 +14,7 @@ function tag_click(tag_data, kind){
                 // alert(tag_data[i]['tag_name']);
                 if(tag_data[i]['kind'] == kind && tag_data[i]['object_id'] == event_id){
                     $('#tag_name').val(tag_data[i]['tag_name']);
-                    $('#tag_color').val(tag_data[i]['color']);
+                    $('#chosen-value').val(tag_data[i]['color']);
                 }
             }
         });
