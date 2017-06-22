@@ -883,7 +883,7 @@ rant @extends('layouts.master')
 					data: {},
 					success: function(data){
 						data.forEach(function(d){
-							var coverSrc = "{{URL::asset('/')}}/" + "img/background/mapImg/mapCover/" + d.cover_src;
+							var coverSrc = "{{URL::asset('/')}}" + "img/background/mapImg/mapCover/" + d.cover_src;
 							var createEle = createMapEle(d.id, d.title, coverSrc, d.created_at);
 							$(".map-list").append(createEle);
 						});
