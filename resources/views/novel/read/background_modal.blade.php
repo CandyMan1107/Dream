@@ -35,17 +35,17 @@
                         </div>
 
                         {{-- HISTORY CONTEXT --}}
-                        <div class="col-md-11 collapse in" id="collapseHistory">
+                        <div class="col-md-11 collapse" id="collapseHistory">
                             History
-                            {{-- @php
-                            use App\Http\Controllers\NovelController;
-                                
-                            echo NovelController::backgroundCharacter($data);
-                            @endphp --}}
                         </div>
                         {{-- CAHRACTER CONTEXT --}}
-                        <div class="col-md-11 collapse" name="backgroundCollapse" id="collapseCharacter">
+                        <div class="col-md-11 collapse in" id="collapseCharacter">
                             Character
+                            @php
+                            use App\Http\Controllers\NovelController;
+                                
+                            echo NovelController::backgroundCharacter($id);
+                            @endphp
                         </div>
                         {{-- ITEM CONTEXT --}}
                         <div class="col-md-11 collapse" id="collapseItem">
