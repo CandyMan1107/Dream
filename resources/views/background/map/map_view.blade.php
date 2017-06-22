@@ -639,7 +639,8 @@ rant @extends('layouts.master')
               contentType: false,
               success: function(data){
 								var imgEle = "";
-								var imgSrc = "{{URL::asset('/')}}/" + data.imgPath
+								//alert(data.imgPath);
+								var imgSrc = "{{URL::asset('/')}}" + data.imgPath;
 								imgEle += "<img id='img" + data.imgId + "' class='img-cell' src='" + imgSrc + "'>";
 								defImagePattern(data.imgId, imgSrc)
 								$(".portfolio").append(imgEle);
@@ -882,7 +883,7 @@ rant @extends('layouts.master')
 					data: {},
 					success: function(data){
 						data.forEach(function(d){
-							var coverSrc = "{{URL::asset('/')}}/" + "img/background/mapImg/mapCover/" + d.cover_src;
+							var coverSrc = "{{URL::asset('/')}}" + "img/background/mapImg/mapCover/" + d.cover_src;
 							var createEle = createMapEle(d.id, d.title, coverSrc, d.created_at);
 							$(".map-list").append(createEle);
 						});
@@ -1002,7 +1003,7 @@ rant @extends('layouts.master')
 				 createEle += "	</div>"
 				 // 정재훈 DIV
 				 createEle += "		<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div'>this is Tag Div</div>"
-				 // 정재훈 DIV END
+				 // 정재훈 DIV End
 				 createEle += "</div>"
 
 				 return createEle;
