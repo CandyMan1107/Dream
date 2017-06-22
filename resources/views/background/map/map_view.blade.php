@@ -1002,7 +1002,7 @@ rant @extends('layouts.master')
 				 createEle += "	</div>"
 				 // 정재훈 DIV
 				 createEle += "		<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div'>this is Tag Div</div>"
-				 // 정재훈 DIV END
+				 // 정재훈 DIV End
 				 createEle += "</div>"
 
 				 return createEle;
