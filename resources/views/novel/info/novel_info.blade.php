@@ -101,7 +101,7 @@
         @php
         use App\Http\Controllers\NovelController;
         
-        echo NovelController::backgroundModal($data);
+        echo NovelController::backgroundModal($data[0]['novelId']);
         @endphp
         {{--quickMenu & viewer & background MODAL END--}}
         {{-- novel-info-2 END --}}

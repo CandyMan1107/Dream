@@ -85,14 +85,13 @@
     </div>
     {{-- read-novel-view END --}}
     
-    
     {{--quickMenu & viewer & background MODAL START--}}
     @php
 	use App\Http\Controllers\NovelController;
 	
     echo NovelController::quickMenu($data);
 	echo NovelController::viewerModal();
-	echo NovelController::backgroundModal($data);
+	echo NovelController::backgroundModal($data['belong_to_novel']);
 	@endphp
     {{--quickMenu & viewer & background MODAL END--}}
     

@@ -90,7 +90,7 @@ class NovelController extends Controller
             $i++;
         }
 
-        // var_dump($episodeData);
+        // var_dump($data);
 
         // echo($episodeCount);
         // var_dump($data[$i]);
@@ -99,13 +99,34 @@ class NovelController extends Controller
     }
 
     // NOVEL BACKGROUND : CHARACTER
-    public static function backgroundCharacter($data) {
-        $backgroundId = $data['belong_to_novel'];
+    public static function backgroundCharacter($id) {
+        // echo $id;
+
+        $novelId = $id;
 
         $backgroundTable = new Background();
-        $characterData = $backgroundTable->selectCharacter($backgroundId);
+        $characterData = $backgroundTable->selectCharacter($novelId);
         
-        // return view('novel.read.background.character')->with("dataC", $dataC);
+        // var_dump($characterData);
+
+        $data = array(array());
+
+        $i = 0;
+
+        foreach ($characterData as $datas) {
+            $data[$i]['name'] = $datas->name;
+            $data[$i]['info'] = $datas->info;
+            $data[$i]['age'] = $datas->age;
+            $data[$i]['gender'] = $datas->gender;
+            $data[$i]['refer_info'] = $datas->name;
+            $data[$i]['img_src'] = $datas->name;
+
+            $i++;
+        }
+
+        // var_dump($data);
+        
+        return view('novel.read.background.character')->with("data", $data);
     }
 
     // VIEWER QUICK MENU
@@ -138,7 +159,7 @@ class NovelController extends Controller
         return view('novel.read.viewer_modal');
     }
 
-    public static function backgroundModal($data) {
-        return view('novel.read.background_modal')->with("data", $data);
+    public static function backgroundModal($id) {
+        return view('novel.read.background_modal')->with("id", $id);
     }
 }
