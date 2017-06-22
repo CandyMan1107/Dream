@@ -16,7 +16,7 @@
 		 
 		 <div class="col-xs-16 col-sm-11 col-md-11" style= "background-color : #e8d6b3" >
 			<br>
-			<div class="row" id="timeline" style="height:180px;">
+			<div class="row" id="timeline" style=" height: 20vh">
 			</div>
 			<nav aria-label="...">
 				<ul class="pager" id="timetableList">
@@ -33,7 +33,7 @@
 			</nav>
 		</div>
 		
-		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set">
+		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set" style="height: 50vh">
 			<div class="row" id="list">
 			{{-- {{ var_dump($data) }} --}}
 				<form class="form-horizontal" id="time_table" name="time_table" action="{{ route('historyTable.store') }}" method="POST">
@@ -177,7 +177,7 @@
 					 </div>
 				</div>
 			</div>
-		</div>}	
+		</div>
 			
 
 

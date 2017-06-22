@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-xs-2 col-sm-1 col-md-1 text-center height-max-set" style="background-color : #EFEFEF ">
+	<div class="col-xs-2 col-sm-1 col-md-1 text-center height-max-set" style="background-color : #EFEFEF; height: 100vh">
 		
 		&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="/background/historyTable" style="color:#555555">
