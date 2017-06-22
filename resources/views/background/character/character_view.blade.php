@@ -8,7 +8,7 @@
 		<script type="text/javascript" src="/js/custom/character_event.js"></script>
 		<script type="text/javascript" src="/js/custom/additional_items.js"></script>
 		<script>character_event( <?=json_encode($data)?> )</script>
-		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-color : #e8d6b3" >
+		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-color : #e8d6b3; height: 100vh" >
 			<div class="row">
 				@if($data[0])
 					@foreach ($data as $character)
