@@ -114,12 +114,13 @@ class NovelController extends Controller
         $i = 0;
 
         foreach ($characterData as $datas) {
+            $data[$i]['id'] = $datas->cha_id;
             $data[$i]['name'] = $datas->name;
             $data[$i]['info'] = $datas->info;
             $data[$i]['age'] = $datas->age;
             $data[$i]['gender'] = $datas->gender;
             $data[$i]['refer_info'] = $datas->name;
-            $data[$i]['img_src'] = $datas->name;
+            $data[$i]['img_src'] = $datas->img_src;
 
             $i++;
         }

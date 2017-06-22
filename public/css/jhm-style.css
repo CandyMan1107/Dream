@@ -261,6 +261,28 @@ READ-NOVEL-VIEW
     font-size: 18px;
 }
 /**************************************
+READ-NOVEL-VIEW : BACKGROUND
+**************************************/
+.container-fluid {
+    height: 340px !important;
+    overflow: auto;
+}
+
+div[name=background-view], div[name=background-info] {
+    overflow: auto;
+}
+
+img[name=character_icon] {
+    margin: 17px;
+    cursor: pointer;
+}
+
+.selectedCharacter {
+    width: 170px;
+    height: auto;
+}
+
+/**************************************
 READ-NOVEL-VIEW : WRITER WORD
 **************************************/
 #writer-word .container {

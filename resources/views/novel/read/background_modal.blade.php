@@ -40,7 +40,7 @@
                         </div>
                         {{-- CAHRACTER CONTEXT --}}
                         <div class="col-md-11 collapse in" id="collapseCharacter">
-                            Character
+                            {{-- Character --}}
                             @php
                             use App\Http\Controllers\NovelController;
                                 
