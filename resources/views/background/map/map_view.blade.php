@@ -833,11 +833,12 @@ rant @extends('layouts.master')
 								"textInfos" : JSON.stringify(textInfos)
 							},
 							success: function(data){
-								//console.log(data);
+								alert("fuck");
 								var mapId = data.split("/")[0];
 								var createdAt = data.split("/")[1]
 								var createEle = createMapEle(mapId, title, canvasUrl, createdAt);
 								$(".map-list").append(createEle);
+								setJscolor();
 								setMapListEvent()
 							}
 						});
@@ -887,6 +888,7 @@ rant @extends('layouts.master')
 							var createEle = createMapEle(d.id, d.title, coverSrc, d.created_at);
 							$(".map-list").append(createEle);
 						});
+						setJscolor();
 						setMapListEvent();
 					}
 				});
@@ -988,6 +990,21 @@ rant @extends('layouts.master')
 
 			}
 
+			function setJscolor(){
+				alert("fuck");
+				console.log($(".tag-palette"));
+				var tagPalette = $(".tag-palette");
+				{{-- tagPalette.forEach(function(tp){
+					//var id = tp.attr("id").replace("color","");
+					tp.addClass("jscolor {valueElement:'chosen-value'}");
+				}); --}}
+				for(var i=0; i<tagPalette.length; i++){
+					console.log(tagPalette[i]);
+					tagPalette.addClass("jscolor {valueElement:'chosen-value'}");
+				}
+				
+			}
+
 			// Title, ImgUrl, Date로 맵 리스트 리턴
 			 function createMapEle(mapId, title, canvasUrl, data){
 				 var createEle = "";
@@ -1002,12 +1019,61 @@ rant @extends('layouts.master')
 				 createEle += "		수정일 : 0000-00-00"
 				 createEle += "	</div>"
 				 // 정재훈 DIV
-				 createEle += "		<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div'>this is Tag Div</div>"
+				 createEle += "	<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div' style='overflow:scroll'>"
+				 createEle += "		<form id='add_tag' name='add_tag' action='map/tag' method='POST'>"
+				 createEle += "			<input type='hidden' name='_token' value='{{ csrf_token() }}'>"
+				 createEle += "			<input type='hidden' name='page' value='maps}'>"
+    			 createEle += "			<input type='hidden' id='object_id' name='object_id' value=''>"
+				 createEle += "			<div class='row'>"
+    			 createEle += " 			<div class='panel panel-warning col-md-6'>"
+        		 createEle += "					<div class=panel-heading'>"
+            	 createEle += "					<h3 class='panel-titl'>태그 이름</h3>"
+        		 createEle += "					</div>"
+        		 createEle += "					<div class='panel-body'>"
+            	 createEle += "						<input type='text' id='tag_name' name='tag_name' class='form-control' placeholder='Text input'>"
+        		 createEle += "					</div>"
+    			 createEle += "				</div>"
+				 createEle += "				<div class='panel panel-warning col-md-6'>"
+        		 createEle += "					<div class='panel-heading'>"
+            	 createEle += "						<h3 class='panel-title'>태그 색상</h3>"
+        		 createEle += "					</div>"
+				 createEle += "					<div id='colorPalette' class='palette'>"
+				// createEle += "						&nbsp;HEX value: <button class='color-palette tag-palette jscolor {valueElement:'chosen-value'}'>Color Picker</button>"
+				 createEle += "						&nbsp;HEX value: <input id='color" + mapId + "'type='button' value ='Color Picker' class='color-palette tag-palette'>"
+				 createEle += "						<input class='form-control panel-body' id='chosen-value' name='tag_color' value='000000' size = '6'>"
+			 	 createEle += "					</div>"
+    			 createEle += "				</div>"
+    			 createEle += "				<button type='submit' name='tag_submit' id='tag_submit' class='btn btn-default'>등록</button>"
+				 createEle += "			</div>"
+				 createEle += "		</form>"
+				 createEle += " </div>"
 				 // 정재훈 DIV End
 				 createEle += "</div>"
 
 				 return createEle;
 			 }
+
+			function callTagView(mapId){
+				var view;
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+				$.ajax({
+					type: "POST",
+					url : "map/tag",
+					data : { page : "maps",
+							data : mapId },
+					success:function(data){
+						view = data;
+					},
+					error:function(request,status,error){
+						alert("code:"+request.status+"\n"+"error:"+error);
+					}
+				});
+				return view;
+			}
 
 			// 텍스트 정보 반환
 			function getTextsInfo(){

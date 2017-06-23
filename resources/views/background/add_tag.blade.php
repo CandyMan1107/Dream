@@ -6,7 +6,9 @@
 <form id="add_tag" name="add_tag" action="{{ route('tagsAdd.store') }}" method="POST">
     {!! csrf_field() !!}
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+    {{-- 현재 페이지 정보 전달 --}}
     <input type="hidden" name="page" value="{{$datas['page']}}">
+    {{-- 대상 id값 전달 --}}
     <input type="hidden" id="object_id" name="object_id" value="">
     <div class="panel panel-warning">
         <div class="panel-heading">

@@ -96,12 +96,6 @@ Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 // Today Novel
 Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
 
-
-Route::get('/background/share', function(){
-    return view('background/share/set_share_view');
-});
-
-
 /**************************************
 CORDOVA VIEWER
 **************************************/
@@ -178,6 +172,8 @@ Route::post('/write_novel/addEpisodeCover', "UpImgController@uploadEpisodeImg");
 // 회차 커버 이미지 삭제
 Route::get('/write_novel/removeEpisodeCover', "UpImgController@removeEpisodeImg");
 
+
+Route::post('/background/map/tag',"TagsAddController@map_view_return");
 
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
