@@ -142,7 +142,7 @@ use App\Http\Controllers\NovelController;
                                 <div class="col-md-12">
                                     <div class="episode">
                                         <div class="row">
-                                            <a href="/novel/read/novel_read_view/{{$d['belong_to_novel']}}&{{ $d['episode_count'] }}">
+                                            <a href="/novel/read/novel_read_view/{{$d['belong_to_novel']}}&{{ $i }}">
                                                 <div class="col-md-3">
                                                     <div>
                                                         <img src="/upload/images/{{ $d['episode_cover_src'] }}" width="261" height="160" />
