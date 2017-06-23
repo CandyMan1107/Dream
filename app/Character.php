@@ -29,4 +29,13 @@ class Character extends Model
 
         return $dataSet;
     }
+
+    public function get_affect_data($id){
+        $dataSet = DB::table('characters')
+                    ->select('img_src')
+                    ->where('cha_id',$id)
+                    ->get();
+
+        return $dataSet;
+    }
 }

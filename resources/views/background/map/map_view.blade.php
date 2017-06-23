@@ -252,7 +252,7 @@ rant @extends('layouts.master')
 	}
 
 	.map-list-content {
-		height:120px;
+		padding:0;
 		width:100%;
 		margin-bottom: 4px;
 		border:3px solid #707070;
@@ -260,8 +260,9 @@ rant @extends('layouts.master')
 	}
 
 	.map-list-img-div{
+		border-bottom: 3px solid #707070;
+		height:120px;
 		background-color: #878787;
-		height:100%;
 		padding: 0;
 	}
 	.map-list-img-div img{
@@ -273,13 +274,18 @@ rant @extends('layouts.master')
 		background-color: #CFCFCF;
 	}
 	.map-list-content-div{
-
+		border-bottom: 3px solid #707070;
 		padding: 4px;
 		background-color: #FAFAFA;
 		padding-left: 10px;
 		padding-top: 20px;
-		height:100%;
+		height:120px;
 		font-size:17px;
+	}
+
+	.map-tag-div{
+		background-color:#FAFAFA;
+		height:100px;
 	}
 
 	#titleWarning{
@@ -318,6 +324,10 @@ rant @extends('layouts.master')
 	}
 	.material-icons{
 		vertical-align: middle;
+	}
+	.tag-toggle-btn{
+		display: inline-block;
+		width:100px;
 	}
 
 	</style>
@@ -629,7 +639,8 @@ rant @extends('layouts.master')
               contentType: false,
               success: function(data){
 								var imgEle = "";
-								var imgSrc = "{{URL::asset('/')}}/" + data.imgPath
+								//alert(data.imgPath);
+								var imgSrc = "{{URL::asset('/')}}" + data.imgPath;
 								imgEle += "<img id='img" + data.imgId + "' class='img-cell' src='" + imgSrc + "'>";
 								defImagePattern(data.imgId, imgSrc)
 								$(".portfolio").append(imgEle);
@@ -822,11 +833,12 @@ rant @extends('layouts.master')
 								"textInfos" : JSON.stringify(textInfos)
 							},
 							success: function(data){
-								//console.log(data);
+								alert("fuck");
 								var mapId = data.split("/")[0];
 								var createdAt = data.split("/")[1]
 								var createEle = createMapEle(mapId, title, canvasUrl, createdAt);
 								$(".map-list").append(createEle);
+								setJscolor();
 								setMapListEvent()
 							}
 						});
@@ -872,10 +884,11 @@ rant @extends('layouts.master')
 					data: {},
 					success: function(data){
 						data.forEach(function(d){
-							var coverSrc = "{{URL::asset('/')}}/" + "img/background/mapImg/mapCover/" + d.cover_src;
+							var coverSrc = "{{URL::asset('/')}}" + "img/background/mapImg/mapCover/" + d.cover_src;
 							var createEle = createMapEle(d.id, d.title, coverSrc, d.created_at);
 							$(".map-list").append(createEle);
 						});
+						setJscolor();
 						setMapListEvent();
 					}
 				});
@@ -898,6 +911,10 @@ rant @extends('layouts.master')
 
 			// 맵 리스트 선택 시, 정보 호출 후 맵에 적용
 			function setMapListEvent(){
+				$(".map-tag-div").attr("data-toggle","hide");
+				$(".map-tag-div").hide();
+
+
 				$(".map-list-content").off().on("dblclick",function(){
 					$.ajaxSetup({
 						headers: {
@@ -958,24 +975,105 @@ rant @extends('layouts.master')
 					$(this).addClass("selected-map-content");
 				});
 
+				$(".tag-toggle-btn").off().on("click",function(){
+					var tagDivId = "tagDiv" + $(this).attr("data-map-id");
+					var tagDiv = $("#" + tagDivId);
+					if(tagDiv.attr("data-toggle") == "hide"){
+						tagDiv.attr("data-toggle", "show");
+						tagDiv.show();
+					} else {
+						tagDiv.attr("data-toggle","hide");
+						tagDiv.hide();
+					}
+
+				});
+
+			}
+
+			function setJscolor(){
+				alert("fuck");
+				console.log($(".tag-palette"));
+				var tagPalette = $(".tag-palette");
+				{{-- tagPalette.forEach(function(tp){
+					//var id = tp.attr("id").replace("color","");
+					tp.addClass("jscolor {valueElement:'chosen-value'}");
+				}); --}}
+				for(var i=0; i<tagPalette.length; i++){
+					console.log(tagPalette[i]);
+					tagPalette.addClass("jscolor {valueElement:'chosen-value'}");
+				}
+				
 			}
 
 			// Title, ImgUrl, Date로 맵 리스트 리턴
 			 function createMapEle(mapId, title, canvasUrl, data){
 				 var createEle = "";
-				 createEle += "<div class='map-list-content' data-map-id='" + mapId +"'>"
+				 createEle += "<div class='col-md-12 map-list-content' data-map-id='" + mapId +"'>"
 				 createEle += "	<div class='col-md-3 map-list-img-div'>"
 				 createEle += "		<img src='" + canvasUrl + "'>"
 				 createEle += "	</div>"
 				 createEle += "	<div class='col-md-9 map-list-content-div'>"
-				 createEle += "		제목 : " 	 + title + "<br>"
+				 createEle += "		제목 : " 	 + title
+				 createEle += "		<button data-map-id='"+mapId+"' class='tag-toggle-btn form-control'>태그 입력</button><br>"
 				 createEle += "		생성일 : " + data +"<br>"
-				 createEle += "		수정일 : 0000-00-00<br>"
+				 createEle += "		수정일 : 0000-00-00"
 				 createEle += "	</div>"
+				 // 정재훈 DIV
+				 createEle += "	<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div' style='overflow:scroll'>"
+				 createEle += "		<form id='add_tag' name='add_tag' action='map/tag' method='POST'>"
+				 createEle += "			<input type='hidden' name='_token' value='{{ csrf_token() }}'>"
+				 createEle += "			<input type='hidden' name='page' value='maps}'>"
+    			 createEle += "			<input type='hidden' id='object_id' name='object_id' value=''>"
+				 createEle += "			<div class='row'>"
+    			 createEle += " 			<div class='panel panel-warning col-md-6'>"
+        		 createEle += "					<div class=panel-heading'>"
+            	 createEle += "					<h3 class='panel-titl'>태그 이름</h3>"
+        		 createEle += "					</div>"
+        		 createEle += "					<div class='panel-body'>"
+            	 createEle += "						<input type='text' id='tag_name' name='tag_name' class='form-control' placeholder='Text input'>"
+        		 createEle += "					</div>"
+    			 createEle += "				</div>"
+				 createEle += "				<div class='panel panel-warning col-md-6'>"
+        		 createEle += "					<div class='panel-heading'>"
+            	 createEle += "						<h3 class='panel-title'>태그 색상</h3>"
+        		 createEle += "					</div>"
+				 createEle += "					<div id='colorPalette' class='palette'>"
+				// createEle += "						&nbsp;HEX value: <button class='color-palette tag-palette jscolor {valueElement:'chosen-value'}'>Color Picker</button>"
+				 createEle += "						&nbsp;HEX value: <input id='color" + mapId + "'type='button' value ='Color Picker' class='color-palette tag-palette'>"
+				 createEle += "						<input class='form-control panel-body' id='chosen-value' name='tag_color' value='000000' size = '6'>"
+			 	 createEle += "					</div>"
+    			 createEle += "				</div>"
+    			 createEle += "				<button type='submit' name='tag_submit' id='tag_submit' class='btn btn-default'>등록</button>"
+				 createEle += "			</div>"
+				 createEle += "		</form>"
+				 createEle += " </div>"
+				 // 정재훈 DIV End
 				 createEle += "</div>"
 
 				 return createEle;
 			 }
+
+			function callTagView(mapId){
+				var view;
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+				$.ajax({
+					type: "POST",
+					url : "map/tag",
+					data : { page : "maps",
+							data : mapId },
+					success:function(data){
+						view = data;
+					},
+					error:function(request,status,error){
+						alert("code:"+request.status+"\n"+"error:"+error);
+					}
+				});
+				return view;
+			}
 
 			// 텍스트 정보 반환
 			function getTextsInfo(){

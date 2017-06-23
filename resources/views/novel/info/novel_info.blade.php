@@ -101,7 +101,7 @@
         @php
         use App\Http\Controllers\NovelController;
         
-        echo NovelController::backgroundModal($data);
+        echo NovelController::backgroundModal($data[0]['novelId']);
         @endphp
         {{--quickMenu & viewer & background MODAL END--}}
         {{-- novel-info-2 END --}}
@@ -125,6 +125,9 @@
                     </div>
                     
                     <div id="default-padding-small" class="col-md-12"></div>
+                        @php 
+                            $i = count($data);
+                        @endphp
                         @foreach ($data as $d)
                             <div class="col-md-12">
                                 <div class="episode">
@@ -138,7 +141,7 @@
                                             <div class="col-md-9">
                                                 <div class="episode-list">
                                                     <div class="col-md-12">
-                                                        <h4>{{ $d['episode_count'] }}. {{ $d['episode_title'] }}</h4>
+                                                        <h4>{{ $i }}. {{ $d['episode_title'] }}</h4>
                                                     </div>
                                                     <div id="default-padding-small-0" class="col-md-12"></div>
                                                     <div class="col-md-2">
@@ -157,6 +160,9 @@
                                 </div>
                             </div>
                             <div id="default-padding-small" class="col-md-12"></div>
+                            @php 
+                                $i--;
+                            @endphp
                         @endforeach
                     
                     {{--PAGE--}}

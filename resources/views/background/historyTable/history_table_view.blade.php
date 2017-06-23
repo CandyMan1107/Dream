@@ -16,7 +16,7 @@
 		 
 		 <div class="col-xs-16 col-sm-11 col-md-11" style= "background-color : #e8d6b3" >
 			<br>
-			<div class="row" id="timeline" style="height:180px;">
+			<div class="row" id="timeline" style=" height: 20vh">
 			</div>
 			<nav aria-label="...">
 				<ul class="pager" id="timetableList">
@@ -33,7 +33,7 @@
 			</nav>
 		</div>
 		
-		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set">
+		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set" style="height: 50vh">
 			<div class="row" id="list">
 			{{-- {{ var_dump($data) }} --}}
 				<form class="form-horizontal" id="time_table" name="time_table" action="{{ route('historyTable.store') }}" method="POST">
@@ -130,9 +130,12 @@
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">배경 장소</label>
 							<div class="col-sm-10">
 							{{-- 장소 아이콘 목록 --}}
-								<div class="inner_mpas"></div>
+								<div class="inner_maps"></div>
+								@php 
+									echo BackgroundHistoryTablesController::maps_effect_modal();
+								@endphp
 								{{-- 장소 등록 아이콘, 모달 호출 --}}
-								<div data-toggle="modal" data-target="#abc">
+								<div data-toggle="modal" data-target="#maps">
 									<p class="remote">
 										<a class="setView" href="#">
 											<i class="fa fa-plus-square-o fa-3x effect" id="maps"></i>
@@ -177,7 +180,7 @@
 					 </div>
 				</div>
 			</div>
-		</div>}	
+		</div>
 			
 
 

@@ -39,14 +39,26 @@ class Effect extends Model
         }
 
         // 배경장소 데이터 insert
-        // for( $i = 0 ;  count($data['maps']['content']) > $i ; $i++){
-        //     $dataSet = [
-        //         'timetable_id'=>$table_id,
-        //         'affect_table'=>"maps",
-        //         'affect_id'=>$data['maps']['id'],
-        //         'affect_content' => $data['mpas']['content'][$i],
-        //     ];
-        //     DB::table('effects')->insert($dataSet);
-        // }
+        if(isset($data['maps']['content'])){
+            for( $i = 0 ;  count($data['maps']['content']) > $i ; $i++){
+                $dataSet = [
+                    'timetable_id'=>(int)$table_id,
+                    'affect_table'=>"maps",
+                    'affect_id'=>(int)$data['maps']['id'][$i],
+                    'affect_content' => $data['maps']['content'][$i],
+                ];
+                // var_dump($dataSet);
+                DB::table('effects')->insert($dataSet);
+            }
+        }
+    }
+
+    public function get_effect_data($table_id){
+        $effect_data = DB::table('effects')
+        ->select('affect_table','affect_id','affect_content')
+        ->where('timetable_id',$table_id)
+        ->get();
+
+        return $effect_data;
     }
 }

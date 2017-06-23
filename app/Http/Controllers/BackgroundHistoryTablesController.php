@@ -9,6 +9,7 @@ use App\Timetable;
 use App\Character;
 use App\Item;
 use App\Effect;
+use App\Map;
 
 class BackgroundHistoryTablesController extends Controller
 {
@@ -91,9 +92,11 @@ class BackgroundHistoryTablesController extends Controller
             $data['items']['content'] = $table['effect_item'];
         }
         // 차후 지도 정보 입력 시 연동
-        // $data['maps']['id'] = $table['map_id'];
-        // $data['maps']['content'] = $table['effect_map'];
-        
+        if(isset($table['map_id'])){
+            $data['maps']['id'] = $table['map_id'];
+            $data['maps']['content'] = $table['effect_map'];
+        }
+        // var_dump($data);
         // 새로 입력 한 연대표 아이디값 반환
         $table_id = $timeTable->insert_table($table);
         // $table_id = 6;
@@ -122,14 +125,6 @@ class BackgroundHistoryTablesController extends Controller
         return $list; 
     }
 
-    public function character_effect_insert(){
-        $table = "characters";
-        $data = $request->all();
-        $effect = new Effect();
-        $effect->insert_effect($table, $data);
-        return "success";
-    }
-
     public static function items_effect_modal(){
         return view('background.historyTable.items_effect_modal');
     }
@@ -151,7 +146,75 @@ class BackgroundHistoryTablesController extends Controller
     }
 
     public static function maps_effect_modal(){
+        return view('background.historyTable.maps_effect_modal');
+    }
+
+    public static function show_maps(){
+        $map = new Map();
+
+        $map_list = $map->dataBringAll();
+        $list = array(array());
+        $i = 0;
+        foreach($map_list as $lists){
+            $list[$i]["id"] = $lists->id;
+            $list[$i]["name"] = $lists->title;
+            $list[$i]["img_src"] = $lists->cover_src;    
+            $i++;
+        }
+
+        return $list; 
+    }
+
+    public function getEffect(Request $request){
+        $data = $request->all();
+        $effect = new Effect();
+
+        $effect_data = $effect->get_effect_data($data['timetable_id']);
+        // $effect_data[0]['affect_table'];
+        // $effect_data[0]['affect_id'];
+        // $effect_data[0]['affect_content'];
         
+        $data = array(array());
+        $i = 0;
+        foreach($effect_data as $datas){
+            $data[$i]["affect_table"] = $datas->affect_table;
+            $data[$i]["affect_id"] = $datas->affect_id;
+            $data[$i]["affect_content"] = $datas->affect_content; 
+            $i++;
+        }
+
+        $character = new Character();
+        $item = new Item();
+        $map = new Map();
+
+        $num = count($effect_data);
+        $items = "items";
+        // 테이블에서 이미지 소스 가져오기
+        for( $i = 0 ; $num> $i ; $i++ ){
+            if($data[$i]["affect_table"] == "characters"){
+                $character_img_src = $character->get_affect_data($data[$i]["affect_id"]);
+
+                foreach($character_img_src as $img_src){
+                    $data[$i]["img_src"] = $img_src->img_src;
+                }
+            }
+            if($data[$i]["affect_table"] == "items"){
+                $item_img_src = $item->get_item_src($data[$i]["affect_id"]);
+
+                foreach($item_img_src as $img_src){
+                    $data[$i]["img_src"] = $img_src->img_src;
+                }
+            }
+            if($data[$i]["affect_table"] == "maps"){
+                $map_img_src = $map->get_map_src($data[$i]["affect_id"]);
+
+                foreach($map_img_src as $img_src){
+                    $data[$i]["img_src"] = $img_src->cover_src;
+                }
+            }
+        }
+        
+        return $data;
     }
 
     /**

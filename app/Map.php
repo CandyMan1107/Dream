@@ -9,18 +9,17 @@ use File;
 
 class Map extends Model
 {
-    public function insert_map($map_info, $img_src){
-        $dataSet = [];
-        $dataSet = [
-            'name' => $map_info['character_name'],
-            'info' => $map_info['character_content'],
-            'age' => $map_info['age'],
-            'gender' => $map_info['gender'],
-            'refer_info' => $map_info['refer_info'],
-            'img_src' => $img_src,
-        ];
-        // data insert
-        DB::table('characters')->insert($dataSet);
-        // var_dump($table);
+    public function dataBringAll(){
+        // maps 전체 data 가져오기
+        $dataSet = DB::table('maps')->get();
+        // var_dump($dataSet);
+
+        return $dataSet;
+    }
+
+    public function get_map_src($map_id){
+        $map_src = DB::table('maps')->select('cover_src')->where('id',$map_id)->get();
+
+        return $map_src;
     }
 }
