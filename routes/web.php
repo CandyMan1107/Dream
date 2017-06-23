@@ -166,11 +166,17 @@ Route::get('/write_novel/get_tags', "writeNovelController@getTags");
 Route::get('/write_novel/get_tags', "writeNovelController@getTags");
 
 // 이미지 등록부
-// 커버 이미지 등록
+// 소설 커버 이미지 등록
 Route::post('/write_novel/addCover', "UpImgController@uploadImg");
 
-// 커버 이미지 삭제
+// 소설 커버 이미지 삭제
 Route::get('/write_novel/removeCover', "UpImgController@removeImg");
+
+// 회차 커버 이미지 등록
+Route::post('/write_novel/addEpisodeCover', "UpImgController@uploadEpisodeImg");
+
+// 회차 커버 이미지 삭제
+Route::get('/write_novel/removeEpisodeCover', "UpImgController@removeEpisodeImg");
 
 
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
