@@ -38,6 +38,7 @@ class Novel extends Model
             ->select('novels.*', 'novel_episodes.belong_to_novel', 'novel_episodes.episode_title', 'novel_episodes.cover_img_src AS episode_cover_src', 'novel_episodes.created_at')
             ->where('novels.id', '=', $id)
             ->where('novel_episodes.belong_to_novel', '=', $id)
+            ->orderBy('novel_episodes.id', 'desc')
             ->get();
 
         return $novelData;

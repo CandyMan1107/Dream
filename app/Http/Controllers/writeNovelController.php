@@ -99,7 +99,7 @@ class writeNovelController extends Controller
 
     // 회차 작성 뷰
     public function writeNovelEpisodeView ($novelId, Request $request){
-      $coverImg = DB::table("cover_images")->select("cover_img_src")->get();
+      $coverImg = DB::table("episode_images")->select("cover_img_src")->where("novel_id", "=",$novelId)->get();
       $novelTitle = DB::table("novels")->select("title")->where("id", "=",$novelId)->get();
       $novelTitle = $novelTitle[0]->title;
 
@@ -107,7 +107,6 @@ class writeNovelController extends Controller
         "coverImg" => $coverImg,
         "novelTitle" => $novelTitle,
         "novelId"   => $novelId
-
       );
 
       return view('write_novel/write_episode_view')->with("tasks",$tasks);

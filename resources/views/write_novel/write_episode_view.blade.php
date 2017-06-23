@@ -608,7 +608,7 @@
                 appendEle += "<div class='col-md-12 basic-info-div background-div'>";
                 appendEle += "  <div class='col-md-6 basic-cha-img'>";
                 //appendEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
-                appendEle += "    <span>" + data.event_names + "</span>";
+                appendEle += "    <br><br><span>" + data.event_names + "</span>";
                 appendEle += "  </div>";
                 appendEle += "  <div class='col-md-6 basic-cha-info'>";
                 appendEle += "    <br>";
@@ -825,7 +825,7 @@
               addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
               addEle += "  <div class='col-md-6 basic-cha-img'>";
               //addEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
-              addEle += "    <span>" + data.event_names + "</span>";
+              addEle += "    <br><span>" + data.event_names + "</span>";
               addEle += "  </div>";
               addEle += "  <div class='col-md-6 basic-cha-info'>";
               addEle += "    <br>";
@@ -964,9 +964,9 @@
           // DB처리
           $.ajax({
               type: "get",
-              url: "/write_novel/removeCover",
+              url: "/write_novel/removeEpisodeCover",
               data: {
-                "userId" : '1',
+                "novelId" : {{$tasks["novelId"]}},
                 "removeFile" : coverImg.attr("data-href")
               },
               success: function (data) {
@@ -987,16 +987,18 @@
 
             // ajax로 DB추가
             var input = $("#imgFile");
-            console.log(new FormData($("#imgFile")[0]));
+            var formData = new FormData();
+            formData.append("imgFile",$("#imgFile")[0].files[0]);
+            formData.append("novelId",{{$tasks["novelId"]}});
             $.ajaxSetup({
               headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
             });
             $.ajax({
-              url: "/write_novel/addCover",
+              url: "/write_novel/addEpisodeCover",
               type: "post",
-              data: new FormData($("#upload_form")[0]),
+              data: formData,
               processData: false,
               contentType: false,
               success: function(data){
@@ -1048,9 +1050,9 @@
                     // DB처리
                     $.ajax({
                         type: "get",
-                        url: "removeCover",
+                        url: "removeEpisodeCover",
                         data: {
-                          "userId" : '1',
+                          "novelId" : {{$tasks["novelId"]}},
                           "removeFile" : coverImg.attr("data-href")
                         },
                         success: function (data) {
