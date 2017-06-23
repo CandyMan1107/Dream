@@ -28,8 +28,15 @@ class TagsAddController extends Controller
         return view('background.add_tag')->with("datas",$datas);
     }
 
-    public function map_view_return(Request $request){
-        echo("이게왜?");
+    public function map_tag_insert(Request $request){
+        $tag = new Tag();
+        $tag_data = $request->all();
+        $result = $tag->insertTag($tag_data);
+        // echo ($tag_data['tag_name']);
+        // echo ($tag_data['page']);
+        // echo ($tag_data['tag_color']);
+        // echo ($tag_data['object_id']);
+        // return var_dump($data);
     }
 
     public function getData(){

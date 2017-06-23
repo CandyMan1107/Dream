@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\DB;
 class Tag extends Model
 {
     public function insertTag($tag_data){
-        echo ($tag_data['tag_name']);
-        echo ($tag_data['page']);
-        echo ($tag_data['tag_color']);
-        echo ($tag_data['object_id']);
-
         $dataSet = [];
         $dataSet = [
             'kind' => $tag_data['page'],
