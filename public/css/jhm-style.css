@@ -333,7 +333,7 @@ READ-NOVEL-VIEW
 READ-NOVEL-VIEW : BACKGROUND
 **************************************/
 
-.container-fluid {
+.background-fluid {
     height: auto;
     overflow: auto;
 }
