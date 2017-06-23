@@ -9,7 +9,7 @@ $(document).ready(function(){
 
     $('.item_effect_submit').click(function(){
         
-        if ( item_id[0]){
+        if (item_id[0]){
             for(var i =0; img_name.length > i ; i++ ){
                 var img_path = img_name[i];
                 // alert(img_path);

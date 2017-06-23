@@ -130,9 +130,12 @@
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">배경 장소</label>
 							<div class="col-sm-10">
 							{{-- 장소 아이콘 목록 --}}
-								<div class="inner_mpas"></div>
+								<div class="inner_maps"></div>
+								@php 
+									echo BackgroundHistoryTablesController::maps_effect_modal();
+								@endphp
 								{{-- 장소 등록 아이콘, 모달 호출 --}}
-								<div data-toggle="modal" data-target="#abc">
+								<div data-toggle="modal" data-target="#maps">
 									<p class="remote">
 										<a class="setView" href="#">
 											<i class="fa fa-plus-square-o fa-3x effect" id="maps"></i>
