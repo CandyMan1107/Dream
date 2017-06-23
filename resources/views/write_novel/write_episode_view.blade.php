@@ -964,9 +964,9 @@
           // DB처리
           $.ajax({
               type: "get",
-              url: "/write_novel/removeCover",
+              url: "/write_novel/removeEpisodeCover",
               data: {
-                "userId" : '1',
+                "novelId" : {{$tasks["novelId"]}},
                 "removeFile" : coverImg.attr("data-href")
               },
               success: function (data) {

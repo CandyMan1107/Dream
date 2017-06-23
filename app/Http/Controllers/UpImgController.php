@@ -57,7 +57,7 @@ class UpImgController extends Controller
 
     // 저장된 이미지 삭제
     public function removeEpisodeImg(Request $request){
-      $userId = $request->input('novelId');
+      $novelId = $request->input('novelId');
       $removeFile = $request->input('removeFile');
 
       File::delete(public_path()."/upload/images/".$removeFile);
