@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                     
-                <div class="container-fluid">
+                <div class="background-fluid container-fluid">
                     <div class="row">
                         {{-- BACKGROUND ICON --}}
                         <div class="col-md-1 text-center">

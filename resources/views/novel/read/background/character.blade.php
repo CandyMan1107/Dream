@@ -53,7 +53,7 @@
             </tr>
             <tr>
                 <td name="character-item">
-                    {{-- <strong>{{$data[0]['name']}}의 물건</strong> --}}
+                    {{-- <strong>{{$data[0]['name']}}의 물건 --}}
                 </td>
                 <td>
                     {{-- ITEM --}}

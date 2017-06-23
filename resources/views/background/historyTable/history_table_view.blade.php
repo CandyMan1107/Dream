@@ -16,7 +16,7 @@
 		 
 		 <div class="col-xs-16 col-sm-11 col-md-11" style= "background-color : #e8d6b3" >
 			<br>
-			<div class="row" id="timeline" style=" height: 20vh">
+			<div class="row" id="timeline" >
 			</div>
 			<nav aria-label="...">
 				<ul class="pager" id="timetableList">

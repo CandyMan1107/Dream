@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     $background = "#" + $("i").filter(".selectedIcon").closest("div").attr("data-name");
 
     $("div").filter($background).show();

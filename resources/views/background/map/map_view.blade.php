@@ -833,7 +833,6 @@ rant @extends('layouts.master')
 								"textInfos" : JSON.stringify(textInfos)
 							},
 							success: function(data){
-								alert("fuck");
 								var mapId = data.split("/")[0];
 								var createdAt = data.split("/")[1]
 								var createEle = createMapEle(mapId, title, canvasUrl, createdAt);
@@ -991,7 +990,6 @@ rant @extends('layouts.master')
 			}
 
 			function setJscolor(){
-				alert("fuck");
 				console.log($(".tag-palette"));
 				var tagPalette = $(".tag-palette");
 				{{-- tagPalette.forEach(function(tp){
@@ -1015,37 +1013,43 @@ rant @extends('layouts.master')
 				 createEle += "	<div class='col-md-9 map-list-content-div'>"
 				 createEle += "		제목 : " 	 + title
 				 createEle += "		<button data-map-id='"+mapId+"' class='tag-toggle-btn form-control'>태그 입력</button><br>"
-				 createEle += "		생성일 : " + data +"<br>"
+				 createEle += "		생성일 : " + data +"<>"
 				 createEle += "		수정일 : 0000-00-00"
 				 createEle += "	</div>"
 				 // 정재훈 DIV
-				 createEle += "	<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div' style='overflow:scroll'>"
-				 createEle += "		<form id='add_tag' name='add_tag' action='map/tag' method='POST'>"
+				 createEle += "	<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div' style='height:20vh'>"
+				 {{-- createEle += "		<form id='add_tag' name='add_tag' action='map/tag' method='POST'>" --}}
 				 createEle += "			<input type='hidden' name='_token' value='{{ csrf_token() }}'>"
 				 createEle += "			<input type='hidden' name='page' value='maps}'>"
     			 createEle += "			<input type='hidden' id='object_id' name='object_id' value=''>"
 				 createEle += "			<div class='row'>"
-    			 createEle += " 			<div class='panel panel-warning col-md-6'>"
+    			 createEle += " 			<div class='panel panel-warning col-md-6' style='height:20vh'>"
         		 createEle += "					<div class=panel-heading'>"
             	 createEle += "					<h3 class='panel-titl'>태그 이름</h3>"
         		 createEle += "					</div>"
         		 createEle += "					<div class='panel-body'>"
-            	 createEle += "						<input type='text' id='tag_name' name='tag_name' class='form-control' placeholder='Text input'>"
+            	 createEle += "						<input type='text' id='tag_name"+mapId+"' name='tag_name' class='form-control tag_name' placeholder='Text input' value=''>"
         		 createEle += "					</div>"
     			 createEle += "				</div>"
-				 createEle += "				<div class='panel panel-warning col-md-6'>"
+				 createEle += "				<div class='panel panel-warning col-md-6' style='height:20vh'>"
         		 createEle += "					<div class='panel-heading'>"
             	 createEle += "						<h3 class='panel-title'>태그 색상</h3>"
         		 createEle += "					</div>"
 				 createEle += "					<div id='colorPalette' class='palette'>"
-				// createEle += "						&nbsp;HEX value: <button class='color-palette tag-palette jscolor {valueElement:'chosen-value'}'>Color Picker</button>"
-				 createEle += "						&nbsp;HEX value: <input id='color" + mapId + "'type='button' value ='Color Picker' class='color-palette tag-palette'>"
-				 createEle += "						<input class='form-control panel-body' id='chosen-value' name='tag_color' value='000000' size = '6'>"
+				 createEle += "						<input class='tag_color' id='tag_color"+mapId+"' list='colors' name='tag_color' value=''>"
+				 createEle += "						<datalist id='colors'>"
+				 createEle += "							<option value='Red'>"
+				 createEle += "							<option value='Blue'>"
+				 createEle += "							<option value='Green'>"
+				 createEle += "							<option value='Orange'>"
+				 createEle += "							<option value='Purple'>"
+				 createEle += "						</datalist>" 
 			 	 createEle += "					</div>"
-    			 createEle += "				</div>"
-    			 createEle += "				<button type='submit' name='tag_submit' id='tag_submit' class='btn btn-default'>등록</button>"
+				 createEle += " 			<p></p>"
+				 createEle += "				<button type='button' name='tag_submit' id='tag_submit' class='btn btn-default tag_submit' value="+mapId+">submit</button>"
+				 createEle += "				</div>"
 				 createEle += "			</div>"
-				 createEle += "		</form>"
+				 {{-- createEle += "		</form>" --}}
 				 createEle += " </div>"
 				 // 정재훈 DIV End
 				 createEle += "</div>"
@@ -1053,27 +1057,39 @@ rant @extends('layouts.master')
 				 return createEle;
 			 }
 
-			function callTagView(mapId){
-				var view;
-				$.ajaxSetup({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
+			// 태그 정보 등록
+			$(document).ready(function(){
+				$('.tag_submit').click(function(){
+					$id = $(this).val();
+					$tag_name = $('#tag_name'+$id+'').val();
+					$tag_color = $('#tag_color'+$id+'').val();
+					{{-- alert($(this).val()); --}}
+					{{-- alert($('#tag_name'+$id+'').val()); --}}
+					{{-- alert($('#tag_color'+$id+'').val()); --}}
+					
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});	
+					$.ajax({
+						type: "POST",
+						url : "map/tag",
+						data : {
+								tag_name : $tag_name,
+								page : "maps",
+								tag_color : $tag_color, 
+								object_id : $id
+								  },
+						success:function(data){
+							alert("태그 입력 성공");
+						},
+						error:function(request,status,error){
+							alert("code:"+request.status+"\n"+"error:"+error);
+						}
+					});
 				});
-				$.ajax({
-					type: "POST",
-					url : "map/tag",
-					data : { page : "maps",
-							data : mapId },
-					success:function(data){
-						view = data;
-					},
-					error:function(request,status,error){
-						alert("code:"+request.status+"\n"+"error:"+error);
-					}
-				});
-				return view;
-			}
+			});
 
 			// 텍스트 정보 반환
 			function getTextsInfo(){

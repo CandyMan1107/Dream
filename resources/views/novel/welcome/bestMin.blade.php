@@ -11,7 +11,7 @@
 						<h1>베스트 웹소설</h1>
 					@endif
 					<p>장르별로 다양한 웹소설 <br>독자들이 선택한 베스트 웹소설은? </p>
-					<hr class="pg-titl-bdr-btm"></hr>
+					<hr class="pg-titl-bdr-btm" />
 				</div>
 				<div class="port-sec">
 					<div class="col-md-12 fil-btn text-center">
