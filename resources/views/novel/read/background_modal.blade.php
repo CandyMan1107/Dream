@@ -60,7 +60,11 @@
                             </div>
                             {{-- RELATION CONTEXT --}}
                             <div class="col-md-11" id="collapseRelation">
-                                Relation
+                                {{-- Relation --}}
+                                @php
+                                    
+                                echo NovelController::backgroundRelation($id);
+                                @endphp
                             </div>
                             {{-- MAP CONTEXT --}}
                             <div class="col-md-11" id="collapseMap">

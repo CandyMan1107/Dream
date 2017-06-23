@@ -161,6 +161,29 @@ class NovelController extends Controller
         return view('novel.read.background.item')->with("data", $data);
     }
 
+    // NOVEL BACKGROUND : RELATION
+    public static function backgroundRelation($id) {
+        // echo $id;
+
+        $novelId = $id;
+
+        $imgRoot = "img/background/characterImg/";
+
+        $backgroundTable = new Background();
+        $chaInfos = $backgroundTable->selectCharacter($novelId);
+        $relInfos = $backgroundTable->selectRelation($novelId);
+        
+        $tasks = array(
+            "imgRoot" => $imgRoot,
+            "chaInfos" => $chaInfos,
+            "relInfos" => $relInfos
+        );
+
+        // var_dump($tasks);
+        
+        return view('novel.read.background.relation')->with("tasks", $tasks);
+    }
+
     // VIEWER QUICK MENU
     public static function quickMenu($data) {
         $novelId = $data['belong_to_novel'];
