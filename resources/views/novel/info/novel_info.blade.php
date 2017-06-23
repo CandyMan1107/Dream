@@ -151,7 +151,7 @@ use App\Http\Controllers\NovelController;
                                                 <div class="col-md-9">
                                                     <div class="episode-list">
                                                         <div class="col-md-12">
-                                                            <h4>{{ $i }}. {{ $d['episode_title'] }}</h4>
+                                                            <h4 name="episode-table">{{ $i }}. {{ $d['episode_title'] }}</h4>
                                                         </div>
                                                         <div id="default-padding-small-0" class="col-md-12"></div>
                                                         <div class="col-md-2">
@@ -249,4 +249,5 @@ use App\Http\Controllers\NovelController;
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="/js/JHM-Custom/jhm-selectIcon-custom.js"></script>
         <script src="/js/JHM-Custom/jhm-comment.js"></script>
+        <script src="/js/JHM-Custom/jhm-arrow.js"></script>
 @endsection

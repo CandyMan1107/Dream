@@ -1,19 +1,14 @@
 $(function () {
-    $("a[name=arrow-back]").on("click", function () {
-        var data = parseInt($(this).data("id"));
-        if (data <= 0) {
-            alert("첫화 입니다.");
-            event.preventDefault();
-        }
-    });
+    $lastNum = $("h4").length - 3;
 
-    // $("a[name=arrow-forward]").on("click", function () {
-    //     var data = $(this).data("id");
-    //     alert(data);
-    //     if (!isset(data)) {
-    //         alert("마지막화 입니다.");
-    //         event.preventDefault();
-    //     }
-    // });
-   
+    $dataB = parseInt($("a[name=arrow-back]").data("id"));
+    $dataF = parseInt($("a[name=arrow-forward]").data("id"));
+
+    if ($dataB-1 < 0) {
+        $("a[name=arrow-back]").hide();
+        $("a[name=arrow-forward]").show();
+    } else if ($dataF+1 >= $lastNum) {
+        $("a[name=arrow-back]").show();
+        $("a[name=arrow-forward]").hide();
+    }
 });
