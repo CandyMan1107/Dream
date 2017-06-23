@@ -272,13 +272,13 @@ div[name=background-view], div[name=background-info] {
     overflow: auto;
 }
 
-img[name=character_icon] {
-    margin: 17px;
+img[name=img_icon] {
+    margin: 17px !important;
     cursor: pointer;
 }
 
-.selectedCharacter {
-    width: 170px;
+.selectedImg {
+    width: 170px !important;
     height: auto;
 }
 
@@ -457,13 +457,13 @@ TODAY NOVEL : DAY SELECT
 selectedIcon : jhm.js
 **************************************/
 .selectedBookmark {
-    color: #2A5769;
+    color: #2A5769 !important;
 }
 .selectedIcon {
-    color: #FA9600;
+    color: #FA9600 !important;
 }
 .selectedFavorite {
-    color: rgba(255, 0, 0, 0.5);;
+    color: rgba(255, 0, 0, 0.5) !important;
 }
 
 /**************************************

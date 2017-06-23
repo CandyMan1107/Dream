@@ -21,6 +21,8 @@ $(document).ready(function () {
     
     $("div").filter(".example-text").css("line-height", "170%");
 
+
+
     $("button[name=reset]").click(function () {
         $("div[name=webMode]").css("line-height", "170%");
         $("div[name=webMode]").css("font-family", "Nanum Gothic");

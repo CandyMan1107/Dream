@@ -1,58 +1,52 @@
 function character_info(data) {
-    $(document).ready(function () {
-        // $img_num = $("div[name=background-view]").children("img").length;
-        $("div[name=background-info]").hide();
+    $(function () {
+        $("div[name=character-info]").hide();
 
-        $("img").each(function () {
-            $(this).click(function () {
-                if (!$(this).hasClass("selectedCharacter")) {
-                    $id = $(this).attr("id");
-                    $arrayId = $id - 1;
-                    // alert($id);
-                    $(this).addClass("selectedCharacter");
-                    $(this).siblings().removeClass("selectedCharacter");
-                    // $("div[name=background-view]").find("img").first().css("border", "1px solid red");
-                    $("div[name=background-view]").find("img").first().before($(this));
-                    $("div").animate({                
-                        scrollTop :  0            
-                    },  400);
+        $characterView = $("img").closest("div[name=character-view]").attr("name");
 
-                    // if ($("div[name=background-info]").hide()) {
-                        // alert("NOT NULL!");
-                        $("td[name='name']").empty();
-                        $("td[name='age']").empty();
-                        $("td[name='gender']").empty();
-                        $("td[name='info']").empty();
-                        $("td[name='refer_info']").empty();
+        if ($("img").closest("div[name=character-view]").attr("name") == $characterView) {
+            $("img").filter(".character_list").each(function () {
+                $(this).click(function () {
+                    if (!$(this).hasClass("selectedImg")) {
+                        $id = $(this).attr("id");
+                        $arrayId = $id - 1;
+                        // alert($id);
+                        $(this).addClass("selectedImg");
+                        $(this).siblings().removeClass("selectedImg");
 
-                        $("div[name=background-info]").show();
+                        $("div[name=character-view]").find("img").first().before($(this));
+                        $("div").animate({                
+                            scrollTop :  0            
+                        },  400);
 
-                        $("td[name='name']").append(data[$arrayId]['name']);
-                        $("td[name='age']").append(data[$arrayId]['age']);
-                        $("td[name='gender']").append(data[$arrayId]['gender']);
-                        $("td[name='info']").append(data[$arrayId]['info']);
-                        $("td[name='refer_info']").append(data[$arrayId]['refer_info']);
-                    // }
-                    //  else if ($("div[name=background-info]").show()) {
-                    //     $("td[name='name']").empty();
-                    //     $("td[name='age']").empty();
-                    //     $("td[name='gender']").empty();
-                    //     $("td[name='info']").empty();
-                    //     $("td[name='refer_info']").empty();
-                    // }
+                        $("td[name='character-name']").empty();
+                        $("td[name='character-age']").empty();
+                        $("td[name='character-gender']").empty();
+                        $("td[name='character-info']").empty();
+                        $("td[name='character-refer_info']").empty();
 
-                } else {
-                    $(this).removeClass("selectedCharacter");
-                    $("div[name=background-info]").hide();
-                    $("td[name='name']").empty();
-                    $("td[name='age']").empty();
-                    $("td[name='gender']").empty();
-                    $("td[name='info']").empty();
-                    $("td[name='refer_info']").empty();
-                }
+                        $("div[name=character-info]").show();
 
+                        $("td[name='character-name']").append(data[$arrayId]['name']);
+                        $("td[name='character-age']").append(data[$arrayId]['age']);
+                        $("td[name='character-gender']").append(data[$arrayId]['gender']);
+                        $("td[name='character-info']").append(data[$arrayId]['info']);
+                        $("td[name='character-refer_info']").append(data[$arrayId]['refer_info']);
+
+
+                    } else {
+                        $(this).removeClass("selectedImg");
+                        $("div[name='character-info']").hide();
+                        $("td[name='character-name']").empty();
+                        $("td[name='character-age']").empty();
+                        $("td[name='character-gender']").empty();
+                        $("td[name='character-info']").empty();
+                        $("td[name='character-refer_info']").empty();
+                    }
+
+                });
             });
-        });
+        }
 
     });
 }
