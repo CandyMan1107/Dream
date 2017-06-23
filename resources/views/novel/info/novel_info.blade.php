@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="default-padding"></div>
+@php
+use App\Http\Controllers\NovelController;
+@endphp
+<div class="default-padding"></div>
         {{-- novel-info-1 START --}}
         <div id="novel-info-1" class="section-padding">
             {{-- container class START --}}
@@ -72,162 +75,172 @@
                         <p>{!! $data[0]['intro'] !!}</p>
                     </div>
                     <div id="default-padding-mid-1" class="col-md-9"></div>
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <select class="form-control input-lg" onchange="location = this.value;">
-                                    @for ($i = count($data); $i > 0; $i--)
-                                    <option value="/novel/read/novel_read_view/{{$data[0]['novelId']}}&{{$i}}">
-                                        {{$i}}
-                                    </option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <a href="/novel/read/novel_read_view/{{$data[0]['novelId']}}&1">
-                                    <button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button>
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <button class="btn btn-default btn-block novel-background-read-Btn" data-toggle="modal" data-target="#backgroundModal">소설 배경 설정 보기</button>
+                    @if (isset($data[0]['noEpi']))
+                        <h1>업로드 준비 중입니다.</h1>
+                    @else
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <select class="form-control input-lg" onchange="location = this.value;">
+                                        @for ($i = count($data); $i > 0; $i--)
+                                        <option value="/novel/read/novel_read_view/{{$data[0]['novelId']}}&{{$i}}">
+                                            {{$i}}
+                                        </option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="/novel/read/novel_read_view/{{$data[0]['novelId']}}&1">
+                                        <button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button>
+                                    </a>
+                                </div>
+                                @if (!isset($data[0]['noBack']))
+                                    <div class="col-md-4">
+                                        <button class="btn btn-default btn-block novel-background-read-Btn" data-toggle="modal" data-target="#backgroundModal">소설 배경 설정 보기</button>
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
             {{-- container class END --}}
         </div>
         {{--quickMenu & viewer & background MODAL START--}}
-        @php
-        use App\Http\Controllers\NovelController;
-        
-        echo NovelController::backgroundModal($data[0]['novelId']);
-        @endphp
+        @if (!isset($data[0]['noEpi']) && !isset($data[0]['noBack']))
+            @php
+                echo NovelController::backgroundModal($data[0]['novelId']);
+            @endphp
+        @endif
         {{--quickMenu & viewer & background MODAL END--}}
         {{-- novel-info-2 END --}}
         <div id="default-padding-big" class="col-md-12"></div>
-        {{-- novel-info-3 START --}}
-        <div id="novel-info-3" class="section-padding">
-            {{-- container class START --}}
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-left">
-                        <h3>
-                            소설회차 <small>({{count($data)}})</small>
-                        </h3>
-                    </div>
-                    <div class="col-md-6 text-right sort">
-                        <h5>
-                            <span class="sort-text">최신화부터</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
-                            &nbsp;&nbsp;&nbsp;
-                            <span class="sort-text">첫화부터</span> <span><i class="material-icons"  name="check">check</i></span>
-                        </h5>
-                    </div>
-                    
-                    <div id="default-padding-small" class="col-md-12"></div>
-                        @php 
-                            $i = count($data);
-                        @endphp
-                        @foreach ($data as $d)
-                            <div class="col-md-12">
-                                <div class="episode">
-                                    <div class="row">
-                                        <a href="/novel/read/novel_read_view/{{$d['belong_to_novel']}}&{{ $d['episode_count'] }}">
-                                            <div class="col-md-3">
-                                                <div>
-                                                    <img src="/upload/images/{{ $d['episode_cover_src'] }}" width="261" height="160" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="episode-list">
-                                                    <div class="col-md-12">
-                                                        <h4>{{ $i }}. {{ $d['episode_title'] }}</h4>
-                                                    </div>
-                                                    <div id="default-padding-small-0" class="col-md-12"></div>
-                                                    <div class="col-md-2">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>&nbsp;1
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <small>댓글</small>&nbsp;<strong>1</strong>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        {{ $d['created_at'] }}
+        @if (!isset($data[0]['noEpi']))
+            {{-- novel-info-3 START --}}
+            <div id="novel-info-3" class="section-padding">
+                {{-- container class START --}}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <h3>
+                                소설회차 <small>({{count($data)}})</small>
+                            </h3>
+                        </div>
+                        <div class="col-md-6 text-right sort">
+                            <h5>
+                                <span class="sort-text">최신화부터</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
+                                &nbsp;&nbsp;&nbsp;
+                                <span class="sort-text">첫화부터</span> <span><i class="material-icons"  name="check">check</i></span>
+                            </h5>
+                        </div>
+                        
+                        <div id="default-padding-small" class="col-md-12"></div>
+                            @php 
+                                $i = count($data);
+                            @endphp
+                            @foreach ($data as $d)
+                                <div class="col-md-12">
+                                    <div class="episode">
+                                        <div class="row">
+                                            <a href="/novel/read/novel_read_view/{{$d['belong_to_novel']}}&{{ $d['episode_count'] }}">
+                                                <div class="col-md-3">
+                                                    <div>
+                                                        <img src="/upload/images/{{ $d['episode_cover_src'] }}" width="261" height="160" />
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </a>
+                                                <div class="col-md-9">
+                                                    <div class="episode-list">
+                                                        <div class="col-md-12">
+                                                            <h4>{{ $i }}. {{ $d['episode_title'] }}</h4>
+                                                        </div>
+                                                        <div id="default-padding-small-0" class="col-md-12"></div>
+                                                        <div class="col-md-2">
+                                                            <i class="fa fa-star" aria-hidden="true"></i>&nbsp;1
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <small>댓글</small>&nbsp;<strong>1</strong>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            {{ $d['created_at'] }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="default-padding-small" class="col-md-12"></div>
-                            @php 
-                                $i--;
-                            @endphp
-                        @endforeach
-                    
-                    {{--PAGE--}}
-                    <div id="default-padding-small-1" class="col-md-12"></div>
+                                <div id="default-padding-small" class="col-md-12"></div>
+                                @php 
+                                    $i--;
+                                @endphp
+                            @endforeach
+                        
+                        {{--PAGE--}}
+                        <div id="default-padding-small-1" class="col-md-12"></div>
+                    </div>
+                    {{-- row class END --}}
                 </div>
-                {{-- row class END --}}
+                {{-- container class END --}}
             </div>
-            {{-- container class END --}}
-        </div>
-        {{-- novel-info-3 END --}}
-        <div id="default-padding-mid-1" class="col-md-12"></div>
-        {{-- novel-review START --}}
-        <div id="novel-review">
-            {{-- container class START --}}
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-left">
-                        <h3>소설리뷰 <small>(1)</small></h3>
-                    </div>
-                    <div class="col-md-6 text-right sort">
-                        <h5>
-                            <span class="sort-text">최신순</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
-                            &nbsp;&nbsp;&nbsp;
-                            <span class="sort-text">추천순</span> <span><i class="material-icons" name="check">check</i></span>
-                        </h5>
-                    </div>
-                    <div id="default-padding-mid" class="col-md-12"></div>
-                    <div class="col-md-12 review-list">
-                        <div class="row">
-                            <div class="col-md-9 text-left">
-                                <span><strong>이대감</strong></span>
-                                &nbsp;
-                                <span><small>2017-05-01 00:29:24</small></span>
-                            </div>
-                            <div class="col-md-3 text-right thumb-up">
-                                <span><i class="material-icons" name="thumb">thumb_up</i></span>
-                                <span class="thumb-text">12</span>
-                            </div>
-                            <div id="default-padding-small" class="col-md-12"></div>
-                            <div class="col-md-12">
-                                <span><small>1화</small></span>
-                                &nbsp;
-                                <span>엄청 재밌어요! 글작가님 글은 항상 재미있었지만 오베는 역대급!</span>
-                            </div>
-                            <div id="default-padding-small-1" class="col-md-12"></div>
-                            <div class="col-md-12 review" data-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
-                                <span class="re-review-text"><small>답글</small></span>
-                                <span><i class="material-icons" name="arrow">keyboard_arrow_down</i></span>
-                            </div>
-                            <div class="col-md-12 collapse" id="collapseComment">
-                                <div class="input-group input-group-mg commentReply">
-                                    <input type="text" class="form-control" placeholder="로그인 후 이용해주세요.">
-                                    <span class="input-group-addon">등록</span>
-                                </div>
-                            </div>
-                            <div id="default-padding-small-1" class="col-md-12"></div>
+            {{-- novel-info-3 END --}}
+            <div id="default-padding-mid-1" class="col-md-12"></div>
+            {{-- novel-review START --}}
+            <div id="novel-review">
+                {{-- container class START --}}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <h3>소설리뷰 <small>(1)</small></h3>
                         </div>
+                        <div class="col-md-6 text-right sort">
+                            <h5>
+                                <span class="sort-text">최신순</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
+                                &nbsp;&nbsp;&nbsp;
+                                <span class="sort-text">추천순</span> <span><i class="material-icons" name="check">check</i></span>
+                            </h5>
+                        </div>
+                        <div id="default-padding-mid" class="col-md-12"></div>
+                        <div class="col-md-12 review-list">
+                            <div class="row">
+                                <div class="col-md-9 text-left">
+                                    <span><strong>이대감</strong></span>
+                                    &nbsp;
+                                    <span><small>2017-05-01 00:29:24</small></span>
+                                </div>
+                                <div class="col-md-3 text-right thumb-up">
+                                    <span><i class="material-icons" name="thumb">thumb_up</i></span>
+                                    <span class="thumb-text">12</span>
+                                </div>
+                                <div id="default-padding-small" class="col-md-12"></div>
+                                <div class="col-md-12">
+                                    <span><small>1화</small></span>
+                                    &nbsp;
+                                    <span>엄청 재밌어요! 글작가님 글은 항상 재미있었지만 오베는 역대급!</span>
+                                </div>
+                                <div id="default-padding-small-1" class="col-md-12"></div>
+                                <div class="col-md-12 review" data-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
+                                    <span class="re-review-text"><small>답글</small></span>
+                                    <span><i class="material-icons" name="arrow">keyboard_arrow_down</i></span>
+                                </div>
+                                <div class="col-md-12 collapse" id="collapseComment">
+                                    <div class="input-group input-group-mg commentReply">
+                                        <input type="text" class="form-control" placeholder="로그인 후 이용해주세요.">
+                                        <span class="input-group-addon">등록</span>
+                                    </div>
+                                </div>
+                                <div id="default-padding-small-1" class="col-md-12"></div>
+                            </div>
+                        </div>
+                        <div id="default-padding-mid" class="col-md-12"></div>
                     </div>
-                    <div id="default-padding-mid" class="col-md-12"></div>
+                    {{-- row class END --}}
                 </div>
-                {{-- row class END --}}
+                {{-- container class END --}}
             </div>
-            {{-- container class END --}}
-        </div>
-        {{-- novel-review END --}}
+            {{-- novel-review END --}}
+        @endif
+
+    
 
         {{-- JHM STYLE --}}
         <link rel="stylesheet" href="/css/jhm-style.css">

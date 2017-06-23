@@ -37,6 +37,30 @@ class Episode extends Model
         return $episodeData;
     }
 
+    // TABLE : novel_episodes SELECT
+    public function basicData($id) {
+
+        $episodeData = DB::table('novel_episodes')
+            ->select('*')
+            ->where('belong_to_novel', '=', $id)
+            ->get();
+
+        return $episodeData;
+    }
+
+    // TABLE : novel_episodes SELECT // JOIN TABLE : novel_backgrounds
+    public function dataJoinBackground($id) {
+
+        $episodeData = DB::table('novel_episodes')
+            ->join('novel_backgrounds', 'novel_episodes.belong_to_novel', '=', 'novel_backgrounds.belong_to_novel')
+            ->select('novel_episodes.belong_to_novel', 'novel_backgrounds.background_id')
+            ->where('novel_episodes.belong_to_novel', '=', $id)
+            ->where('novel_backgrounds.belong_to_novel', '=', $id)
+            ->get();
+
+        return $episodeData;
+    }
+
     // TABLE : novel_episodes SELECT episode_title
     public function episodeTitle($id) {
         $episodeData = DB::table('novel_episodes')

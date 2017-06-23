@@ -334,7 +334,7 @@ READ-NOVEL-VIEW : BACKGROUND
 **************************************/
 
 .container-fluid {
-    height: 340px;
+    height: auto;
     overflow: auto;
 }
 
@@ -415,8 +415,8 @@ text {
 }
 
 .mind-area {
-    width: 900px !important;
-    height: 900px !important;
+    width: 800px !important;
+    height: auto !important;
 }
 
 

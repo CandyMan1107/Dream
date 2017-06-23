@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     // GOOGLE MATERIAL-ICONS <i>
     $("i[name=bookmark]").click(function () {
         // text() & color Change

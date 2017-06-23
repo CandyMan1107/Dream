@@ -2,6 +2,9 @@
 
 @section('content')
 
+@php
+	use App\Http\Controllers\MainController;
+@endphp
 
 <div class="default-padding"></div>
 {{--BANNER START--}}
@@ -17,7 +20,7 @@
 										<h2 class="small">기다려보아</h2>
 										<br/>
 										<p class="big">우하하하하하</p>
-										<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
+										<div class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></div>
 									</div>
 								</a>
 						</div>
@@ -31,7 +34,7 @@
 										<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
 										<br/>
 										<p class="big">{!! $data[$i]['title'] !!}</p>
-										<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
+										<div class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></div>
 									</div>
 								</a>
 							</div>
@@ -59,8 +62,6 @@
 	
 	{{--today & best NOVEL START--}}
 	@php
-	use App\Http\Controllers\MainController;
-	
 	echo MainController::todayNovelView($data);
 	echo MainController::bestNovelView($data);
 	@endphp
@@ -75,11 +76,11 @@
 				<div class="page-title text-center">
 					<h1>2017 공모전</h1>
 					<p>누구나 참가 가능한 공모전 개최! <br>작가의 방이 작가님들과 함께합니다. </p>
-					<hr class="pg-titl-bdr-btm"></hr>
+					<hr class="pg-titl-bdr-btm" />
 				</div>
 				<div class="autoplay">
 					@if (empty($data[0]['title']))
-					 <h1>곧 소설이 업로드됩니다.</h1>
+						<h1>곧 소설이 업로드됩니다.</h1>
 					@else
 						@for ($i = 0; $i < count($data); $i++)
 							<div class="col-md-6">
@@ -131,7 +132,7 @@
 				<div class="page-title text-center">
 					<h1>作家のヘヤ</h1>
 					<p>작가의 안식처, <br>작가의 방 </p>
-					<hr class="pg-titl-bdr-btm"></hr>
+					<hr class="pg-titl-bdr-btm" />
 				</div>
                 {{-- <div id="sendmessage">Your message has been sent. Thank you!</div>
                 <div id="errormessage"></div>

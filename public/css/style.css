@@ -154,7 +154,7 @@ Header
     padding-top: 10px;
 }
 
-a.btn-banner {
+div.btn-banner {
     border: 2px solid #cdcdcd;
     padding: 12px 22px;
     line-height: 0px;

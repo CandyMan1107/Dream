@@ -125,7 +125,7 @@
   </div>
 
 {{-- @php
-use App\Http\Controllers\NovelEpisodeController;
+require_once App\Http\Controllers\NovelEpisodeController;
 echo NovelEpisodeController::show($novelId, $d.id);
 @endphp --}}
 

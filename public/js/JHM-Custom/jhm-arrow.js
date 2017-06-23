@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     $("a[name=arrow-back]").on("click", function () {
         var data = parseInt($(this).data("id"));
         if (data <= 0) {
