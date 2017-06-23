@@ -1,3 +1,5 @@
+<script src="/js/JHM-Custom/jhm-background-custom.js"></script>
+
 {{-- Background Modal START --}}
 <div class="modal fade" id="backgroundModal" tabindex="-1" role="dialog" aria-labelledby="backgroundModalLabel" aria-hidden="true">
     <div class="modal-dialog huge-size">
@@ -13,52 +15,58 @@
                         {{-- BACKGROUND ICON --}}
                         <div class="col-md-1 text-center">
                             {{-- Novel History --}}
-                            <div data-toggle="collapse" href="#collapseHistory" aria-expanded="false" aria-controls="collapseHistory">
-                                <h1><i class="fa fa-clock-o" aria-hidden="true"></i></h1>
+                            <div data-name="collapseHistory">
+                                <h1><i class="fa fa-clock-o" aria-hidden="true" name="backgroundIcon"></i></h1>
                             </div>
                             {{-- Novel Character-Set --}}
-                            <div data-toggle="collapse" href="#collapseCharacter" aria-expanded="false" aria-controls="collapseCharacter">
-                                <h1><i class="fa fa-user" aria-hidden="true"></i></h1>
+                            <div data-name="collapseCharacter">
+                                <h1><i class="fa fa-user selectedIcon" aria-hidden="true" name="backgroundIcon"></i></h1>
                             </div>
                             {{-- Novel Items --}}
-                            <div data-toggle="collapse" href="#collapseItem" aria-expanded="false" aria-controls="collapseItem">
-                                <h1><i class="fa fa-shopping-cart" aria-hidden="true"></i></h1>
+                            <div data-name="collapseItem">
+                                <h1><i class="fa fa-shopping-cart" aria-hidden="true" name="backgroundIcon"></i></h1>
                             </div>
                             {{-- Novel Relation --}}
-                            <div data-toggle="collapse" href="#collapseRelation" aria-expanded="false" aria-controls="collapseRelation">
-                                <h1><i class="fa fa-users" aria-hidden="true"></i></h1>
+                            <div data-name="collapseRelation">
+                                <h1><i class="fa fa-users" aria-hidden="true" name="backgroundIcon"></i></h1>
                             </div>
                             {{-- Novel Map --}}
-                            <div data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">
-                                <h1><i class="fa fa-map" aria-hidden="true"></i></h1>
+                            <div data-name="collapseMap">
+                                <h1><i class="fa fa-map" aria-hidden="true" name="backgroundIcon"></i></h1>
                             </div>
                         </div>
 
-                        {{-- HISTORY CONTEXT --}}
-                        <div class="col-md-11 collapse" id="collapseHistory">
-                            History
-                        </div>
-                        {{-- CAHRACTER CONTEXT --}}
-                        <div class="col-md-11 collapse in" id="collapseCharacter">
-                            Character
-                            @php
-                            use App\Http\Controllers\NovelController;
-                                
-                            echo NovelController::backgroundCharacter($id);
-                            @endphp
-                        </div>
-                        {{-- ITEM CONTEXT --}}
-                        <div class="col-md-11 collapse" id="collapseItem">
-                            Item
-                        </div>
-                        {{-- RELATION CONTEXT --}}
-                        <div class="col-md-11 collapse" id="collapseRelation">
-                            Relation
-                        </div>
-                        {{-- MAP CONTEXT --}}
-                        <div class="col-md-11 collapse" id="collapseMap">
-                            Map
-                        </div>
+                        {{-- <div> --}}
+                            {{-- HISTORY CONTEXT --}}
+                            <div class="col-md-11" id="collapseHistory">
+                                History
+                            </div>
+                            {{-- CAHRACTER CONTEXT --}}
+                            <div class="col-md-11" id="collapseCharacter">
+                                {{-- Character --}}
+                                @php
+                                use App\Http\Controllers\NovelController;
+                                    
+                                echo NovelController::backgroundCharacter($id);
+                                @endphp
+                            </div>
+                            {{-- ITEM CONTEXT --}}
+                            <div class="col-md-11" id="collapseItem">
+                                {{-- Item --}}
+                                @php
+                                    
+                                echo NovelController::backgroundItem($id);
+                                @endphp
+                            </div>
+                            {{-- RELATION CONTEXT --}}
+                            <div class="col-md-11" id="collapseRelation">
+                                Relation
+                            </div>
+                            {{-- MAP CONTEXT --}}
+                            <div class="col-md-11" id="collapseMap">
+                                Map
+                            </div>
+                        {{-- </div> --}}
                     </div>
                 </div>
                     
