@@ -28,6 +28,10 @@ class TagsAddController extends Controller
         return view('background.add_tag')->with("datas",$datas);
     }
 
+    public function map_view_return(Request $request){
+        echo("이게왜?");
+    }
+
     public function getData(){
         // if(isset($_GET['event_id'])){
         //     $event_num = $_GET['event_id'];

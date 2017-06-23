@@ -173,6 +173,8 @@ Route::post('/write_novel/addCover', "UpImgController@uploadImg");
 Route::get('/write_novel/removeCover', "UpImgController@removeImg");
 
 
+Route::post('/background/map/tag',"TagsAddController@map_view_return");
+
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');

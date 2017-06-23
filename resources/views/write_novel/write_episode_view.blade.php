@@ -407,7 +407,7 @@
 
           </div>
           <div class="pull-down background-div background-footer">
-            <button type="button" id="applyTag">태그 적용</button>
+            <button type="button" id="applyTag" class="form-control">태그 적용</button>
           </div>
         </div>
       </div>
@@ -462,7 +462,7 @@
 
          return $("<li></li>")
              .data("item.autocomplete", item)
-             .append("<a class='col-md-12'>" + item.value+ "<div class='pull-right' style='background-color:"+item.color+"'>TC</div>" + "<div class='pull-right'>"+ kind + "</div>"  + "</a>")
+             .append("<a class='col-md-12'>" + item.value+ "<div class='pull-right' style='background-color:#"+item.color+"'>TC</div>" + "<div class='pull-right'>"+ kind + "</div>"  + "</a>")
              .appendTo(ul);
      };
     }
@@ -498,6 +498,8 @@
     // tag에 정보에 따른 정보 출력
     function setBackgroundContent(item){
       // 케이스별로 정보 출력 $(".background-content")
+      console.log("item");
+      console.log(item);
       callBackgroundInfo(item.kind, item.object_id);
 
       // 케이스 + 아이디로 정보 호출
@@ -622,7 +624,7 @@
                 appendEle += "    주요 정보";
                 appendEle += "  </div>";
                 appendEle += "  <div class='col-md-12 info-content'>";
-                appendEle += data.event_contents;
+                appendEle +=      data.event_contents;
                 appendEle += "  </div>";
                 appendEle += "</div>";
 
@@ -782,13 +784,14 @@
           },
           success: function (data) {
              data = data[0];
-            // console.log(data);
+             console.log("asd");
+             console.log(data);
             var addEle = "";
             switch(bgCase){
               case "characters":
                 addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
                 addEle += "  <div class='col-md-6 basic-cha-img'>";
-                addEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
+                addEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'><br>";
                 addEle += "    <span>" + data.name + "</span>";
                 addEle += "  </div>";
                 addEle += "  <div class='col-md-6 basic-cha-info'>";
@@ -805,7 +808,7 @@
               case "items":
               addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
               addEle += "  <div class='col-md-6 basic-cha-img'>";
-              addEle += "    <img class='img-circle img-things-size' src='/img/background/itemImg/"+ data.img_src +"'>";
+              addEle += "    <img class='img-circle img-things-size' src='/img/background/itemImg/"+ data.img_src +"'><br>";
               addEle += "    <span>" + data.name + "</span>";
               addEle += "  </div>";
               addEle += "  <div class='col-md-6 basic-cha-info'>";
