@@ -10,6 +10,10 @@
 link & button
 **************************************/
 
+.img_click {
+    border : 2px solid red;
+}
+
 .white {
     color: #fff !important;
 }

@@ -18,7 +18,7 @@ class BackgroundController extends Controller
      {
          // $background = \App\
          // return __METHOD__ . '은(는) 컬렉션을 조회합니다.';
-         return view('background.background_main');
+         return redirect('/background/historyTable');
      }
 
     public function index_map()
