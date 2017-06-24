@@ -5,7 +5,7 @@
 @include('background.tag')
 
 
-@section('content') 
+@section('content')
 		 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		 <script type="text/javascript" src="/js/custom/history.js"></script>
 		 <script type="text/javascript" src="/js/custom/additional_items.js"></script>
@@ -13,7 +13,7 @@
 		 <script type="text/javascript" src="/js/custom/effect_get_click.js"></script>
 		 <script> ready(  <?=json_encode($data)?>  ) </script>
 		 <script> timetableEvent( <?=json_encode($data)?> );</script>
-		 
+
 		 <div class="col-xs-16 col-sm-11 col-md-11" style= "background-color : #e8d6b3" >
 			<br>
 			<div class="row" id="timeline" >
@@ -27,12 +27,12 @@
 								<li class="event_list" id="{{$i}}"><a href="#">{{$data[$i]['event_name']}}</a></li>
 							<?php
 							}
-						}	
+						}
 					?>
 				</ul>
 			</nav>
 		</div>
-		
+
 		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set" style="height: 50vh">
 			<div class="row" id="list">
 			{{-- {{ var_dump($data) }} --}}
@@ -47,7 +47,7 @@
 							<input class="form-control" type="text" name="event_name" id="event_name" placeholder="사건 이름">
 							</div>
 						</div>
-						{{-- 사건 내용 등록 --}}	
+						{{-- 사건 내용 등록 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">내용</label>
 							<div class="col-sm-10">
@@ -78,7 +78,7 @@
 					</div>
 
 					{{-- 추가사항 등록 스크립트 --}}
-					
+
 					{{-- 화면 분할 오른쪽 --}}
 					<div class="col-xs-7 col-sm-5 col-md-5 height-max-set background_tag">
 						{{-- timetable Id 를 저장하기 위한 공간 --}}
@@ -93,7 +93,7 @@
 
 								</div>
 								{{-- 인물 등록 아이콘, 모달 호출 --}}
-								@php 
+								@php
 									use App\Http\Controllers\BackgroundHistoryTablesController;
 									echo BackgroundHistoryTablesController::characters_effect_modal();
 								@endphp
@@ -113,7 +113,7 @@
 							{{-- 사물 아이콘 목록 --}}
 								<div class="inner_items"></div>
 								{{-- 사물 등록 아이콘, 모달 호출 --}}
-								@php 
+								@php
 									echo BackgroundHistoryTablesController::items_effect_modal();
 								@endphp
 								<div data-toggle="modal" data-target="#items">
@@ -131,7 +131,7 @@
 							<div class="col-sm-10">
 							{{-- 장소 아이콘 목록 --}}
 								<div class="inner_maps"></div>
-								@php 
+								@php
 									echo BackgroundHistoryTablesController::maps_effect_modal();
 								@endphp
 								{{-- 장소 등록 아이콘, 모달 호출 --}}
@@ -155,8 +155,8 @@
 						<button type="submit" id="submit_delete" class="btn btn-default">삭제</button>
 						<button type="submit" id="submit_history" class="btn btn-default">등록</button>
 					</div>
-				</form> 
-					
+				</form>
+
 				<div class="col-xs-3 col-sm-2 col-md-2 height-max-set background_tag">
 					<form class="form-horizontal main-navigation">
 						<div class="form-group form-group-sm">
@@ -172,7 +172,7 @@
 					</form>
 					 <div class="row">
 					 {{-- $page에 태그 값이 참조할 테이블의 이름을 넣어준다. --}}
-					 	 <?php 
+					 	 <?php
 						  	$page = "timetables";
 						  	use App\Http\Controllers\TagsAddController;
 							echo TagsAddController::view_return($page,$data);
@@ -181,10 +181,10 @@
 				</div>
 			</div>
 		</div>
-			
 
 
-		
+
+
 	{{-- 태그 div.row 닫는 태그 --}}
 	</div>
 @endsection
