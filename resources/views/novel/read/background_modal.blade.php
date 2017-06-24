@@ -1,3 +1,7 @@
+@php
+    use App\Http\Controllers\NovelController;
+@endphp
+
 <script src="/js/JHM-Custom/jhm-background-custom.js"></script>
 
 {{-- Background Modal START --}}
@@ -39,36 +43,38 @@
                         {{-- <div> --}}
                             {{-- HISTORY CONTEXT --}}
                             <div class="col-md-11" id="collapseHistory">
-                                History
+                                {{-- History --}}
+                                @php
+                                    echo NovelController::backgroundHistory($id);
+                                @endphp
                             </div>
                             {{-- CAHRACTER CONTEXT --}}
                             <div class="col-md-11" id="collapseCharacter">
                                 {{-- Character --}}
                                 @php
-                                use App\Http\Controllers\NovelController;
-                                    
-                                echo NovelController::backgroundCharacter($id);
+                                    echo NovelController::backgroundCharacter($id);
                                 @endphp
                             </div>
                             {{-- ITEM CONTEXT --}}
                             <div class="col-md-11" id="collapseItem">
                                 {{-- Item --}}
                                 @php
-                                    
-                                echo NovelController::backgroundItem($id);
+                                    echo NovelController::backgroundItem($id);
                                 @endphp
                             </div>
                             {{-- RELATION CONTEXT --}}
                             <div class="col-md-11" id="collapseRelation">
                                 {{-- Relation --}}
                                 @php
-                                    
-                                echo NovelController::backgroundRelation($id);
+                                    echo NovelController::backgroundRelation($id);
                                 @endphp
                             </div>
                             {{-- MAP CONTEXT --}}
                             <div class="col-md-11" id="collapseMap">
-                                Map
+                                {{-- Map --}}
+                                @php
+                                    echo NovelController::backgroundMap($id);
+                                @endphp
                             </div>
                         {{-- </div> --}}
                     </div>

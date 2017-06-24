@@ -1,5 +1,9 @@
-<div id="force-div" class="col-xs-9 col-sm-8 col-md-8 height-max-set force-box" >
+
+<div class="row">
+	<div id="force-div" class="col-md-12"> 
+	</div>
 </div>
+{{-- height-max-set force-box --}}
 <script>
 	$(function() {
 			var nodes = {};
@@ -20,8 +24,8 @@
 			});
 
 			// svg크기 정의 div크기에서 어느정도 여백
-			var width = document.getElementById("force-div").offsetWidth-80;
-			var height = document.getElementById("force-div").offsetHeight-80;
+			var width = 900;
+			var height = 500;
 
 
 			//********************************************************************//

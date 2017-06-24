@@ -337,14 +337,13 @@ READ-NOVEL-VIEW : BACKGROUND
     overflow: auto;
 }
 
-div[name=background-view],
-div[name=background-info] {
-    overflow: auto;
-}
-
 img[name=img_icon] {
     margin: 17px !important;
     cursor: pointer;
+}
+
+div[name=map-info] > img {
+    width: 750px !important;
 }
 
 .selectedImg {
