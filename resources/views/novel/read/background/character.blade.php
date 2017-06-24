@@ -9,7 +9,6 @@
 
     </div>
     <div class="col-md-9 table-responsive" name="character-info">
-        {{-- 캐릭터 이름 등록 --}}
 		<table class="table">
             <tr>
                 <td>
