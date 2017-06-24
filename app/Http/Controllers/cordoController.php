@@ -86,6 +86,7 @@ class cordoController extends Controller
     $task = DB::table("novel_episodes")->where('belong_to_novel','=',$id)->where('is_notice','=','1')->get();
     return $task;
   }
+  
   //로그인 하기
   public function getUsersInfo(Request $request){
     $user_id = $request->input('id');
@@ -93,12 +94,14 @@ class cordoController extends Controller
     $task = DB::table("users")->where('user_id','=',$user_id)->where('password','=', $password)->get();
     return $task;
   }
+
   //아이디 중복체크
   public function idCheck(Request $request){
     $user_id = $request->input('id');
     $task = DB::table("users")->where('user_id', '=', $user_id)->get()->count();
     return $task;
   }
+
   //아이디 찾기
   public function idSearch(Request $request){
     $emailInfo = $request->input('email');
@@ -112,6 +115,7 @@ class cordoController extends Controller
     $task = DB::table('users')->select('password')->where('user_id', '=', $user_id)->where('email','=',$emailInfo)->get();
     return $task;
   }
+
   //회원 정보 입력
   public function insertUserInfo(Request $request){
       $id = $request->input('user_id');
