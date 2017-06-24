@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     $current = new Date();
 
     $("li[name=dayCircle]").each(function () {

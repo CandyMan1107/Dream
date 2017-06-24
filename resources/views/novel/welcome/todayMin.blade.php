@@ -10,7 +10,7 @@
 						<h1><a class="noDeco" href="/novel/kind/today_novel_by_day">오늘의 웹소설</a></h1>
 					@endif
 					<p>오늘의 <br>HOT한 소설! </p>
-					<hr class="pg-titl-bdr-btm"></hr>
+					<hr class="pg-titl-bdr-btm" />
 				</div>
 					@if (empty($data[0]['title']))
 						<h1>조금만</h1>

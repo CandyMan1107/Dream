@@ -30,6 +30,17 @@ class Novel extends Model
         return $novelData;
     }
 
+    // TABLE : novels SELECT
+    public function basicData($id) {
+
+        $novelData = DB::table('novels')
+            ->select('*')
+            ->where('id', '=', $id)
+            ->get();
+
+        return $novelData;
+    }
+
     // TABLE : novels SELECT // JOIN TABLE : novel_episodes
     public function dataJoinEpisode($id) {
 
@@ -39,6 +50,19 @@ class Novel extends Model
             ->where('novels.id', '=', $id)
             ->where('novel_episodes.belong_to_novel', '=', $id)
             ->orderBy('novel_episodes.id', 'desc')
+            ->get();
+
+        return $novelData;
+    }
+
+    // TABLE : novels SELECT // JOIN TABLE : novel_backgrounds
+    public function dataJoinBackground($id) {
+
+        $novelData = DB::table('novels')
+            ->join('novel_backgrounds', 'novels.id', '=', 'novel_backgrounds.belong_to_novel')
+            ->select('novels.title', 'novel_backgrounds.background_id')
+            ->where('novels.id', '=', $id)
+            ->where('novel_backgrounds.belong_to_novel', '=', $id)
             ->get();
 
         return $novelData;

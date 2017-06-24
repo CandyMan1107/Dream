@@ -322,6 +322,62 @@
       width:150px;
       height:150px;
     }
+    /* background 모달 디자인 */
+    .bgModal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    .bg-modal-content{
+      border-radius:5px;
+      margin:0;
+    }
+
+    .bg-modal-header {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      padding: 12px;
+      background-color: #DBDBDB;
+    }
+
+    .bg-modal-header > span {
+      display: inline block;
+    }
+    .bgTitle {
+      font-size: 30px;
+    }
+
+
+    .bg-modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 0px;
+        border: 1px solid #888;
+        height:600px;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button */
+    .bgClose {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .bgClose:hover,
+    .bgClose:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
 
 
@@ -386,7 +442,7 @@
         <div class="col-md-2 background-box">
           <div class="background-div background-top">
             &nbsp;&nbsp;&nbsp;소설 배경 설정
-            <span class="pull-right glyphicon glyphicon-resize-full"></span>
+            <span id="bgBtn" class="pull-right glyphicon glyphicon-resize-full"></span>
           </div>
           <div class="background-div background-search">
 
@@ -421,6 +477,20 @@
         <div class="col-md-6 btn_div"><div class="func_btn episode-save">저장</div></div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div id="bgModal" class="bgModal">
+
+    <div class="bg-modal-content">
+      <div class="bg-modal-header"><span class="bgTitle">상세 소설 배경</span><span class="bgClose">&times;</span></div>
+      <div class="bg-modal-body">
+        <div class="bg-modal-basic">asd</div>
+        <div class="bg-modal-basic">asd</div>
+        <div class="bg-modal-basic">asd</div>
+
+      </div>
     </div>
   </div>
 
@@ -1120,6 +1190,29 @@
             alert("오류발생");
           }
       });
+    }
+
+    // background 모달 이벤트
+    setBackgroundModal()
+    function setBackgroundModal(){
+      var modal = document.getElementById('bgModal');
+      var btn = document.getElementById("bgBtn");
+      var span = document.getElementsByClassName("bgClose")[0];
+
+      btn.onclick = function() {
+          modal.style.display = "block";
+      }
+
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
+
     }
 
 

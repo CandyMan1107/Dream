@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(function () {
     /**************************************
     /novel/read/novel_read_view.blade.php
     **************************************/

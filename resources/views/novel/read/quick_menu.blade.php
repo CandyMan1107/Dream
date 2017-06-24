@@ -44,15 +44,17 @@
                             </p>
                         </td>
                     </tr>
-                    <tr>
-                        <td data-toggle="modal" data-target="#backgroundModal">
-                            <p class="remote">
-                                <a class="novelBackground" href="#">
-                                    <i class="material-icons">remove_red_eye</i>&nbsp;<span>배경보기</span>
-                                </a>
-                            </p>
-                        </td>
-                    </tr>
+                    @if (!isset($dataE[0]['noBack']))
+                        <tr>
+                            <td data-toggle="modal" data-target="#backgroundModal">
+                                <p class="remote">
+                                    <a class="novelBackground" href="#">
+                                        <i class="material-icons">remove_red_eye</i>&nbsp;<span>배경보기</span>
+                                    </a>
+                                </p>
+                            </td>
+                        </tr>
+                    @endif
                 </table>
             </div>
         </div>

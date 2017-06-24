@@ -1,6 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
+
+@php
+	use App\Http\Controllers\NovelController;
+@endphp
     <div class="default-padding"></div>
     {{-- read-novel-info START --}}
     <div id="read-novel-info" class="section-padding">
@@ -86,13 +90,18 @@
     {{-- read-novel-view END --}}
     
     {{--quickMenu & viewer & background MODAL START--}}
-    @php
-	use App\Http\Controllers\NovelController;
-	
-    echo NovelController::quickMenu($data);
-	echo NovelController::viewerModal();
-	echo NovelController::backgroundModal($data['belong_to_novel']);
-	@endphp
+        @if (isset($data['noBack']))
+            @php	
+                echo NovelController::quickMenu($data);
+                echo NovelController::viewerModal();
+            @endphp
+        @else
+            @php	
+                echo NovelController::quickMenu($data);
+                echo NovelController::viewerModal();
+                echo NovelController::backgroundModal($data['belong_to_novel']);
+            @endphp
+        @endif
     {{--quickMenu & viewer & background MODAL END--}}
     
     {{-- writer-word START --}}
@@ -228,8 +237,8 @@
         <script src="/js/JHM-Custom/jhm-selectIcon-custom.js"></script>
         <script src="/js/JHM-Custom/jhm-readNovel-custom.js"></script>
         <script src="/js/JHM-Custom/jhm-quick.js"></script>
-        <script src="/js/JHM-Custom/jhm-arrow.js"></script>
         <script src="/js/JHM-Custom/jhm-comment.js"></script>
+        <script src="/js/JHM-Custom/jhm-arrow.js"></script>
         {{-- BOOK SCRIPT --}}
         {{-- <script type="text/javascript" src="/js/book-custom/jquery.min.1.7.js"></script>
         <script type="text/javascript" src="/js/book-custom/jquery-ui-1.8.20.custom.min.js"></script>
