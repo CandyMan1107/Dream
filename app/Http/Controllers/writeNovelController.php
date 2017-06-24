@@ -120,6 +120,16 @@ class writeNovelController extends Controller
        return $tagInfo;
     }
 
+    //배경설정 케이스와 아이디로 테그정보 호출
+    public function getTagById(Request $request){
+      $bgCase = $request->input('bgCase');
+      $bgId   = $request->input('bgId');
+
+      $tagInfo = DB::table("tags")->select("kind","object_id","color","tag_name as value")->where("kind", "=",$bgCase)->where("object_id", "=", $bgId)->get();
+
+      return $tagInfo;
+    }
+
     // 소설 배경설정 정보 호출
     public function callBackgroundInfo(Request $request){
       $bgCase = $request->input('bgCase');
@@ -129,6 +139,22 @@ class writeNovelController extends Controller
       $bgInfo = DB::table($bgCase)->where($idName,"=",$bgId)->get();
 
       return $bgInfo;
+    }
+
+    // 연대표 정보 호출
+    public function getTimetablesInfo(Request $request){
+      $bgCase = $request->input('bgCase');
+      $bgId   = $request->input('bgId');
+      
+      if($bgCase == null || $bgId == null){
+        $ttData = DB::table("timetables")->get();
+      } else {
+        $ttData = DB::table("timetables")->join("effects","timetables.id", "=", "effects.timetable_id")
+        ->where("affect_table","=",$bgCase)->where("affect_id","=",$bgId)
+        ->get();
+      }
+
+      return $ttData;
     }
 
 }

@@ -475,7 +475,7 @@ rant @extends('layouts.master')
 	</div>
 
 
-	<script type="text/javascript" src="http://d3js.org/d3.hexbin.v0.min.js"></script>
+	<script src ="{{url(asset('js/d3.hexbin.v0.min.js?ver=1'))}}"></script>
 	<script src ="{{url(asset('js/jscolor.js?ver=1'))}}"></script>
 
 
@@ -1000,7 +1000,7 @@ rant @extends('layouts.master')
 					console.log(tagPalette[i]);
 					tagPalette.addClass("jscolor {valueElement:'chosen-value'}");
 				}
-				
+
 			}
 
 			// Title, ImgUrl, Date로 맵 리스트 리턴
@@ -1043,7 +1043,7 @@ rant @extends('layouts.master')
 				 createEle += "							<option value='Green'>"
 				 createEle += "							<option value='Orange'>"
 				 createEle += "							<option value='Purple'>"
-				 createEle += "						</datalist>" 
+				 createEle += "						</datalist>"
 			 	 createEle += "					</div>"
 				 createEle += " 			<p></p>"
 				 createEle += "				<button type='button' name='tag_submit' id='tag_submit' class='btn btn-default tag_submit' value="+mapId+">submit</button>"
@@ -1066,19 +1066,19 @@ rant @extends('layouts.master')
 					{{-- alert($(this).val()); --}}
 					{{-- alert($('#tag_name'+$id+'').val()); --}}
 					{{-- alert($('#tag_color'+$id+'').val()); --}}
-					
+
 					$.ajaxSetup({
 						headers: {
 							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 						}
-					});	
+					});
 					$.ajax({
 						type: "POST",
 						url : "map/tag",
 						data : {
 								tag_name : $tag_name,
 								page : "maps",
-								tag_color : $tag_color, 
+								tag_color : $tag_color,
 								object_id : $id
 								  },
 						success:function(data){

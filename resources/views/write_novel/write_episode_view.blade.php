@@ -3,6 +3,7 @@
 
 
 @section('content')
+
   <style>
 
     .set_row {
@@ -344,24 +345,47 @@
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       padding: 12px;
+      height:10%;
       background-color: #DBDBDB;
     }
 
     .bg-modal-header > span {
       display: inline block;
     }
+
+    .bg-modal-body{
+      height:90%;
+    }
+
+    .bg-modal-top {
+      height:30%;
+      border-bottom: 3px solid #d9d9d9;
+      margin:10px;
+      overflow-y: scroll;
+    }
+    .bg-modal-middle {
+      height:30%;
+      border-bottom: 3px solid #d9d9d9;
+      margin:10px;
+      overflow-y: scroll;
+    }
+    .bg-modal-bottom {
+      height:30%;
+      margin:10px;
+      overflow-y: scroll;
+    }
     .bgTitle {
       font-size: 30px;
     }
 
-
     .bg-modal-content {
+
         background-color: #fefefe;
-        margin: 15% auto; /* 15% from the top and centered */
+        margin: 9% auto; /* 15% from the top and centered */
         padding: 0px;
         border: 1px solid #888;
         height:600px;
-        width: 80%; /* Could be more or less, depending on screen size */
+        width: 60%; /* Could be more or less, depending on screen size */
     }
 
     /* The Close Button */
@@ -379,6 +403,58 @@
         cursor: pointer;
     }
 
+    /* 모달 내부 컨텐츠 css*/
+    .bg-div{
+      height:100%;
+      display: inline-block;
+    }
+
+    .bg-img-div{
+      text-align: center;
+      height:100%;
+    }
+
+    .bg-img-div >span {
+      font-size:15px;
+      font-weight: bold;
+    }
+    .cha-img-size {
+      width:130px;
+      height:130px;
+    }
+
+    .bg-cha-info {
+      font-size: 18px;
+      margin-top:20px;
+    }
+
+    .bg-cha-info > span{
+      font-weight:bold;
+    }
+
+    .bg-refer-div > span{
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .refer-info{
+      height:43px;
+      border:3px solid #c9c9c9;
+      overflow-y: scroll;
+    }
+    .tag-info{
+      height:43px;
+      border:3px solid #c9c9c9;
+      overflow-y: scroll;
+    }
+    .tag-color-box {
+      display: inline-block;
+      background-color: #3c9182
+    }
+
+    #timeline {
+
+    }
 
 
   </style>
@@ -486,14 +562,22 @@
     <div class="bg-modal-content">
       <div class="bg-modal-header"><span class="bgTitle">상세 소설 배경</span><span class="bgClose">&times;</span></div>
       <div class="bg-modal-body">
-        <div class="bg-modal-basic">asd</div>
-        <div class="bg-modal-basic">asd</div>
-        <div class="bg-modal-basic">asd</div>
+        <div class="bg-modal-top">
 
+
+
+        </div>
+        <div class="bg-modal-middle">
+
+        </div>
+        <div class="bg-modal-bottom">
+
+        </div>
       </div>
     </div>
   </div>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="/js/custom/history.js"></script>
 <script>
   (function ($) {
 
@@ -1082,7 +1166,7 @@
                   addSlickEle += "    <img draggable='false' src={{URL::asset('upload/images')}}/"+data+">";
                   addSlickEle += "  </div>";
                   addSlickEle += "</div>";
-                  $(".image_list").slick('slickAdd',addSlickEle);
+                  $(".image_list").slick('slickAdd',addSlickEle,0);
                   $(".image_cell").find(".quitBox").hide();
 
                   // 클릭이벤트
@@ -1184,7 +1268,8 @@
             "postScript": postScript
           },
           success: function (data) {
-            alert(data);
+            alert("회차가 작성되었습니다!");
+            location.href ="/write_novel/my_novel";
           },
           error: function (error) {
             alert("오류발생");
@@ -1215,7 +1300,175 @@
 
     }
 
+    // 모달 컨텐츠 변경
+    setModalContent("characters",1);
+    function setModalContent(bgCase, bgId){
+      removeModalContent();
+      switch(bgCase){
+        case "characters" :
+        setModalCharacters(bgId);
+        break;
+        case "items" :
+        setModalItems(bgId);
+        break;
+        case "maps" :
+        setModalMaps(bgId);
+        break;
+        case "timetables" :
+        setModalTimetables(bgId);
+        break;
+        default:
+        alert("error occured");
+      }
 
+      var topModal = $(".bg-modal-top");
+      var middleModal = $(".bg-modal-middle");
+      var bottomModal = $(".bg-modal-bottom");
+      function removeModalContent(){
+          $(".bg-modal-top").empty();
+          $(".bg-modal-middle").empty();
+          $(".bg-modal-bottom").empty();
+      }
+
+      // 캐릭터 상세 정보 출력
+      function setModalCharacters(bgId){
+        var chaData = callBackgroundInfo("characters",bgId)[0];
+        var tagData = callTagInfo("characters",bgId);
+        var ttData = callTimetablesInfo("characters",bgId);
+        console.log(tagData);
+        var referInfo = chaData.refer_info;
+        referInfo = referInfo.split("^");
+        var topEle = "";
+
+        topEle += "<div class='bg-div bg-img-div col-md-3'>"
+        topEle += "  <img src='/img/background/characterImg/" + chaData.img_src+ "'  class='img-circle cha-img-size'><br>"
+        topEle += "  <span>"+chaData.name+"</span>"
+        topEle += "</div>"
+
+        topEle += "<div class='bg-div bg-basic-div col-md-9'>"
+
+        topEle += "  <div class='bg-div bg-cha-info col-md-6'>"
+        topEle += "    <span>이름</span> | "+chaData.name+"<br>"
+        topEle += "    <span>성별</span> | "+chaData.gender+"<br>"
+        topEle += "    <span>나이</span> | "+chaData.age+"<br>"
+        topEle += "    <span>설명</span> | "+chaData.info
+        topEle += "  </div>"
+
+        topEle += "  <div class='bg-div bg-refer-div col-md-6'>"
+        topEle += "    <span>추가 정보</span>"
+        topEle += "    <div class='refer-info'>"
+        referInfo.forEach(function(ri){
+            topEle += "<div>"+ri+"</div>";
+        });
+
+        topEle += "    </div>"
+        topEle += "    <span>태그 정보</span>"
+        topEle += "    <div class='tag-info'>"
+        tagData.forEach(function(td){
+            topEle += "<div>"+td.value+"<div class='tag-color-box'>TC</div></div>";
+        });
+        topEle += "    </div>"
+        topEle += "  </div>"
+        topEle += "</div>"
+
+        $(".bg-modal-top").append(topEle);
+
+        var middleEle ="";
+        middleEle += "<div class='row col-md-12' id='timeline' ></div><br>";
+        //middleEle += "<div><span>끼친영향</span></div>";
+
+        $(".bg-modal-middle").append(middleEle);
+        console.log(timetableConvert(ttData));
+        ready(timetableConvert(ttData));
+        console.log(timetableConvert(ttData));
+
+      }
+
+      // 사물 상세 정보 출력
+      function setModalItems(bgId){
+      }
+      // 맵 상세 정보 출력
+      function setModalMaps(bgId){
+      }
+      // 사건 상세 정보 출력
+      function setModalTimetables(bgId){
+      }
+
+      // 케이스, 아이디로 해당 배경정보 호출
+      function callBackgroundInfo(bgCase, bgId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_background_info",
+            async: false,
+            data: {
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
+      }
+      // 케이스, 아이디로 해당 태그 호출
+      function callTagInfo(bgCase, bgId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/get_tag_by_id",
+            async: false,
+            data: {
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
+      }
+      // 타임테이블 정보 호출
+      function callTimetablesInfo(bgCase=null, bgId=null){
+        var timetablesInfo;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/get_timetables_info",
+            async: false,
+            data: {
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              timetablesInfo = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return timetablesInfo;
+      }
+
+      // 타임테이블 배열을 표형 데이터로 반환
+      function timetableConvert(data){
+        var tableData = new Array();
+        data.forEach(function(td){
+          var cData = {
+            "event_name"    : td.event_names,
+            "start_day"     : td.start_days,
+            "end_day"       : td.end_days
+          };
+          tableData.push(cData);
+        });
+        return tableData;
+      }
+    }
   })(jQuery);
 
 

@@ -407,7 +407,7 @@
                   addSlickEle += "    <img draggable='false' src={{URL::asset('upload/images')}}/"+data+">";
                   addSlickEle += "  </div>";
                   addSlickEle += "</div>";
-                  $(".image_list").slick('slickAdd',addSlickEle);
+                  $(".image_list").slick('slickAdd',addSlickEle,0);
                   $(".image_cell").find(".quitBox").hide();
 
                   // 클릭이벤트

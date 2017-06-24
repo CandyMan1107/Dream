@@ -78,6 +78,10 @@
 		 margin: 0 5px;
 	 }
 
+	 .create-novel-btn{
+	 		width: 200px;
+	 }
+
 	</style>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
   <div class="write_novel_set">
@@ -100,6 +104,7 @@
 								<div class="input-append">
 										<input type="text" class="span2 form-control">
 										<button type="submit" class="btn">검색</button>
+										&nbsp;<button type="button" class="btn" onclick="location.href='set'">소설 생성</button>
 								</div>
 						</form>
 					</div>
@@ -116,8 +121,11 @@
               <li><a href="#">4</a></li>
               <li><a href="#">5</a></li>
               <li><a href="#">»</a></li>
+
           </ul>
+
         </div>
+
       </div>
 
 
@@ -293,6 +301,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 
 				//alert(pageEle);
 				 $(".pagination").append(pageEle);
+
 			}
 
 
