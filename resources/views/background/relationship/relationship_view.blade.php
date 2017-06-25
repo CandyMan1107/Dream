@@ -270,9 +270,9 @@
 					selectedInThisEvent.classed("selectedNode", true);
 					// 설명 텍스트
 					selectedText = selectedInThisEvent.append("text")
-					.attr("dx", "-18")
-					.attr("dy", "-45")
-					.attr("style", "fill:green; font-weight:bold; font-size:16")
+					.attr("dx", "-30")
+					.attr("dy", "-48")
+					.attr("style", "fill:green; font-weight:bold; font-size:30")
 					.text(function(d) { return "선택"} );
 
 					// Input 내용 입력
@@ -291,15 +291,15 @@
 					// 설명 텍스트
 					selectedText.remove();
 					sourceText = selectedStorage[0].append("text")
-					.attr("dx", "-18")
+					.attr("dx", "-30")
 					.attr("dy", "-45")
-					.attr("style", "fill:red; font-weight:bold; font-size:16")
+					.attr("style", "fill:red; font-weight:bold; font-size:30")
 					.text(function(d) { return "주체"} )
 
 					targetText = selectedStorage[1].append("text")
-					.attr("dx", "-18")
+					.attr("dx", "-30")
 					.attr("dy", "-45")
-					.attr("style", "fill:blue; font-weight:bold; font-size:16")
+					.attr("style", "fill:blue; font-weight:bold; font-size:30")
 					.text(function(d) { return "대상"} )
 
 					selectedInThisEvent.classed("targetNode", true);
@@ -324,9 +324,9 @@
 					targetText.remove();
 					selectedInThisEvent.classed("selectedNode", true);
 					selectedText = selectedInThisEvent.append("text")
-					.attr("dx", "-18")
+					.attr("dx", "-30")
 					.attr("dy", "-45")
-					.attr("style", "fill:green; font-weight:bold; font-size:16")
+					.attr("style", "fill:green; font-weight:bold; font-size:30")
 					.text(function(d) { return "선택"} );
 
 					// Input 내용 입력
@@ -554,7 +554,7 @@
 				// 노드에 텍스트 추가 (name 데이터)
 				node.append("text")
 					 .attr("text-anchor", "middle")
-					 .attr("dy","58")
+					 .attr("dy","60")
 						.attr("style", "fill:#504c6a; font-weight:bold; font-size:30")
 						.text(function(d) { return getChaInfoById(d.chaId).name; });
 
