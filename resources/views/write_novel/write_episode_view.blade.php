@@ -178,12 +178,14 @@
     }
 
     .background-box {
+      position:absolute;
       padding: 4px;
       display: inline-block;
       height:100%;
       background-color: #cefff5;
       vertical-align: middle;
       margin-bottom: 5px;
+      width:190px;
     }
 
     .background-div {
@@ -200,6 +202,7 @@
     }
 
     .background-search{
+      text-align: center;
       padding-top: 2px;
       padding-bottom: 2px;
       height:16%;
@@ -263,6 +266,8 @@
       padding-right: 0px;
       height: 18%;
     }
+
+
 
     .tag-info-header{
       text-align: center;
@@ -497,7 +502,7 @@
   }
 
   .case-btn{
-    z-index:0;
+
   }
 
     #timeline {
@@ -568,7 +573,7 @@
           </div>
           <div class="background-div background-search">
 
-            <div class="input-group">
+            <div class="input-group col-md-12">
       				<div id="radioBtn" class="btn-group">
       					<a class="case-btn btn btn-primary btn-sm notActive"  data-title="characters">인물</a>
                 <a class="case-btn btn btn-primary btn-sm notActive" data-title="items">사물</a>
@@ -729,7 +734,7 @@
                 appendEle += "<input id='bgHidden' type='hidden' data-kind='characters' data-id='"+bgId+"'>"
                 appendEle += "  <div class='col-md-6 basic-cha-img'>";
                 appendEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
-                appendEle += "    <span>" + data.name + "</span>";
+                appendEle += "    <br><span>" + data.name + "</span>";
                 appendEle += "  </div>";
                 appendEle += "  <div class='col-md-6 basic-cha-info'>";
                 appendEle += "    <br>";
