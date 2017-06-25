@@ -68,6 +68,10 @@
 				width:auto;
 			}
 
+			.height-max-set{
+				height:95%;
+			}
+
 
 		</style>
 		<div class="function-div form-group">
@@ -169,7 +173,7 @@
 					.nodes(d3.values(nodes))
 					.links(links)
 			 		.size([width, height])
-					.linkDistance(350)
+					.linkDistance(500)
 					.charge(-800)
 					.on("tick", tick);
 
@@ -527,7 +531,7 @@
 				.on("click", selectRelation)
 				.append("textPath")
 				.attr("xlink:href", function(d) { return "#" + d.id; })
-				.attr("style", "fill:magenta; font-weight:bold; font-size:12")
+				.attr("style", "fill:magenta; font-weight:bold; font-size:30")
 				.text(function(d) { return d.relationship; } );
 
 				var relText = relTextArea.selectAll("text");
@@ -550,8 +554,8 @@
 				// 노드에 텍스트 추가 (name 데이터)
 				node.append("text")
 					 .attr("text-anchor", "middle")
-					 .attr("dy","25")
-						.attr("style", "fill:blue; font-weight:bold; font-size:16")
+					 .attr("dy","58")
+						.attr("style", "fill:#504c6a; font-weight:bold; font-size:30")
 						.text(function(d) { return getChaInfoById(d.chaId).name; });
 
 

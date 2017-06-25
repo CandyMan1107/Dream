@@ -5,7 +5,6 @@
 @section('content')
 
   <style>
-
     .set_row {
       border-top: #EAEAEA 2px solid;
       padding: 10px;
@@ -337,6 +336,7 @@
     }
 
     .bg-modal-content{
+      z-index:3;
       border-radius:5px;
       margin:0;
     }
@@ -491,6 +491,13 @@
     font-size: 16px;
     font-weight: bold;
     margin: 3px;
+  }
+  .active {
+    z-index:1;
+  }
+
+  .case-btn{
+    z-index:0;
   }
 
     #timeline {
@@ -719,6 +726,7 @@
                 var filterTag = filterSourceData("characters", bgId);
                 //appendEle += data.cha_id + data.name + data.info + data.age + data.gender + data.img_src;
                 appendEle += "<div class='col-md-12 basic-info-div background-div'>";
+                appendEle += "<input id='bgHidden' type='hidden' data-kind='characters' data-id='"+bgId+"'>"
                 appendEle += "  <div class='col-md-6 basic-cha-img'>";
                 appendEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
                 appendEle += "    <span>" + data.name + "</span>";
@@ -761,6 +769,7 @@
                 var filterTag = filterSourceData("items", bgId);
                 //appendEle += data.cha_id + data.name + data.info + data.age + data.gender + data.img_src;
                 appendEle += "<div class='col-md-12 basic-info-div background-div'>";
+                appendEle += "<input id='bgHidden' type='hidden' data-kind='items' data-id='"+bgId+"'>"
                 appendEle += "  <div class='col-md-6 basic-cha-img'>";
                 appendEle += "    <img class='img-circle img-things-size' src='/img/background/itemImg/"+ data.img_src +"'>";
                 appendEle += "    <span>" + data.name + "</span>";
@@ -802,6 +811,7 @@
                 var filterTag = filterSourceData("timetables", bgId);
                 //appendEle += data.cha_id + data.name + data.info + data.age + data.gender + data.img_src;
                 appendEle += "<div class='col-md-12 basic-info-div background-div'>";
+                appendEle += "<input id='bgHidden' type='hidden' data-kind='timetables' data-id='"+bgId+"'>"
                 appendEle += "  <div class='col-md-6 basic-cha-img'>";
                 //appendEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
                 appendEle += "    <br><br><span>" + data.event_names + "</span>";
@@ -863,7 +873,6 @@
         }
       }
     }
-
 
     //**********************************************************************************//
     //                               오른쪽 마우스 액션                                  //
@@ -1327,8 +1336,18 @@
       var span = document.getElementsByClassName("bgClose")[0];
 
       btn.onclick = function() {
+
+        var bgKind = $("#bgHidden").attr("data-kind");
+        var bgId = $("#bgHidden").attr("data-id");
+        if(bgKind != null && bgId !=null){
           modal.style.display = "block";
-          setModalContent("characters",1);
+          $(".case-btn").removeClass("active");
+          $(".case-btn").addClass("notActive");
+
+          setModalContent(bgKind,bgId);
+        } else {
+          alert("먼저 태그를 선택해 주세요.");
+        }
       }
 
       span.onclick = function() {
@@ -1428,11 +1447,14 @@
         middleEle += "<div class='row col-md-12' id='timeline' ></div><br>";
 
         $(".bg-modal-middle").append(middleEle);
-        ready(timetableConvert(ttData));
+        console.log(ttData);
+        if(ttData.lenght > 0)
+          ready(timetableConvert(ttData));
 
         // 하위 정보
         var bottomEle = "";
         bottomEle += "<div class='col-md-6 bg-div relation-div'>";
+        if(relData.length > 0)
         relData.forEach(function(rd){
           var sourceInfo = callBackgroundInfo("characters",rd.target)[0];
           var targetInfo = callBackgroundInfo("characters",rd.source)[0];
@@ -1444,8 +1466,10 @@
         });
         bottomEle += "</div>";
         bottomEle += "<div class='col-md-6 bg-div ownership-div'>";
+        console.log(ownerData);
+        if(ownerData.length > 0)
         ownerData.forEach(function(od){
-          var itemInfo = callBackgroundInfo("items",od.id)[0];
+          var itemInfo = callBackgroundInfo("items",od.item_id)[0];
           bottomEle += "  <div class='ownership-list'>";
           bottomEle += "    <img class='img-circle img-things-size' src='/img/background/itemImg/"+ itemInfo.img_src +"'>&nbsp;&nbsp;";
           bottomEle += "    <span>" + itemInfo.name + "</span>";
