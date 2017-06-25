@@ -62,8 +62,8 @@ use App\Http\Controllers\NovelController;
                                 <b name="upload_day"></b> 연재
                             </div>
                             <div class="col-md-2">
-                                <h5 name="genre">
-                                </h5>
+                                <b name="genre">
+                                </b>
                             </div>
                         </div>
                     </div>

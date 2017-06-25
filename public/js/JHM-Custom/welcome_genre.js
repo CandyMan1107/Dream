@@ -1,6 +1,6 @@
-function welcome_genre(data) {
-    $(function () {
-        $welcomeStr = $("input[name='genre']").val();
+$(function () {
+    $("input[name='genre']").each(function () {
+        $welcomeStr = $(this).val();
         $welcomeGenre = $.trim($welcomeStr);
 
         if ($welcomeGenre == "martial") {
@@ -9,15 +9,15 @@ function welcome_genre(data) {
             $welcomeGenre = "판타지";
         } else if ($welcomeGenre == "romance") {
             $welcomeGenre = "로맨스";
-        } else if ($welcomeGenre == "sf") {
+        } else if ($welcomeGenre == "scifi") {
             $welcomeGenre = "SF";
         } else if ($welcomeGenre == "horror") {
             $welcomeGenre = "호러";
-        } else if ($welcomeGenre == "mystery") {
+        } else if ($welcomeGenre == "detective") {
             $welcomeGenre = "추리";
         }
 
-        $("h3[name='genre']").append($welcomeGenre);
-        $("h5[name='genre']").append($welcomeGenre);
+        $(this).siblings("h3").append($welcomeGenre);
+        $(this).siblings("h5").append($welcomeGenre);
     });
-}
+});
