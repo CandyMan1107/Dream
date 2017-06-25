@@ -73,9 +73,12 @@ class NovelController extends Controller
                 
                 array_push($data, $datas);
             }
-        } else if (empty($data)) {
-            // echo("EMPTY!");
+        }
 
+        // var_dump($data);
+         
+        if (empty($data[0])) {
+            // echo ("ECHO!");
             $novelData = $novelTable->basicData($id);
 
             $data = array();
@@ -92,11 +95,9 @@ class NovelController extends Controller
                     'period' => $novelData[$i]->period,
                     'genre' => $novelData[$i]->genre
                 ];
-                
+                    
                 array_push($data, $datas);
             }
-
-            // var_dump($data);
         }
 
         // var_dump($data);
