@@ -17,7 +17,21 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
+                            <label for="user_id" class="col-md-4 control-label">user_id</label>
+
+                            <div class="col-md-6">
+                                <input id="user_id" type="text" class="form-control" name="user_id" value="{{ old('user_id') }}" required autofocus>
+
+                                @if ($errors->has('user_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        {{-- <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">이메일 주소</label>
 
                             <div class="col-md-6">
@@ -29,7 +43,7 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">비밀번호</label>

@@ -5,7 +5,6 @@
 @section('content')
 
   <style>
-
     .set_row {
       border-top: #EAEAEA 2px solid;
       padding: 10px;
@@ -179,12 +178,14 @@
     }
 
     .background-box {
+      position:absolute;
       padding: 4px;
       display: inline-block;
       height:100%;
       background-color: #cefff5;
       vertical-align: middle;
       margin-bottom: 5px;
+      width:190px;
     }
 
     .background-div {
@@ -201,6 +202,7 @@
     }
 
     .background-search{
+      text-align: center;
       padding-top: 2px;
       padding-bottom: 2px;
       height:16%;
@@ -264,6 +266,8 @@
       padding-right: 0px;
       height: 18%;
     }
+
+
 
     .tag-info-header{
       text-align: center;
@@ -337,6 +341,7 @@
     }
 
     .bg-modal-content{
+      z-index:3;
       border-radius:5px;
       margin:0;
     }
@@ -452,11 +457,57 @@
       background-color: #3c9182
     }
 
+    /* 로딩*/
+
+  	#loading {
+  		height: 100%;
+  		left: 0px;
+  		position: fixed;
+  		_position:absolute;
+  		top: 0px;
+  		width: 100%;
+  		filter:alpha(opacity=50);
+  		-moz-opacity:0.5;
+  		opacity : 0.5;
+  	}
+
+  	.loading {
+  		background-color: white;
+  		z-index: 199;
+  	}
+
+  	#loading_img{
+  		position:absolute;
+  		top:50%;
+  		left:50%;
+  		height:35px;
+  		margin-top:-75px;	//	이미지크기
+  		margin-left:-75px;	//	이미지크기
+  		z-index: 200;
+  	}
+
+  .relation-list > span {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 3px;
+  }
+
+  .ownership-list > span {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 3px;
+  }
+  .active {
+    z-index:1;
+  }
+
+  .case-btn{
+
+  }
+
     #timeline {
 
     }
-
-
   </style>
 
 
@@ -522,7 +573,7 @@
           </div>
           <div class="background-div background-search">
 
-            <div class="input-group">
+            <div class="input-group col-md-12">
       				<div id="radioBtn" class="btn-group">
       					<a class="case-btn btn btn-primary btn-sm notActive"  data-title="characters">인물</a>
                 <a class="case-btn btn btn-primary btn-sm notActive" data-title="items">사물</a>
@@ -580,6 +631,8 @@
 <script type="text/javascript" src="/js/custom/history.js"></script>
 <script>
   (function ($) {
+    var loading = $('<div id="loading" class="loading"></div><img id="loading_img" alt="loading" src="/img/write_novel/viewLoading.gif" />')
+						.appendTo(document.body).hide();
 
     // 인물,사물,장소,사건 분류 버튼
     $(".case-btn").on('click',function(){
@@ -651,6 +704,7 @@
 
     // tag에 정보에 따른 정보 출력
     function setBackgroundContent(item){
+
       // 케이스별로 정보 출력 $(".background-content")
       console.log("item");
       console.log(item);
@@ -677,9 +731,10 @@
                 var filterTag = filterSourceData("characters", bgId);
                 //appendEle += data.cha_id + data.name + data.info + data.age + data.gender + data.img_src;
                 appendEle += "<div class='col-md-12 basic-info-div background-div'>";
+                appendEle += "<input id='bgHidden' type='hidden' data-kind='characters' data-id='"+bgId+"'>"
                 appendEle += "  <div class='col-md-6 basic-cha-img'>";
                 appendEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
-                appendEle += "    <span>" + data.name + "</span>";
+                appendEle += "    <br><span>" + data.name + "</span>";
                 appendEle += "  </div>";
                 appendEle += "  <div class='col-md-6 basic-cha-info'>";
                 appendEle += "    <br>";
@@ -719,6 +774,7 @@
                 var filterTag = filterSourceData("items", bgId);
                 //appendEle += data.cha_id + data.name + data.info + data.age + data.gender + data.img_src;
                 appendEle += "<div class='col-md-12 basic-info-div background-div'>";
+                appendEle += "<input id='bgHidden' type='hidden' data-kind='items' data-id='"+bgId+"'>"
                 appendEle += "  <div class='col-md-6 basic-cha-img'>";
                 appendEle += "    <img class='img-circle img-things-size' src='/img/background/itemImg/"+ data.img_src +"'>";
                 appendEle += "    <span>" + data.name + "</span>";
@@ -760,6 +816,7 @@
                 var filterTag = filterSourceData("timetables", bgId);
                 //appendEle += data.cha_id + data.name + data.info + data.age + data.gender + data.img_src;
                 appendEle += "<div class='col-md-12 basic-info-div background-div'>";
+                appendEle += "<input id='bgHidden' type='hidden' data-kind='timetables' data-id='"+bgId+"'>"
                 appendEle += "  <div class='col-md-6 basic-cha-img'>";
                 //appendEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
                 appendEle += "    <br><br><span>" + data.event_names + "</span>";
@@ -821,7 +878,6 @@
         }
       }
     }
-
 
     //**********************************************************************************//
     //                               오른쪽 마우스 액션                                  //
@@ -1166,7 +1222,7 @@
                   addSlickEle += "    <img draggable='false' src={{URL::asset('upload/images')}}/"+data+">";
                   addSlickEle += "  </div>";
                   addSlickEle += "</div>";
-                  $(".image_list").slick('slickAdd',addSlickEle,0);
+                  $(".image_list").slick('slickAdd',addSlickEle);
                   $(".image_cell").find(".quitBox").hide();
 
                   // 클릭이벤트
@@ -1268,7 +1324,7 @@
             "postScript": postScript
           },
           success: function (data) {
-            alert("회차가 작성되었습니다!");
+            alert("소설이 생성되었습니다!");
             location.href ="/write_novel/my_novel";
           },
           error: function (error) {
@@ -1285,7 +1341,18 @@
       var span = document.getElementsByClassName("bgClose")[0];
 
       btn.onclick = function() {
+
+        var bgKind = $("#bgHidden").attr("data-kind");
+        var bgId = $("#bgHidden").attr("data-id");
+        if(bgKind != null && bgId !=null){
           modal.style.display = "block";
+          $(".case-btn").removeClass("active");
+          $(".case-btn").addClass("notActive");
+
+          setModalContent(bgKind,bgId);
+        } else {
+          alert("먼저 태그를 선택해 주세요.");
+        }
       }
 
       span.onclick = function() {
@@ -1301,8 +1368,10 @@
     }
 
     // 모달 컨텐츠 변경
-    setModalContent("characters",1);
+
+
     function setModalContent(bgCase, bgId){
+
       removeModalContent();
       switch(bgCase){
         case "characters" :
@@ -1319,6 +1388,8 @@
         break;
         default:
         alert("error occured");
+
+
       }
 
       var topModal = $(".bg-modal-top");
@@ -1335,9 +1406,12 @@
         var chaData = callBackgroundInfo("characters",bgId)[0];
         var tagData = callTagInfo("characters",bgId);
         var ttData = callTimetablesInfo("characters",bgId);
+        var relData = callRelationInfo(bgId);
+        var ownerData = callOwnershipInfo(bgId);
         console.log(tagData);
         var referInfo = chaData.refer_info;
         referInfo = referInfo.split("^");
+        // 상위 정보
         var topEle = "";
 
         topEle += "<div class='bg-div bg-img-div col-md-3'>"
@@ -1373,15 +1447,41 @@
 
         $(".bg-modal-top").append(topEle);
 
+        // 중간 정보
         var middleEle ="";
         middleEle += "<div class='row col-md-12' id='timeline' ></div><br>";
-        //middleEle += "<div><span>끼친영향</span></div>";
 
         $(".bg-modal-middle").append(middleEle);
-        console.log(timetableConvert(ttData));
-        ready(timetableConvert(ttData));
-        console.log(timetableConvert(ttData));
+        console.log(ttData);
+        if(ttData.lenght > 0)
+          ready(timetableConvert(ttData));
 
+        // 하위 정보
+        var bottomEle = "";
+        bottomEle += "<div class='col-md-6 bg-div relation-div'>";
+        if(relData.length > 0)
+        relData.forEach(function(rd){
+          var sourceInfo = callBackgroundInfo("characters",rd.target)[0];
+          var targetInfo = callBackgroundInfo("characters",rd.source)[0];
+          bottomEle += "  <div class='relation-list'>";
+          bottomEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ sourceInfo.img_src +"'>";
+          bottomEle += "    <span>" + rd.relationship + "</span>";
+          bottomEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ targetInfo.img_src +"'>";
+          bottomEle += "  </div>";
+        });
+        bottomEle += "</div>";
+        bottomEle += "<div class='col-md-6 bg-div ownership-div'>";
+        console.log(ownerData);
+        if(ownerData.length > 0)
+        ownerData.forEach(function(od){
+          var itemInfo = callBackgroundInfo("items",od.item_id)[0];
+          bottomEle += "  <div class='ownership-list'>";
+          bottomEle += "    <img class='img-circle img-things-size' src='/img/background/itemImg/"+ itemInfo.img_src +"'>&nbsp;&nbsp;";
+          bottomEle += "    <span>" + itemInfo.name + "</span>";
+          bottomEle += "  </div>";
+        });
+        bottomEle += "</div>";
+        $(".bg-modal-bottom").append(bottomEle);
       }
 
       // 사물 상세 정보 출력
@@ -1454,7 +1554,6 @@
         });
         return timetablesInfo;
       }
-
       // 타임테이블 배열을 표형 데이터로 반환
       function timetableConvert(data){
         var tableData = new Array();
@@ -1467,6 +1566,44 @@
           tableData.push(cData);
         });
         return tableData;
+      }
+      // 캐릭터 아이디로 관계를 호출
+      function callRelationInfo(chaId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_relation_info",
+            async: false,
+            data: {
+              "chaId"    : chaId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
+      }
+      // 캐릭터 아이디로 소유물건을 호출
+      function callOwnershipInfo(chaId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_ownership_info",
+            async: false,
+            data: {
+              "chaId"    : chaId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
       }
     }
   })(jQuery);

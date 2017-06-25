@@ -141,11 +141,33 @@ class writeNovelController extends Controller
       return $bgInfo;
     }
 
+    // 소설 관계 정보 호출
+    public function callRelationInfo(Request $request){
+      $chaId = $request->input('chaId');
+
+      $bgInfo = DB::table("relations")
+      ->where("source","=",$chaId)->orWhere("target","=",$chaId)
+      ->get();
+
+      return $bgInfo;
+    }
+    // 소설 소유 정보 호출
+    public function callOwnershipInfo(Request $request){
+      $chaId = $request->input('chaId');
+
+      $bgInfo = DB::table("ownerships")
+      ->where("character_id","=",$chaId)
+      ->get();
+
+      return $bgInfo;
+    }
+
+
     // 연대표 정보 호출
     public function getTimetablesInfo(Request $request){
       $bgCase = $request->input('bgCase');
       $bgId   = $request->input('bgId');
-      
+
       if($bgCase == null || $bgId == null){
         $ttData = DB::table("timetables")->get();
       } else {
