@@ -1453,7 +1453,7 @@
 
         $(".bg-modal-middle").append(middleEle);
         console.log(ttData);
-        if(ttData.lenght > 0)
+        if(ttData.length > 0)
           ready(timetableConvert(ttData));
 
         // 하위 정보
