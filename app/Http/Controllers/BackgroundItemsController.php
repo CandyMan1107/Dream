@@ -27,7 +27,7 @@ class BackgroundItemsController extends Controller
             $data[$i]['info'] = $datas->info;
             $data[$i]['category'] = $datas->category;
             $data[$i]['refer_info'] = $datas->refer_info;
-            $data[$i]['img_src'] = $datas->img_src;   
+            $data[$i]['img_src'] = $datas->img_src;
             $data[$i]['refer_info'] = explode('^',$data[$i]['refer_info']);
 
             $i++;
@@ -65,11 +65,11 @@ class BackgroundItemsController extends Controller
         for($i= 0; $i < count($data['refer_info']); $i++){
             if($i==0){
                 $refer_info = $data['refer_info'][$i];
-            }   
+            }
             else{
                 $refer_info = $refer_info."^".$data['refer_info'][$i];
             }
-            
+
         }
         $data['refer_info'] = $refer_info;
 

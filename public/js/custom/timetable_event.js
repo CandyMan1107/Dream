@@ -39,8 +39,8 @@ function timetableEvent(data){
                 $.ajax({
                     type: "POST",
                     url : "historyTable/getEffect",
-                    data : { 
-                            timetable_id : data[event_id]['id'] 
+                    data : {
+                            timetable_id : data[event_id]['id']
                         },
                     success:function(data){
                         $('.affect').remove();
@@ -53,12 +53,12 @@ function timetableEvent(data){
                                 $('#cha'+data[i]['affect_id']+'').val(data[i]['affect_content']);
                             }
                             if(data[i]['affect_table']=="items"){
-                                var img_path = "/img/background/ItemImg/"+data[i]['img_src'];
+                                var img_path = "/img/background/itemImg/"+data[i]['img_src'];
                                 $('.inner_items').append('<img src='+img_path+' alt="character image" class="img-circle img-things-size affect" style="margin : 17px">');
                                 $('.inner_items').append('<input type="text" class="form-control affect" id="item'+data[i]['affect_id']+'" name="effect_item[]" placeholder="내용" style="width:70%; float:right; margin-top:25px">');
                                 $('#item'+data[i]['affect_id']+'').val(data[i]['affect_content']);
                             }
-                            
+
                             if(data[i]['affect_table']=="maps"){
                                 var img_path = "/img/background/mapImg/mapCover/"+data[i]['img_src'];
                                 $('.inner_maps').append('<img src='+img_path+' alt="map image" class="img-circle img-things-size affect" style="margin : 17px">');
