@@ -1,5 +1,4 @@
-<script type="text/javascript" src="/js/JHM-Custom/genre_info.js"></script>
-<script>genre_info( <?=json_encode($data)?> )</script>
+
 {{--TODAY-NOVEL START--}}
 <div id="today-novel" class="section-padding">
 		<div class="container">
@@ -22,7 +21,8 @@
 									<div class="service-box">
 										<div class="service-icon"><img src="upload/images/{{ $data[$i]['cover_img_src'] }}" /></div>
 										<div class="service-text">
-											<h5 class="genre" name="genre">{!! $data[$i]['genre'] !!}</h5>
+											<input type="hidden" name="genre" value="{!! $data[$i]['genre'] !!}"/>
+											<h5 class="genre" name="genre"></h5>
 											<h3>{!! $data[$i]['title'] !!}</h3>
 											<p> <i class="fa fa-pencil"></i> 글반죽</p>
 											<p> <b>{!! $data[$i]['summary_intro'] !!}</b></p>

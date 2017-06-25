@@ -4,8 +4,10 @@
 @php
 use App\Http\Controllers\NovelController;
 @endphp
-<script type="text/javascript" src="/js/JHM-Custom/genre_info.js"></script>
-<script>genre_info( <?=json_encode($data)?> )</script>
+<script type="text/javascript" src="/js/JHM-Custom/info_genre.js"></script>
+<script type="text/javascript" src="/js/JHM-Custom/day_info.js"></script>
+<script>info_genre( <?=json_encode($data)?> )</script>
+<script>day_info( <?=json_encode($data)?> )</script>
 <div class="default-padding"></div>
         {{-- novel-info-1 START --}}
         <div id="novel-info-1" class="section-padding">
@@ -52,25 +54,17 @@ use App\Http\Controllers\NovelController;
                     <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-2">
-                                <h5>
-                                    <i class="fa fa-user-o hit-icon" aria-hidden="true"></i>
-                                    &nbsp;
-                                    1
-                                </h5>
+                                <i class="fa fa-user-o hit-icon" aria-hidden="true"></i>
+                                &nbsp;
+                                1
                             </div>
                             <div class="col-md-2 upload-day">
-                                <h5>
-                                    <b>수, 토</b> 연재
-                                </h5>
+                                <b name="upload_day"></b> 연재
                             </div>
                             <div class="col-md-2">
                                 <h5 name="genre">
-                                    {!! $data[0]['genre'] !!}
                                 </h5>
                             </div>
-                            {{-- <div class="col-md-3">
-                                소설 | 판타지
-                            </div> --}}
                         </div>
                     </div>
                     <div id="default-padding-mid" class="col-md-9"></div>
