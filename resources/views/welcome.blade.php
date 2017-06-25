@@ -5,8 +5,7 @@
 @php
 	use App\Http\Controllers\MainController;
 @endphp
-<script type="text/javascript" src="/js/JHM-Custom/welcome_genre.js"></script>
-<script>welcome_genre( <?=json_encode($data)?> )</script>
+
 <div class="default-padding"></div>
 {{--BANNER START--}}
 	<div id="banner" class="section-padding">
@@ -173,4 +172,6 @@
 	<script type="text/javascript" src="/js/slick.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
 	<script type="text/javascript" src="/js/d3.layout.js"></script>
+	<script type="text/javascript" src="/js/JHM-Custom/welcome_genre.js"></script>
+	
 @endsection

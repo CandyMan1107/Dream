@@ -8,15 +8,15 @@ function info_genre(data) {
             $infoGenre = "판타지";
         } else if ($infoGenre == "romance") {
             $infoGenre = "로맨스";
-        } else if ($infoGenre == "sf") {
+        } else if ($infoGenre == "scifi") {
             $infoGenre = "SF";
         } else if ($infoGenre == "horror") {
             $infoGenre = "호러";
-        } else if ($infoGenre == "mystery") {
+        } else if ($infoGenre == "detective") {
             $infoGenre = "추리";
         }
 
-        $("h5[name='genre']").append($infoGenre);
+        $("b[name='genre']").append($infoGenre);
 
     });
 }
