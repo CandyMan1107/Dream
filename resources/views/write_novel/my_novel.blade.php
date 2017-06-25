@@ -172,6 +172,17 @@ echo NovelEpisodeController::show($novelId, $d.id);
 			$(".episode-collapse").remove();
 			data.forEach(function(d){
 				// 소설 테이블
+				var genre;
+				switch(d.genre){
+					case "romance" : genre = "로맨스"; break;
+					case "fantasy" : genre = "판타지"; break;
+					case "scifi" : genre = "SF"; break;
+					case "martial" : genre = "무협"; break;
+					case "detective" : genre = "추리"; break;
+					case "horror" : genre = "호러"; break;
+					case "agenovel" : genre = "시대극"; break;
+					default: genre = "로멘스"; break;
+				}
 				var tableEle ="";
 				tableEle += "<table class='table novel-table' align='center'>";
 				tableEle += "	<tr>";
@@ -185,7 +196,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				tableEle += "		<td rowspan='2'><img class='cover-img' src='{{URL::asset('upload/images')}}/"+ d.cover_img_src+ "' width='100px' height='144px'></td>";
 				tableEle += "		<td>"+ d.title +"</td>";
 				tableEle += "		<td>"+ "글반죽 "+"</td>";
-				tableEle += "		<td>"+ d.genre +"</td>";
+				tableEle += "		<td>"+ genre +"</td>";
 				tableEle += "		<td>"
 				tableEle += "			<button  data-toggle='collapse' href='#collapse" + d.id + "' type='button' class='btn btn-default episode-mng-btn' data-novel-id='"+d.id+"'>회차관리</button>";
 				tableEle += "			<button type='button' class='btn btn-default write-episode-btn' data-novel-id='"+d.id+"'>회차작성</button>";
