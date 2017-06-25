@@ -1,7 +1,8 @@
 function genre_info(data) {
     $(function () {
         $("h3[name='genre']").each(function () {
-            $genre = $(this).text();
+            $aGenre = $(this).text();
+            $genre = $.trim($aGenre);
 
             if ($genre == "martial") {
                 $(this).text("무협");
@@ -15,7 +16,8 @@ function genre_info(data) {
         });
 
         $("h5[name='genre']").each(function () {
-            $genre = $(this).text();
+            $aGenre = $(this).text();
+            $genre = $.trim($aGenre);
 
             if ($genre == "martial") {
                 $(this).text("무협");
@@ -27,5 +29,6 @@ function genre_info(data) {
                 $(this).text("호러");
             }
         });
+
     });
 }
