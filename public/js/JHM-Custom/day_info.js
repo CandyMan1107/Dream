@@ -25,8 +25,8 @@ function day_info(data) {
             $("b[name='upload_day']").append("&nbsp;수&nbsp;");
         }
 
-        if ($dayStr.indexOf("thu") != -1) {
-            $i = jQuery.inArray("thu", $dayStr);
+        if ($dayStr.indexOf("thr") != -1) {
+            $i = jQuery.inArray("thr", $dayStr);
             $dayStr.splice($i, 1, "목");
 
             $("b[name='upload_day']").append("&nbsp;목&nbsp;");
@@ -37,6 +37,20 @@ function day_info(data) {
             $dayStr.splice($i, 1, "금");
 
             $("b[name='upload_day']").append("&nbsp;금&nbsp;");
+        }
+
+        if ($dayStr.indexOf("sat") != -1) {
+            $i = jQuery.inArray("sat", $dayStr);
+            $dayStr.splice($i, 1, "토");
+
+            $("b[name='upload_day']").append("&nbsp;토&nbsp;");
+        }
+
+        if ($dayStr.indexOf("sun") != -1) {
+            $i = jQuery.inArray("sun", $dayStr);
+            $dayStr.splice($i, 1, "일");
+
+            $("b[name='upload_day']").append("&nbsp;일&nbsp;");
         }
     });
 }
