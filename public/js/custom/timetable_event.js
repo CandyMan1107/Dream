@@ -30,7 +30,6 @@ function timetableEvent(data){
                 $('#other').val(data[event_id]['other']);
                 $('#submit_history').text("수정");
                 $('#submit_delete').show();
-                alert(data[event_id]['id']);
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

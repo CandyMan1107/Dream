@@ -1,12 +1,9 @@
 rant @extends('layouts.master')
 
-@include('partials.mySubNavi')
-
-@include('background.tag')
-
 @section('content')
 
-
+	@include('partials.mySubNavi')
+	@include('background.tag')
 	<style type="text/css">
 
 	.hexagon {

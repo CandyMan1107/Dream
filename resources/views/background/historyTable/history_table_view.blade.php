@@ -1,11 +1,12 @@
 @extends('layouts.master')
 
-@include('partials.mySubNavi')
 
-@include('background.tag')
 
 
 @section('content')
+	@include('partials.mySubNavi')
+
+	@include('background.tag')
 		 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		 <script type="text/javascript" src="/js/custom/history.js"></script>
 		 <script type="text/javascript" src="/js/custom/additional_items.js"></script>
@@ -181,10 +182,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
 	{{-- 태그 div.row 닫는 태그 --}}
 	</div>
 @endsection

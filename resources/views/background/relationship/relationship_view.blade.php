@@ -4,7 +4,6 @@
 
 @include('background.tag')
 
-
 @section('content')
 		<style>
 			path.link {
