@@ -185,8 +185,9 @@
       background-color: #cefff5;
       vertical-align: middle;
       margin-bottom: 5px;
-      width:190px;
+      width:220px;
     }
+
 
     .background-div {
       border-bottom: #D8D8D8 2px solid;
