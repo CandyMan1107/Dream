@@ -45,8 +45,10 @@
                 <td>
                     <strong>작가의 설정</strong>
                 </td>
-                <td name="event-refer_info">
-                    {{-- REFER INFO --}}
+                <td>
+                    <ul name="event-refer_info" class="list-unstyled">
+                        {{-- REFER INFO --}}
+                    </ul>
                 </td>
             </tr>
             <tr>

@@ -17,7 +17,7 @@ $(function () {
             $welcomeGenre = "추리";
         }
 
-        $(this).siblings("h3").append($welcomeGenre);
+        $(this).siblings("h3[name='genre']").append($welcomeGenre);
         $(this).siblings("h5").append($welcomeGenre);
     });
 });
