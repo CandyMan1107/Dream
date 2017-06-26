@@ -7,17 +7,17 @@ function history_info(data) {
         if ($test == $("div").filter("#timeline").attr("id")) {
             $("li[name='event_list']").each(function () {
                 $(this).on("click", function () {
-                    $arrayId = $(this).attr("id");
-                    // alert(data[$arrayId]['event_name']);
-
-                    if ($("div[name=history-info]").is(':visible') == false) {
-                        $("div[name=history-info]").show();
+                    if (!$(this).hasClass("selectedEvent")) {
+                        $arrayId = $(this).attr("id");
+                        // alert(data[$arrayId]['event_name']);
 
                         $("td[name='event-name']").empty();
                         $("td[name='event-content']").empty();
                         $("ul[name='event-refer_info']").empty();
                         $("td[name='event-other']").empty();
                         $("td[name='event-day']").empty();
+
+                        $("div[name=history-info]").show();
 
                         $refer_str = data[$arrayId]['refer_info'];
                         $refer = $refer_str.split("^");
@@ -36,6 +36,7 @@ function history_info(data) {
                         $("td[name='event-other']").append(data[$arrayId]['other']);
                         $("td[name='event-day']").append($event_day);
                     } else {
+                        $(this).removeClass("selectedEvent");
                         $("div[name=history-info]").hide();
                     }
                 });
