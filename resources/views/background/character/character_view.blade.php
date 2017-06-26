@@ -1,10 +1,9 @@
 @extends('layouts.master')
 
-@include('partials.mySubNavi')
-
-@include('background.tag')
-
 @section('content')
+
+	@include('partials.mySubNavi')
+	@include('background.tag')
 		<script type="text/javascript" src="/js/custom/character_event.js"></script>
 		<script type="text/javascript" src="/js/custom/additional_items.js"></script>
 		<script>character_event( <?=json_encode($data)?> )</script>

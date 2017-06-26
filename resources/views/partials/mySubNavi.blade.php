@@ -13,5 +13,6 @@
     $pathname = $(location).attr('pathname'); 
     $pathname = $pathname.split('/');
     console.log($pathname[1]);
-    $("#"+$pathname[1]).css("background-color","#FA9600");
+    $("#"+$pathname[1]).css("background-color","#FABD4A");
+    $("#"+$pathname[1]).css("border-radius","70px");
 </script>
