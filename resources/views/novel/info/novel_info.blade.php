@@ -4,6 +4,10 @@
 @php
 use App\Http\Controllers\NovelController;
 @endphp
+<script type="text/javascript" src="/js/JHM-Custom/info_genre.js"></script>
+<script type="text/javascript" src="/js/JHM-Custom/day_info.js"></script>
+<script>info_genre( <?=json_encode($data)?> )</script>
+<script>day_info( <?=json_encode($data)?> )</script>
 <div class="default-padding"></div>
         {{-- novel-info-1 START --}}
         <div id="novel-info-1" class="section-padding">
@@ -55,14 +59,12 @@ use App\Http\Controllers\NovelController;
                                 1
                             </div>
                             <div class="col-md-2 upload-day">
-                                <b>수, 토</b> 연재
+                                <b name="upload_day"></b> 연재
                             </div>
-                            <div class="col-md-2 genre-default">
-                                {{ $data[0]['genre'] }}
+                            <div class="col-md-2">
+                                <b name="genre">
+                                </b>
                             </div>
-                            {{-- <div class="col-md-3">
-                                소설 | 판타지
-                            </div> --}}
                         </div>
                     </div>
                     <div id="default-padding-mid" class="col-md-9"></div>

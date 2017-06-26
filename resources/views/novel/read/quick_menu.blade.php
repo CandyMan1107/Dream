@@ -1,3 +1,5 @@
+
+
 {{-- quickMenu START --}}
     <div id="quickMenu">
         <div class="row">
@@ -28,7 +30,7 @@
                         <td>
                             <select class="form-control" onchange="location = this.value;">
                                 @for ($i = count($dataE); $i > 0; $i--)
-                                    <option value="/novel/read/novel_read_view/{{$dataE[0]['novel_id']}}&{{$i}}">
+                                    <option class="quickList" name="{{$i}}" value="/novel/read/novel_read_view/{{$dataE[0]['novel_id']}}&{{$i}}">
                                         {{$i}}화. {!! $dataE[$i-1]['episode_title'] !!}
                                     </option>
                                 @endfor

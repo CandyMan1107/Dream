@@ -73,9 +73,12 @@ class NovelController extends Controller
                 
                 array_push($data, $datas);
             }
-        } else if (empty($data)) {
-            // echo("EMPTY!");
+        }
 
+        // var_dump($data);
+         
+        if (empty($data[0])) {
+            // echo ("ECHO!");
             $novelData = $novelTable->basicData($id);
 
             $data = array();
@@ -92,11 +95,9 @@ class NovelController extends Controller
                     'period' => $novelData[$i]->period,
                     'genre' => $novelData[$i]->genre
                 ];
-                
+                    
                 array_push($data, $datas);
             }
-
-            // var_dump($data);
         }
 
         // var_dump($data);
@@ -283,6 +284,66 @@ class NovelController extends Controller
         // var_dump($tasks);
         
         return view('novel.read.background.relation')->with('tasks', $tasks);
+    }
+
+    // NOVEL BACKGROUND : HISTORY
+    public static function backgroundHistory($id) {
+        // echo $id;
+
+        $novelId = $id;
+
+        $backgroundTable = new Background();
+        $historyData = $backgroundTable->selectHistory($novelId);
+
+        // var_dump($historyData);
+        
+        $data = array(array());
+
+        $i = 0;
+
+        foreach ($historyData as $datas) {
+            $data[$i]['id'] = $datas->id;
+            $data[$i]['event_name'] = $datas->event_names;
+            $data[$i]['event_content'] = $datas->event_contents;
+            $data[$i]['start_day'] = $datas->start_days;
+            $data[$i]['end_day'] = $datas->end_days;
+            $data[$i]['other'] = $datas->others;
+            $data[$i]['refer_info'] = $datas->refer_info;
+
+            $i++;
+        }
+
+        // var_dump($data);
+        
+        return view('novel.read.background.history')->with('data', $data);
+    }
+
+    // NOVEL BACKGROUND : MAP
+    public static function backgroundMap($id) {
+        // echo $id;
+
+        $novelId = $id;
+
+        $backgroundTable = new Background();
+        $mapData = $backgroundTable->selectMap($novelId);
+        
+        $data = array(array());
+
+        $i = 0;
+
+        foreach ($mapData as $datas) {
+            $data[$i]['id'] = $datas->id;
+            $data[$i]['cover_src'] = $datas->cover_src;
+            $data[$i]['title'] = $datas->title;
+            $data[$i]['created_at'] = $datas->created_at;
+            $data[$i]['updated_at'] = $datas->updated_at;
+
+            $i++;
+        }
+
+        // var_dump($data);
+        
+        return view('novel.read.background.map')->with('data', $data);
     }
 
     // VIEWER QUICK MENU

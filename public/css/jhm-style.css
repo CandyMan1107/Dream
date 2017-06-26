@@ -128,7 +128,7 @@ NOVEL-INFO
     font-size: 20px;
 }
 
-#novel-info-2 .upload-day>b {
+#novel-info-2 .upload-day b {
     color: #FA9600;
 }
 
@@ -337,14 +337,13 @@ READ-NOVEL-VIEW : BACKGROUND
     overflow: auto;
 }
 
-div[name=background-view],
-div[name=background-info] {
-    overflow: auto;
-}
-
 img[name=img_icon] {
     margin: 17px !important;
     cursor: pointer;
+}
+
+div[name=map-info] > img {
+    width: 750px !important;
 }
 
 .selectedImg {

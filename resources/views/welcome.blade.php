@@ -25,12 +25,12 @@
 								</a>
 						</div>
 					@else
-					
 						@for ($i = 0; $i < count($data); $i++)
 							<div class="col-md-12">
 								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
 									<div class="jumbotron">
-										<h3 class="novel">{!! $data[$i]['genre'] !!}</h3>
+										<input type="hidden" name="genre" value="{!! $data[$i]['genre'] !!}"/>
+										<h3 class="novel" name="genre"></h3>
 										<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
 										<br/>
 										<p class="big">{!! $data[$i]['title'] !!}</p>
@@ -172,4 +172,6 @@
 	<script type="text/javascript" src="/js/slick.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
 	<script type="text/javascript" src="/js/d3.layout.js"></script>
+	<script type="text/javascript" src="/js/JHM-Custom/welcome_genre.js"></script>
+	
 @endsection

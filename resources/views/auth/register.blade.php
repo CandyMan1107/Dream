@@ -31,6 +31,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('user_id') ? ' has-error' : '' }}">
+                            <label for="user_id" class="col-md-4 control-label">아이디</label>
+
+                            <div class="col-md-6">
+                                <input id="user_id" type="text" class="form-control" name="user_id" value="{{ old('user_id') }}" placeholder="user_id" required autofocus>
+
+                                @if ($errors->has('user_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">이메일 주소</label>
 

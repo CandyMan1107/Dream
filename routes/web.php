@@ -155,9 +155,19 @@ Route::get('/write_novel/write_episode/{novelId}', "writeNovelController@writeNo
 // 소설 배경 정보 호출
 Route::get('/write_novel/call_background_info', "writeNovelController@callBackgroundInfo");
 
+// 관계정보 호출
+Route::get('/write_novel/call_relation_info', "writeNovelController@callRelationInfo");
+
+// 소유정보 호출
+Route::get('/write_novel/call_ownership_info', "writeNovelController@callOwnershipInfo");
+
 // 태그 정보 호출
 Route::get('/write_novel/get_tags', "writeNovelController@getTags");
-Route::get('/write_novel/get_tags', "writeNovelController@getTags");
+Route::get('/write_novel/get_tag_by_id', "writeNovelController@getTagById");
+
+// 연대표 정보 호출
+Route::get('/write_novel/get_timetables_info', "writeNovelController@getTimetablesInfo");
+
 
 // 이미지 등록부
 // 소설 커버 이미지 등록
