@@ -1,11 +1,12 @@
 @extends('layouts.master')
 
-@include('partials.mySubNavi')
 
-@include('background.tag')
 
 
 @section('content')
+	@include('partials.mySubNavi')
+
+	@include('background.tag')
 		 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		 <script type="text/javascript" src="/js/custom/history.js"></script>
 		 <script type="text/javascript" src="/js/custom/additional_items.js"></script>
@@ -33,7 +34,7 @@
 			</nav>
 		</div>
 
-		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set" style="height: 50vh">
+		<div class="col-xs-16 col-sm-11 col-md-11 height-max-set" style="height: 50vh; overflow:auto">
 			<div class="row" id="list">
 			{{-- {{ var_dump($data) }} --}}
 				<form class="form-horizontal" id="time_table" name="time_table" action="{{ route('historyTable.store') }}" method="POST">
@@ -181,10 +182,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
 	{{-- 태그 div.row 닫는 태그 --}}
 	</div>
 @endsection

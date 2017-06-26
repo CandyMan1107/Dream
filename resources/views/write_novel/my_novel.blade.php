@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
-@include('partials.mySubNavi')
 
 
 
 @section('content')
+	@include('partials.mySubNavi')
 	<style>
 	.set_row {
 		border-top: #EAEAEA 2px solid;
