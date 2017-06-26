@@ -98,7 +98,7 @@
 
 
 
-		<div class="col-xs-3 col-sm-2 col-md-2 height-max-set background_tag" >
+		<div class="col-xs-3 col-sm-2 col-md-2 height-max-set background_tag" style="height: 100vh">
 			{{-- add_tag.blade.php 구현하고, 컨트롤러로 div안에 불러오는 형식으로 변경 할 것. --}}
 			<form class="form-horizontal main-navigation">
 				<div class="form-group form-group-sm">
