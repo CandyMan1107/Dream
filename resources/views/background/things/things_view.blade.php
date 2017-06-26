@@ -9,7 +9,7 @@
 		<script type="text/javascript" src="/js/custom/item_event.js"></script>
 		<script type="text/javascript" src="/js/custom/additional_items.js"></script>
 		<script>item_event( <?=json_encode($data)?> )</script>
-		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-image:url('/img/cork.jpg')" >
+		<div class="col-xs-6 col-sm-4 col-md-4 height-max-set" style= "background-image:url('/img/cork.jpg'); height: 100vh" >
 			<div class="row">
 				@if($data[0])
 					@foreach ($data as $item)
@@ -65,7 +65,7 @@
 				<button type="submit" class="btn btn-default">등록</button>
 			</form>
 		</div>
-		<div class="col-xs-3 col-sm-2 col-md-2 height-max-set background_tag" >
+		<div class="col-xs-3 col-sm-2 col-md-2 height-max-set background_tag" style="height: 100vh" >
 			{{-- add_tag.blade.php 구현하고, 컨트롤러로 div안에 불러오는 형식으로 변경 할 것. --}}
 			<form class="form-horizontal main-navigation">
 				<div class="form-group form-group-sm">
