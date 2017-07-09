@@ -591,12 +591,12 @@ p.cta-sub-title {
     color: #e43c5c;
 }
 
-#banner {
-    /*background: url('../img/banner-bg-1.jpg') no-repeat;*/
+/*#banner {
+    background: url('../img/banner-bg-1.jpg') no-repeat;
     background: linear-gradient(-135deg, #E4A972, #9941D8) fixed;
     background-size: cover;
     min-height: 500px;
-}
+}*/
 
 .cta2 .btn-default,
 .cta2 .btn-default:hover,
