@@ -670,3 +670,12 @@ NOVEL COMMENT
 .commentReply>input {
     height: 60px !important;
 }
+
+/**************************************
+BLOG - BLOG TOP MENU
+**************************************/
+#blog-top-menu {
+    background: burlywood;
+    height: 65px;
+    padding-top: 20px;
+}
