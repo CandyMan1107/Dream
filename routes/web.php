@@ -66,8 +66,10 @@ Route::get('/login', function () {
 });
 
 /**************************************
-CHARACTER & HISTORY - BACKGROUND
+CHARACTER & HISTORY - BACKGROUND & CHAPTER
 **************************************/
+Route::resource('/chapter', 'ChaptersController');
+
 Route::resource('/background/things', 'BackgroundItemsController');
 
 Route::post('/background/character/ownership', "BackgroundCharactersController@ownership");
