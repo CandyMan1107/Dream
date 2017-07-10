@@ -8,45 +8,50 @@
 
 <div class="default-padding"></div>
 {{--BANNER START--}}
-	<div id="banner" class="section-padding">
-		<div class="container">
-			<div class="row">
-				<div class="autoplay-top">
-					@if (empty($data[0]['title']))
+<div class="section-padding" name="banner">
+	<div class="container">
+		<div class="row">
+			<div class="autoplay-top">
+				@if (empty($data[0]['title']))
+					<div class="col-md-12">
+						<a href="#">
+							<div class="jumbotron">
+								<h3 class="novel">조금만</h3>
+								<h2 class="small">기다려보아</h2>
+								<br/>
+								<p class="big">우하하하하하</p>
+								<div class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></div>
+							</div>
+						</a>
+					</div>
+				@else
+					@for ($i = 0; $i < count($data); $i++)
 						<div class="col-md-12">
-								<a href="#">
-									<div class="jumbotron">
-										<h3 class="novel">조금만</h3>
-										<h2 class="small">기다려보아</h2>
-										<br/>
-										<p class="big">우하하하하하</p>
-										<div class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></div>
-									</div>
-								</a>
-						</div>
-					@else
-						@for ($i = 0; $i < count($data); $i++)
-							<div class="col-md-12">
+							<div class="row">
 								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
-									<div class="jumbotron">
-										<input type="hidden" name="genre" value="{!! $data[$i]['genre'] !!}"/>
-										<h3 class="novel" name="genre"></h3>
-										<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
-										<br/>
-										<p class="big">{!! $data[$i]['title'] !!}</p>
-										<div class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></div>
+									<div class="col-md-7" name="banner-info">
+										<div class="jumbotron">
+											<input type="hidden" name="genre" value="{!! $data[$i]['genre'] !!}"/>
+											<h3 class="novel" name="genre"></h3>
+											<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
+											<br/>
+											<p class="big">{!! $data[$i]['title'] !!}</p>
+											<div class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></div>
+										</div>
 									</div>
+									{{-- <div class="col-md-5" name="banner-img">
+										<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" alt="" data-adaptive-background="1"/>
+									</div> --}}
 								</a>
 							</div>
-						@endfor
-
-					@endif
-					
-				</div>
+						</div>
+					@endfor
+				@endif	
 			</div>
 		</div>
 	</div>
-	{{--BANNER END--}}
+</div>
+{{--BANNER END--}}
 
 	{{--CTA1 START--}}
 	{{--<div class="cta-1">
@@ -173,5 +178,12 @@
 	<script type="text/javascript" src="/js/custom.js"></script>
 	<script type="text/javascript" src="/js/d3.layout.js"></script>
 	<script type="text/javascript" src="/js/JHM-Custom/welcome_genre.js"></script>
-	
+	<script type="text/javascript" src="/js/JHM-Custom/jhm-banner.js"></script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script src="/js/JHM-Custom/adaptive-backgrounds.js"></script>
+	<script type="text/javascript">
+		AdaptiveBackgrounds();
+	</script>
+
 @endsection

@@ -15,14 +15,34 @@ i {
 AUTOPLAY BANNER
 **************************************/
 
-#banner .autoplay-top a {
+div[name=banner] {
+    /*background: url('../img/banner-bg-1.jpg') no-repeat;*/
+    background: -webkit-linear-gradient(top left, #E4A972, #9941D8) fixed;
+    background: -moz-linear-gradient(top left, #E4A972, #9941D8) fixed;
+    background: -o-linear-gradient(top left, #E4A972, #9941D8) fixed;
+    background: linear-gradient(to bottom right, #E4A972, #9941D8) fixed;
+    background-size: cover;
+    min-height: 500px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+
+div[name=banner] a {
     text-decoration: none;
 }
 
-#banner .autoplay-top,
+div[name=banner] .autoplay-top,
 .autoplay-top * {
     outline: none !important;
 }
+
+div[name=banner-img] {
+    height: 500px;
+    overflow: hidden;
+    /*background-repeat: no-repeat;*/
+}
+
+
 
 #event .autoplay,
 .autoplay * {
@@ -332,6 +352,7 @@ READ-NOVEL-VIEW
 /**************************************
 READ-NOVEL-VIEW : BACKGROUND
 **************************************/
+
 .background-fluid {
     height: auto;
     overflow: auto;
@@ -342,7 +363,7 @@ img[name=img_icon] {
     cursor: pointer;
 }
 
-div[name=map-info] > img {
+div[name=map-info]>img {
     width: 750px !important;
 }
 
