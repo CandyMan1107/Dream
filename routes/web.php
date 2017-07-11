@@ -195,3 +195,8 @@ Auth::routes();
 
 // 로그인
 Route::get('/home', 'HomeController@index')->name('home');
+
+/**************************************
+BLOG
+**************************************/
+Route::resource('/blog', "BlogController");
