@@ -3,8 +3,8 @@
 
 
 @section('content')
-  <style>
 
+  <style>
     .set_row {
       border-top: #EAEAEA 2px solid;
       padding: 10px;
