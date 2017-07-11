@@ -3,13 +3,18 @@
 @include('writer_blog.blogTopMenu')
 
 @section('content')
-    <div class="default-padding"></div>
+    @include('writer_blog.blogSideMenu')
 
-    
-    
+            <div id="blog-main" class="col-md-8">
+                MAIN
+            </div>
 
 
 
+        {{-- BLOG SIDE MENU DIV ROW --}}
+        </div>
+    {{-- BLOG SIDE MENU DIV CONTAINER --}}
+    </div>
 
 
 
