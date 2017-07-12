@@ -23,6 +23,7 @@
             @endif
 		</ul>
     </div>
+    
     <div class="col-md-6" name="history-info">
         <table class="table">
             <tr>

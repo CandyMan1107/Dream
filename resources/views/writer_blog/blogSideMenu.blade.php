@@ -17,6 +17,7 @@
                         U-ID
                     )
                 </div>
+                
                 <div class="profile_text">
                     USER PROFILE TEXT
                     USER PROFILE TEXT
@@ -84,8 +85,28 @@
                     웹 소설을 집필 했습니다.
                 </div>
             </div>
-            {{--  --}}
-            <div></div>
+            <hr />
+            {{-- BLOG COUNTER --}}
+            <div class="blog_counter">
+                <small>방문자수</small>
+                {{-- <br /> --}}
+                <div class="blog_visit_info">
+                    <div>
+                        <strong class="text-uppercase">Today</strong>
+                    </div>
+                    <div class="blog_visitNum">
+                        <strong>999</strong>
+                    </div>
+                </div>
+                <div class="blog_visit_info">
+                    <div>
+                        <strong class="text-uppercase">Total</strong>
+                    </div>
+                    <div class="blog_visitNum">
+                        <strong>999</strong>
+                    </div>
+                </div>
+            </div>
         </div>
         {{-- BLOG SIDE MENU DIV END --}}
 
