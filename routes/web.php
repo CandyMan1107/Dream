@@ -10,97 +10,62 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-/**************************************
-MAIN
-**************************************/
-Route::get('/', "MainController@index");
 
+Route::get('/', function () {
+    return view('welcome');
+});
+// Route::get('/', "MainController@index");
 
 Route::get('/lib', function () {
     return view('load');
 });
 
-/**************************************
-RELATION - BACKGROUND
-**************************************/
 Route::get('/background/relation', "RelationController@index");
 
 Route::get('/background/relation/rmRel', "RelationController@removeRelation");
 
 Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
-/**************************************
-MAP - BACKGROUND
-**************************************/
-
-// 지도 등록
-Route::post('/background/addMap', "MapController@mapStore");
-
-//지도 삭제
-Route::post('/background/removeMap', "MapController@removeMap");
-
-
+Route::get('/background/map', function(){
+  return view('background/map/map_view');
+});
 
 // 지도 이미지 등록
-Route::post('/background/addMapImg', "MapController@mapImgStore");
+Route::post('/background/addMapImg', "MapController@MapImgStore");
 
-//지도 리스트 호출
-Route::post('/background/getMapList', "MapController@getMapList");
-
-//지도 아이디의 그리드, 텍스트 정보 호출
-Route::post('/background/getGridsContent', "MapController@getGridsContent");
-
-// 지도 이미지 호출
-Route::get('/background/getImgCellList', "MapController@getImgCellList");
 // 지도 이미지 띄우기
 Route::get('/background/map', "MapController@index");
 
-
-
 // 지도 이미지 삭제
-Route::get('/background/removeImg', "MapController@removeImg");
-
-
-Route::get('/login', function () {
-    return view('auth/login');
-});
-
-/**************************************
-CHARACTER & HISTORY - BACKGROUND & CHAPTER
-**************************************/
-Route::resource('/chapter', 'ChaptersController');
+Route::get('/background/removeMapImg', "MapController@removeImg");
 
 Route::resource('/background/things', 'BackgroundItemsController');
 
 Route::post('/background/character/ownership', "BackgroundCharactersController@ownership");
 
-Route::post('/background/character/ownership_icon', "BackgroundCharactersController@ownership_icon");
-
-Route::post('/background/character/ownership_img', "BackgroundCharactersController@ownership_img");
-
 Route::resource('/background/character', 'BackgroundCharactersController');
-
-Route::post('/background/historyTable/getEffect',"BackgroundHistoryTablesController@getEffect");
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
 Route::resource('/background', 'BackgroundController');
 
-/**************************************
-NOVEL VIEW
-**************************************/
+// NOVEL VIEW START
 // Novel Info
-Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
+Route::get('novel/novel_info/{id}', "NovelController@novelInfo");
 
 // Novel Episode
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
 // Today Novel
-Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
+Route::get('/novel/today_novel_by_day', function(){
+    return view('novel/today_novel_by_day');
+});
+// NOVEL VIEW END
 
-/**************************************
-CORDOVA VIEWER
-**************************************/
+Route::get('/background/share', function(){
+    return view('background/share/set_share_view');
+});
+
 // 코도바 뷰어부
 Route::get('/get_novel', "cordoController@getNovelInfo");
 Route::get('/get_novel/today_best', "cordoController@getTodayBestNovelInfo");
@@ -119,7 +84,7 @@ Route::get('/get_novel/get_episodes',"cordoController@getNovelEpisodes");
 Route::get('/get_novel/get_episode_id',"cordoController@getNovelEpisodeById");
 //Route::get('/get_novel/get_notices',"cordoController@getNovelNotices");
 // users 정보 get & 로그인
-Route::get('/get_novel/userInfo', "cordoController@getUsersInfo");
+Route::get('/get_novel/login', "cordoController@login");
 
 //아이디 중복체크
 Route::get('/get_novel/idCheck', "cordoController@idCheck");
@@ -133,6 +98,21 @@ Route::get('/get_novel/writeJoin', "cordoController@insertUserInfo");
 Route::get('/get_novel/CharactersList', 'cordoController@getCharacters');
 //캐릭터 정보 가져오기
 Route::get('/get_novel/CharacterInfo', 'cordoController@getCharactersInfo');
+// 작성한 소설의 유저정보 호출
+Route::get('/get_novel/UserIdOfNovel', 'cordoController@getUserIdOfNovel');
+// 유저 정보 가져오기
+Route::get('/get_novel/getUserInfo', 'cordoController@getUserInfo');
+
+//소설의 배경설정 중 사건을 가져오기
+Route::get('/get_settings/historyGraphInfo', 'cordoController@getBackgroundSettingsHistoryGraph');
+//소설의 배경설정 중 사건에서 인물을 가져오기
+Route::get('/get_settings/historyCharactersInfo', 'cordoController@getBackgroundSettingsHistoryCharacters');
+//소설의 배경설정 중 사건에서 아이템을 가져오기
+Route::get('/get_settings/historyItemsInfo', 'cordoController@getBackgroundSettingsHistoryItems');
+//소설의 배경설정 중 사건에서 지도를 가져오기
+Route::get('/get_settings/historyMapsInfo', 'cordoController@getBackgroundSettingsHistoryMaps');
+//소설의 배경설정 중 인물들을 가져오기
+Route::get('/get_settings/charactersInfo', 'cordoController@getBackgroundSettingsCharacter');
 
 // 소설 작성부
 // 소설 정보 작성
@@ -140,7 +120,7 @@ Route::get('/write_novel/set', "writeNovelController@setNovelView");
 // 소설 정보 등록
 Route::get('/write_novel/create_novel', "writeNovelController@createNovel");
 // 소설 회차 등록
-Route::post('/write_novel/create_episode', "writeNovelController@createEpisode");
+Route::get('/write_novel/create_episode', "writeNovelController@createEpisode");
 
 // 소설 정보 getter
 Route::get('/write_novel/get_novel_info', "writeNovelController@getNovelInfo");
@@ -157,35 +137,15 @@ Route::get('/write_novel/write_episode/{novelId}', "writeNovelController@writeNo
 // 소설 배경 정보 호출
 Route::get('/write_novel/call_background_info', "writeNovelController@callBackgroundInfo");
 
-// 관계정보 호출
-Route::get('/write_novel/call_relation_info', "writeNovelController@callRelationInfo");
-
-// 소유정보 호출
-Route::get('/write_novel/call_ownership_info', "writeNovelController@callOwnershipInfo");
-
 // 태그 정보 호출
 Route::get('/write_novel/get_tags', "writeNovelController@getTags");
-Route::get('/write_novel/get_tag_by_id', "writeNovelController@getTagById");
-
-// 연대표 정보 호출
-Route::get('/write_novel/get_timetables_info', "writeNovelController@getTimetablesInfo");
-
 
 // 이미지 등록부
-// 소설 커버 이미지 등록
+// 커버 이미지 등록
 Route::post('/write_novel/addCover', "UpImgController@uploadImg");
 
-// 소설 커버 이미지 삭제
+// 커버 이미지 삭제
 Route::get('/write_novel/removeCover', "UpImgController@removeImg");
-
-// 회차 커버 이미지 등록
-Route::post('/write_novel/addEpisodeCover', "UpImgController@uploadEpisodeImg");
-
-// 회차 커버 이미지 삭제
-Route::get('/write_novel/removeEpisodeCover', "UpImgController@removeEpisodeImg");
-
-
-Route::post('/background/map/tag',"TagsAddController@map_tag_insert");
 
 Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
