@@ -15,7 +15,6 @@ MAIN
 **************************************/
 Route::get('/', "MainController@index");
 
-
 Route::get('/lib', function () {
     return view('load');
 });
