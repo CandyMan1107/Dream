@@ -71,7 +71,57 @@
 				height:95%;
 			}
 
+			/* 맵 리스트 css */
+			.map-list{
+				height:300px;
+				overflow-y: scroll;
+			}
 
+			.map-list-content {
+				padding:0;
+				width:100%;
+				margin-bottom: 4px;
+				border:3px solid #707070;
+				border-radius: 3px;
+			}
+
+			.map-list-img-div{
+				border-bottom: 3px solid #707070;
+				height:120px;
+				background-color: #878787;
+				padding: 0;
+			}
+			.map-list-img-div img{
+
+				width: 100%;
+				height:100%;
+			}
+			.modal-body{
+				background-color: #CFCFCF;
+			}
+			.map-list-content-div{
+				border-bottom: 3px solid #707070;
+				padding: 4px;
+				background-color: #FAFAFA;
+				padding-left: 10px;
+				padding-top: 20px;
+				height:120px;
+				font-size:17px;
+			}
+
+			.map-tag-div{
+				background-color:#FAFAFA;
+				height:100px;
+			}
+
+			#titleWarning{
+				top:210px;
+			}
+
+			#titleWarningHeader{
+				background-color: #FFE6DE;
+				text-align: center;
+			}
 		</style>
 		<div class="function-div form-group">
 			<form class="form-inline">
@@ -90,8 +140,53 @@
 			  <button type="button" class="btn btn-default" id="createRelationBtn">관계 형성</button>
 				<button type="button" class="btn btn-default" id="removeRelationBtn">관계 삭제</button>
 				<button type="button" class="btn btn-default" id="removeChaNodeBtn">캐릭터 삭제</button>
+				<button type="button"  data-toggle="modal" data-target="#squarespaceModal" class="btn btn-default" id="relationListBtn">관계 리스트</button>
 			</form>
 		</div>
+		<!-- line modal -->
+		<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						<h3 class="modal-title" id="lineModalLabel">지도 리스트</h3>
+					</div>
+					<div class="modal-body">
+						<div class="map-list">
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<div class="btn-group btn-group-justified" role="group" aria-label="group button">
+							<div class="btn-group" role="group">
+								<input type="text" class="form-control" id="saveMapTitle" placeholder="제목입력">
+							</div>
+							<div class="btn-group" role="group">
+								<button type="button" id="saveMapBtn" class="btn btn-default" role="button">Save</button>
+							</div>
+							<div class="btn-group" role="group">
+								<button type="button" id="deleteMapBtn" class="btn btn-default" role="button">Delete</button>
+							</div>
+							<div class="btn-group" role="group">
+								<button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- warning Modal -->
+		<div class="modal fade" id="titleWarning" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div id="titleWarningHeader" class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+						<h3 class="modal-title">제목을 입력하세요</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="col-xs-7 col-sm-3 col-md-3 height-max-set character-list" style= "background-color : #e8d6b3" >
 			<?php
 				$imgRoot 		= $tasks["imgRoot"];
@@ -464,8 +559,6 @@
 				restart();
 			});
 
-
-
 			// 연결선 커브 및 크기변경 + 노드 위치이동
 			var tf = true;
 
@@ -695,6 +788,269 @@
             }
         });
 			}
+
+
+
+			// 맵 정보 저장 + 맵 리스트에 요소 형성
+			$("#saveMapBtn").on("click",function(){
+				var title = $("#saveMapTitle").val();
+				if(title.length <= 0){
+					$("#titleWarning").modal("show");
+				} else {
+
+					// 이미지 blob 생성
+					var doctype = '<?xml version="1.0" standalone="no"?>'
+						+ '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
+					var source = (new XMLSerializer()).serializeToString(d3.select('.mind-area').node());
+					var blob = new Blob([ doctype + source], { type: 'image/svg+xml;charset=utf-8' });
+					var url = window.URL.createObjectURL(blob);
+
+					// Put the svg into an image tag so that the Canvas element can read it in.
+					var img = d3.select('body').append('img')
+					 .attr('width', 0)
+					 .attr('height', 0)
+					 .node();
+
+					img.onload = function(){
+						// Now that the image has loaded, put the image into a canvas element.
+						var canvas = d3.select('body').append('canvas').classed("cavs",true).node();
+						canvas.width = width+50;
+						canvas.height = height+50;
+						var ctx = canvas.getContext('2d');
+						ctx.drawImage(img, 0, 0);
+						var canvasUrl = canvas.toDataURL("image/png");
+						$(".cavs").hide();
+						// 맵 등록 요청
+
+						var gridInfos = getGridsInfo();
+						var textInfos = getTextsInfo();
+						$.ajaxSetup({
+							headers: {
+								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							}
+						});
+						$.ajax({
+							url: "addMap",
+							type: "post",
+							async: false,
+							data: {
+								"canvasUrl" : canvasUrl,
+								"title"			: title,
+								"gridInfos" : JSON.stringify(gridInfos),
+								"textInfos" : JSON.stringify(textInfos)
+							},
+							success: function(data){
+								var mapId = data.split("/")[0];
+								var createdAt = data.split("/")[1]
+								var createEle = createMapEle(mapId, title, canvasUrl, createdAt);
+								$(".map-list").append(createEle);
+								setJscolor();
+								setMapListEvent()
+							}
+						});
+					}
+					img.src = url;
+				}
+			});
+
+			// 맵 정보 삭제 + 맵 리스트에 요소 삭제
+			$("#deleteMapBtn").on("click",function(){
+				var mapId = $(".selected-map-content").attr("data-map-id");
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+				$.ajax({
+					url: "removeMap",
+					type: "post",
+					async: false,
+					data: {
+						"mapId" : mapId
+					},
+					success: function(data){
+						//alert(data);
+						$(".selected-map-content").remove();
+					}
+				});
+			});
+
+			// 맵 리스트 호출
+			getMapList();
+			function getMapList(){
+				$.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					}
+				});
+				$.ajax({
+					url: "getMapList",
+					type: "post",
+					async: false,
+					data: {},
+					success: function(data){
+						data.forEach(function(d){
+							var coverSrc = "{{URL::asset('/')}}" + "img/background/mapImg/mapCover/" + d.cover_src;
+							var createEle = createMapEle(d.id, d.title, coverSrc, d.created_at);
+							$(".map-list").append(createEle);
+						});
+						setJscolor();
+						setMapListEvent();
+					}
+				});
+			}
+
+			// 그리드 정보 반환
+			function getGridsInfo(){
+				var grids = d3.selectAll("path")[0];
+				var gridObjs = new Array();
+				grids.forEach(function(g){
+					var gridObj = {
+						"grid_id" 	: g.id,
+						"fill_info" : $("#"+g.id).attr("data-code") ? $("#"+g.id).attr("data-code") : "none"
+					};
+					if(gridObj.fill_info != "none")
+						gridObjs.push(gridObj);
+				})
+				return gridObjs;
+			}
+
+			// 맵 리스트 선택 시, 정보 호출 후 맵에 적용
+			function setMapListEvent(){
+				$(".map-tag-div").attr("data-toggle","hide");
+				$(".map-tag-div").hide();
+
+
+				$(".map-list-content").off().on("dblclick",function(){
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
+					$.ajax({
+						url: "getGridsContent",
+						type: "post",
+						data: {
+							"id" : $(this).attr("data-map-id")
+						},
+						success: function(data){
+							// console.log(data.gridInfo);
+							// console.log(data.textInfo);
+
+							removeAllText();
+							removeAllGrid();
+
+							var gridInfo = data.gridInfo;
+							var textInfo = data.textInfo;
+
+							gridInfo.forEach(function(gi){
+								grid = d3.select("#"+gi.grid_id);
+								grid.classed("filled", true);
+								grid.style("fill", gi.fill_info);
+								grid.attr("data-code",gi.fill_info);
+							});
+
+							textInfo.forEach(function(ti){
+								var gridId = ti.text_id.replace("text","#grid");
+								var textGrid = d3.select(gridId).data()[0];
+								//console.log(ti["letter-spacing"]);
+								svg.append("text")
+									 .attr("x",textGrid.x)
+									 .attr("y",textGrid.y)
+									 .style("font-family",ti.font_family)
+									 .style("font-size", ti.font_size)
+									 .style("letter-spacing", ti["letter-spacing"])
+									 .style("fill", ti.fill_color)
+									 .style("font-weight","bold")
+									 .attr("id", ti.text_id)
+									 .attr("data-code", ti.fill_color)
+									 .attr("data-letter-spacing",ti["letter-spacing"])
+									 .classed("map-text","true")
+									 .text(ti.content);
+								$(".map-text").off().on("click",function(){
+									removeSelection();
+									$(this).addClass("selected-cell");
+								});
+							})
+						}
+					});
+				});
+
+				$(".map-list-content").on("click",function(){
+					$(".selected-map-content").removeClass("selected-map-content");
+					$(this).addClass("selected-map-content");
+				});
+
+				$(".tag-toggle-btn").off().on("click",function(){
+					var tagDivId = "tagDiv" + $(this).attr("data-map-id");
+					var tagDiv = $("#" + tagDivId);
+					if(tagDiv.attr("data-toggle") == "hide"){
+						tagDiv.attr("data-toggle", "show");
+						tagDiv.show();
+					} else {
+						tagDiv.attr("data-toggle","hide");
+						tagDiv.hide();
+					}
+
+				});
+
+			}
+
+
+
+			// Title, ImgUrl, Date로 맵 리스트 리턴
+			 function createMapEle(mapId, title, canvasUrl, data){
+				 var createEle = "";
+				 createEle += "<div class='col-md-12 map-list-content' data-map-id='" + mapId +"'>"
+				 createEle += "	<div class='col-md-3 map-list-img-div'>"
+				 createEle += "		<img src='" + canvasUrl + "'>"
+				 createEle += "	</div>"
+				 createEle += "	<div class='col-md-9 map-list-content-div'>"
+				 createEle += "		제목 : " 	 + title
+				 createEle += "		<button data-map-id='"+mapId+"' class='tag-toggle-btn form-control'>태그 입력</button><br>"
+				 createEle += "		생성일 : " + data +"<>"
+				 createEle += "		수정일 : 0000-00-00"
+				 createEle += "	</div>"
+				 // 정재훈 DIV
+				 createEle += "	<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div' style='height:20vh'>"
+				 {{-- createEle += "		<form id='add_tag' name='add_tag' action='map/tag' method='POST'>" --}}
+				 createEle += "			<input type='hidden' name='_token' value='{{ csrf_token() }}'>"
+				 createEle += "			<input type='hidden' name='page' value='maps}'>"
+					 createEle += "			<input type='hidden' id='object_id' name='object_id' value=''>"
+				 createEle += "			<div class='row'>"
+					 createEle += " 			<div class='panel panel-warning col-md-6' style='height:20vh'>"
+						 createEle += "					<div class=panel-heading'>"
+							 createEle += "					<h3 class='panel-titl'>태그 이름</h3>"
+						 createEle += "					</div>"
+						 createEle += "					<div class='panel-body'>"
+							 createEle += "						<input type='text' id='tag_name"+mapId+"' name='tag_name' class='form-control tag_name' placeholder='Text input' value=''>"
+						 createEle += "					</div>"
+					 createEle += "				</div>"
+				 createEle += "				<div class='panel panel-warning col-md-6' style='height:20vh'>"
+						 createEle += "					<div class='panel-heading'>"
+							 createEle += "						<h3 class='panel-title'>태그 색상</h3>"
+						 createEle += "					</div>"
+				 createEle += "					<div id='colorPalette' class='palette'>"
+				 createEle += "						<input class='tag_color' id='tag_color"+mapId+"' list='colors' name='tag_color' value=''>"
+				 createEle += "						<datalist id='colors'>"
+				 createEle += "							<option value='Red'>"
+				 createEle += "							<option value='Blue'>"
+				 createEle += "							<option value='Green'>"
+				 createEle += "							<option value='Orange'>"
+				 createEle += "							<option value='Purple'>"
+				 createEle += "						</datalist>"
+				 createEle += "					</div>"
+				 createEle += " 			<p></p>"
+				 createEle += "				<button type='button' name='tag_submit' id='tag_submit' class='btn btn-default tag_submit' value="+mapId+">submit</button>"
+				 createEle += "				</div>"
+				 createEle += "			</div>"
+				 {{-- createEle += "		</form>" --}}
+				 createEle += " </div>"
+				 // 정재훈 DIV End
+				 createEle += "</div>"
+
+				 return createEle;
+			 }
 
 	});
 

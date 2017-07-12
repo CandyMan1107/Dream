@@ -8,6 +8,7 @@
         @endforeach
 
     </div>
+    
     <div class="col-md-9 table-responsive" name="character-info">
 		<table class="table">
             <tr>

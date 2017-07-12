@@ -4,10 +4,21 @@
 
 @section('content')
     @include('writer_blog.blogSideMenu')
-
+            {{-- BLOG MAIN SPACE START --}}
             <div id="blog-main" class="col-md-8">
+                
+                
+                
+                
+                
                 MAIN
+
+
+
+
+
             </div>
+            {{-- BLOG MAIN SPACE END --}}
 
 
 

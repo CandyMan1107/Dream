@@ -723,6 +723,18 @@ BLOG - BLOG TOP & SIDE MENU
     padding-bottom: 15px;
 }
 
+#blog-side-menu .blog_counter .blog_visit_info div {
+    display: inline-block;
+    position: relative;
+    padding: 12px;
+}
+
+
+
+
+/**************************************
+BLOG - BLOG MAIN
+**************************************/
 #blog-main {
     
 }
