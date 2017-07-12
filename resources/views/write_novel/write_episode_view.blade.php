@@ -3,6 +3,7 @@
 
 
 @section('content')
+  <script src="{{URL::asset('js/jquery.textcomplete.js')}}"></script>
 
   <style>
     .set_row {
@@ -678,7 +679,7 @@
     // 서버로부터 characters, items, timetables, maps 대한 데이터를 불러옴
     var sourceData = Array();
     function setSourceData(data){ sourceData = data; return sourceData;};
-    function getTags(tagCase){
+    function getTags(tagCase=null){
       $.ajax({
           type: "get",
           async: false,
@@ -922,10 +923,71 @@
       }
     });
 
-    // 에디트 박스 엔터
+    $("#editdiv").on("contextmenu",function(event){
+      event.preventDefault();
+      var curSel = window.getSelection();
+      var tagId    = $(".tag-list-select option:selected").attr("data-id");
+      // span 태그 충돌 방지
+      if(!$(".popTag-menu").is(":visible")){
+
+        removeAddTagMenu();
+        if(curSel.toString().length > 0 && curSel.baseNode.parentNode.id=="editdiv" && tagId != null)
+        popAddTagMenu(event, curSel);
+      }
+    });
+
+    var allTagInfos = getTags();
+    $('#editdiv').textcomplete([
+        { // html
+            mentions: getFromTagInfo(allTagInfos,"value"),
+            infos:['info_a','info_b','info_a_c'],
+            match: /@([^\u0000-\u007f]{2,}|\w{2,}|[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+)$/,
+            search: function (term, callback) {
+                callback($.map(this.mentions, function (mention, index) {
+                    var mentionString = mention + "<span class='pull-right' data-index='^nst" + index + "^ned' style='background-color:#" + allTagInfos[index].color + "'>TC</span>";
+                    return (mention.indexOf(term) === 0 ? mentionString : null)
+                }));
+            },
+            index: 1,
+            replace: function (mention) {
+                // 적용 정보 data-case, data-id, bg-color
+                var start = mention.indexOf("^nst") + 4;
+                var end = mention.indexOf("^ned");
+                var mentionIndex = mention.substring(start, end);
+
+                var spanIndex = mention.indexOf("<span");
+                var mentionString = mention.substring(0,spanIndex);
+
+                var spanAttr = " ";
+                spanAttr += " class='tag-span'";
+                spanAttr += " data-case='" + allTagInfos[mentionIndex].kind + "'";
+                spanAttr += " data-id='" + allTagInfos[mentionIndex].object_id + "'";
+                spanAttr += " style=' font-weight:bold; background-color:#" + allTagInfos[mentionIndex].color + ";'";
+
+                return "<span" + spanAttr + ">" + mentionString + '</span>\u200b';
+            },
+            after: function(){
+                setTagSpanEvent();
+            }
+        }
+    ]);
+
+    // 태그 정보로 부터 특정 정보만 추출 value, (color, kind, object_id) 노필요
+    function getFromTagInfo(tagInfo, grepCase){
+      var grepArr = new Array();
+
+      if(grepCase == "value"){
+        for(var i =0; i < tagInfo.length; i++){
+          grepArr.push(tagInfo[i].value)
+        }
+      }
+      return grepArr;
+    }
+
+    //에디트 박스 엔터
     $('div[contenteditable]').keydown(function(e) {
 
-      if (e.keyCode === 13) {
+      if (e.keyCode === 13 && $(".textcomplete-dropdown").css('display') == 'none') {
         document.execCommand('insertHTML', false, '<br><br>');
 
         return false;
@@ -964,23 +1026,28 @@
                 sel.removeAllRanges();
                 sel.addRange(range);
             }
-        $(".tag-span").off().on("mouseover",function(event){
-          var bgCase = $(this).attr("data-case");
-          var bgId =$(this).attr("data-id")
-          if(!$(".popTag-menu").is(":visible")){
-            popBackgroundInfo(event,bgCase,bgId);
-          }
-        });
+        setTagSpanEvent();
+    }
 
-        $(".tag-span").on("mouseout",function(event){
-          removeChaInfo();
-        });
+    // 태그 이벤트 적용
+    function setTagSpanEvent(){
+      $(".tag-span").off().on("mouseover",function(event){
+        var bgCase = $(this).attr("data-case");
+        var bgId =$(this).attr("data-id")
+        if(!$(".popTag-menu").is(":visible")){
+          popBackgroundInfo(event,bgCase,bgId);
+        }
+      });
 
-        $(".tag-span").on("contextmenu",function(event){
-          event.preventDefault();
-          removeAllContextMenu();
-          popTagMenu(event,$(this));
-        });
+      $(".tag-span").on("mouseout",function(event){
+        removeChaInfo();
+      });
+
+      $(".tag-span").on("contextmenu",function(event){
+        event.preventDefault();
+        removeAllContextMenu();
+        popTagMenu(event,$(this));
+      });
     }
 
     // 태그 마우스 오버 시 정보 출력
@@ -1651,6 +1718,8 @@
         });
         return bgData;
       }
+
+
     }
   })(jQuery);
 

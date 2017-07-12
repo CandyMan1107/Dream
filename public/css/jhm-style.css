@@ -15,14 +15,34 @@ i {
 AUTOPLAY BANNER
 **************************************/
 
-#banner .autoplay-top a {
+div[name=banner] {
+    /*background: url('../img/banner-bg-1.jpg') no-repeat;*/
+    background: -webkit-linear-gradient(top left, #E4A972, #9941D8) fixed;
+    background: -moz-linear-gradient(top left, #E4A972, #9941D8) fixed;
+    background: -o-linear-gradient(top left, #E4A972, #9941D8) fixed;
+    background: linear-gradient(to bottom right, #E4A972, #9941D8) fixed;
+    background-size: cover;
+    min-height: 500px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+}
+
+div[name=banner] a {
     text-decoration: none;
 }
 
-#banner .autoplay-top,
+div[name=banner] .autoplay-top,
 .autoplay-top * {
     outline: none !important;
 }
+
+div[name=banner-img] {
+    height: 500px;
+    overflow: hidden;
+    /*background-repeat: no-repeat;*/
+}
+
+
 
 #event .autoplay,
 .autoplay * {
@@ -332,6 +352,7 @@ READ-NOVEL-VIEW
 /**************************************
 READ-NOVEL-VIEW : BACKGROUND
 **************************************/
+
 .background-fluid {
     height: auto;
     overflow: auto;
@@ -342,7 +363,7 @@ img[name=img_icon] {
     cursor: pointer;
 }
 
-div[name=map-info] > img {
+div[name=map-info]>img {
     width: 750px !important;
 }
 
@@ -416,6 +437,7 @@ text {
     width: 800px !important;
     height: auto !important;
 }
+
 
 /**************************************
 READ-NOVEL-VIEW : WRITER WORD
@@ -647,4 +669,72 @@ NOVEL COMMENT
 
 .commentReply>input {
     height: 60px !important;
+}
+
+/**************************************
+BLOG - BLOG TOP & SIDE MENU
+**************************************/
+#blog-top-menu {
+    background: burlywood;
+    height: 65px;
+    padding-top: 20px;
+}
+
+#blog-side-menu {
+    background: beige;
+    width: 200px;
+}
+
+#blog-side-menu .user_icon > i {
+    font-size: 170px;
+}
+
+#blog-side-menu .user_profile {
+    border: 1px solid burlywood;
+}
+
+#blog-side-menu a {
+    text-decoration: none;
+    color: #002E40;
+}
+
+#blog-side-menu .user_setting div {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+#blog-side-menu .user_novel_nav, .blog_menu_nav {
+    border: 1px solid burlywood;
+}
+
+#blog-side-menu .blog_info_bar {
+    border: 1px solid burlywood;
+}
+
+#blog-side-menu .blog_info_bar .blog_follow_info div, .writer_novel_info div {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+#blog-side-menu .blog_info_bar div[name=blogInfoNumText] {
+    /*border: 1px solid red;*/
+    padding-bottom: 15px;
+}
+
+#blog-side-menu .blog_counter .blog_visit_info div {
+    display: inline-block;
+    position: relative;
+    padding: 12px;
+}
+
+
+
+
+/**************************************
+BLOG - BLOG MAIN
+**************************************/
+#blog-main {
+    
 }

@@ -60,8 +60,10 @@ Route::get('/background/removeImg', "MapController@removeImg");
 
 
 /**************************************
-CHARACTER & HISTORY - BACKGROUND
+CHARACTER & HISTORY - BACKGROUND & CHAPTER
 **************************************/
+Route::resource('/chapter', 'ChaptersController');
+
 Route::resource('/background/things', 'BackgroundItemsController');
 
 Route::post('/background/character/ownership', "BackgroundCharactersController@ownership");
@@ -188,3 +190,8 @@ Auth::routes();
 
 //웹 가입후 이동 페이지
 Route::get('/home', 'HomeController@index')->name('home');
+
+/**************************************
+BLOG
+**************************************/
+Route::resource('/blog', "BlogController");

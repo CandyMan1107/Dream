@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use App\Novel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,27 @@ class BackgroundController extends Controller
 
      public function index()
      {
-         // $background = \App\
-         // return __METHOD__ . '은(는) 컬렉션을 조회합니다.';
-         return redirect('/background/historyTable');
+        //  유저 세션에 따른 유저 소설 정보만 뽑아오게 하는 부분 완성
+        $novel = new Novel();
+        $novel_data = $novel->mainData();
+        $data = array(array());
+        $i = 0;
+
+        foreach($novel_data as $datas){
+            $data[$i]['id'] = $datas->id;
+            $data[$i]['title'] = $datas->title;
+            $data[$i]['intro'] = $datas->intro;
+            $data[$i]['summary_intro'] = $datas->summary_intro;
+            $data[$i]['cover_img_src'] = $datas->cover_img_src;
+            $data[$i]['genre'] = $datas->genre;
+            $data[$i]['created_at'] = $datas->created_at;   
+            $data[$i]['updated_at'] = $datas->updated_at;  
+
+            $i++;
+        }
+
+        // var_dump($data);
+        return view('background.main.Background_main')->with("data",$data);
      }
 
     public function index_map()

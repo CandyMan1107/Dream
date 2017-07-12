@@ -116,7 +116,13 @@ class writeNovelController extends Controller
     // 해당 소설의 아이디에 대한 회차 정보 호출
     public function getTags(Request $request){
        $tagCase = $request->input('tagCase');
-       $tagInfo = DB::table("tags")->select("kind","object_id","color","tag_name as value")->where("kind", "=",$tagCase)->get();
+       if($tagCase != null){
+         $tagInfo = DB::table("tags")->select("kind","object_id","color","tag_name as value")->where("kind", "=",$tagCase)->get();
+       } else {
+         $tagInfo = DB::table("tags")->select("kind","object_id","color","tag_name as value")->get();
+       }
+
+
        return $tagInfo;
     }
 
