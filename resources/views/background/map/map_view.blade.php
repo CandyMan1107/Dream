@@ -498,8 +498,8 @@ rant @extends('layouts.master')
 		height = 450;
 
 		//The number of columns and rows of the heatmap
-		var MapColumns = 30,
-		    MapRows = 20;
+		var MapColumns = 45,
+		    MapRows = 30;
 
 		//The maximum radius the hexagons can have to still fit the screen
 		var hexRadius = d3.min([width/((MapColumns + 0.5) * Math.sqrt(3)),

@@ -954,7 +954,6 @@
                 var start = mention.indexOf("^nst") + 4;
                 var end = mention.indexOf("^ned");
                 var mentionIndex = mention.substring(start, end);
-                alert(this.infos[mentionIndex]);
 
                 var spanIndex = mention.indexOf("<span");
                 var mentionString = mention.substring(0,spanIndex);
@@ -978,7 +977,6 @@
       var grepArr = new Array();
 
       if(grepCase == "value"){
-        console.log(tagInfo);
         for(var i =0; i < tagInfo.length; i++){
           grepArr.push(tagInfo[i].value)
         }
