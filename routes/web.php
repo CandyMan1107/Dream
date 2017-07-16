@@ -29,6 +29,9 @@ Route::get('/background/relation/rmRel', "RelationController@removeRelation");
 
 Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
+// 관계 저장
+Route::post('/background/addRelation', "RelationController@relationStore");
+
 /**************************************
 MAP - BACKGROUND
 **************************************/
