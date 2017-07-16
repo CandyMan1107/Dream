@@ -26,7 +26,6 @@
 							<li><a href="#best-novel">베스트 웹소설</a></li>
 							<li><a href="#event">이벤트</a></li>
 							<li><a href="#about">고객센터</a></li>
-							
 						@if (Auth::guest())
                             <li><a href="{{ route('login') }}">로그인</a></li>
 							<li><a href="/register">회원가입</a></li>
