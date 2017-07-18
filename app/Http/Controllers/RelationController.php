@@ -48,4 +48,64 @@ class RelationController extends Controller
 
     echo $test1.$test2.$test3.$test4;
   }
+
+  // 관계 등록
+  public function relationStore(Request $request){
+    // 맵 , 그리드, 텍스트 정보
+    $title = $request->input('title');
+
+    // 이미지 커버 저장
+    $canvasUrl = $request->input('canvasUrl');
+
+
+    $destinationPath = 'img/background/relationImg/';
+    if(!is_dir($destinationPath)){
+      mkdir($destinationPath);
+    }
+    $fileName = date("Y").date("m").date("d").date("s")."_".$title.".png";
+    $outputFile = $destinationPath.$fileName;
+    $ifp = fopen( $outputFile, 'wb' );
+
+    $data = explode( ',', $canvasUrl);
+    fwrite( $ifp, base64_decode( $data[ 1 ] ) );
+    fclose( $ifp );
+
+    // 맵 데이터 추가
+    $mytime = date('Y-m-d H:i:s');
+    DB::table("relation_lists")->insert([
+        "cover_src"  => $fileName,
+        "title"      => $title,
+        "created_at" => $mytime
+    ]);
+
+    // 등록한 맵 아이디 호출
+    $relListInfo = DB::table("relation_lists")->select("id","created_at","updated_at")->orderBy('id', 'DESC')->first();
+    $listId = $relListInfo->id;
+    $createdAt = $relListInfo->created_at;
+    $updatedAt = $relListInfo->updated_at;
+
+    // // 그리드 테이블 등록
+    // foreach($gridInfos as $gridInfo){
+    //   DB::table("grids")->insert([
+    //       "belong_to_map"  => $mapsId,
+    //       "grid_id"        => $gridInfo->grid_id,
+    //       "fill_info"      => $gridInfo->fill_info
+    //   ]);
+    // }
+
+    // // 텍스트 테이블 등록
+    // foreach($textInfos as $textInfo){
+    //   DB::table("map_texts")->insert([
+    //       "belong_to_map"  => $mapsId,
+    //       "text_id"        => $textInfo->text_id,
+    //       "content"        => $textInfo->content,
+    //       "font_family"    => $textInfo->font_family,
+    //       "font_size"      => $textInfo->font_size,
+    //       "letter-spacing" => $textInfo->letter_spacing,
+    //       "fill_color"     => $textInfo->fill_color
+    //   ]);
+    // }
+
+    return $listId."/".$createdAt;
+  }
 }

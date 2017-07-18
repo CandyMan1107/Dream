@@ -28,6 +28,9 @@ Route::get('/background/relation/rmRel', "RelationController@removeRelation");
 
 Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
+// 관계 저장
+Route::post('/background/addRelation', "RelationController@relationStore");
+
 /**************************************
 MAP - BACKGROUND
 **************************************/
@@ -61,6 +64,8 @@ Route::get('/background/removeImg', "MapController@removeImg");
 /**************************************
 CHARACTER & HISTORY - BACKGROUND & CHAPTER
 **************************************/
+Route::post('/chapter/new/chapter','ChaptersController@chapter_add');
+
 Route::resource('/chapter', 'ChaptersController');
 
 Route::resource('/background/things', 'BackgroundItemsController');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRelationListsTable extends Migration
+class ChangeTableNameChpatersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,7 @@ class CreateRelationListsTable extends Migration
      */
     public function up()
     {
-      Schema::create('relation_lists', function (Blueprint $table) {
-          $table->increments('id');
-          $table->string("title");
-          $table->string("cover_src");
-          $table->timestamps();
-      });
+        Schema::rename('novel_chpaters','novel_chapters');
     }
 
     /**
@@ -28,6 +23,6 @@ class CreateRelationListsTable extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('relation_lists');
+        //
     }
 }

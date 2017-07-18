@@ -122,7 +122,41 @@
 				background-color: #FFE6DE;
 				text-align: center;
 			}
+
+			/* 팔레트 css */
+			.paletteHeader {
+				margin: 0px;
+				margin-bottom: 5px;
+				background-color:#8C8C8C;
+				text-align: center;
+				font-size:23px;
+				font-weight: bold;
+			}
+
+			.palette{
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+			#chosen-value{
+				margin-bottom: 5px;
+			}
+			.color-palette {
+				margin-bottom: 5px;
+			}
+
+			.portfolio {
+				border:2px solid #9E9E9E;
+				margin-bottom: 3px;
+			}
+			.material-icons{
+				vertical-align: middle;
+			}
+			.tag-toggle-btn{
+				display: inline-block;
+				width:100px;
+			}
 		</style>
+		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<div class="function-div form-group">
 			<form class="form-inline">
 				<div class="form-group">
@@ -235,7 +269,7 @@
 	{{-- 태그 div.row 닫는 태그 --}}
 	</div>
 
-
+	<script src ="{{url(asset('js/jscolor.js?ver=1'))}}"></script>
 	<script>
 	$(function() {
 			var nodes = {};
@@ -822,32 +856,35 @@
 						$(".cavs").hide();
 						// 맵 등록 요청
 
-						var gridInfos = getGridsInfo();
-						var textInfos = getTextsInfo();
+						// var gridInfos = getGridsInfo();
+						// var textInfos = getTextsInfo();
 						$.ajaxSetup({
 							headers: {
 								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 							}
 						});
+
 						$.ajax({
-							url: "addMap",
+							url: "addRelation",
 							type: "post",
 							async: false,
 							data: {
 								"canvasUrl" : canvasUrl,
-								"title"			: title,
-								"gridInfos" : JSON.stringify(gridInfos),
-								"textInfos" : JSON.stringify(textInfos)
+								"title"			: title
+								// "gridInfos" : JSON.stringify(gridInfos),
+								// "textInfos" : JSON.stringify(textInfos)
 							},
 							success: function(data){
 								var mapId = data.split("/")[0];
 								var createdAt = data.split("/")[1]
 								var createEle = createMapEle(mapId, title, canvasUrl, createdAt);
 								$(".map-list").append(createEle);
-								setJscolor();
+								//setJscolor();
 								setMapListEvent()
+								console.log(data);
 							}
 						});
+
 					}
 					img.src = url;
 				}
@@ -876,7 +913,7 @@
 			});
 
 			// 맵 리스트 호출
-			getMapList();
+			//getMapList();
 			function getMapList(){
 				$.ajaxSetup({
 					headers: {
@@ -894,7 +931,7 @@
 							var createEle = createMapEle(d.id, d.title, coverSrc, d.created_at);
 							$(".map-list").append(createEle);
 						});
-						setJscolor();
+						//setJscolor();
 						setMapListEvent();
 					}
 				});
