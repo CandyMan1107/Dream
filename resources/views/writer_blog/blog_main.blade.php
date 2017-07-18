@@ -6,7 +6,6 @@
     @include('writer_blog.blogSideMenu')
     @php
         use App\Http\Controllers\BlogController;
-        
     @endphp
     <div id="default-padding-mid"></div>
             {{-- BLOG MAIN SPACE START --}}
@@ -15,7 +14,7 @@
                 <div class="row">
                     {{-- BLOG NOTICE START --}}
                     <div class="col-md-12 blog_notice_list">
-                        @if ($data == 0)
+                        @if (empty($data[0]))
                             <h3>블로그가 텅 비었네요!</h3>
                         @else
                             @php
@@ -27,7 +26,7 @@
                     <div id="default-padding"></div>
                     {{-- BLOG BOARD START (NOTICE) --}}
                     <div class="col-md-12 blog_notice">
-                        @if ($data == 0)
+                        @if (empty($data[0]))
                             <h3>마치 통장 같아! 텅장!</h3>
                         @else
                             @php

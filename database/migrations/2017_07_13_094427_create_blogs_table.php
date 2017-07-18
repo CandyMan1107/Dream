@@ -21,7 +21,8 @@ class CreateBlogsTable extends Migration
             $table->text('blog_introduce'); // BLOG INTRODUCE TEXT
             $table->integer('today_hit');   // BLOG TODAY HIT
             $table->integer('total_hit');   // BLOG TOTAL HIT
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

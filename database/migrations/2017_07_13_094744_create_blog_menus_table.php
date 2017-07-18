@@ -18,7 +18,8 @@ class CreateBlogMenusTable extends Migration
             $table->increments('id');   // BLOG MENU ID
             $table->integer('blog_id'); // BLOG ID : blogs table 'id'
             $table->string('menu_title');   // BLOG MENU TITLE
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 
