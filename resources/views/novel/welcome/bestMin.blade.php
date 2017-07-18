@@ -18,7 +18,7 @@
 							<div class="filter wrk-title active" data-filter="all">전체</div>
 							<div class="filter wrk-title" data-filter=".romance">로맨스</div>
 							<div class="filter wrk-title" data-filter=".fantasy">판타지</div>
-							<div class="filter wrk-title lst-cld" data-filter="horror">호러</div>
+							<div class="filter wrk-title lst-cld" data-filter=".horror">호러</div>
 					</div>
 					<div id="Container">
 						@if (empty($data[0]['title']))

@@ -88,7 +88,7 @@ Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
 // Novel Episode
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
-// Today Novel
+// Short-Cut Today Novel
 Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
 
 /**************************************
@@ -193,4 +193,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 /**************************************
 BLOG
 **************************************/
+// Route::get('/blog/write', "BlogController@createMenu");
+
 Route::resource('/blog', "BlogController");

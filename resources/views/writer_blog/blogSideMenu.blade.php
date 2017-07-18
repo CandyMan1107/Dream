@@ -26,12 +26,18 @@
                 </div>
                 <div id="default-padding-mid"></div>
                 <div class="user_setting text-center">
-                    <a href="#">
+                    <a href="{{ route('blog.create') }}">
+                        <div>
+                            <i class="material-icons">border_color</i>
+                        </div>
+                        <div>포스트</div>
+                    </a>
+                    {{--  <a href="#">
                         <div>
                             <i class="material-icons">mail_outline</i>
                         </div>
                         <div>쪽지</div>
-                    </a>
+                    </a>  --}}
                     &nbsp;&nbsp;
                     <a href="#">
                         <div>

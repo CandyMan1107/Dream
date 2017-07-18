@@ -18,12 +18,13 @@ class CreateBlogBoardsTable extends Migration
             $table->increments('id');
             $table->integer('blog_menu_id');    // BLOG MENU ID : blog_menus table 'id'
             $table->string('board_title');  // BOARD TITLE
-            $table->boolean('is_notice'); // TRUE : NOTICE
+            $table->boolean('is_notice')->nullable(); // TRUE : NOTICE 1 || FALSE : NOT NOTICE 0
             // 이건 회원 추가 되면 $table->string('user_id');   // BOARD WRITER
             $table->integer('board_hit')->nullable();   // HIT NUMBER
             $table->integer('board_like')->nullable();    // LIKE NUMBER
             $table->mediumText('board_context'); // BOARD CONTEXT
             $table->timestamps();   // TIMESTAMP OF WRITING THIS BOARD
+
         });
     }
 

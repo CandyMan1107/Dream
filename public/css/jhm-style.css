@@ -733,7 +733,8 @@ BLOG - BLOG TOP & SIDE MENU
 BLOG - BLOG MAIN
 **************************************/
 #blog-main {
-    margin-left: 100px;
+    width: 900px;
+    margin-left: 50px;
 }
 
 #blog-main .blog_notice_list {
@@ -742,12 +743,64 @@ BLOG - BLOG MAIN
     border: 1px solid rosybrown;
 }
 
+#blog-main .blog_notice_list {
+    height: 115px;
+}
+
 #blog-main .blog_notice_list li {
     padding: 3px 0px 3px 0px;
 }
 
 #blog-main .blog_notice {
-    padding-top: 70px;
+    padding-top: 30px;
     border: 1px solid salmon;
-    height: 1485px;
+    /* height: 1485px; */
 }
+
+div[name=title_line] {
+    border-top: 1px solid black;
+}
+
+#blog-main .board_title ul {
+    display: table-row;
+}
+
+#blog-main .board_title ul li {
+    display: table-cell;
+}
+
+#blog-main .board_timestamp {
+    /* color: red; */
+    /* margin-left: 210px; */
+    text-align: right;
+}
+
+#blog-main .board_content {
+    min-height: 600px;
+}
+
+#write-form {
+    margin-left: 100px;
+    height: 1485px;
+    border: 1px solid salmon;
+}
+
+#post-category {
+    height: 26px;
+    width: 100%;
+} 
+
+#post-title {
+    width: 100%;
+}
+
+#post-content {
+    margin-top: 10px;
+}
+
+#write-form button {
+    margin-top: 20px;
+    align-content: center;
+    
+} 
+
