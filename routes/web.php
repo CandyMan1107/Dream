@@ -15,7 +15,6 @@ MAIN
 **************************************/
 Route::get('/', "MainController@index");
 
-
 Route::get('/lib', function () {
     return view('load');
 });
@@ -29,6 +28,9 @@ Route::get('/background/relation/rmRel', "RelationController@removeRelation");
 
 Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
+// 관계 저장
+Route::post('/background/addRelation', "RelationController@relationStore");
+
 /**************************************
 MAP - BACKGROUND
 **************************************/
@@ -38,8 +40,6 @@ Route::post('/background/addMap', "MapController@mapStore");
 
 //지도 삭제
 Route::post('/background/removeMap', "MapController@removeMap");
-
-
 
 // 지도 이미지 등록
 Route::post('/background/addMapImg', "MapController@mapImgStore");
@@ -60,10 +60,6 @@ Route::get('/background/map', "MapController@index");
 // 지도 이미지 삭제
 Route::get('/background/removeImg', "MapController@removeImg");
 
-
-Route::get('/login', function () {
-    return view('auth/login');
-});
 
 /**************************************
 CHARACTER & HISTORY - BACKGROUND & CHAPTER
@@ -119,7 +115,7 @@ Route::get('/get_novel/search',"cordoController@getNovelFromSearch");
 Route::get('/get_novel/show_main_novel',"cordoController@getNovelById");
 Route::get('/get_novel/get_episodes',"cordoController@getNovelEpisodes");
 Route::get('/get_novel/get_episode_id',"cordoController@getNovelEpisodeById");
-//Route::get('/get_novel/get_notices',"cordoController@getNovelNotices");
+// Route::get('/get_novel/get_notices',"cordoController@getNovelNotices");
 // users 정보 get & 로그인
 Route::get('/get_novel/userInfo', "cordoController@getUsersInfo");
 
@@ -193,9 +189,10 @@ Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
 
+// 웹 가입 인증
 Auth::routes();
 
-// 로그인
+//웹 가입후 이동 페이지
 Route::get('/home', 'HomeController@index')->name('home');
 
 /**************************************

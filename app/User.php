@@ -14,8 +14,13 @@ class User extends Authenticatable
      *
      * @var array
      */
+    
+    // protected $fillable = [
+    //     'user_id', 'name', 'email', 'password',
+    // ]; 건드렸던거
+
     protected $fillable = [
-        'user_id', 'name', 'email', 'password',
+        'user_id', 'name', 'password',
     ];
 
     /**
@@ -23,6 +28,11 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    // protected $hidden = [
+    //     'password', 'remember_token',
+    // ]; 원본
+
     protected $hidden = [
         'password', 'remember_token',
     ];

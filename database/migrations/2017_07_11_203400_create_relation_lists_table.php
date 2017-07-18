@@ -15,8 +15,9 @@ class CreateRelationListsTable extends Migration
     {
       Schema::create('relation_lists', function (Blueprint $table) {
           $table->increments('id');
-          $table->integer('listnum');
-          $table->integer('relnum');
+          $table->string("title");
+          $table->string("cover_src");
+          $table->timestamps();
       });
     }
 

@@ -729,12 +729,25 @@ BLOG - BLOG TOP & SIDE MENU
     padding: 12px;
 }
 
-
-
-
 /**************************************
 BLOG - BLOG MAIN
 **************************************/
 #blog-main {
-    
+    margin-left: 100px;
+}
+
+#blog-main .blog_notice_list {
+    height: 49px;
+    /* background-color: red; */
+    border: 1px solid rosybrown;
+}
+
+#blog-main .blog_notice_list li {
+    padding: 3px 0px 3px 0px;
+}
+
+#blog-main .blog_notice {
+    padding-top: 70px;
+    border: 1px solid salmon;
+    height: 1485px;
 }
