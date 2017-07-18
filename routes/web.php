@@ -68,6 +68,8 @@ Route::get('/login', function () {
 /**************************************
 CHARACTER & HISTORY - BACKGROUND & CHAPTER
 **************************************/
+Route::post('/chapter/new/chapter','ChaptersController@chapter_add');
+
 Route::resource('/chapter', 'ChaptersController');
 
 Route::resource('/background/things', 'BackgroundItemsController');
