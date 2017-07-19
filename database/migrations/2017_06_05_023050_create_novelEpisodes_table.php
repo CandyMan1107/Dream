@@ -24,7 +24,8 @@ class CreateNovelEpisodesTable extends Migration
             $table->longText('episode');
             $table->string('writers_postscript'); // 작가의 한마디
             $table->integer('char_count')->default('0'); // 글자수 : 작가가 글쓴 시점에서 한번만 계산하기 위함
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
         });
 

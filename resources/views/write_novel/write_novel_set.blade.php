@@ -208,7 +208,7 @@
               <td class="novel_period_day" data-day="mon">월</td>
               <td class="novel_period_day" data-day="tue">화</td>
               <td class="novel_period_day" data-day="wed">수</td>
-              <td class="novel_period_day" data-day="thr">목</td>
+              <td class="novel_period_day" data-day="thu">목</td>
               <td class="novel_period_day" data-day="fri">금</td>
               <td class="novel_period_day" data-day="sat">토</td>
               <td class="novel_period_day" data-day="sun">일</td>
