@@ -25,8 +25,8 @@ function day_info(data) {
             $("b[name='upload_day']").append("&nbsp;수&nbsp;");
         }
 
-        if ($dayStr.indexOf("thr") != -1) {
-            $i = jQuery.inArray("thr", $dayStr);
+        if ($dayStr.indexOf("thu") != -1) {
+            $i = jQuery.inArray("thu", $dayStr);
             $dayStr.splice($i, 1, "목");
 
             $("b[name='upload_day']").append("&nbsp;목&nbsp;");

@@ -11,11 +11,14 @@
 |
 */
 
+<<<<<<< HEAD
 Route::get('/', function () {
     return view('welcome');
 });
 // Route::get('/', "MainController@index");
 
+=======
+>>>>>>> origin/master
 Route::get('/lib', function () {
     return view('load');
 });
@@ -26,9 +29,33 @@ Route::get('/background/relation/rmRel', "RelationController@removeRelation");
 
 Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
+<<<<<<< HEAD
 Route::get('/background/map', function(){
   return view('background/map/map_view');
 });
+=======
+// 관계 저장
+Route::post('/background/addRelation', "RelationController@relationStore");
+
+// 관계 리스트 호출
+Route::post('/background/getRelationList', "RelationController@getRelationList");
+
+// 관계 삭제
+Route::post('/background/removeList', "RelationController@removeList");
+
+// 관계 정보 호출
+Route::post('/background/getRelsContent', "RelationController@getRelsContent");
+
+/**************************************
+MAP - BACKGROUND
+**************************************/
+
+// 지도 등록
+Route::post('/background/addMap', "MapController@mapStore");
+
+//지도 삭제
+Route::post('/background/removeMap', "MapController@removeMap");
+>>>>>>> origin/master
 
 // 지도 이미지 등록
 Route::post('/background/addMapImg', "MapController@MapImgStore");
@@ -37,7 +64,19 @@ Route::post('/background/addMapImg', "MapController@MapImgStore");
 Route::get('/background/map', "MapController@index");
 
 // 지도 이미지 삭제
+<<<<<<< HEAD
 Route::get('/background/removeMapImg', "MapController@removeImg");
+=======
+Route::get('/background/removeImg', "MapController@removeImg");
+
+
+/**************************************
+CHARACTER & HISTORY - BACKGROUND & CHAPTER
+**************************************/
+Route::post('/chapter/new/chapter','ChaptersController@chapter_add');
+
+Route::resource('/chapter', 'ChaptersController');
+>>>>>>> origin/master
 
 Route::resource('/background/things', 'BackgroundItemsController');
 
@@ -56,6 +95,7 @@ Route::get('novel/novel_info/{id}', "NovelController@novelInfo");
 // Novel Episode
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
+<<<<<<< HEAD
 // Today Novel
 Route::get('/novel/today_novel_by_day', function(){
     return view('novel/today_novel_by_day');
@@ -65,6 +105,10 @@ Route::get('/novel/today_novel_by_day', function(){
 Route::get('/background/share', function(){
     return view('background/share/set_share_view');
 });
+=======
+// Short-Cut Today Novel
+Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
+>>>>>>> origin/master
 
 // 코도바 뷰어부
 Route::get('/get_novel', "cordoController@getNovelInfo");
@@ -82,7 +126,7 @@ Route::get('/get_novel/search',"cordoController@getNovelFromSearch");
 Route::get('/get_novel/show_main_novel',"cordoController@getNovelById");
 Route::get('/get_novel/get_episodes',"cordoController@getNovelEpisodes");
 Route::get('/get_novel/get_episode_id',"cordoController@getNovelEpisodeById");
-//Route::get('/get_novel/get_notices',"cordoController@getNovelNotices");
+// Route::get('/get_novel/get_notices',"cordoController@getNovelNotices");
 // users 정보 get & 로그인
 Route::get('/get_novel/login', "cordoController@login");
 
@@ -151,12 +195,15 @@ Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
 
+// 웹 가입 인증
 Auth::routes();
 
-// 로그인
+//웹 가입후 이동 페이지
 Route::get('/home', 'HomeController@index')->name('home');
 
 /**************************************
 BLOG
 **************************************/
+// Route::get('/blog/write', "BlogController@createMenu");
+
 Route::resource('/blog', "BlogController");
