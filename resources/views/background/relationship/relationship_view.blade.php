@@ -16,6 +16,8 @@
 			  stroke: #fff;
 			  stroke-width: 1.5px;
 			}
+		
+
 
 			text {
 			  fill: #000;
@@ -155,6 +157,10 @@
 				display: inline-block;
 				width:100px;
 			}
+			.selected-map-content{
+				outline: 2px solid red;
+				outline-offset: -2px;
+			}
 		</style>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<div class="function-div form-group">
@@ -225,7 +231,8 @@
 			<?php
 				$imgRoot 		= $tasks["imgRoot"];
 				$chaInfos 	= $tasks["chaInfos"];
-				$relInfos 	= $tasks["relInfos"];
+				//$relInfos 	= $tasks["relInfos"];
+				$relInfos 	= array();
 
 				// 관계에 참여하는 모든 캐릭터 아이디 출력
 				function getAllRelChaId($relInfos){
@@ -253,7 +260,7 @@
 					if(!in_array($chaInfos[$i]->cha_id,getAllRelChaId($relInfos))){
 						$imgSrc = $imgRoot.$chaInfos[$i]->img_src;
 			?>
-			<img src={{URL::asset($imgSrc)}} id="chaNode<?=$chaInfos[$i]->cha_id?>" class="img-circle img-things-size draggable">
+			<img src={{URL::asset($imgSrc)}} id="chaNode<?=$chaInfos[$i]->cha_id?>" class="chanode img-circle img-things-size draggable">
 			<?php
 					}
 				}
@@ -275,7 +282,8 @@
 			var nodes = {};
 			var rel = {};
 			var chaInfos = <?php echo json_encode($chaInfos) ?>;
-			var links = <?php echo json_encode($tasks["relInfos"])?>;
+			//var links = <?php echo json_encode($tasks["relInfos"])?>;
+			var links = new Array();
 
 			// 가져온 데이터를 기반으로 데이터 재해석
 			// link.id, link.source, link.target, link.relationship
@@ -316,6 +324,9 @@
 					.attr("class", "mind-area")
 					.on("dragend", function(){alert("fu!!")});
 
+
+
+
 			// 노드의 이미지 패턴 정의
 			var defs = svg.append("defs").attr("id", "imgdefs");
 			chaInfos.forEach(function(chainfo){
@@ -342,7 +353,7 @@
 			marker.enter().append("svg:marker")
 					.attr("id", String)
 					.attr("viewBox", "0 -5 10 10")
-					.attr("refX", 38)
+					.attr("refX", 25)
 					.attr("refY", -1)
 					.attr("markerWidth", 8)
 					.attr("markerHeight", 8)
@@ -480,11 +491,10 @@
 					return l.id != selectedRelation.replace("#", "");
 				});
 
-
 				var relnum = selectedRelation.replace("#rel", "");
 
 				// 데이터베이스 적용 제거된 관계 삭제
-				removeRelData(relnum);
+				//removeRelData(relnum);
 
 				path.remove();
 				restart();
@@ -522,11 +532,15 @@
 
 				console.log(createdRel);
 
-				// DB 관계 생성
-				createRelData(createdRel.relnum, createdRel.sourceId, createdRel.targetId, createdRel.relationship);
 
 				restart();
 				links.push(obj);
+				console.log("here");
+				console.log(links);
+
+				// DB 관계 생성
+				//createRelData(createdRel.relnum, createdRel.sourceId, createdRel.targetId, createdRel.relationship);
+
 
 				restart();
 			});
@@ -539,10 +553,9 @@
 				var selectedChaId = selectedNode.attr("href");
 				console.log(links);
 				links = links.filter(function(l){
-					if((l.source.chaId == selectedChaId) || (l.target.chaId == selectedChaId)){
-						removeRelData(l.relnum);
-					}
-
+					// if((l.source.chaId == selectedChaId) || (l.target.chaId == selectedChaId)){
+					// 	removeRelData(l.relnum);
+					// }
 					return (l.source.chaId != selectedChaId) && (l.target.chaId != selectedChaId)
 				});
 
@@ -646,7 +659,8 @@
 				path = path.enter().append("svg:path")
 						.attr("id", function(d) { return d.id; } )
 						.attr("class", "link")
-						.attr("marker-end", "url(#end)");
+						.attr("marker-end", "url(#end)")
+						.attr("style","fill:none; stroke:steelblue; stroke-width:3;");
 
 				mytext = mytext.data(links)
 				mytext.remove();
@@ -833,11 +847,14 @@
 				} else {
 
 					// 이미지 blob 생성
+					d3.select('.mind-area').attr("style","background-color:white;");
 					var doctype = '<?xml version="1.0" standalone="no"?>'
 						+ '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
 					var source = (new XMLSerializer()).serializeToString(d3.select('.mind-area').node());
 					var blob = new Blob([ doctype + source], { type: 'image/svg+xml;charset=utf-8' });
 					var url = window.URL.createObjectURL(blob);
+					console.log(source);
+					d3.select('.mind-area').attr("style","background-color:none;");
 
 					// Put the svg into an image tag so that the Canvas element can read it in.
 					var img = d3.select('body').append('img')
@@ -848,8 +865,8 @@
 					img.onload = function(){
 						// Now that the image has loaded, put the image into a canvas element.
 						var canvas = d3.select('body').append('canvas').classed("cavs",true).node();
-						canvas.width = width+50;
-						canvas.height = height+50;
+						canvas.width = width;
+						canvas.height = height;
 						var ctx = canvas.getContext('2d');
 						ctx.drawImage(img, 0, 0);
 						var canvasUrl = canvas.toDataURL("image/png");
@@ -870,9 +887,8 @@
 							async: false,
 							data: {
 								"canvasUrl" : canvasUrl,
-								"title"			: title
-								// "gridInfos" : JSON.stringify(gridInfos),
-								// "textInfos" : JSON.stringify(textInfos)
+								"title"			: title,
+								"relInfos"  : links
 							},
 							success: function(data){
 								var mapId = data.split("/")[0];
@@ -892,28 +908,28 @@
 
 			// 맵 정보 삭제 + 맵 리스트에 요소 삭제
 			$("#deleteMapBtn").on("click",function(){
-				var mapId = $(".selected-map-content").attr("data-map-id");
+				var relId = $(".selected-map-content").attr("data-map-id");
 				$.ajaxSetup({
 					headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					}
 				});
 				$.ajax({
-					url: "removeMap",
+					url: "removeList",
 					type: "post",
 					async: false,
 					data: {
-						"mapId" : mapId
+						"relId" : relId
 					},
 					success: function(data){
-						//alert(data);
+						console.log(data);
 						$(".selected-map-content").remove();
 					}
 				});
 			});
 
 			// 맵 리스트 호출
-			//getMapList();
+			getMapList();
 			function getMapList(){
 				$.ajaxSetup({
 					headers: {
@@ -921,13 +937,13 @@
 					}
 				});
 				$.ajax({
-					url: "getMapList",
+					url: "getRelationList",
 					type: "post",
 					async: false,
 					data: {},
 					success: function(data){
 						data.forEach(function(d){
-							var coverSrc = "{{URL::asset('/')}}" + "img/background/mapImg/mapCover/" + d.cover_src;
+							var coverSrc = "{{URL::asset('/')}}" + "img/background/RelationImg/" + d.cover_src;
 							var createEle = createMapEle(d.id, d.title, coverSrc, d.created_at);
 							$(".map-list").append(createEle);
 						});
@@ -965,7 +981,7 @@
 						}
 					});
 					$.ajax({
-						url: "getGridsContent",
+						url: "getRelsContent",
 						type: "post",
 						data: {
 							"id" : $(this).attr("data-map-id")
@@ -974,41 +990,75 @@
 							// console.log(data.gridInfo);
 							// console.log(data.textInfo);
 
-							removeAllText();
-							removeAllGrid();
+							// removeAllText();
+							// removeAllGrid();
+							console.log(data);
+							var relInfos = data;
+							var chaInfos = new Array();
+							var relChaIds = new Array(); // 관계에 참여하는 모든 캐릭터 아이디
+							links = new Array();
+							nodes = new Array();
+							path.remove();
+							node.remove();
 
-							var gridInfo = data.gridInfo;
-							var textInfo = data.textInfo;
+							restart();
+							relInfos.forEach(function(ri){
+								var obj = new Object();
+								obj.relnum = ri.relnum;
+								obj.id ="rel" + ri.relnum;
+								obj.source = ri.source;
+								obj.source = nodes[obj.source] || (nodes[obj.source] = {chaId: obj.source});
+								obj.target = ri.target;
+								obj.target = nodes[obj.target] || (nodes[obj.target] = {chaId: obj.target});
+								obj.relationship = ri.relationship;
 
-							gridInfo.forEach(function(gi){
-								grid = d3.select("#"+gi.grid_id);
-								grid.classed("filled", true);
-								grid.style("fill", gi.fill_info);
-								grid.attr("data-code",gi.fill_info);
+								if( !(ri.source in relChaIds) ) relChaIds.push(ri.source);
+								if( !(ri.target in relChaIds) ) relChaIds.push(ri.target);
+
+								links.push(obj);
+							})
+
+							var chaInfos = <?php echo json_encode($chaInfos) ?>;
+
+							chaInfos = chaInfos.filter(function(ci){
+								return (relChaIds.indexOf(ci.cha_id+"") == -1);
+							});
+							$(".character-list > img").remove();
+							chaInfos.forEach(function(ci){
+								var nodeEle = "<img src={{URL::asset($imgRoot)}}" + ci.img_src + " id='chaNode" + ci.cha_id + "' class='chanode img-circle img-things-size draggable'>";
+								$(".character-list").append(nodeEle);
+							});
+							$( ".draggable" ).draggable({
+							 revert: true,
+							 revertDuration: 500,
+
+
+							 // 드래그 시작 시 draggedObj에 값 적용
+							 start: function (e) {
+								 // draggable의 데이터 입력
+								 draggedObj = d3.select(e.target).attr("src");
+							 },
+							 // svg위에 드랍 시 오브젝트는 바로 돌아옴
+							 drag: function (e) {
+								 // stop까지의 속도
+								 $(e.target).draggable("option","revertDuration", isObjOnDroppable() ? 0 : 500)
+							 },
+							 // drag가 끝난 후 판단
+							 stop: function (e,ui) {
+								 if(isObjOnDroppable()){
+									 chaId = $(e.target).attr("id").replace("chaNode","");
+									 //alert("id : " + chaId + " position : " + "(" + e.pageX +"," + e.pageY + ")");
+									 $(this).remove();
+									 addNewNode(chaId,e.pageX,e.pageY);
+								 }
+									draggedObj = null;
+
+							 }
 							});
 
-							textInfo.forEach(function(ti){
-								var gridId = ti.text_id.replace("text","#grid");
-								var textGrid = d3.select(gridId).data()[0];
-								//console.log(ti["letter-spacing"]);
-								svg.append("text")
-									 .attr("x",textGrid.x)
-									 .attr("y",textGrid.y)
-									 .style("font-family",ti.font_family)
-									 .style("font-size", ti.font_size)
-									 .style("letter-spacing", ti["letter-spacing"])
-									 .style("fill", ti.fill_color)
-									 .style("font-weight","bold")
-									 .attr("id", ti.text_id)
-									 .attr("data-code", ti.fill_color)
-									 .attr("data-letter-spacing",ti["letter-spacing"])
-									 .classed("map-text","true")
-									 .text(ti.content);
-								$(".map-text").off().on("click",function(){
-									removeSelection();
-									$(this).addClass("selected-cell");
-								});
-							})
+							restart();
+
+
 						}
 					});
 				});
@@ -1045,7 +1095,7 @@
 				 createEle += "	<div class='col-md-9 map-list-content-div'>"
 				 createEle += "		제목 : " 	 + title
 				 createEle += "		<button data-map-id='"+mapId+"' class='tag-toggle-btn form-control'>태그 입력</button><br>"
-				 createEle += "		생성일 : " + data +"<>"
+				 createEle += "		생성일 : " + data +"<br>"
 				 createEle += "		수정일 : 0000-00-00"
 				 createEle += "	</div>"
 				 // 정재훈 DIV

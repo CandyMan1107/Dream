@@ -31,6 +31,15 @@ Route::get('/background/relation/mkRel', "RelationController@createRelation");
 // 관계 저장
 Route::post('/background/addRelation', "RelationController@relationStore");
 
+// 관계 리스트 호출
+Route::post('/background/getRelationList', "RelationController@getRelationList");
+
+// 관계 삭제
+Route::post('/background/removeList', "RelationController@removeList");
+
+// 관계 정보 호출
+Route::post('/background/getRelsContent', "RelationController@getRelsContent");
+
 /**************************************
 MAP - BACKGROUND
 **************************************/
