@@ -185,13 +185,11 @@ Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 
 Route::resource('/tagsAdd', 'TagsAddController');
 
-// 웹 가입 인증
-Auth::routes();
-
-//웹 가입후 이동 페이지
-Route::get('/home', 'HomeController@index')->name('home');
 
 /**************************************
 BLOG
 **************************************/
 Route::resource('/blog', "BlogController");
+
+
+Route::get('/cash', "Controller@cashView");
