@@ -37,7 +37,7 @@ class BackgroundController extends Controller
         }
 
         // var_dump($data);
-        return view('background.main.Background_main')->with("data",$data);
+        return view('background.main.background_main')->with("data",$data);
      }
 
     public function index_map()
@@ -80,7 +80,6 @@ class BackgroundController extends Controller
     {
         // return __METHOD__ . '은(는) 다음 기본 키를 가진 모델을 조회합니다.';
 
-
     }
 
     /**
@@ -91,7 +90,7 @@ class BackgroundController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

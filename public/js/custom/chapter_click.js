@@ -1,0 +1,3 @@
+var a = React.Component({
+
+});

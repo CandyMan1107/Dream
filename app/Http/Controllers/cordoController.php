@@ -62,7 +62,7 @@ class cordoController extends Controller
     ->select("novel_writers.novel_id", "title", "summary_intro","cover_img_src","genre","name")
     ->join("novel_writers","novels.id", "=", "novel_writers.novel_id")
     ->join("users","novel_writers.user_id", "=", "users.id")
-    //->where("novels.title","like","%서%")->get();
+    //->where("novels.title","like","%무%")->get();
     ->where("novels.title","like","%".$searchContent."%")->get();
     return $novelInfo;
   }
@@ -86,22 +86,19 @@ class cordoController extends Controller
     $task = DB::table("novel_episodes")->where('belong_to_novel','=',$id)->where('is_notice','=','1')->get();
     return $task;
   }
-  
   //로그인 하기
-  public function getUsersInfo(Request $request){
+  public function login(Request $request){
     $user_id = $request->input('id');
     $password = $request->input('pw');
-    $task = DB::table("users")->where('user_id','=',$user_id)->where('password','=', $password)->get();
-    return $task;
+    $task = DB::table("users")->where('user_id','=',$user_id)->where('password','=', $password)->get()->count();
+      return $task;
   }
-
   //아이디 중복체크
   public function idCheck(Request $request){
     $user_id = $request->input('id');
     $task = DB::table("users")->where('user_id', '=', $user_id)->get()->count();
     return $task;
   }
-
   //아이디 찾기
   public function idSearch(Request $request){
     $emailInfo = $request->input('email');
@@ -115,7 +112,6 @@ class cordoController extends Controller
     $task = DB::table('users')->select('password')->where('user_id', '=', $user_id)->where('email','=',$emailInfo)->get();
     return $task;
   }
-
   //회원 정보 입력
   public function insertUserInfo(Request $request){
       $id = $request->input('user_id');
@@ -136,6 +132,104 @@ class cordoController extends Controller
     return $tasks;
   }
 
+  //해당 소설을 작성한 작가 아이디 가져오기
+  public function getUserIdOfNovel(Request $request){
+    $novel_id = $request->input('id');
+    $task = DB::table('novel_writers')->select('user_id')->where('novel_id', '=', $novel_id)->get();
+    return $task;
+  }
+
+  //유저 정보 가져오기
+  public function getUserInfo(Request $request){
+    $user_id = $request->input('id');
+    $task = DB::table('users')->select()->where('user_id', '=', $user_id)->get();
+    return $task;
+  }
+
+  public function getBackgroundSettingsHistoryGraph(Request $request){
+    $backgroundData = DB::table('timetables')->get();
+    $data = array(array());
+
+    $i = 0;
+    foreach ($backgroundData as $datas){
+        $data[$i]['id'] = $datas->id;
+        $data[$i]['event_name'] = $datas->event_names;
+        $data[$i]['event_content'] = $datas->event_contents;
+        $data[$i]['start_day'] = $datas->start_days;
+        $data[$i]['end_day'] = $datas->end_days;
+        $data[$i]['other'] = $datas->others;
+        $data[$i]['refer_info'] = $datas->refer_info;
+        $data[$i]['refer_info'] = explode('^',$data[$i]['refer_info']);
+
+        $i++;
+    }
+
+    return $data;
+  }
+
+  public function getBackgroundSettingsHistoryCharacters(Request $request){
+    $backgroundData = DB::table('characters')->get();
+    $data = array(array());
+
+    $i = 0;
+    foreach ($backgroundData as $datas){
+        $data[$i]['id'] = $datas->cha_id;
+        $data[$i]['name'] = $datas->name;
+        $data[$i]['img_src'] = $datas->img_src;
+
+        $i++;
+    }
+    return $data;
+  }
+
+  public function getBackgroundSettingsHistoryItems(Request $request){
+    $backgroundData = DB::table('items')->get();
+    $data = array(array());
+
+    $i = 0;
+    foreach ($backgroundData as $datas){
+        $data[$i]['id'] = $datas->id;
+        $data[$i]['name'] = $datas->name;
+        $data[$i]['img_src'] = $datas->img_src;
+
+        $i++;
+    }
+    return $data;
+  }
+
+  public function getBackgroundSettingsHistoryMaps(Request $request){
+    $backgroundData = DB::table('maps')->get();
+    $data = array(array());
+
+    $i = 0;
+    foreach ($backgroundData as $datas){
+        $data[$i]['id'] = $datas->id;
+        $data[$i]['name'] = $datas->title;
+        $data[$i]['img_src'] = $datas->cover_src;
+
+        $i++;
+    }
+    return $data;
+  }
+
+  public function getBackgroundSettingsCharacters(Request $request){
+    $backgroundData = DB::table('characters')->get();
+    $data = array(array());
+
+    $i = 0;
+    foreach ($backgroundData as $datas){
+      $data[$i]['id'] = $datas->cha_id;
+      $data[$i]['name'] = $datas->name;
+      $data[$i]['info'] = $datas->info;
+      $data[$i]['age'] = $datas->age;
+      $data[$i]['gender'] = $datas->gender;
+      $data[$i]['refer_info'] = $datas->name;
+      $data[$i]['img_src'] = $datas->img_src;
+
+        $i++;
+    }
+    return $data;
+  }
   //캐릭터 정보 가져오기
 //   public function getCharactersInfo(){
 //     $id = $request->input('id');

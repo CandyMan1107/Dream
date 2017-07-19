@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+
 use Illuminate\Http\Request;
+
+use  App\Blog;
+use  App\BlogMenu;
+use  App\BlogBoard;
 
 class BlogController extends Controller
 {
@@ -14,8 +21,32 @@ class BlogController extends Controller
     public function index()
     {
         //
+        $board = new BlogBoard();
+        $boardData = $board->allBoardD();
+        $data = array(array());
 
-        return view('writer_blog.blog_main');
+        $i = 0;
+
+        // print_r($boardData);
+
+        if(empty($boardData)) {
+            $data = 0;
+        } else {
+            foreach($boardData as $datas) {
+                $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+                $data[$i]['board_title'] = $datas->board_title;
+                $data[$i]['is_notice'] = $datas->is_notice;
+                // $data[$i]['board_hit'] = $datas->board_hit;
+                // $data[$i]['board_like'] = $datas->board_like;
+                $data[$i]['board_content'] = $datas->board_content;
+                $data[$i]['created_at'] = $datas->created_at;
+                $data[$i]['updated_at'] = $datas->updated_at;
+
+                $i++;
+            }
+        }
+
+        return view('writer_blog.blog_main')->with("data", $data);
     }
 
     /**
@@ -26,6 +57,15 @@ class BlogController extends Controller
     public function create()
     {
         //
+        // echo ("create() RUNNING");
+        return view('writer_blog.board.write_form');
+    }
+
+    public function createMenu()
+    {
+        //
+
+        
     }
 
     /**
@@ -35,6 +75,20 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    {
+        //
+        $board = new BlogBoard();
+
+        $data = $request->all();
+
+        // print_r($data);
+
+        $board->insertBoardD($data);
+
+        return redirect(route('blog.index'));
+    }
+
+    public function storeMenu(Request $request)
     {
         //
     }
@@ -48,6 +102,21 @@ class BlogController extends Controller
     public function show($id)
     {
         //
+        $boardData = App\BlogBoard::paginate(1, ['*'], 'boardData');
+
+        return view('writer_blog.board.board_view', ['boardData' => $boardData]);
+    }
+
+    public static function mainNoticeList() {
+        $noticeList = BlogBoard::where('is_notice', '=', 'on')->paginate(3, ['*'], 'noticeList');
+
+        return view('writer_blog.part.main_notice_list', ['noticeList' => $noticeList]);
+    }
+
+    public static function mainNotice() {
+        $noticeData = BlogBoard::where('is_notice', '=', 'on')->paginate(1, ['*'], 'noticeData');
+
+        return view('writer_blog.part.main_notice', ['noticeData' => $noticeData]);
     }
 
     /**

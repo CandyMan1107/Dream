@@ -14,7 +14,7 @@ function info_genre(data) {
             $infoGenre = "호러";
         } else if ($infoGenre == "detective") {
             $infoGenre = "추리";
-        }
+        } 
 
         $("b[name='genre']").append($infoGenre);
 
