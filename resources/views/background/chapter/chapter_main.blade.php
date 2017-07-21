@@ -6,7 +6,7 @@
 	@include('background.tag')
 		<script type="text/javascript" src="/js/custom/chapter_click.js"></script>
 		<div class="col-xs-2 col-sm-2 col-md-2 height-max-set" style= "border-right: 2px solid #efefef ; height: 100vh">
-			<div class="novel_id" id="root" value="{{$data['novel']['id']}}>
+			<div class="novel_id" id="root" value="{{$data['novel']['id']}}">
 				<h3 class="text-center">{{$data['novel']['title']}}</h3>
 			</div>
 			<div class="row" id="test">
@@ -19,7 +19,7 @@
 						<tr>
 							<td style="width:80px">
 							{{--  {{var_dump($data)}}   --}}
-								<button type="button" class="btn btn-link chapter_click chapter_val" id="{{$data['chapter'][$i]['chapter_id']}}" value="{{$data['chapter'][$i]['chapter_id']}}">
+								<button type="button" name="chapter_click" class="btn btn-link chapter_click chapter_val" id="{{$data['chapter'][$i]['chapter_id']}}" value="{{$data['chapter'][$i]['chapter_id']}}">
 									{{$data['chapter'][$i]['chapter_name']}} 
 								</button>     
 							</td>
@@ -48,11 +48,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-5 col-sm-3 col-md-3 height-max-set" style= "border-right: 2px solid #efefef ; height: 100vh" >
-			 
-			
+		<div class="col-xs-2 col-sm-2 col-md-2 height-max-set" style= "border-right: 2px solid #efefef ; height: 100vh" >
+			 <div class="chapter_data">
+
+			 </div>
 		</div>
-		<div class="col-xs-7 col-sm-6 col-md-6 height-max-set" >
+		<div class="col-xs-9 col-sm-6 col-md-6 height-max-set" >
 			
 		</div>
 	</div>

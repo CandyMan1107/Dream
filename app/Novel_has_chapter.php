@@ -23,4 +23,13 @@ class Novel_has_chapter extends Model
 
         return $novel_relation_data;
     }
+
+    public function get_chapter_id($novel_id){
+        $data = DB::table('novel_has_chapters')
+                ->select('chapter_id')
+                ->where('novel_id','=',$novel_id)
+                ->get();
+        
+        return $data;
+    }
 }

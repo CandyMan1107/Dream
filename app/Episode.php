@@ -72,4 +72,12 @@ class Episode extends Model
 
         return $episodeData;
     }
+
+    // TABLE : novel_episodes SELECT
+    public function not_chapter_episodes($id) { 
+
+    
+
+        
+    }
 }

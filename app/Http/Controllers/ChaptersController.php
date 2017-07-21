@@ -121,7 +121,32 @@ class ChaptersController extends Controller
     }
 
     public function get_episode($id){
-        echo($id);
+        $episode = new Episode();
+        $novel_has_chapter = new Novel_has_chapter();
+        $chapter_has_episode = new Chapter_has_episode();
+
+        $chapter_id = $novel_has_chapter->get_chapter_id($id);
+        $i = 0;
+        $chapter_data = array();
+        if(isset($chapter_id)){
+            foreach($chapter_id as $chapter) {
+                $chapter_data[$i] = $chapter->chapter_id;
+                $i++;
+            }
+        }
+
+        $episode_id = array();
+        for($i = 0 ; $i < count($chapter_data) ; $i++ ){
+            $episode_data = $chapter_has_episode->get_episode_id($chapter_data[$i]);
+            if(isset($episode_data->episode_id)){
+                 $episode_id[$i] = $episode_data->episode_id;
+            }  
+        }
+        
+        
+        var_dump($chapter_data);
+        // $episode_data = $episode->not_chapter_episodes($id);
+        // var_dump($episode_data);
     }
 
     /**
