@@ -20,7 +20,6 @@ class BlogBoard extends Model
                 // 'board_hit' => $data['board_hit'],
                 // 'board_like' => $data['board_like'],
                 'board_content' => $data['board_content'],
-                'created_at' => $data['created_at'],
             ];
         } else {
             $dataSet = [
@@ -42,6 +41,19 @@ class BlogBoard extends Model
     // user id 매개변수로 받아오기
     public function allBoardD() {
         $boardData = DB::table('blog_boards')->get();
+
+        return $boardData;
+    }
+
+    // blog_boards(TABLE) 
+    // SELECT blog_menu_id, board_title, is_notice, created_at, updated_at
+    // WHERE is_notice = 'on'
+    public function noticeListBoardD() {
+        $boardData = DB::table('blog_boards')
+            ->select('blog_menu_id, board_title, is_notice, created_at, updated_at')
+            ->where('is_notice', '=', 'on')
+            ->orderBy('id', 'desc')
+            ->get();
 
         return $boardData;
     }

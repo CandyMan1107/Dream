@@ -8,6 +8,15 @@
         arrows: false
     });
 
+    // BLOG NOTICE LIST Slider
+    $('.autoplay-notice').slick({
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        // fade: true,
+        arrows: false
+    });
+
     // Navigation scrolls
     $('.navbar-nav li a').bind('click', function(event) {
         $('.navbar-nav li').removeClass('active');

@@ -13,7 +13,7 @@
                 {{-- BLOG MAIN ROW START --}}
                 <div class="row">
                     {{-- BLOG NOTICE START --}}
-                    <div class="col-md-12 blog_notice_list">
+                    <div class="col-md-12 blog_notice_list autoplay-notice">
                         @if (empty($data[0]))
                             <h3>블로그가 텅 비었네요!</h3>
                         @else

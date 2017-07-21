@@ -747,6 +747,15 @@ BLOG - BLOG MAIN
     height: 115px;
 }
 
+#blog-main .blog_notice_list a {
+    text-decoration: none;
+    color: black;
+}
+
+#blog-main .blog_notice_list a:hover {
+    text-decoration: underline;
+}
+
 #blog-main .blog_notice_list li {
     padding: 3px 0px 3px 0px;
 }
