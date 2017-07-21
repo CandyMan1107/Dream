@@ -64,7 +64,7 @@ Route::get('/background/removeImg', "MapController@removeImg");
 /**************************************
 CHARACTER & HISTORY - BACKGROUND & CHAPTER
 **************************************/
-Route::post('/chapter/new/chapter','ChaptersController@chapter_add');
+Route::post('/chapter/episode/{id}','ChaptersController@get_episode');
 
 Route::resource('/chapter', 'ChaptersController');
 

@@ -120,8 +120,8 @@ class ChaptersController extends Controller
         return view('background.chapter.chapter_modal');
     }
 
-    public function chapter_add(Request $request){
-        
+    public function get_episode($id){
+        echo($id);
     }
 
     /**
