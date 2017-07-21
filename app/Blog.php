@@ -7,14 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class Blog extends Model
 {
-    // Blog(TABLE) INSERT DATAS
-    public function insertData() {
-        
+    // blogs(TABLE) INSERT DATAS
+    public function insertBlogD($data) {
+        $dataSet = [];
+        $dataSet = [
+            '' => $data[''],
+        ];
     }
 
-    // Blog(TABLE) SELECT *
+    // blogs(TABLE) SELECT *
     // user id 매개변수로 받아오기
-    public function allData() {
+    public function allBlogD() {
         $blogData = DB::table('blogs')->get();
     }
 }

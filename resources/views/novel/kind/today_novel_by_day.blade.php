@@ -1,28 +1,40 @@
 @extends('layouts.master')
 
 @section('content')
+	<script src="/js/JHM-Custom/today_novel_date.js"></script>
+	<script>today_novel_date( <?=json_encode($data)?> )</script>
+
 	<div class="default-padding"></div>
 	<a class="btn btn-primary" data-toggle="collapse" href="#collapseBanner" aria-expanded="true" aria-controls="collapseBanner">
 		X
 	</a>
+	
 	<div class="collapse in" id="collapseBanner">
-			
+
 			{{--BANNER START--}}
-			<div id="banner" class="section-padding">
+			<div name="banner" class="section-padding">
 				<div class="container">
 					<div class="row">
 						<div class="autoplay-top">
 							@for ($i = 0; $i < count($data); $i++)
 								<div class="col-md-12">
-									<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
-										<div class="jumbotron">
-											<h3 class="novel">{!! $data[$i]['genre'] !!}</h3>
-											<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
-											<br/>
-											<p class="big">{!! $data[$i]['title'] !!}</p>
-											<a class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></a>
-										</div>
-									</a>
+									<div class="row">
+										<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
+											<div class="col-md-7" name="banner-info">
+												<div class="jumbotron">
+													<input type="hidden" name="genre" value="{!! $data[$i]['genre'] !!}"/>
+													<h3 class="novel" name="genre"></h3>
+													<h2 class="small">{!! $data[$i]['summary_intro'] !!}</h2>
+													<br/>
+													<p class="big">{!! $data[$i]['title'] !!}</p>
+													<div class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></div>
+												</div>
+											</div>
+											{{--  <div class="col-md-5" name="banner-img">
+												<img src="upload/images/{{ $data[$i]['cover_img_src'] }}" alt="" data-adaptive-background="1"/>
+											</div>  --}}
+										</a>
+									</div>
 								</div>
 							@endfor
 						</div>
@@ -113,23 +125,55 @@
 				<div id="default-padding-small"></div>
 
 				<div class="collapse" id="collapseGenreMenu">
-					<table class="table text-center">
-						<tr>
-							<td>
-								<a href="#Romance">로맨스</a>
-							</td>
-							<td>
-								<a href="#Fantasy">판타지</a>
-							</td>
-							<td>
-								<a href="#RF">로맨스 판타지</a>
-							</td>
-							<td>
-								<a href="#SF">SF</a>
-							</td>
-						</tr>
-					</table>
+					<div class="port-sec">
+						<div class="col-md-12 fil-btn text-center">
+							<div class="filter wrk-title" data-filter="all">전체</div>
+							<div class="filter wrk-title" data-filter=".romance">로맨스</div>
+							<div class="filter wrk-title" data-filter=".fantasy">판타지</div>
+							<div class="filter wrk-title" data-filter=".horror">호러</div>
+						</div>
+					</div>
 				</div>
+
+				
+
+
+				<div id="Container">
+					@if (empty($data[0]['title']))
+						<h1>기다려보아</h1>
+					@else
+						@for ($i = 0; $i < count($data); $i++)
+							<div class="filimg mix {{ $data[$i]['genre'] }} col-md-4 col-sm-4 col-xs-12" data-myorder="2">
+								
+								{{-- NOVEL'S PERIOD INPUT HIDDEN   --}}
+								<input type="hidden" name="novel_period" value="{!! $data[$i]['period'] !!}"/>
+
+								<a href="/novel/info/novel_info/{{ $data[$i]['id'] }}">
+									<img src="/upload/images/{{ $data[$i]['cover_img_src'] }}" class="img-responsive">
+								</a>
+							</div>
+						@endfor
+					@endif
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
 			{{--row END--}}
@@ -146,6 +190,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/js/JHM-Custom/jhm-todayNovel-custom.js"></script>
+	<script type="text/javascript" src="/js/JHM-Custom/welcome_genre.js"></script>
 	<script src="/js/jquery-3.2.0.js"></script>
 	<script src="/js/jquery.easing.min.js" type="text/javascript"></script>
 	<script src="/js/jquery.mixitup.js" type="text/javascript"></script>

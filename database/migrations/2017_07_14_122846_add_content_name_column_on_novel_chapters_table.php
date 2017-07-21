@@ -26,10 +26,11 @@ class AddContentNameColumnOnNovelChaptersTable extends Migration
      * @return void
      */
     public function down()
-    {
+    {   
         Schema::table('novel_chapters', function (Blueprint $table) {
             $table->dropColumn('chapter_name');
             $table->dropColumn('chapter_content');
         });
+        
     }
 }

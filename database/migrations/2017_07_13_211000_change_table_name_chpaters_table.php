@@ -23,6 +23,7 @@ class ChangeTableNameChpatersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('novel_chpaters');
+        Schema::dropIfExists('novel_chapters');
     }
 }

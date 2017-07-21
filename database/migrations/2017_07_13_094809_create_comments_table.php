@@ -25,7 +25,8 @@ class CreateCommentsTable extends Migration
             // 이건 회원 추가 되면 $table->string('user_id');  // WRITER OF THIS COMMENT
             $table->mediumText('comment');
             $table->integer('comment_like');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
     }
 

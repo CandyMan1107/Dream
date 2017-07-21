@@ -4,6 +4,9 @@
 
 @section('content')
     @include('writer_blog.blogSideMenu')
+    @php
+        use App\Http\Controllers\BlogController;
+    @endphp
     <div id="default-padding-mid"></div>
             {{-- BLOG MAIN SPACE START --}}
             <div id="blog-main" class="col-md-8">
@@ -11,35 +14,25 @@
                 <div class="row">
                     {{-- BLOG NOTICE START --}}
                     <div class="col-md-12 blog_notice_list">
-                        <ul class="list-unstyled">
-                            <li>
-                                <div>
-                                    <strong>[NOTICE]</strong>
-                                    &nbsp;
-                                    NOTICE1
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <strong>[NOTICE]</strong>
-                                    &nbsp;
-                                    NOTICE2
-                                </div>
-                            </li>
-                        </ul>
+                        @if (empty($data[0]))
+                            <h3>블로그가 텅 비었네요!</h3>
+                        @else
+                            @php
+                                echo BlogController::mainNoticeList();
+                            @endphp
+                        @endif
                     </div>
                     {{-- BLOG NOTICE END --}}
                     <div id="default-padding"></div>
                     {{-- BLOG BOARD START (NOTICE) --}}
                     <div class="col-md-12 blog_notice">
-                        <div class="notice_title">
-                            NOTICE TITLE
-                        </div>
-                        <hr />
-                        <div class="notice_context">
-                            <div id="default-padding-big"></div>
-                            NOTICE CONTEXT
-                        </div>
+                        @if (empty($data[0]))
+                            <h3>마치 통장 같아! 텅장!</h3>
+                        @else
+                            @php
+                                echo BlogController::mainNotice();
+                            @endphp
+                        @endif
                     </div>
                     {{-- BLOG BOARD END (NOTICE) --}}
 
@@ -70,7 +63,6 @@
 	{{-- JHM SCRIPT --}}
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/js/JHM-Custom/jhm-todayNovel-custom.js"></script>
 	<script src="/js/jquery-3.2.0.js"></script>
 	<script src="/js/jquery.easing.min.js" type="text/javascript"></script>
 	<script src="/js/jquery.mixitup.js" type="text/javascript"></script>

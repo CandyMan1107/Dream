@@ -57,6 +57,9 @@ class RelationController extends Controller
     // 이미지 커버 저장
     $canvasUrl = $request->input('canvasUrl');
 
+    // 현재 관계 정보
+    $relInfos = $request->input('relInfos');
+
 
     $destinationPath = 'img/background/relationImg/';
     if(!is_dir($destinationPath)){
@@ -70,7 +73,7 @@ class RelationController extends Controller
     fwrite( $ifp, base64_decode( $data[ 1 ] ) );
     fclose( $ifp );
 
-    // 맵 데이터 추가
+    // 관계 리스트 추가
     $mytime = date('Y-m-d H:i:s');
     DB::table("relation_lists")->insert([
         "cover_src"  => $fileName,
@@ -78,34 +81,75 @@ class RelationController extends Controller
         "created_at" => $mytime
     ]);
 
-    // 등록한 맵 아이디 호출
+
+    // 관계 리스트의 최신 번호 호출
     $relListInfo = DB::table("relation_lists")->select("id","created_at","updated_at")->orderBy('id', 'DESC')->first();
     $listId = $relListInfo->id;
     $createdAt = $relListInfo->created_at;
     $updatedAt = $relListInfo->updated_at;
 
-    // // 그리드 테이블 등록
-    // foreach($gridInfos as $gridInfo){
-    //   DB::table("grids")->insert([
-    //       "belong_to_map"  => $mapsId,
-    //       "grid_id"        => $gridInfo->grid_id,
-    //       "fill_info"      => $gridInfo->fill_info
-    //   ]);
-    // }
+    // 관계 정보 등록
+    if(count($relInfos) != 0){
+      foreach($relInfos as $relInfo){
+        DB::table("relations")->insert([
+          "source"        => $relInfo["source"]["chaId"],
+          "target"        => $relInfo["target"]["chaId"],
+          "relationship"  => $relInfo["relationship"]
+        ]);
+        // 등록된 관계 정보 호출
+        $relListInfo = DB::table("relations")->select("relnum")->orderBy('relnum', 'DESC')->first();
+        $relnum = $relListInfo->relnum;
 
-    // // 텍스트 테이블 등록
-    // foreach($textInfos as $textInfo){
-    //   DB::table("map_texts")->insert([
-    //       "belong_to_map"  => $mapsId,
-    //       "text_id"        => $textInfo->text_id,
-    //       "content"        => $textInfo->content,
-    //       "font_family"    => $textInfo->font_family,
-    //       "font_size"      => $textInfo->font_size,
-    //       "letter-spacing" => $textInfo->letter_spacing,
-    //       "fill_color"     => $textInfo->fill_color
-    //   ]);
-    // }
+        DB::table("relation_in_list")->insert([
+          "listnum"        => $listId,
+          "relnum"         => $relnum
+        ]);
+      }
+    }
+
 
     return $listId."/".$createdAt;
+  }
+
+  // 관계 목록
+  public function getRelationList() {
+    $relationInfos = DB::table("relation_lists")->get();
+    return $relationInfos;
+  }
+
+  // 관계삭제
+  public function removeList(Request $request){
+    $relId = $request->input('relId');
+    // 리스트 삭제
+    DB::table("relation_lists")->where('id','=',$relId)->delete();
+    // 리스트에 따른 관계 번호 호출
+    $relnums = DB::table("relation_in_list")->select("relnum")->where("listnum","=",$relId)->get();
+    // 리스트와 관계의 종속 삭제
+    DB::table("relation_in_list")->where("listnum","=",$relId)->delete();
+
+    if(count($relnums) != 0){
+      foreach($relnums as $relnum){
+        DB::table("relations")->where("relnum","=",$relnum->relnum)->delete();
+      }
+    }
+
+    return var_dump($relnums);
+  }
+
+  // 관계 정보 호출
+  public function getRelsContent(Request $request){
+    $relId = $request->input('id');
+
+    $relnums = DB::table("relation_in_list")->select("relnum")->where("listnum","=",$relId)->get();
+    $relnumArr = array();
+    if(count($relnums) != 0){
+      foreach($relnums as $relnum){
+        array_push($relnumArr, $relnum->relnum);
+      }
+    }
+
+    $relInfos = DB::table("relations")->whereIn("relnum", $relnumArr)->get();
+
+    return $relInfos;
   }
 }
