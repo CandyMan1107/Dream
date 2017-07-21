@@ -11,14 +11,12 @@
 |
 */
 
-<<<<<<< HEAD
+
 Route::get('/', function () {
     return view('welcome');
 });
 // Route::get('/', "MainController@index");
 
-=======
->>>>>>> origin/master
 Route::get('/lib', function () {
     return view('load');
 });
@@ -29,11 +27,7 @@ Route::get('/background/relation/rmRel', "RelationController@removeRelation");
 
 Route::get('/background/relation/mkRel', "RelationController@createRelation");
 
-<<<<<<< HEAD
-Route::get('/background/map', function(){
-  return view('background/map/map_view');
-});
-=======
+
 // 관계 저장
 Route::post('/background/addRelation', "RelationController@relationStore");
 
@@ -55,7 +49,6 @@ Route::post('/background/addMap', "MapController@mapStore");
 
 //지도 삭제
 Route::post('/background/removeMap', "MapController@removeMap");
->>>>>>> origin/master
 
 // 지도 이미지 등록
 Route::post('/background/addMapImg', "MapController@MapImgStore");
@@ -64,9 +57,7 @@ Route::post('/background/addMapImg', "MapController@MapImgStore");
 Route::get('/background/map', "MapController@index");
 
 // 지도 이미지 삭제
-<<<<<<< HEAD
-Route::get('/background/removeMapImg', "MapController@removeImg");
-=======
+
 Route::get('/background/removeImg', "MapController@removeImg");
 
 
@@ -76,7 +67,7 @@ CHARACTER & HISTORY - BACKGROUND & CHAPTER
 Route::post('/chapter/episode/{id}','ChaptersController@get_episode');
 
 Route::resource('/chapter', 'ChaptersController');
->>>>>>> origin/master
+
 
 Route::resource('/background/things', 'BackgroundItemsController');
 
@@ -95,20 +86,13 @@ Route::get('novel/novel_info/{id}', "NovelController@novelInfo");
 // Novel Episode
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
-<<<<<<< HEAD
-// Today Novel
-Route::get('/novel/today_novel_by_day', function(){
-    return view('novel/today_novel_by_day');
-});
-// NOVEL VIEW END
 
 Route::get('/background/share', function(){
     return view('background/share/set_share_view');
 });
-=======
+
 // Short-Cut Today Novel
 Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
->>>>>>> origin/master
 
 // 코도바 뷰어부
 Route::get('/get_novel', "cordoController@getNovelInfo");
