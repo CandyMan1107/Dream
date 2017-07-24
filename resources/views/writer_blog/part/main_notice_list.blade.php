@@ -1,14 +1,19 @@
-<ul class="list-unstyled">
-    @foreach ($noticeList as $list)
-        <li>
+ {{print_r($noticeList)}}
+ {{--  <ul class="list-unstyled">   --}}
+     @foreach ($noticeList as $list)
+        {{--  <li>  --}}
+    
             <div>
-                <strong>
-                    [공지]
-                </strong>
-                &nbsp;
-                {{ $list['board_title'] }}
+                 <a href="/blog/2"> 
+                    <strong>
+                        [공지]
+                    </strong>
+                    &nbsp;
+                    {{ $list['board_title'] }}
+                    &nbsp;
+                    <small>{!! $list['created_at'] !!}</small>
+                </a>
             </div>
-        </li>
-    @endforeach
-</ul>
-{{ $noticeList->appends(['noticeList' => $noticeList->currentPage()])->links() }}  
+        {{--  </li>  --}}
+    @endforeach 
+ {{--  </ul>   --}}

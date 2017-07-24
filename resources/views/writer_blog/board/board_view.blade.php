@@ -15,7 +15,7 @@
             <small>| {!! $data['blog_menu_id'] !!}</small>
         </li>
          <li class="board_timestamp">
-            <small>0000.00.00. 00:00</small>
+            <small>{!! $data['created_at'] !!}</small>
         </li> 
     </ul>
     

@@ -108,13 +108,30 @@ class BlogController extends Controller
     }
 
     public static function mainNoticeList() {
-        $noticeList = BlogBoard::where('is_notice', '=', 'on')->paginate(3, ['*'], 'noticeList');
+        $boardTable = new BlogBoard();
 
-        return view('writer_blog.part.main_notice_list', ['noticeList' => $noticeList]);
+        $noticeList = $boardTable->noticeListBoardD();
+
+        $data = array(array());
+        $i = 0;
+
+        foreach($noticeList as $datas) {
+            $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+            $data[$i]['board_title'] = $datas->board_title;
+            $data[$i]['is_notice'] = $datas->is_notice;
+            $data[$i]['created_at'] = $datas->created_at;
+            $data[$i]['updated_at'] = $datas->updated_at;
+
+            $i++;
+        }
+
+        var_dump($data);
+
+        // return view('writer_blog.part.main_notice_list')->with('data', $data);
     }
 
     public static function mainNotice() {
-        $noticeData = BlogBoard::where('is_notice', '=', 'on')->paginate(1, ['*'], 'noticeData');
+        $noticeData = BlogBoard::where('is_notice', '=', 'on')->orderBy('id', 'desc')->paginate(1, ['*'], 'noticeData');
 
         return view('writer_blog.part.main_notice', ['noticeData' => $noticeData]);
     }
