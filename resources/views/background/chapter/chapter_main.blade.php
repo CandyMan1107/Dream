@@ -9,7 +9,7 @@
 			<div class="novel_id" id="root" value="{{$data['novel']['id']}}">
 				<h3 class="text-center">{{$data['novel']['title']}}</h3>
 			</div>
-			<div class="row" id="test">
+			<div class="row chapter_side" id="test">
 				@for($i = 0; $i < count($data['chapter']) ; $i++)
 					<table class="table table-condensed">
 						<tr>
@@ -19,8 +19,9 @@
 						<tr>
 							<td style="width:80px">
 							{{--  {{var_dump($data)}}   --}}
-								<button type="button" name="chapter_click" class="btn btn-link chapter_click chapter_val" id="{{$data['chapter'][$i]['chapter_id']}}" value="{{$data['chapter'][$i]['chapter_id']}}">
+								<button type="button" name="chapter_click" class="btn btn-link chapter_click chapter_val" id="chapter_id{{$i}}" value="{{$data['chapter'][$i]['chapter_id']}}">
 									{{$data['chapter'][$i]['chapter_name']}} 
+									<div id="chapter_name{{$i}}" value="{{$data['chapter'][$i]['chapter_name']}}"></div>
 								</button>     
 							</td>
 							<td>
