@@ -11,16 +11,17 @@
 |
 */
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-// Route::get('/', "MainController@index");
+/**************************************
+MAIN
+**************************************/
+Route::get('/', "MainController@index");
 
 Route::get('/lib', function () {
     return view('load');
 });
-
+/**************************************
+RELATION - BACKGROUND
+**************************************/
 Route::get('/background/relation', "RelationController@index");
 
 Route::get('/background/relation/rmRel', "RelationController@removeRelation");
@@ -192,6 +193,7 @@ BLOG
 **************************************/
 // Route::get('/blog/write', "BlogController@createMenu");
 
+Route::resource('/blog', 'BlogController');
 
 Route::get('/cash', "Controller@cashView");
 
