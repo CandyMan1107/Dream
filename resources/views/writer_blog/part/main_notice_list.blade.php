@@ -1,9 +1,8 @@
- {{print_r($noticeList)}}
- {{--  <ul class="list-unstyled">   --}}
-     @foreach ($noticeList as $list)
+{{--  <ul class="list-unstyled">   --}}
+    @foreach ($data as $list)
         {{--  <li>  --}}
     
-            <div>
+            {{--  <div>
                  <a href="/blog/2"> 
                     <strong>
                         [공지]
@@ -13,7 +12,7 @@
                     &nbsp;
                     <small>{!! $list['created_at'] !!}</small>
                 </a>
-            </div>
+            </div>  --}}
         {{--  </li>  --}}
     @endforeach 
  {{--  </ul>   --}}

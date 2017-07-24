@@ -70,7 +70,7 @@ class BlogController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -95,7 +95,7 @@ class BlogController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * Display the Boards of Blog.
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -107,14 +107,48 @@ class BlogController extends Controller
         return view('writer_blog.board.board_view', ['boardData' => $boardData]);
     }
 
-    public static function mainNoticeList() {
+    /** 
+    * Push the data of mainNoticeList.
+    * @return array $data
+    */
+    public function noticeList() {
         $boardTable = new BlogBoard();
 
         $noticeList = $boardTable->noticeListBoardD();
 
         $data = array(array());
         $i = 0;
+        
+        foreach($noticeList as $datas) {
+            $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+            $data[$i]['board_title'] = $datas->board_title;
+            $data[$i]['is_notice'] = $datas->is_notice;
+            $data[$i]['created_at'] = $datas->created_at;
+            $data[$i]['updated_at'] = $datas->updated_at;
 
+            $i++;
+        }
+
+        return $data;
+    }
+
+    /**
+    * Display the mainNoticeList with noticeList()'s $data
+    * @return view main_notice_list.blade.php
+    */
+    public static function mainNoticeList() {
+        // $class = new BlogController();
+        // $data = $class->noticeList();
+
+        // var_dump($data);
+
+        $boardTable = new BlogBoard();
+
+        $noticeList = $boardTable->noticeListBoardD();
+
+        $data = array(array());
+        $i = 0;
+        
         foreach($noticeList as $datas) {
             $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
             $data[$i]['board_title'] = $datas->board_title;
@@ -126,6 +160,8 @@ class BlogController extends Controller
         }
 
         var_dump($data);
+
+        
 
         // return view('writer_blog.part.main_notice_list')->with('data', $data);
     }

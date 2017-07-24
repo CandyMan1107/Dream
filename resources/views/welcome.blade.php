@@ -64,13 +64,17 @@
 	</div>--}}
 	{{--CTA1 END--}}
 	<div id="default-padding-mid"></div>
+
+	@if (!empty($data))
+		{{--today & best NOVEL START--}}
+		@php
+			echo MainController::todayNovelView($data);
+			echo MainController::bestNovelView($data); 
+		@endphp
+		{{--today & best NOVEL END--}}
+	@endif
 	
-	{{--today & best NOVEL START--}}
-	@php
-	echo MainController::todayNovelView($data);
-	echo MainController::bestNovelView($data);
-	@endphp
-	{{--today & best NOVEL END--}}
+	
 
 	<div id="default-padding-big"></div>
 

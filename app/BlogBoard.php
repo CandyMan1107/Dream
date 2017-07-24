@@ -50,7 +50,7 @@ class BlogBoard extends Model
     // WHERE is_notice = 'on'
     public function noticeListBoardD() {
         $boardData = DB::table('blog_boards')
-            ->select('blog_menu_id, board_title, is_notice, created_at, updated_at')
+            ->select('id', 'blog_menu_id', 'board_title', 'is_notice', 'created_at', 'updated_at')
             ->where('is_notice', '=', 'on')
             ->orderBy('id', 'desc')
             ->get();
