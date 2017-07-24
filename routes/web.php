@@ -185,7 +185,12 @@ BLOG
 **************************************/
 // Route::get('/blog/write', "BlogController@createMenu");
 
-Route::resource('/blog', "BlogController");
-
 
 Route::get('/cash', "Controller@cashView");
+
+// 웹페이지 로그인
+
+Route::get('/login', function () {
+    return view('login.login');
+});
+// Route::resource('/login', "LoginController");
