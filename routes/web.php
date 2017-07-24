@@ -66,6 +66,8 @@ CHARACTER & HISTORY - BACKGROUND & CHAPTER
 **************************************/
 Route::get('/chapter/episode/{id}','ChaptersController@get_episode');
 
+Route::get('/chapter/noepisode/{id}/{this_chapter_id}','ChaptersController@get_no_episode');
+
 Route::resource('/chapter', 'ChaptersController');
 
 Route::resource('/background/things', 'BackgroundItemsController');

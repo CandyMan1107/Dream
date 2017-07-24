@@ -120,7 +120,35 @@ class ChaptersController extends Controller
         return view('background.chapter.chapter_modal');
     }
 
-    public function get_episode($id){
+    public function get_episode($id) {
+
+        $episode = new Episode();
+        $chapter_has_episode = new Chapter_has_episode();
+
+        $episode_id = $chapter_has_episode->get_episode_id($id);
+
+        $episode_datas = array(array());
+        $i = 0;
+        
+        if(isset($episode_id)) {
+            foreach($episode_id as $one_episode) {
+                $episode_data = $episode->get_episode_by_episode_id($one_episode->episode_id);
+                $episode_datas[$i]['id'] = $episode_data->id;
+                $episode_datas[$i]['cover_img_src'] = $episode_data->cover_img_src;
+                $episode_datas[$i]['episode_title'] = $episode_data->episode_title;
+                $episode_datas[$i]['episode'] = $episode_data->episode;
+                $episode_datas[$i]['char_count'] = $episode_data->char_count;
+
+                $i++;
+            }
+        }
+        
+        
+
+        return($episode_datas);
+    }
+
+    public function get_no_episode($id,$this_chapter_id){
         $episode = new Episode();
         $novel_has_chapter = new Novel_has_chapter();
         $chapter_has_episode = new Chapter_has_episode();
@@ -135,18 +163,32 @@ class ChaptersController extends Controller
             }
         }
 
-        $episode_id = array();
+        $episode_data = array();
+        $episode_ids = array();
         for($i = 0 ; $i < count($chapter_data) ; $i++ ){
             $episode_data = $chapter_has_episode->get_episode_id($chapter_data[$i]);
             if(isset($episode_data->episode_id)){
-                 $episode_id[$i] = $episode_data->episode_id;
+                 $episode_ids[$i]=$episode_data->episode_id;
             }  
         }
         
+        $episode_datas = $episode->get_episode($episode_ids,$id);
         
-        var_dump($chapter_data);
-        // $episode_data = $episode->not_chapter_episodes($id);
-        // var_dump($episode_data);
+        $episode_data_not_chapter = array(array());
+        $episode_data_not_chapter['chapter_id'] = $this_chapter_id;
+        $i = 0;
+        foreach($episode_datas as $temp_episode_data) {
+            $episode_data_not_chapter[$i]['id'] = $temp_episode_data->id;
+            $episode_data_not_chapter[$i]['cover_img_src'] = $temp_episode_data->cover_img_src;
+            $episode_data_not_chapter[$i]['episode'] = $temp_episode_data->episode;
+            $episode_data_not_chapter[$i]['episode_title'] = $temp_episode_data->episode_title;
+            $episode_data_not_chapter[$i]['char_count'] = $temp_episode_data->char_count;
+
+            $i++;
+        }
+
+        // var_dump($episode_data_not_chapter[0]);
+        return view('background.chapter.episode_modal')->with("data",$episode_data_not_chapter);
     }
 
     /**

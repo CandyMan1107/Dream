@@ -73,11 +73,23 @@ class Episode extends Model
         return $episodeData;
     }
 
-    // TABLE : novel_episodes SELECT
-    public function not_chapter_episodes($id) { 
-
-    
-
+    // TABLE : novel_episodes SELECT * WHERE episode_id NOTIN episode_id
+    // JJH
+    public function get_episode($episode_id,$novel_id) { 
+        $data = DB::table('novel_episodes')
+                ->where('belong_to_novel','=',$novel_id) 
+                ->whereNotIn('id',$episode_id)     
+                ->get();
         
+        return $data;
+    }
+
+    // TABLE : novel_episodes SELECT * WHERE episode_id
+    public function get_episode_by_episode_id ($episode_id) {
+        $data = DB::table('novel_episodes')
+                ->where('id','=',$novel_id)
+                ->get();
+        
+        return $data;
     }
 }
