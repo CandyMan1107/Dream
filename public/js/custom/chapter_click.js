@@ -1,25 +1,28 @@
 $(document).ready(function(){
-    $(".chapter_click").each(function(){
+    $(".chapter_click").each(function(i,e){
         $(this).click(function(){
-            // .selected border : 2px solid red
-            // if(!$(this).hasClass("selected")){
-            //     $(this).addClass("selected");
-                
-            //     $(this).siblings().removeClass("selected");
-            // }
-            alert("34");
+            let chapter_id = $("#chapter_id"+i).attr('value');
+            let chapter_name = $("#chapter_name"+i).attr('value');
+            let novel_id = $("#novel_id").val();
+            let ajax_url = "episode/"+novel_id;
+            alert(chapter_id);
+            alert(chapter_name);
+
+            $('div').remove('.chapter_info');
+
+            let append_data = "<div class='chapter_info'>"
+            append_data += "<h3 class='text-center'>"+chapter_name+"</h3>"
+            append_data += "</div>"
+            $('.chapter_data').append(append_data);
+            
         });
     });
 
     // $(".chapter_click").click(function(){
-    //     var name = $(".chapter_val").val();
-    //     // alert(name);
-    //     var novel_id = $("#novel_id").val();
-    //     let ajax_url = "episode/"+novel_id;
 
-    //     $('.chapter_data').append(
-    //         '<h3 class="text-center">name</h3>'
-    //     );
+
+
+
     //     // alert(ajax_url);
     //     $.ajax({
     //         type: "GET",
