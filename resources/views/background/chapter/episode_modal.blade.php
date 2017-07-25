@@ -3,25 +3,25 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">에피소드 등록</h4>
+        <h4 class="modal-title">회차 등록</h4>
       </div>
       <form class="form-horizontal" action="{{ route('chapter.store') }}" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         {{--  <meta name="csrf-token" content="{{ csrf_token() }}">  --}}
         <div class="modal-body table-responsive">
             <table class="table table-striped">
-                <th>
-                    <td>에피소드 제목</td>
-                    <td>에피소드 내용</td>
-                    <td>챕터 등록</td>
-                </th>
+                <tr>
+                    <th>회차 표지</th>
+                    <th>회차 제목</th>
+                    <th>챕터 등록</th>
+                </tr>
                 @for ($i = 0 ; $i < count($data)-1 ; $i++)
                     <tr>
                         <td>
-                            df
+                            {{$data[$i]['episode_title']}}
                         </td>
                         <td>
-                            23
+                            {{$data[$i]['episode_title']}}
                         </td>
                         <td>
                             34
