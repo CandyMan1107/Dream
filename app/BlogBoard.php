@@ -45,15 +45,40 @@ class BlogBoard extends Model
         return $boardData;
     }
 
+    // blog_boards(TABLE) SELECT *
+    // user id 매개변수로 받아오기
+    // orderBy id desc
+    public function orderAllBoardD() {
+        $boardData = DB::table('blog_boards')
+            ->orderBy('created_at', 'desc')
+            ->paginate(1, ['*'], 'boardData');
+
+        return $boardData;
+    }
+
     // blog_boards(TABLE) 
-    // SELECT blog_menu_id, board_title, is_notice, created_at, updated_at
+    // SELECT id, blog_menu_id, board_title, is_notice, created_at, updated_at
     // WHERE is_notice = 'on'
     public function noticeListBoardD() {
         $boardData = DB::table('blog_boards')
             ->select('id', 'blog_menu_id', 'board_title', 'is_notice', 'created_at', 'updated_at')
             ->where('is_notice', '=', 'on')
-            ->orderBy('id', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
+
+        return $boardData;
+    }
+
+    // blog_boards(TABLE)
+    // SELECT *
+    // WHERE blog_menu_id = $blog_menu_id
+    // AND id = $post_id
+    public function selectedBoardD($blog_menu_id, $post_id) {
+        $boardData = DB::table('blog_boards')
+            ->where('blog_menu_id', '=', $blog_menu_id)
+            ->where('id', '=', $post_id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(1, ['*'], 'data');
 
         return $boardData;
     }

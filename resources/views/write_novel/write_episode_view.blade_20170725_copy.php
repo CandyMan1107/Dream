@@ -164,21 +164,6 @@
       height:500px;
     }
 
-    .timetable-div {
-      border:#EAEAEA 2px solid;
-      padding-left: 5px;
-      padding-top: 10px;
-    }
-
-    .timetable-content-div {
-      min-height: 250px;
-    }
-
-    .timetable-btn-div {
-      text-align: center;
-      padding-bottom: 10px;
-    }
-
     .edit-box {
       border:#EAEAEA 2px solid;
       margin-bottom: 10px;
@@ -518,39 +503,13 @@
     z-index:1;
   }
 
-  .window-div{
+  .case-btn{
 
   }
-  .window-header {
-    background-color: #EAEAEA;
-    vertical-align:middle;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    padding-right: 0px;
-    padding-left: 2px;
-  }
-  .window-content{
-    padding: 0px;
-  }
-  .window-header-clear{
-    text-align: right;
-    padding-right: 0px;
-  }
-  .window-clear-icon{
-    font-size:33px;
-  }
 
-  .timetable-info-table {
-    margin-left: 10px;
-  }
-  .timetable-window-attr-div {
-    padding: 0px;
-    text-align: center;
-    font-size: 18px;
-    font-weight:bold;
-    background-color: #B2EBF4;
-  }
+    #timeline {
+
+    }
   </style>
 
 
@@ -605,53 +564,39 @@
       <div class="row set_row">
         <div class="col-md-12 menu_title">내용</div>
       </div>
-      <div class="timetable-div col-md-12">
-        <div class="col-md-12 timetable-content-div" id='timeline'>
-        Loading...
-        </div>
-        <div class="col-md-12 timetable-btn-div">
-          <ul class="pager timetable-btn-ul">
-          </ul>
-        </div>
-      </div>
-
       <div class="col-md-12 edit-div">
-
-        <div id="editdiv" class="col-md-12 edit-box episode-editor-div" contenteditable="true">
+        <div id="editdiv" class="col-md-10 edit-box episode-editor-div" contenteditable="true">
           episode content
+        </div>
+        <div class="col-md-2 background-box">
+          <div class="background-div background-top">
+            &nbsp;&nbsp;&nbsp;소설 배경 설정
+            <span id="bgBtn" class="pull-right glyphicon glyphicon-resize-full"></span>
+          </div>
+          <div class="background-div background-search">
 
-          <div class='window-div'>
-            <div class='col-md-12 window-header'>
-              <div class="col-md-11 window-header-text">
-                제목
-              </div>
-              <div class=" col-md-1 window-header-clear">
-                <i class='pull-right material-icons window-clear-icon'>clear</i>
-              </div>
-            </div>
-
-            <div class='col-md-12 window-content'>
-              <table class='timetable-info-table'>
-                <tr>
-                  <td>사건명</td>
-                  <td>사건명</td>
-                </tr>
-                <tr>
-                  <td>사건설명</td>
-                  <td>사건설명</td>
-                </tr>
-                <tr>
-                  <td>부가설명</td>
-                  <td>부가설명</td>
-                </tr>
-              </table>
-
-
+            <div class="input-group col-md-12">
+      				<div id="radioBtn" class="btn-group">
+      					<a class="case-btn btn btn-primary btn-sm notActive"  data-title="characters">인물</a>
+                <a class="case-btn btn btn-primary btn-sm notActive" data-title="items">사물</a>
+      					<a class="case-btn btn btn-primary btn-sm notActive" data-title="maps">장소</a>
+                <a class="case-btn btn btn-primary btn-sm notActive" data-title="timetables">사건</a>
+      				</div>
+    			  </div>
+            <div class="ui-widget">
+              <label for="tags"></label>
+              <input id="tags" class="form-control">
             </div>
           </div>
+          <div class="background-div background-content">
 
+          </div>
+          <div class="pull-down background-div background-footer">
+            <button type="button" id="applyTag" class="form-control">태그 적용</button>
+          </div>
         </div>
       </div>
+
       <div class="edit-box writers-postscript-div" contenteditable="true">
         writers postscript
       </div>
@@ -664,6 +609,26 @@
     </div>
   </div>
 
+  <!-- The Modal -->
+  <div id="bgModal" class="bgModal">
+
+    <div class="bg-modal-content">
+      <div class="bg-modal-header"><span class="bgTitle">상세 소설 배경</span><span class="bgClose">&times;</span></div>
+      <div class="bg-modal-body">
+        <div class="bg-modal-top">
+
+
+
+        </div>
+        <div class="bg-modal-middle">
+
+        </div>
+        <div class="bg-modal-bottom">
+
+        </div>
+      </div>
+    </div>
+  </div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="/js/custom/history.js"></script>
 <script>
@@ -1481,89 +1446,170 @@
       });
     }
 
-    // 헬퍼툴 연대표 호출
-    getTimetableHelper()
-    // 핼퍼툴의 연대표 호출
-    function getTimetableHelper(){
-      var ttData = callTimetablesInfo();
-      console.log(ttData);
-      if(ttData.length > 0){
-        ready(timetableConvert(ttData));
-        setTimetableBtn(ttData);
+    // background 모달 이벤트
+    setBackgroundModal()
+    function setBackgroundModal(){
+      var modal = document.getElementById('bgModal');
+      var btn = document.getElementById("bgBtn");
+      var span = document.getElementsByClassName("bgClose")[0];
+
+      btn.onclick = function() {
+
+        var bgKind = $("#bgHidden").attr("data-kind");
+        var bgId = $("#bgHidden").attr("data-id");
+        if(bgKind != null && bgId !=null){
+          modal.style.display = "block";
+          $(".case-btn").removeClass("active");
+          $(".case-btn").addClass("notActive");
+
+          setModalContent(bgKind,bgId);
+        } else {
+          alert("먼저 태그를 선택해 주세요.");
+        }
       }
 
-        function setTimetableBtn(ttData){
-          ttData.forEach(function(fd){
-            $(".timetable-btn-ul").append(" <li><a class='timetable-btn-li' href='#' data-id='" + fd.id + "'>" + fd.event_names+ "</a></li> ");
-          })
-          setTImetableBtnEvent()
-          function setTImetableBtnEvent(){
-            $(".timetable-btn-li").off().on("click",function(e){
-              e.preventDefault();
-              var editorOffset = $(".edit-box").offset();
-              var btnOffset = $(this).offset();
-              var id = $(this).attr("data-id");
-              var eleId = "timetableWin" + id
-              var width = 200;
-              var height = 200;
-              var bgCase = "timetables";
-              if( $("#" + eleId).length < 1 ){
-                popWindow(width,height,btnOffset.left - width/2 + 20,editorOffset.top,"cl",eleId);
-                setWindowContent(eleId, bgCase, id);
-              } else {
-                if( $("#" + eleId).css('display') == 'none' ) $("#" + eleId).show();
-                else $("#" + eleId).hide();
-              }
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
 
-            });
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
           }
-
-
-        }
-    }
-
-    // 윈도우 띄우기
-    // 길이, 높이, X, Y, 클래스, 아이디
-    var zindex = 100;
-    function popWindow(width, height, winX, winY, winCl, winId){
-      var eleStr = "<div id='" + winId + "' class='"+ winCl +"'></div>";
-      var appendedEle = $(eleStr).appendTo("body")
-               .css({top: winY + "px", left: winX + "px"})
-               .css('z-index', ++zindex)
-               .css('position', 'absolute')
-               .css('border', "2px solid black")
-               .css('background-color', 'white')
-               .width(width + "px")
-               .height(height + "px");
-      appendedEle.draggable();
-      appendedEle.on('mousedown', function(){
-        $(this).css("z-index", ++zindex);
-      })
+      }
 
     }
 
-    // 해당 윈도우의 컨텐츠를 만듦
-    function setWindowContent(eleId, bgCase, bgId){
+    // 모달 컨텐츠 변경
+
+
+    function setModalContent(bgCase, bgId){
+
+      removeModalContent();
       switch(bgCase){
         case "characters" :
-        setWindowCharacters(bgId);
+        setModalCharacters(bgId);
         break;
         case "items" :
-        setWindowItems(bgId);
+        setModalItems(bgId);
         break;
         case "maps" :
-        setWindowMaps(bgId);
+        setModalMaps(bgId);
         break;
         case "timetables" :
-        setWindowTimetables(bgId);
+        setModalTimetables(bgId);
         break;
         default:
         alert("error occured");
-      }
-      function setWindowTimetables(){
-        var winEle = $("#" + eleId);
-        var addEle = "";
 
+
+      }
+
+      var topModal = $(".bg-modal-top");
+      var middleModal = $(".bg-modal-middle");
+      var bottomModal = $(".bg-modal-bottom");
+      function removeModalContent(){
+          $(".bg-modal-top").empty();
+          $(".bg-modal-middle").empty();
+          $(".bg-modal-bottom").empty();
+      }
+
+      // 캐릭터 상세 정보 출력
+      function setModalCharacters(bgId){
+        var chaData = callBackgroundInfo("characters",bgId)[0];
+        var tagData = callTagInfo("characters",bgId);
+        var ttData = callTimetablesInfo("characters",bgId);
+        var relData = callRelationInfo(bgId);
+        var ownerData = callOwnershipInfo(bgId);
+        console.log(tagData);
+        var referInfo = chaData.refer_info;
+        referInfo = referInfo.split("^");
+        // 상위 정보
+        var topEle = "";
+
+        topEle += "<div class='bg-div bg-img-div col-md-3'>"
+        topEle += "  <img src='/img/background/characterImg/" + chaData.img_src+ "'  class='img-circle cha-img-size'><br>"
+        topEle += "  <span>"+chaData.name+"</span>"
+        topEle += "</div>"
+
+        topEle += "<div class='bg-div bg-basic-div col-md-9'>"
+
+        topEle += "  <div class='bg-div bg-cha-info col-md-6'>"
+        topEle += "    <span>이름</span> | "+chaData.name+"<br>"
+        topEle += "    <span>성별</span> | "+chaData.gender+"<br>"
+        topEle += "    <span>나이</span> | "+chaData.age+"<br>"
+        topEle += "    <span>설명</span> | "+chaData.info
+        topEle += "  </div>"
+
+        topEle += "  <div class='bg-div bg-refer-div col-md-6'>"
+        topEle += "    <span>추가 정보</span>"
+        topEle += "    <div class='refer-info'>"
+        referInfo.forEach(function(ri){
+            topEle += "<div>"+ri+"</div>";
+        });
+
+        topEle += "    </div>"
+        topEle += "    <span>태그 정보</span>"
+        topEle += "    <div class='tag-info'>"
+        tagData.forEach(function(td){
+            topEle += "<div>"+td.value+"<div class='tag-color-box'>TC</div></div>";
+        });
+        topEle += "    </div>"
+        topEle += "  </div>"
+        topEle += "</div>"
+
+        $(".bg-modal-top").append(topEle);
+
+        // 중간 정보
+        var middleEle ="";
+        middleEle += "<div class='row col-md-12' id='timeline' ></div><br>";
+
+        $(".bg-modal-middle").append(middleEle);
+        console.log(ttData);
+        if(ttData.length > 0)
+          ready(timetableConvert(ttData));
+
+        // 하위 정보
+        var bottomEle = "";
+        bottomEle += "<div class='col-md-6 bg-div relation-div'>";
+        if(relData.length > 0)
+        relData.forEach(function(rd){
+          var sourceInfo = callBackgroundInfo("characters",rd.target)[0];
+          var targetInfo = callBackgroundInfo("characters",rd.source)[0];
+          bottomEle += "  <div class='relation-list'>";
+          bottomEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ sourceInfo.img_src +"'>";
+          bottomEle += "    <span>" + rd.relationship + "</span>";
+          bottomEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ targetInfo.img_src +"'>";
+          bottomEle += "  </div>";
+        });
+        bottomEle += "</div>";
+        bottomEle += "<div class='col-md-6 bg-div ownership-div'>";
+        console.log(ownerData);
+        if(ownerData.length > 0)
+        ownerData.forEach(function(od){
+          var itemInfo = callBackgroundInfo("items",od.item_id)[0];
+          bottomEle += "  <div class='ownership-list'>";
+          bottomEle += "    <img class='img-circle img-things-size' src='/img/background/itemImg/"+ itemInfo.img_src +"'>&nbsp;&nbsp;";
+          bottomEle += "    <span>" + itemInfo.name + "</span>";
+          bottomEle += "  </div>";
+        });
+        bottomEle += "</div>";
+        $(".bg-modal-bottom").append(bottomEle);
+      }
+
+      // 사물 상세 정보 출력
+      function setModalItems(bgId){
+      }
+      // 맵 상세 정보 출력
+      function setModalMaps(bgId){
+      }
+      // 사건 상세 정보 출력
+      function setModalTimetables(bgId){
+      }
+
+      // 케이스, 아이디로 해당 배경정보 호출
+      function callBackgroundInfo(bgCase, bgId){
+        var bgData;
         $.ajax({
             type: "get",
             url: "/write_novel/call_background_info",
@@ -1573,178 +1619,108 @@
               "bgId"    : bgId
             },
             success: function (data) {
-              console.log(data);
-              data = data[0];
-
-              addEle += "<div class='window-div'>"
-              addEle += "  <div class='col-md-12 window-header'>"
-              addEle += "   <div class='col-md-10 window-header-text'>"
-              addEle += "    사건-" + data.event_names;
-              addEle += "   </div>"
-              addEle += "   <div class='col-md-2 window-header-clear' >"
-              addEle += "     <i class='pull-right material-icons window-clear-icon' data-id='" + data.id +"'>clear</i>"
-              addEle += "   </div>"
-              addEle += "  </div>"
-              addEle += "  <div class='col-md-12 window-content'>"
-              addEle += "    <table class='timetable-info-table'>"
-              addEle += "      <tr>"
-              addEle += "        <td>사건명</td>"
-              addEle += "        <td>" + data.event_names + "</td>"
-              addEle += "      </tr>"
-              addEle += "      <tr>"
-              addEle += "        <td>사건설명</td>"
-              addEle += "        <td>" + data.event_contents + "</td>"
-              addEle += "      </tr>"
-              addEle += "      <tr>"
-              addEle += "        <td>부가설명</td>"
-              addEle += "        <td>" + data.refer_info + "</td>"
-              addEle += "      </tr>"
-              addEle += "      <tr>"
-              addEle += "        <td>사건시작일</td>"
-              addEle += "        <td>" + data.start_days + "</td>"
-              addEle += "      </tr>"
-              addEle += "      <tr>"
-              addEle += "        <td>사건종료일</td>"
-              addEle += "        <td>" + data.end_days + "</td>"
-              addEle += "      </tr>"
-              addEle += "    </table>"
-              addEle += "     <div class='timetable-window-attr-div col-md-3'>인물</div>"
-              addEle += "     <div class='timetable-window-attr-div col-md-3'>사물</div>"
-              addEle += "     <div class='timetable-window-attr-div col-md-3'>관계</div>"
-              addEle += "     <div class='timetable-window-attr-div col-md-3'>지도</div>"
-              addEle += "  </div>"
-              addEle += "</div>"
-
-              winEle.append(addEle)
-              // 닫기버튼 이벤트
-              setClearBtnEvent()
+              bgData = data;
             },
             error: function (error) {
               alert("오류발생");
             }
         });
-        function setClearBtnEvent(){
-          $(".window-clear-icon").off().on("click",function(){
-            var id = $(this).attr("data-id");
-            $("#timetableWin" + id).hide();
-          });
-        }
-
-
+        return bgData;
       }
-    }
-    // 케이스, 아이디로 해당 배경정보 호출
-    function callBackgroundInfo(bgCase, bgId){
-      var bgData;
-      $.ajax({
-          type: "get",
-          url: "/write_novel/call_background_info",
-          async: false,
-          data: {
-            "bgCase"  : bgCase,
-            "bgId"    : bgId
-          },
-          success: function (data) {
-            bgData = data;
-          },
-          error: function (error) {
-            alert("오류발생");
-          }
-      });
-      return bgData;
-    }
-    // 케이스, 아이디로 해당 태그 호출
-    function callTagInfo(bgCase, bgId){
-      var bgData;
-      $.ajax({
-          type: "get",
-          url: "/write_novel/get_tag_by_id",
-          async: false,
-          data: {
-            "bgCase"  : bgCase,
-            "bgId"    : bgId
-          },
-          success: function (data) {
-            bgData = data;
-          },
-          error: function (error) {
-            alert("오류발생");
-          }
-      });
-      return bgData;
-    }
-    // 타임테이블 정보 호출
-    function callTimetablesInfo(bgCase=null, bgId=null){
-      var timetablesInfo;
-      $.ajax({
-          type: "get",
-          url: "/write_novel/get_timetables_info",
-          async: false,
-          data: {
-            "bgCase"  : bgCase,
-            "bgId"    : bgId
-          },
-          success: function (data) {
-            timetablesInfo = data;
-          },
-          error: function (error) {
-            alert("오류발생");
-          }
-      });
-      return timetablesInfo;
-    }
-    // 타임테이블 배열을 표형 데이터로 반환
-    function timetableConvert(data){
-      var tableData = new Array();
-      data.forEach(function(td){
-        var cData = {
-          "event_name"    : td.event_names,
-          "start_day"     : td.start_days,
-          "end_day"       : td.end_days
-        };
-        tableData.push(cData);
-      });
-      return tableData;
-    }
-    // 캐릭터 아이디로 관계를 호출
-    function callRelationInfo(chaId){
-      var bgData;
-      $.ajax({
-          type: "get",
-          url: "/write_novel/call_relation_info",
-          async: false,
-          data: {
-            "chaId"    : chaId
-          },
-          success: function (data) {
-            bgData = data;
-          },
-          error: function (error) {
-            alert("오류발생");
-          }
-      });
-      return bgData;
-    }
-    // 캐릭터 아이디로 소유물건을 호출
-    function callOwnershipInfo(chaId){
-      var bgData;
-      $.ajax({
-          type: "get",
-          url: "/write_novel/call_ownership_info",
-          async: false,
-          data: {
-            "chaId"    : chaId
-          },
-          success: function (data) {
-            bgData = data;
-          },
-          error: function (error) {
-            alert("오류발생");
-          }
-      });
-      return bgData;
-    }
+      // 케이스, 아이디로 해당 태그 호출
+      function callTagInfo(bgCase, bgId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/get_tag_by_id",
+            async: false,
+            data: {
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
+      }
+      // 타임테이블 정보 호출
+      function callTimetablesInfo(bgCase=null, bgId=null){
+        var timetablesInfo;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/get_timetables_info",
+            async: false,
+            data: {
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              timetablesInfo = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return timetablesInfo;
+      }
+      // 타임테이블 배열을 표형 데이터로 반환
+      function timetableConvert(data){
+        var tableData = new Array();
+        data.forEach(function(td){
+          var cData = {
+            "event_name"    : td.event_names,
+            "start_day"     : td.start_days,
+            "end_day"       : td.end_days
+          };
+          tableData.push(cData);
+        });
+        return tableData;
+      }
+      // 캐릭터 아이디로 관계를 호출
+      function callRelationInfo(chaId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_relation_info",
+            async: false,
+            data: {
+              "chaId"    : chaId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
+      }
+      // 캐릭터 아이디로 소유물건을 호출
+      function callOwnershipInfo(chaId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_ownership_info",
+            async: false,
+            data: {
+              "chaId"    : chaId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
+      }
 
+
+    }
   })(jQuery);
 
 
