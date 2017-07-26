@@ -738,13 +738,9 @@ BLOG - BLOG MAIN
 }
 
 #blog-main .blog_notice_list {
-    height: 49px;
+    height: 40px;
     /* background-color: red; */
     border: 1px solid rosybrown;
-}
-
-#blog-main .blog_notice_list {
-    height: 115px;
 }
 
 #blog-main .blog_notice_list a {
@@ -756,8 +752,12 @@ BLOG - BLOG MAIN
     text-decoration: underline;
 }
 
-#blog-main .blog_notice_list li {
+/* #blog-main .blog_notice_list li {
     padding: 3px 0px 3px 0px;
+} */
+
+#blog-main .blog_notice_list .list_text {
+    padding-top: 8px;
 }
 
 #blog-main .blog_notice {
