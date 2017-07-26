@@ -10,8 +10,8 @@
 				<h3 class="text-center">{{$data['novel']['title']}}</h3>
 			</div>
 			<div class="row chapter_side" id="test">
-				@for($i = 0; $i < count($data['chapter']) ; $i++)
-					<table class="table table-condensed">
+				<table class="table table-condensed">
+					@for($i = 0; $i < count($data['chapter']) ; $i++)
 						<tr>
 							<th>제목</th>
 							<th>내용</th>
@@ -28,8 +28,8 @@
 								{{$data['chapter'][$i]['chapter_content']}}  
 							</td>
 						</tr>
-					</table>
-				@endfor
+					@endfor
+				</table>
 			</div>
 			<div>
 				{{-- 등록 챕터 목록 --}}

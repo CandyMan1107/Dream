@@ -53,6 +53,20 @@ class ChaptersController extends Controller
         return redirect($redirect_url);
     }
 
+    public function add_episode(Request $request) 
+    {
+        $chapter_has_episode = new Chapter_has_episode();
+        $data = $request->all();
+        $chapter_id = $data['chapter_id'];
+        for($i = 0; $i < count($data['episode_id']) ; $i++) {
+            $chapter_has_episode->add_episode($chapter_id,$data['episode_id'][$i]);
+        }
+        // echo $data['episode_id'][0];
+        
+
+        // var_dump($data['episode_id']);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -132,19 +146,21 @@ class ChaptersController extends Controller
         
         if(isset($episode_id)) {
             foreach($episode_id as $one_episode) {
+                // echo($one_episode->episode_id);
                 $episode_data = $episode->get_episode_by_episode_id($one_episode->episode_id);
-                $episode_datas[$i]['id'] = $episode_data->id;
-                $episode_datas[$i]['cover_img_src'] = $episode_data->cover_img_src;
-                $episode_datas[$i]['episode_title'] = $episode_data->episode_title;
-                $episode_datas[$i]['episode'] = $episode_data->episode;
-                $episode_datas[$i]['char_count'] = $episode_data->char_count;
+                // var_dump($episode_data[0]);
+                $episode_datas[$i]['id'] = $episode_data[0]->id;
+                $episode_datas[$i]['cover_img_src'] = $episode_data[0]->cover_img_src;
+                $episode_datas[$i]['episode_title'] = $episode_data[0]->episode_title;
+                $episode_datas[$i]['char_count'] = $episode_data[0]->char_count;
+                $episode_datas[$i]['episode'] = $episode_data[0]->episode;
 
                 $i++;
             }
         }
         
         
-
+        // var_dump($episode_datas);
         return($episode_datas);
     }
 
@@ -167,8 +183,8 @@ class ChaptersController extends Controller
         $episode_ids = array();
         for($i = 0 ; $i < count($chapter_data) ; $i++ ){
             $episode_data = $chapter_has_episode->get_episode_id($chapter_data[$i]);
-            if(isset($episode_data->episode_id)){
-                 $episode_ids[$i]=$episode_data->episode_id;
+            if(isset($episode_data[0]->episode_id)){
+                 $episode_ids[$i]=$episode_data[0]->episode_id;
             }  
         }
         

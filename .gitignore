@@ -10,3 +10,4 @@ Homestead.yaml
 .env
 package-lock.json
 public/img/
+public/upload/

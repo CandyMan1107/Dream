@@ -16,4 +16,14 @@ class Chapter_has_episode extends Model
         
         return $data;
     }
+
+    public function add_episode($chapter_id, $episode_id) {
+        $data = array();
+        $data = [
+            'chapter_id' => $chapter_id,
+            'episode_id' => $episode_id
+        ];
+
+        DB::table('chapter_has_episodes')->insert($data);
+    }
 }
