@@ -11,17 +11,24 @@
 |
 */
 
-/**************************************
-MAIN
-**************************************/
+/*
+|--------------------------------------------------------------------------
+| MAIN-page
+|--------------------------------------------------------------------------
+*/
 Route::get('/', "MainController@index");
+
+
 
 Route::get('/lib', function () {
     return view('load');
 });
-/**************************************
-RELATION - BACKGROUND
-**************************************/
+
+/*
+|--------------------------------------------------------------------------
+| RELATION-Background-page
+|--------------------------------------------------------------------------
+*/
 Route::get('/background/relation', "RelationController@index");
 
 Route::get('/background/relation/rmRel', "RelationController@removeRelation");
@@ -41,9 +48,11 @@ Route::post('/background/removeList', "RelationController@removeList");
 // 관계 정보 호출
 Route::post('/background/getRelsContent', "RelationController@getRelsContent");
 
-/**************************************
-MAP - BACKGROUND
-**************************************/
+/*
+|--------------------------------------------------------------------------
+| Map-Background-page
+|--------------------------------------------------------------------------
+*/
 
 // 지도 등록
 Route::post('/background/addMap', "MapController@mapStore");
@@ -62,9 +71,11 @@ Route::get('/background/map', "MapController@index");
 Route::get('/background/removeImg', "MapController@removeImg");
 
 
-/**************************************
-CHARACTER & HISTORY - BACKGROUND & CHAPTER
-**************************************/
+/*
+|--------------------------------------------------------------------------
+| CHAPTER & HISTORY-Background-page
+|--------------------------------------------------------------------------
+*/
 Route::get('/chapter/episode/{id}','ChaptersController@get_episode');
 
 Route::get('/chapter/noepisode/{id}/{this_chapter_id}','ChaptersController@get_no_episode');
@@ -87,19 +98,29 @@ Route::resource('/background/historyTable', 'BackgroundHistoryTablesController')
 
 Route::resource('/background', 'BackgroundController');
 
-// NOVEL VIEW START
-// Novel Info
+/*
+|--------------------------------------------------------------------------
+| NOVEL-Reader-page
+|--------------------------------------------------------------------------
+*/
 Route::get('novel/novel_info/{id}', "NovelController@novelInfo");
 
-// Novel Episode
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
-
+/*
+|--------------------------------------------------------------------------
+| SHARE-Background-page
+|--------------------------------------------------------------------------
+*/
 Route::get('/background/share', function(){
     return view('background/share/set_share_view');
 });
 
-// Short-Cut Today Novel
+/*
+|--------------------------------------------------------------------------
+| TODAY-Novel-page
+|--------------------------------------------------------------------------
+*/
 Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
 
 // 코도바 뷰어부
@@ -188,12 +209,13 @@ Route::get('/background/tagsAdd/get', "TagsAddController@getData");
 Route::resource('/tagsAdd', 'TagsAddController');
 
 
-/**************************************
-BLOG
-**************************************/
-// Route::get('/blog/write', "BlogController@createMenu");
-
+/*
+|--------------------------------------------------------------------------
+| BLOG-page
+|--------------------------------------------------------------------------
+*/
 Route::resource('/blog', 'BlogController');
+
 
 Route::get('/cash', "Controller@cashView");
 

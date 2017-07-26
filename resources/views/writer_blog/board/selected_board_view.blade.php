@@ -18,7 +18,7 @@
                             <h3>블로그가 텅 비었네요!</h3>
                         @else
                             @php
-                                echo BlogController::mainNoticeList($data);
+                                echo BlogController::mainNoticeList();
                             @endphp
                         @endif
                     </div>
@@ -30,7 +30,7 @@
                             <h3>마치 통장 같아! 텅장!</h3>
                         @else
                             @php
-                                echo BlogController::allBoard();
+                                echo BlogController::selectedBoard($data);
                             @endphp
                         @endif
                     </div>
