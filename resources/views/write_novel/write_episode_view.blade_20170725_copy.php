@@ -164,21 +164,6 @@
       height:500px;
     }
 
-    .timetable-div {
-      border:#EAEAEA 2px solid;
-      padding-left: 5px;
-      padding-top: 10px;
-    }
-
-    .timetable-content-div {
-      min-height: 250px;
-    }
-
-    .timetable-btn-div {
-      text-align: center;
-      padding-bottom: 10px;
-    }
-
     .edit-box {
       border:#EAEAEA 2px solid;
       margin-bottom: 10px;
@@ -579,22 +564,39 @@
       <div class="row set_row">
         <div class="col-md-12 menu_title">내용</div>
       </div>
-      <div class="timetable-div col-md-12">
-        <div class="col-md-12 timetable-content-div" id='timeline'>
-        asd<br>asd<br>asd<br>asd<br>asd<br>asd<br>asd<br>asd<br>
-        </div>
-        <div class="col-md-12 timetable-btn-div">
-          <ul class="pager timetable-btn-ul">
-          </ul>
-        </div>
-      </div>
-
       <div class="col-md-12 edit-div">
-
-        <div id="editdiv" class="col-md-12 edit-box episode-editor-div" contenteditable="true">
+        <div id="editdiv" class="col-md-10 edit-box episode-editor-div" contenteditable="true">
           episode content
         </div>
+        <div class="col-md-2 background-box">
+          <div class="background-div background-top">
+            &nbsp;&nbsp;&nbsp;소설 배경 설정
+            <span id="bgBtn" class="pull-right glyphicon glyphicon-resize-full"></span>
+          </div>
+          <div class="background-div background-search">
+
+            <div class="input-group col-md-12">
+      				<div id="radioBtn" class="btn-group">
+      					<a class="case-btn btn btn-primary btn-sm notActive"  data-title="characters">인물</a>
+                <a class="case-btn btn btn-primary btn-sm notActive" data-title="items">사물</a>
+      					<a class="case-btn btn btn-primary btn-sm notActive" data-title="maps">장소</a>
+                <a class="case-btn btn btn-primary btn-sm notActive" data-title="timetables">사건</a>
+      				</div>
+    			  </div>
+            <div class="ui-widget">
+              <label for="tags"></label>
+              <input id="tags" class="form-control">
+            </div>
+          </div>
+          <div class="background-div background-content">
+
+          </div>
+          <div class="pull-down background-div background-footer">
+            <button type="button" id="applyTag" class="form-control">태그 적용</button>
+          </div>
+        </div>
       </div>
+
       <div class="edit-box writers-postscript-div" contenteditable="true">
         writers postscript
       </div>
@@ -1445,40 +1447,44 @@
     }
 
     // background 모달 이벤트
-    // setBackgroundModal()
-    // function setBackgroundModal(){
-    //   var modal = document.getElementById('bgModal');
-    //   var btn = document.getElementById("bgBtn");
-    //   var span = document.getElementsByClassName("bgClose")[0];
-    //
-    //   btn.onclick = function() {
-    //     var bgKind = $("#bgHidden").attr("data-kind");
-    //     var bgId = $("#bgHidden").attr("data-id");
-    //     if(bgKind != null && bgId !=null){
-    //       modal.style.display = "block";
-    //       $(".case-btn").removeClass("active");
-    //       $(".case-btn").addClass("notActive");
-    //
-    //       setModalContent(bgKind,bgId);
-    //     } else {
-    //       alert("먼저 태그를 선택해 주세요.");
-    //     }
-    //   }
-    //
-    //   span.onclick = function() {
-    //       modal.style.display = "none";
-    //   }
-    //
-    //   window.onclick = function(event) {
-    //       if (event.target == modal) {
-    //           modal.style.display = "none";
-    //       }
-    //   }
-    //
-    // }
+    setBackgroundModal()
+    function setBackgroundModal(){
+      var modal = document.getElementById('bgModal');
+      var btn = document.getElementById("bgBtn");
+      var span = document.getElementsByClassName("bgClose")[0];
+
+      btn.onclick = function() {
+
+        var bgKind = $("#bgHidden").attr("data-kind");
+        var bgId = $("#bgHidden").attr("data-id");
+        if(bgKind != null && bgId !=null){
+          modal.style.display = "block";
+          $(".case-btn").removeClass("active");
+          $(".case-btn").addClass("notActive");
+
+          setModalContent(bgKind,bgId);
+        } else {
+          alert("먼저 태그를 선택해 주세요.");
+        }
+      }
+
+      span.onclick = function() {
+          modal.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
+
+    }
 
     // 모달 컨텐츠 변경
+
+
     function setModalContent(bgCase, bgId){
+
       removeModalContent();
       switch(bgCase){
         case "characters" :
@@ -1495,6 +1501,8 @@
         break;
         default:
         alert("error occured");
+
+
       }
 
       var topModal = $(".bg-modal-top");
@@ -1505,7 +1513,6 @@
           $(".bg-modal-middle").empty();
           $(".bg-modal-bottom").empty();
       }
-
 
       // 캐릭터 상세 정보 출력
       function setModalCharacters(bgId){
@@ -1600,202 +1607,120 @@
       function setModalTimetables(bgId){
       }
 
-
-    }
-
-    // 헬퍼툴 연대표 호출
-    getTimetableHelper()
-    // 핼퍼툴의 연대표 호출
-    function getTimetableHelper(){
-      var ttData = callTimetablesInfo();
-      console.log(ttData);
-      if(ttData.length > 0){
-        ready(timetableConvert(ttData));
-        setTimetableBtn(ttData);
+      // 케이스, 아이디로 해당 배경정보 호출
+      function callBackgroundInfo(bgCase, bgId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_background_info",
+            async: false,
+            data: {
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
+      }
+      // 케이스, 아이디로 해당 태그 호출
+      function callTagInfo(bgCase, bgId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/get_tag_by_id",
+            async: false,
+            data: {
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
+      }
+      // 타임테이블 정보 호출
+      function callTimetablesInfo(bgCase=null, bgId=null){
+        var timetablesInfo;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/get_timetables_info",
+            async: false,
+            data: {
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              timetablesInfo = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return timetablesInfo;
+      }
+      // 타임테이블 배열을 표형 데이터로 반환
+      function timetableConvert(data){
+        var tableData = new Array();
+        data.forEach(function(td){
+          var cData = {
+            "event_name"    : td.event_names,
+            "start_day"     : td.start_days,
+            "end_day"       : td.end_days
+          };
+          tableData.push(cData);
+        });
+        return tableData;
+      }
+      // 캐릭터 아이디로 관계를 호출
+      function callRelationInfo(chaId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_relation_info",
+            async: false,
+            data: {
+              "chaId"    : chaId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
+      }
+      // 캐릭터 아이디로 소유물건을 호출
+      function callOwnershipInfo(chaId){
+        var bgData;
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_ownership_info",
+            async: false,
+            data: {
+              "chaId"    : chaId
+            },
+            success: function (data) {
+              bgData = data;
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        return bgData;
       }
 
-        function setTimetableBtn(ttData){
-          ttData.forEach(function(fd){
-            $(".timetable-btn-ul").append(" <li><a class='timetable-btn-li' href='#' data-id='" + fd.id + "'>" + fd.event_names+ "</a></li> ");
-          })
-          setTImetableBtnEvent()
-
-          function setTImetableBtnEvent(){
-            $(".timetable-btn-li").off().on("click",function(e){
-              e.preventDefault();
-              var editorOffset = $(".edit-box").offset();
-              var btnOffset = $(this).offset();
-              var id = $(this).attr("data-id");
-              var eleId = "timetableWin" + id
-              var width = 200;
-              var height = 200;
-              var case =
-              if( $("#" + eleId).length < 1 ){
-                popWindow(width,height,btnOffset.left - width/2 + 20,editorOffset.top,"cl",eleId);
-                setWindowContent(eleId, case, id);
-              } else {
-                if( $("#" + eleId).css('display') == 'none' ) $("#" + eleId).show();
-                else $("#" + eleId).hide();
-              }
-
-            });
-          }
-
-
-        }
-    }
-
-    // 윈도우 띄우기
-    // 길이, 높이, X, Y, 클래스, 아이디
-    var zindex = 100;
-    function popWindow(width, height, winX, winY, winCl, winId){
-      var eleStr = "<div id='" + winId + "' class='"+ winCl +"'></div>";
-      var appendedEle = $(eleStr).appendTo("body")
-               .css({top: winY + "px", left: winX + "px"})
-               .css('z-index', ++zindex)
-               .css('position', 'absolute')
-               .css('border', "2px solid black")
-               .css('background-color', 'white')
-               .width(width + "px")
-               .height(height + "px");
-      appendedEle.draggable();
-      appendedEle.on('mousedown', function(){
-        $(this).css("z-index", ++zindex);
-      })
 
     }
-
-    // 해당 윈도우의 컨텐츠를 만듦
-    function setWindowContent(eleId, case, id){
-      switch(bgCase){
-        case "characters" :
-        setWindowCharacters(bgId);
-        break;
-        case "items" :
-        setWindowItems(bgId);
-        break;
-        case "maps" :
-        setWindowMaps(bgId);
-        break;
-        case "timetables" :
-        setWindowTimetables(bgId);
-        break;
-        default:
-        alert("error occured");
-      }
-    }
-    // 케이스, 아이디로 해당 배경정보 호출
-    function callBackgroundInfo(bgCase, bgId){
-      var bgData;
-      $.ajax({
-          type: "get",
-          url: "/write_novel/call_background_info",
-          async: false,
-          data: {
-            "bgCase"  : bgCase,
-            "bgId"    : bgId
-          },
-          success: function (data) {
-            bgData = data;
-          },
-          error: function (error) {
-            alert("오류발생");
-          }
-      });
-      return bgData;
-    }
-    // 케이스, 아이디로 해당 태그 호출
-    function callTagInfo(bgCase, bgId){
-      var bgData;
-      $.ajax({
-          type: "get",
-          url: "/write_novel/get_tag_by_id",
-          async: false,
-          data: {
-            "bgCase"  : bgCase,
-            "bgId"    : bgId
-          },
-          success: function (data) {
-            bgData = data;
-          },
-          error: function (error) {
-            alert("오류발생");
-          }
-      });
-      return bgData;
-    }
-    // 타임테이블 정보 호출
-    function callTimetablesInfo(bgCase=null, bgId=null){
-      var timetablesInfo;
-      $.ajax({
-          type: "get",
-          url: "/write_novel/get_timetables_info",
-          async: false,
-          data: {
-            "bgCase"  : bgCase,
-            "bgId"    : bgId
-          },
-          success: function (data) {
-            timetablesInfo = data;
-          },
-          error: function (error) {
-            alert("오류발생");
-          }
-      });
-      return timetablesInfo;
-    }
-    // 타임테이블 배열을 표형 데이터로 반환
-    function timetableConvert(data){
-      var tableData = new Array();
-      data.forEach(function(td){
-        var cData = {
-          "event_name"    : td.event_names,
-          "start_day"     : td.start_days,
-          "end_day"       : td.end_days
-        };
-        tableData.push(cData);
-      });
-      return tableData;
-    }
-    // 캐릭터 아이디로 관계를 호출
-    function callRelationInfo(chaId){
-      var bgData;
-      $.ajax({
-          type: "get",
-          url: "/write_novel/call_relation_info",
-          async: false,
-          data: {
-            "chaId"    : chaId
-          },
-          success: function (data) {
-            bgData = data;
-          },
-          error: function (error) {
-            alert("오류발생");
-          }
-      });
-      return bgData;
-    }
-    // 캐릭터 아이디로 소유물건을 호출
-    function callOwnershipInfo(chaId){
-      var bgData;
-      $.ajax({
-          type: "get",
-          url: "/write_novel/call_ownership_info",
-          async: false,
-          data: {
-            "chaId"    : chaId
-          },
-          success: function (data) {
-            bgData = data;
-          },
-          error: function (error) {
-            alert("오류발생");
-          }
-      });
-      return bgData;
-    }
-
   })(jQuery);
 
 
