@@ -10,18 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< HEAD
 
 /*
 |--------------------------------------------------------------------------
 | MAIN-page
 |--------------------------------------------------------------------------
 */
-=======
-/**************************************
-MAIN
-**************************************/
->>>>>>> 00dbb73a7a978b2305788c5bf0565c92660cc245
 Route::get('/', "MainController@index");
 
 
@@ -30,17 +24,12 @@ Route::get('/lib', function () {
     return view('load');
 });
 
-<<<<<<< HEAD
 /*
 |--------------------------------------------------------------------------
 | RELATION-Background-page
 |--------------------------------------------------------------------------
 */
-=======
-/**************************************
-RELATION - BACKGROUND
-**************************************/
->>>>>>> 00dbb73a7a978b2305788c5bf0565c92660cc245
+
 Route::get('/background/relation', "RelationController@index");
 
 Route::get('/background/relation/rmRel', "RelationController@removeRelation");
@@ -91,7 +80,7 @@ Route::get('/background/map', "MapController@index");
 Route::get('/background/removeImg', "MapController@removeImg");
 
 
-<<<<<<< HEAD
+
 /*
 |--------------------------------------------------------------------------
 | CHAPTER & HISTORY-Background-page
@@ -101,11 +90,9 @@ Route::get('/chapter/episode/{id}','ChaptersController@get_episode');
 
 Route::get('/chapter/noepisode/{id}/{this_chapter_id}','ChaptersController@get_no_episode');
 
-=======
 /**************************************
 CHARACTER & HISTORY - BACKGROUND & CHAPTER
 **************************************/
->>>>>>> 00dbb73a7a978b2305788c5bf0565c92660cc245
 Route::resource('/chapter', 'ChaptersController');
 
 Route::resource('/background/things', 'BackgroundItemsController');
@@ -124,24 +111,16 @@ Route::resource('/background/historyTable', 'BackgroundHistoryTablesController')
 
 Route::resource('/background', 'BackgroundController');
 
-<<<<<<< HEAD
+
 /*
 |--------------------------------------------------------------------------
 | NOVEL-Reader-page
 |--------------------------------------------------------------------------
 */
 Route::get('novel/novel_info/{id}', "NovelController@novelInfo");
-=======
-/**************************************
-NOVEL VIEW
-**************************************/
-// Novel Info
-Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
->>>>>>> 00dbb73a7a978b2305788c5bf0565c92660cc245
 
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
-<<<<<<< HEAD
 /*
 |--------------------------------------------------------------------------
 | SHARE-Background-page
@@ -156,9 +135,7 @@ Route::get('/background/share', function(){
 | TODAY-Novel-page
 |--------------------------------------------------------------------------
 */
-=======
 // Today Novel
->>>>>>> 00dbb73a7a978b2305788c5bf0565c92660cc245
 Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
 
 /**************************************
@@ -259,26 +236,8 @@ Auth::routes();
 //웹 가입후 이동 페이지
 Route::get('/home', 'HomeController@index')->name('home');
 
-<<<<<<< HEAD
-/*
-|--------------------------------------------------------------------------
-| BLOG-page
-|--------------------------------------------------------------------------
-*/
-Route::resource('/blog', 'BlogController');
 
-
-Route::get('/cash', "Controller@cashView");
-
-// 웹페이지 로그인
-
-Route::get('/login', function () {
-    return view('login.login');
-});
-// Route::resource('/login', "LoginController");
-=======
 /**************************************
 BLOG
 **************************************/
 Route::resource('/blog', "BlogController");
->>>>>>> 00dbb73a7a978b2305788c5bf0565c92660cc245
