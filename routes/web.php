@@ -90,9 +90,12 @@ Route::get('/chapter/episode/{id}','ChaptersController@get_episode');
 
 Route::get('/chapter/noepisode/{id}/{this_chapter_id}','ChaptersController@get_no_episode');
 
-/**************************************
-CHARACTER & HISTORY - BACKGROUND & CHAPTER
-**************************************/
+Route::get('/chapter/timetable/{novel_id}/{chapter_id}','ChaptersController@get_timetable');
+
+Route::get('/chapter/bringtimetable/{novel_id}/{chapter_id}','ChaptersController@bring_timetable');
+
+Route::post('/chapter/add/episode','ChaptersController@add_episode');
+
 Route::resource('/chapter', 'ChaptersController');
 
 Route::resource('/background/things', 'BackgroundItemsController');
@@ -117,7 +120,7 @@ Route::resource('/background', 'BackgroundController');
 | NOVEL-Reader-page
 |--------------------------------------------------------------------------
 */
-Route::get('novel/novel_info/{id}', "NovelController@novelInfo");
+Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
 
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 

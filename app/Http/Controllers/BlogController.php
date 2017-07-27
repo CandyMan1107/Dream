@@ -109,11 +109,11 @@ class BlogController extends Controller
     public function show($id)
     {
         //
-        $data = explode('&', $id);
+        //$data = explode('&', $id);
 
         // print_r($data);
 
-        return view('writer_blog.board.selected_board_view', ['data' => $data]);
+        //return view('writer_blog.board.selected_board_view', ['data' => $data]);
     }
 
     /**
@@ -121,35 +121,21 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public static function selectedBoard($data)
-    {
-        //
-        $idArr = $data;
+    // public static function selectedBoard($data)
+    // {
+    //     //
+    //     $idArr = $data;
 
-        $blog_menu_id = $idArr[0];
-        $post_id = $idArr[1];
+    //     $blog_menu_id = $idArr[0];
+    //     $post_id = $idArr[1];
 
-        $board = new BlogBoard();
-        $boardData = $board->selectedBoardD($blog_menu_id, $post_id);
+    //     $board = new BlogBoard();
+    //     $boardData = $board->selectedBoardD($blog_menu_id, $post_id);
 
-        // print_r($boardData);
+    //     // print_r($boardData);
 
-        return view('writer_blog.all_boards_view', ['boardData' => $boardData]);
-    }
-
-    /**
-    * Display ALL Boards of Blog.
-    * @return board_view.blade.php
-    */
-    public static function allBoard()
-    {
-        $board = new BlogBoard();
-        $boardData = $board->orderAllBoardD();
-
-        // print_r($boardData);
-
-        return view('writer_blog.all_boards_view', ['boardData' => $boardData]);
-    }
+    //     return view('writer_blog.all_boards_view', ['boardData' => $boardData]);
+    // }
 
     /**
     * Display the mainNoticeList with noticeList()'s $data
@@ -181,6 +167,20 @@ class BlogController extends Controller
         // var_dump($data);
 
         return view('writer_blog.part.main_notice_list')->with('data', $data);
+    }
+
+    /**
+    * Display ALL Boards of Blog.
+    * @return all_boards_view.blade.php
+    */
+    public static function allBoard()
+    {
+        $board = new BlogBoard();
+        $boardData = $board->orderAllBoardD();
+
+        // print_r($boardData);
+
+        return view('writer_blog.all_boards_view', ['boardData' => $boardData]);
     }
 
     
