@@ -116,7 +116,7 @@ Route::resource('/background', 'BackgroundController');
 | NOVEL-Reader-page
 |--------------------------------------------------------------------------
 */
-Route::get('novel/novel_info/{id}', "NovelController@novelInfo");
+Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
 
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 

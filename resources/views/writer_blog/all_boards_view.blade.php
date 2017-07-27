@@ -1,21 +1,22 @@
-@foreach ($boardData as $data)
+
+ @foreach ($boardData as $data)
     <div class="board_title">
         <ul class="list-inline">
-            @if ($data['is_notice'] == "on")
+            @if ($data->is_notice == "on")
                 <li>
                     <strong>[공지]</strong>
                 </li>
             @endif
             <li>
                 <h4>
-                    <strong>{!! $data['board_title'] !!}</strong>
+                    <strong>{!! $data->board_title !!}</strong>
                 </h4>
             </li>
             <li>
-                <small>| {!! $data['blog_menu_id'] !!}</small>
+                <small>| {!! $data->blog_menu_id !!}</small>
             </li>
             <li class="board_timestamp">
-                <small>{!! $data['created_at'] !!}</small>
+                <small>{!! $data->created_at !!}</small>
             </li> 
         </ul>
         
@@ -23,9 +24,10 @@
     <div name="title_line"></div>
     <div class="board_content">
         <div id="default-padding-big"></div>
-        {!! $data['board_content'] !!}
+        {!! $data->board_content !!}
     </div>
 @endforeach
+ 
 <div class="text-center">
      {{ $boardData->appends(['boardData' => $boardData->currentPage()])->links() }}   
 </div>
