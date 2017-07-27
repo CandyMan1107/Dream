@@ -7,6 +7,8 @@
  * ready(data) function 호출
  * data[] 는 event_name, start_day, end_day 를 연관 배열 형식으로 가지고 있어야한다.
  * 그래프를 호출하게 될 div의 id 는 timeline 으로 정의한다.
+ * ready(data,num=null) num에 양의 정수를 준후
+ * timetable2와 같은 형식으로 사용 시 여러개의 timetable호출 가능
  * 기타 변경 사항은 JeongJaeHun 에게 문의 바랍니다.
  ************************************************/
 
