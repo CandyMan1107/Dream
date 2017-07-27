@@ -261,14 +261,19 @@ class ChaptersController extends Controller
             }
         }
 
-        $none_has_timetable_id = $timetable->get_timetable_notIn_chapter($novel_id,$timetable_id);
+        $none_has_timetable = $timetable->get_timetable_notIn_chapter($novel_id,$timetable_id);
 
         $data = array(array());
         $i++;
         if(isset($none_has_timetable_id)){
-
+            foreach($none_has_timetable as $temp_none_has_timetable) {
+                $data[$i]['id'] = $temp_none_has_timetable->id;
+                $data[$i]['event_name'] = $temp_none_has_timetable->id;
+                $data[$i]['event_content'] = $temp_none_has_timetable->id;
+                $data[$i]['id'] = $temp_none_has_timetable->id;
+            }
         }
-        var_dump($none_has_timetable_id);
+        var_dump($none_has_timetable);
     }
 
     /**

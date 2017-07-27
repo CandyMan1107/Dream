@@ -12,7 +12,7 @@
 
 google.charts.load('current', {'packages':['timeline']});
 
-function ready(data){
+function ready(data, num=null){
 	var datas = data;
 
 	console.log(datas[0]['event_name']);
@@ -28,7 +28,7 @@ function ready(data){
 
 
 	// 차트가 생성될 div 태그의 id값을 timeline으로 설정
-	var container = document.getElementById('timeline');
+	var container = document.getElementById(num==null ? 'timeline' : 'timeline' + num);
 	var chart = new google.visualization.Timeline(container);
 	var dataTable = new google.visualization.DataTable();
 	
