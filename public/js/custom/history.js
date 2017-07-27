@@ -1,3 +1,15 @@
+/*************************************************
+ * Make By JeongJaeHun
+ * 2017.07.27 주석 작업
+ * <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ * 해당 구문 호출 이후
+ * history.js 를 include 시킨 이후,
+ * ready(data) function 호출
+ * data[] 는 event_name, start_day, end_day 를 연관 배열 형식으로 가지고 있어야한다.
+ * 그래프를 호출하게 될 div의 id 는 timeline 으로 정의한다.
+ * 기타 변경 사항은 JeongJaeHun 에게 문의 바랍니다.
+ ************************************************/
+
 google.charts.load('current', {'packages':['timeline']});
 
 function ready(data){
@@ -15,7 +27,7 @@ function ready(data){
 	var events = new Array();
 
 
-
+	// 차트가 생성될 div 태그의 id값을 timeline으로 설정
 	var container = document.getElementById('timeline');
 	var chart = new google.visualization.Timeline(container);
 	var dataTable = new google.visualization.DataTable();

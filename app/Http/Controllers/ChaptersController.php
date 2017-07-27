@@ -7,6 +7,8 @@ use App\Novel_chapter;
 use App\Episode;
 use App\Novel_has_chapter;
 use App\Chapter_has_episode;
+use App\Timetable;
+use App\Chapter_has_timetable;
 
 use Illuminate\Http\Request;
 
@@ -169,6 +171,7 @@ class ChaptersController extends Controller
         $novel_has_chapter = new Novel_has_chapter();
         $chapter_has_episode = new Chapter_has_episode();
 
+        // 노벨이 가지고 있는 챕터 정보
         $chapter_id = $novel_has_chapter->get_chapter_id($id);
         $i = 0;
         $chapter_data = array();
@@ -179,18 +182,30 @@ class ChaptersController extends Controller
             }
         }
 
-        $episode_data = array();
+        // var_dump($chapter_data);
         $episode_ids = array();
-        for($i = 0 ; $i < count($chapter_data) ; $i++ ){
-            $episode_data = $chapter_has_episode->get_episode_id($chapter_data[$i]);
-            if(isset($episode_data[0]->episode_id)){
-                 $episode_ids[$i]=$episode_data[0]->episode_id;
-            }  
+        $episode_count = 0;
+        // chapter_data 가 있으면
+        if(isset($chapter_data)) {
+            for($i = 0 ; $i < count($chapter_data) ; $i++ ){
+                // DB로부터 데이터 불러옴
+                $episode_data = $chapter_has_episode->get_episode_id($chapter_data[$i]);
+                // 불러온 데이터가 있으면
+                if(isset($episode_data)){
+                    // 각 불러온 데이터의 id를 저장
+                    foreach($episode_data as $one_episode){
+                        $episode_ids[$episode_count] = $one_episode->episode_id;
+                        $episode_count++;
+                    }
+                }  
+            }
         }
+        // var_dump($episode_ids);
         
         $episode_datas = $episode->get_episode($episode_ids,$id);
-        
+        // var_dump($episode_datas);
         $episode_data_not_chapter = array(array());
+        // 챕터 입력을 위한 변수 선언
         $episode_data_not_chapter['chapter_id'] = $this_chapter_id;
         $i = 0;
         foreach($episode_datas as $temp_episode_data) {
@@ -205,6 +220,55 @@ class ChaptersController extends Controller
 
         // var_dump($episode_data_not_chapter[0]);
         return view('background.chapter.episode_modal')->with("data",$episode_data_not_chapter);
+    }
+
+    public function get_timetable($novel_id,$chapter_id){
+        // 소설에서 설정 id가져오고 그것의 정보를 가져오는 형식으로 구현
+
+        $timetable = new Timetable();
+        $time_data = $timetable->dataBringAll();
+
+        $timetable_data = array(array());
+        $i = 0;;
+        foreach($time_data as $data){
+            $timetable_data[$i]['id'] = $data->id;
+            $timetable_data[$i]['event_name'] = $data->event_names;
+            $timetable_data[$i]['event_content'] = $data->event_contents;
+            $timetable_data[$i]['start_day'] = $data->start_days;
+            $timetable_data[$i]['end_day'] = $data->end_days;
+            
+
+            $i++;
+        }
+        // echo "34";
+        return $timetable_data;
+    }
+
+    public function bring_timetable($novel_id,$chapter_id){
+        // chapter_has_timetables에서 해당 챕터의 사건 정보 가져오기.
+        $chapter_has_timetable = new Chapter_has_timetable();
+        $timetable = new Timetable();
+
+        $chapter_timetable_id = $chapter_has_timetable->chapter_has_timetable_id($chapter_id);
+        
+        // query에서 notin을 쓰기위한 배열화
+        $timetable_id = array();
+        $i=0;
+        if(isset($chapter_timetable_id)){
+            foreach($chapter_timetable_id as $temp_chapter_timetable) {
+                $timetable_id[$i] = $temp_chapter_timetable->timetable_id;
+                $i++;
+            }
+        }
+
+        $none_has_timetable_id = $timetable->get_timetable_notIn_chapter($novel_id,$timetable_id);
+
+        $data = array(array());
+        $i++;
+        if(isset($none_has_timetable_id)){
+
+        }
+        var_dump($none_has_timetable_id);
     }
 
     /**

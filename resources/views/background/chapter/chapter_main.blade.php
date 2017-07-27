@@ -4,6 +4,8 @@
 
 	@include('partials.mySubNavi')
 	@include('background.tag')
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript" src="/js/custom/history.js"></script>
 		<script type="text/javascript" src="/js/custom/chapter_click.js"></script>
 		<div class="col-xs-2 col-sm-2 col-md-2 height-max-set" style= "border-right: 2px solid #efefef ; height: 100vh">
 			<div class="novel_id" id="root" value="{{$data['novel']['id']}}">
@@ -50,12 +52,25 @@
 			</div>
 		</div>
 		<div class="col-xs-2 col-sm-2 col-md-2 height-max-set" style= "border-right: 2px solid #efefef ; height: 100vh" >
-			 <div class="chapter_data">
+			<div class="chapter_data">
 
-			 </div>
+			</div>
 		</div>
 		<div class="col-xs-9 col-sm-6 col-md-6 height-max-set" >
-			
+			<div>
+				<div class="row" style="border-bottom : 2px solid #efefef">
+					<div class="col-md-6" style="">
+						<div id="timeline" style="height:40vh"></div>
+						<div id="timeline_name" style=""></div>
+					</div>
+					<div class="col-md-6">회차 글자수</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-6">추천수0</div>
+					<div class="col-md-6">회차 조회수</div>
+				</div>
+			</div>
 		</div>
 	</div>
 @endsection

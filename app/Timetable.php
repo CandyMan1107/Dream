@@ -32,4 +32,19 @@ class Timetable extends Model
 
         return $dataSet;
     }
+
+    // JJH 2017.07.27 
+    // select * from timetable, novel_has_background
+    // where novel_has_background 'kind' = timetable
+    // where novel_has_background 'background_id' = timetalb 'id'
+    // whereNotIn timetable 'id', $chapter_has_id
+    public function get_timetable_notIn_chapter($novel_id,$timetable_id) { 
+        $data = DB::table('timetables')
+                // 소설 설정 종속 이후 구현하기
+                // ->where
+                ->whereNotIn('id',$timetable_id)     
+                ->get();
+        
+        return $data;
+    }
 }
