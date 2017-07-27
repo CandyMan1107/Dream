@@ -30,6 +30,7 @@ class Novel_has_chapter extends Model
                 ->where('novel_id','=',$novel_id)
                 ->get();
         
+        // var_dump($data);
         return $data;
     }
 }
