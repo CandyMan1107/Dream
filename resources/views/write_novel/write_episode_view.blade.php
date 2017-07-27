@@ -541,15 +541,53 @@
     font-size:33px;
   }
 
-  .timetable-info-table {
-    margin-left: 10px;
+  /* 사건 테이블 css*/
+  .table-div{
+    padding:0px;
+    height:200px;
+    overflow-y: scroll;
   }
+  .timetable-info-table {
+    padding-left: 10px;
+    table-layout: fixed;
+    word-break:break-all;
+  }
+  .timetable-info-table > tr {
+    height:100px;
+  }
+  .timetable-info-tr {
+    height:40px;
+  }
+  .timetable-info-table > td {
+    word-break:break-all;
+  }
+
   .timetable-window-attr-div {
     padding: 0px;
     text-align: center;
     font-size: 18px;
     font-weight:bold;
     background-color: #B2EBF4;
+  }
+
+  .selected-attr {
+    background-color: #5CD1E5;
+  }
+
+  .subject-td {
+    text-align: center;
+    font-weight: bold;
+    background-color: #FAECC5;
+
+  }
+
+  .content-td {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .attr-content-div {
+    word-break:break-all;
   }
   </style>
 
@@ -620,35 +658,7 @@
         <div id="editdiv" class="col-md-12 edit-box episode-editor-div" contenteditable="true">
           episode content
 
-          <div class='window-div'>
-            <div class='col-md-12 window-header'>
-              <div class="col-md-11 window-header-text">
-                제목
-              </div>
-              <div class=" col-md-1 window-header-clear">
-                <i class='pull-right material-icons window-clear-icon'>clear</i>
-              </div>
-            </div>
 
-            <div class='col-md-12 window-content'>
-              <table class='timetable-info-table'>
-                <tr>
-                  <td>사건명</td>
-                  <td>사건명</td>
-                </tr>
-                <tr>
-                  <td>사건설명</td>
-                  <td>사건설명</td>
-                </tr>
-                <tr>
-                  <td>부가설명</td>
-                  <td>부가설명</td>
-                </tr>
-              </table>
-
-
-            </div>
-          </div>
 
         </div>
       </div>
@@ -1504,7 +1514,7 @@
               var btnOffset = $(this).offset();
               var id = $(this).attr("data-id");
               var eleId = "timetableWin" + id
-              var width = 200;
+              var width = 300;
               var height = 200;
               var bgCase = "timetables";
               if( $("#" + eleId).length < 1 ){
@@ -1533,8 +1543,8 @@
                .css('position', 'absolute')
                .css('border', "2px solid black")
                .css('background-color', 'white')
-               .width(width + "px")
-               .height(height + "px");
+               .css('width', width + "px")
+               .css('min-height', height + "px");
       appendedEle.draggable();
       appendedEle.on('mousedown', function(){
         $(this).css("z-index", ++zindex);
@@ -1586,38 +1596,51 @@
               addEle += "   </div>"
               addEle += "  </div>"
               addEle += "  <div class='col-md-12 window-content'>"
+              addEle += "   <div class='col-md-12 table-div'>"
               addEle += "    <table class='timetable-info-table'>"
-              addEle += "      <tr>"
-              addEle += "        <td>사건명</td>"
-              addEle += "        <td>" + data.event_names + "</td>"
+              addEle += "      <tr class='timetable-info-tr'>"
+              addEle += "        <td width='30%' class='subject-td'>사건명</td>"
+              addEle += "        <td width='70%' class='content-td'>" + data.event_names + "</td>"
               addEle += "      </tr>"
-              addEle += "      <tr>"
-              addEle += "        <td>사건설명</td>"
-              addEle += "        <td>" + data.event_contents + "</td>"
+              addEle += "      <tr class='timetable-info-tr'>"
+              addEle += "        <td class='subject-td'>사건설명</td>"
+              addEle += "        <td class='content-td'>" + data.event_contents + "</td>"
               addEle += "      </tr>"
-              addEle += "      <tr>"
-              addEle += "        <td>부가설명</td>"
-              addEle += "        <td>" + data.refer_info + "</td>"
+              addEle += "      <tr class='timetable-info-tr'>"
+              addEle += "        <td class='subject-td'>부가설명</td>"
+              addEle += "        <td class='content-td'>" + data.refer_info + "</td>"
               addEle += "      </tr>"
-              addEle += "      <tr>"
-              addEle += "        <td>사건시작일</td>"
-              addEle += "        <td>" + data.start_days + "</td>"
+              addEle += "      <tr class='timetable-info-tr'>"
+              addEle += "        <td class='subject-td'>사건시작일</td>"
+              addEle += "        <td class='content-td'>" + data.start_days + "</td>"
               addEle += "      </tr>"
-              addEle += "      <tr>"
-              addEle += "        <td>사건종료일</td>"
-              addEle += "        <td>" + data.end_days + "</td>"
+              addEle += "      <tr class='timetable-info-tr'>"
+              addEle += "        <td class='subject-td'>사건종료일</td>"
+              addEle += "        <td class='content-td'>" + data.end_days + "</td>"
               addEle += "      </tr>"
               addEle += "    </table>"
-              addEle += "     <div class='timetable-window-attr-div col-md-3'>인물</div>"
-              addEle += "     <div class='timetable-window-attr-div col-md-3'>사물</div>"
-              addEle += "     <div class='timetable-window-attr-div col-md-3'>관계</div>"
-              addEle += "     <div class='timetable-window-attr-div col-md-3'>지도</div>"
+              addEle += "   </div>"
+              addEle += "     <div data-timetable-id='"+data.id+"' data-attr='characters' class='timetable-window-attr-div attr-div-" + data.id + " col-md-3'>인물</div>"
+              addEle += "     <div data-timetable-id='"+data.id+"' data-attr='items' class='timetable-window-attr-div attr-div-" + data.id + " col-md-3'>사물</div>"
+              addEle += "     <div data-timetable-id='"+data.id+"' data-attr='relations' class='timetable-window-attr-div attr-div-" + data.id + " col-md-3'>관계</div>"
+              addEle += "     <div data-timetable-id='"+data.id+"' data-attr='maps' class='timetable-window-attr-div attr-div-" + data.id + " col-md-3'>지도</div>"
+              addEle += "  </div>"
+              addEle += "  <div class='col-md-12 attr-content-div'>"
+              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-characters-div-" + data.id + "'>cha-div</div>"
+              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-items-div-" + data.id + "'>item-div</div>"
+              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-relations-div-" + data.id + "'>rel-div</div>"
+              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-maps-div-" + data.id + "'>map-div</div>"
               addEle += "  </div>"
               addEle += "</div>"
 
               winEle.append(addEle)
+              // 인물,사물,관계,지도 컨텐츠 감춤
+              $(".attr-content-" + data.id).hide();
+
               // 닫기버튼 이벤트
-              setClearBtnEvent()
+              setClearBtnEvent();
+              // 인물,사물,관계,지도 버튼
+              setAttrBtnEvent();
             },
             error: function (error) {
               alert("오류발생");
@@ -1630,7 +1653,97 @@
           });
         }
 
+        function setAttrBtnEvent(){
+          $(".timetable-window-attr-div").off().on("mouseover",function(){
+            $(this).css("background-color","#5CD1E5");
+          })
 
+          $(".timetable-window-attr-div").on("mouseout",function(){
+            if(!$(this).hasClass("selected-attr"))
+              $(this).css("background-color","#B2EBF4");
+          })
+
+          $(".timetable-window-attr-div").on("click",function(){
+            var attr = $(this).attr("data-attr");
+            var timeTableId = $(this).attr("data-timetable-id");
+            var attrDiv = $(".attr-" + attr + "-div-" + timeTableId);
+            var sameEle = $(".attr-div-" + timeTableId)
+          //  alert(attr + " " + timeTableId);
+            if(!attrDiv.hasClass("hasCalled"))
+              setAffectInfo(timeTableId, attr ,attrDiv);
+
+
+            // check : selected == false
+            if(!$(this).hasClass("selected-attr")){
+              // 모든 div select 속성 제거
+              sameEle.removeClass("selected-attr");
+              sameEle.css("background-color","#B2EBF4");
+              // 현재 div select 속성 추가
+              $(this).addClass("selected-attr");
+              $(this).css("background-color","#5CD1E5");
+              // 모든 attr-div 숨김
+              $(".attr-content-" + timeTableId).hide();
+              // 현재 attr-div 보임
+              attrDiv.show();
+
+            // check : selected == true
+            } else {
+              // 모든 div select 속성 제거
+              sameEle.removeClass("selected-attr");
+              sameEle.css("background-color","#B2EBF4");
+              // 모든 attr-div 숨김
+              $(".attr-content-" + timeTableId).hide();
+            }
+
+          })
+        }
+
+
+      }
+    }
+    // 사건에 영향을 끼친 정보 호출하여 setDiv에 적용
+
+    function setAffectInfo(timetableId, bgCase, setDiv=null){
+      $.ajax({
+          type: "get",
+          url: "/write_novel/call_affect_info",
+          async: false,
+          data: {
+            "timetableId"  : timetableId,
+            "bgCase"       : bgCase
+          },
+          success: function (data) {
+
+            console.log(data);
+            var appendEle = "";
+            switch(bgCase){
+              case "characters":
+              appendEle = createCharacterElement(data);
+              break;
+              case "items":
+              break;
+              case "relations":
+              break;
+              case "maps":
+              break;
+            }
+            setDiv.append(appendEle);
+          },
+          error: function (error) {
+            alert("오류발생");
+          }
+      });
+
+      function createCharacterElement(data){
+        var addEle = "";
+
+        data.forEach(function(dt){
+          addEle += "이름: " + dt.name + "<br>";
+          addEle += "설명: " + dt.info + "<br>";
+        });
+
+
+        return addEle;
       }
     }
     // 케이스, 아이디로 해당 배경정보 호출
