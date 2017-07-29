@@ -11,6 +11,9 @@ use  App\Blog;
 use  App\BlogMenu;
 use  App\BlogBoard;
 
+use  App\MenuBoardRelation;
+use  App\BoardFileRelation;
+
 class BlogController extends Controller
 {
     /**
@@ -51,6 +54,8 @@ class BlogController extends Controller
                     $i++;
                 }
             }
+
+            // print_r($data);
         
 
         return view('writer_blog.blog_main')->with("data", $data);
@@ -84,13 +89,19 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         //
-        $board = new BlogBoard();
-
         $data = $request->all();
 
-        // print_r($data);
+        // print_r($data['blog_id']);
 
-        $board->insertBoardD($data);
+
+        $board = new BlogBoard();
+        $blog_menu_board_relation = new MenuBoardRelation();
+
+        // INSERT DATAS INTO blog_boards TABLE
+        $blog_board_id = $board->newBoardD($data);
+
+        // INSERT DATAS INTO menu_board_relations TABLE
+        $blog_menu_board_relation->insertRelationD($data['blog_menu_id'], $blog_board_id);
 
         return redirect(route('blog.index'));
     }
@@ -109,33 +120,20 @@ class BlogController extends Controller
     public function show($id)
     {
         //
-        //$data = explode('&', $id);
+        $hrefArr = explode('&', $id);
 
-        // print_r($data);
+        // print_r($hrefArr);
 
-        //return view('writer_blog.board.selected_board_view', ['data' => $data]);
+        $blog_menu_id = $hrefArr[0];
+        $post_id = $hrefArr[1];
+
+        $board = new BlogBoard();
+        $boardData = $board->selectedBoardD($blog_menu_id, $post_id);
+
+        // print_r($boardData);
+
+        return $boardData;
     }
-
-    /**
-     * Display the selected Board's view.
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public static function selectedBoard($data)
-    // {
-    //     //
-    //     $idArr = $data;
-
-    //     $blog_menu_id = $idArr[0];
-    //     $post_id = $idArr[1];
-
-    //     $board = new BlogBoard();
-    //     $boardData = $board->selectedBoardD($blog_menu_id, $post_id);
-
-    //     // print_r($boardData);
-
-    //     return view('writer_blog.all_boards_view', ['boardData' => $boardData]);
-    // }
 
     /**
     * Display the mainNoticeList with noticeList()'s $data

@@ -47,8 +47,8 @@ class ChaptersController extends Controller
         $chapter = new Novel_chapter();
         $novel_has_chapter = new Novel_has_chapter();
 
-        // $chapter_id = $chapter->new_chater($data);
-        // $novel_has_chapter->add_chapter($data['novel_id'],$chapter_id);
+        $chapter_id = $chapter->new_chater($data);
+        $novel_has_chapter->add_chapter($data['novel_id'],$chapter_id);
 
         $redirect_url = 'chapter/'.$data['novel_id'];
 

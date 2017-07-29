@@ -18,7 +18,7 @@
                             <h3>블로그가 텅 비었네요!</h3>
                         @else
                             @php
-                                echo BlogController::mainNoticeList($data);
+                                 echo BlogController::mainNoticeList($data); 
                             @endphp
                         @endif
                     </div>
@@ -30,16 +30,17 @@
                             <h3>마치 통장 같아! 텅장!</h3>
                         {{-- ELSEIF $_SERVER["REQUEST_URI"] in /blog OR /blog?%%% --}}
                         @elseif (!empty($data[0]) && (strpos($_SERVER["REQUEST_URI"], "/blog")!==false || strpos($_SERVER["REQUEST_URI"], "/blog?")!==false))
-                            @php
-                                echo BlogController::allBoard();
-                            @endphp
+                            <div name="blog_post">
+                                @php
+                                    echo BlogController::allBoard(); 
+                                @endphp
+                            </div>
                         {{-- ELSE ONCLICK
                         url 받아와서 뒤에 뭐가 있으면 js 파일로 ajax --}}
                         @else
-                            @php
-                                echo($_SERVER["REQUEST_URI"]);
-                            @endphp
-                            <div class="testing"></div>
+                            <div name="blog_post">
+
+                            </div>
                         @endif
                     </div>
                     {{-- BLOG BOARD END (NOTICE) --}}
