@@ -94,6 +94,8 @@ Route::get('/chapter/timetable/{novel_id}/{chapter_id}','ChaptersController@get_
 
 Route::get('/chapter/bringtimetable/{novel_id}/{chapter_id}','ChaptersController@bring_timetable');
 
+Route::post('/chapter/addtimetable','ChaptersController@add_timetable');
+
 Route::post('/chapter/add/episode','ChaptersController@add_episode');
 
 Route::resource('/chapter', 'ChaptersController');

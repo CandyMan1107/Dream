@@ -7,6 +7,12 @@
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script type="text/javascript" src="/js/custom/history.js"></script>
 		<script type="text/javascript" src="/js/custom/chapter_click.js"></script>
+		<style>
+			.pie { fill : orange; stroke : white; }
+			.total { font-size : 9pt; text-anchor : middle; }
+			.pieNum { font-size : 10px; text-anchor : middle; }
+		</style>
+
 		<div class="col-xs-2 col-sm-2 col-md-2 height-max-set" style= "border-right: 2px solid #efefef ; height: 100vh">
 			<div class="novel_id" id="root" value="{{$data['novel']['id']}}">
 				<h3 class="text-center">{{$data['novel']['title']}}</h3>
@@ -56,14 +62,17 @@
 
 			</div>
 		</div>
-		<div class="col-xs-9 col-sm-6 col-md-6 height-max-set" >
+		<div class="col-xs-9 col-sm-6 col-md-6 height-max-set">
 			<div>
 				<div class="row" style="border-bottom : 2px solid #efefef">
 					<div class="col-md-6" style="">
 						<div id="timeline" style="height:40vh"></div>
+						<div id="timeline_button"></div>
 						<div id="timeline_name" style=""></div>
 					</div>
-					<div class="col-md-6">회차 글자수</div>
+					<div class="col-md-6">회차 글자수
+						<svg id="myGraph" style="width : 320px; height : 240px; border : 1px solid black;"></svg>
+					</div>
 				</div>
 				<br>
 				<div class="row">
