@@ -279,8 +279,9 @@ Route::get('/cash', "Controller@cashView");
 // 웹페이지 로그인
 
 Route::get('/login', 'MemberController@login_index');
-// Route::post('/loginAction', 'MemberController@login');
 Route::post('/login', 'MemberController@login');
+
+Route::get('/logout', 'MemberController@logout');
 
 // 웹페이지 회원가입
 Route::get('/register', 'MemberController@register_index');
