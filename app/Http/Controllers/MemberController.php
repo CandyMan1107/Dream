@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class MemberController extends Controller
 {
     public function index(){
         

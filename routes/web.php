@@ -202,4 +202,15 @@ Route::get('/cash', "Controller@cashView");
 Route::get('/login', function () {
     return view('login.login');
 });
+
+// 웹페이지 회원가입
+Route::get('/register', function () {
+    return view('login.register');
+});
+
+// 캐시 충천
+Route::get('/cash', function () {
+    return view('novel.cash');
+});
+
 // Route::resource('/login', "LoginController");
