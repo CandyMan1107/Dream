@@ -18,7 +18,7 @@
                             <h3>블로그가 텅 비었네요!</h3>
                         @else
                             @php
-                                 echo BlogController::mainNoticeList($data); 
+                                echo BlogController::mainNoticeList();
                             @endphp
                         @endif
                     </div>
@@ -28,19 +28,10 @@
                     <div class="col-md-12 blog_notice">
                         @if (empty($data[0]))
                             <h3>마치 통장 같아! 텅장!</h3>
-                        {{-- ELSEIF $_SERVER["REQUEST_URI"] in /blog OR /blog?%%% --}}
-                        @elseif (!empty($data[0]) && (strpos($_SERVER["REQUEST_URI"], "/blog")!==false || strpos($_SERVER["REQUEST_URI"], "/blog?")!==false))
-                            <div name="blog_post">
-                                @php
-                                    echo BlogController::allBoard(); 
-                                @endphp
-                            </div>
-                        {{-- ELSE ONCLICK
-                        url 받아와서 뒤에 뭐가 있으면 js 파일로 ajax --}}
                         @else
-                            <div name="blog_post">
-
-                            </div>
+                            @php
+                                echo BlogController::selectedBoard($data);
+                            @endphp
                         @endif
                     </div>
                     {{-- BLOG BOARD END (NOTICE) --}}
@@ -70,7 +61,6 @@
     {{-- JHM STYLE --}}
     <link rel="stylesheet" href="/css/jhm-style.css">
 	{{-- JHM SCRIPT --}}
-    <script type="text/javascript" src="/js/JHM-Custom/blog_click.js"></script>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="/js/jquery-3.2.0.js"></script>
@@ -78,5 +68,4 @@
 	<script src="/js/jquery.mixitup.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/js/slick.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
-    
 @endsection

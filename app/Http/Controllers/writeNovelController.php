@@ -185,4 +185,21 @@ class writeNovelController extends Controller
       return $ttData;
     }
 
+    // 연대표 정보 호출
+    public function callAffectInfo(Request $request){
+      $timetableId = $request->input('timetableId');
+      $bgCase      = $request->input('bgCase');
+      $affectId    = "id";
+      if($bgCase == "relations") $bgCase = "relation_lists";
+      if($bgCase == "characters") $affectId = "cha_id";
+
+      $ttData = DB::table("effects")->join($bgCase, "effects.affect_id", "=", $bgCase.".".$affectId)
+      ->where("timetable_id","=",$timetableId)
+      ->where("affect_table","=",$bgCase)
+      ->get();
+
+
+      return $ttData;
+    }
+
 }

@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="episode">
+<div class="modal fade" tabindex="-1" role="dialog" id="timetable_modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

@@ -16,7 +16,7 @@ class CreateBlogMenusTable extends Migration
         // BLOG MENUS TABLE
         Schema::create('blog_menus', function (Blueprint $table) {
             $table->increments('id');   // BLOG MENU ID
-            $table->integer('blog_id'); // BLOG ID : blogs table 'id'
+            // $table->integer('blog_id'); // BLOG ID : blogs table 'id'
             $table->string('menu_title');   // BLOG MENU TITLE
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

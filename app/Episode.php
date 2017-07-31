@@ -87,7 +87,7 @@ class Episode extends Model
     // TABLE : novel_episodes SELECT * WHERE episode_id
     public function get_episode_by_episode_id ($episode_id) {
         $data = DB::table('novel_episodes')
-                ->where('id','=',$novel_id)
+                ->where('id','=',$episode_id)
                 ->get();
         
         return $data;

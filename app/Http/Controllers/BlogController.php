@@ -11,6 +11,9 @@ use  App\Blog;
 use  App\BlogMenu;
 use  App\BlogBoard;
 
+use  App\MenuBoardRelation;
+use  App\BoardFileRelation;
+
 class BlogController extends Controller
 {
     /**
@@ -21,30 +24,39 @@ class BlogController extends Controller
     public function index()
     {
         //
-        $board = new BlogBoard();
-        $boardData = $board->allBoardD();
-        $data = array(array());
 
-        $i = 0;
+            $board = new BlogBoard();
+            $boardData = $board->allBoardD();
+            $data = array(array());
 
-        // print_r($boardData);
+            $i = 0;
 
-        if(empty($boardData)) {
-            $data = 0;
-        } else {
-            foreach($boardData as $datas) {
-                $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
-                $data[$i]['board_title'] = $datas->board_title;
-                $data[$i]['is_notice'] = $datas->is_notice;
-                // $data[$i]['board_hit'] = $datas->board_hit;
-                // $data[$i]['board_like'] = $datas->board_like;
-                $data[$i]['board_content'] = $datas->board_content;
-                $data[$i]['created_at'] = $datas->created_at;
-                $data[$i]['updated_at'] = $datas->updated_at;
+            // print_r($boardData);
 
-                $i++;
+            if(empty($boardData)) {
+                $data = 0;
+            } else {
+                foreach($boardData as $datas) {
+                    $data[$i]['id'] = $datas->id;
+                    $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+                    $data[$i]['board_title'] = $datas->board_title;
+                    $data[$i]['is_notice'] = $datas->is_notice;
+                    // $data[$i]['board_hit'] = $datas->board_hit;
+                    // $data[$i]['board_like'] = $datas->board_like;
+                    $data[$i]['board_content'] = $datas->board_content;
+                    $data[$i]['created_at'] = $datas->created_at;
+                    $data[$i]['updated_at'] = $datas->updated_at;
+
+                    // show($id)'s $id : blog_menu_id&id
+                    $hrefArr = array($data[$i]['blog_menu_id'], $data[$i]['id']);
+                    $data[$i]['href'] = implode("&", $hrefArr);
+
+                    $i++;
+                }
             }
-        }
+
+            // print_r($data);
+        
 
         return view('writer_blog.blog_main')->with("data", $data);
     }
@@ -77,13 +89,19 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         //
-        $board = new BlogBoard();
-
         $data = $request->all();
 
-        // print_r($data);
+        // print_r($data['blog_id']);
 
-        $board->insertBoardD($data);
+
+        $board = new BlogBoard();
+        $blog_menu_board_relation = new MenuBoardRelation();
+
+        // INSERT DATAS INTO blog_boards TABLE
+        $blog_board_id = $board->newBoardD($data);
+
+        // INSERT DATAS INTO menu_board_relations TABLE
+        $blog_menu_board_relation->insertRelationD($data['blog_menu_id'], $blog_board_id);
 
         return redirect(route('blog.index'));
     }
@@ -102,34 +120,19 @@ class BlogController extends Controller
     public function show($id)
     {
         //
-        $boardData = App\BlogBoard::paginate(1, ['*'], 'boardData');
+        $hrefArr = explode('&', $id);
 
-        return view('writer_blog.board.board_view', ['boardData' => $boardData]);
-    }
+        // print_r($hrefArr);
 
-    /** 
-    * Push the data of mainNoticeList.
-    * @return array $data
-    */
-    public function noticeList() {
-        $boardTable = new BlogBoard();
+        $blog_menu_id = $hrefArr[0];
+        $post_id = $hrefArr[1];
 
-        $noticeList = $boardTable->noticeListBoardD();
+        $board = new BlogBoard();
+        $boardData = $board->selectedBoardD($blog_menu_id, $post_id);
 
-        $data = array(array());
-        $i = 0;
-        
-        foreach($noticeList as $datas) {
-            $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
-            $data[$i]['board_title'] = $datas->board_title;
-            $data[$i]['is_notice'] = $datas->is_notice;
-            $data[$i]['created_at'] = $datas->created_at;
-            $data[$i]['updated_at'] = $datas->updated_at;
+        // print_r($boardData);
 
-            $i++;
-        }
-
-        return $data;
+        return $boardData;
     }
 
     /**
@@ -137,11 +140,6 @@ class BlogController extends Controller
     * @return view main_notice_list.blade.php
     */
     public static function mainNoticeList() {
-        // $class = new BlogController();
-        // $data = $class->noticeList();
-
-        // var_dump($data);
-
         $boardTable = new BlogBoard();
 
         $noticeList = $boardTable->noticeListBoardD();
@@ -150,27 +148,40 @@ class BlogController extends Controller
         $i = 0;
         
         foreach($noticeList as $datas) {
+            $data[$i]['id'] = $datas->id;
             $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
             $data[$i]['board_title'] = $datas->board_title;
             $data[$i]['is_notice'] = $datas->is_notice;
             $data[$i]['created_at'] = $datas->created_at;
             $data[$i]['updated_at'] = $datas->updated_at;
 
+            // show($id)'s $id : blog_menu_id&id
+            $hrefArr = array($data[$i]['blog_menu_id'], $data[$i]['id']);
+            $data[$i]['href'] = implode("&", $hrefArr);
+
             $i++;
         }
 
-        var_dump($data);
+        // var_dump($data);
 
-        
-
-        // return view('writer_blog.part.main_notice_list')->with('data', $data);
+        return view('writer_blog.part.main_notice_list')->with('data', $data);
     }
 
-    public static function mainNotice() {
-        $noticeData = BlogBoard::where('is_notice', '=', 'on')->orderBy('id', 'desc')->paginate(1, ['*'], 'noticeData');
+    /**
+    * Display ALL Boards of Blog.
+    * @return all_boards_view.blade.php
+    */
+    public static function allBoard()
+    {
+        $board = new BlogBoard();
+        $boardData = $board->orderAllBoardD();
 
-        return view('writer_blog.part.main_notice', ['noticeData' => $noticeData]);
+        // print_r($boardData);
+
+        return view('writer_blog.all_boards_view', ['boardData' => $boardData]);
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.

@@ -7,11 +7,17 @@ use DB;
 
 class Member extends Model
 {
-    public function dataBringAll(){
-        // maps 전체 data 가져오기
-        $dataSet = DB::table('user')->get();
-        // var_dump($dataSet);
+    public function formstore($data) {
+        $user_id = Input::get('user_id');
+        $pass = Input::get('password');
+        $email = Input::get('email');
 
-        return $dataSet;
+        $users = new Register();
+
+        $users->name = $user_id;
+        $users->password = $pass;
+        $users->email = $email;
+
+        $users->save();
     }
 }
