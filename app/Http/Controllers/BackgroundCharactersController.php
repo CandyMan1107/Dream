@@ -115,6 +115,9 @@ class BackgroundCharactersController extends Controller
         $background = new Background();
         $imgUpLoad = new BackgroundCharactersController();
 
+        session_start();
+        $novel_id = $_SESSION['novel_id'];
+
         $file = Input::file('character_img_upload');
         $data = $request->all();
 
@@ -137,8 +140,13 @@ class BackgroundCharactersController extends Controller
             $img_name = null;
         }
 
-        $character_inser_id = $character->insert_character($data,$img_name);
-        
+        $character_insert_id = $character->insert_character($data,$img_name);
+        // $character_insert_id = 4;
+        $novel_background_data = array();
+        $novel_background_data['belong_to_novel'] = $novel_id;
+        $novel_background_data['novel_background'] = "characters";
+        $novel_background_data['background_id'] = $character_insert_id;
+        $background->insertData($novel_background_data);
 
         return redirect(route('character.index'));
     }

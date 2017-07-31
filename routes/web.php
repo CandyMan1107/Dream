@@ -300,6 +300,6 @@ Route::get('/cash', function () {
 Route::get('/blog/setMap/{id}', "BlogController@viewSetMapMain");
 Route::get('/blog/setMap/createMenu/{id}', "BlogController@createMenu");
 Route::get('/blog/setMap/storeMenu/{id}', "BlogController@storeMenu");
-Route::get('/blog/setMap/destroyMenu', "BlogController@destroyMenu");
+Route::get('/blog/setMap/destroyMenu/{id}', "BlogController@destroyMenu");
 
 Route::resource('/blog', "BlogController");

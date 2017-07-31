@@ -7,6 +7,7 @@ $(function () {
 
             let ajax_url = "blog/" + $hrefStr;
 
+
             // IF $hrefStr in &
             // blog_menu_id&post_id
             if ($hrefStr.match("&")) {

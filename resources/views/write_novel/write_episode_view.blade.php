@@ -1,4 +1,4 @@
-<div class="default-padding"></div>
+pp<div class="default-padding"></div>
 @extends('layouts.master')
 
 
@@ -588,7 +588,35 @@
 
   .attr-content-div {
     word-break:break-all;
+    padding:0px;
+    max-height:100px;
+    overflow-y: scroll;
   }
+
+  .attr-content {
+    padding:0px;
+  }
+
+  .cha-info-div {
+    margin: 0px;
+    margin-top: 5px;
+    text-align: center;
+  }
+
+  .cha-img-div {
+    font-weight: bold;
+  }
+  .cha-effect-div {
+    display:table;
+    text-align: left;
+    height:90px;
+  }
+  .cha-effect-content {
+    display:table-cell;
+    vertical-align: middle;
+  }
+
+
   </style>
 
 
@@ -1545,7 +1573,7 @@
                .css('background-color', 'white')
                .css('width', width + "px")
                .css('min-height', height + "px");
-      appendedEle.draggable();
+      appendedEle.draggable({handle:'.window-header, .table-div, .timetable-window-attr-div'});
       appendedEle.on('mousedown', function(){
         $(this).css("z-index", ++zindex);
       })
@@ -1626,10 +1654,10 @@
               addEle += "     <div data-timetable-id='"+data.id+"' data-attr='maps' class='timetable-window-attr-div attr-div-" + data.id + " col-md-3'>지도</div>"
               addEle += "  </div>"
               addEle += "  <div class='col-md-12 attr-content-div'>"
-              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-characters-div-" + data.id + "'>cha-div</div>"
-              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-items-div-" + data.id + "'>item-div</div>"
-              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-relations-div-" + data.id + "'>rel-div</div>"
-              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-maps-div-" + data.id + "'>map-div</div>"
+              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-characters-div-" + data.id + "'></div>"
+              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-items-div-" + data.id + "'></div>"
+              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-relations-div-" + data.id + "'></div>"
+              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-maps-div-" + data.id + "'></div>"
               addEle += "  </div>"
               addEle += "</div>"
 
@@ -1687,12 +1715,12 @@
               attrDiv.show();
 
             // check : selected == true
-            } else {
+          } else {
               // 모든 div select 속성 제거
               sameEle.removeClass("selected-attr");
               sameEle.css("background-color","#B2EBF4");
               // 모든 attr-div 숨김
-              $(".attr-content-" + timeTableId).hide();
+              $(".attr-content-" + timeTableId).hide()   ;
             }
 
           })
@@ -1716,30 +1744,45 @@
 
             console.log(data);
             var appendEle = "";
-            switch(bgCase){
-              case "characters":
-              appendEle = createCharacterElement(data);
-              break;
-              case "items":
-              break;
-              case "relations":
-              break;
-              case "maps":
-              break;
-            }
+            appendEle = createCharacterElement(bgCase, data);
             setDiv.append(appendEle);
+            setDiv.addClass("hasCalled");
           },
           error: function (error) {
             alert("오류발생");
           }
       });
 
-      function createCharacterElement(data){
+      function createCharacterElement(bgCase, data){
         var addEle = "";
 
+        // 이미지 루트 설정
+        var imgRoot = "/img/background/";
+        switch(bgCase){
+          case "characters":
+            imgRoot += "characterImg/";
+          break;
+          case "items":
+            imgRoot += "itemImg/";
+          break;
+          case "relations":
+            imgRoot += "relationImg/";
+          break;
+          case "maps":
+            imgRoot += "mapImg/";
+          break;
+        }
+
+        // 엘리먼트 내용
         data.forEach(function(dt){
-          addEle += "이름: " + dt.name + "<br>";
-          addEle += "설명: " + dt.info + "<br>";
+          addEle += "<div class='col-md-12 cha-info-div'>"
+          addEle += " <div class='col-md-6 cha-img-div'>"
+          addEle += "   <img class='img-circle img-things-size' src='/img/background/characterImg/"+ dt.img_src +"'><br>" + dt.name
+          addEle += " </div>"
+          addEle += " <div class='col-md-6 cha-effect-div'>"
+          addEle += "    <div class='cha-effect-content'>" + dt.affect_content + "</div>"
+          addEle += " </div>"
+          addEle += "</div>"
         });
 
 
