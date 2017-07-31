@@ -19,10 +19,11 @@ class MemberController extends Controller
 
         $checkLogin = DB::table('users')->where(['user_id' => $user_id, 'password' => $password])->get();
         if(count($checkLogin) > 0) {
-           header("Location:localhost");
+            
+            return redirect('/');
         }
         else {
-            echo "로긴 실패";
+            return redirect('/login');
         }    
     }
 
@@ -31,29 +32,17 @@ class MemberController extends Controller
     }
 
     public function register(Request $req) {
-        $data=Input::except(array('token'));
-
-        $rule = array(
-            'user_id' => 'required',
-            'name' => 'required',
-            'password' => 'required',
-            'check_password' => 'required|same:password',
-            'email' => 'required',
+        DB::table('users')->insert(
+            [
+                'user_id' => $req->get('user_id'),
+                'name' => $req->get('name'),
+                'email' => $req->get('email'),
+                'password' => $req->get('password'),
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]
         );
 
-        $message = array(
-            'check_password.required' => '비번 입력안햇다',
-            'check_password.same' => '비번 안똑같다',
-        );
-
-        $validattor = Validator::make($data, $rule, $message);
-
-        if($validattor->fails()) {
-            echo "가입 실패";
-        } else{
-            Register::formstore(Input::except(array('_token', 'check_password')));
-
-            return Redirect::to('register')->with('success', 'successfully registered');
-        }
+        return redirect('/');
     }
 }
