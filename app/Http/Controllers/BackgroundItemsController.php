@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use App\Item;
+use App\Background;
 
 class BackgroundItemsController extends Controller
 {
@@ -17,7 +18,17 @@ class BackgroundItemsController extends Controller
     public function index()
     {
         $item = new Item();
-        $dataSet = $item->dataBringAll();
+
+        session_start();
+        // echo($_SESSION['novel_id']);
+        if(!isset($_SESSION['novel_id'])){
+            return redirect('background');
+        }
+        else {
+            $novel_id = $_SESSION['novel_id'];
+        }
+
+        $dataSet = $item->date_get_novel_id($novel_id);
         $data = array(array());
         $i = 0;
 
@@ -54,8 +65,12 @@ class BackgroundItemsController extends Controller
     public function store(Request $request)
     {
         $item = new Item();
+        $background = new Background();
         $imgUpLoad = new BackgroundItemsController();
 
+        session_start();
+        $novel_id = $_SESSION['novel_id'];
+        
         $file = Input::file('item_img_upload');
         $data = $request->all();
         // var_dump($data);
@@ -80,7 +95,13 @@ class BackgroundItemsController extends Controller
             $img_name = null;
         }
 
-        $item->insert_item($data,$img_name);
+        $item_insert_id = $item->insert_item($data,$img_name);
+
+        $novel_background_data = array();
+        $novel_background_data['belong_to_novel'] = $novel_id;
+        $novel_background_data['novel_background'] = "items";
+        $novel_background_data['background_id'] = $item_insert_id;
+        $background->insertData($novel_background_data);
 
         return redirect(route('things.index'));
     }
