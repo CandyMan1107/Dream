@@ -30,12 +30,6 @@ class BlogMenu extends Model
             ->select('blog_menus.*', 'blog_menu_relations.blog_id')
             ->get();
 
-        if (empty($menuData[0])) {
-            // echo("IS EMPTY!");
-
-            $menuData = "empty";
-        }
-
 
         return $menuData;
     }

@@ -1,5 +1,6 @@
-{{-- <div class="default-padding"></div> --}}
-
+@php
+	use App\Http\Controllers\BlogController;
+@endphp
 <div class="container">
     <div class="row">
         {{-- BLOG SIDE MENU DIV START --}}
@@ -20,10 +21,7 @@
                 </div>
                 
                 <div class="profile_text">
-                    USER PROFILE TEXT
-                    USER PROFILE TEXT
-                    USER PROFILE TEXT
-                    USER PROFILE TEXT
+                    {!! $data[0]['blog_introduce'] !!}
                 </div>
                 <div id="default-padding-mid"></div>
                 <div class="user_setting text-center">
@@ -64,11 +62,11 @@
             <div class="blog_menu_nav">
                 <strong>작가의 방</strong>
                 {{-- 블로그 메뉴 있을 때 없을 때   --}}
-                @if (empty($data[0]['blog_menu_id']))
+                @if ($data[0]['blog_menu_id'] == "empty")
                     <h5>메뉴가 없습니다.</h5>
                 @else
                     @php
-                        echo BlogController::allMenu($data['blog_id']); 
+                        echo BlogController::showAllMenu($data[0]['id']); 
                     @endphp
                 @endif
                 
@@ -110,7 +108,9 @@
                         <strong class="text-uppercase">Today</strong>
                     </div>
                     <div class="blog_visitNum">
-                        <strong>999</strong>
+                        <strong>
+                            {!! $data[0]['today_hit'] !!}
+                        </strong>
                     </div>
                 </div>
                 <div class="blog_visit_info">
@@ -118,7 +118,9 @@
                         <strong class="text-uppercase">Total</strong>
                     </div>
                     <div class="blog_visitNum">
-                        <strong>999</strong>
+                        <strong>
+                            {!! $data[0]['total_hit'] !!}
+                        </strong>
                     </div>
                 </div>
             </div>
