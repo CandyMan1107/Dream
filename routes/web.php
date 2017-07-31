@@ -10,15 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 /*
 |--------------------------------------------------------------------------
 | MAIN-page
 |--------------------------------------------------------------------------
 */
 Route::get('/', "MainController@index");
-
-
 
 Route::get('/lib', function () {
     return view('load');
@@ -29,7 +26,6 @@ Route::get('/lib', function () {
 | RELATION-Background-page
 |--------------------------------------------------------------------------
 */
-
 Route::get('/background/relation', "RelationController@index");
 
 Route::get('/background/relation/rmRel', "RelationController@removeRelation");
@@ -121,7 +117,6 @@ Route::resource('/background', 'BackgroundController');
 |--------------------------------------------------------------------------
 */
 Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
-
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
 
 /*
@@ -160,21 +155,54 @@ Route::get('/get_novel/show_main_novel',"cordoController@getNovelById");
 Route::get('/get_novel/get_episodes',"cordoController@getNovelEpisodes");
 Route::get('/get_novel/get_episode_id',"cordoController@getNovelEpisodeById");
 // Route::get('/get_novel/get_notices',"cordoController@getNovelNotices");
+
 // users 정보 get & 로그인
 Route::get('/get_novel/userInfo', "cordoController@getUsersInfo");
 
+
 //아이디 중복체크
-Route::get('/get_novel/idCheck', "cordoController@idCheck");
+Route::get('/get_user/id_check', "cordoController@idCheck");
 //아이디 찾기
-Route::get('/get_novel/idSearch', "cordoController@idSearch");
+Route::get('/get_user/id_search', "cordoController@idSearch");
 //비밀번호 찾기
-Route::get('/get_novel/pwSearch', "cordoController@pwSearch");
+Route::get('/get_user/pw_search', "cordoController@pwSearch");
 // 회원가입
-Route::get('/get_novel/writeJoin', "cordoController@insertUserInfo");
+Route::get('/set_user/write_join', "cordoController@insertUserInfo");
+// 유저 정보 가져오기
+Route::get('/get_user/getUserInfo', 'cordoController@getUserInfo');
+
 //캐릭터 목록 가져오기
 Route::get('/get_novel/CharactersList', 'cordoController@getCharacters');
 //캐릭터 정보 가져오기
 Route::get('/get_novel/CharacterInfo', 'cordoController@getCharactersInfo');
+
+
+// 작성한 소설의 유저정보 호출
+Route::get('/get_novel/UserIdOfNovel', 'cordoController@getUserIdOfNovel');
+
+//소설의 배경설정 중 사건을 가져오기
+Route::get('/get_settings/historyGraphInfo', 'cordoController@getBackgroundSettingsHistoryGraph');
+//소설의 배경설정 중 사건안에서 인물을 가져오기
+Route::get('/get_settings/historyCharactersInfo', 'cordoController@getBackgroundSettingsHistoryCharacters');
+//소설의 배경설정 중 사건안에서 아이템을 가져오기
+Route::get('/get_settings/historyItemsInfo', 'cordoController@getBackgroundSettingsHistoryItems');
+//소설의 배경설정 중 사건안에서 지도를 가져오기
+Route::get('/get_settings/historyMapsInfo', 'cordoController@getBackgroundSettingsHistoryMaps');
+//소설의 배경설정 중 인물들을 가져오기
+Route::get('/get_settings/charactersInfo', 'cordoController@getBackgroundSettingsCharacters');
+//소설의 배경설정 중 사물들을 가져오기
+Route::get('/get_settings/itemsInfo', 'cordoController@getBackgroundSettingsItems');
+
+//소설의 배경설정 중 지도들을 가져오기
+Route::get('/get_settings/mapsInfo', 'cordoController@getBackgroundSettingsMaps');
+//소설의 배경설정 중 관계정보들을 가져오기
+Route::get('/get_settings/relationsInfo', 'cordoController@getBackgroundSettingsRelations');
+//해당 유저의 포인트를 구매
+Route::get('/set_point/set_point', 'cordoController@setPoint');
+//해당 유저의 포인트를 보여주기
+Route::get('/get_point/get_point', 'cordoController@getPoint');
+
+
 
 // 소설 작성부
 // 소설 정보 작성
@@ -214,6 +242,7 @@ Route::get('/write_novel/get_timetables_info', "writeNovelController@getTimetabl
 
 // 사건에 연관된 배경 정보 호출
 Route::get('/write_novel/call_affect_info', "writeNovelController@callAffectInfo");
+
 
 
 // 이미지 등록부
