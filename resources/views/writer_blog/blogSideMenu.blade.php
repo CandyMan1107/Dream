@@ -10,6 +10,7 @@
             </div>
             {{-- USER PROFILE --}}
             <div class="user_profile">
+            <input type="hidden" value="1" name="user_id" />
                 <div class="user_info text-center">
                     <strong>U-NAME</strong>
                     &nbsp;
@@ -26,6 +27,7 @@
                 </div>
                 <div id="default-padding-mid"></div>
                 <div class="user_setting text-center">
+                {{-- 블로그 메뉴 있을 때 없을 때 마우스 막아놓기!   --}}
                     <a href="{{ route('blog.create') }}">
                         <div>
                             <i class="material-icons">border_color</i>
@@ -39,7 +41,8 @@
                         <div>쪽지</div>
                     </a>  --}}
                     &nbsp;&nbsp;
-                    <a href="#">
+                    {{-- 관리 : 사용자의 블로그일 때만 표시   --}}
+                    <a href="/blog/setMap/1">
                         <div>
                             <i class="material-icons">settings</i>
                         </div>
@@ -51,6 +54,7 @@
             {{-- BLOG MENU NAV --}}
             <div class="user_novel_nav">
                 <strong>USER 의 소설</strong>
+                {{-- 소설 있을 때 없을 때   --}}
                 <ul>
                     <li>NOVEL1</li>
                     <li>NOVEL2</li>
@@ -59,10 +63,15 @@
             <hr />
             <div class="blog_menu_nav">
                 <strong>작가의 방</strong>
-                <ul>
-                    <li>MENU1</li>
-                    <li>MENU2</li>
-                </ul>
+                {{-- 블로그 메뉴 있을 때 없을 때   --}}
+                @if (empty($data[0]['blog_menu_id']))
+                    <h5>메뉴가 없습니다.</h5>
+                @else
+                    @php
+                        echo BlogController::allMenu($data['blog_id']); 
+                    @endphp
+                @endif
+                
             </div>
             <div id="default-padding-mid"></div>
             {{-- BLOG INFO BAR --}}

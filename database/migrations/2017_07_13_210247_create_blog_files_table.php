@@ -16,7 +16,7 @@ class CreateBlogFilesTable extends Migration
         // BLOG FILES TABLE
         Schema::create('blog_files', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('blog_board_id');   // BLOG BOARD ID :  blog_boards table 'id'
+            // $table->integer('blog_board_id');   // BLOG BOARD ID :  blog_boards table 'id'
             $table->string('blog_file_type');   
             // BLOG UPLOAD FILE TYPE
             // image, video, file
