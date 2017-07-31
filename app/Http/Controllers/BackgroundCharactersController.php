@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use App\Character;
 use App\Item;
 use App\Ownership;
+use App\Background;
 
 class BackgroundCharactersController extends Controller
 {
@@ -19,7 +20,17 @@ class BackgroundCharactersController extends Controller
     public function index()
     {
         $character = new Character();
-        $dataSet = $character->dataBringAll();
+        
+        session_start();
+        // echo($_SESSION['novel_id']);
+        if(!isset($_SESSION['novel_id'])){
+            return redirect('background');
+        }
+        else {
+            $novel_id = $_SESSION['novel_id'];
+        }
+
+        $dataSet = $character->date_get_novel_id($novel_id);
         $data = array(array());
         $i = 0;
 
@@ -101,8 +112,11 @@ class BackgroundCharactersController extends Controller
     public function store(Request $request)
     {
         $character = new Character();
-
+        $background = new Background();
         $imgUpLoad = new BackgroundCharactersController();
+
+        session_start();
+        $novel_id = $_SESSION['novel_id'];
 
         $file = Input::file('character_img_upload');
         $data = $request->all();
@@ -126,7 +140,13 @@ class BackgroundCharactersController extends Controller
             $img_name = null;
         }
 
-        $character->insert_character($data,$img_name);
+        $character_insert_id = $character->insert_character($data,$img_name);
+        // $character_insert_id = 4;
+        $novel_background_data = array();
+        $novel_background_data['belong_to_novel'] = $novel_id;
+        $novel_background_data['novel_background'] = "characters";
+        $novel_background_data['background_id'] = $character_insert_id;
+        $background->insertData($novel_background_data);
 
         return redirect(route('character.index'));
     }

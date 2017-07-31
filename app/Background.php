@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Background extends Model
 {
+    
     // TABLE : novel_backgrounds INSERT
     public function insertData($table) {
         $backgroundData = [];

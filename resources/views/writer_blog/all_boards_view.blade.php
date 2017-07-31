@@ -2,6 +2,7 @@
  @foreach ($boardData as $data)
     <div class="board_title">
         <ul class="list-inline">
+            
             @if ($data->is_notice == "on")
                 <li>
                     <strong>[공지]</strong>

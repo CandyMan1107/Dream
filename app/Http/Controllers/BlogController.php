@@ -11,6 +11,10 @@ use  App\Blog;
 use  App\BlogMenu;
 use  App\BlogBoard;
 
+use  App\BlogMenuRelation;
+use  App\MenuBoardRelation;
+use  App\BoardFileRelation;
+
 class BlogController extends Controller
 {
     /**
@@ -34,8 +38,12 @@ class BlogController extends Controller
                 $data = 0;
             } else {
                 foreach($boardData as $datas) {
-                    $data[$i]['id'] = $datas->id;
+                    $data[$i]['id'] = $datas->id;   // blog_board_id
+
+                    $data[$i]['user_id'] = $datas->user_id;
+                    $data[$i]['blog_id'] = $datas->blog_id;
                     $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+
                     $data[$i]['board_title'] = $datas->board_title;
                     $data[$i]['is_notice'] = $datas->is_notice;
                     // $data[$i]['board_hit'] = $datas->board_hit;
@@ -51,9 +59,63 @@ class BlogController extends Controller
                     $i++;
                 }
             }
+
+        // print_r($data);
         
 
         return view('writer_blog.blog_main')->with("data", $data);
+    }
+
+    public static function showBlogSideMenu($id) 
+    {
+        $user_id = $id;
+
+        // echo $user_id;
+
+        $blog = new Blog();
+        $blogData = $blog->allBlogD($user_id);
+
+        $data = array(array());
+
+        $i = 0;
+
+        if (empty($blogData[0])) {
+            // echo("empty!");
+
+            $blogData = $blog->basicBlogD($user_id);
+
+            foreach($blogData as $datas) {
+                $data[$i]['id'] = $datas->id;   // blog auto-increments id
+
+                $data[$i]['user_id'] = $datas->user_id;
+                $data[$i]['blog_menu_id'] = "empty";
+
+                // $data[$i]['cover_img_src'] = $datas->cover_img_src;
+                $data[$i]['blog_introduce'] = $datas->blog_introduce;
+                $data[$i]['today_hit'] = $datas->today_hit;
+                $data[$i]['total_hit'] = $datas->total_hit;
+
+                $i++;
+            }
+        } else {
+            foreach($blogData as $datas) {
+                $data[$i]['id'] = $datas->id;   // blog auto-increments id
+
+                $data[$i]['user_id'] = $datas->user_id;
+                $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+
+                // $data[$i]['cover_img_src'] = $datas->cover_img_src;
+                $data[$i]['blog_introduce'] = $datas->blog_introduce;
+                $data[$i]['today_hit'] = $datas->today_hit;
+                $data[$i]['total_hit'] = $datas->total_hit;
+
+                $i++;
+            }
+        }
+
+        // print_r($data);
+        
+        return view('writer_blog.blogSideMenu')->with("data", $data);
     }
 
     /**
@@ -68,11 +130,44 @@ class BlogController extends Controller
         return view('writer_blog.board.write_form');
     }
 
-    public function createMenu()
+    /**
+     * Show the form for creating a new resource.
+     * 
+     * @return blog_set_main.blade.php
+     */
+    public function createMenu($id)
     {
-        //
+        $user_id = $id;
 
-        
+        // echo $user_id;
+
+        // 메뉴 테이블 전체의 메뉴 아이디 및 메뉴 제목, 블로그 아이디 게시글 아이디
+        $menu = new BlogMenu();
+        $menuData = $menu->allMenuD($user_id);
+        // print_r($menuData);
+
+        $data = array(array());
+
+        $i = 0;
+
+        if ($menuData == "empty") {
+            $data[0]['id'] = 0;
+        } else {
+            foreach($menuData as $datas) {
+                $data[$i]['id'] = $datas->id;   // menu auto-increments id
+
+                $data[$i]['blog_id'] = $datas->blog_id;
+                // $data[$i]['blog_board_id'] = $datas->blog_board_id;
+
+                $data[$i]['menu_title'] = $datas->menu_title;
+
+                $i++;
+            }
+        }
+
+        // print_r($data);
+
+        return view('writer_blog.set.menu.blog_set_menu')->with('data', $data);
     }
 
     /**
@@ -84,13 +179,19 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         //
-        $board = new BlogBoard();
-
         $data = $request->all();
 
-        // print_r($data);
+        // print_r($data['blog_id']);
 
-        $board->insertBoardD($data);
+
+        $board = new BlogBoard();
+        $blog_menu_board_relation = new MenuBoardRelation();
+
+        // INSERT DATAS INTO blog_boards TABLE
+        $blog_board_id = $board->newBoardD($data);
+
+        // INSERT DATAS INTO menu_board_relations TABLE
+        $blog_menu_board_relation->insertRelationD($data['blog_menu_id'], $blog_board_id);
 
         return redirect(route('blog.index'));
     }
@@ -98,6 +199,24 @@ class BlogController extends Controller
     public function storeMenu(Request $request)
     {
         //
+        // echo("PASS"); 
+
+        $data = $request->all();
+
+        // print_r($data);
+
+        // echo($data['blog_id']);
+
+        $menu = new BlogMenu();
+        $blog_menu_relation = new BlogMenuRelation();
+
+        // INSERT DATAS INTO blog_boards TABLE
+        $blog_menu_id = $menu->newMenuD($data);
+
+        // INSERT DATAS INTO menu_board_relations TABLE
+        $blog_menu_relation->insertRelationD($data['blog_id'], $blog_menu_id);
+
+        return redirect(route('blog.index'));
     }
 
     /**
@@ -108,34 +227,57 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
-        //$data = explode('&', $id);
+        // Is There "&"?
+        if (strpos($id, "&")!==false) {
+            $hrefArr = explode('&', $id);
 
-        // print_r($data);
+            // print_r($hrefArr);
 
-        //return view('writer_blog.board.selected_board_view', ['data' => $data]);
+            $blog_menu_id = $hrefArr[0];
+            $post_id = $hrefArr[1];
+
+            $board = new BlogBoard();
+            $boardData = $board->selectedBoardD($blog_menu_id, $post_id);
+
+            $data = array(array());
+            $i = 0;
+
+            foreach ($boardData as $datas) {
+                $data[$i]['id'] = $datas->id;
+                $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+                $data[$i]['board_title'] = $datas->board_title;
+                $data[$i]['is_notice'] = $datas->is_notice;
+                // $data[$i]['board_hit'] = $datas->board_hit;
+                // $data[$i]['board_like'] = $datas->board_like;
+                $data[$i]['board_content'] = $datas->board_content;
+                $data[$i]['created_at'] = $datas->created_at;
+                $data[$i]['updated_at'] = $datas->updated_at;
+
+                $i++;
+            }
+
+            // print_r($data);
+        } else {
+            $blog_menu_id = $id;
+            // selectedMenuD($blog_menu_id)
+        }
+        
+
+        //return $data;
     }
 
     /**
-     * Display the selected Board's view.
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Display the specified resource.
+     * Display the setting-maps-main of Blog.
+     * @return blog_set_main.blade.php
      */
-    // public static function selectedBoard($data)
-    // {
-    //     //
-    //     $idArr = $data;
+    public function viewSetMapMain($id)
+    {
+        // echo $id;
+        $user_id = $id;
 
-    //     $blog_menu_id = $idArr[0];
-    //     $post_id = $idArr[1];
-
-    //     $board = new BlogBoard();
-    //     $boardData = $board->selectedBoardD($blog_menu_id, $post_id);
-
-    //     // print_r($boardData);
-
-    //     return view('writer_blog.all_boards_view', ['boardData' => $boardData]);
-    // }
+        return view('writer_blog.set.blog_set_main')->with('user_id', $user_id);
+    }
 
     /**
     * Display the mainNoticeList with noticeList()'s $data
@@ -180,10 +322,43 @@ class BlogController extends Controller
 
         // print_r($boardData);
 
+
+
         return view('writer_blog.all_boards_view', ['boardData' => $boardData]);
     }
 
-    
+    /**
+     * Display ALL Menus of Blog.
+     * @return all_menu_list.blade.php
+     */
+    public static function showAllMenu($id)
+    {
+        $blog_id = $id;
+
+        // echo($blog_id);
+
+        $menu = new BlogMenu();
+        $menuData = $menu->allMenuD($blog_id);
+
+        // print_r($menuData);
+
+        $data = array(array());
+        $i = 0;
+
+        foreach ($menuData as $datas) {
+            $data[$i]['id'] = $datas->id;   // blog-menu auto increments id
+
+            // $data[$i]['blog_id'] = $datas->blog_id;
+
+            $data[$i]['menu_title'] = $datas->menu_title;
+
+            $i++;
+        }
+
+        // print_r($data);
+
+        return view('writer_blog.part.blog_menu_list')->with('data', $data);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -215,6 +390,17 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyMenu($id)
     {
         //
     }

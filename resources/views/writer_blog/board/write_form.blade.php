@@ -11,7 +11,8 @@
                 <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/formr-data">
                 {{ csrf_field() }}
                     <div class="form-group">
-
+                        {{-- 나중에 수정하기! 해당 블로그 자동 증가 아이디로 --}}
+                        <input type="hidden" value="1" name="blog_id" />
                         <div class="row">
                             {{--  blog_menu_id  --}}
                             <div class="col-md-3">
@@ -37,7 +38,6 @@
                                 </textarea>
                             </div>
                         </div>
-                        <input type="hidden" name="created_at" value="">
                     </div>
                     <button class="btn btn-default">임시저장 구현해주겠니</button>
                     &nbsp; &nbsp;

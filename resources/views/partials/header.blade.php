@@ -27,7 +27,7 @@
 							<li><a href="#event">이벤트</a></li>
 							<li><a href="#about">고객센터</a></li>
 						
-                            <li><a href="#">로그인</a></li>
+                            <li><a href="/login">로그인</a></li>
 							<li><a href="/register">회원가입</a></li>
                         
 						</ul>

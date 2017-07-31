@@ -16,7 +16,7 @@ class CreateBlogBoardsTable extends Migration
         // BLOG BOARDS TABLE
         Schema::create('blog_boards', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('blog_menu_id');    // BLOG MENU ID : blog_menus table 'id'
+            // $table->integer('blog_menu_id');    // BLOG MENU ID : blog_menus table 'id'
             $table->string('board_title');  // BOARD TITLE
             $table->string('is_notice')->nullable(); // NOTICE on
             // 이건 회원 추가 되면 $table->string('user_id');   // BOARD WRITER
