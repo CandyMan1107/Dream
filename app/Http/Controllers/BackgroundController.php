@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Novel;
+use App\Background;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,8 @@ class BackgroundController extends Controller
         $novel_data = $novel->mainData();
         $data = array(array());
         $i = 0;
-
+        session_start();
+        session_unset("novel_id");
         foreach($novel_data as $datas){
             $data[$i]['id'] = $datas->id;
             $data[$i]['title'] = $datas->title;
@@ -77,7 +79,12 @@ class BackgroundController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+        session_start();
+        $_SESSION['novel_id'] = $id;
+        $url = "background/historyTable";
+        
+        return redirect($url);
         // return __METHOD__ . '은(는) 다음 기본 키를 가진 모델을 조회합니다.';
 
     }

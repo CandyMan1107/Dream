@@ -10,6 +10,7 @@ use App\Character;
 use App\Item;
 use App\Effect;
 use App\Map;
+use App\Background;
 
 class BackgroundHistoryTablesController extends Controller
 {
@@ -21,8 +22,16 @@ class BackgroundHistoryTablesController extends Controller
     public function index()
     {
         $timeTable = new Timetable();
-        $dataSet = $timeTable->dataBringAll();
         
+        session_start();
+        // echo($_SESSION['novel_id']);
+        if(!isset($_SESSION['novel_id'])){
+            return redirect('background');
+        }
+        else {
+            $novel_id = $_SESSION['novel_id'];
+        }
+        $dataSet = $timeTable->date_get_novel_id($novel_id);
         // var_dump($dataSet);
         // echo($dataSet[0]["event_names"]);
         $data = array(array());
@@ -62,9 +71,11 @@ class BackgroundHistoryTablesController extends Controller
     public function store(Request $request)
     {
         $table = $request->all();
-
+        session_start();
+        $novel_id = $_SESSION['novel_id'];
         $timeTable = new Timetable();
         $effect = new Effect();
+        $background = new Background();
         $refer_info = "";
 
         for($i= 0; $i < count($table['refer_info']); $i++){
@@ -99,6 +110,12 @@ class BackgroundHistoryTablesController extends Controller
         // var_dump($data);
         // 새로 입력 한 연대표 아이디값 반환
         $table_id = $timeTable->insert_table($table);
+        // $table_id = 9;
+        $novel_background_data = array();
+        $novel_background_data['belong_to_novel'] = $novel_id;
+        $novel_background_data['novel_background'] = "timetables";
+        $novel_background_data['background_id'] = $table_id;
+        $background->insertData($novel_background_data);
         // $table_id = 6;
         // 관계 테이블에 데이터 저장
         $effect->insert_effect($table_id,$data);

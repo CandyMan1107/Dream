@@ -17,4 +17,5 @@ class Controller extends BaseController
     public function cashView(){
       return view('novel/cash');
     }
+
 }

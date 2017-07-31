@@ -18,8 +18,9 @@ class Character extends Model
             'img_src' => $img_src,
         ];
         // data insert
-        DB::table('characters')->insert($dataSet);
+        $id = DB::table('characters')->insertGetId($dataSet);
         // var_dump($table);
+        return $id;
     }
 
     public function dataBringAll(){
@@ -36,6 +37,22 @@ class Character extends Model
                     ->where('cha_id',$id)
                     ->get();
 
+        return $dataSet;
+    }
+
+    // JJH 2017.07.31
+    // SELECT * FROM characters, novel_backgrounds
+    // WHERE characters.id = novel_backgrounds.background_id
+    // WHERE novel_backgrounds.novel_background = characters
+    // WHERE novel_bakcgrounds.belong_to_novel = $novel_id
+    public function date_get_novel_id($novel_id){
+        $dataSet = DB::table('characters')
+                    ->join('novel_backgrounds','characters.cha_id','=','novel_backgrounds.background_id')
+                    ->where('novel_backgrounds.belong_to_novel','=',$novel_id)
+                    ->where('novel_backgrounds.novel_background','=','characters')
+                    ->get();
+
+        // var_dump($dataSet);
         return $dataSet;
     }
 }
