@@ -17,7 +17,12 @@ class Blog extends Model
 
     // blogs(TABLE) SELECT *
     // user id 매개변수로 받아오기
-    public function allBlogD() {
-        $blogData = DB::table('blogs')->get();
+    public function allBlogD($id) {
+        $blogData = DB::table('blogs')
+            ->join()
+            ->where()
+            ->get();
+
+        return $blogData;
     }
 }

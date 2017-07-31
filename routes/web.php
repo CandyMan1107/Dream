@@ -138,7 +138,6 @@ Route::get('/background/share', function(){
 | TODAY-Novel-page
 |--------------------------------------------------------------------------
 */
-// Today Novel
 Route::get('novel/kind/today_novel_by_day', "MainController@todayNovelShow");
 
 /**************************************
@@ -267,3 +266,14 @@ Route::get('/cash', function () {
     return view('novel.cash');
 });
 
+/*
+|--------------------------------------------------------------------------
+| BLOG
+|--------------------------------------------------------------------------
+*/
+Route::get('/blog/setMap/{id}', "BlogController@viewSetMapMain");
+Route::get('/blog/setMap/createMenu/{id}', "BlogController@createMenu");
+Route::get('/blog/setMap/storeMenu/{id}', "BlogController@storeMenu");
+Route::get('/blog/setMap/destroyMenu', "BlogController@destroyMenu");
+
+Route::resource('/blog', "BlogController");

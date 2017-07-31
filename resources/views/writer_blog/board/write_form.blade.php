@@ -38,7 +38,6 @@
                                 </textarea>
                             </div>
                         </div>
-                        <input type="hidden" name="created_at" value="">
                     </div>
                     <button class="btn btn-default">임시저장 구현해주겠니</button>
                     &nbsp; &nbsp;

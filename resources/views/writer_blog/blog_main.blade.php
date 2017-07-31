@@ -1,12 +1,14 @@
 @extends('layouts.master')
-
+@php
+	use App\Http\Controllers\BlogController;
+@endphp
 @include('writer_blog.blogTopMenu')
 
 @section('content')
     @include('writer_blog.blogSideMenu')
-    @php
+    {{--  @php
         use App\Http\Controllers\BlogController;
-    @endphp
+    @endphp  --}}
     <div id="default-padding-mid"></div>
             {{-- BLOG MAIN SPACE START --}}
             <div id="blog-main" class="col-md-8">
@@ -37,10 +39,10 @@
                             </div>
                         {{-- ELSE ONCLICK
                         url 받아와서 뒤에 뭐가 있으면 js 파일로 ajax --}}
-                        @else
+                        {{--  @else
                             <div name="blog_post">
 
-                            </div>
+                            </div>  --}}
                         @endif
                     </div>
                     {{-- BLOG BOARD END (NOTICE) --}}
