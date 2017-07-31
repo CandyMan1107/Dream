@@ -222,25 +222,29 @@ class ChaptersController extends Controller
         return view('background.chapter.episode_modal')->with("data",$episode_data_not_chapter);
     }
 
+    // 챕터에 등록되어 있는 timetable을 가져온다.
     public function get_timetable($novel_id,$chapter_id){
         // 소설에서 설정 id가져오고 그것의 정보를 가져오는 형식으로 구현
 
+        $chapter_has_timetable = new Chapter_has_timetable();
         $timetable = new Timetable();
-        $time_data = $timetable->dataBringAll();
 
+        $timetable_id = $chapter_has_timetable->chapter_has_timetable_id($chapter_id);
+        
+        $i = 0;
         $timetable_data = array(array());
-        $i = 0;;
-        foreach($time_data as $data){
-            $timetable_data[$i]['id'] = $data->id;
-            $timetable_data[$i]['event_name'] = $data->event_names;
-            $timetable_data[$i]['event_content'] = $data->event_contents;
-            $timetable_data[$i]['start_day'] = $data->start_days;
-            $timetable_data[$i]['end_day'] = $data->end_days;
-            
+        foreach($timetable_id as $temp_timetable_id) {
+            $data = $timetable->get_timetable_into_chapter($temp_timetable_id->id);
+
+            $timetable_data[$i]['id'] = $data[0]->id;
+            $timetable_data[$i]['event_name'] = $data[0]->event_names;
+            $timetable_data[$i]['event_content'] = $data[0]->event_contents;
+            $timetable_data[$i]['start_day'] = $data[0]->start_days;
+            $timetable_data[$i]['end_day'] = $data[0]->end_days;
 
             $i++;
         }
-        // echo "34";
+
         return $timetable_data;
     }
 
@@ -264,16 +268,39 @@ class ChaptersController extends Controller
         $none_has_timetable = $timetable->get_timetable_notIn_chapter($novel_id,$timetable_id);
 
         $data = array(array());
-        $i++;
-        if(isset($none_has_timetable_id)){
+        // $data['chapter_id'] = $chapter_id;
+        session_start();
+        $_SESSION['chapter_id'] = $chapter_id;
+        $i = 0;
+        if(isset($none_has_timetable)){
             foreach($none_has_timetable as $temp_none_has_timetable) {
                 $data[$i]['id'] = $temp_none_has_timetable->id;
-                $data[$i]['event_name'] = $temp_none_has_timetable->id;
-                $data[$i]['event_content'] = $temp_none_has_timetable->id;
-                $data[$i]['id'] = $temp_none_has_timetable->id;
+                $data[$i]['event_name'] = $temp_none_has_timetable->event_names;
+                $data[$i]['event_content'] = $temp_none_has_timetable->event_contents;
+                $data[$i]['start_day'] = $temp_none_has_timetable->start_days;
+                $data[$i]['end_day'] = $temp_none_has_timetable->end_days;
+                $i++;
             }
         }
-        var_dump($none_has_timetable);
+        // var_dump($data);
+        return view('background.chapter.timetable_modal')->with("data",$data);
+        
+    }
+
+    public function add_timetable(Request $request) {
+        session_start();
+        session_unset("chapter_id");
+        $data = $request->all();
+        $chapter_has_timetable = new Chapter_has_timetable();
+        for($i = 0; $i < count($data['timetable_id']) ; $i++ ){
+            $chapter_has_timetable->insert_timetable_id($data['chapter_id'],$data['timetable_id'][$i]);
+        }
+        
+        var_dump($data);
+        $hostname = explode('/',$data['hostname']);
+        var_dump($hostname);
+        $url = $hostname[1]."/".$hostname[3];
+        return redirect($url);
     }
 
     /**

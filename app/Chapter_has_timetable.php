@@ -15,4 +15,14 @@ class Chapter_has_timetable extends Model
 
         return $data;
     }
+
+    public function insert_timetable_id($chapter_id,$timetable_id){
+        $dataSet = array();
+        $dataSet = [
+            'chapter_id' => $chapter_id,
+            'timetable_id' => $timetable_id
+        ];
+
+        DB::table('chapter_has_timetables')->insert($dataSet);
+    }
 }

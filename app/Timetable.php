@@ -33,6 +33,22 @@ class Timetable extends Model
         return $dataSet;
     }
 
+    // JJH 2017.07.31
+    // SELECT * FROM timetables, novel_backgrounds
+    // WHERE timetables.id = novel_backgrounds.background_id
+    // WHERE novel_backgrounds.novel_background = timetables
+    // WHERE novel_bakcgrounds.belong_to_novel = $novel_id
+    public function date_get_novel_id($novel_id){
+        $dataSet = DB::table('timetables')
+                    ->join('novel_backgrounds','timetables.id','=','novel_backgrounds.background_id')
+                    ->where('novel_backgrounds.belong_to_novel','=',$novel_id)
+                    ->where('novel_backgrounds.novel_background','=','timetables')
+                    ->get();
+
+        // var_dump($dataSet);
+        return $dataSet;
+    }
+
     // JJH 2017.07.27 
     // select * from timetable, novel_has_background
     // where novel_has_background 'kind' = timetable
@@ -45,6 +61,16 @@ class Timetable extends Model
                 ->whereNotIn('id',$timetable_id)     
                 ->get();
         
+        return $data;
+    }
+
+    // JJH 2017.07.28
+    // select * from timetable where id = timetable_id
+    public function get_timetable_into_chapter($timetable_id) {
+        $data = DB::table('timetables')
+                ->where('id',$timetable_id)
+                ->get();
+
         return $data;
     }
 }

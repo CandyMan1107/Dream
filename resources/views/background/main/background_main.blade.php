@@ -3,7 +3,8 @@
 @section('content')
 
 	@include('partials.mySubNavi')
-	@include('background.tag')
+	 <div class="row">
+	 	<div class="col-xs-2 col-sm-1 col-md-1 text-center height-max-set" style="height: 100vh"></div>
 		<div class="col-xs-11 col-sm-9 col-md-9 height-max-set" style= "height: 100vh" >
 			<br>
 			@for($i = 0; $i < count($data) ; $i++)
@@ -26,7 +27,7 @@
 						<td>제목</td>
 						<td>장르</td>
 						<td>
-							<a class="btn btn-default" href="#" role="button">배경 설정</a>
+							<a class="btn btn-default" href="/background/{{$data[$i]['id']}}" role="button">배경 설정</a>
 							<a class="btn btn-default" href="/chapter/{{$data[$i]['id']}}" role="button">챕터 설정</a>
 						</td>
 					</tr>

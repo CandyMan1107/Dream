@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 use App\Character;
 use App\Item;
 use App\Ownership;
+use App\Background;
 
 class BackgroundCharactersController extends Controller
 {
@@ -19,7 +20,17 @@ class BackgroundCharactersController extends Controller
     public function index()
     {
         $character = new Character();
-        $dataSet = $character->dataBringAll();
+        
+        session_start();
+        // echo($_SESSION['novel_id']);
+        if(!isset($_SESSION['novel_id'])){
+            return redirect('background');
+        }
+        else {
+            $novel_id = $_SESSION['novel_id'];
+        }
+
+        $dataSet = $character->date_get_novel_id($novel_id);
         $data = array(array());
         $i = 0;
 
@@ -101,7 +112,7 @@ class BackgroundCharactersController extends Controller
     public function store(Request $request)
     {
         $character = new Character();
-
+        $background = new Background();
         $imgUpLoad = new BackgroundCharactersController();
 
         $file = Input::file('character_img_upload');
@@ -126,7 +137,8 @@ class BackgroundCharactersController extends Controller
             $img_name = null;
         }
 
-        $character->insert_character($data,$img_name);
+        $character_inser_id = $character->insert_character($data,$img_name);
+        
 
         return redirect(route('character.index'));
     }
