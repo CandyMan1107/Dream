@@ -813,3 +813,37 @@ div[name=title_line] {
     
 } 
 
+#blog-set a {
+    text-decoration: none;
+}
+
+#blog-set i {
+    font-size: 150px; 
+}
+
+#blog-set .blog_menu_set i, .blog_menu_set h4 {
+    color: #FA9600;
+}
+#blog-set .blog_menu_set i:hover {
+    color: #E4A972;
+}
+
+#blog-set .blog_design_set i, .blog_design_set h4 {
+    color: #9941D8;
+}
+#blog-set .blog_design_set i:hover {
+    color: #666;
+}
+
+#blog-set .my_novel_set i, .my_novel_set h4 {
+    color: #2A5769;
+}
+#blog-set .my_novel_set i:hover {
+    color: #000000;
+}
+
+#blog-set > div {
+    padding: 100px 0px 100px 0px;
+    height: 600px;
+}
+

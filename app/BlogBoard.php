@@ -44,7 +44,9 @@ class BlogBoard extends Model
     public function allBoardD() {
         $boardData = DB::table('blog_boards')
             ->join('menu_board_relations', 'blog_boards.id', '=', 'menu_board_relations.blog_board_id')
-            ->select('blog_boards.*', 'menu_board_relations.blog_menu_id')
+            ->join('blog_menu_relations', 'menu_board_relations.blog_menu_id', '=', 'blog_menu_relations.blog_menu_id')
+            ->join('user_blog_relations', 'blog_menu_relations.blog_id', '=', 'user_blog_relations.blog_id')
+            ->select('blog_boards.*', 'menu_board_relations.blog_menu_id', 'blog_menu_relations.blog_id', 'user_blog_relations.user_id')
             ->get();
 
         return $boardData;

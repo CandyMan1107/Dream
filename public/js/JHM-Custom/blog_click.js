@@ -27,6 +27,8 @@ $(function () {
                     dataType: "json",
                     success: function(data){
                         // alert(JSON.stringify(data));
+                        
+                        // alert(data[0]['id']);
 
                         var append_data = "<div>";
                         
@@ -34,22 +36,22 @@ $(function () {
 
                         append_data += "        <ul class='list-inline'>";
 
-                        if (data['is_notice'] == "on") {
+                        if (data[0]['is_notice'] == "on") {
                             append_data += "        <li><strong>[공지]</strong></li>";
                         }
 
                         append_data += "            <li>";
                         append_data += "                <h4>";
-                        append_data += "                    <strong>" + data['board_title'] + "</strong>";
+                        append_data += "                    <strong>" + data[0]['board_title'] + "</strong>";
                         append_data += "                </h4>";
                         append_data += "            </li>";
 
                         append_data += "            <li>";
-                        append_data += "                <small>" + data['blog_menu_id'] + "</small>";
+                        append_data += "                <small>" + data[0]['blog_menu_id'] + "</small>";
                         append_data += "            </li>";
 
                         append_data += "            <li class='board_timestamp'>";
-                        append_data += "                <small>" + data['created_at'] + "</small>";
+                        append_data += "                <small>" + data[0]['created_at'] + "</small>";
                         append_data += "            </li>";
 
                         append_data += "        </ul>";
@@ -60,13 +62,16 @@ $(function () {
 
                         append_data += "    <div class='board_content'>";
                         append_data += "        <div id='default-padding-big'></div>";
-                        append_data +=          data['board_content'];
+                        append_data +=          data[0]['board_content'];
                         append_data += "    </div>";
 
                         append_data += "    <div class='text-center'>";
                         // append_data += data;
                         append_data += "    </div>";
 
+                        append_data += "<div class='text-center'>";
+                        append_data += "";
+                        append_data += "</div>";
                         
                         append_data += "    </div>";
 
