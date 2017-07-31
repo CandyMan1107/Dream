@@ -271,6 +271,30 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+/**************************************
+BLOG
+**************************************/
+// Route::get('/blog/write', "BlogController@createMenu");
+
+Route::resource('/blog', 'BlogController');
+
+Route::get('/cash', "Controller@cashView");
+
+// 웹페이지 로그인
+
+Route::get('/login', 'MemberController@login_index');
+// Route::post('/loginAction', 'MemberController@login');
+Route::post('/login', 'MemberController@login');
+
+// 웹페이지 회원가입
+Route::get('/register', 'MemberController@register_index');
+Route::post('/register', 'MemberController@register');
+
+// 캐시 충천
+Route::get('/cash', function () {
+    return view('novel.cash');
+});
+
 /*
 |--------------------------------------------------------------------------
 | BLOG
