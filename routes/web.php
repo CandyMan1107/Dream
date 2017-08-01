@@ -110,6 +110,8 @@ Route::post('/background/historyTable/getEffect',"BackgroundHistoryTablesControl
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
+Route::resource('/background/share','BackgroundShareController');
+
 Route::resource('/background', 'BackgroundController');
 
 
@@ -120,15 +122,6 @@ Route::resource('/background', 'BackgroundController');
 */
 Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
-
-/*
-|--------------------------------------------------------------------------
-| SHARE-Background-page
-|--------------------------------------------------------------------------
-*/
-Route::get('/background/share', function(){
-    return view('background/share/set_share_view');
-});
 
 /*
 |--------------------------------------------------------------------------
