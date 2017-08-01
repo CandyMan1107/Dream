@@ -26,11 +26,12 @@ class BackgroundHistoryTablesController extends Controller
         session_start();
         // echo($_SESSION['novel_id']);
         if(!isset($_SESSION['novel_id'])){
-            return redirect('background');
+            return redirect('write_novel/my_novel');
         }
         else {
             $novel_id = $_SESSION['novel_id'];
         }
+        // var_dump($_SESSION['novel_id']);
         $dataSet = $timeTable->date_get_novel_id($novel_id);
         // var_dump($dataSet);
         // echo($dataSet[0]["event_names"]);
@@ -243,7 +244,31 @@ class BackgroundHistoryTablesController extends Controller
      */
     public function show($id)
     {
-    
+        $timeTable = new Timetable();
+        
+        session_start();
+        // echo($_SESSION['novel_id']);
+        $_SESSION['novel_id'] = $id;
+        $novel_id = $id;
+        // var_dump($_SESSION['novel_id']);
+        $dataSet = $timeTable->date_get_novel_id($novel_id);
+        // var_dump($dataSet);
+        // echo($dataSet[0]["event_names"]);
+        $data = array(array());
+        $i = 0;
+        foreach ($dataSet as $datas){
+            $data[$i]['id'] = $datas->id;
+            $data[$i]['event_name'] = $datas->event_names;
+            $data[$i]['event_content'] = $datas->event_contents;
+            $data[$i]['start_day'] = $datas->start_days;
+            $data[$i]['end_day'] = $datas->end_days;
+            $data[$i]['other'] = $datas->others;
+            $data[$i]['refer_info'] = $datas->refer_info;
+            $data[$i]['refer_info'] = explode('^',$data[$i]['refer_info']);
+            
+            $i++;
+        }
+        return view('background.historyTable.history_table_view')->with("data", $data);
     }
 
     /**
