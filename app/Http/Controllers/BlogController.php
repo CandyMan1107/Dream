@@ -66,6 +66,58 @@ class BlogController extends Controller
         return view('writer_blog.blog_main')->with("data", $data);
     }
 
+    public static function showBlogSideMenu($id) 
+    {
+        $user_id = $id;
+
+        // echo $user_id;
+
+        $blog = new Blog();
+        $blogData = $blog->allBlogD($user_id);
+
+        $data = array(array());
+
+        $i = 0;
+
+        if (empty($blogData[0])) {
+            // echo("empty!");
+
+            $blogData = $blog->basicBlogD($user_id);
+
+            foreach($blogData as $datas) {
+                $data[$i]['id'] = $datas->id;   // blog auto-increments id
+
+                $data[$i]['user_id'] = $datas->user_id;
+                $data[$i]['blog_menu_id'] = "empty";
+
+                // $data[$i]['cover_img_src'] = $datas->cover_img_src;
+                $data[$i]['blog_introduce'] = $datas->blog_introduce;
+                $data[$i]['today_hit'] = $datas->today_hit;
+                $data[$i]['total_hit'] = $datas->total_hit;
+
+                $i++;
+            }
+        } else {
+            foreach($blogData as $datas) {
+                $data[$i]['id'] = $datas->id;   // blog auto-increments id
+
+                $data[$i]['user_id'] = $datas->user_id;
+                $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+
+                // $data[$i]['cover_img_src'] = $datas->cover_img_src;
+                $data[$i]['blog_introduce'] = $datas->blog_introduce;
+                $data[$i]['today_hit'] = $datas->today_hit;
+                $data[$i]['total_hit'] = $datas->total_hit;
+
+                $i++;
+            }
+        }
+
+        // print_r($data);
+        
+        return view('writer_blog.blogSideMenu')->with("data", $data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -211,7 +263,7 @@ class BlogController extends Controller
         }
         
 
-        return $data;
+        //return $data;
     }
 
     /**
@@ -279,24 +331,33 @@ class BlogController extends Controller
      * Display ALL Menus of Blog.
      * @return all_menu_list.blade.php
      */
-    public static function allMenu($id)
+    public static function showAllMenu($id)
     {
         $blog_id = $id;
+
+        // echo($blog_id);
 
         $menu = new BlogMenu();
         $menuData = $menu->allMenuD($blog_id);
 
-        print_r($menuData);
+        // print_r($menuData);
 
         $data = array(array());
         $i = 0;
 
-        // foreach () {
+        foreach ($menuData as $datas) {
+            $data[$i]['id'] = $datas->id;   // blog-menu auto increments id
 
-        //     $i++;
-        // }
+            // $data[$i]['blog_id'] = $datas->blog_id;
 
-        // return view('writer_blog.part.blog_menu_list');
+            $data[$i]['menu_title'] = $datas->menu_title;
+
+            $i++;
+        }
+
+        // print_r($data);
+
+        return view('writer_blog.part.blog_menu_list')->with('data', $data);
     }
 
     /**

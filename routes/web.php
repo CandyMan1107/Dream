@@ -279,8 +279,9 @@ Route::get('/cash', "Controller@cashView");
 // 웹페이지 로그인
 
 Route::get('/login', 'MemberController@login_index');
-// Route::post('/loginAction', 'MemberController@login');
 Route::post('/login', 'MemberController@login');
+
+Route::get('/logout', 'MemberController@logout');
 
 // 웹페이지 회원가입
 Route::get('/register', 'MemberController@register_index');
@@ -299,6 +300,6 @@ Route::get('/cash', function () {
 Route::get('/blog/setMap/{id}', "BlogController@viewSetMapMain");
 Route::get('/blog/setMap/createMenu/{id}', "BlogController@createMenu");
 Route::get('/blog/setMap/storeMenu/{id}', "BlogController@storeMenu");
-Route::get('/blog/setMap/destroyMenu', "BlogController@destroyMenu");
+Route::get('/blog/setMap/destroyMenu/{id}', "BlogController@destroyMenu");
 
 Route::resource('/blog', "BlogController");

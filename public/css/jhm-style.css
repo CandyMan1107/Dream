@@ -813,7 +813,7 @@ div[name=title_line] {
     
 } 
 
-#blog-set a {
+a[name='blog_click'] {
     text-decoration: none;
 }
 

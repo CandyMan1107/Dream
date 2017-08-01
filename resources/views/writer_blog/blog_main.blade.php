@@ -5,10 +5,12 @@
 @include('writer_blog.blogTopMenu')
 
 @section('content')
-    @include('writer_blog.blogSideMenu')
-    {{--  @php
-        use App\Http\Controllers\BlogController;
-    @endphp  --}}
+    {{-- user_id를 가지고 넘어가야하는데...   --}}
+    @php
+          echo BlogController::showBlogSideMenu(1);   
+    @endphp
+    {{--  @include('writer_blog.blogSideMenu')  --}}
+
     <div id="default-padding-mid"></div>
             {{-- BLOG MAIN SPACE START --}}
             <div id="blog-main" class="col-md-8">
