@@ -20,8 +20,9 @@ function timetableEvent(data){
                 else {
                     $('.refer_info_div').append('<input type="text" class="form-control refer_info" name="refer_info[]" id='+i+' value="'+data[event_id]['refer_info']+'">');
                 }
+                // id 값의 버그, join 시 +1된 id값이 나옴.
                 $('#timetable_id').val(data[event_id]['id']);
-                // alert($("#timetable_id").val());
+                // alert(data[event_id]['id']);
                 $('#start_day').val(data[event_id]['start_day']);
                 $('#end_day').val(data[event_id]['end_day']);
                 // $('#character').val(data[event_id]['character']);
@@ -42,6 +43,7 @@ function timetableEvent(data){
                             timetable_id : data[event_id]['id']
                         },
                     success:function(data){
+                        // alert(data);
                         $('.affect').remove();
                         for(var i = 0; i < data.length; i++){
                             // console.log(data[i]['img_src']);
