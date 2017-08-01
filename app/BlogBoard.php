@@ -92,8 +92,25 @@ class BlogBoard extends Model
            ->select('blog_boards.*', 'menu_board_relations.blog_menu_id')
            ->where('blog_boards.id', '=', $post_id)
            ->where('menu_board_relations.blog_menu_id', '=', $blog_menu_id)
-           ->orderBy('created_at', 'desc')
-           ->paginate(1, ['*'], 'data');
+           ->orderBy('blog_boards.created_at', 'desc')
+           ->paginate(1, ['*'], 'boardData');
+
+        return $boardData;
+    }
+
+
+    // blog_boards(TABLE) SELECT *
+    // JOIN menu_board_relations(TABLE)
+    // menu id 매개변수로 받아오기
+    // orderBy blog_boards.created_at desc
+    public function selectedMenuBoardD($id) {
+        $boardData = DB::table('blog_boards')
+            ->join('menu_board_relations', 'blog_boards.id', '=', 'menu_board_relations.blog_board_id')
+            ->select('blog_boards.*', 'menu_board_relations.blog_menu_id')
+            ->where('menu_board_relations.blog_menu_id', '=', $id)
+            ->orderBy('blog_boards.created_at', 'desc')
+            ->paginate(1, ['*'], 'boardData');
+            
 
         return $boardData;
     }

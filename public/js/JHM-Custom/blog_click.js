@@ -7,6 +7,8 @@ $(function () {
 
             let ajax_url = "blog/" + $hrefStr;
 
+            // alert(ajax_url);
+
 
             // IF $hrefStr in &
             // blog_menu_id&post_id
@@ -80,7 +82,9 @@ $(function () {
                     }
                 });
             } else {
+                alert($hrefStr);
 
+                $blog_menu_id = $hrefStr;
             }
             // alert($hrefStr);
         });

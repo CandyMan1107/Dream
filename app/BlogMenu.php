@@ -24,7 +24,7 @@ class BlogMenu extends Model
 
     // blog_menus(TABLE)
     // SELECT *
-    public function allMenuD($id) {
+    public function allMenuD() {
         $menuData = DB::table('blog_menus')
             ->join('blog_menu_relations', 'blog_menus.id', '=', 'blog_menu_relations.blog_menu_id')
             ->select('blog_menus.*', 'blog_menu_relations.blog_id')
