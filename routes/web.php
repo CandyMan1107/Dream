@@ -110,6 +110,8 @@ Route::post('/background/historyTable/getEffect',"BackgroundHistoryTablesControl
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
+Route::resource('/background/share','BackgroundShareController');
+
 Route::resource('/background', 'BackgroundController');
 
 
@@ -120,15 +122,6 @@ Route::resource('/background', 'BackgroundController');
 */
 Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
-
-/*
-|--------------------------------------------------------------------------
-| SHARE-Background-page
-|--------------------------------------------------------------------------
-*/
-Route::get('/background/share', function(){
-    return view('background/share/set_share_view');
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -279,8 +272,9 @@ Route::get('/cash', "Controller@cashView");
 // 웹페이지 로그인
 
 Route::get('/login', 'MemberController@login_index');
-// Route::post('/loginAction', 'MemberController@login');
 Route::post('/login', 'MemberController@login');
+
+Route::get('/logout', 'MemberController@logout');
 
 // 웹페이지 회원가입
 Route::get('/register', 'MemberController@register_index');

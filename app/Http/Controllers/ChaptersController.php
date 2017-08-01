@@ -21,7 +21,10 @@ class ChaptersController extends Controller
      */
     public function index()
     {
-        return view('background.chapter.chapter_main');
+        session_start();
+        $novel_id = $_SESSION['novel_id'];
+        $url = 'chapter/'.$novel_id;
+        return redirect($url);
     }
 
     /**
@@ -86,7 +89,9 @@ class ChaptersController extends Controller
         $novel_data = $novel->basicData($novel_id);
         $novel_relation = $novel_has_chapter->get_data($novel_id);
         
-    
+        session_start();
+        // echo($_SESSION['novel_id']);
+        $_SESSION['novel_id'] = $novel_id;
             
         
         

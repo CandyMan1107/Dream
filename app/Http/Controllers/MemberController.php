@@ -18,13 +18,16 @@ class MemberController extends Controller
         $password = $req->input('password');
 
         $checkLogin = DB::table('users')->where(['user_id' => $user_id, 'password' => $password])->get();
+        $_SESSION['user_id'] = $user_id;
+        return view('welcome')->with('user_id', $user_id);
+        
+
         if(count($checkLogin) > 0) {
-            
             return redirect('/');
         }
         else {
             return redirect('/login');
-        }    
+        }
     }
 
     public function register_index() {
@@ -43,6 +46,13 @@ class MemberController extends Controller
             ]
         );
 
+        return redirect('/');
+    }
+
+    public function logout() {
+        session_start();
+        session_destroy();
+        
         return redirect('/');
     }
 }
