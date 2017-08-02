@@ -13,7 +13,16 @@ class BackgroundShareController extends Controller
      */
     public function index()
     {
+        session_start();
+        if(isset($_SESSION['novel_id'])){
+            $novel_id = $_SESSION['novel_id'];
+        }
+        else{
+            return redirect('write_novel/my_novel');
+        }
+        var_dump($novel_id);
         //
+        return view('background.share.set_share_view');
     }
 
     /**
