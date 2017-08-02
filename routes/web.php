@@ -42,7 +42,7 @@ Route::post('/background/getRelationList', "RelationController@getRelationList")
 Route::post('/background/removeList', "RelationController@removeList");
 
 // 관계 정보 호출
-Route::post('/background/getReContent', "MapController@getGridsContent");
+Route::post('/background/getRelsContent', "RelationController@getRelsContent");
 
 /*
 |--------------------------------------------------------------------------

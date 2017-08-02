@@ -1,4 +1,4 @@
-pp<div class="default-padding"></div>
+<div class="default-padding"></div>
 @extends('layouts.master')
 
 
@@ -6,6 +6,12 @@ pp<div class="default-padding"></div>
   <script src="{{URL::asset('js/jquery.textcomplete.js')}}"></script>
 
   <style>
+    .sticky {
+      position: fixed;
+      top:0;
+      z-index: 100;
+      border-top: 0;
+    }
     .set_row {
       border-top: #EAEAEA 2px solid;
       padding: 10px;
@@ -134,6 +140,9 @@ pp<div class="default-padding"></div>
       border:2px solid #5CD1E5;
     }
 
+    .cover-div {
+      padding-bottom: 0px;
+    }
     .img_upload_label{
       display: inline-block;
       padding: .5em .75em;
@@ -145,7 +154,10 @@ pp<div class="default-padding"></div>
       cursor: pointer;
       border: 2px solid #00D8FF;;
       border-radius: .25em;
+    }
 
+    #coverHideBtn {
+      display: inline-block;
     }
     .img_upload_btn{
       position: absolute;
@@ -158,25 +170,30 @@ pp<div class="default-padding"></div>
 
     /*에디터 부*/
 
-    .edit-div {
-      padding: 0;
-      padding-bottom: 10px;
-      height:500px;
-    }
 
     .timetable-div {
+
+      z-index: 10;
+      background-color: #D4F4FA;
       border:#EAEAEA 2px solid;
-      padding-left: 5px;
+      padding: 0px;
       padding-top: 10px;
     }
 
     .timetable-content-div {
-      min-height: 250px;
+      height: 190px;
     }
 
     .timetable-btn-div {
+      padding: 0px;
       text-align: center;
       padding-bottom: 10px;
+
+    }
+
+    .timetable-btn-ul {
+      padding : 0px;
+      margin:0px;
     }
 
     .edit-box {
@@ -184,8 +201,14 @@ pp<div class="default-padding"></div>
       margin-bottom: 10px;
       overflow-y: scroll;
       padding-left: 5px;
-
     }
+    .edit-div {
+      z-index: 0;
+      padding: 0;
+      padding-bottom: 10px;
+      height:1000px;
+    }
+
 
     .episode-editor-div {
       display: inline-block;
@@ -650,16 +673,21 @@ pp<div class="default-padding"></div>
         </div>
       </div>
 
-      <div class="row set_row">
-        <div class="col-md-10 menu_title">표지 이미지
+      <div class="row set_row cover-div">
+        <div class="col-md-9 menu_title">표지 이미지
         </div>
 
-        <div class="col-md-2">
-          <form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="">
-            <label class="img_upload_label">이미지 업로드
-              <input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
-            </label>
-          </form>
+        <div class="col-md-3">
+          <div class="col-md-10">
+            <form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="">
+              <label class="img_upload_label">이미지 업로드
+                <input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
+              </label>
+            </form>
+          </div>
+          <div class="col-md-2">
+              <p type="button" name="button" id='coverHideBtn' data-toggle='on'><i class="coverHideBtn material-icons" style='font-size:40px;'>&#xE313;</i></p>
+          </div>
         </div>
       </div>
 
@@ -669,12 +697,13 @@ pp<div class="default-padding"></div>
       </div>
 
       <div class="row set_row">
-        <div class="col-md-12 menu_title">내용</div>
+        <div class="col-md-12 menu_title">내용<i class='material-icons pull-right' data-toggle='on' id='helperHideBtn' style='font-size:40px;'>&#xE316;</i></div>
       </div>
       <div class="timetable-div col-md-12">
         <div class="col-md-12 timetable-content-div" id='timeline'>
-        Loading...
+        No Timetable Data
         </div>
+
         <div class="col-md-12 timetable-btn-div">
           <ul class="pager timetable-btn-ul">
           </ul>
@@ -792,6 +821,7 @@ pp<div class="default-padding"></div>
             url: "/write_novel/call_background_info",
             async: false,
             data: {
+              "novelId" : {{$tasks["novelId"]}},
               "bgCase"  : bgCase,
               "bgId"    : bgId
             },
@@ -1130,6 +1160,7 @@ pp<div class="default-padding"></div>
           url: "/write_novel/call_background_info",
           async: false,
           data: {
+            "novelId" : {{$tasks["novelId"]}},
             "bgCase"  : bgCase,
             "bgId"    : bgId
           },
@@ -1607,6 +1638,7 @@ pp<div class="default-padding"></div>
             url: "/write_novel/call_background_info",
             async: false,
             data: {
+              "novelId" : {{$tasks["novelId"]}},
               "bgCase"  : bgCase,
               "bgId"    : bgId
             },
@@ -1797,6 +1829,7 @@ pp<div class="default-padding"></div>
           url: "/write_novel/call_background_info",
           async: false,
           data: {
+            "novelId" : {{$tasks["novelId"]}},
             "bgCase"  : bgCase,
             "bgId"    : bgId
           },
@@ -1837,6 +1870,7 @@ pp<div class="default-padding"></div>
           url: "/write_novel/get_timetables_info",
           async: false,
           data: {
+            "novelId" : {{$tasks["novelId"]}},
             "bgCase"  : bgCase,
             "bgId"    : bgId
           },
@@ -1900,6 +1934,62 @@ pp<div class="default-padding"></div>
       });
       return bgData;
     }
+
+    // 표지이미지 접기 버튼
+    $("#coverHideBtn").on("click",function(){
+      var toggle = $(this).attr("data-toggle");
+      if(toggle == 'on'){
+        $(".image_list_box").slideUp("fast");
+        $(this).html("<i class='material-icons' style='font-size:40px;'>&#xE316;</i>");
+        $(this).attr("data-toggle","off")
+
+      } else {
+        $(".image_list_box").slideDown("fast");
+        $(this).html("<i class='material-icons' style='font-size:40px;'>&#xE313;</i>");
+        $(this).attr("data-toggle","on")
+      }
+
+    });
+
+    // 헬퍼 숨기기 버튼
+    $("#helperHideBtn").on("click",function(){
+      var toggle = $(this).attr("data-toggle");
+      if(toggle == 'on'){
+        $(".timetable-div").slideUp("fast");
+        $(this).html("&#xE316;");
+        $(this).attr("data-toggle","off")
+
+      } else {
+        $(".timetable-div").slideDown("fast");
+        $(this).html("&#xE313;");
+        $(this).attr("data-toggle","on")
+      }
+
+    });
+
+
+    // 스티키 메뉴
+    var firstWidth = $('.timetable-div').width()+4;
+    var stickyNavTop = $('.timetable-div').offset().top;
+    var stickyNav = function(){
+    var scrollTop = $(window).scrollTop()+40;
+    if($("#coverHideBtn").attr("data-toggle")=='off') scrollTop += $(".image_list_box").height();
+      if (scrollTop > stickyNavTop) {
+
+          $('.timetable-div').addClass('sticky');
+          $('.timetable-div').css("width", firstWidth)
+          $(".navbar").slideUp("fast");
+
+      } else {
+          $('.timetable-div').removeClass('sticky');
+          $(".navbar").slideDown("fast");
+      }
+    }
+    stickyNav();
+    $(window).scroll(function() {
+      stickyNav();
+    });
+
 
   })(jQuery);
 
