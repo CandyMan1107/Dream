@@ -24,7 +24,7 @@ class BackgroundCharactersController extends Controller
         session_start();
         // echo($_SESSION['novel_id']);
         if(!isset($_SESSION['novel_id'])){
-            return redirect('background');
+            return redirect('write_novel/my_novel');
         }
         else {
             $novel_id = $_SESSION['novel_id'];
