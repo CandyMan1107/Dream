@@ -18,15 +18,15 @@ class MemberController extends Controller
         $password = $req->input('password');
 
         $checkLogin = DB::table('users')->where(['user_id' => $user_id, 'password' => $password])->get();
-        $_SESSION['user_id'] = $user_id;
-        return view('welcome')->with('user_id', $user_id);
         
-
+        
         if(count($checkLogin) > 0) {
+            $_SESSION['user_id'] = $user_id;
+            return view('welcome')->with('user_id', $user_id);
             return redirect('/');
         }
         else {
-            return redirect('/login');
+            return view('login.login');
         }
     }
 

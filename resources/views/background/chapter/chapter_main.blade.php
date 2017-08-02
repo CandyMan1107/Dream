@@ -19,24 +19,26 @@
 			</div>
 			<div class="row chapter_side" id="test">
 				<table class="table table-condensed">
-					@for($i = 0; $i < count($data['chapter']) ; $i++)
-						<tr>
-							<th>제목</th>
-							<th>내용</th>
-						</tr>
-						<tr>
-							<td style="width:80px">
-							{{--  {{var_dump($data)}}   --}}
-								<button type="button" name="chapter_click" class="btn btn-link chapter_click chapter_val" id="chapter_id{{$i}}" value="{{$data['chapter'][$i]['chapter_id']}}">
-									{{$data['chapter'][$i]['chapter_name']}} 
-									<div id="chapter_name{{$i}}" value="{{$data['chapter'][$i]['chapter_name']}}"></div>
-								</button>     
-							</td>
-							<td>
-								{{$data['chapter'][$i]['chapter_content']}}  
-							</td>
-						</tr>
-					@endfor
+					@isset($data[0])
+						@for($i = 0; $i < count($data['chapter']) ; $i++)
+							<tr>
+								<th>제목</th>
+								<th>내용</th>
+							</tr>
+							<tr>
+								<td style="width:80px">
+								{{--  {{var_dump($data)}}   --}}
+									<button type="button" name="chapter_click" class="btn btn-link chapter_click chapter_val" id="chapter_id{{$i}}" value="{{$data['chapter'][$i]['chapter_id']}}">
+										{{$data['chapter'][$i]['chapter_name']}} 
+										<div id="chapter_name{{$i}}" value="{{$data['chapter'][$i]['chapter_name']}}"></div>
+									</button>     
+								</td>
+								<td>
+									{{$data['chapter'][$i]['chapter_content']}}  
+								</td>
+							</tr>
+						@endfor
+					@endisset
 				</table>
 			</div>
 			<div>
