@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('point');
+            $table->integer('point')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });
