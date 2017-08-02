@@ -53,12 +53,13 @@ class Effect extends Model
         }
     }
 
+    // 버그로 인한 테이블 id -1 로 호출중
     public function get_effect_data($table_id){
         $effect_data = DB::table('effects')
         ->select('affect_table','affect_id','affect_content')
-        ->where('timetable_id',$table_id)
+        ->where('timetable_id',$table_id-1)
         ->get();
-
+        
         return $effect_data;
     }
 }

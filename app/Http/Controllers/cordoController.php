@@ -86,6 +86,7 @@ class cordoController extends Controller
     $task = DB::table("novel_episodes")->where('belong_to_novel','=',$id)->where('is_notice','=','1')->get();
     return $task;
   }
+
   //로그인 하기
   public function login(Request $request){
     $user_id = $request->input('id');
@@ -135,7 +136,7 @@ class cordoController extends Controller
   //해당 소설을 작성한 작가 아이디 가져오기
   public function getUserIdOfNovel(Request $request){
     $novel_id = $request->input('id');
-    $task = DB::table('novel_writers')->select('user_id')->where('novel_id', '=', $novel_id)->get();
+    $task = DB::table('novel_writers')->where('novel_id', '=', $novel_id)->get();
     return $task;
   }
 
@@ -230,6 +231,73 @@ class cordoController extends Controller
     }
     return $data;
   }
+
+  public function getBackgroundSettingsItems(Request $request){
+    $backgroundData = DB::table('items')->get();
+    $data = array(array());
+
+    $i = 0;
+    foreach ($backgroundData as $datas){
+      $data[$i]['id'] = $datas->id;
+      $data[$i]['name'] = $datas->name;
+      $data[$i]['info'] = $datas->info;
+      $data[$i]['category'] = $datas->category;
+      $data[$i]['refer_info'] = $datas->name;
+      $data[$i]['img_src'] = $datas->img_src;
+
+        $i++;
+    }
+    return $data;
+  }
+public function getBackgroundSettingsMaps(Request $request){
+    $backgroundData = DB::table('maps')->get();
+    $data = array(array());
+
+    $i = 0;
+    foreach ($backgroundData as $datas){
+      $data[$i]['id'] = $datas->id;
+      $data[$i]['cover_src'] = $datas->cover_src;
+      $data[$i]['title'] = $datas->title;
+      $data[$i]['created_at'] = $datas->created_at;
+      $data[$i]['updated_at'] = $datas->updated_at;
+
+        $i++;
+    }
+    return $data;
+  }
+
+  public function getBackgroundSettingsRelations(Request $request){
+    $backgroundData = DB::table('relations')->get();
+    $data = array(array());
+
+    $i = 0;
+    foreach ($backgroundData as $datas){
+      $data[$i]['relnum'] = $datas->relnum;
+      $data[$i]['source'] = $datas->source;
+      $data[$i]['target'] = $datas->target;
+      $data[$i]['relationship'] = $datas->relationship;
+
+      $i++;
+    }
+    return $data;
+  }
+
+  //유저의 포인트를 구매
+  public function setPoint(Request $request){
+    $user_id = $request->input('user_id');
+    $point = $request->input('point');
+    DB::table('user_point')->insert([
+      "user_id" => $user_id,
+      "point" => $point
+    ]);
+  }
+  //유저의 포인트를 가져오기
+  public function getPoint(Request $request){
+    $user_id = $request->input('user_id');
+    $task = DB::table('user_point')->where('user_id', '=', $user_id)->get();
+    return $task;
+  }
+
   //캐릭터 정보 가져오기
 //   public function getCharactersInfo(){
 //     $id = $request->input('id');

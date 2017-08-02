@@ -23,6 +23,7 @@
 				<ul class="pager" id="timetableList">
 					<?php
 						if($data[0]){
+							 
 							for($i = 0 ; $i < count($data) ; $i++){
 							?>
 								<li class="event_list" id="{{$i}}"><a href="#">{{$data[$i]['event_name']}}</a></li>

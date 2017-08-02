@@ -1,9 +1,14 @@
 @extends('layouts.master')
-
+@php
+	use App\Http\Controllers\BlogController;
+@endphp
 @include('writer_blog.blogTopMenu')
 
 @section('content')
-    @include('writer_blog.blogSideMenu')
+    {{-- 해당 블로그의 주인 user_id를 가지고 넘어가야하는데...   --}}
+    @php
+          echo BlogController::showBlogSideMenu(1);   
+    @endphp
     <div id="default-padding-mid"></div>
             {{-- BOARD WRITE FORM SPACE START --}}
             <div id="write-form" class="col-md-8">
@@ -12,13 +17,14 @@
                 {{ csrf_field() }}
                     <div class="form-group">
                         {{-- 나중에 수정하기! 해당 블로그 자동 증가 아이디로 --}}
-                        <input type="hidden" value="1" name="blog_id" />
+                        <input type="hidden" value="{{$blog_id}}" name="blog_id" />
                         <div class="row">
                             {{--  blog_menu_id  --}}
                             <div class="col-md-3">
                                 <select name="blog_menu_id" id="post-category" class="form-control">
-                                    <option value="1">menu1</option>
-                                    <option value="2">menu2</option>
+                                    @php
+                                        echo BlogController::wirteFormMenuList($blog_id);
+                                    @endphp
                                 </select>
                             </div>
                             {{--  board_title  --}}

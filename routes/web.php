@@ -110,6 +110,8 @@ Route::post('/background/historyTable/getEffect',"BackgroundHistoryTablesControl
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
+Route::resource('/background/share','BackgroundShareController');
+
 Route::resource('/background', 'BackgroundController');
 
 
@@ -120,15 +122,6 @@ Route::resource('/background', 'BackgroundController');
 */
 Route::get('/novel/info/novel_info/{id}', "NovelController@novelInfo");
 Route::get('/novel/read/novel_read_view/{id}', "NovelController@episodeShow");
-
-/*
-|--------------------------------------------------------------------------
-| SHARE-Background-page
-|--------------------------------------------------------------------------
-*/
-Route::get('/background/share', function(){
-    return view('background/share/set_share_view');
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -279,8 +272,9 @@ Route::get('/cash', "Controller@cashView");
 // 웹페이지 로그인
 
 Route::get('/login', 'MemberController@login_index');
-// Route::post('/loginAction', 'MemberController@login');
 Route::post('/login', 'MemberController@login');
+
+Route::get('/logout', 'MemberController@logout');
 
 // 웹페이지 회원가입
 Route::get('/register', 'MemberController@register_index');
@@ -297,8 +291,13 @@ Route::get('/cash', function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/blog/setMap/{id}', "BlogController@viewSetMapMain");
+
+Route::get('/blog/menu/{id}', "BlogController@selectedMenu");
 Route::get('/blog/setMap/createMenu/{id}', "BlogController@createMenu");
 Route::get('/blog/setMap/storeMenu/{id}', "BlogController@storeMenu");
 Route::get('/blog/setMap/destroyMenu/{id}', "BlogController@destroyMenu");
+
+Route::get('/blog/create/{id}', "BlogController@createBoard");
+Route::get('/blog/{id}', "BlogController@showBlog");
 
 Route::resource('/blog', "BlogController");
