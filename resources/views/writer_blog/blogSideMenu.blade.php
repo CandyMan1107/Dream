@@ -26,7 +26,8 @@
                 <div id="default-padding-mid"></div>
                 <div class="user_setting text-center">
                 {{-- 블로그 메뉴 있을 때 없을 때 마우스 막아놓기!   --}}
-                    <a href="{{ route('blog.create') }}">
+                    {{--  <a href="{{ route('blog.create') }}">  --}}
+                    <a href="/blog/create/{{$data[0]['id']}}">
                         <div>
                             <i class="material-icons">border_color</i>
                         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Input;
+use App\Background;
 
 class writeNovelController extends Controller
 {
@@ -128,21 +129,37 @@ class writeNovelController extends Controller
 
     //배경설정 케이스와 아이디로 테그정보 호출
     public function getTagById(Request $request){
-      $bgCase = $request->input('bgCase');
-      $bgId   = $request->input('bgId');
+
+      $bgCase   = $request->input('bgCase');
+      $bgId     = $request->input('bgId');
 
       $tagInfo = DB::table("tags")->select("kind","object_id","color","tag_name as value")->where("kind", "=",$bgCase)->where("object_id", "=", $bgId)->get();
+
+
 
       return $tagInfo;
     }
 
     // 소설 배경설정 정보 호출
     public function callBackgroundInfo(Request $request){
-      $bgCase = $request->input('bgCase');
-      $bgId   = $request->input('bgId');
-      $idName = ($bgCase == "characters" ? "cha_id" : "id");
+      $novelId  = $request->input('novelId');
+      $bgCase   = $request->input('bgCase');
+      $bgId     = $request->input('bgId');
 
-      $bgInfo = DB::table($bgCase)->where($idName,"=",$bgId)->get();
+
+      $idName = ($bgCase == "characters" ? "cha_id" : "id");
+      $table = ($bgCase == "relations" ? "relation_lists" : $bgCase);
+
+      //$bgInfo = DB::table($table)->where($idName,"=",$bgId)->get();
+
+      $bgInfo = DB::table($table)
+                      ->join('novel_backgrounds', $table.'.'.$idName,'=','novel_backgrounds.background_id')
+                      ->where('novel_backgrounds.belong_to_novel','=',$novelId)
+                      ->where('novel_backgrounds.novel_background','=',$bgCase)
+                      ->where('novel_backgrounds.'.$idName, '=', $bgId)
+                      ->get();
+
+
 
       return $bgInfo;
     }
@@ -171,13 +188,23 @@ class writeNovelController extends Controller
 
     // 연대표 정보 호출
     public function getTimetablesInfo(Request $request){
+      $novelId = $request->input('novelId');
       $bgCase = $request->input('bgCase');
       $bgId   = $request->input('bgId');
 
       if($bgCase == null || $bgId == null){
-        $ttData = DB::table("timetables")->get();
+        $ttData =   DB::table('timetables')
+                          ->join('novel_backgrounds','timetables.id','=','novel_backgrounds.background_id')
+                          ->where('novel_backgrounds.belong_to_novel','=',$novelId)
+                          ->where('novel_backgrounds.novel_background','=','timetables')
+                          ->get();
+
       } else {
-        $ttData = DB::table("timetables")->join("effects","timetables.id", "=", "effects.timetable_id")
+        $ttData = DB::table("timetables")
+        ->join("effects","timetables.id", "=", "effects.timetable_id")
+        ->join('novel_backgrounds','timetables.id','=','novel_backgrounds.background_id')
+        ->where('novel_backgrounds.belong_to_novel','=',$novelId)
+        ->where('novel_backgrounds.novel_background','=','timetables')
         ->where("affect_table","=",$bgCase)->where("affect_id","=",$bgId)
         ->get();
       }

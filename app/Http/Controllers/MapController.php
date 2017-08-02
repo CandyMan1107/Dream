@@ -7,11 +7,21 @@ use Illuminate\Support\Facades\Input;
 use DB;
 use File;
 use App\Map;
+use App\Background;
 
 
 class MapController extends Controller
 {
     public function index() {
+        // 소설 세션 검사
+        session_start();
+        if(!isset($_SESSION['novel_id'])){
+            return redirect('background');
+        }
+        else {
+            $novel_id = $_SESSION['novel_id'];
+        }
+
         $imgRoot = "img/background/mapImg";
         $img_src = DB::select("select * from map_images");
 
@@ -30,7 +40,16 @@ class MapController extends Controller
 
     // 맵 목록
     public function getMapList() {
-      $mapsInfos = DB::table("maps")->get();
+      session_start();
+      $novel_id = $_SESSION['novel_id'];
+      $background = new Background();
+
+      $mapsInfos = DB::table('maps')
+                      ->join('novel_backgrounds','maps.id','=','novel_backgrounds.background_id')
+                      ->where('novel_backgrounds.belong_to_novel','=',$novel_id)
+                      ->where('novel_backgrounds.novel_background','=','maps')
+                      ->get();
+
       return $mapsInfos;
     }
 
@@ -102,6 +121,17 @@ class MapController extends Controller
             "fill_color"     => $textInfo->fill_color
         ]);
       }
+
+      // 소설 - 배경정보
+      session_start();
+      $novel_id = $_SESSION['novel_id'];
+      $background = new Background();
+
+      $novel_background_data = array();
+      $novel_background_data['belong_to_novel'] = $novel_id;
+      $novel_background_data['novel_background'] = "maps";
+      $novel_background_data['background_id'] = $mapsId;
+      $background->insertData($novel_background_data);
 
       return $mapsId."/".$createdAt;
     }

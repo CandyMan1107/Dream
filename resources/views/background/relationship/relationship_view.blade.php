@@ -16,7 +16,7 @@
 			  stroke: #fff;
 			  stroke-width: 1.5px;
 			}
-		
+
 
 
 			text {
@@ -282,7 +282,7 @@
 			var nodes = {};
 			var rel = {};
 			var chaInfos = <?php echo json_encode($chaInfos) ?>;
-			//var links = <?php echo json_encode($tasks["relInfos"])?>;
+
 			var links = new Array();
 
 			// 가져온 데이터를 기반으로 데이터 재해석
