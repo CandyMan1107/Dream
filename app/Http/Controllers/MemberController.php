@@ -20,14 +20,14 @@ class MemberController extends Controller
         $checkLogin = DB::table('users')->where(['user_id' => $user_id, 'password' => $password])->get();
         
         if(count($checkLogin) > 0) {
-            $_SESSION['is_logged'] = 'YES';
+            session_start();
             $_SESSION['user_id'] = $user_id;
-            return view('welcome')->with('user_id', $user_id, 'is_logged', 'YES');
-            // return redirect('/');
+            
+            echo 'success';
+            return redirect('/');
         }
         else {
-            $_SESSION['is_logged'] = 'NO';
-            $_SESSION['user_id'] = '';
+            echo 'false';
             return view('login.login');
         }
     }
