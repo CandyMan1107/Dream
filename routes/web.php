@@ -290,14 +290,26 @@ Route::get('/cash', function () {
 | BLOG
 |--------------------------------------------------------------------------
 */
-Route::get('/blog/setMap/{id}', "BlogController@viewSetMapMain");
+/**
+ * The MAIN VIEW of blog
+ * @param $user_id(DataType : INTEGER)
+ * @return view('writer_blog.blog_main')
+ */
+Route::get('/blog/{id}', "BlogController@showBlogMain");
+
 
 Route::get('/blog/menu/{id}', "BlogController@selectedMenu");
+
+Route::get('/blog/create/{id}', "BlogController@createBoard");
+
+/**
+ * The SET MAP VIEW of blog
+ * @param The owner's $user_id(DataType : INTEGER)
+ * @return BLOG'S SETTING MAP
+ */
+Route::get('/blog/setMap/{id}', "BlogController@viewSetMapMain");
 Route::get('/blog/setMap/createMenu/{id}', "BlogController@createMenu");
 Route::get('/blog/setMap/storeMenu/{id}', "BlogController@storeMenu");
 Route::get('/blog/setMap/destroyMenu/{id}', "BlogController@destroyMenu");
-
-Route::get('/blog/create/{id}', "BlogController@createBoard");
-Route::get('/blog/{id}', "BlogController@showBlog");
 
 Route::resource('/blog', "BlogController");
