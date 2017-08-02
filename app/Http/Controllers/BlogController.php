@@ -25,7 +25,6 @@ class BlogController extends Controller
     public function index()
     {
         //
-
             $board = new BlogBoard();
             $boardData = $board->allBoardD();
             $data = array(array());
@@ -59,6 +58,50 @@ class BlogController extends Controller
                     $i++;
                 }
             }
+
+        // print_r($data);
+        
+
+        return view('writer_blog.blog_main')->with("data", $data);
+    }
+
+    public function showBlog($id) 
+    {
+        // Blog's OWNER user_id
+        $blog_owner_id = $id;
+
+        $board = new BlogBoard();
+        $boardData = $board->allBoardD();
+        $data = array(array());
+
+        $i = 0;
+
+        // print_r($boardData);
+
+        if(empty($boardData)) {
+            $data = 0;
+        } else {
+            foreach($boardData as $datas) {
+                $data[$i]['id'] = $datas->id;   // blog_board_id
+
+                $data[$i]['user_id'] = $datas->user_id; // blog_owner_id & user_id 구분하기
+                $data[$i]['blog_id'] = $datas->blog_id;
+                $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+
+                $data[$i]['board_title'] = $datas->board_title;
+                $data[$i]['is_notice'] = $datas->is_notice;
+                // $data[$i]['board_hit'] = $datas->board_hit;
+                // $data[$i]['board_like'] = $datas->board_like;
+                $data[$i]['board_content'] = $datas->board_content;
+                $data[$i]['created_at'] = $datas->created_at;
+                $data[$i]['updated_at'] = $datas->updated_at;
+                // show($id)'s $id : blog_menu_id&id
+                $hrefArr = array($data[$i]['blog_menu_id'], $data[$i]['id']);
+                $data[$i]['href'] = implode("&", $hrefArr);
+
+                $i++;
+            }
+        }
 
         // print_r($data);
         
@@ -420,7 +463,7 @@ class BlogController extends Controller
      * Display View All Boards of the Selected Menu.
      * @return selected_menu_view.blade.php
      */
-    public static function selectedMenuAllB($id) 
+    public static function selectedMenu($id) 
     {
         $blog_menu_id = $id;
 
@@ -429,44 +472,60 @@ class BlogController extends Controller
         $menuBoard = new BlogBoard();
         $menuBoardD = $menuBoard->selectedMenuBoardD($blog_menu_id);
 
-        $data = array(array());
-        $i = 0;
+        // $data = array(array());
+        // $i = 0;
 
-        // var_dump($menuBoardD);
-        print_r($menuBoardD[0]);
+        //nvar_dump($menuBoardD);
+        // print_r($menuBoardD);
 
-        // if(empty($menuBoardD[0])) {
-        //     // echo("empty!");
+        if(empty($menuBoardD[0])) {
+            // echo("empty!");
 
-        //     $data = "empty";
-        // } else {
-        //     foreach($menuBoardD as $datas) {
-        //         $data[$i]['id'] = $datas->id;   // blog_board_id
+            $data = "empty";
+        } else {
+            // foreach($menuBoardD as $datas) {
+                // $data[$i]['id'] = $datas->id;   // blog_board_id
 
-        //         // $data[$i]['user_id'] = $datas->user_id; // blog_owner_id & user_id 구분하기
+                // $data[$i]['user_id'] = $datas->user_id; // blog_owner_id & user_id 구분하기
 
-        //         $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+                $data = $blog_menu_id;
 
-        //         $data[$i]['board_title'] = $datas->board_title;
-        //         $data[$i]['is_notice'] = $datas->is_notice;
-        //         // $data[$i]['board_hit'] = $datas->board_hit;
-        //         // $data[$i]['board_like'] = $datas->board_like;
-        //         $data[$i]['board_content'] = $datas->board_content;
-        //         $data[$i]['created_at'] = $datas->created_at;
-        //         $data[$i]['updated_at'] = $datas->updated_at;
+                // $data[$i]['board_title'] = $datas->board_title;
+                // $data[$i]['is_notice'] = $datas->is_notice;
+                // // $data[$i]['board_hit'] = $datas->board_hit;
+                // // $data[$i]['board_like'] = $datas->board_like;
+                // $data[$i]['board_content'] = $datas->board_content;
+                // $data[$i]['created_at'] = $datas->created_at;
+                // $data[$i]['updated_at'] = $datas->updated_at;
 
-        //         // show($id)'s $id : blog_menu_id&id
-        //         $hrefArr = array($data[$i]['blog_menu_id'], $data[$i]['id']);
-        //         $data[$i]['href'] = implode("&", $hrefArr);
+                // // show($id)'s $id : blog_menu_id&id
+                // $hrefArr = array($data[$i]['blog_menu_id'], $data[$i]['id']);
+                // $data[$i]['href'] = implode("&", $hrefArr);
 
-        //         $i++;
-        //     }
-        // }
+                // $i++;
+            // }
+        }
 
-        // print_r($data);
+        // echo($data);
         
 
-        // return view('writer_blog.selected_menu_view')->with('data', $data);
+        return view('writer_blog.selected_menu_view')->with('data', $data);
+    }
+
+    /**
+     * Display View All Boards of the Selected Menu.
+     * @return selected_menu_view.blade.php
+     */
+    public static function selectedMenuAllB($id) 
+    {
+        $blog_menu_id = $id;
+
+        // print_r($blog_menu_id);
+
+        $menuBoard = new BlogBoard();
+        $data = $menuBoard->selectedMenuBoardD($blog_menu_id);
+        
+        return view('writer_blog.selected_menu_board', ['data' => $data]);
     }
 
     /**

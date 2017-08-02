@@ -292,11 +292,12 @@ Route::get('/cash', function () {
 */
 Route::get('/blog/setMap/{id}', "BlogController@viewSetMapMain");
 
-Route::get('/blog/menu/{id}', "BlogController@selectedMenuAllB");
+Route::get('/blog/menu/{id}', "BlogController@selectedMenu");
 Route::get('/blog/setMap/createMenu/{id}', "BlogController@createMenu");
 Route::get('/blog/setMap/storeMenu/{id}', "BlogController@storeMenu");
 Route::get('/blog/setMap/destroyMenu/{id}', "BlogController@destroyMenu");
 
 Route::get('/blog/create/{id}', "BlogController@createBoard");
+Route::get('/blog/{id}', "BlogController@showBlog");
 
 Route::resource('/blog', "BlogController");

@@ -21,7 +21,7 @@
                             <h3>메뉴에 작성된 게시글이 없습니다.</h3>
                         @else
                             @php
-                                 echo BlogController::mainNoticeList($data); 
+                                 echo BlogController::mainNoticeList(); 
                             @endphp
                         @endif
                     </div>
@@ -33,8 +33,13 @@
                             <h3>포스트 아이콘을 눌러서 게시글을 작성해주세요.</h3>
                         {{-- ELSEIF $_SERVER["REQUEST_URI"] in /blog OR /blog?%%% --}}
                         @elseif (!empty($data[0]) && (strpos($_SERVER["REQUEST_URI"], "/blog/menu")!==false || strpos($_SERVER["REQUEST_URI"], "/blog/menu?")!==false))
+                        
                             <div name="blog_post">
-                                @foreach ($data as $menuD)
+                                @php
+                                    echo BlogController::selectedMenuAllB($data); 
+                                @endphp
+                            
+                                {{--  @foreach ($data as $menuD)
                                       <div class="board_title">
                                         <ul class="list-inline">
                                             
@@ -66,7 +71,7 @@
 
                                 <div class="text-center">
                                     {{ $data->appends(['data' => $data->currentPage()])->links() }}   
-                                </div>
+                                </div>   --}}
                             </div>
                         {{-- ELSE ONCLICK
                         url 받아와서 뒤에 뭐가 있으면 js 파일로 ajax --}}
