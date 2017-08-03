@@ -20,7 +20,7 @@ class BackgroundShareController extends Controller
         else{
             return redirect('write_novel/my_novel');
         }
-        var_dump($novel_id);
+        // var_dump($novel_id);
         //
         return view('background.share.set_share_view');
     }
@@ -56,7 +56,10 @@ class BackgroundShareController extends Controller
     {
         //
     }
-
+    
+    public function get_background(){
+        echo ("23");
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -1,4 +1,4 @@
-<?php //session_start() ?>
+<?php session_start() ?>
 <article>
 	<header>
 		<style type="text/css">

@@ -11,6 +11,7 @@ use App\Item;
 use App\Effect;
 use App\Map;
 use App\Background;
+use App\Relation_list;
 
 class BackgroundHistoryTablesController extends Controller
 {
@@ -38,7 +39,7 @@ class BackgroundHistoryTablesController extends Controller
         $data = array(array());
         $i = 0;
         foreach ($dataSet as $datas){
-            $data[$i]['id'] = $datas->id;
+            $data[$i]['id'] = $datas->background_id;
             $data[$i]['event_name'] = $datas->event_names;
             $data[$i]['event_content'] = $datas->event_contents;
             $data[$i]['start_day'] = $datas->start_days;
@@ -49,6 +50,7 @@ class BackgroundHistoryTablesController extends Controller
             
             $i++;
         }
+        // var_dump($data);
         return view('background.historyTable.history_table_view')->with("data", $data);
     }
 
@@ -77,6 +79,7 @@ class BackgroundHistoryTablesController extends Controller
         $timeTable = new Timetable();
         $effect = new Effect();
         $background = new Background();
+        $relation_list = new Relation_list();
         $refer_info = "";
 
         for($i= 0; $i < count($table['refer_info']); $i++){
@@ -107,6 +110,10 @@ class BackgroundHistoryTablesController extends Controller
         if(isset($table['map_id'])){
             $data['maps']['id'] = $table['map_id'];
             $data['maps']['content'] = $table['effect_map'];
+        }
+        if(isset($table['relation_id'])){
+            $data['relations']['id'] = $table['relation_id'];
+            $data['relations']['content'] = $table['effect_relation'];
         }
         // var_dump($data);
         // 새로 입력 한 연대표 아이디값 반환
@@ -182,17 +189,39 @@ class BackgroundHistoryTablesController extends Controller
         return $list; 
     }
 
+    public static function relations_effect_modal(){
+        return view('background.historyTable.relation_effect_modal');
+    }
+
+    public static function show_relations(){
+        $relation_list = new Relation_list();
+
+        // session_start();
+        $novel_id = $_SESSION['novel_id'];
+        $relation = $relation_list->get_data_by_novel_id($novel_id);
+        // var_dump($relation);
+        $list = array(array());
+        $i = 0;
+        foreach($relation as $lists){
+            $list[$i]["id"] = $lists->background_id;
+            $list[$i]["name"] = $lists->title;
+            $list[$i]["img_src"] = $lists->cover_src;    
+            $i++;
+        }
+
+        return $list; 
+    }
+
     public function getEffect(Request $request){
         $data = $request->all();
         
         $effect = new Effect();
         
-        // effect 부분 버그 발생, effect model 에서 강제로 -1한 값으로 호출중
         $effect_data = $effect->get_effect_data($data['timetable_id']);
         // $effect_data[0]['affect_table'];
         // $effect_data[0]['affect_id'];
         // $effect_data[0]['affect_content'];
-        
+        // var_dump($data['timetable_id']);
         $data = array(array());
         $i = 0;
         foreach($effect_data as $datas){
@@ -205,6 +234,7 @@ class BackgroundHistoryTablesController extends Controller
         $character = new Character();
         $item = new Item();
         $map = new Map();
+        $relation_list = new Relation_list();
 
         $num = count($effect_data);
         $items = "items";
@@ -228,6 +258,13 @@ class BackgroundHistoryTablesController extends Controller
                 $map_img_src = $map->get_map_src($data[$i]["affect_id"]);
 
                 foreach($map_img_src as $img_src){
+                    $data[$i]["img_src"] = $img_src->cover_src;
+                }
+            }
+            if($data[$i]["affect_table"] == "relations"){
+                $relation_img_src = $relation_list->get_relation_src($data[$i]["affect_id"]);
+
+                foreach($relation_img_src as $img_src){
                     $data[$i]["img_src"] = $img_src->cover_src;
                 }
             }

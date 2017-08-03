@@ -110,6 +110,8 @@ Route::post('/background/historyTable/getEffect',"BackgroundHistoryTablesControl
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
+Route::get('/background/share/get_background','BackgroundShareController@get_background');
+
 Route::resource('/background/share','BackgroundShareController');
 
 Route::resource('/background', 'BackgroundController');
