@@ -40,8 +40,10 @@ class BlogBoard extends Model
 
     // blog_boards(TABLE) SELECT *
     // JOIN menu_board_relations(TABLE)
+    // JOIN blog_menu_relations(TABLE)
+    // JOIN user_blog_relations(TABLE)
     // user id 매개변수로 받아오기
-    public function allBoardD() {
+    public function allBoardD($blog_owner_id) {
         $boardData = DB::table('blog_boards')
             ->join('menu_board_relations', 'blog_boards.id', '=', 'menu_board_relations.blog_board_id')
             ->join('blog_menu_relations', 'menu_board_relations.blog_menu_id', '=', 'blog_menu_relations.blog_menu_id')

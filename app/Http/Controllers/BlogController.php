@@ -7,10 +7,12 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use  App\User;
 use  App\Blog;
 use  App\BlogMenu;
 use  App\BlogBoard;
 
+use  App\UserBlogRelation;
 use  App\BlogMenuRelation;
 use  App\MenuBoardRelation;
 use  App\BoardFileRelation;
@@ -73,51 +75,76 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      * MAIN PAGE OF BLOG
-     * @param The OWNER's $user_id (DataType : INTEGER)
+     * @param The OWNER's $user_id (DataType : STRING)
      * @return \Illuminate\Http\Response
      */
-    public function showBlogMain($id) 
+    public function showBlogMain($ownerId) 
     {
-        // Blog's OWNER user_id
-        $blog_owner_id = $id;
+        // Blog's OWNER user_id (DataType : STRING)
+        $blog_owner_id = $ownerId;
 
         // 현재 접속 유저의 아이디 또한 구해서 변수 지정하기!
+        $current_user_id = "yerriel";
 
-        $board = new BlogBoard();
-        $boardData = $board->allBoardD();
-        $data = array(array());
+        // echo($blog_owner_id);
 
-        $i = 0;
+        $userBlogR = new UserBlogRelation();
+        $userBlogRD = $userBlogR->allUserBlogRD($blog_owner_id);
 
-        // print_r($boardData);
+        // print_r($userBlogRD);
 
-        if(empty($boardData)) {
-            $data = 0;
-        } else {
-            foreach($boardData as $datas) {
-                $data[$i]['id'] = $datas->id;   // blog_board_id
-
-                $data[$i]['user_id'] = $datas->user_id; // blog_owner_id & user_id 구분하기
-                $data[$i]['blog_id'] = $datas->blog_id;
-                $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
-
-                $data[$i]['board_title'] = $datas->board_title;
-                $data[$i]['is_notice'] = $datas->is_notice;
-                // $data[$i]['board_hit'] = $datas->board_hit;
-                // $data[$i]['board_like'] = $datas->board_like;
-                $data[$i]['board_content'] = $datas->board_content;
-                $data[$i]['created_at'] = $datas->created_at;
-                $data[$i]['updated_at'] = $datas->updated_at;
-                // show($id)'s $id : blog_menu_id&id
-                $hrefArr = array($data[$i]['blog_menu_id'], $data[$i]['id']);
-                $data[$i]['href'] = implode("&", $hrefArr);
-
-                $i++;
+        if (empty($userBlogRD[0])) {
+            // echo "EMPTY!";
+            if ($blog_owner_id == $current_user_id) {
+                $data[0] = "Please create a blog.";
+            } else {
+                $data[0] = "ERROR!";
             }
+
+            $data[1] = $blog_owner_id;
+            $data[2] = $current_user_id;
+
+        } else {
+            $blog_owner_id = $userBlogRD[0];
+
+            $board = new BlogBoard();
+            $boardData = $board->allBoardD($blog_owner_id);
+            $data = array(array());
+
+            $i = 0;
+
+            // print_r($boardData);
+
+            if(empty($boardData)) {
+                $data = 0;
+            } else {
+                foreach($boardData as $datas) {
+                    $data[$i]['id'] = $datas->id;   // blog_board_id
+
+                    $data[$i]['user_id'] = $datas->user_id; // blog_owner_id & user_id 구분하기
+                    $data[$i]['blog_id'] = $datas->blog_id;
+                    $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+
+                    $data[$i]['board_title'] = $datas->board_title;
+                    $data[$i]['is_notice'] = $datas->is_notice;
+                    // $data[$i]['board_hit'] = $datas->board_hit;
+                    // $data[$i]['board_like'] = $datas->board_like;
+                    $data[$i]['board_content'] = $datas->board_content;
+                    $data[$i]['created_at'] = $datas->created_at;
+                    $data[$i]['updated_at'] = $datas->updated_at;
+                    // show($id)'s $id : blog_menu_id&id
+                    $hrefArr = array($data[$i]['blog_menu_id'], $data[$i]['id']);
+                    $data[$i]['href'] = implode("&", $hrefArr);
+
+                    $i++;
+                }
+            }
+
+            
         }
 
-        // print_r($data);
         
+        // print_r($data);
 
         return view('writer_blog.blog_main')->with("data", $data);
     }
@@ -127,9 +154,10 @@ class BlogController extends Controller
      * @param $blog_menu_id (DataType : INTEGER)
      * @return selected_menu_view.blade.php
      */
-    public function selectedMenu($id) 
+    public function selectedMenu($ownerId, $menuId) 
     {
-        $blog_menu_id = $id;
+        $blog_owner_id = $ownerId;
+        $blog_menu_id = $menuId;
 
         // echo($blog_menu_id);
 
@@ -159,12 +187,34 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      * @return $data = $blog_id
      */
-    public function createBoard($id)
+    public function createBoard($ownerId)
     {
         //
         // echo ("create() RUNNING");
 
-        $blog_id = $id;
+        $owner_id = $ownerId;
+
+        // echo $owner_id;
+        
+        // $user = new User();
+        // $userData = $user->searchUserId($owner_id);
+
+        // // echo $userData;
+
+        // foreach ($userData as $datas) {
+        //     $user_id = $datas->id;
+        // }
+
+        // var_dump(is_int($user_id));
+
+        $userBlogR = new UserBlogRelation();
+        $userBlogRD = $userBlogR->allUserBlogRD($owner_id);
+
+        foreach ($userBlogRD as $datas) {
+            $blog_id = $datas->blog_id;
+        }
+
+        // var_dump(is_int($blog_id));
 
 
         return view('writer_blog.board.write_form')->with('blog_id', $blog_id);
@@ -193,7 +243,9 @@ class BlogController extends Controller
         // INSERT DATAS INTO menu_board_relations TABLE
         $blog_menu_board_relation->insertRelationD($data['blog_menu_id'], $blog_board_id);
 
-        return redirect(route('blog.index'));
+        return redirect()->action(
+            'BlogController@showBlogMain', ['ownerId' => $data['owner_id']]
+        );
     }
 
     /**
@@ -257,7 +309,7 @@ class BlogController extends Controller
 
 /*
 |--------------------------------------------------------------------------
-| STATIC FUNCTIONS
+| BLOG VIEW - STATIC FUNCTIONS
 |--------------------------------------------------------------------------
 */
 
@@ -350,7 +402,8 @@ class BlogController extends Controller
     * Display the mainNoticeList with noticeList()'s $data
     * @return view('writer_blog.part.main_notice_list')
     */
-    public static function mainNoticeList() {
+    public static function mainNoticeList() 
+    {
         $boardTable = new BlogBoard();
 
         $noticeList = $boardTable->noticeListBoardD();
@@ -452,6 +505,75 @@ class BlogController extends Controller
     
 
 
+/*
+|--------------------------------------------------------------------------
+| CREATE BLOG
+|--------------------------------------------------------------------------
+*/
+    /**
+     * Display View Form of Create Blog.
+     * @param $blog_owner_id (DataType : INTEGER)
+     * @return view('writer_blog.blog.blog_create_form')
+     */
+    public static function showBlogCreateForm($id) 
+    {
+        // print_r($data);
+
+        // Blog's OWNER user_id (DataType : STRING)
+        $blog_owner_id = $id[1];
+        // Current User user_id (DataType : STRING)
+        // $current_user_id = $data[2];
+
+        // echo $blog_owner_id;
+
+        $data[0] = $blog_owner_id;
+
+        return view('writer_blog.blog.blog_create_form')->with('data', $data);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function storeBlogCreateForm(Request $request)
+    {
+        //
+        // echo("PASS"); 
+
+        $data = $request->all();
+
+        // print_r($data);
+
+        // echo($data['blog_owner_id']);
+
+        $blog = new Blog();
+
+        $user = new User();
+        $user_blog_relation = new UserBlogRelation();
+
+        // INSERT DATAS INTO blogs TABLE
+        $blog_id = $blog->newBlogD($data);
+
+        $userData = $user->searchUserId($data['blog_owner_id']);
+
+        foreach ($userData as $datas) {
+            $owner_id = $datas->id;
+        }
+
+        // echo $owner_id;
+
+        // var_dump(is_int($owner_id));
+
+        // INSERT DATAS INTO user_blog_relations TABLE
+        $user_blog_relation->insertRelationD($owner_id, $blog_id);
+
+        // return redirect()->action(
+        //     'BlogController@showBlogMain', ['ownerId' => $ownerId]
+        // );
+    }
+
+
+
+
 
 
 
@@ -461,7 +583,7 @@ class BlogController extends Controller
 
 /*
 |--------------------------------------------------------------------------
-| BLOG SET MAP
+| BLOG SET MAP (MENU, DESIGN)
 |--------------------------------------------------------------------------
 */
 
@@ -471,12 +593,15 @@ class BlogController extends Controller
      * @param $user_id(DataType : INTEGER)
      * @return blog_set_main.blade.php
      */
-    public function viewSetMapMain($id)
+    public function showSetMapMain($ownerId, $blogId)
     {
         // echo $id;
-        $user_id = $id;
+        $owner_id = $ownerId;
+        $blog_id = $blogId;
 
-        return view('writer_blog.set.blog_set_main')->with('user_id', $user_id);
+        // echo $blog_id;
+
+        return view('writer_blog.set.blog_set_main')->with('blog_id', $blog_id);
     }
 
     /**
@@ -484,11 +609,12 @@ class BlogController extends Controller
      * 
      * @return blog_set_main.blade.php
      */
-    public function createMenu($id)
+    public function createMenu($ownerId, $blogId)
     {
-        $user_id = $id;
+        $owner_id = $ownerId;
+        $blog_id = $blogId;
 
-        // echo $user_id;
+        // echo $blog_id;
 
         // 메뉴 테이블 전체의 메뉴 아이디 및 메뉴 제목, 블로그 아이디 게시글 아이디
         $menu = new BlogMenu();
@@ -499,13 +625,14 @@ class BlogController extends Controller
 
         $i = 0;
 
-        if ($menuData == "empty") {
+        if (empty($menuData[0])) {
             $data[0]['id'] = 0;
+            $data[0]['blog_id'] = $blog_id;
         } else {
             foreach($menuData as $datas) {
                 $data[$i]['id'] = $datas->id;   // menu auto-increments id
 
-                $data[$i]['blog_id'] = $datas->blog_id;
+                $data[$i]['blog_id'] = $blog_id;
                 // $data[$i]['blog_board_id'] = $datas->blog_board_id;
 
                 $data[$i]['menu_title'] = $datas->menu_title;
@@ -531,7 +658,7 @@ class BlogController extends Controller
 
         // print_r($data);
 
-        // echo($data['blog_id']);
+        // echo($data['owner_id']);
 
         $menu = new BlogMenu();
         $blog_menu_relation = new BlogMenuRelation();
@@ -542,7 +669,9 @@ class BlogController extends Controller
         // INSERT DATAS INTO menu_board_relations TABLE
         $blog_menu_relation->insertRelationD($data['blog_id'], $blog_menu_id);
 
-        return redirect(route('blog.index'));
+        return redirect()->action(
+            'BlogController@showBlogMain', ['ownerId' => $data['owner_id']]
+        );
     }
 
     /**
@@ -551,7 +680,7 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroyMenu($id)
+    public function destroyMenu($ownerId, $blogId)
     {
         //
     }

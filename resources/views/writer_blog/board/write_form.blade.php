@@ -12,7 +12,6 @@
     <div id="default-padding-mid"></div>
             {{-- BOARD WRITE FORM SPACE START --}}
             <div id="write-form" class="col-md-8">
-
                 <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/formr-data">
                 {{ csrf_field() }}
                     <div class="form-group">
@@ -45,8 +44,8 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-default">임시저장 구현해주겠니</button>
-                    &nbsp; &nbsp;
+                    {{--  <button class="btn btn-default">임시저장 구현해주겠니</button>  --}}
+                    {{--  &nbsp; &nbsp;  --}}
                     <button type="submit" class="btn btn-default">등록</button>
                 </form>
             </div>

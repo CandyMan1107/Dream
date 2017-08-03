@@ -27,7 +27,7 @@
                 <div class="user_setting text-center">
                 {{-- 블로그 메뉴 있을 때 없을 때 마우스 막아놓기!   --}}
                     {{--  <a href="{{ route('blog.create') }}">  --}}
-                    <a href="/blog/create/{{$data[0]['id']}}">
+                    <a href="/yerriel/blog/create">
                         <div>
                             <i class="material-icons">border_color</i>
                         </div>
@@ -41,7 +41,7 @@
                     </a>  --}}
                     &nbsp;&nbsp;
                     {{-- 관리 : 사용자의 블로그일 때만 표시   --}}
-                    <a href="/blog/setMap/1">
+                    <a href="/yerriel/blog/{{$data[0]['id']}}/setMap">
                         <div>
                             <i class="material-icons">settings</i>
                         </div>

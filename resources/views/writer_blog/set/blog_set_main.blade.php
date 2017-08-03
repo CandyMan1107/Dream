@@ -9,7 +9,7 @@
         <div class="row">
             <div id="blog-set">
                 <div class="col-md-4 text-center blog_menu_set">
-                    <a href="/blog/setMap/createMenu/1">
+                    <a href="/yerriel/blog/{{$blog_id}}/setMap/createMenu">
                         <i class="material-icons">settings</i>
                         <h4>메뉴 관리</h4>
                     </a>
