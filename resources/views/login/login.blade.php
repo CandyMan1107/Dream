@@ -19,25 +19,15 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label">아이디</label>
                         <div class="col-md-5">
-                            <input id="email" type="text" class="form-control" name="user_id" value="{{ old('user_id') }}" required autofocus>
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                            <input id="email" type="text" class="form-control" name="user_id"required autofocus>
                         </div>
                     </div>
 
-                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <div class="form-group">
                         <label for="password" class="col-md-4 control-label">비밀번호</label>
                         <div class="col-md-5">
                             <input id="password" type="password" class="form-control" name="password" required>
 
-                            @if ($errors->has('password'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
-                            @endif
                         </div>
                     </div>
                     
