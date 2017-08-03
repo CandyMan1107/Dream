@@ -1,35 +1,63 @@
 <style>
-#frm{
-    border: solid gray 1px;
-    width: 20%;
-    border-radius: 5px;
-    margin: 100px auto;
-    background: white;
-}
-#btn {
-    color: #fff;
-    background: #337ab7;
-    padding: 5px;
+.row{
+    margin: 200px;
+    padding: 100px auto;
 }
 </style>
+
 @extends('layouts.master')
 @section('content')
-<br><br><br><br><br><br><br>
-<html>
-<head>
-</head>
-<body id="body">
-<center>
-    <div id="frm">
-        <form action="/login" method="post">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <br>
-            아디 : <input type="text" name="user_id"><br>
-            비번 : <input type="password" name="password"><br><br>
-            <input id="btn" type="submit" name="login" value="로그인">
-        </form>
+<div id="login_pannel" class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">로그인</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" action="/login" method="post"  role="form" >
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">아이디</label>
+                        <div class="col-md-5">
+                            <input id="email" type="text" class="form-control" name="user_id" value="{{ old('user_id') }}" required autofocus>
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label for="password" class="col-md-4 control-label">비밀번호</label>
+                        <div class="col-md-5">
+                            <input id="password" type="password" class="form-control" name="password" required>
+
+                            @if ($errors->has('password'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-4">
+                            <button type="submit" class="btn btn-primary" name="login">
+                                로그인
+                            </button>
+
+                            <a href="/register" class="btn btn-primary col-md-offset-1">
+                                회원가입
+                            </a>
+
+                        </div>
+                    </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</center>
-</body>
-</html>
 @endsection

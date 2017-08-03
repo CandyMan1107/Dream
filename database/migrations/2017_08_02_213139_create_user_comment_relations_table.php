@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRecommentsTable extends Migration
+class CreateUserCommentRelationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateRecommentsTable extends Migration
      */
     public function up()
     {
-        // RECOMMENTS TABLE
-        Schema::create('recomments', function (Blueprint $table) {
+        // USER_COMMENT_RELATIONS TABLE
+        Schema::create('user_comment_relations', function (Blueprint $table) {
             $table->increments('id');
-            $table->mediumText('recomment_content');
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->integer('user_id');
+            $table->integer('comment_id');
         });
     }
 
@@ -30,6 +29,6 @@ class CreateRecommentsTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('recomments');
+        Schema::dropIfExists('user_comment_relations');
     }
 }
