@@ -51,13 +51,26 @@ class Effect extends Model
                 DB::table('effects')->insert($dataSet);
             }
         }
+
+        if(isset($data['relations']['content'])){
+            for( $i = 0 ;  count($data['relations']['content']) > $i ; $i++){
+                $dataSet = [
+                    'timetable_id'=>(int)$table_id,
+                    'affect_table'=>"relations",
+                    'affect_id'=>(int)$data['relations']['id'][$i],
+                    'affect_content' => $data['relations']['content'][$i],
+                ];
+                // var_dump($dataSet);
+                DB::table('effects')->insert($dataSet);
+            }
+        }
     }
 
-    // 버그로 인한 테이블 id -1 로 호출중
+   
     public function get_effect_data($table_id){
         $effect_data = DB::table('effects')
         ->select('affect_table','affect_id','affect_content')
-        ->where('timetable_id',$table_id-1)
+        ->where('timetable_id',$table_id)
         ->get();
         
         return $effect_data;

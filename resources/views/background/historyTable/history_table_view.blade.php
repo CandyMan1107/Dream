@@ -146,6 +146,25 @@
 								</div>
 							</div>
 						</div>
+						{{-- 관계 --}}
+						<div class="form-group form-group-lg">
+							<label class="col-sm-2 control-label" for="formGroupInputLarge">연관 관계</label>
+							<div class="col-sm-10">
+							{{-- 관계 아이콘 목록 --}}
+								<div class="inner_relations"></div>
+								@php
+									echo BackgroundHistoryTablesController::relations_effect_modal();
+								@endphp
+								{{-- 관계 등록 아이콘, 모달 호출 --}}
+								<div data-toggle="modal" data-target="#relations">
+									<p class="remote">
+										<a class="setView" href="#">
+											<i class="fa fa-plus-square-o fa-3x effect" id="relations"></i>
+										</a>
+									</p>
+								</div>
+							</div>
+						</div>
 						{{-- 기타 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">기타</label>

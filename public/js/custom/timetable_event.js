@@ -6,7 +6,7 @@ function timetableEvent(data){
         $('.event_list').click(function() {
                 event_id = $(this).attr("id");
                 $('.refer_info').remove();
-                // alert(event_id);
+                
                 $('#name').text("사건 정보");
                 $('#event_name').val(data[event_id]['event_name']);
                 $('#event_content').val(data[event_id]['event_content']);
@@ -65,6 +65,13 @@ function timetableEvent(data){
                                 $('.inner_maps').append('<img src='+img_path+' alt="map image" class="img-circle img-things-size affect" style="margin : 17px">');
                                 $('.inner_maps').append('<input type="text" class="form-control affect" id="map'+data[i]['affect_id']+'" name="effect_map[]" placeholder="내용" style="width:70%; float:right; margin-top:25px">');
                                 $('#map'+data[i]['affect_id']+'').val(data[i]['affect_content']);
+                            }
+
+                            if (data[i]['affect_table'] == "relations") {
+                                var img_path = "/img/background/relationImg/" + data[i]['img_src'];
+                                $('.inner_relations').append('<img src=' + img_path + ' alt="relation image" class="img-circle img-things-size affect" style="margin : 17px">');
+                                $('.inner_relations').append('<input type="text" class="form-control affect" id="relation' + data[i]['affect_id'] + '" name="effect_relation[]" placeholder="내용" style="width:70%; float:right; margin-top:25px">');
+                                $('#relation' + data[i]['affect_id'] + '').val(data[i]['affect_content']);
                             }
                         }
                     },
