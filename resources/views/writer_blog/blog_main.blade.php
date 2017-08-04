@@ -19,7 +19,7 @@
     @else
         {{-- 현재 가지고 있는 user_id를 가지고 넘어가야하는데...   --}}
         @php
-            echo BlogController::showBlogSideMenu(1);   
+            echo BlogController::showBlogSideMenu($data[0]['blog_owner_id']);   
         @endphp
         {{--  @include('writer_blog.blogSideMenu')  --}}
 
@@ -34,7 +34,7 @@
                                 <h3>블로그가 텅 비었네요!</h3>
                             @else
                                 @php
-                                    echo BlogController::mainNoticeList($data); 
+                                    echo BlogController::mainNoticeList($data[0]['user_id']); 
                                 @endphp
                             @endif
                         </div>

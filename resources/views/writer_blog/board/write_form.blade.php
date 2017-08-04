@@ -7,7 +7,7 @@
 @section('content')
     {{-- 해당 블로그의 주인 user_id를 가지고 넘어가야하는데...   --}}
     @php
-          echo BlogController::showBlogSideMenu(1);   
+          echo BlogController::showBlogSideMenu($data['blog_owner_id']);   
     @endphp
     <div id="default-padding-mid"></div>
             {{-- BOARD WRITE FORM SPACE START --}}
@@ -15,14 +15,15 @@
                 <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/formr-data">
                 {{ csrf_field() }}
                     <div class="form-group">
-                        {{-- 나중에 수정하기! 해당 블로그 자동 증가 아이디로 --}}
-                        <input type="hidden" value="{{$blog_id}}" name="blog_id" />
+                        <input type="hidden" value="{{$data['blog_id']}}" name="blog_id" />
+                        <input type="hidden" value="{{$data['blog_owner_id']}}" name="blog_owner_id" />
+                        {{-- 현재 접속자 아이디를 따져서 메뉴 선택창 안보이게 하기 : 독자 게시판   --}}
                         <div class="row">
                             {{--  blog_menu_id  --}}
                             <div class="col-md-3">
                                 <select name="blog_menu_id" id="post-category" class="form-control">
                                     @php
-                                        echo BlogController::wirteFormMenuList($blog_id);
+                                        echo BlogController::wirteFormMenuList($data['blog_id']);
                                     @endphp
                                 </select>
                             </div>

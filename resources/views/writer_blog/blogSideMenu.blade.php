@@ -13,10 +13,10 @@
             <div class="user_profile">
             <input type="hidden" value="1" name="user_id" />
                 <div class="user_info text-center">
-                    <strong>U-NAME</strong>
+                    <strong>{!! $data[0]['blog_owner_name'] !!} </strong>
                     &nbsp;
                     (
-                        U-ID
+                         {!! $data[0]['blog_owner_id'] !!} 
                     )
                 </div>
                 

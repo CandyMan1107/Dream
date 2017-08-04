@@ -27,7 +27,7 @@ class UserBlogRelation extends Model
         // echo $id;
         $userBlogRData = DB::table('user_blog_relations')
             ->join('users', 'user_blog_relations.user_id' ,'=', 'users.id')
-            ->select('user_blog_relations.*')
+            ->select('user_blog_relations.blog_id', 'users.id', 'users.user_id', 'users.name')
             ->where('users.user_id', '=', $id)
             ->get();
 

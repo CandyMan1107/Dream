@@ -7,7 +7,7 @@
 @section('content')
     {{-- 해당 블로그를 보고 있는 사람의 아닌가 주인인가 아닌데 이상한데 user_id를 가지고 넘어가야하는데...   --}}
     @php
-          echo BlogController::showBlogSideMenu(1);   
+          echo BlogController::showBlogSideMenu($data[1]);   
     @endphp
 
     <div id="default-padding-mid"></div>
@@ -21,7 +21,7 @@
                             <h3>메뉴에 작성된 게시글이 없습니다.</h3>
                         @else
                             @php
-                                 echo BlogController::mainNoticeList(); 
+                                  echo BlogController::mainNoticeList($data[1]);  
                             @endphp
                         @endif
                     </div>
@@ -29,14 +29,14 @@
                     <div id="default-padding"></div>
                     {{-- BLOG BOARD START (NOTICE) --}}
                     <div class="col-md-12 blog_notice">
-                        @if ($data == "empty")
+                        @if ($data[0] == "empty")
                             <h3>포스트 아이콘을 눌러서 게시글을 작성해주세요.</h3>
                         {{-- ELSEIF $_SERVER["REQUEST_URI"] in /blog OR /blog?%%% --}}
                         @elseif (!empty($data[0]) && (strpos($_SERVER["REQUEST_URI"], "/blog/menu")!==false || strpos($_SERVER["REQUEST_URI"], "/blog/menu?")!==false))
                         
                             <div name="blog_post">
                                 @php
-                                    echo BlogController::selectedMenuAllB($data); 
+                                    echo BlogController::selectedMenuAllB($data[0]); 
                                 @endphp
                             
                                 {{--  @foreach ($data as $menuD)
