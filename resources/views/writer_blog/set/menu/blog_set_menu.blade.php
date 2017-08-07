@@ -9,12 +9,12 @@
             <div class="col-md-6">
                 {{-- menu_title_list   --}}
                 {{-- 현재 존재하는 메뉴 리스트 보여주기   --}}
-                <form action="/blog/setMap/destroyMenu" method="POST" enctype="multipart/formr-data">
+                <form action="/yerriel/blog/{{$data[0]['blog_id']}}/setMap/destroyMenu" method="POST" enctype="multipart/formr-data">
                     {{ csrf_field() }}
                     
                     <div class="form-group">
                         {{-- 나중에 수정하기! 해당 블로그 자동 증가 아이디로 --}}
-                        <input type="hidden" value="1" name="blog_id" />
+                        <input type="hidden" value="{{$data[0]['blog_id']}}" name="blog_id" />
                         <div class="row">
                             {{-- menu_title_list --}}
                             <div class="col-md-12">
@@ -48,11 +48,12 @@
                 </form>
             </div>
             <div class="col-md-6">
-                <form action="/blog/setMap/storeMenu/1" method="GET" enctype="multipart/formr-data">
+                <form action="/yerriel/blog/{{$data[0]['blog_id']}}/setMap/storeMenu" method="GET" enctype="multipart/formr-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         {{-- 나중에 수정하기! 해당 블로그 자동 증가 아이디로 --}}
-                        <input type="hidden" value="1" name="blog_id" />
+                        <input type="hidden" value="{{$data[0]['blog_id']}}" name="blog_id" />
+                        <input type="hidden" value="yerriel" name="owner_id" />
                         <div class="row">
                             {{-- menu_title   --}}
                             <div class="col-md-12">

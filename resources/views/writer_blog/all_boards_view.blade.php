@@ -14,7 +14,7 @@
                 </h4>
             </li>
             <li>
-                <small>| {!! $data->blog_menu_id !!}</small>
+                <small>| {!! $data->menu_title !!}</small>
             </li>
             <li class="board_timestamp">
                 <small>{!! $data->created_at !!}</small>

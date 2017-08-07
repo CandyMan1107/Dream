@@ -708,6 +708,11 @@ BLOG - BLOG TOP & SIDE MENU
     border: 1px solid burlywood;
 }
 
+#blog-side-menu .user_novel_nav, .blog_reader_menu_nav {
+    margin-top: 10px;
+    border: 1px solid burlywood;
+}
+
 #blog-side-menu .blog_info_bar {
     border: 1px solid burlywood;
 }

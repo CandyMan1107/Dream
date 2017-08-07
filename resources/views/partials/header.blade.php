@@ -1,4 +1,4 @@
-<?php //session_start() ?>
+<?php session_start() ?>
 <article>
 	<header>
 		<style type="text/css">
@@ -23,7 +23,8 @@
 						<ul class="nav navbar-nav navbar-right">
 
 							<li class="active"><a href="/">Home</a></li>
-							<li><a href="/blog">Blog</a></li>
+							{{-- SESSION의 user_id string 으로 변경하기 --}}
+							<li><a href="/yerriel/blog">Blog</a></li>
 							<li><a href="#today-novel">오늘의 웹소설</a></li>
 							<li><a href="#best-novel">베스트 웹소설</a></li>
 							<li><a href="#event">이벤트</a></li>

@@ -13,10 +13,10 @@
             <div class="user_profile">
             <input type="hidden" value="1" name="user_id" />
                 <div class="user_info text-center">
-                    <strong>U-NAME</strong>
+                    <strong>{!! $data[0]['blog_owner_name'] !!} </strong>
                     &nbsp;
                     (
-                        U-ID
+                         {!! $data[0]['blog_owner_id'] !!} 
                     )
                 </div>
                 
@@ -27,7 +27,7 @@
                 <div class="user_setting text-center">
                 {{-- 블로그 메뉴 있을 때 없을 때 마우스 막아놓기!   --}}
                     {{--  <a href="{{ route('blog.create') }}">  --}}
-                    <a href="/blog/create/{{$data[0]['id']}}">
+                    <a href="/yerriel/blog/create">
                         <div>
                             <i class="material-icons">border_color</i>
                         </div>
@@ -41,7 +41,7 @@
                     </a>  --}}
                     &nbsp;&nbsp;
                     {{-- 관리 : 사용자의 블로그일 때만 표시   --}}
-                    <a href="/blog/setMap/1">
+                    <a href="/yerriel/blog/{{$data[0]['id']}}/setMap">
                         <div>
                             <i class="material-icons">settings</i>
                         </div>
@@ -70,7 +70,11 @@
                         echo BlogController::showAllMenu($data[0]['id']); 
                     @endphp
                 @endif
-                
+            </div>
+            <div class="blog_reader_menu_nav">
+                <strong>
+                    <a href="/{{$data[0]['blog_owner_id']}}/blog/communication">독자 게시판</a>
+                </strong>
             </div>
             <div id="default-padding-mid"></div>
             {{-- BLOG INFO BAR --}}

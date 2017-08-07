@@ -23,11 +23,9 @@ class MemberController extends Controller
             session_start();
             $_SESSION['user_id'] = $user_id;
             
-            echo 'success';
             return redirect('/');
         }
         else {
-            echo 'false';
             return view('login.login');
         }
     }
