@@ -944,7 +944,7 @@
 					success: function(data){
 						data.forEach(function(d){
 							var coverSrc = "{{URL::asset('/')}}" + "img/background/RelationImg/" + d.cover_src;
-							var createEle = createMapEle(d.id, d.title, coverSrc, d.created_at);
+							var createEle = createMapEle(d.background_id, d.title, coverSrc, d.created_at);
 							$(".map-list").append(createEle);
 						});
 						//setJscolor();
@@ -1084,7 +1084,6 @@
 			}
 
 
-
 			// Title, ImgUrl, Date로 맵 리스트 리턴
 			 function createMapEle(mapId, title, canvasUrl, data){
 				 var createEle = "";
@@ -1120,11 +1119,11 @@
 				 createEle += "					<div id='colorPalette' class='palette'>"
 				 createEle += "						<input class='tag_color' id='tag_color"+mapId+"' list='colors' name='tag_color' value=''>"
 				 createEle += "						<datalist id='colors'>"
-				 createEle += "							<option value='Red'>"
-				 createEle += "							<option value='Blue'>"
-				 createEle += "							<option value='Green'>"
-				 createEle += "							<option value='Orange'>"
-				 createEle += "							<option value='Purple'>"
+				 createEle += "							<option value='FFA7A7'>Red</option>"
+				 createEle += "							<option value='B2CCFF'>Blue</option>"
+				 createEle += "							<option value='B7F0B1'>Green</option>"
+				 createEle += "							<option value='FFE08C'>Orange</option>"
+				 createEle += "							<option value='FFB2F5'>Purple</option>"
 				 createEle += "						</datalist>"
 				 createEle += "					</div>"
 				 createEle += " 			<p></p>"
@@ -1138,6 +1137,37 @@
 
 				 return createEle;
 			 }
+
+			 $('.tag_submit').click(function(){
+				 $id = $(this).val();
+				 $tag_name = $('#tag_name'+$id+'').val();
+				 $tag_color = $('#tag_color'+$id+'').val();
+				 {{-- alert($(this).val()); --}}
+				 {{-- alert($('#tag_name'+$id+'').val()); --}}
+				 {{-- alert($('#tag_color'+$id+'').val()); --}}
+
+				 $.ajaxSetup({
+					 headers: {
+						 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					 }
+				 });
+				 $.ajax({
+					 type: "POST",
+					 url : "map/tag",
+					 data : {
+							 tag_name : $tag_name,
+							 page : "relations",
+							 tag_color : $tag_color,
+							 object_id : $id
+								 },
+					 success:function(data){
+						 alert("태그 입력 성공");
+					 },
+					 error:function(request,status,error){
+						 alert("code:"+request.status+"\n"+"error:"+error);
+					 }
+				 });
+			 });
 
 	});
 

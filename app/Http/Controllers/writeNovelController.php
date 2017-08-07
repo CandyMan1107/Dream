@@ -133,7 +133,10 @@ class writeNovelController extends Controller
       $bgCase   = $request->input('bgCase');
       $bgId     = $request->input('bgId');
 
-      $tagInfo = DB::table("tags")->select("kind","object_id","color","tag_name as value")->where("kind", "=",$bgCase)->where("object_id", "=", $bgId)->get();
+      $tagInfo = DB::table("tags")
+      ->select("kind","object_id","color","tag_name as value")
+      ->where("kind", "=",$bgCase)
+      ->where("object_id", "=", $bgId)->get();
 
 
 
@@ -146,7 +149,6 @@ class writeNovelController extends Controller
       $bgCase   = $request->input('bgCase');
       $bgId     = $request->input('bgId');
 
-
       $idName = ($bgCase == "characters" ? "cha_id" : "id");
       $table = ($bgCase == "relations" ? "relation_lists" : $bgCase);
 
@@ -156,10 +158,8 @@ class writeNovelController extends Controller
                       ->join('novel_backgrounds', $table.'.'.$idName,'=','novel_backgrounds.background_id')
                       ->where('novel_backgrounds.belong_to_novel','=',$novelId)
                       ->where('novel_backgrounds.novel_background','=',$bgCase)
-                      ->where('novel_backgrounds.'.$idName, '=', $bgId)
+                      ->where('novel_backgrounds.background_id', '=', $bgId)
                       ->get();
-
-
 
       return $bgInfo;
     }
@@ -216,17 +216,60 @@ class writeNovelController extends Controller
     public function callAffectInfo(Request $request){
       $timetableId = $request->input('timetableId');
       $bgCase      = $request->input('bgCase');
+      $table       = $bgCase;
       $affectId    = "id";
-      if($bgCase == "relations") $bgCase = "relation_lists";
-      if($bgCase == "characters") $affectId = "cha_id";
+      if($bgCase == "relations") {
+          $table = "relation_lists";
+      }
+      if($bgCase == "characters") {
+          $affectId = "cha_id";
+      }
 
-      $ttData = DB::table("effects")->join($bgCase, "effects.affect_id", "=", $bgCase.".".$affectId)
-      ->where("timetable_id","=",$timetableId)
-      ->where("affect_table","=",$bgCase)
+      $ttData = DB::table("effects")->join($table, "effects.affect_id", "=", $table.".".$affectId)
+      ->where("effects.timetable_id","=",$timetableId)
+      ->where("effects.affect_table","=",$bgCase)
       ->get();
 
 
       return $ttData;
+      //return $bgCase.$timetableId;
+    }
+
+    // 연대표 정보 호출 + 태그정보 호출
+    public function callAffectInfoWithTag(Request $request){
+      $timetableId = $request->input('timetableId');
+      $bgCase      = $request->input('bgCase');
+      $table       = $bgCase;
+      $affectId    = "id";
+      if($bgCase == "relations") {
+          $table = "relation_lists";
+      }
+      if($bgCase == "characters") {
+          $affectId = "cha_id";
+      }
+
+      $ttData = DB::table("effects")->join($table, "effects.affect_id", "=", $table.".".$affectId)
+      ->where("effects.timetable_id","=",$timetableId)
+      ->where("effects.affect_table","=",$bgCase)
+      ->get();
+
+      $ttIdArray = array();
+      foreach($ttData as $td){
+        array_push($ttIdArray, $td->affect_id);
+      }
+
+      $tagData = DB::table("tags")
+      ->where("kind","=",$bgCase)
+      ->whereIn("object_id", $ttIdArray)
+      ->get();
+
+      $data = [
+        "affect_info" => $ttData,
+        "tag_info"    => $tagData
+      ];
+
+
+      return $data;
     }
 
 }

@@ -237,6 +237,7 @@ Route::get('/write_novel/get_timetables_info', "writeNovelController@getTimetabl
 
 // 사건에 연관된 배경 정보 호출
 Route::get('/write_novel/call_affect_info', "writeNovelController@callAffectInfo");
+Route::get('/write_novel/call_affect_info_with_tag', "writeNovelController@callAffectInfoWithTag");
 
 
 

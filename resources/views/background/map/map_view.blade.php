@@ -880,7 +880,7 @@ rant @extends('layouts.master')
 					success: function(data){
 						data.forEach(function(d){
 							var coverSrc = "{{URL::asset('/')}}" + "img/background/mapImg/mapCover/" + d.cover_src;
-							var createEle = createMapEle(d.id, d.title, coverSrc, d.created_at);
+							var createEle = createMapEle(d.background_id, d.title, coverSrc, d.created_at);
 							$(".map-list").append(createEle);
 						});
 						setJscolor();
@@ -1034,11 +1034,11 @@ rant @extends('layouts.master')
 				 createEle += "					<div id='colorPalette' class='palette'>"
 				 createEle += "						<input class='tag_color' id='tag_color"+mapId+"' list='colors' name='tag_color' value=''>"
 				 createEle += "						<datalist id='colors'>"
-				 createEle += "							<option value='Red'>"
-				 createEle += "							<option value='Blue'>"
-				 createEle += "							<option value='Green'>"
-				 createEle += "							<option value='Orange'>"
-				 createEle += "							<option value='Purple'>"
+				 createEle += "							<option value='FFA7A7'>Red</option>"
+				 createEle += "							<option value='B2CCFF'>Blue</option>"
+				 createEle += "							<option value='B7F0B1'>Green</option>"
+				 createEle += "							<option value='FFE08C'>Orange</option>"
+				 createEle += "							<option value='FFB2F5'>Purple</option>"
 				 createEle += "						</datalist>"
 			 	 createEle += "					</div>"
 				 createEle += " 			<p></p>"

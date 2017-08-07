@@ -1,4 +1,4 @@
-<div class="default-padding"></div>
+fvcc<div class="default-padding"></div>
 @extends('layouts.master')
 
 
@@ -261,10 +261,12 @@
     }
 
     .basic-info-div{
+      width:250px;
       padding-top: 3px;
       /*background-color: yellow;*/
       padding-left: 0px;
       padding-right: 0px;
+
     }
     .basic-cha-img{
       /*background-color: blue;*/
@@ -276,11 +278,13 @@
     }
     .basic-cha-info{
       display:inline-block;
-      padding:0;
-      padding-left: 2px;
-      text-align: left;
-      /*background-color: green;*/
-      min-height: 30%;
+
+
+    }
+
+    .basic-cha-span {
+      display:inline-block;
+      vertical-align: middle;
     }
 
     .info-div{
@@ -567,7 +571,7 @@
   /* 사건 테이블 css*/
   .table-div{
     padding:0px;
-    height:200px;
+
     overflow-y: scroll;
   }
   .timetable-info-table {
@@ -628,8 +632,11 @@
 
   .cha-img-div {
     font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
   }
   .cha-effect-div {
+    padding:0px;
     display:table;
     text-align: left;
     height:90px;
@@ -639,7 +646,32 @@
     vertical-align: middle;
   }
 
+  #mouse-cursor-div {
+    display:none;
+    pointer-events: none;
+    z-index:1000;
+    width:30px;
+    height:30px;
+    position:absolute;
+    margin-top: -30px;
+    margin-left: -30px;
+    left:500px;
+    top:500px;
+  }
+  #mouse-cursor-color {
+    width:8px;
+    height:8px;
+    background-color: blue;
+  }
 
+  .ready-img-div{
+    position:absolute;
+    z-index:1000;
+  }
+
+  .bgInfo-window-div{
+    position:absolute;
+  }
   </style>
 
 
@@ -730,6 +762,10 @@
 
     </div>
   </div>
+  <div id='mouse-cursor-div'>
+    <div id="mouse-cursor-color">
+    </div>
+  <i class="material-icons">&#xE243;</i></div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="/js/custom/history.js"></script>
@@ -1134,11 +1170,21 @@
 
     // 태그 이벤트 적용
     function setTagSpanEvent(){
-      $(".tag-span").off().on("mouseover",function(event){
+      $(".tag-span").off().on("mouseenter",function(event){
         var bgCase = $(this).attr("data-case");
-        var bgId =$(this).attr("data-id")
-        if(!$(".popTag-menu").is(":visible")){
-          popBackgroundInfo(event,bgCase,bgId);
+        var bgId =$(this).attr("data-id");
+        var popMenu = $("." + bgCase + "-" +bgId + "-" +"pop");
+        if(!$(".popTag-menu").is(":visible") && tagPaintCursor == false){
+          // 팝 메뉴가 이미 존재할 경우
+          if(popMenu.length > 0){
+            popMenu.show();
+            popMenu.offset({ top: event.pageY, left: event.pageX})
+
+
+          } else {
+            popBackgroundInfo(event,bgCase,bgId);
+          }
+
         }
       });
 
@@ -1171,12 +1217,12 @@
             var addEle = "";
             switch(bgCase){
               case "characters":
-                addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
-                addEle += "  <div class='col-md-6 basic-cha-img'>";
+                addEle += "<div class='basic-info-div pop-menu popChaInfo-menu "+bgCase+"-"+bgId+"-"+"pop'>";
+                addEle += "  <div class='col-md-4 basic-cha-img'>";
                 addEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'><br>";
-                addEle += "    <span>" + data.name + "</span>";
+                addEle += "    <span style='font-weight:bold;'>" + data.name + "</span>";
                 addEle += "  </div>";
-                addEle += "  <div class='col-md-6 basic-cha-info'>";
+                addEle += "  <div class='col-md-8 basic-cha-info'>";
                 addEle += "    <br>";
                 addEle += "    <span>";
                 addEle += "    이름 | " + data.name + "<br>";
@@ -1189,11 +1235,11 @@
               break;
               case "items":
               addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
-              addEle += "  <div class='col-md-6 basic-cha-img'>";
+              addEle += "  <div class='col-md-4 basic-cha-img'>";
               addEle += "    <img class='img-circle img-things-size' src='/img/background/itemImg/"+ data.img_src +"'><br>";
-              addEle += "    <span>" + data.name + "</span>";
+              addEle += "    <span style='font-weight:bold;'>" + data.name + "</span>";
               addEle += "  </div>";
-              addEle += "  <div class='col-md-6 basic-cha-info'>";
+              addEle += "  <div class='col-md-8 basic-cha-info'>";
               addEle += "    <br>";
               addEle += "    <span>";
               addEle += "    이름 | " + data.name + "<br>";
@@ -1203,22 +1249,31 @@
               addEle += "</div>";
               break;
 
-              case "timetables":
+              case "relations":
               addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
-              addEle += "  <div class='col-md-6 basic-cha-img'>";
-              //addEle += "    <img class='img-circle img-things-size' src='/img/background/characterImg/"+ data.img_src +"'>";
-              addEle += "    <br><span>" + data.event_names + "</span>";
+              addEle += "  <div class='col-md-4 basic-cha-img'>";
+              addEle += "    <img class='img-circle img-things-size' src='/img/background/relationImg/"+ data.cover_src +"'>";
+              addEle += "    <br><span style='font-weight:bold;'>" + data.title + "</span>";
               addEle += "  </div>";
-              addEle += "  <div class='col-md-6 basic-cha-info'>";
-              addEle += "    <br>";
-              addEle += "    <span>";
-              addEle += "    이름 | " + data.event_names + "<br>";
-              addEle += "    도구 | " + data.add_items + "<br>";
+              addEle += "  <div class='col-md-8 basic-cha-info'>";
+              addEle += "    <span class='basic-cha-span'><br><br>";
+              addEle += "    제목 | " + data.title;
               addEle += "    </span>";
               addEle += "  </div>";
               addEle += "</div>";
               break;
               case "maps":
+              addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
+              addEle += "  <div class='col-md-4 basic-cha-img'>";
+              addEle += "    <img class='img-circle img-things-size' src='/img/background/mapImg/mapCover/"+ data.cover_src +"'>";
+              addEle += "    <br><span style='font-weight:bold;'>" + data.title + "</span>";
+              addEle += "  </div>";
+              addEle += "  <div class='col-md-8 basic-cha-info'>";
+              addEle += "    <span class='basic-cha-span'><br><br>";
+              addEle += "    제목 | " + data.title;
+              addEle += "    </span>";
+              addEle += "  </div>";
+              addEle += "</div>";
               break;
             }
             $(addEle).appendTo("body")
@@ -1563,7 +1618,8 @@
 
         function setTimetableBtn(ttData){
           ttData.forEach(function(fd){
-            $(".timetable-btn-ul").append(" <li><a class='timetable-btn-li' href='#' data-id='" + fd.id + "'>" + fd.event_names+ "</a></li> ");
+            console.log(fd);
+            $(".timetable-btn-ul").append(" <li><a class='timetable-btn-li' href='#' data-id='" + fd.background_id + "'>" + fd.event_names+ "</a></li> ");
           })
           setTImetableBtnEvent()
           function setTImetableBtnEvent(){
@@ -1577,8 +1633,9 @@
               var height = 200;
               var bgCase = "timetables";
               if( $("#" + eleId).length < 1 ){
-                popWindow(width,height,btnOffset.left - width/2 + 20,editorOffset.top,"cl",eleId);
-                setWindowContent(eleId, bgCase, id);
+                if(popWindow(width,height,btnOffset.left - width/2 + 20,editorOffset.top,"cl",eleId)){
+                  setWindowContent(eleId, bgCase, id);
+                }
               } else {
                 if( $("#" + eleId).css('display') == 'none' ) $("#" + eleId).show();
                 else $("#" + eleId).hide();
@@ -1594,21 +1651,29 @@
     // 윈도우 띄우기
     // 길이, 높이, X, Y, 클래스, 아이디
     var zindex = 100;
+    // 이동시 false, 생성시 true
     function popWindow(width, height, winX, winY, winCl, winId){
-      var eleStr = "<div id='" + winId + "' class='"+ winCl +"'></div>";
-      var appendedEle = $(eleStr).appendTo("body")
-               .css({top: winY + "px", left: winX + "px"})
-               .css('z-index', ++zindex)
-               .css('position', 'absolute')
-               .css('border', "2px solid black")
-               .css('background-color', 'white')
-               .css('width', width + "px")
-               .css('min-height', height + "px");
-      appendedEle.draggable({handle:'.window-header, .table-div, .timetable-window-attr-div'});
-      appendedEle.on('mousedown', function(){
-        $(this).css("z-index", ++zindex);
-      })
-
+      //해당 윈도우가 이미 존재할 경우
+      var curEle = $("#" + winId);
+      if( curEle.length > 0){
+        curEle.offset({top:winY, left:winX});
+        return false;
+      } else {
+        var eleStr = "<div id='" + winId + "' class='"+ winCl +"'></div>";
+        var appendedEle = $(eleStr).appendTo("body")
+                 .css({top: winY + "px", left: winX + "px"})
+                 .css('z-index', ++zindex)
+                 .css('position', 'absolute')
+                 .css('border', "2px solid black")
+                 .css('background-color', 'white')
+                 .css('width', width + "px")
+                 .css('min-height', height + "px");
+        appendedEle.draggable({handle:'.window-header, .table-div, .timetable-window-attr-div'});
+        appendedEle.on('mousedown', function(){
+          $(this).css("z-index", ++zindex);
+        })
+        return true;
+      }
     }
 
     // 해당 윈도우의 컨텐츠를 만듦
@@ -1620,6 +1685,9 @@
         case "items" :
         setWindowItems(bgId);
         break;
+        case "relations" :
+        setWindowRelations(bgId);
+        break;
         case "maps" :
         setWindowMaps(bgId);
         break;
@@ -1629,6 +1697,7 @@
         default:
         alert("error occured");
       }
+      // 사건 컨텐츠
       function setWindowTimetables(){
         var winEle = $("#" + eleId);
         var addEle = "";
@@ -1652,7 +1721,7 @@
               addEle += "    사건-" + data.event_names;
               addEle += "   </div>"
               addEle += "   <div class='col-md-2 window-header-clear' >"
-              addEle += "     <i class='pull-right material-icons window-clear-icon' data-id='" + data.id +"'>clear</i>"
+              addEle += "     <i class='pull-right material-icons window-clear-icon' data-id='" + data.background_id +"'>clear</i>"
               addEle += "   </div>"
               addEle += "  </div>"
               addEle += "  <div class='col-md-12 window-content'>"
@@ -1668,7 +1737,11 @@
               addEle += "      </tr>"
               addEle += "      <tr class='timetable-info-tr'>"
               addEle += "        <td class='subject-td'>부가설명</td>"
-              addEle += "        <td class='content-td'>" + data.refer_info + "</td>"
+              addEle += "        <td class='content-td'>"
+              data.refer_info.split("^").forEach(function(ri){
+                addEle += ri + "<br>";
+              });
+              addEle += "         </td>";
               addEle += "      </tr>"
               addEle += "      <tr class='timetable-info-tr'>"
               addEle += "        <td class='subject-td'>사건시작일</td>"
@@ -1680,16 +1753,16 @@
               addEle += "      </tr>"
               addEle += "    </table>"
               addEle += "   </div>"
-              addEle += "     <div data-timetable-id='"+data.id+"' data-attr='characters' class='timetable-window-attr-div attr-div-" + data.id + " col-md-3'>인물</div>"
-              addEle += "     <div data-timetable-id='"+data.id+"' data-attr='items' class='timetable-window-attr-div attr-div-" + data.id + " col-md-3'>사물</div>"
-              addEle += "     <div data-timetable-id='"+data.id+"' data-attr='relations' class='timetable-window-attr-div attr-div-" + data.id + " col-md-3'>관계</div>"
-              addEle += "     <div data-timetable-id='"+data.id+"' data-attr='maps' class='timetable-window-attr-div attr-div-" + data.id + " col-md-3'>지도</div>"
+              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='characters' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>인물</div>"
+              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='items' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>사물</div>"
+              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='relations' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>관계</div>"
+              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='maps' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>지도</div>"
               addEle += "  </div>"
               addEle += "  <div class='col-md-12 attr-content-div'>"
-              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-characters-div-" + data.id + "'></div>"
-              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-items-div-" + data.id + "'></div>"
-              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-relations-div-" + data.id + "'></div>"
-              addEle += "   <div data-timetable-id='"+data.id+"' class='col-md-12 attr-content attr-content-" + data.id + " attr-maps-div-" + data.id + "'></div>"
+              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-characters-div-" + data.background_id + "'></div>"
+              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-items-div-" + data.background_id + "'></div>"
+              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-relations-div-" + data.background_id + "'></div>"
+              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-maps-div-" + data.background_id + "'></div>"
               addEle += "  </div>"
               addEle += "</div>"
 
@@ -1729,6 +1802,141 @@
             var attrDiv = $(".attr-" + attr + "-div-" + timeTableId);
             var sameEle = $(".attr-div-" + timeTableId)
           //  alert(attr + " " + timeTableId);
+            console.log(".attr-" + attr + "-div-" + timeTableId);
+            if(!attrDiv.hasClass("hasCalled"))
+              setAffectInfo(timeTableId, attr ,attrDiv);
+
+
+            // check : selected == false
+            if(!$(this).hasClass("selected-attr")){
+              // 모든 div select 속성 제거
+              sameEle.removeClass("selected-attr");
+              sameEle.css("background-color","#B2EBF4");
+              // 현재 div select 속성 추가
+              $(this).addClass("selected-attr");
+              $(this).css("background-color","#5CD1E5");
+              // 모든 attr-div 숨김
+              $(".attr-content-" + timeTableId).hide();
+              // 현재 attr-div 보임
+              attrDiv.show();
+
+            // check : selected == true
+          } else {
+              // 모든 div select 속성 제거
+              sameEle.removeClass("selected-attr");
+              sameEle.css("background-color","#B2EBF4");
+              // 모든 attr-div 숨김
+              $(".attr-content-" + timeTableId).hide()   ;
+            }
+
+          })
+        }
+
+
+      }
+      function setWindowCharacters(){
+        var winEle = $("#" + eleId);
+        var addEle = "";
+
+        $.ajax({
+            type: "get",
+            url: "/write_novel/call_background_info",
+            async: false,
+            data: {
+              "novelId" : {{$tasks["novelId"]}},
+              "bgCase"  : bgCase,
+              "bgId"    : bgId
+            },
+            success: function (data) {
+              console.log(data);
+              data = data[0];
+              var imgRoot = "/img/background/characterImg/";
+
+              addEle += "<div class='window-div'>"
+              addEle += "  <div class='col-md-12 window-header'>"
+              addEle += "   <div class='col-md-10 window-header-text'>"
+              addEle += "    인물-" + data.name;
+              addEle += "   </div>"
+              addEle += "   <div class='col-md-2 window-header-clear' >"
+              addEle += "     <i class='pull-right material-icons window-clear-icon' data-case='" + bgCase +"' data-id='" + data.background_id +"'>clear</i>"
+              addEle += "   </div>"
+              addEle += "  </div>"
+              addEle += "  <div class='col-md-12 window-content'>"
+              addEle += "   <div class='col-md-12 table-div'>"
+              addEle += "    <table class='timetable-info-table'>"
+              addEle += "      <tr class='timetable-info-tr'>"
+              addEle += "        <td width='30%' class='subject-td'>캐릭터</td>"
+              addEle += "        <td width='70%' class='content-td'><img class='img-circle img-things-size' src='" + imgRoot + data.img_src + "'>  <b>" + data.name + "</b></td>"
+              addEle += "      </tr>"
+              addEle += "      <tr class='timetable-info-tr'>"
+              addEle += "        <td class='subject-td'>정보</td>"
+              addEle += "        <td class='content-td'>" + data.info + "</td>"
+              addEle += "      </tr>"
+              addEle += "      <tr class='timetable-info-tr'>"
+              addEle += "        <td class='subject-td'>나이/성별</td>"
+              addEle += "        <td class='content-td'>" + data.age + " / "+data.gender + "</td>"
+              addEle += "      </tr>"
+              addEle += "      <tr class='timetable-info-tr'>"
+              addEle += "        <td class='subject-td'>부가설명</td>"
+              addEle += "        <td class='content-td'>"
+              data.refer_info.split("^").forEach(function(ri){
+                addEle += ri + "<br>";
+              });
+              addEle += "         </td>";
+              addEle += "      </tr>"
+              addEle += "    </table>"
+              addEle += "   </div>"
+              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='characters' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>인물</div>"
+              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='items' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>사물</div>"
+              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='relations' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>관계</div>"
+              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='maps' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>지도</div>"
+              addEle += "  </div>"
+              addEle += "  <div class='col-md-12 attr-content-div'>"
+              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-characters-div-" + data.background_id + "'></div>"
+              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-items-div-" + data.background_id + "'></div>"
+              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-relations-div-" + data.background_id + "'></div>"
+              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-maps-div-" + data.background_id + "'></div>"
+              addEle += "  </div>"
+              addEle += "</div>"
+
+              winEle.append(addEle)
+              // 인물,사물,관계,지도 컨텐츠 감춤
+              $(".attr-content-" + data.id).hide();
+
+              // 닫기버튼 이벤트
+              setClearBtnEvent();
+              // 인물,사물,관계,지도 버튼
+              setAttrBtnEvent();
+            },
+            error: function (error) {
+              alert("오류발생");
+            }
+        });
+        function setClearBtnEvent(){
+          $(".window-clear-icon").off().on("click",function(){
+            var bgId = $(this).attr("data-id");
+            var bgCase = $(this).attr("data-case");
+            $("#" + bgCase +"Win" + bgId).hide();
+          });
+        }
+
+        function setAttrBtnEvent(){
+          $(".timetable-window-attr-div").off().on("mouseover",function(){
+            $(this).css("background-color","#5CD1E5");
+          })
+
+          $(".timetable-window-attr-div").on("mouseout",function(){
+            if(!$(this).hasClass("selected-attr"))
+              $(this).css("background-color","#B2EBF4");
+          })
+
+          $(".timetable-window-attr-div").on("click",function(){
+            var attr = $(this).attr("data-attr");
+            var timeTableId = $(this).attr("data-timetable-id");
+            var attrDiv = $(".attr-" + attr + "-div-" + timeTableId);
+            var sameEle = $(".attr-div-" + timeTableId)
+          //  alert(attr + " " + timeTableId);
+            console.log(".attr-" + attr + "-div-" + timeTableId);
             if(!attrDiv.hasClass("hasCalled"))
               setAffectInfo(timeTableId, attr ,attrDiv);
 
@@ -1761,12 +1969,19 @@
 
       }
     }
-    // 사건에 영향을 끼친 정보 호출하여 setDiv에 적용
 
+
+    // 사건에 영향을 끼친 정보 호출하여 setDiv에 적용
+    // 태그페인트 정보
+    var tagPaintActivated = false;
+    var tagPaintCursor = false;
+    var tagPaintCase = '';
+    var tagPaintId = '';
+    var tagPaintColor = '';
     function setAffectInfo(timetableId, bgCase, setDiv=null){
       $.ajax({
           type: "get",
-          url: "/write_novel/call_affect_info",
+          url: "/write_novel/call_affect_info_with_tag",
           async: false,
           data: {
             "timetableId"  : timetableId,
@@ -1775,19 +1990,23 @@
           success: function (data) {
 
             console.log(data);
+            bgData = data["affect_info"];
+            tagData = data["tag_info"];
             var appendEle = "";
-            appendEle = createCharacterElement(bgCase, data);
+            appendEle = createCharacterElement(bgCase, bgData, tagData);
             setDiv.append(appendEle);
             setDiv.addClass("hasCalled");
+
+            setTagBtnEvent();
+            setWinImgEvent();
           },
           error: function (error) {
             alert("오류발생");
           }
       });
 
-      function createCharacterElement(bgCase, data){
+      function createCharacterElement(bgCase, bgData, tagData){
         var addEle = "";
-
         // 이미지 루트 설정
         var imgRoot = "/img/background/";
         switch(bgCase){
@@ -1801,26 +2020,231 @@
             imgRoot += "relationImg/";
           break;
           case "maps":
-            imgRoot += "mapImg/";
+            imgRoot += "mapImg/mapCover/";
           break;
         }
 
         // 엘리먼트 내용
-        data.forEach(function(dt){
+        bgData.forEach(function(dt){
+          var name = dt.name;
+          var img = dt.img_src;
+          var bgId = dt.id
+          var tagEle = "";
+          var affectId = dt.affect_id;
+
+          // 태그 엘리먼트 생성
+          tagEle += "<select class='" + dt.affect_table + "-" + dt.affect_id + "-" +"select' style='width:60%; height:26px;'>";
+          tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+          tagData.forEach(function(td){
+            if(td.object_id == affectId){
+              tagEle += "<option style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
+            }
+          })
+          tagEle += "</select>";
+          tagEle += "<button data-case='"+dt.affect_table+"' data-id='"+dt.affect_id+"' class='tag-set-btn'>적용</button>"
+
+          switch(bgCase){
+            case "characters":
+              bgId = dt.cha_id;
+            break;
+            case "items":
+
+            break;
+            case "relations":
+              name = dt.title;
+              img = dt.cover_src;
+              break;
+            case "maps":
+              name = dt.title;
+              img = dt.cover_src;
+              break;
+          }
+
+          console.log(dt);
           addEle += "<div class='col-md-12 cha-info-div'>"
           addEle += " <div class='col-md-6 cha-img-div'>"
-          addEle += "   <img class='img-circle img-things-size' src='/img/background/characterImg/"+ dt.img_src +"'><br>" + dt.name
+          addEle += "   <img data-id='" + bgId + "' data-case='" + bgCase + "' class='window-img-circle img-circle img-things-size' src='"+  imgRoot + img +"'><br>" + name
           addEle += " </div>"
           addEle += " <div class='col-md-6 cha-effect-div'>"
-          addEle += "    <div class='cha-effect-content'>" + dt.affect_content + "</div>"
+          addEle += "    <div class='cha-effect-content'>" + dt.affect_content + tagEle + "</div>"
           addEle += " </div>"
           addEle += "</div>"
         });
-
-
         return addEle;
       }
+
+      // 태그 버튼 이벤트
+      function setTagBtnEvent(){
+        $(".tag-set-btn").off().on("click",function(){
+          var bgCase    = $(this).attr("data-case");
+          var bgId      = $(this).attr("data-id");
+          var selectEle = $("." + bgCase + "-" + bgId + "-select");
+
+          // 아무런 태그도 선택하지않았거나 이미 활성화 된 경우 비활성화
+          if(selectEle.val() != null && tagPaintActivated == false) {
+            tagPaintActivated = true;
+            tagPaintCursor = true;
+            tagPaintCase = $(this).attr("data-case");
+            tagPaintId = $(this).attr("data-id");
+            tagPaintColor = selectEle.val();
+            $(".tag-set-btn").html("취소");
+            setMouseCursorPaint();
+          } else {
+            tagPaintActivated = false;
+            tagPaintCursor = false;
+            tagPaintCase = '';
+            tagPaintId = '';
+            tagPaintColor = '';
+            $(".tag-set-btn").html("적용");
+            disableMouseCursorPaint();
+          }
+
+        })
+      }
+
+
     }
+    // 이미지 드래그 이벤트
+    var lastClickedImgEle = null;
+    var intervalEle;
+    var curMouseX = 0;
+    var curMouseY = 0;
+    var imgDivHeight = 300;
+    var imgDivWidth = 300;
+    var winId;
+
+    // 각 이미지에 이벤트 적용
+    function setWinImgEvent(){
+      $(".window-img-circle").off().on("mousedown",function(event){
+        event.preventDefault();
+        // 마우스 왼쪽버튼에만 반응
+        if (event.which != 1) return false;
+
+        lastClickedImgEle = $(this);
+
+
+        // 클래스별 크기 지정 + 대상에따른 윈도우 팝업
+        var bgCase  = lastClickedImgEle.attr("data-case")
+        var bgId    = lastClickedImgEle.attr("data-id")
+        setWinSize(bgCase);
+        winId   = bgCase + "Win" + bgId;
+
+        // 이미 존재할 경우 -> 새로운 창을 띄우지 않음
+        if($("#" + winId).length <= 0 && popWindow(imgDivWidth, imgDivHeight, curMouseX-imgDivWidth/2, curMouseY-imgDivHeight/2, "cl", winId)){
+            setWindowContent(winId, bgCase, bgId);
+            $("#" + winId).hide();
+        };
+
+
+        // 실제 너비, 높이 적용
+        imgDivWidth = $("#" + winId).width();
+        imgDivHeight = $("#" + winId).height();
+
+
+        var addEle = "<div class='ready-img-div'></div>";
+        $("body").append(addEle);
+        $(".ready-img-div").css("width",0);
+        $(".ready-img-div").css("height",0);
+        $(".ready-img-div").css("opacity",0.1);
+        $(".ready-img-div").css("left",event.pageX);
+        $(".ready-img-div").css("top",event.pageY);
+        $(".ready-img-div").css("background-color","#BDBDBD");
+
+        $(".ready-img-div").animate({
+          height:imgDivHeight,
+          width:imgDivWidth,
+          opacity:0.35
+        }, 600);
+
+        // 언제나 마우스를 가운데로 위치
+        intervalEle = setInterval(function(){
+          var height = $(".ready-img-div").height();
+          var width = $(".ready-img-div").width();
+          $(".ready-img-div").offset({top:curMouseY-height/2, left:curMouseX-width/2});
+        }, 10)
+
+
+      });
+
+      // 배경설정 대상에 따른 윈도우 크기 설정
+      function setWinSize(bgCase){
+        switch(bgCase){
+          case "characters" :
+            imgDivHeight = 230;
+          break;
+          case "items" :
+          break;
+          case "relations" :
+          break;
+          case "maps":
+          break;
+          case "timetables" :
+          break;
+        }
+      }
+    }
+
+    // 움직일때마다 마우스의 위치 적용
+    $("body").mousemove(function(event){
+        curMouseX = event.pageX;
+        curMouseY = event.pageY;
+    });
+
+    // 마우스를 땔 경우 - 윈도우 준비 모션 종료
+    $("body").on("mouseup",function(event){
+      // 마우스 왼쪽버튼에만 반응
+      if (event.which != 1) return false;
+      if(lastClickedImgEle != null){
+        // 윈도우 준비모션 종료
+        $(".ready-img-div").remove();
+        clearInterval(intervalEle);
+        $("#" + winId).show();
+        $("#" + winId).offset({top:curMouseY-imgDivHeight/2, left:curMouseX-imgDivWidth/2});
+
+        // 선택 이미지 타겟 초기화
+        lastClickedImgEle = null;
+
+      }
+    });
+
+
+    // 태그 페인트 이벤트 - 커서 모양 변화
+    $("body").mousemove(function(event){
+      if(tagPaintCursor) setMouseCursorPaint();
+      else disableMouseCursorPaint();
+    });
+    // 마우스 포인터 활성화
+    function setMouseCursorPaint(){
+      $("#mouse-cursor-div").show();
+      $("#mouse-cursor-div").offset({ top: event.pageY, left: event.pageX})
+      $("#mouse-cursor-color").css("background-color", "#" + tagPaintColor);
+      $("body").css('cursor','none');
+    }
+    // 마우스 포인터 비활성화
+    function disableMouseCursorPaint(){
+      $("#mouse-cursor-div").hide();
+      $("body").css('cursor','default');
+    }
+
+    // 태그 페인트 이벤트 - 선택부분 태그화
+    $('#editdiv').on("mouseup",function(){
+      var curSel = window.getSelection();
+      sel = curSel;
+
+      // 한글자 이상 선택하였을 경우
+      if(curSel.toString().length > 0 && curSel.baseNode.parentNode.id=="editdiv" && tagPaintActivated == true){
+        surroundSelection("#" + tagPaintColor, tagPaintCase, tagPaintId);
+        tagPaintActivated = false;
+        tagPaintCursor = false;
+        tagPaintCase = '';
+        tagPaintId = '';
+        tagPaintColor = '';
+        $(".tag-set-btn").html("적용");
+        disableMouseCursorPaint();
+      }
+    })
+
+
     // 케이스, 아이디로 해당 배경정보 호출
     function callBackgroundInfo(bgCase, bgId){
       var bgData;
