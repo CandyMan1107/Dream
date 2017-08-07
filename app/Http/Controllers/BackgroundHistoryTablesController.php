@@ -24,13 +24,13 @@ class BackgroundHistoryTablesController extends Controller
     {
         $timeTable = new Timetable();
         
-        session_start();
-        // echo($_SESSION['novel_id']);
-        if(!isset($_SESSION['novel_id'])){
+        echo($_COOKIE['novel_id']);
+        $novel_id = $_COOKIE['novel_id'];
+        if(!isset($_COOKIE['novel_id'])){
             return redirect('write_novel/my_novel');
         }
         else {
-            $novel_id = $_SESSION['novel_id'];
+            $novel_id = $_COOKIE['novel_id'];
         }
         // var_dump($_SESSION['novel_id']);
         $dataSet = $timeTable->date_get_novel_id($novel_id);
@@ -74,8 +74,7 @@ class BackgroundHistoryTablesController extends Controller
     public function store(Request $request)
     {
         $table = $request->all();
-        session_start();
-        $novel_id = $_SESSION['novel_id'];
+        $novel_id = $_COOKIE['novel_id'];
         $timeTable = new Timetable();
         $effect = new Effect();
         $background = new Background();
@@ -197,7 +196,7 @@ class BackgroundHistoryTablesController extends Controller
         $relation_list = new Relation_list();
 
         // session_start();
-        $novel_id = $_SESSION['novel_id'];
+        $novel_id = $_COOKIE['novel_id'];
         $relation = $relation_list->get_data_by_novel_id($novel_id);
         // var_dump($relation);
         $list = array(array());
@@ -283,9 +282,9 @@ class BackgroundHistoryTablesController extends Controller
     {
         $timeTable = new Timetable();
         
-        session_start();
+        // session_start();
         // echo($_SESSION['novel_id']);
-        $_SESSION['novel_id'] = $id;
+        setcookie('novel_id',$id,time()+(60*60),'/');
         $novel_id = $id;
         // var_dump($_SESSION['novel_id']);
         $dataSet = $timeTable->date_get_novel_id($novel_id);

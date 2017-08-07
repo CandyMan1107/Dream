@@ -110,6 +110,14 @@ Route::post('/background/historyTable/getEffect',"BackgroundHistoryTablesControl
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
+Route::get('/background/share/get_background/{kind}','BackgroundShareController@get_background');
+
+Route::get('/background/share/get_open_character','BackgroundShareController@get_open_character');
+
+Route::get('/background/share/get_open_item','BackgroundShareController@get_open_item');
+
+Route::post('/background/share/insert_open_background','BackgroundShareController@insert_open_background_data');
+
 Route::resource('/background/share','BackgroundShareController');
 
 Route::resource('/background', 'BackgroundController');
@@ -293,24 +301,28 @@ Route::get('/cash', function () {
 */
 /**
  * The MAIN VIEW of blog
- * @param $user_id(DataType : INTEGER)
+ * @param $user_id(DataType : STRING)
  * @return view('writer_blog.blog_main')
  */
-Route::get('/blog/{id}', "BlogController@showBlogMain");
+Route::get('/{ownerId}/blog', "BlogController@showBlogMain");
 
+Route::get('/{ownerId}/blog/menu/{menuId}', "BlogController@selectedMenu");
 
-Route::get('/blog/menu/{id}', "BlogController@selectedMenu");
+Route::get('/{ownerId}/blog/communication', "BlogController@showBlogCommunication");
 
-Route::get('/blog/create/{id}', "BlogController@createBoard");
+Route::get('/{ownerId}/blog/create', "BlogController@createBoard");
 
 /**
  * The SET MAP VIEW of blog
  * @param The owner's $user_id(DataType : INTEGER)
  * @return BLOG'S SETTING MAP
  */
-Route::get('/blog/setMap/{id}', "BlogController@viewSetMapMain");
-Route::get('/blog/setMap/createMenu/{id}', "BlogController@createMenu");
-Route::get('/blog/setMap/storeMenu/{id}', "BlogController@storeMenu");
-Route::get('/blog/setMap/destroyMenu/{id}', "BlogController@destroyMenu");
+Route::get('/{ownerId}/create/blog', "BlogController@showBlogCreateForm");
+Route::get('/{ownerId}/create/blog/store', "BlogController@storeBlogCreateForm");
+
+Route::get('/{ownerId}/blog/{blogId}/setMap', "BlogController@showSetMapMain");
+Route::get('/{ownerId}/blog/{blogId}/setMap/createMenu', "BlogController@createMenu");
+Route::get('/{ownerId}/blog/{blogId}/setMap/storeMenu', "BlogController@storeMenu");
+Route::get('/{ownerId}/blog/{blogId}/setMap/destroyMenu', "BlogController@destroyMenu");
 
 Route::resource('/blog', "BlogController");

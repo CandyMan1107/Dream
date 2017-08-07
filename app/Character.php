@@ -55,4 +55,12 @@ class Character extends Model
         // var_dump($dataSet);
         return $dataSet;
     }
+
+    public function none_set_open_background($id) {
+        $data = DB::table('characters')
+                ->where('characters.cha_id','=',$id)
+                ->get();
+        // var_dump($id);
+        return $data;
+    }
 }

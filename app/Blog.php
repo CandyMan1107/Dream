@@ -8,11 +8,16 @@ use Illuminate\Support\Facades\DB;
 class Blog extends Model
 {
     // blogs(TABLE) INSERT DATAS
-    public function insertBlogD($data) {
-        // $dataSet = [];
-        // $dataSet = [
-        //     '' => $data[''],
-        // ];
+    public function newBlogD($data) {
+        $dataSet = [];
+
+        $dataSet = [
+            'blog_introduce' => $data['blog_introduce'],
+        ];
+
+        $blog_id = DB::table('blogs')->insertGetId($dataSet);
+
+        return $blog_id;
     }
 
     // blogs(TABLE) SELECT *
