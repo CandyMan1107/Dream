@@ -26,9 +26,23 @@ class UserBlogRelation extends Model
     {
         // echo $id;
         $userBlogRData = DB::table('user_blog_relations')
-            ->join('users', 'user_blog_relations.user_id' ,'=', 'users.id')
+            ->join('users', 'user_blog_relations.user_id', '=', 'users.id')
             ->select('user_blog_relations.blog_id', 'users.id', 'users.user_id', 'users.name')
             ->where('users.user_id', '=', $id)
+            ->get();
+
+        return $userBlogRData;
+    }
+
+    // user_blog_relations(TABLE) SELECT * user_id (DataType : INT)
+    // JOIN users(TABLE)
+    // @param $ownerId (DataType : STRING)
+    public function checkUserId($ownerId) 
+    {
+        $userBlogRData = DB::table('user_blog_relations')
+            ->join('users', 'user_blog_relations.user_id', '=', 'users.id')
+            ->select('user_blog_relations.user_id')
+            ->where('users.user_id', '=', $ownerId)
             ->get();
 
         return $userBlogRData;

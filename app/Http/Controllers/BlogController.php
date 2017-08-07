@@ -137,6 +137,21 @@ class BlogController extends Controller
 
         // echo($blog_owner_id);
 
+        $data[2] = $blog_owner_id;
+
+        $userBlogR = new UserBlogRelation();
+        $userBlogRD = $userBlogR->checkUserId($blog_owner_id);
+
+        // print_r($userBlogRD);
+
+        foreach ($userBlogRD as $user) {
+            $blog_owner_id = $user->user_id;
+        }
+
+        // print_r($blog_owner_id);
+
+        // var_dump(is_int($blog_owner_id));
+
         $menuBoard = new BlogBoard();
         $menuBoardD = $menuBoard->selectedMenuBoardD($blog_menu_id);
 
@@ -154,6 +169,7 @@ class BlogController extends Controller
         }
 
         // echo($data);
+        // print_r($data);
         
 
         return view('writer_blog.selected_menu_view')->with('data', $data);
@@ -261,6 +277,8 @@ class BlogController extends Controller
                 $data[$i]['id'] = $datas->id;   // blog_board_id
                 $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
 
+                $data[$i]['menu_title'] = $datas->menu_title;
+
                 $data[$i]['board_title'] = $datas->board_title;
                 $data[$i]['is_notice'] = $datas->is_notice;
                 // $data[$i]['board_hit'] = $datas->board_hit;
@@ -284,8 +302,36 @@ class BlogController extends Controller
 
 
 
+/*
+|--------------------------------------------------------------------------
+| BLOG READERS COMMUNICATION
+|--------------------------------------------------------------------------
+*/
 
+    /**
+     * The Communication PAGE of blog
+     * @param $ownerId(DataType : STRING)
+     * @return view('writer_blog.blog_communication_board')
+     */
+    public function showBlogCommunication($ownerId) 
+    {
+        // (DataType : STRING)
+        $blog_owner_id = $ownerId;
 
+        $data[0] = $blog_owner_id;
+
+        $userBlogR = new UserBlogRelation();
+        $userBlogRD = $userBlogR->checkUserId($blog_owner_id);
+
+        foreach ($userBlogRD as $user) {
+            // (DataType : INT)
+            $data[1] = $user->user_id;
+        }
+
+        // print_r($data);
+
+        return view('writer_blog.blog_communication_board')->with('data', $data);
+    }
 
 
 
@@ -302,7 +348,7 @@ class BlogController extends Controller
 
     /**
      * The SIDE MENU of blog
-     * @param $user_id(DataType : INTEGER)
+     * @param $user_id(DataType : STRING)
      * @return view('writer_blog.blogSideMenu')
      */
     public static function showBlogSideMenu($id) 
@@ -525,8 +571,16 @@ class BlogController extends Controller
     }
 
     
+    /**
+     * Display View All Boards of the Selected Menu.
+     * Laravel pagination
+     * @param $blog_menu_id (DataType : INTEGER)
+     * @return view('writer_blog.selected_menu_board', ['data' => $data])
+     */
+    public static function allCommunicationB($id)
+    {
 
-    
+    }
 
 
 /*

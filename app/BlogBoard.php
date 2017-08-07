@@ -61,7 +61,8 @@ class BlogBoard extends Model
     public function orderAllBoardD() {
         $boardData = DB::table('blog_boards')
             ->join('menu_board_relations', 'blog_boards.id', '=', 'menu_board_relations.blog_board_id')
-            ->select('blog_boards.*', 'menu_board_relations.blog_menu_id')
+            ->join('blog_menus', 'menu_board_relations.blog_menu_id', '=', 'blog_menus.id')
+            ->select('blog_boards.*', 'menu_board_relations.blog_menu_id', 'blog_menus.menu_title')
             ->orderBy('created_at', 'desc')
             ->paginate(1, ['*'], 'boardData');
 
@@ -91,9 +92,10 @@ class BlogBoard extends Model
     public function selectedBoardD($blog_owner_id, $blog_menu_id, $post_id) {
         $boardData = DB::table('blog_boards')
            ->join('menu_board_relations', 'blog_boards.id', '=', 'menu_board_relations.blog_board_id')
+           ->join('blog_menus', 'menu_board_relations.blog_menu_id', '=', 'blog_menus.id')
            ->join('blog_menu_relations', 'menu_board_relations.blog_menu_id', '=', 'blog_menu_relations.blog_menu_id')
            ->join('user_blog_relations', 'blog_menu_relations.blog_id', '=', 'user_blog_relations.blog_id')
-           ->select('blog_boards.*', 'menu_board_relations.blog_menu_id', 'user_blog_relations.user_id')
+           ->select('blog_boards.*', 'menu_board_relations.blog_menu_id', 'user_blog_relations.user_id', 'blog_menus.menu_title')
            ->where('blog_boards.id', '=', $post_id)
            ->where('menu_board_relations.blog_menu_id', '=', $blog_menu_id)
            ->where('user_blog_relations.user_id', '=', $blog_owner_id)
@@ -111,7 +113,8 @@ class BlogBoard extends Model
     public function selectedMenuBoardD($id) {
         $boardData = DB::table('blog_boards')
             ->join('menu_board_relations', 'blog_boards.id', '=', 'menu_board_relations.blog_board_id')
-            ->select('blog_boards.*', 'menu_board_relations.blog_menu_id')
+            ->join('blog_menus', 'menu_board_relations.blog_menu_id', '=', 'blog_menus.id')
+            ->select('blog_boards.*', 'menu_board_relations.blog_menu_id', 'blog_menus.menu_title')
             ->where('menu_board_relations.blog_menu_id', '=', $id)
             ->orderBy('blog_boards.created_at', 'desc')
             ->paginate(1, ['*'], 'boardData');

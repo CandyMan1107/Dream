@@ -70,7 +70,11 @@
                         echo BlogController::showAllMenu($data[0]['id']); 
                     @endphp
                 @endif
-                
+            </div>
+            <div class="blog_reader_menu_nav">
+                <strong>
+                    <a href="/{{$data[0]['blog_owner_id']}}/blog/communication">독자 게시판</a>
+                </strong>
             </div>
             <div id="default-padding-mid"></div>
             {{-- BLOG INFO BAR --}}

@@ -301,6 +301,8 @@ Route::get('/{ownerId}/blog', "BlogController@showBlogMain");
 
 Route::get('/{ownerId}/blog/menu/{menuId}', "BlogController@selectedMenu");
 
+Route::get('/{ownerId}/blog/communication', "BlogController@showBlogCommunication");
+
 Route::get('/{ownerId}/blog/create', "BlogController@createBoard");
 
 /**

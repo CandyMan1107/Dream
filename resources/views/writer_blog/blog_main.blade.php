@@ -51,12 +51,6 @@
                                         echo BlogController::allBoard(); 
                                     @endphp
                                 </div>
-                            {{-- ELSE ONCLICK
-                            url 받아와서 뒤에 뭐가 있으면 js 파일로 ajax --}}
-                            {{--  @else
-                                <div name="blog_post">
-
-                                </div>  --}}
                             @endif
                         </div>
                         {{-- BLOG BOARD END (NOTICE) --}}
