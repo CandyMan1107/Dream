@@ -75,8 +75,8 @@ function timetableEvent(data){
                             }
                         }
                     },
-                    error:function(){
-                        alert("실패");
+                    error: function (request, status, error){
+                        alert("code:" + request.status + "\n" +  "\n" + "error:" + error);
                     }
                 });
         });

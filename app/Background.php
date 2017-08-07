@@ -80,4 +80,21 @@ class Background extends Model
 
         return $backgroundData;
     }
+    /***********************
+    JJH 2017.08.03
+    SELECT *
+    FROM novel_backgrounds
+    WHERE belong_to_novel = $novel_id
+    WHERE id != $open_background
+    WHERE novel_background = $kind
+    ***********************/
+    public function get_none_open_background($novel_id,$open_background,$kind){
+        $data = DB::table('novel_backgrounds')
+                ->where('belong_to_novel','=',$novel_id) 
+                ->where('novel_background','=',$kind) 
+                ->whereNotIn('background_id',$open_background)
+                ->get();
+        
+        return $data;
+    }
 }
