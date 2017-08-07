@@ -1,11 +1,13 @@
 @extends('layouts.master')
 @php
 	use App\Http\Controllers\BlogController;
+    use App\Http\Controllers\CommunicationController;
 @endphp
 @include('writer_blog.blogTopMenu')  
 @section('content')
     {{-- 현재 가지고 있는 user_id를 가지고 넘어가야하는데...   --}}
     @php
+        {{-- @param DataType STRING   --}}
          echo BlogController::showBlogSideMenu($data[0]);    
     @endphp
 
@@ -18,7 +20,8 @@
                     {{-- BLOG NOTICE START --}}
                     <div class="col-md-12 blog_notice_list text-center autoplay-notice">
                         @php
-                             echo BlogController::mainNoticeList($data[1]);  
+                            {{-- @param DataType INT   --}}
+                             {{--  echo BlogController::mainNoticeList($data[1]);    --}}
                         @endphp
                     </div>
                     {{-- BLOG NOTICE END --}}
@@ -29,9 +32,10 @@
                         </div>
                     </div>
                     <div class="col-me-12">
-                        <table class="table table-hover">
-                            
-                        </table>
+                        @php
+                            {{-- @param DataType INT   --}}
+                            echo CommunicationController::allCommunicationB($data[1])
+                        @endphp
                     </div>
 
 

@@ -17,7 +17,7 @@
                 <div class="row">
                     {{-- BLOG NOTICE START --}}
                     <div class="col-md-12 blog_notice_list text-center autoplay-notice">
-                        @if ($data == "empty")
+                        @if ($data[0] == "empty")
                             <h3>메뉴에 작성된 게시글이 없습니다.</h3>
                         @else
                             @php
@@ -32,7 +32,7 @@
                         @if ($data[0] == "empty")
                             <h3>포스트 아이콘을 눌러서 게시글을 작성해주세요.</h3>
                         {{-- ELSEIF $_SERVER["REQUEST_URI"] in /blog OR /blog?%%% --}}
-                        @elseif (!empty($data[0]) && (strpos($_SERVER["REQUEST_URI"], "/blog/menu")!==false || strpos($_SERVER["REQUEST_URI"], "/blog/menu?")!==false))
+                        @elseif (($data[0] !== 0) && (strpos($_SERVER["REQUEST_URI"], "/blog/menu")!==false || strpos($_SERVER["REQUEST_URI"], "/blog/menu?")!==false))
                         
                             <div name="blog_post">
                                 @php

@@ -43,12 +43,13 @@ class BlogBoard extends Model
     // JOIN blog_menu_relations(TABLE)
     // JOIN user_blog_relations(TABLE)
     // user id 매개변수로 받아오기
-    public function allBoardD($blog_owner_id) {
+    public function allBoardD($blogOwnerId) {
         $boardData = DB::table('blog_boards')
             ->join('menu_board_relations', 'blog_boards.id', '=', 'menu_board_relations.blog_board_id')
             ->join('blog_menu_relations', 'menu_board_relations.blog_menu_id', '=', 'blog_menu_relations.blog_menu_id')
             ->join('user_blog_relations', 'blog_menu_relations.blog_id', '=', 'user_blog_relations.blog_id')
             ->select('blog_boards.*', 'menu_board_relations.blog_menu_id', 'blog_menu_relations.blog_id', 'user_blog_relations.user_id')
+            ->where('user_blog_relations.user_id', '=', $blogOwnerId)
             ->get();
 
         return $boardData;
@@ -58,11 +59,13 @@ class BlogBoard extends Model
     // JOIN menu_board_relations(TABLE)
     // user id 매개변수로 받아오기
     // orderBy blog_boards.created_at desc
-    public function orderAllBoardD() {
+    public function orderAllBoardD($blogId) {
         $boardData = DB::table('blog_boards')
             ->join('menu_board_relations', 'blog_boards.id', '=', 'menu_board_relations.blog_board_id')
             ->join('blog_menus', 'menu_board_relations.blog_menu_id', '=', 'blog_menus.id')
+            ->join('blog_menu_relations', 'blog_menus.id', '=', 'blog_menu_relations.blog_menu_id')
             ->select('blog_boards.*', 'menu_board_relations.blog_menu_id', 'blog_menus.menu_title')
+            ->where('blog_menu_relations.blog_id', '=', $blogId)
             ->orderBy('created_at', 'desc')
             ->paginate(1, ['*'], 'boardData');
 
@@ -73,10 +76,13 @@ class BlogBoard extends Model
     // SELECT id, blog_menu_id, board_title, is_notice, created_at, updated_at
     // JOIN menu_board_relations(TABLE)
     // WHERE is_notice = 'on'
-    public function noticeListBoardD() {
+    public function noticeListBoardD($ownerId) {
         $boardData = DB::table('blog_boards')
            ->join('menu_board_relations', 'blog_boards.id', '=', 'menu_board_relations.blog_board_id')
+           ->join('blog_menu_relations', 'menu_board_relations.blog_menu_id', '=', 'blog_menu_relations.blog_menu_id')
+           ->join('user_blog_relations', 'blog_menu_relations.blog_id', '=', 'user_blog_relations.blog_id')
            ->select('blog_boards.*', 'menu_board_relations.blog_menu_id')
+           ->where('user_blog_relations.user_id', '=', $ownerId)
            ->where('blog_boards.is_notice', '=', 'on')
            ->orderBy('created_at', 'desc')
            ->get();
@@ -95,7 +101,7 @@ class BlogBoard extends Model
            ->join('blog_menus', 'menu_board_relations.blog_menu_id', '=', 'blog_menus.id')
            ->join('blog_menu_relations', 'menu_board_relations.blog_menu_id', '=', 'blog_menu_relations.blog_menu_id')
            ->join('user_blog_relations', 'blog_menu_relations.blog_id', '=', 'user_blog_relations.blog_id')
-           ->select('blog_boards.*', 'menu_board_relations.blog_menu_id', 'user_blog_relations.user_id', 'blog_menus.menu_title')
+           ->select('blog_boards.*', 'blog_menus.menu_title')
            ->where('blog_boards.id', '=', $post_id)
            ->where('menu_board_relations.blog_menu_id', '=', $blog_menu_id)
            ->where('user_blog_relations.user_id', '=', $blog_owner_id)

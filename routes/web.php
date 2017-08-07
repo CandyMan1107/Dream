@@ -319,3 +319,12 @@ Route::get('/{ownerId}/blog/{blogId}/setMap/storeMenu', "BlogController@storeMen
 Route::get('/{ownerId}/blog/{blogId}/setMap/destroyMenu', "BlogController@destroyMenu");
 
 Route::resource('/blog', "BlogController");
+
+
+/*
+|--------------------------------------------------------------------------
+| BLOG COMMUNICATION
+|--------------------------------------------------------------------------
+*/
+
+Route::resource('/communication', "CommunicationController");
