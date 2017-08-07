@@ -94,6 +94,9 @@ $(document).ready(function(){
                 else if(click_id=="relations"){
                     alert("23");
                 }
+                else if (click_id=="timetables"){
+                    
+                }
                 $(function () {
                     $(".draggable").draggable({
                     });

@@ -21,13 +21,13 @@ class BackgroundCharactersController extends Controller
     {
         $character = new Character();
         
-        session_start();
+        // session_start();
         // echo($_SESSION['novel_id']);
-        if(!isset($_SESSION['novel_id'])){
+        if(!isset($_COOKIE['novel_id'])){
             return redirect('write_novel/my_novel');
         }
         else {
-            $novel_id = $_SESSION['novel_id'];
+            $novel_id = $_COOKIE['novel_id'];
         }
 
         $dataSet = $character->date_get_novel_id($novel_id);
@@ -115,8 +115,8 @@ class BackgroundCharactersController extends Controller
         $background = new Background();
         $imgUpLoad = new BackgroundCharactersController();
 
-        session_start();
-        $novel_id = $_SESSION['novel_id'];
+        // session_start();
+        $novel_id = $_COOKIE['novel_id'];
 
         $file = Input::file('character_img_upload');
         $data = $request->all();
