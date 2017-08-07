@@ -16,6 +16,7 @@ $(document).ready(function(){
                 $('.none_set_background').remove();
                 $('.open_character_icon').remove();
                 $('.open_item_data_set').remove();
+                $('.open_list').remove();
                 if( click_id == "characters") {
                     
                     character_append = "<div id='none_set_background'>"
@@ -89,6 +90,9 @@ $(document).ready(function(){
                             alert("code:" + request.status + "\n" + "error:" + error);
                         }
                     });
+                }
+                else if(click_id=="relations"){
+                    alert("23");
                 }
                 $(function () {
                     $(".draggable").draggable({

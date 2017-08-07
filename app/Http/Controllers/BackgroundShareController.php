@@ -8,6 +8,7 @@ use App\Background;
 use App\Character;
 use App\Item;
 use App\Timetable;
+use App\Relation_list;
 use App\Ownership;
 use App\open_character;
 use App\open_ownership;
@@ -22,9 +23,8 @@ class BackgroundShareController extends Controller
      */
     public function index()
     {
-        session_start();
-        if(isset($_SESSION['novel_id'])){
-            $novel_id = $_SESSION['novel_id'];
+        if(isset($_COOKIE['novel_id'])){
+            $novel_id = $_COOKIE['novel_id'];
         }
         else{
             return redirect('write_novel/my_novel');
@@ -71,8 +71,7 @@ class BackgroundShareController extends Controller
         $background = new Background;
         $open_character = new open_character();
         $open_ownership = new open_ownership();
-        session_start();
-        $novel_id = $_SESSION['novel_id'];
+        $novel_id = $_COOKIE['novel_id'];
 
         $set_open_background_id = array();
         $set_open_background_data = array(array());
@@ -158,7 +157,22 @@ class BackgroundShareController extends Controller
                 $i++;
             }
         }
+        else if($kine=="relations"){
+            $relation_list = new Relation_list();
+            $i= 0;
+            // foreach ($none_open_background as $temp_none_open_background){
+            //     $temp_none_open_background_data = $item->none_set_open_background($temp_none_open_background->background_id);
 
+            //     foreach($temp_none_open_background_data as $temp_data){
+            //         $none_open_background_data[$i]['id'] = $temp_data->id;
+            //         $none_open_background_data[$i]['name'] = $temp_data->name;
+            //         $none_open_background_data[$i]['info'] = $temp_data->info;
+            //         $none_open_background_data[$i]['category'] = $temp_data->category;
+            //         $none_open_background_data[$i]['img_src'] = $temp_data->img_src;
+            //     }
+            //     $i++;
+            // }
+        }
         // item 일 경우
         // var_dump($none_open_background_data);
         return $none_open_background_data;
@@ -181,8 +195,7 @@ class BackgroundShareController extends Controller
         $open_ownership = new open_ownership();
         $novel_has_open_background = new Novel_has_open_background();
 
-        session_start();
-        $novel_id = $_SESSION['novel_id'];
+        $novel_id = $_COOKIE['novel_id'];
 
         
         $character_info = array();
@@ -210,8 +223,7 @@ class BackgroundShareController extends Controller
         return redirect('background/share');
     }
     public function get_open_character(){
-        session_start();
-        $novel_id = $_SESSION['novel_id'];
+        $novel_id = $_COOKIE['novel_id'];
 
         $novel_has_open_background = new Novel_has_open_background;
         // $open_character = new open_character;
@@ -247,8 +259,7 @@ class BackgroundShareController extends Controller
 
         $novel_has_open_background = new Novel_has_open_background();
 
-        session_start();
-        $novel_id = $_SESSION['novel_id'];
+        $novel_id = $_COOKIE['novel_id'];
 
         
         $item_info = array();
@@ -267,8 +278,8 @@ class BackgroundShareController extends Controller
     }
 
     public function get_open_item(){
-        session_start();
-        $novel_id = $_SESSION['novel_id'];
+
+        $novel_id = $_COOKIE['novel_id'];
 
         $novel_has_open_background = new Novel_has_open_background;
         // $open_character = new open_character;
