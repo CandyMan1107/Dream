@@ -272,17 +272,18 @@ Route::resource('/blog', 'BlogController');
 Route::get('/cash', "Controller@cashView");
 
 // 웹페이지 로그인
-
 Route::get('/login', 'MemberController@login_index');
 Route::post('/login', 'MemberController@login');
-
 Route::get('/logout', 'MemberController@logout');
 
 // 웹페이지 회원가입
 Route::get('/register', 'MemberController@register_index');
 Route::post('/register', 'MemberController@register');
 
-// 캐시 충천
+// 마이페이지
+Route::get('/mypage', 'MemberController@myinfo');
+
+// 캐시 충천 페이지
 Route::get('/cash', function () {
     return view('novel.cash');
 });
