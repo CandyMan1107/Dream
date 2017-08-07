@@ -37,7 +37,7 @@ class Item extends Model
     }
 
     public function get_item_src($item_id){
-        $item_src = DB::table('items')->select('img_src')->where('id',$item_id)->get();
+        $item_src = DB::table('items')->select('id','img_src')->where('id',$item_id)->get();
 
         return $item_src;
     }
@@ -56,5 +56,13 @@ class Item extends Model
 
         // var_dump($dataSet);
         return $dataSet;
+    }
+
+    public function none_set_open_background($id) {
+        $data = DB::table('items')
+                ->where('items.id','=',$id)
+                ->get();
+        // var_dump($id);
+        return $data;
     }
 }

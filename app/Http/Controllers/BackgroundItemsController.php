@@ -19,13 +19,13 @@ class BackgroundItemsController extends Controller
     {
         $item = new Item();
 
-        session_start();
+        // session_start();
         // echo($_SESSION['novel_id']);
-        if(!isset($_SESSION['novel_id'])){
+        if(!isset($_COOKIE['novel_id'])){
             return redirect('write_novel/my_novel');
         }
         else {
-            $novel_id = $_SESSION['novel_id'];
+            $novel_id = $_COOKIE['novel_id'];
         }
 
         $dataSet = $item->date_get_novel_id($novel_id);
@@ -68,8 +68,8 @@ class BackgroundItemsController extends Controller
         $background = new Background();
         $imgUpLoad = new BackgroundItemsController();
 
-        session_start();
-        $novel_id = $_SESSION['novel_id'];
+        // session_start();
+        $novel_id = $_COOKIE['novel_id'];
         
         $file = Input::file('item_img_upload');
         $data = $request->all();

@@ -110,7 +110,13 @@ Route::post('/background/historyTable/getEffect',"BackgroundHistoryTablesControl
 
 Route::resource('/background/historyTable', 'BackgroundHistoryTablesController');
 
-Route::get('/background/share/get_background','BackgroundShareController@get_background');
+Route::get('/background/share/get_background/{kind}','BackgroundShareController@get_background');
+
+Route::get('/background/share/get_open_character','BackgroundShareController@get_open_character');
+
+Route::get('/background/share/get_open_item','BackgroundShareController@get_open_item');
+
+Route::post('/background/share/insert_open_background','BackgroundShareController@insert_open_background_data');
 
 Route::resource('/background/share','BackgroundShareController');
 
@@ -239,6 +245,7 @@ Route::get('/write_novel/get_timetables_info', "writeNovelController@getTimetabl
 
 // 사건에 연관된 배경 정보 호출
 Route::get('/write_novel/call_affect_info', "writeNovelController@callAffectInfo");
+Route::get('/write_novel/call_affect_info_with_tag', "writeNovelController@callAffectInfoWithTag");
 
 
 
