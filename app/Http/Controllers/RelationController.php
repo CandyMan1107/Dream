@@ -10,12 +10,12 @@ use App\Background;
 class RelationController extends Controller
 {
   public function index(){
-    session_start();
-    if(!isset($_SESSION['novel_id'])){
+    //session_start();
+    if(!isset($_COOKIE['novel_id'])){
         return redirect('background');
     }
     else {
-        $novel_id = $_SESSION['novel_id'];
+        $novel_id = $_COOKIE['novel_id'];
     }
 
     $imgRoot = "img/background/characterImg/";
@@ -120,8 +120,8 @@ class RelationController extends Controller
     }
 
     // 소설 - 배경정보
-    session_start();
-    $novel_id = $_SESSION['novel_id'];
+    //session_start();
+    $novel_id = $_COOKIE['novel_id'];
     $background = new Background();
 
     $novel_background_data = array();
@@ -136,8 +136,8 @@ class RelationController extends Controller
 
   // 관계 목록
   public function getRelationList() {
-    session_start();
-    $novel_id = $_SESSION['novel_id'];
+    //session_start();
+    $novel_id = $_COOKIE['novel_id'];
     $background = new Background();
 
     $relationInfos = DB::table('relation_lists')
