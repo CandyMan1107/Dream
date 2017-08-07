@@ -38,7 +38,6 @@ class Timetable extends Model
     // WHERE timetables.id = novel_backgrounds.background_id
     // WHERE novel_backgrounds.novel_background = timetables
     // WHERE novel_bakcgrounds.belong_to_novel = $novel_id
-    // id 값의 버그 +1된 값으로 나옴. join 사용시 버그 발생
     public function date_get_novel_id($novel_id){
         $dataSet = DB::table('timetables')
                     ->join('novel_backgrounds','timetables.id','=','novel_backgrounds.background_id')

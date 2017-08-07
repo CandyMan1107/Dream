@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBlogsTable extends Migration
+class CreateCommunicationBoardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateBlogsTable extends Migration
      */
     public function up()
     {
-        // BLOGS TABLE
-        Schema::create('blogs', function (Blueprint $table) {
+        //
+        Schema::create('communication_boards', function (Blueprint $table) {
             $table->increments('id');
-            // 이건 회원 추가 되면 $table->string('user_id');
-            //$table->string('cover_img_src')->nullable();    // BLOG COVER IMG
-            $table->text('blog_introduce'); // BLOG INTRODUCE TEXT
-            $table->integer('today_hit')->default(0);   // BLOG TODAY HIT
-            $table->integer('total_hit')->default(0);   // BLOG TOTAL HIT
+            $table->string('title');
+            $table->mediumText('content');
+            $table->string('writer_name');
+            // $table->integer('hit')->default(0);
+            // $table->integer('like')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
@@ -34,6 +34,6 @@ class CreateBlogsTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('communication_boards');
     }
 }

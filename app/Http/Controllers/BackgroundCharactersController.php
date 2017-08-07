@@ -20,14 +20,15 @@ class BackgroundCharactersController extends Controller
     public function index()
     {
         $character = new Character();
-        
-        session_start();
+
+        // session_start();
+
         // echo($_SESSION['novel_id']);
-        if(!isset($_SESSION['novel_id'])){
+        if(!isset($_COOKIE['novel_id'])){
             return redirect('write_novel/my_novel');
         }
         else {
-            $novel_id = $_SESSION['novel_id'];
+            $novel_id = $_COOKIE['novel_id'];
         }
 
         $dataSet = $character->date_get_novel_id($novel_id);
@@ -41,7 +42,7 @@ class BackgroundCharactersController extends Controller
             $data[$i]['age'] = $datas->age;
             $data[$i]['gender'] = $datas->gender;
             $data[$i]['refer_info'] = $datas->refer_info;
-            $data[$i]['img_src'] = $datas->img_src;   
+            $data[$i]['img_src'] = $datas->img_src;
             $data[$i]['refer_info'] = explode('^',$data[$i]['refer_info']);
 
             $i++;
@@ -88,7 +89,7 @@ class BackgroundCharactersController extends Controller
 
         $item_data = $ownership->get_ownership($character_id);
         return $item_data;
-    } 
+    }
 
     public static function ownership_img(Request $request){
         $data = $request->all();
@@ -101,7 +102,7 @@ class BackgroundCharactersController extends Controller
             $img_src[$i] = $item->get_item_src($item_id[$i]);
         }
         return $img_src;
-    } 
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -115,8 +116,8 @@ class BackgroundCharactersController extends Controller
         $background = new Background();
         $imgUpLoad = new BackgroundCharactersController();
 
-        session_start();
-        $novel_id = $_SESSION['novel_id'];
+        // session_start();
+        $novel_id = $_COOKIE['novel_id'];
 
         $file = Input::file('character_img_upload');
         $data = $request->all();
@@ -126,11 +127,11 @@ class BackgroundCharactersController extends Controller
         for($i= 0; $i < count($data['refer_info']); $i++){
             if($i==0){
                 $refer_info = $data['refer_info'][$i];
-            }   
+            }
             else{
                 $refer_info = $refer_info."^".$data['refer_info'][$i];
             }
-            
+
         }
         $data['refer_info'] = $refer_info;
         if($file){
@@ -168,7 +169,7 @@ class BackgroundCharactersController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
@@ -218,10 +219,10 @@ class BackgroundCharactersController extends Controller
         foreach($item_list as $lists){
             $list[$i]["id"] = $lists->id;
             $list[$i]["name"] = $lists->name;
-            $list[$i]["img_src"] = $lists->img_src;    
+            $list[$i]["img_src"] = $lists->img_src;
             $i++;
         }
 
-        return $list; 
+        return $list;
    }
 }

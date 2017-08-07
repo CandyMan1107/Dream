@@ -1,56 +1,46 @@
 @extends('layouts.master')
 @php
 	use App\Http\Controllers\BlogController;
+    use App\Http\Controllers\CommunicationController;
 @endphp
-@include('writer_blog.blogTopMenu')
-
+@include('writer_blog.blogTopMenu')  
 @section('content')
-    {{-- 해당 블로그를 보고 있는 사람의 아닌가 주인인가 아닌데 이상한데 user_id를 가지고 넘어가야하는데...   --}}
+    {{-- 현재 가지고 있는 user_id를 가지고 넘어가야하는데...   --}}
     @php
-          echo BlogController::showBlogSideMenu($data[2]);   
+        {{-- @param DataType STRING   --}}
+         echo BlogController::showBlogSideMenu($data[0]);    
     @endphp
 
-    <div id="default-padding-mid"></div>
+            <div id="default-padding-mid"></div>
             {{-- BLOG MAIN SPACE START --}}
             <div id="blog-main" class="col-md-8">
                 {{-- BLOG MAIN ROW START --}}
                 <div class="row">
+
                     {{-- BLOG NOTICE START --}}
                     <div class="col-md-12 blog_notice_list text-center autoplay-notice">
-                        @if ($data[0] == "empty")
-                            <h3>메뉴에 작성된 게시글이 없습니다.</h3>
-                        @else
-                            @php
-                                  echo BlogController::mainNoticeList($data[1]);  
-                            @endphp
-                        @endif
+                        @php
+                            {{-- @param DataType INT   --}}
+                             {{--  echo BlogController::mainNoticeList($data[1]);    --}}
+                        @endphp
                     </div>
                     {{-- BLOG NOTICE END --}}
                     <div id="default-padding"></div>
-                    {{-- BLOG BOARD START (NOTICE) --}}
                     <div class="col-md-12 blog_notice">
-                        @if ($data[0] == "empty")
-                            <h3>포스트 아이콘을 눌러서 게시글을 작성해주세요.</h3>
-                        {{-- ELSEIF $_SERVER["REQUEST_URI"] in /blog OR /blog?%%% --}}
-                        @elseif (($data[0] !== 0) && (strpos($_SERVER["REQUEST_URI"], "/blog/menu")!==false || strpos($_SERVER["REQUEST_URI"], "/blog/menu?")!==false))
-                        
-                            <div name="blog_post">
-                                @php
-                                    echo BlogController::selectedMenuAllB($data[0]); 
-                                @endphp
-                            </div>
-                        @endif
+                        <div name="blog_post">
+                            {{--    --}}
+                        </div>
                     </div>
-                    {{-- BLOG BOARD END (NOTICE) --}}
+                    <div class="col-me-12">
+                        @php
+                            {{-- @param DataType INT   --}}
+                            echo CommunicationController::allCommunicationB($data[1])
+                        @endphp
+                    </div>
 
 
                 </div>
                 {{-- BLOG MAIN ROW END --}}
-
-
-
-
-
             </div>
             {{-- BLOG MAIN SPACE END --}}
 
@@ -60,8 +50,6 @@
         </div>
     {{-- BLOG SIDE MENU DIV CONTAINER --}}
     </div>
-
-
 
     <div id="default-padding-big"></div>
 
@@ -76,5 +64,5 @@
 	<script src="/js/jquery.mixitup.js" type="text/javascript"></script>
 	<script type="text/javascript" src="/js/slick.js"></script>
 	<script type="text/javascript" src="/js/custom.js"></script>
-    
+   
 @endsection

@@ -3,9 +3,10 @@ $(function () {
         $(this).click(function (event) {
             event.preventDefault();
 
+            $ownerStr = $(this).children("input[name='blog_owner_id']").val();
             $hrefStr = $(this).children("input[name='blog_href']").val();
 
-            let ajax_url = "blog/" + $hrefStr;
+            let ajax_url = "/blog/" + $hrefStr;
 
             // alert(ajax_url);
 
@@ -50,7 +51,7 @@ $(function () {
                         append_data += "            </li>";
 
                         append_data += "            <li>";
-                        append_data += "                <small>" + data[0]['blog_menu_id'] + "</small>";
+                        append_data += "                <small>| " + data[0]['menu_title'] + "</small>";
                         append_data += "            </li>";
 
                         append_data += "            <li class='board_timestamp'>";
@@ -82,9 +83,7 @@ $(function () {
                     }
                 });
             } else {
-                alert($hrefStr);
-
-                $blog_menu_id = $hrefStr;
+                //
             }
             // alert($hrefStr);
         });
