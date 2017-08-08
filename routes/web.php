@@ -247,6 +247,11 @@ Route::get('/write_novel/get_timetables_info', "writeNovelController@getTimetabl
 Route::get('/write_novel/call_affect_info', "writeNovelController@callAffectInfo");
 Route::get('/write_novel/call_affect_info_with_tag', "writeNovelController@callAffectInfoWithTag");
 
+// 태그 + 연관정보 호출부
+// 1. 캐릭터
+//    1) 소유사물
+Route::get('/write_novel/call_own_items_with_tag', "writeNovelController@callOwnItemsWithTag");
+
 
 
 // 이미지 등록부
