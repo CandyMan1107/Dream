@@ -12,6 +12,9 @@ use  App\Blog;
 use  App\BlogMenu;
 use  App\BlogBoard;
 
+use App\CommunicationMenu;
+use App\BlogCommunicationRelation;
+
 use  App\UserBlogRelation;
 use  App\BlogMenuRelation;
 use  App\MenuBoardRelation;
@@ -42,8 +45,11 @@ class BlogController extends Controller
      */
     public function showBlogMain($ownerId) 
     {
+        
         // Blog's OWNER user_id (DataType : STRING)
         $blog_owner_id = $ownerId;
+
+        // echo ($blog_owner_id);
 
         // 현재 접속 유저의 아이디 또한 구해서 변수 지정하기!
         $current_user_id = "yerriel";
@@ -77,26 +83,33 @@ class BlogController extends Controller
                 $blog_id = $datas->blog_id;
                 // DataType : STRING
                 $blog_owner_name = $datas->name;
+                // DataType : INT
+                $blogOwnerId = $datas->id;
             }
 
-            // var_dump(is_string($blog_owner_name));
+            // var_dump(is_string($blog_owner_id));
 
             $board = new BlogBoard();
-            $boardData = $board->allBoardD($blog_owner_id);
+            $boardData = $board->allBoardD($blogOwnerId);
             $data = array(array());
 
             $i = 0;
 
             // print_r($boardData);
 
-            if(empty($boardData)) {
-                $data = 0;
+            if(empty($boardData[0])) {
+                $data[0] = 0;
+                // DataType : STRING
+                $data[1] = $blog_owner_id;
+                // DataType : INT
+                $data[2] = $blogOwnerId;
             } else {
+
                 foreach($boardData as $datas) {
                     $data[$i]['id'] = $datas->id;   // blog_board_id
 
                     // DataType : INT
-                    $data[$i]['user_id'] = $datas->user_id; // blog_owner_id & user_id 구분하기
+                    $data[$i]['blogOwnerId'] = $datas->user_id; // blog_owner_id & user_id 구분하기
                     $data[$i]['blog_id'] = $blog_id;
                     $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
 
@@ -112,7 +125,7 @@ class BlogController extends Controller
                     $data[$i]['created_at'] = $datas->created_at;
                     $data[$i]['updated_at'] = $datas->updated_at;
                     // show($id)'s $id : blog_menu_id&id
-                    $hrefArr = array($data[$i]['user_id'], $data[$i]['blog_menu_id'], $data[$i]['id']);
+                    $hrefArr = array($data[$i]['blogOwnerId'], $data[$i]['blog_menu_id'], $data[$i]['id']);
                     $data[$i]['href'] = implode("&", $hrefArr);
 
                     $i++;
@@ -121,6 +134,9 @@ class BlogController extends Controller
 
             
         }
+
+        // print_r($data);
+        // echo($data[0]);
 
         return view('writer_blog.blog_main')->with("data", $data);
     }
@@ -253,6 +269,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
+        // echo $id;
         // Is There "&"?
         if (strpos($id, "&")!==false) {
             $hrefArr = explode('&', $id);
@@ -262,20 +279,22 @@ class BlogController extends Controller
             // DataType : INT
             $blog_owner_id = $hrefArr[0];
             $blog_menu_id = $hrefArr[1];
-            $post_id = $hrefArr[1];
+            $post_id = $hrefArr[2];
 
             $board = new BlogBoard();
             $boardData = $board->selectedBoardD($blog_owner_id, $blog_menu_id, $post_id);
+
+            // var_dump($boardData);
 
             $data = array(array());
             $i = 0;
 
             foreach ($boardData as $datas) {
                 // DataType : INT
-                $data[$i]['blog_owner_id'] = $datas->user_id;
+                $data[$i]['blog_owner_id'] = $blog_owner_id;
                 // DataType : INT
-                $data[$i]['id'] = $datas->id;   // blog_board_id
-                $data[$i]['blog_menu_id'] = $datas->blog_menu_id;
+                $data[$i]['id'] = $post_id;   // blog_board_id
+                $data[$i]['blog_menu_id'] = $blog_menu_id;
 
                 $data[$i]['menu_title'] = $datas->menu_title;
 
@@ -292,8 +311,7 @@ class BlogController extends Controller
 
              
         } else {
-            $blog_menu_id = $id;
-            // selectedMenuD($blog_menu_id)
+            //
         }
         
         // print_r($data);
@@ -402,6 +420,10 @@ class BlogController extends Controller
                 $data[$i]['user_id'] = $datas->user_id;
                 $data[$i]['blog_menu_id'] = "empty";
 
+                // DataType : STRING
+                $data[$i]['blog_owner_id'] = $blog_owner_id;
+                $data[$i]['blog_owner_name'] = $blog_owner_name;
+
                 // $data[$i]['cover_img_src'] = $datas->cover_img_src;
                 $data[$i]['blog_introduce'] = $datas->blog_introduce;
                 $data[$i]['today_hit'] = $datas->today_hit;
@@ -474,7 +496,7 @@ class BlogController extends Controller
 
         $boardTable = new BlogBoard();
 
-        $noticeList = $boardTable->noticeListBoardD();
+        $noticeList = $boardTable->noticeListBoardD($blog_owner_id);
 
         $data = array(array());
         $i = 0;
@@ -504,12 +526,15 @@ class BlogController extends Controller
     /**
     * Display ALL Boards of Blog.
     * Laravel pagination
+    * @param $blog_id (DataType : INT)
     * @return view('writer_blog.all_boards_view', ['boardData' => $boardData])
     */
-    public static function allBoard()
+    public static function allBoard($blogId)
     {
+        $blog_id = $blogId;
+
         $board = new BlogBoard();
-        $boardData = $board->orderAllBoardD();
+        $boardData = $board->orderAllBoardD($blog_id);
 
         // print_r($boardData);
 
@@ -571,16 +596,7 @@ class BlogController extends Controller
     }
 
     
-    /**
-     * Display View All Boards of the Selected Menu.
-     * Laravel pagination
-     * @param $blog_menu_id (DataType : INTEGER)
-     * @return view('writer_blog.selected_menu_board', ['data' => $data])
-     */
-    public static function allCommunicationB($id)
-    {
-
-    }
+    
 
 
 /*
@@ -621,17 +637,28 @@ class BlogController extends Controller
 
         // print_r($data);
 
-        // echo($data['blog_owner_id']);
+        $ownerId = $data['blog_owner_id'];
+        // var_dump(is_string($ownerId));
 
         $blog = new Blog();
 
         $user = new User();
+
+        $communication = new CommunicationMenu();
+
+        $blog_communication_relation = new BlogCommunicationRelation();
+
         $user_blog_relation = new UserBlogRelation();
 
         // INSERT DATAS INTO blogs TABLE
+        // $blog_id (DataType : INT)
         $blog_id = $blog->newBlogD($data);
 
-        $userData = $user->searchUserId($data['blog_owner_id']);
+        $communication_id = $communication->newCommunicationD();
+        $blogCommunicationR = $blog_communication_relation->insertData($blog_id, $communication_id);
+
+        // $userData (DataType : INT)
+        $userData = $user->searchUserId($ownerId);
 
         foreach ($userData as $datas) {
             $owner_id = $datas->id;
@@ -644,9 +671,9 @@ class BlogController extends Controller
         // INSERT DATAS INTO user_blog_relations TABLE
         $user_blog_relation->insertRelationD($owner_id, $blog_id);
 
-        // return redirect()->action(
-        //     'BlogController@showBlogMain', ['ownerId' => $ownerId]
-        // );
+        return redirect()->action(
+            'BlogController@showBlogMain', ['ownerId' => $ownerId]
+        );
     }
 
 

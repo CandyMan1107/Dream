@@ -2,27 +2,33 @@
 @php
 	use App\Http\Controllers\BlogController;
 @endphp
-@if ($data[0] == "Please create a blog.")
+@if ($data[0] === "Please create a blog.")
     @include('partials.mySubNavi')
 @else
     @include('writer_blog.blogTopMenu')  
 @endif
 @section('content')
-    @if ($data[0] == "Please create a blog.")
+    @if ($data[0] === "Please create a blog.")
         @php
             echo BlogController::showBlogCreateForm($data);
         @endphp
-    
-    @elseif ($data[0] == "error")
+    @elseif ($data[0] === "error")
         <div id="default-padding-big"></div>
         <h1>웹 소설 작가가 되면 작가의 방을 이용하실 수 있어요!</h1>
     @else
-        {{-- 현재 가지고 있는 user_id를 가지고 넘어가야하는데...   --}}
-        @php
-            echo BlogController::showBlogSideMenu($data[0]['blog_owner_id']);   
-        @endphp
-        {{--  @include('writer_blog.blogSideMenu')  --}}
-
+        @if ($data[0] == 0)
+            {{-- 현재 가지고 있는 user_id를 가지고 넘어가야하는데...   --}}
+            @php
+                echo BlogController::showBlogSideMenu($data[1]);     
+            @endphp
+        @else
+            {{-- 현재 가지고 있는 user_id를 가지고 넘어가야하는데...   --}}
+            @php
+                echo BlogController::showBlogSideMenu($data[0]['blog_owner_id']);     
+            @endphp
+        @endif
+        
+        
         <div id="default-padding-mid"></div>
                 {{-- BLOG MAIN SPACE START --}}
                 <div id="blog-main" class="col-md-8">
@@ -30,11 +36,11 @@
                     <div class="row">
                         {{-- BLOG NOTICE START --}}
                         <div class="col-md-12 blog_notice_list text-center autoplay-notice">
-                            @if (empty($data[0]))
+                            @if ($data[0] == 0)
                                 <h3>블로그가 텅 비었네요!</h3>
                             @else
                                 @php
-                                    echo BlogController::mainNoticeList($data[0]['user_id']); 
+                                     echo BlogController::mainNoticeList($data[0]['blogOwnerId']);  
                                 @endphp
                             @endif
                         </div>
@@ -42,13 +48,13 @@
                         <div id="default-padding"></div>
                         {{-- BLOG BOARD START (NOTICE) --}}
                         <div class="col-md-12 blog_notice">
-                            @if (empty($data[0]))
+                            @if ($data[0] == 0)
                                 <h3>마치 통장 같아! 텅장!</h3>
                             {{-- ELSEIF $_SERVER["REQUEST_URI"] in /blog OR /blog?%%% --}}
-                            @elseif (!empty($data[0]) && (strpos($_SERVER["REQUEST_URI"], "/blog")!==false || strpos($_SERVER["REQUEST_URI"], "/blog?")!==false))
+                            @elseif (($data[0] !== 0) && (strpos($_SERVER["REQUEST_URI"], "/blog")!==false || strpos($_SERVER["REQUEST_URI"], "/blog?")!==false))
                                 <div name="blog_post">
                                     @php
-                                        echo BlogController::allBoard(); 
+                                         echo BlogController::allBoard($data[0]['blog_id']);  
                                     @endphp
                                 </div>
                             @endif
