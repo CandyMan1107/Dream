@@ -32,10 +32,11 @@
 
 							@if(isset($_SESSION['user_id']))
 								<li><a href="/logout">로그아웃</a></li>
+								<li><a href="/mypage">마이페이지</a></li>
 							@else
 								<li><a href="/login">로그인</a></li>
+								<li><a href="/register">회원가입</a></li>
 							@endif
-							<li><a href="/register">회원가입</a></li>
 						</ul>
 					</div>
 				</div>
