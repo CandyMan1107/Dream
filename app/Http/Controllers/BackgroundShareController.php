@@ -197,8 +197,8 @@ class BackgroundShareController extends Controller
                     $j = 0;
                     foreach($effect_data as $temp_effect_data) {
                         if($temp_effect_data->affect_table == "characters"){
-                            $none_open_background_data[$i][$j]['affect_table']= $temp_effect_data
-                            
+                            $none_open_background_data[$i][$j]['affect_table']= $temp_effect_data;
+
                         }
                     }
                 }
