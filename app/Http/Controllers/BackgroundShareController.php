@@ -10,6 +10,8 @@ use App\Item;
 use App\Timetable;
 use App\Relation_list;
 use App\Ownership;
+use App\Effect;
+use App\Map;
 use App\open_character;
 use App\open_ownership;
 use App\open_item;
@@ -157,7 +159,7 @@ class BackgroundShareController extends Controller
                 $i++;
             }
         }
-        else if($kine=="relations"){
+        else if($kind=="relations"){
             $relation_list = new Relation_list();
             $i= 0;
             // foreach ($none_open_background as $temp_none_open_background){
@@ -173,9 +175,39 @@ class BackgroundShareController extends Controller
             //     $i++;
             // }
         }
+        else if($kind=="timetables"){
+            $timetable = new Timetable();
+            $effect = new Effect();
+            $i=0;
+            foreach ($none_open_background as $temp_none_open_background){
+                $temp_none_open_background_data = $timetable->none_set_open_background($temp_none_open_background->background_id);
+
+                foreach($temp_none_open_background_data as $temp_data){
+                    // 기본 데이터 세팅
+                    $none_open_background_data[$i]['id'] = $temp_data->id;
+                    $none_open_background_data[$i]['event_name'] = $temp_data->event_names;
+                    $none_open_background_data[$i]['event_content'] = $temp_data->event_contents;
+                    $none_open_background_data[$i]['start_day'] = $temp_data->start_days;
+                    $none_open_background_data[$i]['end_day'] = $temp_data->end_days;
+                    $none_open_background_data[$i]['others'] = $temp_data->others;
+
+                    $effect_data = $effect->get_effect_data_by_join($none_open_background_data[$i]['id']);
+                    var_dump($effect_data);
+                    // 끼친 영향 데이터 가져오기
+                    $j = 0;
+                    foreach($effect_data as $temp_effect_data) {
+                        if($temp_effect_data->affect_table == "characters"){
+                            $none_open_background_data[$i][$j]['affect_table']= $temp_effect_data
+                            
+                        }
+                    }
+                }
+                $i++;
+            }
+        }
         // item 일 경우
         // var_dump($none_open_background_data);
-        return $none_open_background_data;
+        // return $none_open_background_data;
     }
 
     public function insert_open_background_data(Request $request){
