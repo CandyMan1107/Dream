@@ -212,6 +212,7 @@ class writeNovelController extends Controller
       return $ttData;
     }
 
+    // 연대표 정보 호출부
     // 연대표 정보 호출
     public function callAffectInfo(Request $request){
       $timetableId = $request->input('timetableId');
@@ -234,7 +235,6 @@ class writeNovelController extends Controller
       return $ttData;
       //return $bgCase.$timetableId;
     }
-
     // 연대표 정보 호출 + 태그정보 호출
     public function callAffectInfoWithTag(Request $request){
       $timetableId = $request->input('timetableId');
@@ -272,4 +272,31 @@ class writeNovelController extends Controller
       return $data;
     }
 
+    // 캐릭터 정보 호출부
+    // 소유사물 + 태그
+    public function callOwnItemsWithTag(Request $request){
+      $bgId        = $request->input('bgId');
+      $bgCase      = $request->input('bgCase');
+
+      $bgData = DB::table("items")
+      ->join("ownerships","items.id", "=", "ownerships.item_id")
+      ->get();
+
+      $bgDataIdArray = array();
+      foreach($bgData as $bd){
+        array_push($bgDataIdArray, $bd->item_id);
+      }
+
+      $tagData = DB::table("tags")
+      ->where("kind","=","items")
+      ->whereIn("object_id", $bgDataIdArray)
+      ->get();
+
+      $data = [
+        "affect_info" => $bgData,
+        "tag_info"    => $tagData
+      ];
+
+      return $data;
+    }
 }

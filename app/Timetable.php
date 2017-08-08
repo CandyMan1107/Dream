@@ -73,4 +73,12 @@ class Timetable extends Model
 
         return $data;
     }
+
+    public function none_set_open_background($id) {
+        $data = DB::table('timetables')
+                ->where('timetables.id','=',$id)
+                ->get();
+        // var_dump($id);
+        return $data;
+    }
 }

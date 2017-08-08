@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Input;
 use Validator;
+use Session;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -45,8 +46,31 @@ class MemberController extends Controller
                 'updated_at' => date('Y-m-d H:i:s')
             ]
         );
-
         return redirect('/');
+    }
+
+    public function mypage_index() {
+           return view('login.mypage');
+    }
+    
+    public function myinfo(Request $req) {
+        $user_id = $req->input('user_id');
+        
+        $_SESSION['user_id'] = $user_id;
+
+        $user_info = DB::table('users')->select('user_id')->get('');
+        $name = DB::table('users')->select('name')->get('');
+        $email = DB::table('users')->select('email')->get('');
+        $password = DB::table('users')->select('password')->get('');
+        $created_at = DB::table('users')->select('created_at')->get('');
+
+        return view('login.mypage')->with(
+            'user_id', $user_info,
+            'name', $name,
+            'email', $email,
+            'password', $password,
+            'created_at', $created_at
+            );
     }
 
     public function logout() {

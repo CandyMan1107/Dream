@@ -247,6 +247,11 @@ Route::get('/write_novel/get_timetables_info', "writeNovelController@getTimetabl
 Route::get('/write_novel/call_affect_info', "writeNovelController@callAffectInfo");
 Route::get('/write_novel/call_affect_info_with_tag', "writeNovelController@callAffectInfoWithTag");
 
+// 태그 + 연관정보 호출부
+// 1. 캐릭터
+//    1) 소유사물
+Route::get('/write_novel/call_own_items_with_tag', "writeNovelController@callOwnItemsWithTag");
+
 
 
 // 이미지 등록부
@@ -279,17 +284,18 @@ Route::resource('/blog', 'BlogController');
 Route::get('/cash', "Controller@cashView");
 
 // 웹페이지 로그인
-
 Route::get('/login', 'MemberController@login_index');
 Route::post('/login', 'MemberController@login');
-
 Route::get('/logout', 'MemberController@logout');
 
 // 웹페이지 회원가입
 Route::get('/register', 'MemberController@register_index');
 Route::post('/register', 'MemberController@register');
 
-// 캐시 충천
+// 마이페이지
+Route::get('/mypage', 'MemberController@myinfo');
+
+// 캐시 충천 페이지
 Route::get('/cash', function () {
     return view('novel.cash');
 });

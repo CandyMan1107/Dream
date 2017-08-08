@@ -10,7 +10,7 @@ $(document).ready(function(){
             type: "GET",
             url: get_background_url,
             success: function (data) {
-                // alert(data);
+                console.log(data);
                 // character 의 경우
                 $('.open_character_data_set').remove();
                 $('.none_set_background').remove();
@@ -95,7 +95,7 @@ $(document).ready(function(){
                     alert("23");
                 }
                 else if (click_id=="timetables"){
-                    
+
                 }
                 $(function () {
                     $(".draggable").draggable({
