@@ -251,6 +251,10 @@ Route::get('/write_novel/call_affect_info_with_tag', "writeNovelController@callA
 // 1. 캐릭터
 //    1) 소유사물
 Route::get('/write_novel/call_own_items_with_tag', "writeNovelController@callOwnItemsWithTag");
+//    2) 소속관계
+Route::get('/write_novel/call_belong_relations_with_tag', "writeNovelController@callBelongRelationsWithTag");
+//    3) 참여사건
+Route::get('/write_novel/call_belong_timetables_with_tag', "writeNovelController@callBelongTimetablesWithTag");
 
 
 
