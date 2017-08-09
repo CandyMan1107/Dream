@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-use  App\User;
+use App\User;
 
 use App\UserBlogRelation; 
 use App\CommunicationRelation; 
@@ -97,9 +97,11 @@ class CommunicationController extends Controller
 
         // var_dump(is_int($data['blog_id']));
 
+        $data['community'] = 1;
 
 
-        //return view('writer_blog.board.write_form')->with('data', $data);
+
+        return view('writer_blog.board.write_form')->with('data', $data);
     }
 
 
@@ -112,6 +114,12 @@ class CommunicationController extends Controller
     public function store(Request $request)
     {
         //
+        $data = $request->all();
+
+        var_dump($data);
+
+        // $communityB = new CommunicationBoard();
+        // $communityBD = $communityB->newBoardD();
     }
 
     /**

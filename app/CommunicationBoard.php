@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class CommunicationBoard extends Model
 {
+    // @param
+    public function newBoardD($id)
+    {
+        $boardData;
+        return $boardData;
+    }
     // @param $blogId (DataType : INT)
     public function allBoardD($id) 
     {
