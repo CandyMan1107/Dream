@@ -318,7 +318,7 @@ Route::get('/{ownerId}/blog', "BlogController@showBlogMain");
 
 Route::get('/{ownerId}/blog/menu/{menuId}', "BlogController@selectedMenu");
 
-Route::get('/{ownerId}/blog/communication', "BlogController@showBlogCommunication");
+Route::get('/{ownerId}/blog/community', "BlogController@showBlogCommunication");
 
 Route::get('/{ownerId}/blog/create', "BlogController@createBoard");
 
@@ -344,4 +344,6 @@ Route::resource('/blog', "BlogController");
 |--------------------------------------------------------------------------
 */
 
-Route::resource('/communication', "CommunicationController");
+Route::get('/{ownerId}/blog/community/create', "CommunicationController@createCommunityBoard");
+
+Route::resource('/community', "CommunicationController");

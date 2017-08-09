@@ -1,27 +1,22 @@
 @extends('layouts.master')
 @php
 	use App\Http\Controllers\BlogController;
+    use App\Http\Controllers\CommunicationController;
 @endphp
 @include('writer_blog.blogTopMenu')
 
 @section('content')
     {{-- 해당 블로그의 주인 user_id를 가지고 넘어가야하는데...   --}}
     @php
-        {{-- @param DataType STRING   --}}
-        echo BlogController::showBlogSideMenu($data['blog_owner_id']);   
+          echo BlogController::showBlogSideMenu($data['blog_owner_id']);   
     @endphp
     <div id="default-padding-mid"></div>
             {{-- BOARD WRITE FORM SPACE START --}}
             <div id="write-form" class="col-md-8">
-            @if
-            @elseif
-            @endif
-                <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/formr-data">
+                <form action="{{ route('communication.store') }}" method="POST" enctype="multipart/formr-data">
                 {{ csrf_field() }}
                     <div class="form-group">
-                        {{-- DataType INT   --}}
                         <input type="hidden" value="{{$data['blog_id']}}" name="blog_id" />
-                        {{-- DataType STRING --}}
                         <input type="hidden" value="{{$data['blog_owner_id']}}" name="blog_owner_id" />
                         {{-- 현재 접속자 아이디를 따져서 메뉴 선택창 안보이게 하기 : 독자 게시판   --}}
                         <div class="row">
