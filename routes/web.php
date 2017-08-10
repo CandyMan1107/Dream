@@ -183,6 +183,15 @@ Route::get('/get_novel/CharacterInfo', 'cordoController@getCharactersInfo');
 // 작성한 소설의 유저정보 호출
 Route::get('/get_novel/UserIdOfNovel', 'cordoController@getUserIdOfNovel');
 
+//해당 작가의 블로그 정보가져오기
+Route::get('/get_blog/UserIdOfBlog', 'cordoController@getUserIdOfBlogInfo');
+//블로그와 카테고리 연동하기(블로그-메뉴 조인)
+Route::get('/get_blog/BlogOfMenuJoin', 'cordoController@getBlogOfMenuJoinInfo');
+//카테고리 목록 가져오기
+Route::get('/get_blog/BlogMenuInfo', 'cordoController@getCategoryInfo');
+//카테고리와 게시물 연동하기(메뉴-게시판 조인)
+Route::get('/get_blog/MenuOfBoardJoin', 'cordoController@getMenuOfBoardJoinInfo');
+
 //소설의 배경설정 중 사건을 가져오기
 Route::get('/get_settings/historyGraphInfo', 'cordoController@getBackgroundSettingsHistoryGraph');
 //소설의 배경설정 중 사건안에서 인물을 가져오기
@@ -204,6 +213,8 @@ Route::get('/get_settings/relationsInfo', 'cordoController@getBackgroundSettings
 Route::get('/set_point/set_point', 'cordoController@setPoint');
 //해당 유저의 포인트를 보여주기
 Route::get('/get_point/get_point', 'cordoController@getPoint');
+//해당 유저의 포인트를 수정
+Route::get('/set_point/set_point_again', 'cordoController@setPointAgain');
 
 
 
