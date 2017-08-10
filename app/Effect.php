@@ -75,4 +75,28 @@ class Effect extends Model
         
         return $effect_data;
     }
+
+    public function get_effect_data_by_join($table_id){
+        $data = DB::table('effects')
+        ->where('timetable_id',$table_id)
+        ->leftjoin('characters',function($join){
+            $join->on('effects.affect_id','=','characters.cha_id')
+                    ->where('effects.affect_table',"characters");
+        })
+        ->leftjoin('items',function($join){
+            $join->on('effects.affect_id','=','items.id')
+                    ->where('effects.affect_table',"items");
+        })
+        ->leftjoin('relation_lists',function($join){
+            $join->on('effects.affect_id','=','relation_lists.id')
+                    ->where('effects.affect_table',"relations");
+        })
+        ->leftjoin('maps',function($join){
+            $join->on('effects.affect_id','=','maps.id')
+                    ->where('effects.affect_table',"maps");
+        })
+        ->get();
+
+        return $data;
+    }
 }

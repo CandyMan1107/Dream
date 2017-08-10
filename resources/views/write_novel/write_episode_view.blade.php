@@ -589,7 +589,7 @@ fvcc<div class="default-padding"></div>
     word-break:break-all;
   }
 
-  .timetable-window-attr-div {
+  .window-attr-div {
     padding: 0px;
     text-align: center;
     font-size: 18px;
@@ -629,6 +629,12 @@ fvcc<div class="default-padding"></div>
     margin-top: 5px;
     text-align: center;
   }
+  .rellist-info-div {
+    background-color:#EAEAEA;
+    margin: 0px;
+    padding:0px;
+    text-align: center;
+  }
 
   .cha-img-div {
     font-weight: bold;
@@ -644,6 +650,14 @@ fvcc<div class="default-padding"></div>
   .cha-effect-content {
     display:table-cell;
     vertical-align: middle;
+  }
+
+  .rel-effect-div{
+    padding:0px;
+    display:table;
+    text-align: center;
+    height:90px;
+    font-weight:bold;
   }
 
   #mouse-cursor-div {
@@ -863,7 +877,6 @@ fvcc<div class="default-padding"></div>
             },
             success: function (data) {
               data = data[0];
-              console.log("asdasd");
               console.log(data);
               var div = $(".background-content");
               // 캐릭터 정보 출력
@@ -1212,7 +1225,7 @@ fvcc<div class="default-padding"></div>
           },
           success: function (data) {
              data = data[0];
-             console.log("asd");
+
              console.log(data);
             var addEle = "";
             switch(bgCase){
@@ -1231,7 +1244,7 @@ fvcc<div class="default-padding"></div>
                 addEle += "    </span>";
                 addEle += "  </div>";
                 addEle += "</div>";
-                //addEle += "<div class=''>asd</div>";
+
               break;
               case "items":
               addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
@@ -1628,7 +1641,7 @@ fvcc<div class="default-padding"></div>
               var editorOffset = $(".edit-box").offset();
               var btnOffset = $(this).offset();
               var id = $(this).attr("data-id");
-              var eleId = "timetableWin" + id
+              var eleId = "timetablesWin" + id
               var width = 300;
               var height = 200;
               var bgCase = "timetables";
@@ -1721,7 +1734,7 @@ fvcc<div class="default-padding"></div>
               addEle += "    사건-" + data.event_names;
               addEle += "   </div>"
               addEle += "   <div class='col-md-2 window-header-clear' >"
-              addEle += "     <i class='pull-right material-icons window-clear-icon' data-id='" + data.background_id +"'>clear</i>"
+              addEle += "     <i class='pull-right material-icons window-clear-icon' data-case='timetables' data-id='" + data.background_id +"'>clear</i>"
               addEle += "   </div>"
               addEle += "  </div>"
               addEle += "  <div class='col-md-12 window-content'>"
@@ -1753,16 +1766,17 @@ fvcc<div class="default-padding"></div>
               addEle += "      </tr>"
               addEle += "    </table>"
               addEle += "   </div>"
-              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='characters' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>인물</div>"
-              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='items' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>사물</div>"
-              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='relations' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>관계</div>"
-              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='maps' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>지도</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='characters' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>인물</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='items' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>사물</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='relations' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>관계</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='maps' class='"+bgCase+"-window-attr-div attr-div-"  + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>지도</div>"
               addEle += "  </div>"
               addEle += "  <div class='col-md-12 attr-content-div'>"
-              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-characters-div-" + data.background_id + "'></div>"
-              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-items-div-" + data.background_id + "'></div>"
-              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-relations-div-" + data.background_id + "'></div>"
-              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-maps-div-" + data.background_id + "'></div>"
+              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-characters-div-" + bgCase + "-" + data.background_id + "'></div>"
+              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-items-div-" + bgCase + "-" + data.background_id + "'></div>"
+              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-relations-div-" + bgCase + "-" + data.background_id + "'></div>"
+              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-maps-div-" + bgCase + "-" + data.background_id + "'></div>"
+
               addEle += "  </div>"
               addEle += "</div>"
 
@@ -1781,28 +1795,30 @@ fvcc<div class="default-padding"></div>
         });
         function setClearBtnEvent(){
           $(".window-clear-icon").off().on("click",function(){
-            var id = $(this).attr("data-id");
-            $("#timetableWin" + id).hide();
+            var bgId = $(this).attr("data-id");
+            var bgCase = $(this).attr("data-case");
+            $("#" + bgCase +"Win" + bgId).hide();
           });
         }
 
         function setAttrBtnEvent(){
-          $(".timetable-window-attr-div").off().on("mouseover",function(){
+          $(".timetables-window-attr-div").off().on("mouseover",function(){
             $(this).css("background-color","#5CD1E5");
           })
 
-          $(".timetable-window-attr-div").on("mouseout",function(){
+          $(".timetables-window-attr-div").on("mouseout",function(){
             if(!$(this).hasClass("selected-attr"))
               $(this).css("background-color","#B2EBF4");
           })
 
-          $(".timetable-window-attr-div").on("click",function(){
+          $(".timetables-window-attr-div").on("click",function(){
             var attr = $(this).attr("data-attr");
+            var bgCase = $(this).attr("data-case");
             var timeTableId = $(this).attr("data-timetable-id");
-            var attrDiv = $(".attr-" + attr + "-div-" + timeTableId);
-            var sameEle = $(".attr-div-" + timeTableId)
-          //  alert(attr + " " + timeTableId);
-            console.log(".attr-" + attr + "-div-" + timeTableId);
+            var attrDiv = $(".attr-" + attr + "-div-" + bgCase + "-" + timeTableId);
+            var sameEle = $(".attr-div-"  + bgCase + "-" + timeTableId)
+
+            console.log(".attr-" + attr + "-div-"  + bgCase + "-" + timeTableId);
             if(!attrDiv.hasClass("hasCalled"))
               setAffectInfo(timeTableId, attr ,attrDiv);
 
@@ -1816,23 +1832,21 @@ fvcc<div class="default-padding"></div>
               $(this).addClass("selected-attr");
               $(this).css("background-color","#5CD1E5");
               // 모든 attr-div 숨김
-              $(".attr-content-" + timeTableId).hide();
+              $(".attr-content-"  + bgCase + "-" + timeTableId).hide();
               // 현재 attr-div 보임
               attrDiv.show();
 
             // check : selected == true
-          } else {
+            } else {
               // 모든 div select 속성 제거
               sameEle.removeClass("selected-attr");
               sameEle.css("background-color","#B2EBF4");
               // 모든 attr-div 숨김
-              $(".attr-content-" + timeTableId).hide()   ;
+              $(".attr-content-"  + bgCase + "-" + timeTableId).hide()   ;
             }
 
           })
         }
-
-
       }
       function setWindowCharacters(){
         var winEle = $("#" + eleId);
@@ -1886,16 +1900,14 @@ fvcc<div class="default-padding"></div>
               addEle += "      </tr>"
               addEle += "    </table>"
               addEle += "   </div>"
-              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='characters' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>인물</div>"
-              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='items' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>사물</div>"
-              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='relations' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>관계</div>"
-              addEle += "     <div data-timetable-id='"+data.background_id+"' data-attr='maps' class='timetable-window-attr-div attr-div-" + data.background_id + " col-md-3'>지도</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='own-items' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-4 window-attr-div'>소유사물</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='belong-relations' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-4 window-attr-div'>참여관계</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='belong-timetables' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-4 window-attr-div'>참여사건</div>"
               addEle += "  </div>"
               addEle += "  <div class='col-md-12 attr-content-div'>"
-              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-characters-div-" + data.background_id + "'></div>"
-              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-items-div-" + data.background_id + "'></div>"
-              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-relations-div-" + data.background_id + "'></div>"
-              addEle += "   <div data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + data.background_id + " attr-maps-div-" + data.background_id + "'></div>"
+              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-own-items-div-" + bgCase + "-" + data.background_id + "'></div>"
+              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-belong-relations-div-" + bgCase + "-" + data.background_id + "'></div>"
+              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-belong-timetables-div-" + bgCase + "-" + data.background_id + "'></div>"
               addEle += "  </div>"
               addEle += "</div>"
 
@@ -1921,25 +1933,28 @@ fvcc<div class="default-padding"></div>
         }
 
         function setAttrBtnEvent(){
-          $(".timetable-window-attr-div").off().on("mouseover",function(){
+          $("."+bgCase+"-window-attr-div").off().on("mouseover",function(){
             $(this).css("background-color","#5CD1E5");
           })
 
-          $(".timetable-window-attr-div").on("mouseout",function(){
+          $("."+bgCase+"-window-attr-div").on("mouseout",function(){
             if(!$(this).hasClass("selected-attr"))
               $(this).css("background-color","#B2EBF4");
           })
 
-          $(".timetable-window-attr-div").on("click",function(){
+          $("."+bgCase+"-window-attr-div").on("click",function(){
             var attr = $(this).attr("data-attr");
+            var bgCase = $(this).attr("data-case");
             var timeTableId = $(this).attr("data-timetable-id");
-            var attrDiv = $(".attr-" + attr + "-div-" + timeTableId);
-            var sameEle = $(".attr-div-" + timeTableId)
-          //  alert(attr + " " + timeTableId);
-            console.log(".attr-" + attr + "-div-" + timeTableId);
-            if(!attrDiv.hasClass("hasCalled"))
-              setAffectInfo(timeTableId, attr ,attrDiv);
+            var attrDiv = $(".attr-" + attr + "-div-" + bgCase + "-" + timeTableId);
+            var sameEle = $(".attr-div-" + bgCase + "-" + timeTableId)
 
+            console.log(".attr-" + attr + "-div-" + bgCase + "-" + timeTableId);
+            console.log(".attr-belong-relations-characters-1")
+            // 각 대상별 다른 부분 ********************************************************
+            if(!attrDiv.hasClass("hasCalled"))
+              setCharacterAffectInfo(bgCase, timeTableId, attr, attrDiv);
+            //***************************************************************************
 
             // check : selected == false
             if(!$(this).hasClass("selected-attr")){
@@ -1950,23 +1965,262 @@ fvcc<div class="default-padding"></div>
               $(this).addClass("selected-attr");
               $(this).css("background-color","#5CD1E5");
               // 모든 attr-div 숨김
-              $(".attr-content-" + timeTableId).hide();
+              $(".attr-content-" + bgCase + "-" + timeTableId).hide();
               // 현재 attr-div 보임
               attrDiv.show();
 
             // check : selected == true
-          } else {
+            } else {
               // 모든 div select 속성 제거
               sameEle.removeClass("selected-attr");
               sameEle.css("background-color","#B2EBF4");
               // 모든 attr-div 숨김
-              $(".attr-content-" + timeTableId).hide()   ;
+              $(".attr-content-" + bgCase + "-" + timeTableId).hide()   ;
             }
 
+
+            function setCharacterAffectInfo(bgCase, bgId, attr, setDiv){
+              switch(attr){
+                case "own-items" :
+                  setOwnItemsInfo();
+                  break;
+                case "belong-relations" :
+                  setBelongRelationsInfo();
+                  break;
+                case "belong-timetables" :
+                  setBelongTimetablesInfo();
+                  break;
+              }
+              function setOwnItemsInfo(){
+                $.ajax({
+                    type: "get",
+                    url: "/write_novel/call_own_items_with_tag",
+                    data: {
+                      "bgCase"  : bgCase,
+                      "bgId"    : bgId
+                    },
+                    success: function (data) {
+
+                      var bgData = data["affect_info"];
+                      var tagData = data["tag_info"];
+
+                      var appendEle = "";
+                      console.log(data);
+                      appendEle = createOwnItemsElement(bgCase, bgData, tagData);
+                      setDiv.append(appendEle);
+                      setDiv.addClass("hasCalled");
+
+                      setTagBtnEvent();
+                      setWinImgEvent();
+                    },
+                    error: function (error) {
+                      alert("오류발생");
+                    }
+                });
+                function createOwnItemsElement(bgCase, bgData, tagData){
+                  var addEle = "";
+                  // 이미지 루트 설정
+                  var imgRoot = "/img/background/itemImg/";
+
+                  // 엘리먼트 내용
+                  bgData.forEach(function(dt){
+                    var name      = dt.name;
+                    var img       = dt.img_src;
+                    var info      = dt.info;
+                    var bgId      = dt.item_id;
+                    var bgCase    = "items";
+                    var tagEle    = "";
+
+                    // 태그 엘리먼트 생성
+                    tagEle += "<select class='" + bgCase + "-" + bgId  + "-" +"select' style='width:60%; height:26px;'>";
+                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+                    tagData.forEach(function(td){
+                      if(td.object_id == bgId ){
+                        tagEle += "<option data-kind='" + td.kind + "' data-id='" + td.object_id + "' style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
+                      }
+                    })
+                    tagEle += "</select>";
+                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>적용</button>"
+
+
+                    console.log(dt);
+                    addEle += "<div class='col-md-12 cha-info-div'>"
+                    addEle += " <div class='col-md-6 cha-img-div'>"
+                    addEle += "   <img data-id='" + bgId + "' data-case='" + bgCase + "' class='window-img-circle img-circle img-things-size' src='"+  imgRoot + img +"'><br>" + name
+                    addEle += " </div>"
+                    addEle += " <div class='col-md-6 cha-effect-div'>"
+                    addEle += "    <div class='cha-effect-content'>" + info + tagEle + "</div>"
+                    addEle += " </div>"
+                    addEle += "</div>"
+                  });
+                  return addEle;
+                }
+              }
+              function setBelongRelationsInfo(){
+                $.ajax({
+                    type: "get",
+                    url: "/write_novel/call_belong_relations_with_tag",
+                    data: {
+                      "bgCase"  : bgCase,
+                      "bgId"    : bgId
+                    },
+                    success: function (data) {
+                      console.log(data);
+                      var listInfo  = data["list_info"];
+                      var relInfo   = data["rel_info"];
+                      var chaInfo   = data["cha_info"];
+                      var tagInfo   = data["tag_info"];
+
+                      var appendEle = "";
+                      console.log(data);
+                      appendEle = createBelongRelationsElement(listInfo, relInfo, chaInfo, tagInfo);
+                      setDiv.append(appendEle);
+                      setDiv.addClass("hasCalled");
+
+                      setTagBtnEvent();
+                      setWinImgEvent();
+                    },
+                    error: function (error) {
+                      alert("오류발생");
+                    }
+                });
+                function createBelongRelationsElement(listInfo, relInfo, chaInfo, tagData){
+                  var addEle = "";
+                  // 이미지 루트 설정
+                  var relImgRoot = "/img/background/relationImg/";
+                  var chaImgRoot = "/img/background/characterImg/";
+
+                  // 엘리먼트 내용
+                  listInfo.forEach(function(li){
+                    var title     = li.title;
+                    var img       = li.cover_src;
+                    var bgId      = li.listnum;
+                    var bgCase    = "relations";
+                    var tagEle    = "";
+
+                    // 태그 엘리먼트 생성
+                    tagEle += "<select class='" + bgCase + "-" + bgId  + "-" +"select' style='width:60%; height:26px;'>";
+                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+                    tagData.forEach(function(td){
+                      if(td.object_id == bgId){
+                        tagEle += "<option style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
+                      }
+                    })
+                    tagEle += "</select>";
+                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>적용</button>"
+
+                    addEle += "<div class='col-md-12 rellist-info-div'>"
+                    addEle += " <div class='col-md-6 cha-img-div'>"
+                    addEle += "   <img data-id='" + bgId + "' data-case='" + bgCase + "' class='window-img-circle img-circle img-things-size' src='"+  relImgRoot + img +"'><br><b>" + title + "</b>";
+                    addEle += " </div>"
+                    addEle += " <div class='col-md-6 cha-effect-div'>"
+                    addEle += "    <div class='cha-effect-content'>" + tagEle + "</div>"
+                    addEle += " </div>"
+                    addEle += "</div>"
+
+                    //console.log(dt);
+                    relInfo.forEach(function(ri){
+
+                      if(ri.listnum == bgId){
+                        var sourceData = getChaDataById(chaInfo, ri.source)
+                        var targetData = getChaDataById(chaInfo, ri.target)
+
+                        addEle += "<div class='col-md-12 cha-info-div'>"
+                        addEle += " <div class='col-md-4 cha-img-div'>"
+                        addEle += "   <img data-id='" + sourceData.cha_id + "' data-case='characters' class='window-img-circle img-circle img-things-size' src='"+  chaImgRoot + sourceData.img_src +"'><br>" + sourceData.name
+                        addEle += " </div>"
+                        addEle += " <div class='col-md-4 rel-effect-div'>"
+                        addEle += "    <div class='cha-effect-content'>" + ri.relationship + "</div>"
+                        addEle += " </div>"
+                        addEle += " <div class='col-md-4 cha-img-div'>"
+                        addEle += "   <img data-id='" + targetData.cha_id + "' data-case='characters' class='window-img-circle img-circle img-things-size' src='"+  chaImgRoot + targetData.img_src +"'><br>" + targetData.name
+                        addEle += " </div>"
+                        addEle += "</div>"
+                      }
+                    })
+
+                    // 아이디로 캐릭터 정보 추출
+                    function getChaDataById(chaInfo, chaId){
+                      for(var i=0; i < chaInfo.length; i++){
+                        if(chaInfo[i].cha_id == chaId)
+                          return chaInfo[i];
+                      }
+                      return false;
+                    }
+
+
+                  });
+                  return addEle;
+                }
+
+              }
+              function setBelongTimetablesInfo(){
+                $.ajax({
+                    type: "get",
+                    url: "/write_novel/call_belong_timetables_with_tag",
+                    data: {
+                      "bgCase"  : bgCase,
+                      "bgId"    : bgId
+                    },
+                    success: function (data) {
+                      console.log(data);
+
+                      var affectInfo  = data["affect_info"];
+                      var tagInfo     = data["tag_info"];
+
+                      var appendEle = "";
+                      console.log(data);
+                      appendEle = createBelongTimetablesElement(affectInfo, tagInfo);
+                      setDiv.append(appendEle);
+                      setDiv.addClass("hasCalled");
+
+                      setTagBtnEvent();
+                      setWinImgEvent();
+                    },
+                    error: function (error) {
+                      alert("오류발생");
+                    }
+                });
+                function createBelongTimetablesElement(affectInfo, tagInfo){
+                  var addEle = "";
+                  // 이미지 루트 설정
+                  var chaImgRoot = "/img/background/characterImg/";
+
+                  // 엘리먼트 내용
+                  affectInfo.forEach(function(ai){
+                    var eventTitle    = ai.event_names;
+                    var eventContent  = ai.eventContents;
+                    var effectContent = ai.affect_content;
+                    var bgId          = ai.timetable_id;
+                    var bgCase        = "timetables";
+                    var tagEle        = "";
+
+                    // 태그 엘리먼트 생성
+                    tagEle += "<select class='" + bgCase + "-" + bgId  + "-" +"select' style='width:60%; height:26px;'>";
+                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+                    tagInfo.forEach(function(td){
+                      if(td.object_id == bgId){
+                        tagEle += "<option style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
+                      }
+                    })
+                    tagEle += "</select>";
+                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>적용</button>"
+
+                    addEle += "<div class='col-md-12 cha-info-div'>"
+                    addEle += " <div class='col-md-6 cha-img-div'>"
+                    addEle += "   <i data-id='" + bgId + "' data-case='" + bgCase + "' class='window-img-circle img-circle img-things-size material-icons' style='background-color:#EAEAEA; font-size:65'>&#xE878;</i><br>" + eventTitle
+                    addEle += " </div>"
+                    addEle += " <div class='col-md-6 cha-effect-div'>"
+                    addEle += "    <div class='cha-effect-content'>" + effectContent + tagEle + "</div>"
+                    addEle += " </div>"
+                    addEle += "</div>"
+                  });
+                  return addEle;
+                }
+              }
+            }
           })
         }
-
-
       }
     }
 
@@ -1982,7 +2236,6 @@ fvcc<div class="default-padding"></div>
       $.ajax({
           type: "get",
           url: "/write_novel/call_affect_info_with_tag",
-          async: false,
           data: {
             "timetableId"  : timetableId,
             "bgCase"       : bgCase
@@ -2073,37 +2326,36 @@ fvcc<div class="default-padding"></div>
         return addEle;
       }
 
-      // 태그 버튼 이벤트
-      function setTagBtnEvent(){
-        $(".tag-set-btn").off().on("click",function(){
-          var bgCase    = $(this).attr("data-case");
-          var bgId      = $(this).attr("data-id");
-          var selectEle = $("." + bgCase + "-" + bgId + "-select");
-
-          // 아무런 태그도 선택하지않았거나 이미 활성화 된 경우 비활성화
-          if(selectEle.val() != null && tagPaintActivated == false) {
-            tagPaintActivated = true;
-            tagPaintCursor = true;
-            tagPaintCase = $(this).attr("data-case");
-            tagPaintId = $(this).attr("data-id");
-            tagPaintColor = selectEle.val();
-            $(".tag-set-btn").html("취소");
-            setMouseCursorPaint();
-          } else {
-            tagPaintActivated = false;
-            tagPaintCursor = false;
-            tagPaintCase = '';
-            tagPaintId = '';
-            tagPaintColor = '';
-            $(".tag-set-btn").html("적용");
-            disableMouseCursorPaint();
-          }
-
-        })
-      }
-
-
     }
+    // 태그 버튼 이벤트
+    function setTagBtnEvent(){
+      $(".tag-set-btn").off().on("click",function(){
+        var bgCase    = $(this).attr("data-case");
+        var bgId      = $(this).attr("data-id");
+        var selectEle = $("." + bgCase + "-" + bgId + "-select");
+
+        // 아무런 태그도 선택하지않았거나 이미 활성화 된 경우 비활성화
+        if(selectEle.val() != null && tagPaintActivated == false) {
+          tagPaintActivated = true;
+          tagPaintCursor = true;
+          tagPaintCase = $(this).attr("data-case");
+          tagPaintId = $(this).attr("data-id");
+          tagPaintColor = selectEle.val();
+          $(".tag-set-btn").html("취소");
+          setMouseCursorPaint();
+        } else {
+          tagPaintActivated = false;
+          tagPaintCursor = false;
+          tagPaintCase = '';
+          tagPaintId = '';
+          tagPaintColor = '';
+          $(".tag-set-btn").html("적용");
+          disableMouseCursorPaint();
+        }
+
+      })
+    }
+
     // 이미지 드래그 이벤트
     var lastClickedImgEle = null;
     var intervalEle;
@@ -2112,7 +2364,6 @@ fvcc<div class="default-padding"></div>
     var imgDivHeight = 300;
     var imgDivWidth = 300;
     var winId;
-
     // 각 이미지에 이벤트 적용
     function setWinImgEvent(){
       $(".window-img-circle").off().on("mousedown",function(event){
@@ -2121,7 +2372,6 @@ fvcc<div class="default-padding"></div>
         if (event.which != 1) return false;
 
         lastClickedImgEle = $(this);
-
 
         // 클래스별 크기 지정 + 대상에따른 윈도우 팝업
         var bgCase  = lastClickedImgEle.attr("data-case")
@@ -2135,11 +2385,9 @@ fvcc<div class="default-padding"></div>
             $("#" + winId).hide();
         };
 
-
         // 실제 너비, 높이 적용
         imgDivWidth = $("#" + winId).width();
         imgDivHeight = $("#" + winId).height();
-
 
         var addEle = "<div class='ready-img-div'></div>";
         $("body").append(addEle);
@@ -2149,7 +2397,6 @@ fvcc<div class="default-padding"></div>
         $(".ready-img-div").css("left",event.pageX);
         $(".ready-img-div").css("top",event.pageY);
         $(".ready-img-div").css("background-color","#BDBDBD");
-
         $(".ready-img-div").animate({
           height:imgDivHeight,
           width:imgDivWidth,
@@ -2162,8 +2409,6 @@ fvcc<div class="default-padding"></div>
           var width = $(".ready-img-div").width();
           $(".ready-img-div").offset({top:curMouseY-height/2, left:curMouseX-width/2});
         }, 10)
-
-
       });
 
       // 배경설정 대상에 따른 윈도우 크기 설정

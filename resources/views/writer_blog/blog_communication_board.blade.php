@@ -21,7 +21,7 @@
                     <div class="col-md-12 blog_notice_list text-center autoplay-notice">
                         @php
                             {{-- @param DataType INT   --}}
-                             {{--  echo BlogController::mainNoticeList($data[1]);    --}}
+                              echo BlogController::mainNoticeList($data[1]);   
                         @endphp
                     </div>
                     {{-- BLOG NOTICE END --}}
@@ -33,8 +33,8 @@
                     </div>
                     <div class="col-me-12">
                         @php
-                            {{-- @param DataType INT   --}}
-                            echo CommunicationController::allCommunicationB($data[1])
+                            {{-- @param $blogId DataType INT   --}}
+                            echo CommunicationController::allCommunicationB($data[2])
                         @endphp
                     </div>
 

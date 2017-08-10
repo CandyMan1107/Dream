@@ -73,7 +73,7 @@
             </div>
             <div class="blog_reader_menu_nav">
                 <strong>
-                    <a href="/{{$data[0]['blog_owner_id']}}/blog/communication">독자 게시판</a>
+                    <a href="/{{$data[0]['blog_owner_id']}}/blog/community">독자 게시판</a>
                 </strong>
             </div>
             <div id="default-padding-mid"></div>

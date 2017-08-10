@@ -33,7 +33,7 @@ class BackgroundItemsController extends Controller
         $i = 0;
 
         foreach($dataSet as $datas){
-            $data[$i]['id'] = $datas->id;
+            $data[$i]['id'] = $datas->background_id;
             $data[$i]['name'] = $datas->name;
             $data[$i]['info'] = $datas->info;
             $data[$i]['category'] = $datas->category;

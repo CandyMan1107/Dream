@@ -247,6 +247,15 @@ Route::get('/write_novel/get_timetables_info', "writeNovelController@getTimetabl
 Route::get('/write_novel/call_affect_info', "writeNovelController@callAffectInfo");
 Route::get('/write_novel/call_affect_info_with_tag', "writeNovelController@callAffectInfoWithTag");
 
+// 태그 + 연관정보 호출부
+// 1. 캐릭터
+//    1) 소유사물
+Route::get('/write_novel/call_own_items_with_tag', "writeNovelController@callOwnItemsWithTag");
+//    2) 소속관계
+Route::get('/write_novel/call_belong_relations_with_tag', "writeNovelController@callBelongRelationsWithTag");
+//    3) 참여사건
+Route::get('/write_novel/call_belong_timetables_with_tag', "writeNovelController@callBelongTimetablesWithTag");
+
 
 
 // 이미지 등록부
@@ -311,7 +320,7 @@ Route::get('/{ownerId}/blog', "BlogController@showBlogMain");
 
 Route::get('/{ownerId}/blog/menu/{menuId}', "BlogController@selectedMenu");
 
-Route::get('/{ownerId}/blog/communication', "BlogController@showBlogCommunication");
+Route::get('/{ownerId}/blog/community', "BlogController@showBlogCommunication");
 
 Route::get('/{ownerId}/blog/create', "BlogController@createBoard");
 
@@ -337,4 +346,6 @@ Route::resource('/blog', "BlogController");
 |--------------------------------------------------------------------------
 */
 
-Route::resource('/communication', "CommunicationController");
+Route::get('/{ownerId}/blog/community/create', "CommunicationController@createCommunityBoard");
+
+Route::resource('/community', "CommunicationController");
