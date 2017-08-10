@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use DB;
 use Input;
-use Validator;
 use Session;
+use Redirect;
+use Validator;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -16,17 +17,21 @@ class MemberController extends Controller
     
     public function login(Request $req){
         $user_id = $req->input('user_id');
+        $name = $req->input('name');
+        $email = $req->input('email');
         $password = $req->input('password');
 
         $checkLogin = DB::table('users')->where(['user_id' => $user_id, 'password' => $password])->get();
         
+        // 로그인 성공 시 세션 생성
         if(count($checkLogin) > 0) {
-            session_start();
-            $_SESSION['user_id'] = $user_id;
-            
-            return redirect('/');
+            Session::put('user_id', $user_id, 'name', $name, 'email', $email);
+            Session::get('user_id', $user_id);
+
+            return Redirect::to('/');
         }
         else {
+            echo "<script>alert(\"로그인 실패\");</script>";
             return view('login.login');
         }
     }
@@ -35,6 +40,7 @@ class MemberController extends Controller
         return view('login.register');
     }
 
+    // 회원가입
     public function register(Request $req) {
         DB::table('users')->insert(
             [
@@ -54,29 +60,24 @@ class MemberController extends Controller
     }
     
     public function myinfo(Request $req) {
-        $user_id = $req->input('user_id');
+        $login_id = Session::get('user_id');
+        $user_info = DB::select('select * from users where user_id = ?',[$login_id]);
         
-        $_SESSION['user_id'] = $user_id;
-
-        $user_info = DB::table('users')->select('user_id')->get('');
-        $name = DB::table('users')->select('name')->get('');
-        $email = DB::table('users')->select('email')->get('');
-        $password = DB::table('users')->select('password')->get('');
-        $created_at = DB::table('users')->select('created_at')->get('');
-
-        return view('login.mypage')->with(
-            'user_id', $user_info,
-            'name', $name,
-            'email', $email,
-            'password', $password,
-            'created_at', $created_at
-            );
+        return view('login.mypage')->with('user_id', $user_info);
     }
 
-    public function logout() {
-        session_start();
-        session_destroy();
-        
+    // 회원정보 수정
+    public function modify(Request $req) {
+        $modify_name = $req->input('name');
+        $modify_password = $req->input('password');
+
+        $modify = DB::select('update users set name = ?, password = ?', [$modify_name, $modify_password]);
+
+        return view('login.mypage');
+    }
+
+    public function logout(Request $req) {
+        $req->session()->flush();
         return redirect('/');
     }
 }

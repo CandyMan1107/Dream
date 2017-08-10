@@ -1,4 +1,3 @@
-<?php session_start() ?>
 <article>
 	<header>
 		<style type="text/css">
@@ -30,7 +29,7 @@
 							<li><a href="#event">이벤트</a></li>
 							<li><a href="#about">고객센터</a></li>
 
-							@if(isset($_SESSION['user_id']))
+							@if(Session::has('user_id'))
 								<li><a href="/logout">로그아웃</a></li>
 								<li><a href="/mypage">마이페이지</a></li>
 							@else

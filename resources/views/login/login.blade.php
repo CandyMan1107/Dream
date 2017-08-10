@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label">아이디</label>
                         <div class="col-md-5">
-                            <input id="email" type="text" class="form-control" name="user_id"required autofocus>
+                            <input id="email" type="text" class="form-control" name="user_id" required autofocus>
                         </div>
                     </div>
 

@@ -289,6 +289,8 @@ Route::post('/register', 'MemberController@register');
 
 // 마이페이지
 Route::get('/mypage', 'MemberController@myinfo');
+// 마이페이지 회원 정보 수정
+Route::post('/modify', 'MemberController@modify');
 
 // 캐시 충천 페이지
 Route::get('/cash', function () {
