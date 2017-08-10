@@ -17,6 +17,7 @@ class MemberController extends Controller
     
     public function login(Request $req){
         $user_id = $req->input('user_id');
+        
         $name = $req->input('name');
         $email = $req->input('email');
         $password = $req->input('password');
@@ -60,20 +61,20 @@ class MemberController extends Controller
     }
     
     public function myinfo(Request $req) {
-        $login_id = Session::get('user_id');
-        $user_info = DB::select('select * from users where user_id = ?',[$login_id]);
+        $user_id = Session::get('user_id');
+        $user_info = DB::select('select * from users where user_id = ?', [$user_id]);
         
         return view('login.mypage')->with('user_id', $user_info);
     }
 
     // 회원정보 수정
     public function modify(Request $req) {
-        $modify_name = $req->input('name');
         $modify_password = $req->input('password');
 
-        $modify = DB::select('update users set name = ?, password = ?', [$modify_name, $modify_password]);
+        // $modify = DB::update('update users set name = ?, password = ?', [$modify_name, $modify_password]);
+        $modify = DB::update('update users set password = ?', [$modify_password]);
 
-        return view('login.mypage');
+        return redirect('/mypage');
     }
 
     public function logout(Request $req) {
