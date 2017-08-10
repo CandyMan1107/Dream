@@ -1,6 +1,6 @@
 <style>
 .row{
-    margin: 200px;
+    margin: 150px;
     padding: 100px auto;
 }
 </style>
@@ -8,6 +8,7 @@
 @extends('layouts.master')
 
 @section('content')
+@include('partials.mySubNavi')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -27,7 +28,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">비밀번호</label>
                             <div class="col-md-5">
-                                <input id="password" value="{{$value->password}}" type="password" class="form-control" required>
+                                <input id="password" name="password" value="{{$value->password}}" type="password" class="form-control" required>
                             </div>
                         </div>
 
@@ -41,7 +42,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">닉네임</label>
                             <div class="col-md-5">
-                                <input id="name" value="{{$value->name}}" type="text" class="form-control" required autofocus>
+                                <input name="name" value="{{$value->name}}" type="text" class="form-control" readonly>
                             </div>
                         </div>
                         
@@ -55,7 +56,8 @@
                          <div class="form-group"> 
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
-                                    수정하기
+                                    수정
+                                    <script><alert>"수정 성공"</alert></script>
                                 </button>
 
                                 <button type="reset" class="btn btn-primary col-md-offset-2">
