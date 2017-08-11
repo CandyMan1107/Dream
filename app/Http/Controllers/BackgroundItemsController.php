@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 
 use App\Item;
 use App\Background;
+use App\Tag;
 
 class BackgroundItemsController extends Controller
 {
@@ -67,6 +68,7 @@ class BackgroundItemsController extends Controller
         $item = new Item();
         $background = new Background();
         $imgUpLoad = new BackgroundItemsController();
+        $tag = new Tag();
 
         // session_start();
         $novel_id = $_COOKIE['novel_id'];
@@ -102,6 +104,13 @@ class BackgroundItemsController extends Controller
         $novel_background_data['novel_background'] = "items";
         $novel_background_data['background_id'] = $item_insert_id;
         $background->insertData($novel_background_data);
+
+        $tag_insert_data = array();
+        $tag_insert_data['page'] = "items";
+        $tag_insert_data['object_id'] = $item_insert_id;
+        $tag_insert_data['tag_name'] = $data['item_name'];
+        $tag_insert_data['tag_color'] = "00ff00";
+        $tag->insertTag($tag_insert_data);
 
         return redirect(route('things.index'));
     }

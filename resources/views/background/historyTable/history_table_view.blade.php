@@ -46,14 +46,14 @@
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">제목</label>
 							<div class="col-sm-10">
-							<input class="form-control" type="text" name="event_name" id="event_name" placeholder="사건 이름">
+								<input class="form-control" type="text" name="event_name" id="event_name" placeholder="사건 이름">
 							</div>
 						</div>
 						{{-- 사건 내용 등록 --}}
 						<div class="form-group form-group-lg">
 							<label class="col-sm-2 control-label" for="formGroupInputLarge">내용</label>
 							<div class="col-sm-10">
-							<textarea class="form-control" rows="3" name="event_content" id="event_content"></textarea>
+								<textarea class="form-control" rows="3" name="event_content" id="event_content"></textarea>
 							</div>
 						</div>
 						{{-- 사건 추가사항 추가 --}}

@@ -17,6 +17,7 @@ $(document).ready(function(){
                 $('.open_character_icon').remove();
                 $('.open_item_data_set').remove();
                 $('.open_list').remove();
+                $('.timetable_append_area').remove();
                 if( click_id == "characters") {
                     
                     character_append = "<div id='none_set_background'>"
@@ -95,7 +96,27 @@ $(document).ready(function(){
                     alert("23");
                 }
                 else if (click_id=="timetables"){
+                    // alert("23");
+                    
+                    let timetable_append = "<div class='timetable_append_area'>"
+                    timetable_append += "       <div id='timeline'>"
+                    timetable_append += "       </div>"
+                    timetable_append += "       <div id='timetable_icon'>"
+                    timetable_append += "       </div>"
+                    timetable_append += "   </div>"
 
+                    $('#none_set_open_background').append(timetable_append);
+                    
+                    let timetable_icon_list = "<nav aria-label='...'>"
+                    timetable_icon_list += "    <ul class='pager' id='timetableList'>"    
+                    for(let i = 0 ; i < data.length ; i++){
+                    timetable_icon_list += "        <li class='event_list draggable' id='" + i + "'><a href='#'>" + data[i]['event_name'] + "</a></li>"
+                    }
+                    timetable_icon_list += "    </ul>"
+                    timetable_icon_list += "</nav>"
+
+                    $('#timetable_icon').append(timetable_icon_list);
+                    ready(data);
                 }
                 $(function () {
                     $(".draggable").draggable({
@@ -118,6 +139,10 @@ $(document).ready(function(){
                             else if ( click_id == "items"){
                                 $('.open_item_data_set').remove();
                                 append_item_data($id,data);
+                            }
+                            else if ( click_id == "timetables") {
+                                $('.open_timetable_data_set').remove();
+                                append_timetable_data($id,data)
                             }
                             // console.log(data);
                         }
@@ -215,4 +240,40 @@ function append_item_data($id,data){
     item_data_append += "</div>"
 
     $('.set_open_background_data').append(item_data_append);
+}
+
+function append_timetable_data($id,data){
+    let timetable_data_append = "<div class='open_timetable_set'>"
+    timetable_data_append += "      <h3 id='name'>사건정보</h3>"
+    timetable_data_append += "      <div class='form-group form-group-lg'>"
+    timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>제목</label>"
+    timetable_data_append += "          <div class='col-sm-10'>"
+    timetable_data_append += "              <input class='form-control' type='text' name='event_name' id='event_name' placeholder='사건 이름'>"
+    timetable_data_append += "          </div>"
+    timetable_data_append += "      </div>"
+    timetable_data_append += "      <div class='form-group form-group-lg'>"
+    timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>내용</label>"
+    timetable_data_append += "          <div class='col-sm-10'>"
+    timetable_data_append += "              <textarea class='form-control' rows='3' name='event_content' id='event_content'></textarea>"
+    timetable_data_append += "          </div>"
+    timetable_data_append += "      </div>"
+    // 사건 기간
+    timetable_data_append += "      <div class='form-group form-group-lg'>"
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += ""
+    timetable_data_append += "</div>"
+
+    $('.set_open_background_data').append(timetable_data_append);
 }

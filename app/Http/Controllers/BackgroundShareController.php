@@ -191,15 +191,56 @@ class BackgroundShareController extends Controller
                     $none_open_background_data[$i]['end_day'] = $temp_data->end_days;
                     $none_open_background_data[$i]['others'] = $temp_data->others;
 
-                    $effect_data = $effect->get_effect_data_by_join($none_open_background_data[$i]['id']);
-                    var_dump($effect_data);
+                    $effect_data = $effect->get_effect_data($none_open_background_data[$i]['id']);
+                    // var_dump($effect_data);
                     // 끼친 영향 데이터 가져오기
                     $j = 0;
                     foreach($effect_data as $temp_effect_data) {
                         if($temp_effect_data->affect_table == "characters"){
-                            $none_open_background_data[$i][$j]['affect_table']= $temp_effect_data;
-
+                            $character = new Character();
+                            $character_effect_data = $character->get_affect_data($temp_effect_data->affect_id);
+                            
+                            foreach($character_effect_data as $temp_character_effect_data) {
+                                $none_open_background_data[$i][$j]['id']= $temp_effect_data->affect_id;
+                                $none_open_background_data[$i][$j]['img_src'] = $temp_character_effect_data->img_src;
+                                $none_open_background_data[$i][$j]['affect_content'] = $temp_effect_data->affect_content;
+                                $none_open_background_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
+                            }
                         }
+                        else if($temp_effect_data->affect_table == "items"){
+                            $item = new Item();
+                            $item_effect_data = $item->get_item_src($temp_effect_data->affect_id);
+
+                            foreach($item_effect_data as $temp_item_effect_data){
+                                $none_open_background_data[$i][$j]['id']= $temp_effect_data->affect_id;
+                                $none_open_background_data[$i][$j]['img_src'] = $temp_item_effect_data->img_src;
+                                $none_open_background_data[$i][$j]['affect_content'] = $temp_effect_data->affect_content;
+                                $none_open_background_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
+                            }
+                        }
+                        else if($temp_effect_data->affect_table == "relations"){
+                            $relation_list = new Relation_list();
+                            $relation_effect_data = $relation_list->get_relation_src($temp_effect_data->affect_id);
+
+                            foreach($relation_effect_data as $temp_relation_effect_data){
+                                $none_open_background_data[$i][$j]['id']= $temp_effect_data->affect_id;
+                                $none_open_background_data[$i][$j]['img_src'] = $temp_relation_effect_data->cover_src;
+                                $none_open_background_data[$i][$j]['affect_content'] = $temp_effect_data->affect_content;
+                                $none_open_background_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
+                            }
+                        }
+                        else if($temp_effect_data->affect_table == "maps"){
+                            $map = new Map();
+                            $map_effect_data = $map->get_map_src($temp_effect_data->affect_id);
+
+                            foreach($map_effect_data as $temp_map_effect_data){
+                                $none_open_background_data[$i][$j]['id']= $temp_effect_data->affect_id;
+                                $none_open_background_data[$i][$j]['img_src'] = $temp_map_effect_data->cover_src;
+                                $none_open_background_data[$i][$j]['affect_content'] = $temp_effect_data->affect_content;
+                                $none_open_background_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
+                            }
+                        }
+                        $j++;
                     }
                 }
                 $i++;
@@ -207,7 +248,7 @@ class BackgroundShareController extends Controller
         }
         // item 일 경우
         // var_dump($none_open_background_data);
-        // return $none_open_background_data;
+        return $none_open_background_data;
     }
 
     public function insert_open_background_data(Request $request){

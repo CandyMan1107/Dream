@@ -8,7 +8,7 @@ use DB;
 use File;
 use App\Map;
 use App\Background;
-
+use App\Tag;
 
 class MapController extends Controller
 {
@@ -121,6 +121,17 @@ class MapController extends Controller
             "fill_color"     => $textInfo->fill_color
         ]);
       }
+    
+        // JJH auto tag
+        // 2017.08.11
+        $tag = new Tag();
+
+        $tag_insert_data = array();
+        $tag_insert_data['page'] = "maps";
+        $tag_insert_data['object_id'] = $mapsId;
+        $tag_insert_data['tag_name'] = $title;
+        $tag_insert_data['tag_color'] = "f0f00f";
+        $tag->insertTag($tag_insert_data);
 
       // 소설 - 배경정보
       //session_start();

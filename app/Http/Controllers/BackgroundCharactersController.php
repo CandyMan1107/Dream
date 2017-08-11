@@ -9,6 +9,7 @@ use App\Character;
 use App\Item;
 use App\Ownership;
 use App\Background;
+use App\Tag;
 
 class BackgroundCharactersController extends Controller
 {
@@ -115,6 +116,7 @@ class BackgroundCharactersController extends Controller
         $character = new Character();
         $background = new Background();
         $imgUpLoad = new BackgroundCharactersController();
+        $tag = new Tag();
 
         // session_start();
         $novel_id = $_COOKIE['novel_id'];
@@ -149,6 +151,12 @@ class BackgroundCharactersController extends Controller
         $novel_background_data['background_id'] = $character_insert_id;
         $background->insertData($novel_background_data);
 
+        $tag_insert_data = array();
+        $tag_insert_data['page'] = "characters";
+        $tag_insert_data['object_id'] = $character_insert_id;
+        $tag_insert_data['tag_name'] = $data['character_name'];
+        $tag_insert_data['tag_color'] = "ff0000";
+        $tag->insertTag($tag_insert_data);
         return redirect(route('character.index'));
     }
 

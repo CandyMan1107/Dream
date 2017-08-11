@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Input;
 use App\Background;
+use App\Tag;
 
 class RelationController extends Controller
 {
@@ -99,6 +100,17 @@ class RelationController extends Controller
     $listId = $relListInfo->id;
     $createdAt = $relListInfo->created_at;
     $updatedAt = $relListInfo->updated_at;
+
+    // JJH auto tag
+    // 2017.08.11
+    $tag = new Tag();
+  
+    $tag_insert_data = array();
+    $tag_insert_data['page'] = "relations";
+    $tag_insert_data['object_id'] = $listId;
+    $tag_insert_data['tag_name'] = $title;
+    $tag_insert_data['tag_color'] = "0f0f00";
+    $tag->insertTag($tag_insert_data);
 
     // 관계 정보 등록
     if(count($relInfos) != 0){
