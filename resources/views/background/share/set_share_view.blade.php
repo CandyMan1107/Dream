@@ -3,6 +3,8 @@
 @section('content') 
 		@include('partials.mySubNavi')
 		@include('background.tag')
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript" src="/js/custom/history.js"></script>
 		<script type="text/javascript" src="/js/custom/share_click.js"></script>
 		
 		{{-- 설정 정보 호출 div   --}}

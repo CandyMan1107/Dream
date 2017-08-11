@@ -12,6 +12,7 @@ use App\Effect;
 use App\Map;
 use App\Background;
 use App\Relation_list;
+use App\Tag;
 
 class BackgroundHistoryTablesController extends Controller
 {
@@ -79,6 +80,7 @@ class BackgroundHistoryTablesController extends Controller
         $effect = new Effect();
         $background = new Background();
         $relation_list = new Relation_list();
+        $tag = new Tag();
         $refer_info = "";
 
         for($i= 0; $i < count($table['refer_info']); $i++){
@@ -124,6 +126,14 @@ class BackgroundHistoryTablesController extends Controller
         $novel_background_data['background_id'] = $table_id;
         $background->insertData($novel_background_data);
         // $table_id = 6;
+
+        $tag_insert_data = array();
+        $tag_insert_data['page'] = "timetables";
+        $tag_insert_data['object_id'] = $table_id;
+        $tag_insert_data['tag_name'] = $table['event_name'];
+        $tag_insert_data['tag_color'] = "00f0f0";
+        $tag->insertTag($tag_insert_data);
+
         // 관계 테이블에 데이터 저장
         $effect->insert_effect($table_id,$data);
         return redirect(route('historyTable.index'));
