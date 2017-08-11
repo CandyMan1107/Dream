@@ -10,6 +10,14 @@ i {
     cursor: pointer;
 }
 
+/**************************************
+nav-pref
+**************************************/
+a[name=nav-pref] {
+    text-decoration: none;
+    color: #002E40;
+    margin-left: 90%;
+}
 
 /**************************************
 AUTOPLAY BANNER
@@ -667,6 +675,10 @@ NOVEL COMMENT
     height: 100px !important;
 }
 
+.userComment-small>input {
+    height: 80px !important;
+}
+
 .commentReply>input {
     height: 60px !important;
 }
@@ -675,13 +687,13 @@ NOVEL COMMENT
 BLOG - BLOG TOP & SIDE MENU
 **************************************/
 #blog-top-menu {
-    background: burlywood;
+    /* background: burlywood; */
     height: 65px;
     padding-top: 20px;
 }
 
 #blog-side-menu {
-    background: beige;
+    /* background: beige; */
     width: 200px;
 }
 
@@ -690,7 +702,7 @@ BLOG - BLOG TOP & SIDE MENU
 }
 
 #blog-side-menu .user_profile {
-    border: 1px solid burlywood;
+    /* border: 1px solid burlywood; */
 }
 
 #blog-side-menu a {
@@ -705,16 +717,16 @@ BLOG - BLOG TOP & SIDE MENU
 }
 
 #blog-side-menu .user_novel_nav, .blog_menu_nav {
-    border: 1px solid burlywood;
+    /* border: 1px solid burlywood; */
 }
 
 #blog-side-menu .user_novel_nav, .blog_reader_menu_nav {
     margin-top: 10px;
-    border: 1px solid burlywood;
+    /* border: 1px solid burlywood; */
 }
 
 #blog-side-menu .blog_info_bar {
-    border: 1px solid burlywood;
+    /* border: 1px solid burlywood; */
 }
 
 #blog-side-menu .blog_info_bar .blog_follow_info div, .writer_novel_info div {
@@ -745,7 +757,7 @@ BLOG - BLOG MAIN
 #blog-main .blog_notice_list {
     height: 40px;
     /* background-color: red; */
-    border: 1px solid rosybrown;
+    /* border: 1px solid rosybrown; */
 }
 
 #blog-main .blog_notice_list a {
@@ -767,12 +779,12 @@ BLOG - BLOG MAIN
 
 #blog-main .blog_notice {
     padding-top: 30px;
-    border: 1px solid salmon;
+    /* border: 1px solid salmon; */
     /* height: 1485px; */
 }
 
 div[name=title_line] {
-    border-top: 1px solid black;
+    border-top: 1px solid rgba(149, 152, 154, .5);
 }
 
 #blog-main .board_title ul {
@@ -790,13 +802,13 @@ div[name=title_line] {
 }
 
 #blog-main .board_content {
-    min-height: 600px;
+    min-height: 450px;
 }
 
 #write-form {
     margin-left: 100px;
     height: 1485px;
-    border: 1px solid salmon;
+    /* border: 1px solid salmon; */
 }
 
 #post-category {

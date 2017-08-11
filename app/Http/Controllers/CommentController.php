@@ -17,6 +17,17 @@ class CommentController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return view('partials.comment')
+     */
+    public static function commentView()
+    {
+        //
+        return view('partials.comment');
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

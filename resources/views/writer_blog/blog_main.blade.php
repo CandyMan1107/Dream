@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @php
 	use App\Http\Controllers\BlogController;
+    use App\Http\Controllers\CommentController;
 @endphp
 @if ($data[0] === "Please create a blog.")
     @include('partials.mySubNavi')
@@ -66,7 +67,9 @@
                     {{-- BLOG MAIN ROW END --}}
 
 
-
+                @php
+                    echo CommentController::commentView();
+                @endphp
 
 
                 </div>

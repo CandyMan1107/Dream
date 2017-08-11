@@ -345,7 +345,11 @@ class BlogController extends Controller
             // (DataType : INT)
             $data[1] = $user->user_id;
             $data[2] = $user->blog_id;
+            //
+            $blog_id = $data[2];
+            
         }
+        $data[3] = $blog_id."&".$blog_owner_id;
 
         // print_r($data);
 

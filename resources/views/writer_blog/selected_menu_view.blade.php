@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @php
 	use App\Http\Controllers\BlogController;
+    use App\Http\Controllers\CommentController;
 @endphp
 @include('writer_blog.blogTopMenu')
 
@@ -48,8 +49,11 @@
                 {{-- BLOG MAIN ROW END --}}
 
 
-
-
+            @if ($data[0] !== "empty")
+                @php
+                    echo CommentController::commentView();
+                @endphp
+            @endif
 
             </div>
             {{-- BLOG MAIN SPACE END --}}

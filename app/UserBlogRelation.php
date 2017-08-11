@@ -37,6 +37,7 @@ class UserBlogRelation extends Model
     // user_blog_relations(TABLE) SELECT * user_id (DataType : INT)
     // JOIN users(TABLE)
     // @param $ownerId (DataType : STRING)
+    // @return $user_id, $blog_id (DataType : INT)
     public function checkUserId($ownerId) 
     {
         $userBlogRData = DB::table('user_blog_relations')

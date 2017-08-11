@@ -34,7 +34,7 @@
                     <div class="col-me-12">
                         @php
                             {{-- @param $blogId DataType INT   --}}
-                            echo CommunicationController::allCommunicationB($data[2])
+                             echo CommunicationController::allCommunicationB($data[3]) 
                         @endphp
                     </div>
 

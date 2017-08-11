@@ -19,4 +19,14 @@ class BlogCommunicationRelation extends Model
 
         DB::table('blog_communication_relations')->insert($dataSet);
     }
+
+    // @param $blog_id (DataType INT)
+    public function checkCommunityId($blogId) {
+        $community_id = DB::table('blog_communication_relations')
+                            ->select('communication_id')
+                            ->where('blog_id', '=', $blogId)
+                            ->get();
+
+        return $community_id;
+    }
 }
