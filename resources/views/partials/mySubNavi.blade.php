@@ -6,6 +6,7 @@
         <li role="presentation"><a href="#" class="sub">책갈피</a></li>
         <li role="presentation" id="write_novel"><a href="/write_novel/my_novel" class="sub">내작품</a></li>
         <li role="presentation"><a href="/yerriel/blog" class="sub">블로그</a></li>
+        <li role="presentation"><a href="/mypage" class="sub">내 정보</a></li>
         {{--  <li class="background" role="button" id="background"><a href="/background" class="sub">소설설정</a></li>  --}}
 </ul>
     

@@ -1,59 +1,43 @@
 @extends('layouts.master')
 @php
 	use App\Http\Controllers\BlogController;
+    use App\Http\Controllers\CommunicationController;
 @endphp
 @include('writer_blog.blogTopMenu')
 
 @section('content')
     {{-- 해당 블로그의 주인 user_id를 가지고 넘어가야하는데...   --}}
     @php
-        {{-- @param DataType STRING   --}}
-        echo BlogController::showBlogSideMenu($data['blog_owner_id']);   
+          echo BlogController::showBlogSideMenu($data['blog_owner_id']);   
     @endphp
     <div id="default-padding-mid"></div>
             {{-- BOARD WRITE FORM SPACE START --}}
             <div id="write-form" class="col-md-8">
-            @if (isset($data['community']))
-                <form action="{{ route('community.store') }}" method="POST" enctype="multipart/formr-data">
-            @else
-                <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/formr-data">
-            @endif
+                <form action="{{ route('communication.store') }}" method="POST" enctype="multipart/formr-data">
                 {{ csrf_field() }}
                     <div class="form-group">
-                        {{-- DataType STRING? 현재 글쓰고 있는 사람 id --}}
-                        <input type="hidden" value="jhm1107" name="writer_name" />
-                        {{-- DataType INT   --}}
                         <input type="hidden" value="{{$data['blog_id']}}" name="blog_id" />
-                        {{-- DataType STRING --}}
                         <input type="hidden" value="{{$data['blog_owner_id']}}" name="blog_owner_id" />
                         {{-- 현재 접속자 아이디를 따져서 메뉴 선택창 안보이게 하기 : 독자 게시판   --}}
                         <div class="row">
                             {{--  blog_menu_id  --}}
                             <div class="col-md-3">
-                                @if (isset($data['community']))
-                                    <p>독자 게시판</p>
-                                @else
-                                    <select name="blog_menu_id" id="post-category" class="form-control">
-                                        @php
-                                            echo BlogController::wirteFormMenuList($data['blog_id']);
-                                        @endphp
-                                    </select>
-                                @endif
+                                <select name="blog_menu_id" id="post-category" class="form-control">
+                                    @php
+                                        echo BlogController::wirteFormMenuList($data['blog_id']);
+                                    @endphp
+                                </select>
                             </div>
                             {{--  board_title  --}}
                             <div class="col-md-9">
                                 <input name="board_title" id="post-title" type="text" placeholder="포스트 제목을 입력하세요." />
                             </div> 
-                            @if (isset($data['community']))
-                                <div></div>
-                            @else
-                                {{-- is_notice --}}
-                                <div class="col-md-12">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="is_notice" id="notice-check"> 공지
-                                    </label>
-                                </div>
-                            @endif
+                            {{-- is_notice --}}
+                            <div class="col-md-12">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="is_notice" id="notice-check"> 공지
+                                </label>
+                            </div>
                             {{--  board_content  --}}
                             <div class="col-md-12">
                                 <textarea name="board_content" id="post-content" cols="101" rows="5" autofocus>

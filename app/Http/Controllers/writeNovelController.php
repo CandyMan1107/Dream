@@ -272,14 +272,16 @@ class writeNovelController extends Controller
       return $data;
     }
 
-    // 캐릭터 정보 호출부
-    // 소유사물 + 태그
+    // 태그 + 연관정보 호출부
+    // 1. 캐릭터
+    //    1) 소유사물
     public function callOwnItemsWithTag(Request $request){
       $bgId        = $request->input('bgId');
       $bgCase      = $request->input('bgCase');
 
       $bgData = DB::table("items")
       ->join("ownerships","items.id", "=", "ownerships.item_id")
+      ->where("ownerships.character_id", "=", $bgId)
       ->get();
 
       $bgDataIdArray = array();
@@ -294,6 +296,76 @@ class writeNovelController extends Controller
 
       $data = [
         "affect_info" => $bgData,
+        "tag_info"    => $tagData
+      ];
+
+      return $data;
+    }
+    //    2) 소속관계
+    public function callBelongRelationsWithTag(Request $request){
+      $bgId        = $request->input('bgId');
+      $bgCase      = $request->input('bgCase');
+
+
+      $listInfo = DB::table("relation_lists")
+      ->join("relation_in_list","relation_lists.id", "=", "relation_in_list.listnum")
+      ->join("relations", "relation_in_list.relnum", "=", "relations.relnum")
+      ->where("relations.source", "=", $bgId)
+      ->orWhere("relations.target", "=", $bgId)
+      ->get();
+
+      $listIdArray = array();
+      foreach($listInfo as $li){
+        array_push($listIdArray, $li->listnum);
+      }
+
+      $relInfo = DB::table("relations")
+      ->join("relation_in_list","relations.relnum", "=", "relation_in_list.relnum")
+      ->where("relations.source", "=", $bgId)
+      ->orWhere("relations.target", "=", $bgId)
+      ->whereIn("relation_in_list.listnum", $listIdArray)
+      ->get();
+
+      $chaInfo = DB::table("characters")->select()->get();
+
+      $tagData = DB::table("tags")
+      ->where("kind","=","relations")
+      ->whereIn("object_id", $listIdArray)
+      ->get();
+
+      $data = [
+        "list_info" => $listInfo,
+        "rel_info"  => $relInfo,
+        "cha_info"  => $chaInfo,
+        "tag_info"  => $tagData
+      ];
+
+      return $data;
+    }
+    //    3) 참여사건
+    public function callBelongTimetablesWithTag(Request $request){
+      $bgCase  = $request->input('bgCase');
+      $bgId    = $request->input('bgId');
+
+      $btData = DB::table("timetables")
+      ->join("effects", "timetables.id", "=", "effects.timetable_id")
+      ->join("characters", "effects.affect_id", "=", "characters.cha_id")
+      ->where("effects.affect_table", "=", "characters")
+      ->where("effects.affect_id","=", $bgId)
+      ->get();
+
+      $btIdArray = array();
+      foreach($btData as $bt){
+        array_push($btIdArray, $bt->timetable_id);
+      }
+
+      $tagData = DB::table("tags")
+      ->where("kind","=","timetables")
+      ->whereIn("object_id", $btIdArray)
+      ->get();
+
+      $data = [
+        "affect_info" => $btData,
         "tag_info"    => $tagData
       ];
 

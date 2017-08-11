@@ -629,6 +629,12 @@ fvcc<div class="default-padding"></div>
     margin-top: 5px;
     text-align: center;
   }
+  .rellist-info-div {
+    background-color:#EAEAEA;
+    margin: 0px;
+    padding:0px;
+    text-align: center;
+  }
 
   .cha-img-div {
     font-weight: bold;
@@ -644,6 +650,14 @@ fvcc<div class="default-padding"></div>
   .cha-effect-content {
     display:table-cell;
     vertical-align: middle;
+  }
+
+  .rel-effect-div{
+    padding:0px;
+    display:table;
+    text-align: center;
+    height:90px;
+    font-weight:bold;
   }
 
   #mouse-cursor-div {
@@ -863,7 +877,6 @@ fvcc<div class="default-padding"></div>
             },
             success: function (data) {
               data = data[0];
-              console.log("asdasd");
               console.log(data);
               var div = $(".background-content");
               // 캐릭터 정보 출력
@@ -1212,7 +1225,7 @@ fvcc<div class="default-padding"></div>
           },
           success: function (data) {
              data = data[0];
-             console.log("asd");
+
              console.log(data);
             var addEle = "";
             switch(bgCase){
@@ -1231,7 +1244,7 @@ fvcc<div class="default-padding"></div>
                 addEle += "    </span>";
                 addEle += "  </div>";
                 addEle += "</div>";
-                //addEle += "<div class=''>asd</div>";
+
               break;
               case "items":
               addEle += "<div class='basic-info-div pop-menu popChaInfo-menu'>";
@@ -1892,9 +1905,9 @@ fvcc<div class="default-padding"></div>
               addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='belong-timetables' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-4 window-attr-div'>참여사건</div>"
               addEle += "  </div>"
               addEle += "  <div class='col-md-12 attr-content-div'>"
-              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-own-items-div-" + data.background_id + "'></div>"
-              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-belong-relations-" + data.background_id + "'></div>"
-              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-belong-timetables-div-" + data.background_id + "'></div>"
+              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-own-items-div-" + bgCase + "-" + data.background_id + "'></div>"
+              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-belong-relations-div-" + bgCase + "-" + data.background_id + "'></div>"
+              addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-belong-timetables-div-" + bgCase + "-" + data.background_id + "'></div>"
               addEle += "  </div>"
               addEle += "</div>"
 
@@ -1937,7 +1950,7 @@ fvcc<div class="default-padding"></div>
             var sameEle = $(".attr-div-" + bgCase + "-" + timeTableId)
 
             console.log(".attr-" + attr + "-div-" + bgCase + "-" + timeTableId);
-
+            console.log(".attr-belong-relations-characters-1")
             // 각 대상별 다른 부분 ********************************************************
             if(!attrDiv.hasClass("hasCalled"))
               setCharacterAffectInfo(bgCase, timeTableId, attr, attrDiv);
@@ -1966,7 +1979,7 @@ fvcc<div class="default-padding"></div>
             }
 
 
-            function setCharacterAffectInfo(bgCase, bgId, attr, attrDiv){
+            function setCharacterAffectInfo(bgCase, bgId, attr, setDiv){
               switch(attr){
                 case "own-items" :
                   setOwnItemsInfo();
@@ -1975,14 +1988,13 @@ fvcc<div class="default-padding"></div>
                   setBelongRelationsInfo();
                   break;
                 case "belong-timetables" :
-                  setBelong-timetablesInfo();
+                  setBelongTimetablesInfo();
                   break;
               }
               function setOwnItemsInfo(){
                 $.ajax({
                     type: "get",
                     url: "/write_novel/call_own_items_with_tag",
-                    async: false,
                     data: {
                       "bgCase"  : bgCase,
                       "bgId"    : bgId
@@ -1994,20 +2006,218 @@ fvcc<div class="default-padding"></div>
 
                       var appendEle = "";
                       console.log(data);
-                      // appendEle = createOwnItemsElement(bgCase, bgData, tagData);
-                      // setDiv.append(appendEle);
-                      // setDiv.addClass("hasCalled");
-                      //
-                      // setTagBtnEvent();
-                      // setWinImgEvent();
+                      appendEle = createOwnItemsElement(bgCase, bgData, tagData);
+                      setDiv.append(appendEle);
+                      setDiv.addClass("hasCalled");
+
+                      setTagBtnEvent();
+                      setWinImgEvent();
                     },
                     error: function (error) {
                       alert("오류발생");
                     }
                 });
+                function createOwnItemsElement(bgCase, bgData, tagData){
+                  var addEle = "";
+                  // 이미지 루트 설정
+                  var imgRoot = "/img/background/itemImg/";
+
+                  // 엘리먼트 내용
+                  bgData.forEach(function(dt){
+                    var name      = dt.name;
+                    var img       = dt.img_src;
+                    var info      = dt.info;
+                    var bgId      = dt.item_id;
+                    var bgCase    = "items";
+                    var tagEle    = "";
+
+                    // 태그 엘리먼트 생성
+                    tagEle += "<select class='" + bgCase + "-" + bgId  + "-" +"select' style='width:60%; height:26px;'>";
+                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+                    tagData.forEach(function(td){
+                      if(td.object_id == bgId ){
+                        tagEle += "<option data-kind='" + td.kind + "' data-id='" + td.object_id + "' style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
+                      }
+                    })
+                    tagEle += "</select>";
+                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>적용</button>"
+
+
+                    console.log(dt);
+                    addEle += "<div class='col-md-12 cha-info-div'>"
+                    addEle += " <div class='col-md-6 cha-img-div'>"
+                    addEle += "   <img data-id='" + bgId + "' data-case='" + bgCase + "' class='window-img-circle img-circle img-things-size' src='"+  imgRoot + img +"'><br>" + name
+                    addEle += " </div>"
+                    addEle += " <div class='col-md-6 cha-effect-div'>"
+                    addEle += "    <div class='cha-effect-content'>" + info + tagEle + "</div>"
+                    addEle += " </div>"
+                    addEle += "</div>"
+                  });
+                  return addEle;
+                }
               }
-              function setBelongRelationsInfo(){}
-              function setBelongTimetablesInfo(){}
+              function setBelongRelationsInfo(){
+                $.ajax({
+                    type: "get",
+                    url: "/write_novel/call_belong_relations_with_tag",
+                    data: {
+                      "bgCase"  : bgCase,
+                      "bgId"    : bgId
+                    },
+                    success: function (data) {
+                      console.log(data);
+                      var listInfo  = data["list_info"];
+                      var relInfo   = data["rel_info"];
+                      var chaInfo   = data["cha_info"];
+                      var tagInfo   = data["tag_info"];
+
+                      var appendEle = "";
+                      console.log(data);
+                      appendEle = createBelongRelationsElement(listInfo, relInfo, chaInfo, tagInfo);
+                      setDiv.append(appendEle);
+                      setDiv.addClass("hasCalled");
+
+                      setTagBtnEvent();
+                      setWinImgEvent();
+                    },
+                    error: function (error) {
+                      alert("오류발생");
+                    }
+                });
+                function createBelongRelationsElement(listInfo, relInfo, chaInfo, tagData){
+                  var addEle = "";
+                  // 이미지 루트 설정
+                  var relImgRoot = "/img/background/relationImg/";
+                  var chaImgRoot = "/img/background/characterImg/";
+
+                  // 엘리먼트 내용
+                  listInfo.forEach(function(li){
+                    var title     = li.title;
+                    var img       = li.cover_src;
+                    var bgId      = li.listnum;
+                    var bgCase    = "relations";
+                    var tagEle    = "";
+
+                    // 태그 엘리먼트 생성
+                    tagEle += "<select class='" + bgCase + "-" + bgId  + "-" +"select' style='width:60%; height:26px;'>";
+                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+                    tagData.forEach(function(td){
+                      if(td.object_id == bgId){
+                        tagEle += "<option style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
+                      }
+                    })
+                    tagEle += "</select>";
+                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>적용</button>"
+
+                    addEle += "<div class='col-md-12 rellist-info-div'>"
+                    addEle += " <div class='col-md-6 cha-img-div'>"
+                    addEle += "   <img data-id='" + bgId + "' data-case='" + bgCase + "' class='window-img-circle img-circle img-things-size' src='"+  relImgRoot + img +"'><br><b>" + title + "</b>";
+                    addEle += " </div>"
+                    addEle += " <div class='col-md-6 cha-effect-div'>"
+                    addEle += "    <div class='cha-effect-content'>" + tagEle + "</div>"
+                    addEle += " </div>"
+                    addEle += "</div>"
+
+                    //console.log(dt);
+                    relInfo.forEach(function(ri){
+
+                      if(ri.listnum == bgId){
+                        var sourceData = getChaDataById(chaInfo, ri.source)
+                        var targetData = getChaDataById(chaInfo, ri.target)
+
+                        addEle += "<div class='col-md-12 cha-info-div'>"
+                        addEle += " <div class='col-md-4 cha-img-div'>"
+                        addEle += "   <img data-id='" + sourceData.cha_id + "' data-case='characters' class='window-img-circle img-circle img-things-size' src='"+  chaImgRoot + sourceData.img_src +"'><br>" + sourceData.name
+                        addEle += " </div>"
+                        addEle += " <div class='col-md-4 rel-effect-div'>"
+                        addEle += "    <div class='cha-effect-content'>" + ri.relationship + "</div>"
+                        addEle += " </div>"
+                        addEle += " <div class='col-md-4 cha-img-div'>"
+                        addEle += "   <img data-id='" + targetData.cha_id + "' data-case='characters' class='window-img-circle img-circle img-things-size' src='"+  chaImgRoot + targetData.img_src +"'><br>" + targetData.name
+                        addEle += " </div>"
+                        addEle += "</div>"
+                      }
+                    })
+
+                    // 아이디로 캐릭터 정보 추출
+                    function getChaDataById(chaInfo, chaId){
+                      for(var i=0; i < chaInfo.length; i++){
+                        if(chaInfo[i].cha_id == chaId)
+                          return chaInfo[i];
+                      }
+                      return false;
+                    }
+
+
+                  });
+                  return addEle;
+                }
+
+              }
+              function setBelongTimetablesInfo(){
+                $.ajax({
+                    type: "get",
+                    url: "/write_novel/call_belong_timetables_with_tag",
+                    data: {
+                      "bgCase"  : bgCase,
+                      "bgId"    : bgId
+                    },
+                    success: function (data) {
+                      console.log(data);
+
+                      var affectInfo  = data["affect_info"];
+                      var tagInfo     = data["tag_info"];
+
+                      var appendEle = "";
+                      console.log(data);
+                      appendEle = createBelongTimetablesElement(affectInfo, tagInfo);
+                      setDiv.append(appendEle);
+                      setDiv.addClass("hasCalled");
+
+                      setTagBtnEvent();
+                      setWinImgEvent();
+                    },
+                    error: function (error) {
+                      alert("오류발생");
+                    }
+                });
+                function createBelongTimetablesElement(affectInfo, tagInfo){
+                  var addEle = "";
+                  // 이미지 루트 설정
+                  var chaImgRoot = "/img/background/characterImg/";
+
+                  // 엘리먼트 내용
+                  affectInfo.forEach(function(ai){
+                    var eventTitle    = ai.event_names;
+                    var eventContent  = ai.eventContents;
+                    var effectContent = ai.affect_content;
+                    var bgId          = ai.timetable_id;
+                    var bgCase        = "timetables";
+                    var tagEle        = "";
+
+                    // 태그 엘리먼트 생성
+                    tagEle += "<select class='" + bgCase + "-" + bgId  + "-" +"select' style='width:60%; height:26px;'>";
+                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+                    tagInfo.forEach(function(td){
+                      if(td.object_id == bgId){
+                        tagEle += "<option style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
+                      }
+                    })
+                    tagEle += "</select>";
+                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>적용</button>"
+
+                    addEle += "<div class='col-md-12 cha-info-div'>"
+                    addEle += " <div class='col-md-6 cha-img-div'>"
+                    addEle += "   <i data-id='" + bgId + "' data-case='" + bgCase + "' class='window-img-circle img-circle img-things-size material-icons' style='background-color:#EAEAEA; font-size:65'>&#xE878;</i><br>" + eventTitle
+                    addEle += " </div>"
+                    addEle += " <div class='col-md-6 cha-effect-div'>"
+                    addEle += "    <div class='cha-effect-content'>" + effectContent + tagEle + "</div>"
+                    addEle += " </div>"
+                    addEle += "</div>"
+                  });
+                  return addEle;
+                }
+              }
             }
           })
         }
