@@ -46,7 +46,24 @@
                             @endif
                         </div>
                         {{-- BLOG NOTICE END --}}
-                        <div id="default-padding"></div>
+                        <div id="default-padding-big"></div>
+                        <div id="default-padding-mid"></div>
+
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+                        <div class="col-md-12">
+                            <h4><strong></strong></h4>
+                        </div>
+                        <canvas id="myChart" class="col-md-12" height="300"></canvas>
+
+                        <script src="/js/JHM-Custom/novel_chart.js"></script>
+
+
+
+
+
+
                         {{-- BLOG BOARD START (NOTICE) --}}
                         <div class="col-md-12 blog_notice">
                             @if ($data[0] == 0)
