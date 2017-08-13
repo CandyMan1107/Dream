@@ -318,6 +318,26 @@ class BlogController extends Controller
         return $data;
     }
 
+/*
+|--------------------------------------------------------------------------
+| BLOG SIDE MENU BAR - NOVEL LIST
+|--------------------------------------------------------------------------
+*/
+    /**
+     * Display the specified resource.
+     * Display the Boards of Blog.
+     * @param  string  $blog_owner_id
+     * @return \Illuminate\Http\Response
+     */
+    public static function showAllNovel($ownerId)
+    {
+        $blog_owner_id = $ownerId;
+
+        echo $blog_owner_id;
+
+        // return view('writer_blog.part.novel_list');
+    }
+
 
 
 /*
