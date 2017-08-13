@@ -10,7 +10,7 @@ $(document).ready(function(){
             type: "GET",
             url: get_background_url,
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 // character 의 경우
                 $('.open_character_data_set').remove();
                 $('.none_set_background').remove();
@@ -117,6 +117,41 @@ $(document).ready(function(){
 
                     $('#timetable_icon').append(timetable_icon_list);
                     ready(data);
+
+                    let get_open_timetable_url = 'share/get_open_timetable';
+                    $.ajax({
+                        type: "GET",
+                        url: get_open_timetable_url,
+                        success: function (data) {
+                            console.log(data);
+                            let open_timetable = "<div class='timetable_append_area'>"
+                            open_timetable += "       <div id='timeline2'>"
+                            open_timetable += "       </div>"
+                            open_timetable += "       <div id='timetable_icon2'>"
+                            open_timetable += "       </div>"
+                            open_timetable += "   </div>"
+                            $('#open_background').append(open_timetable);
+                            ready(data,2);
+                            let open_timetable_icon_list = "<nav aria-label='...'>"
+                            open_timetable_icon_list += "    <ul class='pager' id='timetableList'>"
+                            for (let i = 0; i < data.length; i++) {
+                                open_timetable_icon_list += "        <li class='event_list open_list' id='" + i + "'><a href='#'>" + data[i]['event_name'] + "</a></li>"
+                            }
+                            open_timetable_icon_list += "    </ul>"
+                            open_timetable_icon_list += "</nav>"
+
+                            $('#timetable_icon2').append(open_timetable_icon_list);
+                            $('.open_list').click(function () {
+                                $('.open_timetable_data_set').remove();
+                                $id = $(this).attr('id');
+                                // alert($id);
+                                append_timetable_data($id, data)
+                            });
+                        },
+                        error: function (request, status, error) {
+                            alert("code:" + request.status + "\n" + "error:" + error);
+                        }
+                    });
                 }
                 $(function () {
                     $(".draggable").draggable({
@@ -129,7 +164,7 @@ $(document).ready(function(){
                             $data = ui.draggable.data('previousId', $(this).attr('id'));
                             // 드롭한 데이터 id값
                             $id = $data.attr('id');
-                            console.log($id);
+                            // console.log($id);
                             // alert(click_id);
                             
                             if( click_id == "characters"){
@@ -243,37 +278,101 @@ function append_item_data($id,data){
 }
 
 function append_timetable_data($id,data){
-    let timetable_data_append = "<div class='open_timetable_set'>"
+    let timetable_data_append = "<div class='open_timetable_data_set'>"
     timetable_data_append += "      <h3 id='name'>사건정보</h3>"
+    timetable_data_append += "      <input type='hidden' name='kind' id='' value='timetables'>"
+    timetable_data_append += "      <input type='hidden' name='id' id='' value='" + data[$id]['id'] + "'>"
     timetable_data_append += "      <div class='form-group form-group-lg'>"
     timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>제목</label>"
     timetable_data_append += "          <div class='col-sm-10'>"
-    timetable_data_append += "              <input class='form-control' type='text' name='event_name' id='event_name' placeholder='사건 이름'>"
+    timetable_data_append += "              <input class='form-control' type='text' name='event_name' id='event_name' value='"+data[$id]['event_name']+"'>"
     timetable_data_append += "          </div>"
     timetable_data_append += "      </div>"
     timetable_data_append += "      <div class='form-group form-group-lg'>"
     timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>내용</label>"
     timetable_data_append += "          <div class='col-sm-10'>"
-    timetable_data_append += "              <textarea class='form-control' rows='3' name='event_content' id='event_content'></textarea>"
+    timetable_data_append += "              <textarea class='form-control' rows='3' name='event_content' id='event_content'>"+data[$id]['event_content']+"</textarea>"
     timetable_data_append += "          </div>"
     timetable_data_append += "      </div>"
     // 사건 기간
     timetable_data_append += "      <div class='form-group form-group-lg'>"
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += ""
-    timetable_data_append += "</div>"
+    timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>기간</label>"
+    timetable_data_append += "          <div class='col-xs-4'>"
+    timetable_data_append += "              <input type='text' name='start_day' id='start_day' class='form-control' value='"+data[$id]['start_day']+"'>"
+    timetable_data_append += "          </div>"
+    timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>~</label>"
+    timetable_data_append += "          <div class='col-xs-4'>"
+    timetable_data_append += "              <input type='text' name='end_day' id='end_day' class='form-control' value='"+data[$id]['end_day']+"'>"
+    timetable_data_append += "          </div>"
+    timetable_data_append += "      </div>"
+    timetable_data_append += "      <div id='timetable_id' value='timetable_value'></div>"
+    timetable_data_append += "      <div class='form-group form-group-lg'>"
+    timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>등장 인물</label>"
+    timetable_data_append += "          <div class='col-sm-10'>"
+    timetable_data_append += "              <div class='inner_characters'></div>"
+    timetable_data_append += "          </div>"
+    timetable_data_append += "      </div>"
+    timetable_data_append += "      <div class='form-group form-group-lg'>"
+    timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>등장 사물</label>"
+    timetable_data_append += "          <div class='col-sm-10'>"
+    timetable_data_append += "              <div class='inner_items'></div>"
+    timetable_data_append += "          </div>"
+    timetable_data_append += "      </div>"
+    timetable_data_append += "      <div class='form-group form-group-lg'>"
+    timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>배경 장소</label>"
+    timetable_data_append += "          <div class='col-sm-10'>"
+    timetable_data_append += "              <div class='inner_maps'></div>"
+    timetable_data_append += "          </div>"
+    timetable_data_append += "      </div>"
+    timetable_data_append += "      <div class='form-group form-group-lg'>"
+    timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>연관 관계</label>"
+    timetable_data_append += "          <div class='col-sm-10'>"
+    timetable_data_append += "              <div class='inner_relations'></div>"
+    timetable_data_append += "          </div>"
+    timetable_data_append += "      </div>"
+    timetable_data_append += "      <div class='form-group form-group-lg'>"
+    timetable_data_append += "          <label class='col-sm-2 control-label' for='formGroupInputLarge'>기타</label>"
+    timetable_data_append += "          <div class='col-sm-10'>"
+    timetable_data_append += "              <textarea class='form-control' id = 'other' name='other' rows='3'></textarea>"
+    timetable_data_append += "          </div>"
+    timetable_data_append += "      </div>"
+    timetable_data_append += "      <button type='submit' id='submit_history' class='btn btn-default'>등록</button>"
+    timetable_data_append += "  </div>"
 
     $('.set_open_background_data').append(timetable_data_append);
+
+    if(data[$id][0]) {
+        effect_character_append = ""
+        effect_item_append = ""
+        effect_map_append = ""
+        effect_relation_append = ""
+        for(let i = 0 ; i < data[$id]['effect_count'] ; i++ ){
+            if(data[$id][i]['affect_table'] == "characters"){
+                effect_character_append += "<img src='/img/background/characterImg/"+data[$id][i]['img_src']+"' alt='character image' class='img-circle img-things-size affect' style='margin : 17px'>"
+                effect_character_append += "<input type='text' class='form-control affect' id='' name='effect_character[]' style='width:70%; float:right; margin-top:25px' value='"+data[$id][i]['affect_content']+"'>"
+                effect_character_append += "<input type='hidden' class='affect_character' name='character_id[]' value='"+data[$id][i]['id']+"'>"
+            }
+            if(data[$id][i]['affect_table'] == "items"){
+                effect_item_append += "<img src='/img/background/itemImg/"+data[$id][i]['img_src']+"' alt='item image' class='img-circle img-things-size affect' style='margin : 17px'>"
+                effect_item_append += "<input type='text' class='form-control affect' id='' name='effect_item[]' style='width:70%; float: right; margin-top:25px' value='"+data[$id][i]['affect_content']+"'>"
+                effect_item_append += "<input type='hidden' class='affect_item' name='item_id[]' value='"+data[$id][i]['id']+"'>"
+            }
+            if(data[$id][i]['affect_table'] == "maps"){
+                effect_map_append += "<img src='/img/background/mapImg/mapCover/"+data[$id][i]['img_src']+"' alt='map image' class='img-circle img-things-size affect' style='margin : 17px'>"
+                effect_map_append += "<input type='text' class='form-control affect' id='' name='effect_map[]' style='width:70%; float:right; margin-top:25px' value='"+data[$id][i]['affect_content']+"'>"
+                effect_map_append += "<input type='hidden' class='affect_map' name='map_id[]' value='"+data[$id][i]['id']+"'>"
+            }
+            if(data[$id][i]['affect_table'] == "relations"){
+                effect_relation_append += "<img src='/img/background/relationImg/"+data[$id][i]['img_src']+"' alt='relation image' class='img-circle img-things-size affect' style='margin : 17px'>"
+                effect_relation_append += "<input type='text' class='form-control affect' id='' name='effect_relation[]' style='width:70%; float:right; margin-top:25px' value='"+data[$id][i]['affect_content']+"'>"
+                effect_relation_append += "<input type='hidden' class='affect_relation' name='relation_id[]' value='"+data[$id][i]['id']+"'>"
+            }
+        }
+        // console.log(data[$id]['effect_count']);
+        $('.inner_characters').append(effect_character_append);
+        $('.inner_items').append(effect_item_append);
+        $('.inner_maps').append(effect_map_append);
+        $('.inner_relations').append(effect_relation_append);
+    }
+    // console.log(data);
 }

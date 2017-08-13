@@ -15,6 +15,8 @@ use App\Map;
 use App\open_character;
 use App\open_ownership;
 use App\open_item;
+use App\open_timetable;
+use App\open_effect;
 
 class BackgroundShareController extends Controller
 {
@@ -242,6 +244,7 @@ class BackgroundShareController extends Controller
                         }
                         $j++;
                     }
+                    $none_open_background_data[$i]['effect_count'] = $j;
                 }
                 $i++;
             }
@@ -260,7 +263,9 @@ class BackgroundShareController extends Controller
         else if($data['kind']=="items"){
             $backgroundShareController->insert_open_item_data($data);
         }
-
+        else if($data['kind']=="timetables"){
+            $backgroundShareController->insert_open_timetable_data($data);
+        }
         return redirect('background/share');
     }
     public function insert_open_character_data($data){
@@ -359,6 +364,7 @@ class BackgroundShareController extends Controller
 
         $return_novel_open_data = array(array());
 
+        // join
         $novel_open_data = $novel_has_open_background->get_data_by_open_item($novel_id);
         $i = 0;
         // var_dump($novel_open_data);
@@ -369,6 +375,126 @@ class BackgroundShareController extends Controller
             $return_novel_open_data[$i]['category']= $temp_novel_open_data->category;
             $return_novel_open_data[$i]['img_src']= $temp_novel_open_data->img_src;
 
+            $i++;
+        }
+
+        return $return_novel_open_data;
+    }
+
+    public function insert_open_timetable_data($data){
+        $open_timetable = new open_timetable();
+        $open_effect = new open_effect();
+        $novel_has_open_background = new Novel_has_open_background();
+
+        $novel_id = $_COOKIE['novel_id'];
+        $novel_id = $_COOKIE['novel_id'];
+        $timetable_info = array();
+
+        $timetable_info['event_names'] = $data['event_name'];
+        $timetable_info['event_contents'] = $data['event_content'];
+        $timetable_info['start_days'] = $data['start_day'];
+        $timetable_info['end_days'] = $data['end_day'];
+        $timetable_info['others'] = $data['other'];
+
+        $open_timetable_insert_id = $open_timetable->insert_open_timetable($timetable_info);
+
+        // $open_timetable_insert_id = 1;
+        $open_effect_info = array();
+        if(isset($data['character_id'])){
+            $open_effect_info['characters']['id'] = $data['character_id'];
+            $open_effect_info['characters']['content'] = $data['effect_character'];
+        }
+        if(isset($table['item_id'])){
+            $open_effect_info['items']['id'] = $data['item_id'];
+            $open_effect_info['items']['content'] = $data['effect_item'];
+        }
+        // 차후 지도 정보 입력 시 연동
+        if(isset($table['map_id'])){
+            $open_effect_info['maps']['id'] = $data['map_id'];
+            $open_effect_info['maps']['content'] = $data['effect_map'];
+        }
+        if(isset($table['relation_id'])){
+            $open_effect_info['relations']['id'] = $data['relation_id'];
+            $open_effect_info['relations']['content'] = $data['effect_relation'];
+        }
+        $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info);
+        $novel_has_open_background->insert_open_relation($novel_id,"timetables",$open_timetable_insert_id,$data['id']);
+    }
+    public function get_open_timetable(){
+        $novel_id = $_COOKIE['novel_id'];
+
+        $novel_has_open_background = new Novel_has_open_background;
+        $open_effect = new open_effect();
+
+        // $open_character = new open_character;
+
+        $return_novel_open_data = array(array());
+
+        $novel_open_data = $novel_has_open_background->get_data_by_open_timetable($novel_id);
+        $i = 0;
+        // var_dump($novel_open_data);
+        foreach($novel_open_data as $temp_novel_open_data) {
+            $return_novel_open_data[$i]['id'] = $temp_novel_open_data->open_background_id;
+            $return_novel_open_data[$i]['event_name']= $temp_novel_open_data->event_names;
+            $return_novel_open_data[$i]['event_content']= $temp_novel_open_data->event_contents;
+            $return_novel_open_data[$i]['start_day']= $temp_novel_open_data->start_days;
+            $return_novel_open_data[$i]['end_day']= $temp_novel_open_data->end_days;
+            $return_novel_open_data[$i]['other']= $temp_novel_open_data->others;
+
+            
+            // var_dump($return_novel_open_data);
+            $effect_data = $open_effect->get_open_effect_data($return_novel_open_data[$i]['id']);
+            
+            // 끼친 영향 데이터 가져오기
+            $j = 0;
+            foreach($effect_data as $temp_effect_data) {
+                if($temp_effect_data->affect_table == "characters"){
+                    $character = new Character();
+                    $character_effect_data = $character->get_affect_data($temp_effect_data->affect_id);
+                    
+                    foreach($character_effect_data as $temp_character_effect_data) {
+                        $return_novel_open_data[$i][$j]['id']= $temp_effect_data->affect_id;
+                        $return_novel_open_data[$i][$j]['img_src'] = $temp_character_effect_data->img_src;
+                        $return_novel_open_data[$i][$j]['affect_content'] = $temp_effect_data->affect_content;
+                        $return_novel_open_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
+                    }
+                }
+                else if($temp_effect_data->affect_table == "items"){
+                    $item = new Item();
+                    $item_effect_data = $item->get_item_src($temp_effect_data->affect_id);
+
+                    foreach($item_effect_data as $temp_item_effect_data){
+                        $return_novel_open_data[$i][$j]['id']= $temp_effect_data->affect_id;
+                        $return_novel_open_data[$i][$j]['img_src'] = $temp_item_effect_data->img_src;
+                        $return_novel_open_data[$i][$j]['affect_content'] = $temp_effect_data->affect_content;
+                        $return_novel_open_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
+                    }
+                }
+                else if($temp_effect_data->affect_table == "relations"){
+                    $relation_list = new Relation_list();
+                    $relation_effect_data = $relation_list->get_relation_src($temp_effect_data->affect_id);
+
+                    foreach($relation_effect_data as $temp_relation_effect_data){
+                        $return_novel_open_data[$i][$j]['id']= $temp_effect_data->affect_id;
+                        $return_novel_open_data[$i][$j]['img_src'] = $temp_relation_effect_data->cover_src;
+                        $return_novel_open_data[$i][$j]['affect_content'] = $temp_effect_data->affect_content;
+                        $return_novel_open_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
+                    }
+                }
+                else if($temp_effect_data->affect_table == "maps"){
+                    $map = new Map();
+                    $map_effect_data = $map->get_map_src($temp_effect_data->affect_id);
+
+                    foreach($map_effect_data as $temp_map_effect_data){
+                        $return_novel_open_data[$i][$j]['id']= $temp_effect_data->affect_id;
+                        $return_novel_open_data[$i][$j]['img_src'] = $temp_map_effect_data->cover_src;
+                        $return_novel_open_data[$i][$j]['affect_content'] = $temp_effect_data->affect_content;
+                        $return_novel_open_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
+                    }
+                }
+                $j++;
+            }
+            $return_novel_open_data[$i]['effect_count'] = $j;
             $i++;
         }
 
