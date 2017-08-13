@@ -62,7 +62,7 @@ $(function () {
 
                         append_data += "    </div>";
 
-                        append_data += "    <div name='title-line'></div>";
+                        append_data += "    <div name='title-line' style='border-top: 1px solid rgba(149, 152, 154, .5);'></div>";
 
                         append_data += "    <div class='board_content'>";
                         append_data += "        <div id='default-padding-big'></div>";

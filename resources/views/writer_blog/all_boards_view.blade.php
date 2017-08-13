@@ -18,7 +18,7 @@
             </li>
             <li class="board_timestamp">
                 <small>{!! $data->created_at !!}</small>
-            </li> 
+            </li>
         </ul>
         
     </div>

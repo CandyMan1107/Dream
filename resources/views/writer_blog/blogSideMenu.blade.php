@@ -49,7 +49,7 @@
                     </a>
                 </div>
             </div>
-            <div id="default-padding-mid-1"></div>
+            <hr />
             {{-- BLOG MENU NAV --}}
             <div class="user_novel_nav">
                 <strong>USER 의 소설</strong>
@@ -71,12 +71,13 @@
                     @endphp
                 @endif
             </div>
+            <hr />
             <div class="blog_reader_menu_nav">
                 <strong>
                     <a href="/{{$data[0]['blog_owner_id']}}/blog/community">독자 게시판</a>
                 </strong>
             </div>
-            <div id="default-padding-mid"></div>
+            <hr />
             {{-- BLOG INFO BAR --}}
             <div class="blog_info_bar">
                 <strong>활동정보</strong>

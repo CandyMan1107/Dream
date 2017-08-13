@@ -45,7 +45,8 @@
                                 <input name="board_title" id="post-title" type="text" placeholder="포스트 제목을 입력하세요." />
                             </div> 
                             @if (isset($data['community']))
-                                <div></div>
+                                {{-- DataType INT --}}
+                                <input type="hidden" value="{{ $data['blogOwnerId'] }}" name="blogOwnerId" />
                             @else
                                 {{-- is_notice --}}
                                 <div class="col-md-12">

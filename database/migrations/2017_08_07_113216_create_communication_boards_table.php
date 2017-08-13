@@ -16,8 +16,8 @@ class CreateCommunicationBoardsTable extends Migration
         //
         Schema::create('communication_boards', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->mediumText('content');
+            $table->string('board_title');
+            $table->mediumText('board_content');
             $table->string('writer_name');
             // $table->integer('hit')->default(0);
             // $table->integer('like')->default(0);
