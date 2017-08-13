@@ -17,6 +17,8 @@ use App\open_ownership;
 use App\open_item;
 use App\open_timetable;
 use App\open_effect;
+use App\open_relation_list;
+use App\open_map;
 
 class BackgroundShareController extends Controller
 {
@@ -75,6 +77,7 @@ class BackgroundShareController extends Controller
         $background = new Background;
         $open_character = new open_character();
         $open_ownership = new open_ownership();
+        // $open_relation_list = new open_relation_list;
         $novel_id = $_COOKIE['novel_id'];
 
         $set_open_background_id = array();
@@ -164,18 +167,30 @@ class BackgroundShareController extends Controller
         else if($kind=="relations"){
             $relation_list = new Relation_list();
             $i= 0;
-            // foreach ($none_open_background as $temp_none_open_background){
-            //     $temp_none_open_background_data = $item->none_set_open_background($temp_none_open_background->background_id);
+            foreach ($none_open_background as $temp_none_open_background){
+                $temp_none_open_background_data = $relation_list->none_set_open_background($temp_none_open_background->background_id);
 
-            //     foreach($temp_none_open_background_data as $temp_data){
-            //         $none_open_background_data[$i]['id'] = $temp_data->id;
-            //         $none_open_background_data[$i]['name'] = $temp_data->name;
-            //         $none_open_background_data[$i]['info'] = $temp_data->info;
-            //         $none_open_background_data[$i]['category'] = $temp_data->category;
-            //         $none_open_background_data[$i]['img_src'] = $temp_data->img_src;
-            //     }
-            //     $i++;
-            // }
+                foreach($temp_none_open_background_data as $temp_data){
+                    $none_open_background_data[$i]['id'] = $temp_data->id;
+                    $none_open_background_data[$i]['title'] = $temp_data->title;
+                    $none_open_background_data[$i]['cover_src'] = $temp_data->cover_src;
+                }
+                $i++;
+            }
+        }
+        else if($kind=="maps"){
+            $map = new Map();
+            $i= 0;
+            foreach ($none_open_background as $temp_none_open_background){
+                $temp_none_open_background_data = $map->none_set_open_background($temp_none_open_background->background_id);
+
+                foreach($temp_none_open_background_data as $temp_data){
+                    $none_open_background_data[$i]['id'] = $temp_data->id;
+                    $none_open_background_data[$i]['title'] = $temp_data->title;
+                    $none_open_background_data[$i]['cover_src'] = $temp_data->cover_src;
+                }
+                $i++;
+            }
         }
         else if($kind=="timetables"){
             $timetable = new Timetable();
@@ -265,6 +280,12 @@ class BackgroundShareController extends Controller
         }
         else if($data['kind']=="timetables"){
             $backgroundShareController->insert_open_timetable_data($data);
+        }
+        else if($data['kind']=="relations"){
+            $backgroundShareController->insert_open_relation_data($data);
+        }
+        else if($data['kind']=="maps"){
+            $backgroundShareController->insert_open_map_data($data);
         }
         return redirect('background/share');
     }
@@ -381,12 +402,87 @@ class BackgroundShareController extends Controller
         return $return_novel_open_data;
     }
 
+    public function insert_open_relation_data($data){
+        $open_relation_list =  new open_relation_list();
+        $novel_has_open_background = new Novel_has_open_background();
+
+        $novel_id = $_COOKIE['novel_id'];
+        $relation_info = array();
+
+        $relation_info['cover_src'] = $data['cover_src'];
+        $relation_info['title'] = $data['relation_title'];
+
+        $open_relation_id = $open_relation_list->insert_open_relation($relation_info);
+        // $open_relation_id = 1;
+        $novel_has_open_background->insert_open_relation($novel_id,"relations",$open_relation_id,$data['id']);
+    }
+
+    public function get_open_relation(){
+        $novel_id = $_COOKIE['novel_id'];
+
+        $novel_has_open_background = new Novel_has_open_background;
+        // $open_character = new open_character;
+
+        $return_novel_open_data = array(array());
+
+        // join
+        $novel_open_data = $novel_has_open_background->get_data_by_open_relation($novel_id);
+        $i = 0;
+        // var_dump($novel_open_data);
+        foreach($novel_open_data as $temp_novel_open_data) {
+            $return_novel_open_data[$i]['id'] = $temp_novel_open_data->open_background_id;
+            $return_novel_open_data[$i]['title']= $temp_novel_open_data->title;
+            $return_novel_open_data[$i]['cover_src']= $temp_novel_open_data->cover_src;
+
+            $i++;
+        }
+
+        return $return_novel_open_data;
+    }
+
+    public function insert_open_map_data($data){
+        $open_map =  new open_map();
+        $novel_has_open_background = new Novel_has_open_background();
+
+        $novel_id = $_COOKIE['novel_id'];
+        $map_info = array();
+
+        $map_info['cover_src'] = $data['cover_src'];
+        $map_info['title'] = $data['map_title'];
+
+        $open_map_id = $open_map->insert_open_map($map_info);
+        // $open_relation_id = 1;
+        $novel_has_open_background->insert_open_relation($novel_id,"maps",$open_map_id,$data['id']);
+    }
+
+    public function get_open_map(){
+        $novel_id = $_COOKIE['novel_id'];
+
+        $novel_has_open_background = new Novel_has_open_background;
+        // $open_character = new open_character;
+
+        $return_novel_open_data = array(array());
+
+        // join
+        $novel_open_data = $novel_has_open_background->get_data_by_open_map($novel_id);
+        $i = 0;
+        // var_dump($novel_open_data);
+        foreach($novel_open_data as $temp_novel_open_data) {
+            $return_novel_open_data[$i]['id'] = $temp_novel_open_data->open_background_id;
+            $return_novel_open_data[$i]['title']= $temp_novel_open_data->title;
+            $return_novel_open_data[$i]['cover_src']= $temp_novel_open_data->cover_src;
+
+            $i++;
+        }
+
+        return $return_novel_open_data;
+    }
+
     public function insert_open_timetable_data($data){
         $open_timetable = new open_timetable();
         $open_effect = new open_effect();
         $novel_has_open_background = new Novel_has_open_background();
 
-        $novel_id = $_COOKIE['novel_id'];
         $novel_id = $_COOKIE['novel_id'];
         $timetable_info = array();
 

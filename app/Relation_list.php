@@ -31,4 +31,12 @@ class Relation_list extends Model
         // var_dump($relation_id);
         return $relation_src;
     }
+
+    public function none_set_open_background($id) {
+        $data = DB::table('relation_lists')
+                ->where('relation_lists.id','=',$id)
+                ->get();
+        // var_dump($id);
+        return $data;
+    }
 }

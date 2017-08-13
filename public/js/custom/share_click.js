@@ -18,6 +18,12 @@ $(document).ready(function(){
                 $('.open_item_data_set').remove();
                 $('.open_list').remove();
                 $('.timetable_append_area').remove();
+                $('.relation_append_area').remove();
+                $('.map_append_area').remove();
+                $('.open_item_data_set').remove();
+                $('.open_relation_data_set').remove();
+                $('.open_map_data_set').remove();
+
                 if( click_id == "characters") {
                     
                     character_append = "<div id='none_set_background'>"
@@ -93,7 +99,72 @@ $(document).ready(function(){
                     });
                 }
                 else if(click_id=="relations"){
-                    alert("23");
+                    relation_append = "<div id='none_set_background'>"
+                    for (let i = 0; i < data.length; i++) {
+                        relation_append += "<img src='/img/background/relationImg/"+data[i]['cover_src']+"' alt='relation image' class='img-rounded relation_list event_list draggable' id='"+i+"' name='relation_list' style='width : 200px; height : 150px; margin : 15px'>"
+                    }
+                    relation_append += "</div>"
+
+                    $('#none_set_open_background').append(relation_append);
+                    
+                    let get_open_relation_url = 'share/get_open_relation';
+                    $.ajax({
+                        type: "GET",
+                        url: get_open_relation_url,
+                        success: function (data) {
+                            console.log(data);
+                            let open_relation = "<div class='open_relation_icon'>"
+                            for (let i = 0; i < data.length; i++) {
+                                open_relation += "<img src='/img/background/relationImg/"+data[i]['cover_src']+"' alt='relation image' class='img-rounded relation_list event_list open_list' id='"+i+"' name='relation_list' style='width : 200px; height : 150px; margin : 15px'>"
+                            }
+                            open_relation += "</div>"
+                            $('#open_background').append(open_relation);
+
+                            $('.open_list').click(function () {
+                                $('.open_relation_data_set').remove();
+                                $id = $(this).attr('id');
+                                // alert($id);
+                                append_relation_data($id, data)
+                            });
+                        },
+                        error: function (request, status, error) {
+                            alert("code:" + request.status + "\n" + "error:" + error);
+                        }
+                    });
+                }
+                else if(click_id=="maps"){
+                    map_append = "<div id='none_set_background'>"
+                    for (let i = 0; i < data.length; i++) {
+                        map_append += "<img src='/img/background/mapImg/mapCover/"+data[i]['cover_src']+"' alt='map image' class='img-rounded map_list event_list draggable' id='"+i+"' name='map_list' style='width : 200px; height : 150px; margin : 15px'>"
+                    }
+                    map_append += "</div>"
+
+                    $('#none_set_open_background').append(map_append);
+                    
+                    let get_open_map_url = 'share/get_open_map';
+                    $.ajax({
+                        type: "GET",
+                        url: get_open_map_url,
+                        success: function (data) {
+                            console.log(data);
+                            let open_map = "<div class='open_map_icon'>"
+                            for (let i = 0; i < data.length; i++) {
+                                open_map += "<img src='/img/background/mapImg/mapCover/"+data[i]['cover_src']+"' alt='map image' class='img-rounded map_list event_list open_list' id='"+i+"' name='map_list' style='width : 200px; height : 150px; margin : 15px'>"
+                            }
+                            open_map += "</div>"
+                            $('#open_background').append(open_map);
+
+                            $('.open_list').click(function () {
+                                $('.open_map_data_set').remove();
+                                $id = $(this).attr('id');
+                                // alert($id);
+                                append_map_data($id, data)
+                            });
+                        },
+                        error: function (request, status, error) {
+                            alert("code:" + request.status + "\n" + "error:" + error);
+                        }
+                    });
                 }
                 else if (click_id=="timetables"){
                     // alert("23");
@@ -178,6 +249,14 @@ $(document).ready(function(){
                             else if ( click_id == "timetables") {
                                 $('.open_timetable_data_set').remove();
                                 append_timetable_data($id,data)
+                            }
+                            else if ( click_id == "relations"){
+                                $('.open_relation_data_set').remove();
+                                append_relation_data($id, data)
+                            }
+                            else if ( click_id == "maps"){
+                                $('.open_map_data_set').remove();
+                                append_map_data($id, data)
                             }
                             // console.log(data);
                         }
@@ -276,7 +355,30 @@ function append_item_data($id,data){
 
     $('.set_open_background_data').append(item_data_append);
 }
+function append_relation_data($id,data) {
+    let relation_data_append = "<div class='open_relation_data_set'>"
+    relation_data_append += "   <input type='hidden' name='kind' id='' value='relations'>"
+    relation_data_append += "   <input type='hidden' name='cover_src' id='cover_src' value='" +data[$id]['cover_src']+ "'>"
+    relation_data_append += "   <input type='hidden' name='id' id='' value='"+data[$id]['id']+"'>"
+    relation_data_append += "   <img src='/img/background/relationImg/"+data[$id]['cover_src']+"' alt='relation image' class='img-thumbnail relation_list event_list ' id='"+$id+"' name='relation_list' style='width:50vw; height:50vh; border: 3px solid grey; margin : 15px'>"
+    relation_data_append += "   <textarea class='form-control' rows='5' id='relation_title' name='relation_title' style='margin : 15px'>"+data[$id]['title']+"</textarea>"
+    relation_data_append += "   <button type='submit' class='btn btn-default'>등록</button>"
+    relation_data_append += "</div>"
 
+    $('.set_open_background_data').append(relation_data_append);
+}
+function append_map_data($id,data) {
+    let relation_data_append = "<div class='open_map_data_set'>"
+    relation_data_append += "   <input type='hidden' name='kind' id='' value='maps'>"
+    relation_data_append += "   <input type='hidden' name='cover_src' id='cover_src' value='" +data[$id]['cover_src']+ "'>"
+    relation_data_append += "   <input type='hidden' name='id' id='' value='"+data[$id]['id']+"'>"
+    relation_data_append += "   <img src='/img/background/mapImg/mapCover/"+data[$id]['cover_src']+"' alt='map image' class='img-thumbnail map_list event_list ' id='"+$id+"' name='map_list' style='width:50vw; height:50vh; border: 3px solid grey; margin : 15px'>"
+    relation_data_append += "   <textarea class='form-control' rows='5' id='map_title' name='map_title' style='margin : 15px'>"+data[$id]['title']+"</textarea>"
+    relation_data_append += "   <button type='submit' class='btn btn-default'>등록</button>"
+    relation_data_append += "</div>"
+
+    $('.set_open_background_data').append(relation_data_append);
+}
 function append_timetable_data($id,data){
     let timetable_data_append = "<div class='open_timetable_data_set'>"
     timetable_data_append += "      <h3 id='name'>사건정보</h3>"
