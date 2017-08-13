@@ -116,6 +116,12 @@ Route::get('/background/share/get_open_character','BackgroundShareController@get
 
 Route::get('/background/share/get_open_item','BackgroundShareController@get_open_item');
 
+Route::get('/background/share/get_open_timetable','BackgroundShareController@get_open_timetable');
+
+Route::get('/background/share/get_open_relation','BackgroundShareController@get_open_relation');
+
+Route::get('/background/share/get_open_map','BackgroundShareController@get_open_map');
+
 Route::post('/background/share/insert_open_background','BackgroundShareController@insert_open_background_data');
 
 Route::resource('/background/share','BackgroundShareController');

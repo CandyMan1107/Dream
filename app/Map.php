@@ -22,4 +22,12 @@ class Map extends Model
 
         return $map_src;
     }
+
+    public function none_set_open_background($id) {
+        $data = DB::table('maps')
+                ->where('maps.id','=',$id)
+                ->get();
+        // var_dump($id);
+        return $data;
+    }
 }
