@@ -48,14 +48,14 @@ class Episode extends Model
         return $episodeData;
     }
 
-    // TABLE : novel_episodes SELECT // JOIN TABLE : novel_backgrounds
+    // TABLE : novel_episodes SELECT // JOIN TABLE : novel_has_open_backgrounds
     public function dataJoinBackground($id) {
 
         $episodeData = DB::table('novel_episodes')
-            ->join('novel_backgrounds', 'novel_episodes.belong_to_novel', '=', 'novel_backgrounds.belong_to_novel')
-            ->select('novel_episodes.belong_to_novel', 'novel_backgrounds.background_id')
+            ->join('novel_has_open_backgrounds', 'novel_episodes.belong_to_novel', '=', 'novel_has_open_backgrounds.novel_id')
+            ->select('novel_episodes.belong_to_novel', 'novel_has_open_backgrounds.background_id')
             ->where('novel_episodes.belong_to_novel', '=', $id)
-            ->where('novel_backgrounds.belong_to_novel', '=', $id)
+            ->where('novel_has_open_backgrounds.novel_id', '=', $id)
             ->get();
 
         return $episodeData;
