@@ -2,32 +2,34 @@ var event_id = 0;
 
 function character_event(data){
     $(document).ready(function(){  
-        $("img[name=character_icon]").each(function(){
+        $("img[name=character_icon]").each(function(e,i){
             $(this).click(function(){
                 // .selected border : 2px solid red
+                
                 if(!$(this).hasClass("selected")){
                     $(this).addClass("selected");
                    
                     $(this).siblings().removeClass("selected");
                 }
-                event_id = $(this).attr("id")-1;
+                event_id = $(this).attr("id");
+                console.log(event_id);
                 $('.refer_info').remove();
                 $('#name').text("캐릭터 정보");
-                $('#character_id').val(data[event_id]['id']);
-                $('#character_name').val(data[event_id]['name']);
-                if(data[event_id]['refer_info'].length>1){
+                $('#character_id').val(data[e]['id']);
+                $('#character_name').val(data[e]['name']);
+                if(data[e]['refer_info'].e>1){
                     // alert(data[event_id]['refer_info'][1]);
-                    for( var i = 0; data[event_id]['refer_info'].length > i ; i++){
+                    for( var i = 0; data[e]['refer_info'].length > i ; i++){
                         // alert(data[event_id]['refer_info'][i]);
-                        $('.refer_info_div').append('<input type="text" class="form-control refer_info" name="refer_info[]" id='+i+' value="'+data[event_id]['refer_info'][i]+'">');
+                        $('.refer_info_div').append('<input type="text" class="form-control refer_info" name="refer_info[]" id='+i+' value="'+data[e]['refer_info'][i]+'">');
                     }
                 }
                 else {
-                    $('.refer_info_div').append('<input type="text" class="form-control refer_info" name="refer_info[]" id='+i+' value="'+data[event_id]['refer_info']+'">');
+                    $('.refer_info_div').append('<input type="text" class="form-control refer_info" name="refer_info[]" id='+i+' value="'+data[e]['refer_info']+'">');
                 }
-                $('#character_content').val(data[event_id]['info']);
-                $('#age').val(data[event_id]['age']);
-                $('#gender').val(data[event_id]['gender']);
+                $('#character_content').val(data[e]['info']);
+                $('#age').val(data[e]['age']);
+                $('#gender').val(data[e]['gender']);
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -37,7 +39,7 @@ function character_event(data){
                     type: "POST",
                     url : "character/ownership_icon",
                     data : { 
-                            character_id : data[event_id]['id'] 
+                            character_id : data[e]['id'] 
                         },
                     success:function(data){
                         var ownership_item = data[0]["item_id"].split("+");
