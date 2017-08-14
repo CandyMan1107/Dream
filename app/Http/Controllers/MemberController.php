@@ -43,6 +43,10 @@ class MemberController extends Controller
 
     // 회원가입
     public function register(Request $req) {
+        $user_id = $req->input('user_id');
+        $name = $req->input('name');
+        $email = $req->input('email');
+
         DB::table('users')->insert(
             [
                 'user_id' => $req->get('user_id'),
@@ -53,6 +57,10 @@ class MemberController extends Controller
                 'updated_at' => date('Y-m-d H:i:s')
             ]
         );
+
+        Session::put('user_id', $user_id, 'name', $name, 'email', $email);
+        Session::get('user_id', $user_id);
+        
         return redirect('/');
     }
 
