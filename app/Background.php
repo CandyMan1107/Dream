@@ -84,4 +84,19 @@ class Background extends Model
         
         return $data;
     }
+
+    // JJH 2017.08.14
+    // TABLE : novel_backgrounds INSERT
+    public function insertData($table) {
+        $backgroundData = [];
+        $backgroundData = [
+            'belong_to_novel' => $table['belong_to_novel'], // 소설아이디
+            'novel_background' => $table['novel_background'],   
+            // 배경설정종류 테이블명 : characters, items, relations, timetables, maps
+            'background_id' => $table['background_id'] // 각 배경 설정 정보 요소의 ID
+        ];
+
+        DB::table('novel_backgrounds')->insert($backgroundData);
+    }
+
 }

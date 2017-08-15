@@ -207,6 +207,7 @@ fvcc<div class="default-padding"></div>
       padding: 0;
       padding-bottom: 10px;
       height:1000px;
+      font-size:20px;
     }
 
 
@@ -571,7 +572,6 @@ fvcc<div class="default-padding"></div>
   /* 사건 테이블 css*/
   .table-div{
     padding:0px;
-
     overflow-y: scroll;
   }
   .timetable-info-table {
@@ -616,7 +616,7 @@ fvcc<div class="default-padding"></div>
   .attr-content-div {
     word-break:break-all;
     padding:0px;
-    max-height:100px;
+    max-height:300px;
     overflow-y: scroll;
   }
 
@@ -1672,7 +1672,7 @@ fvcc<div class="default-padding"></div>
         curEle.offset({top:winY, left:winX});
         return false;
       } else {
-        var eleStr = "<div id='" + winId + "' class='"+ winCl +"'></div>";
+        var eleStr = "<div id='" + winId + "' class='draggable-window "+ winCl +"'></div>";
         var appendedEle = $(eleStr).appendTo("body")
                  .css({top: winY + "px", left: winX + "px"})
                  .css('z-index', ++zindex)
@@ -1684,6 +1684,13 @@ fvcc<div class="default-padding"></div>
         appendedEle.draggable({handle:'.window-header, .table-div, .timetable-window-attr-div'});
         appendedEle.on('mousedown', function(){
           $(this).css("z-index", ++zindex);
+        })
+        appendedEle.resizable({
+          resize:function(event,ui){
+            console.log(event);
+            console.log(ui);
+            console.log(ui.originalSize);
+          }
         })
         return true;
       }
@@ -2458,6 +2465,21 @@ fvcc<div class="default-padding"></div>
       if(tagPaintCursor) setMouseCursorPaint();
       else disableMouseCursorPaint();
     });
+
+    // 스크롤 이벤트 ( 드래그 윈도우 동시 이동 )
+    var scrollPosition = $(window).scrollTop();
+    $(window).scroll(function(event){
+      var curPosition = $(window).scrollTop();
+      var moveHeight = scrollPosition - curPosition;
+      var dragWindow = $(".draggable-window");
+
+      $(".draggable-window").each(function(){
+        var curTop = $(this).offset().top
+        $(this).offset({top:curTop - moveHeight});
+      })
+      scrollPosition = curPosition;
+    });
+
     // 마우스 포인터 활성화
     function setMouseCursorPaint(){
       $("#mouse-cursor-div").show();

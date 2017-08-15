@@ -37,7 +37,7 @@ class BackgroundCharactersController extends Controller
         $i = 0;
 
         foreach($dataSet as $datas){
-            $data[$i]['id'] = $datas->cha_id;
+            $data[$i]['id'] = $datas->background_id;
             $data[$i]['name'] = $datas->name;
             $data[$i]['info'] = $datas->info;
             $data[$i]['age'] = $datas->age;
