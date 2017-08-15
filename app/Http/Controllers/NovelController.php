@@ -102,7 +102,7 @@ class NovelController extends Controller
 
         // var_dump($data);
         // echo $data[0]['title'];
-
+        
         // echo(gettype($data));
 
         return view('novel.info.novel_info')->with('data', $data);
@@ -216,7 +216,7 @@ class NovelController extends Controller
         $i = 0;
 
         foreach ($characterData as $datas) {
-            $data[$i]['id'] = $datas->cha_id;
+            $data[$i]['id'] = $datas->id;
             $data[$i]['name'] = $datas->name;
             $data[$i]['info'] = $datas->info;
             $data[$i]['age'] = $datas->age;

@@ -6,11 +6,11 @@
 			<div class="row">
 				<div class="page-title text-center">
 					@if (empty($data[0]['title']))
-						<h1>베스트 웹소설</h1>
+						<h1>전체 웹소설</h1>
 					@else
-						<h1>베스트 웹소설</h1>
+						<h1>모든 웹소설</h1>
 					@endif
-					<p>장르별로 다양한 웹소설 <br>독자들이 선택한 베스트 웹소설은? </p>
+					<p>장르별로 다양한 웹소설!</p>
 					<hr class="pg-titl-bdr-btm" />
 				</div>
 				<div class="port-sec">

@@ -33,12 +33,6 @@
                         </div>
                         <div>포스트</div>
                     </a>
-                    {{--  <a href="#">
-                        <div>
-                            <i class="material-icons">mail_outline</i>
-                        </div>
-                        <div>쪽지</div>
-                    </a>  --}}
                     &nbsp;&nbsp;
                     {{-- 관리 : 사용자의 블로그일 때만 표시   --}}
                     <a href="/yerriel/blog/{{$data[0]['id']}}/setMap">
@@ -55,8 +49,10 @@
                 <strong>USER 의 소설</strong>
                 {{-- 소설 있을 때 없을 때   --}}
                 <ul>
-                    <li>NOVEL1</li>
-                    <li>NOVEL2</li>
+                    @php
+                        {{-- @param DataType STRING   --}}
+                        echo BlogController::showAllNovel($data[0]['blog_owner_id']);
+                    @endphp
                 </ul>
             </div>
             <hr />

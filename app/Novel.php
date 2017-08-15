@@ -43,13 +43,14 @@ class Novel extends Model
     }
 
     // TABLE : novels SELECT // JOIN TABLE : novel_backgrounds
+    // @param $id (INT)
     public function dataJoinBackground($id) {
 
         $novelData = DB::table('novels')
-            ->join('novel_backgrounds', 'novels.id', '=', 'novel_backgrounds.belong_to_novel')
-            ->select('novels.title', 'novel_backgrounds.background_id')
+            ->join('novel_has_open_backgrounds', 'novels.id', '=', 'novel_has_open_backgrounds.novel_id')
+            ->select('novels.title', 'novel_has_open_backgrounds.background_id')
             ->where('novels.id', '=', $id)
-            ->where('novel_backgrounds.belong_to_novel', '=', $id)
+            ->where('novel_has_open_backgrounds.novel_id', '=', $id)
             ->get();
 
         return $novelData;
