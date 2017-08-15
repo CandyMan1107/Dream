@@ -18,7 +18,7 @@ class open_timetable extends Model
         ];
         // data insert
         $id = DB::table('open_timetables')->insertGetId($dataSet);
-        var_dump($table);
+        // var_dump($table);
         return $id;
     }
 }
