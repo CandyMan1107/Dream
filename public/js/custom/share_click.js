@@ -444,8 +444,9 @@ function append_timetable_data($id,data){
     $('.set_open_background_data').append(timetable_data_append);
 
     if(data[$id][0]) {
-        effect_character_append = ""
+        // console.log(data);
         effect_item_append = ""
+        effect_character_append = ""
         effect_map_append = ""
         effect_relation_append = ""
         for(let i = 0 ; i < data[$id]['effect_count'] ; i++ ){

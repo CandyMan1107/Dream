@@ -493,27 +493,42 @@ class BackgroundShareController extends Controller
         $timetable_info['others'] = $data['other'];
 
         $open_timetable_insert_id = $open_timetable->insert_open_timetable($timetable_info);
-
+        // var_dump($data);
         // $open_timetable_insert_id = 1;
         $open_effect_info = array();
         if(isset($data['character_id'])){
-            $open_effect_info['characters']['id'] = $data['character_id'];
-            $open_effect_info['characters']['content'] = $data['effect_character'];
+            for($i = 0; $i < count($data['character_id']);$i++){
+                $open_effect_info['characters']['id'] = $data['character_id'][$i];
+                $open_effect_info['characters']['content'] = $data['effect_character'][$i];
+                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info);
+            }
         }
-        if(isset($table['item_id'])){
-            $open_effect_info['items']['id'] = $data['item_id'];
-            $open_effect_info['items']['content'] = $data['effect_item'];
+        if(isset($data['item_id'])){
+            // var_dump($data);
+            for($i = 0; $i < count($data['item_id']);$i++){
+                $open_effect_info['items']['id'] = $data['item_id'][$i];
+                $open_effect_info['items']['content'] = $data['effect_item'][$i];
+                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info);
+            }
         }
-        // 차후 지도 정보 입력 시 연동
-        if(isset($table['map_id'])){
-            $open_effect_info['maps']['id'] = $data['map_id'];
-            $open_effect_info['maps']['content'] = $data['effect_map'];
+        // // 차후 지도 정보 입력 시 연동
+        if(isset($data['map_id'])){
+            for($i = 0; $i < count($data['map_id']);$i++){
+                $open_effect_info['maps']['id'] = $data['map_id'][$i];
+                $open_effect_info['maps']['content'] = $data['effect_map'][$i];
+                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info);
+            }
+            
         }
-        if(isset($table['relation_id'])){
-            $open_effect_info['relations']['id'] = $data['relation_id'];
-            $open_effect_info['relations']['content'] = $data['effect_relation'];
+        if(isset($data['relation_id'])){
+            for($i = 0; $i < count($data['relation_id']);$i++){
+                $open_effect_info['relations']['id'] = $data['relation_id'][$i];
+                $open_effect_info['relations']['content'] = $data['effect_relation'][$i];
+                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info);
+            }
+            
         }
-        $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info);
+        
         $novel_has_open_background->insert_open_relation($novel_id,"timetables",$open_timetable_insert_id,$data['id']);
     }
     public function get_open_timetable(){
@@ -540,7 +555,7 @@ class BackgroundShareController extends Controller
             
             // var_dump($return_novel_open_data);
             $effect_data = $open_effect->get_open_effect_data($return_novel_open_data[$i]['id']);
-            
+            // var_dump($effect_data);
             // 끼친 영향 데이터 가져오기
             $j = 0;
             foreach($effect_data as $temp_effect_data) {
@@ -555,7 +570,7 @@ class BackgroundShareController extends Controller
                         $return_novel_open_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
                     }
                 }
-                else if($temp_effect_data->affect_table == "items"){
+                if($temp_effect_data->affect_table == "items"){
                     $item = new Item();
                     $item_effect_data = $item->get_item_src($temp_effect_data->affect_id);
 
@@ -566,7 +581,7 @@ class BackgroundShareController extends Controller
                         $return_novel_open_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
                     }
                 }
-                else if($temp_effect_data->affect_table == "relations"){
+                if($temp_effect_data->affect_table == "relations"){
                     $relation_list = new Relation_list();
                     $relation_effect_data = $relation_list->get_relation_src($temp_effect_data->affect_id);
 
@@ -577,7 +592,7 @@ class BackgroundShareController extends Controller
                         $return_novel_open_data[$i][$j]['affect_table'] = $temp_effect_data->affect_table;
                     }
                 }
-                else if($temp_effect_data->affect_table == "maps"){
+                if($temp_effect_data->affect_table == "maps"){
                     $map = new Map();
                     $map_effect_data = $map->get_map_src($temp_effect_data->affect_id);
 
