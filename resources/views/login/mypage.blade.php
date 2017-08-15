@@ -6,6 +6,10 @@
 button.btn-primary {
     background-color: #000;
 }
+.radio {
+    margin: 10px;
+    padding: 5px;
+}
 </style>
 
 @extends('layouts.master')
@@ -59,27 +63,100 @@ button.btn-primary {
                         <div class="form-group">
                             <label class="col-md-4 control-label">보유 포인트</label>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-	                                포인트 충천
+	                                포인트 충전
                             </button>
-                        
+                        <!-- 포인트 충천 창  -->
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                        <h4 class="modal-title" id="myModalLabel">포인트 충전</h4>
                                         </div>
+                                            <!-- 충전창 바디  -->
                                             <div class="modal-body">
-                                        
+                                                <div class="form-group">
+                                                    <label class="col-md-4">보유 포인트</label><br>
+                                                    <br>
+                                                    <div class="col-md-4"><input id="user_id" value="{{$value->user_id}} Point" class="form-control" readonly></div>
+                                                </div>
                                             </div>
+                                            <div class="radio">
+                                                <div class="radio">
+                                                    <div style="float:left;">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" id="point1">
+                                                            1000 Point
+                                                        </label>
+                                                    </div>
+                                                    <div style="float:right;">
+                                                        <label>
+                                                            10000원
+                                                        </label>
+                                                    </div><br><br><br>
+
+                                                    <div style="float:left;">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" id="point2">
+                                                            2000 Point
+                                                        </label>
+                                                    </div>
+                                                    <div style="float:right;">
+                                                        <label>
+                                                            20000원
+                                                        </label>
+                                                    </div><br><br><br>
+
+                                                    <div style="float:left;">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" id="point3">
+                                                            3000 Point
+                                                        </label>
+                                                    </div>
+                                                    <div style="float:right;">
+                                                        <label>
+                                                            30000원
+                                                        </label>
+                                                    </div><br><br><br>
+
+                                                    <div style="float:left;">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" id="point4">
+                                                            4000 Point
+                                                        </label>
+                                                    </div>
+                                                    <div style="float:right;">
+                                                    <label>
+                                                        40000원
+                                                    </label>
+                                                    </div><br><br><br>
+                                                    
+                                                    <div style="float:left;">
+                                                        <label>
+                                                            <input type="radio" name="optionsRadios" id="point5">
+                                                            5000 Point
+                                                        </label>
+                                                    </div>
+                                                    <div style="float:right;">
+                                                        <label>
+                                                            50000원
+                                                        </label>
+                                                    </div><br><br><br>
+                                                </div>
+                                            </div>
+                                            
                                         <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                            <div class="point-group">
+                                                <button type="submit" action="/point" class="btn btn-primary">충전</button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
+                                            </div>
+                                        <!-- <button type="button" class="btn btn-default " data-dismiss="modal">취소</button> -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                            
+                        <!-- 포인트 충천 끝  -->
+
                         <div class="col-md-3">
                             <input id="readonly" value="{{$value->point}}" type="text" class="form-control" readonly>
                         </div>
@@ -91,7 +168,7 @@ button.btn-primary {
                                     정보 수정
                                 </button>
 
-                                <button type="reset" class="btn btn-primary col-md-offset-2">
+                                <button type="reset" class="btn btn-primary col-md-offset-1">
                                     취소
                                 </button>
                             </div>

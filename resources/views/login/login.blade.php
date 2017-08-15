@@ -13,7 +13,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">로그인</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" action="/login" method="post"  role="form" >
+                    <form class="form-horizontal" action="/login" method="post"  role="form">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     
                     <div class="form-group">
