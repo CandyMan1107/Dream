@@ -301,8 +301,8 @@ class BackgroundShareController extends Controller
         // $character_info['id'] = $data['id'];
         $character_info['name'] = $data['character_name'];
         $character_info['info'] = $data['character_content'];
-        $character_info['age'] = $data['character_age'];
-        $character_info['gender'] = $data['character_gender'];
+        $character_info['age'] = $data['age'];
+        $character_info['gender'] = $data['gender'];
         $character_info['img_src'] = $data['img_src'];
 
         $table_id = $open_character->insert_open_character($character_info);
