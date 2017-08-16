@@ -23,6 +23,7 @@ $(document).ready(function(){
                 $('.open_item_data_set').remove();
                 $('.open_relation_data_set').remove();
                 $('.open_map_data_set').remove();
+                $('.open_timetable_data_set').remove();
 
                 if( click_id == "characters") {
                     
@@ -168,7 +169,7 @@ $(document).ready(function(){
                 }
                 else if (click_id=="timetables"){
                     // alert("23");
-                    
+                    console.log(data);
                     let timetable_append = "<div class='timetable_append_area'>"
                     timetable_append += "       <div id='timeline'>"
                     timetable_append += "       </div>"
@@ -194,7 +195,7 @@ $(document).ready(function(){
                         type: "GET",
                         url: get_open_timetable_url,
                         success: function (data) {
-                            console.log(data);
+                            // console.log(data);
                             let open_timetable = "<div class='timetable_append_area'>"
                             open_timetable += "       <div id='timeline2'>"
                             open_timetable += "       </div>"
@@ -258,7 +259,7 @@ $(document).ready(function(){
                                 $('.open_map_data_set').remove();
                                 append_map_data($id, data)
                             }
-                            // console.log(data);
+                            console.log(data);
                         }
                     });
                 });
@@ -452,23 +453,27 @@ function append_timetable_data($id,data){
         for(let i = 0 ; i < data[$id]['effect_count'] ; i++ ){
             if(data[$id][i]['affect_table'] == "characters"){
                 effect_character_append += "<img src='/img/background/characterImg/"+data[$id][i]['img_src']+"' alt='character image' class='img-circle img-things-size affect' style='margin : 17px'>"
-                effect_character_append += "<input type='text' class='form-control affect' id='' name='effect_character[]' style='width:70%; float:right; margin-top:25px' value='"+data[$id][i]['affect_content']+"'>"
-                effect_character_append += "<input type='hidden' class='affect_character' name='character_id[]' value='"+data[$id][i]['id']+"'>"
+                effect_character_append += "<input type='text' class='form-control affect' id='' name='affect_info[]' style='width:70%; float:right; margin-top:25px' value='"+data[$id][i]['affect_content']+"'>"
+                effect_character_append += "<input type='hidden' class='affect_character' name='affect_id[]' value='" + data[$id][i]['id'] + "'>"
+                effect_character_append += "<input type='hidden' class='affect_content' name='affect_content[]' value='characters'>"
             }
             if(data[$id][i]['affect_table'] == "items"){
                 effect_item_append += "<img src='/img/background/itemImg/"+data[$id][i]['img_src']+"' alt='item image' class='img-circle img-things-size affect' style='margin : 17px'>"
-                effect_item_append += "<input type='text' class='form-control affect' id='' name='effect_item[]' style='width:70%; float: right; margin-top:25px' value='"+data[$id][i]['affect_content']+"'>"
-                effect_item_append += "<input type='hidden' class='affect_item' name='item_id[]' value='"+data[$id][i]['id']+"'>"
+                effect_item_append += "<input type='text' class='form-control affect' id='' name='affect_info[]' style='width:70%; float: right; margin-top:25px' value='" + data[$id][i]['affect_content'] + "'>"
+                effect_item_append += "<input type='hidden' class='affect_item' name='affect_id[]' value='" + data[$id][i]['id'] + "'>"
+                effect_item_append += "<input type='hidden' class='affect_content' name='affect_content[]' value='items'>"
             }
             if(data[$id][i]['affect_table'] == "maps"){
                 effect_map_append += "<img src='/img/background/mapImg/mapCover/"+data[$id][i]['img_src']+"' alt='map image' class='img-circle img-things-size affect' style='margin : 17px'>"
-                effect_map_append += "<input type='text' class='form-control affect' id='' name='effect_map[]' style='width:70%; float:right; margin-top:25px' value='"+data[$id][i]['affect_content']+"'>"
-                effect_map_append += "<input type='hidden' class='affect_map' name='map_id[]' value='"+data[$id][i]['id']+"'>"
+                effect_map_append += "<input type='text' class='form-control affect' id='' name='affect_info[]' style='width:70%; float:right; margin-top:25px' value='" + data[$id][i]['affect_content'] + "'>"
+                effect_map_append += "<input type='hidden' class='affect_map' name='affect_id[]' value='" + data[$id][i]['id'] + "'>"
+                effect_map_append += "<input type='hidden' class='affect_content' name='affect_content[]' value='maps'>"
             }
             if(data[$id][i]['affect_table'] == "relations"){
                 effect_relation_append += "<img src='/img/background/relationImg/"+data[$id][i]['img_src']+"' alt='relation image' class='img-circle img-things-size affect' style='margin : 17px'>"
-                effect_relation_append += "<input type='text' class='form-control affect' id='' name='effect_relation[]' style='width:70%; float:right; margin-top:25px' value='"+data[$id][i]['affect_content']+"'>"
-                effect_relation_append += "<input type='hidden' class='affect_relation' name='relation_id[]' value='"+data[$id][i]['id']+"'>"
+                effect_relation_append += "<input type='text' class='form-control affect' id='' name='affect_info[]' style='width:70%; float:right; margin-top:25px' value='" + data[$id][i]['affect_content'] + "'>"
+                effect_relation_append += "<input type='hidden' class='affect_relation' name='affect_id[]' value='" + data[$id][i]['id'] + "'>"
+                effect_relation_append += "<input type='hidden' class='affect_content' name='affect_content[]' value='relations'>"
             }
         }
         // console.log(data[$id]['effect_count']);
