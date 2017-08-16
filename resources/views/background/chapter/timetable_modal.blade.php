@@ -9,7 +9,7 @@
       </div>
         <form class="form-horizontal" action="/chapter/addtimetable" method="POST" enctype="multipart/form-data"> 
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <input type="hidden" name="chapter_id" value="{{$_SESSION['chapter_id']}}"> 
+        <input type="hidden" name="chapter_id" value="{{$_COOKIE['chapter_id']}}"> 
         {{--  <meta name="csrf-token" content="{{ csrf_token() }}">  --}}
         @php
             $hostname=$_SERVER["REQUEST_URI"]; 

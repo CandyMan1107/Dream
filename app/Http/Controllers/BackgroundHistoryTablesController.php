@@ -25,7 +25,7 @@ class BackgroundHistoryTablesController extends Controller
     {
         $timeTable = new Timetable();
         
-        echo($_COOKIE['novel_id']);
+        // echo($_COOKIE['novel_id']);
         $novel_id = $_COOKIE['novel_id'];
         if(!isset($_COOKIE['novel_id'])){
             return redirect('write_novel/my_novel');
@@ -297,24 +297,26 @@ class BackgroundHistoryTablesController extends Controller
         setcookie('novel_id',$id,time()+(60*60),'/');
         $novel_id = $id;
         // var_dump($_SESSION['novel_id']);
-        $dataSet = $timeTable->date_get_novel_id($novel_id);
-        // var_dump($dataSet);
-        // echo($dataSet[0]["event_names"]);
-        $data = array(array());
-        $i = 0;
-        foreach ($dataSet as $datas){
-            $data[$i]['id'] = $datas->id;
-            $data[$i]['event_name'] = $datas->event_names;
-            $data[$i]['event_content'] = $datas->event_contents;
-            $data[$i]['start_day'] = $datas->start_days;
-            $data[$i]['end_day'] = $datas->end_days;
-            $data[$i]['other'] = $datas->others;
-            $data[$i]['refer_info'] = $datas->refer_info;
-            $data[$i]['refer_info'] = explode('^',$data[$i]['refer_info']);
+        // $dataSet = $timeTable->date_get_novel_id($novel_id);
+        // // var_dump($dataSet);
+        // // echo($dataSet[0]["event_names"]);
+        // $data = array(array());
+        // $i = 0;
+        // foreach ($dataSet as $datas){
+        //     $data[$i]['id'] = $datas->id;
+        //     $data[$i]['event_name'] = $datas->event_names;
+        //     $data[$i]['event_content'] = $datas->event_contents;
+        //     $data[$i]['start_day'] = $datas->start_days;
+        //     $data[$i]['end_day'] = $datas->end_days;
+        //     $data[$i]['other'] = $datas->others;
+        //     $data[$i]['refer_info'] = $datas->refer_info;
+        //     $data[$i]['refer_info'] = explode('^',$data[$i]['refer_info']);
             
-            $i++;
-        }
-        return view('background.historyTable.history_table_view')->with("data", $data);
+        //     $i++;
+        // }
+        // $backgroundHistoryTables = new BackgroundHistoryTablesController();
+        // $backgroundHistoryTables->index();
+        return redirect('background/historyTable');
     }
 
     /**

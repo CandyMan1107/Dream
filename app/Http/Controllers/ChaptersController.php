@@ -21,8 +21,8 @@ class ChaptersController extends Controller
      */
     public function index()
     {
-        session_start();
-        $novel_id = $_SESSION['novel_id'];
+        // session_start();
+        $novel_id = $_COOKIE['novel_id'];
         $url = 'chapter/'.$novel_id;
         return redirect($url);
     }
@@ -70,6 +70,10 @@ class ChaptersController extends Controller
         
 
         // var_dump($data['episode_id']);
+        $novel_id = $_COOKIE['novel_id'];
+        $redirect_url = 'chapter/'.$novel_id;
+
+        return redirect($redirect_url);
     }
 
     /**
@@ -89,9 +93,9 @@ class ChaptersController extends Controller
         $novel_data = $novel->basicData($novel_id);
         $novel_relation = $novel_has_chapter->get_data($novel_id);
         
-        session_start();
+        // session_start();
         // echo($_SESSION['novel_id']);
-        $_SESSION['novel_id'] = $novel_id;
+        $_COOKIE['novel_id'] = $novel_id;
             
         
         
@@ -274,8 +278,8 @@ class ChaptersController extends Controller
 
         $data = array(array());
         // $data['chapter_id'] = $chapter_id;
-        session_start();
-        $_SESSION['chapter_id'] = $chapter_id;
+        // session_start();
+        $_COOKIE['chapter_id'] = $chapter_id;
         $i = 0;
         if(isset($none_has_timetable)){
             foreach($none_has_timetable as $temp_none_has_timetable) {
@@ -293,8 +297,8 @@ class ChaptersController extends Controller
     }
 
     public function add_timetable(Request $request) {
-        session_start();
-        session_unset("chapter_id");
+        // session_start();
+        // session_unset("chapter_id");
         $data = $request->all();
         $chapter_has_timetable = new Chapter_has_timetable();
         for($i = 0; $i < count($data['timetable_id']) ; $i++ ){

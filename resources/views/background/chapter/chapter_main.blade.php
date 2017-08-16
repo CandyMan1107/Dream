@@ -19,7 +19,7 @@
 			</div>
 			<div class="row chapter_side" id="test">
 				<table class="table table-condensed">
-					@isset($data[0])
+					@isset($data['chapter'])
 						@for($i = 0; $i < count($data['chapter']) ; $i++)
 							<tr>
 								<th>제목</th>
