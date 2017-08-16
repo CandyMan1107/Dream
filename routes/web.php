@@ -323,6 +323,8 @@ Route::get('/cash', function () {
     return view('novel.cash');
 });
 
+Route::get('/point', 'MemberController@point_add');
+
 /*
 |--------------------------------------------------------------------------
 | BLOG

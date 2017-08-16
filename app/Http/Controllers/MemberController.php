@@ -80,11 +80,20 @@ class MemberController extends Controller
         $modify_password = $req->input('password');
 
         // $modify = DB::update('update users set name = ?, password = ?', [$modify_name, $modify_password]);
-        $modify = DB::update('update users set password = ?', [$modify_password]);
+        $modify_info = DB::update('update users set password = ?', [$modify_password]);
 
         return redirect('/mypage');
     }
 
+    public function point_add(Request $req) {
+        $point_select = $req->input('point');
+
+        $point_added = DB::update('update users set point = ?', [$point_select]);
+        
+        return redirect('/mypage');
+    }
+
+    //로그아웃
     public function logout(Request $req) {
         $req->session()->flush();
         return redirect('/');
