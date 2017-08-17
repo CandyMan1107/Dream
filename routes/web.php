@@ -330,11 +330,7 @@ Route::get('/point', 'MemberController@point_add');
 | BLOG
 |--------------------------------------------------------------------------
 */
-/**
- * The MAIN VIEW of blog
- * @param $user_id(DataType : STRING)
- * @return view('writer_blog.blog_main')
- */
+
 Route::get('/{ownerId}/blog', "BlogController@showBlogMain");
 
 Route::get('/{ownerId}/blog/menu/{menuId}', "BlogController@selectedMenu");

@@ -35,8 +35,8 @@ class Background extends Model
     // TABLE : novel_backgrounds SELECT [RELATIONS]
     public function selectRelation($id) {
         $backgroundData = DB::table('novel_has_open_backgrounds')
-            ->join('oepn_relations', 'novel_has_open_backgrounds.open_background_id', '=', 'oepn_relations.relnum')
-            ->select('oepn_relations.*')
+            ->join('open_relation_lists', 'novel_has_open_backgrounds.open_background_id', '=', 'open_relation_lists.id')
+            ->select('open_relation_lists.*')
             ->where('novel_has_open_backgrounds.novel_id', '=', $id)
             ->where('novel_has_open_backgrounds.background_kind', '=', 'relations')
             ->get();

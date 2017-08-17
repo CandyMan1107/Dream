@@ -18,7 +18,7 @@
         <ul class="pager" id="timetableList">
             @if ($data[0])
                 @for ($i = 0; $i < count($data); $i++)
-                    <li name="event_list" id="{{$i}}"><a href="#">{{$data[$i]['event_name']}}</a></li>
+                    <li name="event_list" id="{{$i}}"><a href="#">{!! $data[$i]['event_name'] !!}</a></li>
                 @endfor
             @endif
 		</ul>
