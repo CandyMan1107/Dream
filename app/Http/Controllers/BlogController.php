@@ -346,11 +346,6 @@ class BlogController extends Controller
 |--------------------------------------------------------------------------
 */
 
-    /**
-     * The Communication PAGE of blog
-     * @param $ownerId(DataType : STRING)
-     * @return view('writer_blog.blog_communication_board')
-     */
     public function showBlogCommunication($ownerId) 
     {
         // (DataType : STRING)
