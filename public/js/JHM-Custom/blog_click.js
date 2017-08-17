@@ -31,11 +31,11 @@ $(function () {
                     dataType: "json",
                     success: function(data){
                         // alert(JSON.stringify(data));
-                        
+
                         // alert(data[0]['id']);
 
                         var append_data = "<div>";
-                        
+
                         append_data += "    <div class='board_title'>";
 
                         append_data += "        <ul class='list-inline'>";
@@ -76,7 +76,7 @@ $(function () {
                         append_data += "<div class='text-center'>";
                         append_data += "";
                         append_data += "</div>";
-                        
+
                         append_data += "    </div>";
 
                         $("div[name='blog_post']").append(append_data);
