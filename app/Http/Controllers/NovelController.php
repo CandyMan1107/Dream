@@ -227,6 +227,10 @@ class NovelController extends Controller
             $i++;
         }
 
+        if (empty($data[0])) {
+            $data[0] = 0;
+        }
+
         // var_dump($data);
         
         return view('novel.read.background.character')->with('data', $data);
@@ -258,6 +262,10 @@ class NovelController extends Controller
             $i++;
         }
 
+        if (empty($data[0])) {
+            $data[0] = 0;
+        }
+
         // var_dump($data);
         
         return view('novel.read.background.item')->with('data', $data);
@@ -286,6 +294,10 @@ class NovelController extends Controller
             // $data[$i]['img_src'] = $imgRoot.$data[$i]['relHref'];
 
             $i++;
+        }
+
+        if (empty($data[0])) {
+            $data[0] = 0;
         }
 
         // var_dump($data);
@@ -320,6 +332,10 @@ class NovelController extends Controller
             $i++;
         }
 
+        if (empty($data[0])) {
+            $data[0] = 0;
+        }
+
         // var_dump($data);
         
         return view('novel.read.background.history')->with('data', $data);
@@ -346,6 +362,10 @@ class NovelController extends Controller
             $data[$i]['updated_at'] = $datas->updated_at;
 
             $i++;
+        }
+
+        if (empty($data[0])) {
+            $data[0] = 0;
         }
 
         // var_dump($data);

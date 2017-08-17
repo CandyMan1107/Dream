@@ -1,14 +1,16 @@
 <script src="/js/JHM-Custom/character_info.js"></script>
 <script>character_info( <?=json_encode($data)?> )</script>
 <div class="row">
-    <div class="col-md-3 text-center" name="character-view">
-    
+    @if ($data[0] == 0) 
+    <div class="col-md-12 text-center" name="character-view">
+        <strong>아직 공개된 배경 정보가 없습니다.</strong>
+    @else
+        <div class="col-md-3 text-center" name="character-view">
         @foreach ($data as $character)
             <img id="{{$character['id']}}" src="/img/background/characterImg/{{$character['img_src']}}" alt="character image" class="img-circle img-things-size character_list event_list" name="img_icon">
         @endforeach
-
+    @endif
     </div>
-    
     <div class="col-md-9 table-responsive" name="character-info">
 		<table class="table">
             <tr>

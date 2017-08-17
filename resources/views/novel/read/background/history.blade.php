@@ -16,7 +16,9 @@
 
         </div>
         <ul class="pager" id="timetableList">
-            @if ($data[0])
+            @if ($data[0] == 0)
+                <strong>아직 공개된 배경 정보가 없습니다.</strong>
+            @else
                 @for ($i = 0; $i < count($data); $i++)
                     <li name="event_list" id="{{$i}}"><a href="#">{!! $data[$i]['event_name'] !!}</a></li>
                 @endfor
