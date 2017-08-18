@@ -6,8 +6,36 @@
 </style>
 
 @extends('layouts.master')
-
 @section('content')
+
+<script>
+
+// $(document).ready(function(){
+// 	$("#register").click(function(){
+// 		alert("회원가입 성공");
+// 	});
+// });
+
+// function idCheck(id) {
+//     $.ajax({
+//         type:'POST',
+//         url:"/register"
+//         data : {
+//             "user_id" : user_id,
+//             "name" : name,
+//             "email" : email
+//         },
+//         success:function(data){
+//             if(data) {
+//                 alert("중복된 아이디다.");
+//             }else {
+//                 alert("잘된다 이거야");
+//             }
+//         }
+//     })
+// }
+</script>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -84,7 +112,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary" name="register">
+                                <button id="register" type="submit" class="btn btn-primary" name="register">
                                     회원가입
                                 </button>
 
