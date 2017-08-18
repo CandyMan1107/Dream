@@ -17,21 +17,19 @@ class MemberController extends Controller
     
     public function login(Request $req){
         $user_id = Input::get('user_id');
-        $name = Input::get('name');
-        $email = Input::get('email');
         $password = Input::get('password');
+        $point = DB::table('users')->select("point")->where(['user_id' => $user_id])->get();
+
+        $point = $point[0]->point;
 
         $checkLogin = DB::table('users')->where(['user_id' => $user_id, 'password' => $password])->get();
         
         // 로그인 성공 시 세션 생성
         if(count($checkLogin) > 0) {
-            Session::put('user_id', $user_id, 'name', $name, 'email', $email);
-            Session::get('user_id', $user_id);
-            echo "<script>alert(\"로그인 실패\");</script>";
-            return Redirect::to('/');
+            Session::put('user_id', $user_id);
+            Session::put('point', $point);
         }
         else {
-            echo "<script>alert(\"로그인 실패\");</script>";
             return view('login.login');
         }
     }
@@ -62,10 +60,10 @@ class MemberController extends Controller
                     'updated_at' => date('Y-m-d H:i:s')
                 ]
             );            
-            
-            
-            Session::put('user_id', $user_id, 'name', $name, 'email', $email);
-            Session::get('user_id', $user_id);
+                
+            // Session::put('user_id', $user_id, 'name', $name, 'email', $email);
+            // Session::put('user_id', $user_id);
+            // Session::get('user_id', $user_id);
             // return view('welcome');
             return redirect('/');
         }
@@ -90,25 +88,24 @@ class MemberController extends Controller
         $modify_info = DB::update('update users set password = ? where user_id = ?', [$modify_password, $user_id]);
         // $modify = DB::update('update users set name = ?, password = ?', [$modify_name, $modify_password]);
 
-        return redirect('/mypage')->with('alert', '성공');
+        return redirect('/mypage');
     }
 
     public function point_add(Request $req) {
         $user_id = Session::get('user_id');
-        // $point_select = Input::get('point');
-        $point_select = $req->input('point');
-        
-        // return $req;      
+        $session_point = Session::get('point');
 
-        // $point_added = DB::update('update users set point = ? where user_id = ?', [$point_select, $user_id]);
-        
+        $point_select = Input::get('selceted'); // 원래 대는 코드
+
+        $point_added = DB::update('update users set point = ? where user_id = ?', [$point_select+$session_point, $user_id]);
+        $point = Session::put('point', $point_select+$session_point);
+    
         // return redirect('/mypage');
-        // return var_dump($point_select);
     }
 
     //로그아웃
     public function logout(Request $req) {
         $req->session()->flush();
-        return redirect('/');
+        // return redirect('/');
     }
 }

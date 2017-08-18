@@ -13,35 +13,55 @@ button.btn-primary {
 </style>
 
 @extends('layouts.master')
-
 @section('content')
 @include('partials.mySubNavi')
 
 <script>
+//포인트 충전 시
+$(document).ready(function(){
+	$("#point_add").click(function(){
+		$.ajax({
+			url:'/point',
+			success:function(data){
+                location.href="/mypage";
+                alert("충전 성공");
+            },
+            error:function(){
+                alert("충전 실패");
+            }
+		})
+	});
+});
+
+// 정보 수정
 // $(document).ready(function(){
-//     $("#point_add").click(function(){
-//         // $(this).hide();
-//         $.ajax({
-//             url:'/point',
-//             type:'get',
-//             success:function(data){
-//                 // $(this).getAttribute('name');
-//                 var checked = ;
-//                 alert(checked);
-//             // $point_select = $req->input('point');
+// 	$("#modify_button").click(function(){
+// 		$.ajax({
+// 			url:'/modify',
+//             // data:{
+
+//             // },
+// 			success:function(data){
+//                 location.href="/";
+//                 alert("변경 성공");
 //             },
 //             error:function(){
-//                 console.log("실패");
+//                 location.href="/mypage";
+//                 alert("변경 실패");
 //             }
-//         });
-//     });
+// 		})
+// 	});
 // });
 
+// 포인트 value값 가져오기
 $(document).ready(function(){
-    $("input['name=point1']").each(function(){
-        $(this).click(function(){
-            alert("ffff");
-        });
+    $(".input_radio").on("click",function(){
+        $(".input_radio").prop("checked",false);
+        $(this).prop("checked",true);
+
+        $(".input_radio").attr("name", null);
+        $(this).attr("name","selceted");
+
     });
 });
 </script>
@@ -54,7 +74,7 @@ $(document).ready(function(){
             <div class="panel-body">
                   <form class="form-horizontal" role="form" method="POST" action="/modify">  
                  <!-- <form class="form-horizontal" role="form" method="POST">  -->
-                     {{ csrf_field() }} 
+                    {{ csrf_field() }}  
                     @foreach($user_id as $value)
                     <div class="form-group">
                         <label class="col-md-4 control-label">아이디</label>
@@ -135,13 +155,12 @@ $(document).ready(function(){
                     </div>
                         <div class="radio">
                             <div class="radio">
-                                <div style="float:left;">
+                                 <div style="float:left;">
                                     <label>
-                                        <input id="radio" type="radio" name="point" value="1000">
+                                        <input type="radio" class="input_radio" value="1000">
                                         1000 Point
                                     </label>
                                 </div>
-
                                 <div style="float:right;">
                                     <label>
                                         10000원
@@ -150,20 +169,19 @@ $(document).ready(function(){
 
                                 <div style="float:left;">
                                     <label>
-                                        <input type="radio" name="point1" value="2000">
+                                        <input type="radio" class="input_radio" value="2000">
                                         2000 Point
                                     </label>
                                 </div>
-
                                 <div style="float:right;">
                                     <label>
                                         20000원
                                     </label>
-                                </div><br><br><br>
-
-                                <div style="float:left;">
+                                </div><br><br><br> 
+                                
+                                 <div style="float:left;">
                                     <label>
-                                        <input type="radio" name="point2" value="3000">
+                                        <input type="radio" class="input_radio" value="3000">
                                         3000 Point
                                     </label>
                                 </div>
@@ -176,11 +194,10 @@ $(document).ready(function(){
 
                                 <div style="float:left;">
                                     <label>
-                                        <input type="radio" name="point3" value="4000">
+                                        <input type="radio" class="input_radio" value="4000">
                                         4000 Point
                                     </label>
                                 </div>
-
                                 <div style="float:right;">
                                 <label>
                                     40000원
@@ -189,16 +206,15 @@ $(document).ready(function(){
                                 
                                 <div style="float:left;">
                                     <label>
-                                        <input type="radio" name="point">
+                                        <input type="radio" class="input_radio" value="5000">
                                         5000 Point
                                     </label>
                                 </div>
-
                                 <div style="float:right;">
                                     <label>
                                         50000원
                                     </label>
-                                </div><br><br><br>
+                                </div><br><br><br> 
 
                             </div>
                         </div>
