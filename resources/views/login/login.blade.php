@@ -7,6 +7,16 @@
 
 @extends('layouts.master')
 @section('content')
+
+<script>
+// $(document).ready(function(){
+// 	$("#login").click(function(){
+// 		alert("로그인 성공");
+// 	});
+// });
+
+</script>
+
 <div id="login_pannel" class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -33,7 +43,7 @@
                     
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary" name="login">
+                            <button id="login" type="submit" class="btn btn-primary" name="login">
                                 로그인
                             </button>
 

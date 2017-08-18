@@ -324,6 +324,8 @@ Route::get('/cash', function () {
 });
 
 Route::get('/point', 'MemberController@point_add');
+// Route::post('/point', 'MemberController@point_add');
+
 
 /*
 |--------------------------------------------------------------------------
