@@ -193,10 +193,26 @@ Route::get('/get_novel/UserIdOfNovel', 'cordoController@getUserIdOfNovel');
 Route::get('/get_blog/UserIdOfBlog', 'cordoController@getUserIdOfBlogInfo');
 //블로그와 카테고리 연동하기(블로그-메뉴 조인)
 Route::get('/get_blog/BlogOfMenuJoin', 'cordoController@getBlogOfMenuJoinInfo');
-//카테고리 목록 가져오기
-Route::get('/get_blog/BlogMenuInfo', 'cordoController@getCategoryInfo');
-//카테고리와 게시물 연동하기(메뉴-게시판 조인)
+//카테고리와 게시판 연동하여 메뉴 아이디 게시판 아이디 입력(메뉴-게시판 조인)
+Route::get('/set_blog/MenuOfBoardJoin', 'cordoController@insertMenuOfBoardJoinInfo');
+//카테고리와 게시판 연동하기(메뉴-게시판)
 Route::get('/get_blog/MenuOfBoardJoin', 'cordoController@getMenuOfBoardJoinInfo');
+//블로그 아이디로 메뉴(카테고리)아이디 정보가져오기
+Route::get('/get_blog/BoardOfMenuInfo', 'cordoController@getBoardOfMenuInfo');
+//게시판 글쓰기
+Route::get('/set_blog/BoardWrite', 'cordoController@insertBoardWrite');
+//게시물 정보 가져오기
+Route::get('/get_blog/ContentReadInfo', 'cordoController@getContentReadInfo');
+//독자 게시판 메뉴 연결하기(블로그 - 독자메뉴 조인)
+Route::get('/get_blog/blogOfCommunicationMenuJoin', 'cordoController@getCommunicationMenuJoinInfo');
+//독자 게시판과 독자의 게시글 연결하여 정보 받아오기(독자메뉴 - 독자게시글 조인)
+Route::get('/get_blog/CommunicationMenuOfBoardsJoin', 'cordoController@getCommunicationBoardJoinInfo');
+//독자 게시판에 글쓰기
+Route::get('/set_blog/UserBoardWrite', 'cordoController@insertUserBoarWrite');
+//독자게시판 메뉴와 독자게시판 게시글 등록(릴레이션)
+Route::get('/set_blog/CommunicationMenuOfBoardRelations', 'cordoController@insertCommunicationMenuOfBoardRelation');
+//유저게시물 정보 가져오기
+Route::get('/get_blog/UserContentReadInfo', 'cordoController@getUserContentReadInfo');
 
 //소설의 배경설정 중 사건을 가져오기
 Route::get('/get_settings/historyGraphInfo', 'cordoController@getBackgroundSettingsHistoryGraph');
@@ -221,7 +237,12 @@ Route::get('/set_point/set_point', 'cordoController@setPoint');
 Route::get('/get_point/get_point', 'cordoController@getPoint');
 //해당 유저의 포인트를 수정
 Route::get('/set_point/set_point_again', 'cordoController@setPointAgain');
-
+//관심등록 하기
+Route::get('/set_novel/add_favorite','cordoController@setFavorite');
+//관심등록 된 것을 삭제
+Route::get('/set_novel/delete_favorite','cordoController@delFavorite');
+//관심등록 되어 있는지 확인하기 위해 정보 가져오기
+Route::get('/get_novel/favorite_novel','cordoController@getFavorite');
 
 
 // 소설 작성부
@@ -330,7 +351,11 @@ Route::get('/point', 'MemberController@point_add');
 | BLOG
 |--------------------------------------------------------------------------
 */
-
+/**
+ * The MAIN VIEW of blog
+ * @param $user_id(DataType : STRING)
+ * @return view('writer_blog.blog_main')
+ */
 Route::get('/{ownerId}/blog', "BlogController@showBlogMain");
 
 Route::get('/{ownerId}/blog/menu/{menuId}', "BlogController@selectedMenu");
