@@ -504,24 +504,25 @@ class BackgroundShareController extends Controller
             if($data['affect_content'][$i] == "characters"){
                 $open_effect_info['characters']['id'] = $data['affect_id'][$i];
                 $open_effect_info['characters']['content'] = $data['affect_info'][$i];
-                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info);
+                // var_dump($data['affect_info'][$i]);
+                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info,"characters");
                 
             }
             if($data['affect_content'][$i] == "items"){
                 $open_effect_info['items']['id'] = $data['affect_id'][$i];
                 $open_effect_info['items']['content'] = $data['affect_info'][$i];
-                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info);
+                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info,"items");
             }
             // // 차후 지도 정보 입력 시 연동
             if($data['affect_content'][$i] == "maps"){
                 $open_effect_info['maps']['id'] = $data['affect_id'][$i];
                 $open_effect_info['maps']['content'] = $data['affect_info'][$i];
-                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info);   
+                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info,"maps");   
             }
             if($data['affect_content'][$i] == "relations"){
                 $open_effect_info['relations']['id'] = $data['affect_id'][$i];
                 $open_effect_info['relations']['content'] = $data['affect_info'][$i];
-                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info);            
+                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info,"relations");            
             }
             // var_dump($data['affect_content'][$i]);
             // var_dump($i);
