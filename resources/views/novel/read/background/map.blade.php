@@ -6,15 +6,18 @@
     $list = BackgroundHistoryTablesController::show_maps();
 @endphp
 <div class="row">
+    @if($list[0])
     <div class="col-md-1" name="map-view">
-        @if($list[0])
-          @foreach ($list as $map)
-              @php
+        @foreach ($list as $map)
+            @php
                 $img_src = "/img/background/mapImg/mapCover/".$map['img_src'];
-              @endphp
-              <img id="{{$map['id']}}" src="{{$img_src}}" alt="map image" class="img-circle img-things-size map_list" name="img_icon">
-          @endforeach
-        @endif
+            @endphp
+            <img id="{{$map['id']}}" src="{{$img_src}}" alt="map image" class="img-circle img-things-size map_list" name="img_icon">
+        @endforeach
+    @else
+    <div class="col-md-12" name="map-view">
+        <strong>아직 공개된 배경 정보가 없습니다.</strong>
+    @endif
     </div>
     <div class="col-md-11" name="map-info">
         {{-- MAP IMG --}}

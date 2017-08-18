@@ -16,12 +16,11 @@
             <div id="blog-main" class="col-md-8">
                 {{-- BLOG MAIN ROW START --}}
                 <div class="row">
-
                     {{-- BLOG NOTICE START --}}
                     <div class="col-md-12 blog_notice_list text-center autoplay-notice">
                         @php
                             {{-- @param DataType INT   --}}
-                              echo BlogController::mainNoticeList($data[1]);   
+                            {{--  echo BlogController::mainNoticeList($data[1]);     --}}
                         @endphp
                     </div>
                     {{-- BLOG NOTICE END --}}

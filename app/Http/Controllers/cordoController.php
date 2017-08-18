@@ -147,6 +147,34 @@ class cordoController extends Controller
     return $task;
   }
 
+  //블로그 정보 가져오기
+  public function getUserIdOfBlogInfo(Request $request){
+    $user_id = $request->input('id');
+    $task = DB::table('blogs')->select()->where('id', '=', $user_id)->get();
+    return $task;
+  }
+
+  //블로그와 카테고리 연동하기(블로그-메뉴 조인)
+  public function getBlogOfMenuJoinInfo(Request $request){
+    $blog_id = $request->input('id');
+    $task = DB::table('blog_menu_relations')->select()->where('blog_id', '=', $blog_id)->get();
+    return $task;
+  }
+
+  //카테고리목록가져오기(메뉴목록가져오기)
+  public function getCategoryInfo(Request $request){
+    $blog_menu_id = $request->input('id');
+    $task = DB::table('blog_menus')->select()->where('id', '=', $blog_menu_id)->get();
+    return $task;
+  }
+
+  //카테고리와 게시물 연동하기(메뉴-게시판 조인)
+  public function getMenuOfBoardJoinInfo(Request $request){
+    $blog_menu_id = $request->input('id');
+    $task = DB::table('menu_board_relations')->select()->where('blog_menu_id', '=', $blog_menu_id)->get();
+    return $task;
+  }
+
   public function getBackgroundSettingsHistoryGraph(Request $request){
     $backgroundData = DB::table('timetables')->get();
     $data = array(array());
@@ -286,14 +314,31 @@ public function getBackgroundSettingsMaps(Request $request){
   public function setPoint(Request $request){
     $user_id = $request->input('user_id');
     $point = $request->input('point');
-    DB::table('user_point')->insert([
-      "user_id" => $user_id,
-      "point" => $point
-    ]);
+    $first = $request->input('first');
+    $current_point = $request->input('current_point');
+    $final_point = $point + $current_point;
+
+    if($first == 0){
+      DB::table('user_point')->insert([
+        "user_id" => $user_id,
+        "point" => 0
+      ]);
+    }else if($first == 1){
+      DB::table('user_point')->where('user_id',$user_id)->update(array('point' => $final_point));
+    }
   }
   //유저의 포인트를 가져오기
   public function getPoint(Request $request){
     $user_id = $request->input('user_id');
+    $task = DB::table('user_point')->where('user_id', '=', $user_id)->get();
+    return $task;
+  }
+  //유저의 포인트를 수정
+  public function setPointAgain(Request $request){
+    $point = $request->input('current_point');
+    $update_point = $point - 100;
+    $user_id = $request->input('user_id');
+    DB::table('user_point')->where('user_id',$user_id)->update(array('point'=>$update_point));
     $task = DB::table('user_point')->where('user_id', '=', $user_id)->get();
     return $task;
   }

@@ -2,7 +2,7 @@
 
 @section('content')
 @php
-use App\Http\Controllers\NovelController;
+    use App\Http\Controllers\NovelController;
 @endphp
 <script type="text/javascript" src="/js/JHM-Custom/info_genre.js"></script>
 <script type="text/javascript" src="/js/JHM-Custom/day_info.js"></script>
@@ -98,7 +98,9 @@ use App\Http\Controllers\NovelController;
                                 </div>
                                 @if (!isset($data[0]['noBack']))
                                     <div class="col-md-4">
-                                        <button class="btn btn-default btn-block novel-background-read-Btn" data-toggle="modal" data-target="#backgroundModal">소설 배경 설정 보기</button>
+                                        <button class="btn btn-default btn-block novel-background-read-Btn" data-toggle="modal" data-target="#backgroundModal">
+                                            소설 배경 설정 보기
+                                        </button>
                                     </div>
                                 @endif
                             </div>
@@ -109,7 +111,7 @@ use App\Http\Controllers\NovelController;
             {{-- container class END --}}
         </div>
         {{--quickMenu & viewer & background MODAL START--}}
-        @if (!isset($data[0]['noEpi']) && !isset($data[0]['noBack']))
+        @if (!isset($data[0]['noEpi']) && !isset($data[0]['noBack']))  
             @php
                 echo NovelController::backgroundModal($data[0]['novelId']);
             @endphp
@@ -153,7 +155,7 @@ use App\Http\Controllers\NovelController;
                                                 <div class="col-md-9">
                                                     <div class="episode-list">
                                                         <div class="col-md-12">
-                                                            <h4 name="episode-table">{{ $i }}. {{ $d['episode_title'] }}</h4>
+                                                            <h4 name="episode-table">{{ $i }}. {!! $d['episode_title'] !!}</h4>
                                                         </div>
                                                         <div id="default-padding-small-0" class="col-md-12"></div>
                                                         <div class="col-md-2">
@@ -163,7 +165,7 @@ use App\Http\Controllers\NovelController;
                                                             <small>댓글</small>&nbsp;<strong>1</strong>
                                                         </div>
                                                         <div class="col-md-8">
-                                                            {{ $d['created_at'] }}
+                                                            {!! $d['created_at'] !!}
                                                         </div>
                                                     </div>
                                                 </div>

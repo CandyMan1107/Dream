@@ -346,11 +346,6 @@ class BlogController extends Controller
 |--------------------------------------------------------------------------
 */
 
-    /**
-     * The Communication PAGE of blog
-     * @param $ownerId(DataType : STRING)
-     * @return view('writer_blog.blog_communication_board')
-     */
     public function showBlogCommunication($ownerId) 
     {
         // (DataType : STRING)
@@ -388,12 +383,6 @@ class BlogController extends Controller
 | BLOG VIEW - STATIC FUNCTIONS
 |--------------------------------------------------------------------------
 */
-
-    /**
-     * The SIDE MENU of blog
-     * @param $user_id(DataType : STRING)
-     * @return view('writer_blog.blogSideMenu')
-     */
     public static function showBlogSideMenu($id) 
     {
         // Blog's OWNER user_id (DataType : STRING)
@@ -482,11 +471,7 @@ class BlogController extends Controller
         return view('writer_blog.blogSideMenu')->with("data", $data);
     }
 
-    /**
-     * The Menu List of WRITE-FORM
-     * @param $blog_id(DataType : INTEGER)
-     * @return view('writer_blog.board.select_menu_list')
-     */
+   
     public static function wirteFormMenuList($id)
     {
         $blog_id = $id;
@@ -510,10 +495,7 @@ class BlogController extends Controller
         return view('writer_blog.board.select_menu_list')->with('data', $data);
     }
 
-    /**
-    * Display the mainNoticeList with noticeList()'s $data
-    * @return view('writer_blog.part.main_notice_list')
-    */
+    
     public static function mainNoticeList($ownerId) 
     {
         // DataType : INT

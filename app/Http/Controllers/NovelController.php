@@ -227,6 +227,10 @@ class NovelController extends Controller
             $i++;
         }
 
+        if (empty($data[0])) {
+            $data[0] = 0;
+        }
+
         // var_dump($data);
         
         return view('novel.read.background.character')->with('data', $data);
@@ -258,6 +262,10 @@ class NovelController extends Controller
             $i++;
         }
 
+        if (empty($data[0])) {
+            $data[0] = 0;
+        }
+
         // var_dump($data);
         
         return view('novel.read.background.item')->with('data', $data);
@@ -269,21 +277,32 @@ class NovelController extends Controller
 
         $novelId = $id;
 
-        $imgRoot = 'img/background/characterImg/';
-
+        $imgRoot = '/img/background/relationImg/';
         $backgroundTable = new Background();
-        $chaInfos = $backgroundTable->selectCharacter($novelId);
+        // $chaInfos = $backgroundTable->selectCharacter($novelId);
         $relInfos = $backgroundTable->selectRelation($novelId);
-        
-        $tasks = array(
-            "imgRoot" => $imgRoot,
-            "chaInfos" => $chaInfos,
-            "relInfos" => $relInfos
-        );
 
-        // var_dump($tasks);
+        // var_dump($relInfos);
+
+        $data = array(array());
+        $i = 0;
+
+        foreach ($relInfos as $datas) {
+            $data[$i]['id'] = $datas->id;
+            $data[$i]['relHref'] = $datas->cover_src;
+
+            // $data[$i]['img_src'] = $imgRoot.$data[$i]['relHref'];
+
+            $i++;
+        }
+
+        if (empty($data[0])) {
+            $data[0] = 0;
+        }
+
+        // var_dump($data);
         
-        return view('novel.read.background.relation')->with('tasks', $tasks);
+        return view('novel.read.background.relation')->with('data', $data);
     }
 
     // NOVEL BACKGROUND : HISTORY
@@ -313,6 +332,10 @@ class NovelController extends Controller
             $i++;
         }
 
+        if (empty($data[0])) {
+            $data[0] = 0;
+        }
+
         // var_dump($data);
         
         return view('novel.read.background.history')->with('data', $data);
@@ -339,6 +362,10 @@ class NovelController extends Controller
             $data[$i]['updated_at'] = $datas->updated_at;
 
             $i++;
+        }
+
+        if (empty($data[0])) {
+            $data[0] = 0;
         }
 
         // var_dump($data);
@@ -401,6 +428,7 @@ class NovelController extends Controller
     }
 
     public static function backgroundModal($id) {
+        // echo "PASS";
         return view('novel.read.background_modal')->with('id', $id);
     }
 }

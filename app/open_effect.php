@@ -17,7 +17,7 @@ class open_effect extends Model
                     'timetable_id' => (int)$table_id,
                     'affect_table' => "characters",
                     'affect_id' => (int)$data['characters']['id'][$i],
-                    'affect_content' => $data['characters']['content'][$i],
+                    'affect_content' => (string)$data['characters']['content'][$i],
                 ];
                 // echo((int)$data['characters']['id'][$i]);
                 DB::table('open_effects')->insert($dataSet);
@@ -31,7 +31,7 @@ class open_effect extends Model
                     'timetable_id' => (int)$table_id,
                     'affect_table' => "items",
                     'affect_id'=>(int)$data['items']['id'][$i],
-                    'affect_content'=>$data['items']['content'][$i],
+                    'affect_content'=>(string)$data['items']['content'][$i],
                 ];
                 // echo((int)$data['characters']['id'][$i]);
                 DB::table('open_effects')->insert($dataSet);
@@ -45,7 +45,7 @@ class open_effect extends Model
                     'timetable_id'=>(int)$table_id,
                     'affect_table'=>"maps",
                     'affect_id'=>(int)$data['maps']['id'][$i],
-                    'affect_content' => $data['maps']['content'][$i],
+                    'affect_content' => (string)$data['maps']['content'][$i],
                 ];
                 // var_dump($dataSet);
                 DB::table('open_effects')->insert($dataSet);
@@ -58,7 +58,7 @@ class open_effect extends Model
                     'timetable_id'=>(int)$table_id,
                     'affect_table'=>"relations",
                     'affect_id'=>(int)$data['relations']['id'][$i],
-                    'affect_content' => $data['relations']['content'][$i],
+                    'affect_content' => (string)$data['relations']['content'][$i],
                 ];
                 // var_dump($dataSet);
                 DB::table('open_effects')->insert($dataSet);

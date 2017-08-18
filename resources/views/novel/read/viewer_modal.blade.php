@@ -10,21 +10,21 @@
                     {{-- Screen MODE --}}
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-2 text-left">
-                                <h5><strong>화면 모드</strong></h5>
-                            </div>
-                            <div class="col-md-7 text-left">
+                            {{--  <div class="col-md-2 text-left">  --}}
+                                {{--  <h5><strong>화면 모드</strong></h5>  --}}
+                            {{--  </div>  --}}
+                            {{--  <div class="col-md-7 text-left">  --}}
                                 {{-- 50px x 50px 화면 모드 이미지 버튼 2개 --}}
-                                <ul class="list-inline">
-                                    <li class="viewScreen webMode viewOn">
+                                {{--  <ul class="list-inline">  --}}
+                                    {{--  <li class="viewScreen webMode viewOn">  --}}
                                         {{-- WEB MODE --}}
-                                    </li>
+                                    {{--  </li>  --}}
                                     {{-- <li class="viewScreen bookMode viewOff"> --}}
                                         {{-- E-Book MODE --}}
                                     {{-- </li> --}}
-                                </ul>
-                            </div>
-                            <div class="col-md-3 text-right">
+                                {{--  </ul>
+                            </div>  --}}
+                            <div class="col-md-12 text-right">
                                 <button type="button" class="btn btn-default" name="reset"><i class="material-icons">settings_backup_restore</i>원래대로</button>
                             </div>
                         </div>

@@ -10,7 +10,7 @@ function character_info(data) {
                     if (!$(this).hasClass("selectedImg")) {
                         $id = $(this).attr("id");
                         $arrayId = $id - 1;
-                        // alert($id);
+                        // alert($arrayId);
                         $(this).addClass("selectedImg");
                         $(this).siblings().removeClass("selectedImg");
 

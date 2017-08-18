@@ -20,9 +20,10 @@
                     <div class="row">
                         {{-- BLOG NOTICE START --}}
                         <div class="col-md-12 blog_notice_list text-center autoplay-notice">
+                            {{--  {{print_r($data)}}  --}}
                             @php
                                 {{-- @param DataType INT   --}}
-                                echo BlogController::mainNoticeList($data['blogOwnerId']);  
+                                {{--  echo BlogController::mainNoticeList($data['blogOwnerId']);    --}}
                             @endphp
                         </div>
                         {{-- BLOG NOTICE END --}}

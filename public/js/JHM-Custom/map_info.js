@@ -1,6 +1,6 @@
 function map_info(data) {
     $(function () {
-        $("div[name=map-info]").hide();
+        $("div[name='map-info']").hide();
 
         $test = $("div[name='map-view']").attr("name");
 
