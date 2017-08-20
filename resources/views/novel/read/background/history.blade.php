@@ -75,10 +75,15 @@
                     <strong>등장인물</strong>
                 </td>
                 <td name="event-character">
-                    @foreach ($characterList as $character)
-                        {!! $character['name'] !!}
-                        &nbsp;
-                    @endforeach
+                    @if ($data[0] == 0)
+                        <input type="hidden" value="EMPTY" />
+                    @else
+                        @foreach ($characterList as $character)
+                            {!! $character['name'] !!}
+                            &nbsp;
+                        @endforeach
+                    @endif
+                    
                 </td>
             </tr>
             <tr>
@@ -86,10 +91,14 @@
                     <strong>등장사물</strong>
                 </td>
                 <td name="event-item">
-                    @foreach ($itemList as $item)
-                        {!! $item['name'] !!}
-                        &nbsp;
-                    @endforeach
+                    @if ($data[0] == 0)
+                        <input type="hidden" value="EMPTY" />
+                    @else
+                        @foreach ($itemList as $item)
+                            {!! $item['name'] !!}
+                            &nbsp;
+                        @endforeach
+                    @endif
                 </td>
             </tr>
             <tr>
@@ -97,10 +106,14 @@
                     <strong>배경 장소</strong>
                 </td>
                 <td name="event-map">
-                    @foreach ($mapList as $map)
-                        {!! $map['name'] !!}
-                        &nbsp;
-                    @endforeach
+                    @if ($data[0] == 0)
+                        <input type="hidden" value="EMPTY" />
+                    @else
+                        @foreach ($mapList as $map)
+                            {!! $map['name'] !!}
+                            &nbsp;
+                        @endforeach
+                    @endif
                 </td>
             </tr>
 		</table>

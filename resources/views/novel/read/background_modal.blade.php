@@ -20,11 +20,11 @@
                         <div class="col-md-1 text-center">
                             {{-- Novel History --}}
                             <div data-name="collapseHistory">
-                                <h1><i class="fa fa-clock-o" aria-hidden="true" name="backgroundIcon"></i></h1>
+                                <h1><i class="fa fa-clock-o selectedIcon" aria-hidden="true" name="backgroundIcon"></i></h1>
                             </div>
                             {{-- Novel Character-Set --}}
                             <div data-name="collapseCharacter">
-                                <h1><i class="fa fa-user selectedIcon" aria-hidden="true" name="backgroundIcon"></i></h1>
+                                <h1><i class="fa fa-user" aria-hidden="true" name="backgroundIcon"></i></h1>
                             </div>
                             {{-- Novel Items --}}
                             <div data-name="collapseItem">
