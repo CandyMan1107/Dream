@@ -7,9 +7,24 @@
   crossorigin="anonymous"></script>
 <script>
 
+// $(document).ready(function(){
+// 	$(".logout").click(function(){
+// 		alert("로그아웃 성공");
+// 	});
+// });
+
 $(document).ready(function(){
 	$(".logout").click(function(){
-		alert("로그아웃 성공");
+		$.ajax({
+			url:'/logout',
+			success:function(data){
+				location.href="/"
+                alert("로그아웃 성공");
+            },
+            error:function(){
+                alert("실패");
+            }
+		})
 	});
 });
 </script>			

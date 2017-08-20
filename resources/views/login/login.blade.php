@@ -9,11 +9,20 @@
 @section('content')
 
 <script>
-// $(document).ready(function(){
-// 	$("#login").click(function(){
-// 		alert("로그인 성공");
-// 	});
-// });
+$(document).ready(function(){
+    $("#login").click(function(){
+        $.ajax({
+            url:'/login',
+            success:function(data){
+                location.href="/";
+                alert("로그인 성공");
+            },
+            error:function(){
+                alert("로그인 실패");
+            }
+        });
+    });
+});
 
 </script>
 
@@ -43,7 +52,8 @@
                     
                     <div class="form-group">
                         <div class="col-md-8 col-md-offset-4">
-                            <button id="login" type="submit" class="btn btn-primary" name="login">
+                            <!-- <button id="login" type="submit" class="btn btn-primary" name="login"> -->
+                            <button id="login" class="btn btn-primary" name="login">
                                 로그인
                             </button>
 
