@@ -3,12 +3,13 @@ var event_id = 0;
 function item_event(data){
     $(document).ready(function(){
         $("img[name=item_icon]").each(function(e,i){
-            $('.item_list').click(function(){
+            $(this).click(function(){
                 if(!$(this).hasClass("selected")){
                     $(this).addClass("selected");
                    
                     $(this).siblings().removeClass("selected");
                 }
+                // console.log(e);
                 event_id = $(this).attr("id")-1;
                 $('.refer_info').remove();
                 $('#name').text("사물 정보");
