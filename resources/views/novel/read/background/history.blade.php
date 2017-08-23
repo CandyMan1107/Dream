@@ -25,7 +25,7 @@
             @endif
 		</ul>
     </div>
-    
+
     <div class="col-md-6" name="history-info">
         <table class="table">
             <tr>
@@ -54,22 +54,28 @@
                     </ul>
                 </td>
             </tr>  --}}
+            {{--
             <tr>
                 <td>
                     <strong>기타</strong>
                 </td>
                 <td name="event-other">
-                    {{-- OTHER --}}
+                    // OTHER
                 </td>
             </tr>
+            --}}
+
+            {{--
             <tr>
                 <td>
                     <strong>기간</strong>
                 </td>
                 <td name="event-day">
-                    {{-- START DAY ~ END DAY --}}
+                    // START DAY ~ END DAY 
                 </td>
             </tr>
+            --}}
+
             <tr>
                 <td>
                     <strong>등장인물</strong>
@@ -79,11 +85,11 @@
                         <input type="hidden" value="EMPTY" />
                     @else
                         @foreach ($characterList as $character)
-                            {{--  {!! $character['name'] !!}  --}}
+                              {!! $character['name'] !!}
                             &nbsp;
                         @endforeach
                     @endif
-                    
+
                 </td>
             </tr>
             <tr>
@@ -95,7 +101,7 @@
                         <input type="hidden" value="EMPTY" />
                     @else
                         @foreach ($itemList as $item)
-                            {{--  {!! $item['name'] !!}  --}}
+                              {!! $item['name'] !!}
                             &nbsp;
                         @endforeach
                     @endif
@@ -110,7 +116,7 @@
                         <input type="hidden" value="EMPTY" />
                     @else
                         @foreach ($mapList as $map)
-                            {{--  {!! $map['name'] !!}  --}}
+                            {!! $map['name'] !!}
                             &nbsp;
                         @endforeach
                     @endif

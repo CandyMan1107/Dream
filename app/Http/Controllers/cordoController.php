@@ -400,20 +400,33 @@ public function getBackgroundSettingsMaps(Request $request){
   }
 
   public function getBackgroundSettingsRelations(Request $request){
-    $backgroundData = DB::table('relations')->get();
+    $backgroundData = DB::table('open_relation_lists')->get();
     $data = array(array());
 
     $i = 0;
     foreach ($backgroundData as $datas){
-      $data[$i]['relnum'] = $datas->relnum;
-      $data[$i]['source'] = $datas->source;
-      $data[$i]['target'] = $datas->target;
-      $data[$i]['relationship'] = $datas->relationship;
-
+      $data[$i]['title'] = $datas->title;
+      $data[$i]['cover_src'] = $datas->cover_src;
       $i++;
     }
     return $data;
   }
+
+  // public function getBackgroundSettingsRelations(Request $request){
+  //   $backgroundData = DB::table('open_relation_lists')->get();
+  //   $data = array(array());
+  //
+  //   $i = 0;
+  //   foreach ($backgroundData as $datas){
+  //     $data[$i]['relnum'] = $datas->relnum;
+  //     $data[$i]['source'] = $datas->source;
+  //     $data[$i]['target'] = $datas->target;
+  //     $data[$i]['relationship'] = $datas->relationship;
+  //
+  //     $i++;
+  //   }
+  //   return $data;
+  // }
 
   //유저의 포인트를 구매
   public function setPoint(Request $request){
