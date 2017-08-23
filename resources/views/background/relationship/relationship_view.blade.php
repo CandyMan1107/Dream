@@ -189,7 +189,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						<h3 class="modal-title" id="lineModalLabel">지도 리스트</h3>
+						<h3 class="modal-title" id="lineModalLabel">관계 리스트</h3>
 					</div>
 					<div class="modal-body">
 						<div class="map-list">
@@ -273,7 +273,7 @@
 		</div>
 
 
-	{{-- 태그 div.row 닫는 태그 --}}
+	{{-- 태그 div.row 닫는 태그 --}}d
 	</div>
 
 	<script src ="{{url(asset('js/jscolor.js?ver=1'))}}"></script>
@@ -840,71 +840,72 @@
 
 
 			// 맵 정보 저장 + 맵 리스트에 요소 형성
-			$("#saveMapBtn").on("click",function(){
-				var title = $("#saveMapTitle").val();
-				if(title.length <= 0){
-					$("#titleWarning").modal("show");
-				} else {
+			// $("#saveMapBtn").on("click",function(){
+			// 	var title = $("#saveMapTitle").val();
+			// 	if(title.length <= 0){
+			// 		$("#titleWarning").modal("show");
+			// 	} else {
+			//
+			// 		// 이미지 blob 생성
+			// 		d3.select('.mind-area').attr("style","background-color:white;");
+			// 		var doctype = '<?xml version="1.0" standalone="no"?>'
+			// 			+ '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
+			// 		var source = (new XMLSerializer()).serializeToString(d3.select('.mind-area').node());
+			// 		var blob = new Blob([ doctype + source], { type: 'image/svg+xml;charset=utf-8' });
+			// 		var url = window.URL.createObjectURL(blob);
+			// 		console.log(source);
+			// 		d3.select('.mind-area').attr("style","background-color:none;");
+			//
+			// 		// Put the svg into an image tag so that the Canvas element can read it in.
+			// 		var img = d3.select('body').append('img')
+			// 		 .attr('width', 0)
+			// 		 .attr('height', 0)
+			// 		 .node();
+			//
+			// 		img.onload = function(){
+			// 			// Now that the image has loaded, put the image into a canvas element.
+			// 			var canvas = d3.select('body').append('canvas').classed("cavs",true).node();
+			// 			canvas.width = width;
+			// 			canvas.height = height;
+			// 			var ctx = canvas.getContext('2d');
+			// 			ctx.drawImage(img, 0, 0);
+			// 			var canvasUrl = canvas.toDataURL("image/png");
+			// 			$(".cavs").hide();
+			// 			// 맵 등록 요청
+			//
+			// 			// var gridInfos = getGridsInfo();
+			// 			// var textInfos = getTextsInfo();
+			// 			$.ajaxSetup({
+			// 				headers: {
+			// 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			// 				}
+			// 			});
+			//
+			// 			$.ajax({
+			// 				url: "addRelation",
+			// 				type: "post",
+			// 				async: false,
+			// 				data: {
+			// 					"canvasUrl" : canvasUrl,
+			// 					"title"			: title,
+			// 					"relInfos"  : links
+			// 				},
+			// 				success: function(data){
+			// 					var mapId = data.split("/")[0];
+			// 					var createdAt = data.split("/")[1]
+			// 					var createEle = createMapEle(mapId, title, canvasUrl, createdAt);
+			// 					$(".map-list").append(createEle);
+			// 					//setJscolor();
+			// 					setMapListEvent()
+			// 					console.log(data);
+			// 				}
+			// 			});
+			//
+			// 		}
+			// 		img.src = url;
+			// 	}
+			// });
 
-					// 이미지 blob 생성
-					d3.select('.mind-area').attr("style","background-color:white;");
-					var doctype = '<?xml version="1.0" standalone="no"?>'
-						+ '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">';
-					var source = (new XMLSerializer()).serializeToString(d3.select('.mind-area').node());
-					var blob = new Blob([ doctype + source], { type: 'image/svg+xml;charset=utf-8' });
-					var url = window.URL.createObjectURL(blob);
-					console.log(source);
-					d3.select('.mind-area').attr("style","background-color:none;");
-
-					// Put the svg into an image tag so that the Canvas element can read it in.
-					var img = d3.select('body').append('img')
-					 .attr('width', 0)
-					 .attr('height', 0)
-					 .node();
-
-					img.onload = function(){
-						// Now that the image has loaded, put the image into a canvas element.
-						var canvas = d3.select('body').append('canvas').classed("cavs",true).node();
-						canvas.width = width;
-						canvas.height = height;
-						var ctx = canvas.getContext('2d');
-						ctx.drawImage(img, 0, 0);
-						var canvasUrl = canvas.toDataURL("image/png");
-						$(".cavs").hide();
-						// 맵 등록 요청
-
-						// var gridInfos = getGridsInfo();
-						// var textInfos = getTextsInfo();
-						$.ajaxSetup({
-							headers: {
-								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-							}
-						});
-
-						$.ajax({
-							url: "addRelation",
-							type: "post",
-							async: false,
-							data: {
-								"canvasUrl" : canvasUrl,
-								"title"			: title,
-								"relInfos"  : links
-							},
-							success: function(data){
-								var mapId = data.split("/")[0];
-								var createdAt = data.split("/")[1]
-								var createEle = createMapEle(mapId, title, canvasUrl, createdAt);
-								$(".map-list").append(createEle);
-								//setJscolor();
-								setMapListEvent()
-								console.log(data);
-							}
-						});
-
-					}
-					img.src = url;
-				}
-			});
 
 			// 맵 정보 삭제 + 맵 리스트에 요소 삭제
 			$("#deleteMapBtn").on("click",function(){
@@ -943,7 +944,7 @@
 					data: {},
 					success: function(data){
 						data.forEach(function(d){
-							var coverSrc = "{{URL::asset('/')}}" + "img/background/RelationImg/" + d.cover_src;
+							var coverSrc = "{{URL::asset('/')}}" + "img/background/relationImg/" + d.cover_src;
 							var createEle = createMapEle(d.background_id, d.title, coverSrc, d.created_at);
 							$(".map-list").append(createEle);
 						});
@@ -1169,7 +1170,164 @@
 				 });
 			 });
 
+
+
+			 // 맵 정보 저장 + 맵 리스트에 요소 형성
+			 $("#saveMapBtn").on("click", parseImages);
+
+			 var canvasSvg = document.querySelector('svg');
+			 var doSomethingWith = function(canvas) {
+				 var title = $("#saveMapTitle").val();
+				 var canvasUrl = canvas.toDataURL("image/png");
+ 				if(title.length <= 0){
+ 					$("#titleWarning").modal("show");
+ 				} else {
+ 						$.ajaxSetup({
+ 							headers: {
+ 								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+ 							}
+ 						});
+
+ 						$.ajax({
+ 							url: "addRelation",
+ 							type: "post",
+ 							async: false,
+ 							data: {
+ 								"canvasUrl" : canvasUrl,
+ 								"title"			: title,
+ 								"relInfos"  : links
+ 							},
+ 							success: function(data){
+ 								var mapId = data.split("/")[0];
+ 								var createdAt = data.split("/")[1]
+ 								var createEle = createMapEle(mapId, title, canvasUrl, createdAt);
+ 								$(".map-list").append(createEle);
+ 								//setJscolor();
+ 								setMapListEvent()
+ 								console.log(data);
+ 							}
+ 						});
+ 				}
+			 };
+			 function parseImages() {
+				 d3.select('.mind-area').attr("style","background-color:white;");
+			   var xlinkNS = "http://www.w3.org/1999/xlink";
+			   var total, encoded;
+			   // convert an external bitmap image to a dataURL
+			   var toDataURL = function(image) {
+
+			     var img = new Image();
+			     img.crossOrigin = 'anonymous';
+
+			     img.onload = function() {
+			       // we should now be able to draw it without tainting the canvas
+			       var canvas = document.createElement('canvas');
+			       canvas.width = this.width;
+			       canvas.height = this.height;
+			       // draw the loaded image
+			       canvas.getContext('2d').drawImage(this, 0, 0);
+			       // set our <image>'s href attribute to the dataURL of our canvas
+			       image.setAttributeNS(xlinkNS, 'href', canvas.toDataURL("image/png"));
+			       // that was the last one
+			       if (++encoded === total) exportDoc();
+			     };
+
+			     // No CORS set in the response
+			     img.onerror = function() {
+			       // save the src
+			       var oldSrc = this.src;
+			       // there is an other problem
+			       this.onerror = function() {
+			         console.warn('failed to load an image at : ', this.src);
+			         if (--total === encoded && encoded > 0) exportDoc();
+			       };
+			       // remove the crossorigin attribute
+			       this.removeAttribute('crossorigin');
+			       // retry
+			       this.src = '';
+			       this.src = oldSrc;
+			     };
+			     // load our external image into our img
+			     var href = image.getAttributeNS(xlinkNS, 'href');
+			     // really weird bug that appeared since this answer was first posted
+			     // we need to force a no-cached request for the crossOrigin be applied
+			     img.src = href + (href.indexOf('?') > -1 ? + '&1': '?1');
+			   };
+
+			   // get an external svg doc to data String
+			   var parseFromUrl = function(url, element) {
+			     var xhr = new XMLHttpRequest();
+			     xhr.onload = function() {
+			       if (this.status === 200) {
+			         var response = this.responseText || this.response;
+			         var dataUrl = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(response);
+			         element.setAttributeNS(xlinkNS, 'href', dataUrl);
+			         if (++encoded === total) exportDoc();
+			       }
+			       // request failed with xhr, try as an <img>
+			       else {
+			         toDataURL(element);
+			       }
+			     };
+			     xhr.onerror = function() {
+			       toDataURL(element);
+			     };
+			     xhr.open('GET', url);
+			     xhr.send();
+			   };
+
+			   var images = canvasSvg.querySelectorAll('image');
+			   total = images.length;
+			   encoded = 0;
+
+			   // loop through all our <images> elements
+			   for (var i = 0; i < images.length; i++) {
+			     var href = images[i].getAttributeNS(xlinkNS, 'href');
+			     // check if the image is external
+			     if (href.indexOf('data:image') < 0) {
+			       // if it points to another svg element
+			       if (href.indexOf('.svg') > 0) {
+			         parseFromUrl(href, images[i]);
+			       } else // a pixel image
+			         toDataURL(images[i]);
+			     }
+			     // else increment our counter
+			     else if (++encoded === total) exportDoc();
+			   }
+			   // if there were no <image> element
+			   if (total === 0) exportDoc();
+				 d3.select('.mind-area').attr("style","background-color:none;");
+			 }
+			 var exportDoc = function() {
+			   // check if our svgNode has width and height properties set to absolute values
+			   // otherwise, canvas won't be able to draw it
+			   var bbox = canvasSvg.getBoundingClientRect();
+
+			   if (canvasSvg.width.baseVal.unitType !== 1) canvasSvg.setAttribute('width', bbox.width);
+			   if (canvasSvg.height.baseVal.unitType !== 1) canvasSvg.setAttribute('height', bbox.height);
+
+			   // serialize our node
+			   var svgData = (new XMLSerializer()).serializeToString(canvasSvg);
+			   // remember to encode special chars
+			   var svgURL = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData);
+
+			   var svgImg = new Image();
+
+			   svgImg.onload = function() {
+			     var canvas = document.createElement('canvas');
+			     // IE11 doesn't set a width on svg images...
+			     canvas.width = this.width || bbox.width;
+			     canvas.height = this.height || bbox.height;
+
+			     canvas.getContext('2d').drawImage(svgImg, 0, 0, canvas.width, canvas.height);
+			     doSomethingWith(canvas)
+			   };
+
+			   svgImg.src = svgURL;
+			 };
+
 	});
+
 
 	</script>
 @endsection
