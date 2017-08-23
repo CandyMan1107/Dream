@@ -44,16 +44,16 @@
                     {{-- EVENT CONTENT --}}
                 </td>
             </tr>
-            <tr>
+            {{--  <tr>
                 <td>
                     <strong>작가의 설정</strong>
                 </td>
                 <td>
                     <ul name="event-refer_info" class="list-unstyled">
-                        {{-- REFER INFO --}}
+                        // REFER INFO
                     </ul>
                 </td>
-            </tr>
+            </tr>  --}}
             <tr>
                 <td>
                     <strong>기타</strong>
@@ -79,7 +79,7 @@
                         <input type="hidden" value="EMPTY" />
                     @else
                         @foreach ($characterList as $character)
-                            {!! $character['name'] !!}
+                            {{--  {!! $character['name'] !!}  --}}
                             &nbsp;
                         @endforeach
                     @endif
@@ -95,7 +95,7 @@
                         <input type="hidden" value="EMPTY" />
                     @else
                         @foreach ($itemList as $item)
-                            {!! $item['name'] !!}
+                            {{--  {!! $item['name'] !!}  --}}
                             &nbsp;
                         @endforeach
                     @endif
@@ -110,7 +110,7 @@
                         <input type="hidden" value="EMPTY" />
                     @else
                         @foreach ($mapList as $map)
-                            {!! $map['name'] !!}
+                            {{--  {!! $map['name'] !!}  --}}
                             &nbsp;
                         @endforeach
                     @endif
