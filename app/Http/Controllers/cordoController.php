@@ -400,7 +400,7 @@ public function getBackgroundSettingsMaps(Request $request){
   }
 
   public function getBackgroundSettingsRelations(Request $request){
-    $backgroundData = DB::table('open_relation_lists')->get();
+    $backgroundData = DB::table('relations')->get();
     $data = array(array());
 
     $i = 0;
