@@ -20,7 +20,7 @@ function history_info(data) {
                         $("div[name=history-info]").show();
 
                         $refer_str = data[$arrayId]['refer_info'];
-                        $refer = $refer_str.split("^");
+                        // $refer = $refer_str.split("^");
 
                         $start_day = data[$arrayId]['start_day'];
                         $end_day = data[$arrayId]['end_day']
@@ -30,7 +30,7 @@ function history_info(data) {
                         $("td[name='event-content']").append(data[$arrayId]['event_content']);
 
                         for ($i = 0; $i < $refer.length; $i++) {
-                            $("ul[name='event-refer_info']").append("<li>" + $refer[$i] + "</li>");
+                            // $("ul[name='event-refer_info']").append("<li>" + $refer[$i] + "</li>");
                         }
 
                         $("td[name='event-other']").append(data[$arrayId]['other']);

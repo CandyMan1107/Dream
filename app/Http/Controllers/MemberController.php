@@ -16,23 +16,20 @@ class MemberController extends Controller
     }
     
     public function login(Request $req){
-        $user_id = $req->input('user_id');
-        
-        $name = $req->input('name');
-        $email = $req->input('email');
-        $password = $req->input('password');
+        $user_id = Input::get('user_id');
+        $password = Input::get('password');
+        $point = DB::table('users')->select("point")->where(['user_id' => $user_id])->get();
+
+        $point = $point[0]->point;
 
         $checkLogin = DB::table('users')->where(['user_id' => $user_id, 'password' => $password])->get();
         
         // 로그인 성공 시 세션 생성
         if(count($checkLogin) > 0) {
-            Session::put('user_id', $user_id, 'name', $name, 'email', $email);
-            Session::get('user_id', $user_id);
-
-            return Redirect::to('/');
+            Session::put('user_id', $user_id);
+            Session::put('point', $point);
         }
         else {
-            echo "<script>alert(\"로그인 실패\");</script>";
             return view('login.login');
         }
     }
@@ -43,25 +40,33 @@ class MemberController extends Controller
 
     // 회원가입
     public function register(Request $req) {
-        $user_id = $req->input('user_id');
-        $name = $req->input('name');
-        $email = $req->input('email');
+        $user_id = Input::get('user_id');
+        $name = Input::get('name');
+        $email = Input::get('email');
 
-        DB::table('users')->insert(
-            [
-                'user_id' => $req->get('user_id'),
-                'name' => $req->get('name'),
-                'email' => $req->get('email'),
-                'password' => $req->get('password'),
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]
-        );
-
-        Session::put('user_id', $user_id, 'name', $name, 'email', $email);
-        Session::get('user_id', $user_id);
+        $checkRegister = DB::table('users')->where(['user_id' => $user_id, 'name' => $name, 'email' => $email])->get();
         
-        return redirect('/');
+        if(count($checkRegister) > 0){
+            echo "<script>alert(\"가입 실패\");</script>";
+            return view('login.register');
+        }else {
+            DB::table('users')->insert(
+                [
+                    'user_id' => $req->get('user_id'),
+                    'name' => $req->get('name'),
+                    'email' => $req->get('email'),
+                    'password' => $req->get('password'),
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]
+            );            
+                
+            // Session::put('user_id', $user_id, 'name', $name, 'email', $email);
+            // Session::put('user_id', $user_id);
+            // Session::get('user_id', $user_id);
+            // return view('welcome');
+            return redirect('/');
+        }
     }
 
     public function mypage_index() {
@@ -77,25 +82,30 @@ class MemberController extends Controller
 
     // 회원정보 수정
     public function modify(Request $req) {
-        $modify_password = $req->input('password');
+        $user_id = Session::get('user_id');
+        $modify_password = Input::get('password');
 
+        $modify_info = DB::update('update users set password = ? where user_id = ?', [$modify_password, $user_id]);
         // $modify = DB::update('update users set name = ?, password = ?', [$modify_name, $modify_password]);
-        $modify_info = DB::update('update users set password = ?', [$modify_password]);
 
         return redirect('/mypage');
     }
 
     public function point_add(Request $req) {
-        $point_select = $req->input('point');
+        $user_id = Session::get('user_id');
+        $session_point = Session::get('point');
 
-        $point_added = DB::update('update users set point = ?', [$point_select]);
-        
-        return redirect('/mypage');
+        $point_select = Input::get('selceted'); // 원래 대는 코드
+
+        $point_added = DB::update('update users set point = ? where user_id = ?', [$point_select+$session_point, $user_id]);
+        $point = Session::put('point', $point_select+$session_point);
+    
+        // return redirect('/mypage');
     }
 
     //로그아웃
     public function logout(Request $req) {
         $req->session()->flush();
-        return redirect('/');
+        // return redirect('/');
     }
 }

@@ -136,7 +136,11 @@ class cordoController extends Controller
   //해당 소설을 작성한 작가 아이디 가져오기
   public function getUserIdOfNovel(Request $request){
     $novel_id = $request->input('id');
-    $task = DB::table('novel_writers')->where('novel_id', '=', $novel_id)->get();
+    $task = DB::table('users')
+                    ->join('novel_writers', 'users.user_id', '=', 'novel_writers.user_id')
+                    ->select('users.*')
+                    ->where('novel_writers.novel_id', '=', $novel_id)
+                    ->get();
     return $task;
   }
 
@@ -150,33 +154,134 @@ class cordoController extends Controller
   //블로그 정보 가져오기
   public function getUserIdOfBlogInfo(Request $request){
     $user_id = $request->input('id');
-    $task = DB::table('blogs')->select()->where('id', '=', $user_id)->get();
+    $task = DB::table('blogs')
+                    ->join('user_blog_relations', 'blogs.id', '=', 'user_blog_relations.blog_id')
+                    ->select('blogs.*')
+                    ->where('user_blog_relations.user_id', '=', $user_id)
+                    ->orderBy('id', 'desc')
+                    ->get();
     return $task;
   }
 
   //블로그와 카테고리 연동하기(블로그-메뉴 조인)
   public function getBlogOfMenuJoinInfo(Request $request){
     $blog_id = $request->input('id');
-    $task = DB::table('blog_menu_relations')->select()->where('blog_id', '=', $blog_id)->get();
+    $task = DB::table('blog_menus')
+                    ->join('blog_menu_relations', 'blog_menus.id', '=', 'blog_menu_relations.blog_menu_id')
+                    ->select('blog_menus.*')
+                    ->where('blog_menu_relations.blog_id', '=', $blog_id)
+                    ->get();
     return $task;
   }
 
-  //카테고리목록가져오기(메뉴목록가져오기)
-  public function getCategoryInfo(Request $request){
-    $blog_menu_id = $request->input('id');
-    $task = DB::table('blog_menus')->select()->where('id', '=', $blog_menu_id)->get();
-    return $task;
+
+  //카테고리와 게시물 연동하여 메뉴 아이디 게시판 아이디 입력(메뉴-게시판 조인)
+  public function insertMenuOfBoardJoinInfo(Request $request){
+    $blog_menu_id = $request->input('menuId');
+    $blog_board_id = $request->input('boardId');
+    DB::table('menu_board_relations')->insert([
+      "blog_menu_id" => $blog_menu_id,
+      "blog_board_id" => $blog_board_id
+    ]);
   }
 
-  //카테고리와 게시물 연동하기(메뉴-게시판 조인)
+  //카테고리와 게시물 연동하기(메뉴-게시판)
   public function getMenuOfBoardJoinInfo(Request $request){
-    $blog_menu_id = $request->input('id');
-    $task = DB::table('menu_board_relations')->select()->where('blog_menu_id', '=', $blog_menu_id)->get();
+    $task = DB::table('blog_boards')
+                    ->join('menu_board_relations', 'blog_boards.id', '=', 'menu_board_relations.blog_board_id')
+                    ->select('blog_boards.*')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
     return $task;
   }
+
+  //게시판 글쓰기
+  public function insertBoardWrite(Request $request){
+    $title = $request->input('titleVal');
+    $readInfo = $request->input('contentVal');
+    $noticeCheck = $request->input('CheckResult');
+    DB::table('blog_boards')->insert([
+      "board_title" => $title,
+      "board_content" => $readInfo,
+      "is_notice" => $noticeCheck
+    ]);
+    $task = DB::table('blog_boards')->select()->orderBy('id', 'desc')->limit('1')->get();
+    return $task;
+  }
+
+  //게시물 정보 가져오기
+  public function getContentReadInfo(Request $request){
+    $board_id = $request->input('id');
+    $task = DB::table('blog_boards')->select()->where('id', '=', $board_id)->get();
+    return $task;
+  }
+
+  //블로그 아이디로 메뉴(카테고리)아이디 정보가져오기
+  public function getBoardOfMenuInfo(Request $request){
+    $board_id = $request->input('id');
+    $task = DB::table('blog_menus')
+                    ->join('menu_board_relations', 'blog_menus.id', '=', 'menu_board_relations.blog_menu_id')
+                    ->select('blog_menus.*')
+                    ->where('menu_board_relations.blog_board_id', '=', $board_id)
+                    ->get();
+    return $task;
+  }
+
+  //독자 게시판 메뉴 연결하기(블로그 - 독자메뉴 조인)
+  public function getCommunicationMenuJoinInfo(Request $request){
+    $blog_id = $request->input('id');
+    $task = DB::table('communication_menus')
+                    ->join('blog_communication_relations', 'communication_menus.id', '=', 'blog_communication_relations.communication_id')
+                    ->select('communication_menus.*')
+                    ->where('blog_communication_relations.blog_id', '=', $blog_id)
+                    ->get();
+    return $task;
+  }
+
+  //독자 게시판과 독자의 게시글 연결하여 정보 받아오기(독자메뉴 - 독자게시글 조인)
+  public function getCommunicationBoardJoinInfo(Request $request){
+    $task = DB::table('communication_boards')
+                    ->join('communication_relations', 'communication_boards.id', '=', 'communication_relations.board_id')
+                    ->select('communication_boards.*')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+    return $task;
+  }
+
+  //독자 게시판에 글쓰기
+  public function insertUserBoarWrite(Request $request){
+    $title = $request->input('titleVal');
+    $readInfo = $request->input('contentVal');
+    $userName = $request->input('userName');
+    DB::table('communication_boards')->insert([
+      "board_title" => $title,
+      "board_content" => $readInfo,
+      "writer_name" => $userName
+    ]);
+    $task = DB::table('communication_boards')->select()->orderBy('id', 'desc')->limit('1')->get();
+    return $task;
+  }
+
+  //독자게시판 메뉴와 독자게시판 게시글 등록
+  public function insertCommunicationMenuOfBoardRelation(Request $request){
+    $user_board_menu_id = $request->input('menuId');
+    $user_board_id = $request->input('boardId');
+    DB::table('communication_relations')->insert([
+      "communication_id" => $user_board_menu_id,
+      "board_id" => $user_board_id
+    ]);
+  }
+
+  //유저 게시물 정보 가져오기
+  public function getUserContentReadInfo(Request $request){
+    $board_id = $request->input('id');
+    $task = DB::table('communication_boards')->select()->where('id', '=', $board_id)->get();
+    return $task;
+  }
+
 
   public function getBackgroundSettingsHistoryGraph(Request $request){
-    $backgroundData = DB::table('timetables')->get();
+    $backgroundData = DB::table('open_timetables')->get();
     $data = array(array());
 
     $i = 0;
@@ -197,7 +302,7 @@ class cordoController extends Controller
   }
 
   public function getBackgroundSettingsHistoryCharacters(Request $request){
-    $backgroundData = DB::table('characters')->get();
+    $backgroundData = DB::table('open_characters')->get();
     $data = array(array());
 
     $i = 0;
@@ -212,7 +317,7 @@ class cordoController extends Controller
   }
 
   public function getBackgroundSettingsHistoryItems(Request $request){
-    $backgroundData = DB::table('items')->get();
+    $backgroundData = DB::table('open_items')->get();
     $data = array(array());
 
     $i = 0;
@@ -227,7 +332,7 @@ class cordoController extends Controller
   }
 
   public function getBackgroundSettingsHistoryMaps(Request $request){
-    $backgroundData = DB::table('maps')->get();
+    $backgroundData = DB::table('open_maps')->get();
     $data = array(array());
 
     $i = 0;
@@ -242,26 +347,26 @@ class cordoController extends Controller
   }
 
   public function getBackgroundSettingsCharacters(Request $request){
-    $backgroundData = DB::table('characters')->get();
+    $backgroundData = DB::table('open_characters')->get();
     $data = array(array());
 
     $i = 0;
     foreach ($backgroundData as $datas){
-      $data[$i]['id'] = $datas->cha_id;
+      $data[$i]['id'] = $datas->id;
       $data[$i]['name'] = $datas->name;
       $data[$i]['info'] = $datas->info;
       $data[$i]['age'] = $datas->age;
       $data[$i]['gender'] = $datas->gender;
-      $data[$i]['refer_info'] = $datas->name;
+      //$data[$i]['refer_info'] = $datas->name;
       $data[$i]['img_src'] = $datas->img_src;
 
-        $i++;
+      $i++;
     }
     return $data;
   }
 
   public function getBackgroundSettingsItems(Request $request){
-    $backgroundData = DB::table('items')->get();
+    $backgroundData = DB::table('open_items')->get();
     $data = array(array());
 
     $i = 0;
@@ -278,7 +383,7 @@ class cordoController extends Controller
     return $data;
   }
 public function getBackgroundSettingsMaps(Request $request){
-    $backgroundData = DB::table('maps')->get();
+    $backgroundData = DB::table('open_maps')->get();
     $data = array(array());
 
     $i = 0;
@@ -295,20 +400,33 @@ public function getBackgroundSettingsMaps(Request $request){
   }
 
   public function getBackgroundSettingsRelations(Request $request){
-    $backgroundData = DB::table('relations')->get();
+    $backgroundData = DB::table('open_relation_lists')->get();
     $data = array(array());
 
     $i = 0;
     foreach ($backgroundData as $datas){
-      $data[$i]['relnum'] = $datas->relnum;
-      $data[$i]['source'] = $datas->source;
-      $data[$i]['target'] = $datas->target;
-      $data[$i]['relationship'] = $datas->relationship;
-
+      $data[$i]['title'] = $datas->title;
+      $data[$i]['cover_src'] = $datas->cover_src;
       $i++;
     }
     return $data;
   }
+
+  // public function getBackgroundSettingsRelations(Request $request){
+  //   $backgroundData = DB::table('open_relation_lists')->get();
+  //   $data = array(array());
+  //
+  //   $i = 0;
+  //   foreach ($backgroundData as $datas){
+  //     $data[$i]['relnum'] = $datas->relnum;
+  //     $data[$i]['source'] = $datas->source;
+  //     $data[$i]['target'] = $datas->target;
+  //     $data[$i]['relationship'] = $datas->relationship;
+  //
+  //     $i++;
+  //   }
+  //   return $data;
+  // }
 
   //유저의 포인트를 구매
   public function setPoint(Request $request){
@@ -319,18 +437,18 @@ public function getBackgroundSettingsMaps(Request $request){
     $final_point = $point + $current_point;
 
     if($first == 0){
-      DB::table('user_point')->insert([
+      DB::table('users')->insert([
         "user_id" => $user_id,
         "point" => 0
       ]);
     }else if($first == 1){
-      DB::table('user_point')->where('user_id',$user_id)->update(array('point' => $final_point));
+      DB::table('users')->where('user_id','=',$user_id)->update(array('point' => $final_point));
     }
   }
   //유저의 포인트를 가져오기
   public function getPoint(Request $request){
     $user_id = $request->input('user_id');
-    $task = DB::table('user_point')->where('user_id', '=', $user_id)->get();
+    $task = DB::table('users')->where('user_id', '=', $user_id)->get();
     return $task;
   }
   //유저의 포인트를 수정
@@ -338,10 +456,37 @@ public function getBackgroundSettingsMaps(Request $request){
     $point = $request->input('current_point');
     $update_point = $point - 100;
     $user_id = $request->input('user_id');
-    DB::table('user_point')->where('user_id',$user_id)->update(array('point'=>$update_point));
-    $task = DB::table('user_point')->where('user_id', '=', $user_id)->get();
+    DB::table('users')->where('user_id','=',$user_id)->update(array('point'=>$update_point));
+    $task = DB::table('users')->where('user_id', '=', $user_id)->get();
     return $task;
   }
+
+  //관심등록 설정
+  public function setFavorite(Request $request){
+    $user_id = $request->input('user_id');
+    $novel_id = $request->input('novel_id');
+    DB::table('add_favorite')->insert([
+      "user_id" => $user_id,
+      "novel_id" => $novel_id
+    ]);
+  }
+  //관심등록 삭제
+  public function delFavorite(Request $request){
+    $user_id = $request->input('user_id');
+    $novel_id = $request->input('novel_id');
+    DB::table('add_favorite')->where('user_id','=',$user_id)->where('novel_id','=',$novel_id)->delete();
+  }
+
+  //관심등록된 소설 가져오기
+  public function getFavorite(Request $request){
+    $user_id = $request->input('user_id');
+    $task = DB::table('add_favorite')->where('user_id','=',$user_id)->get();
+    return $task;
+  }
+
+
+
+
 
   //캐릭터 정보 가져오기
 //   public function getCharactersInfo(){
