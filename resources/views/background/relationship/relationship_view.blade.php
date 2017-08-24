@@ -474,8 +474,6 @@
 					resetInput();
 					selectedNameInput.val(selectedName);
 				}
-
-
 			}
 
 
@@ -1026,7 +1024,7 @@
 							});
 							$(".character-list > img").remove();
 							chaInfos.forEach(function(ci){
-								var nodeEle = "<img src={{URL::asset($imgRoot)}}" + ci.img_src + " id='chaNode" + ci.cha_id + "' class='chanode img-circle img-things-size draggable'>";
+								var nodeEle = "<img src={{URL::asset($imgRoot)}}/" + ci.img_src + " id='chaNode" + ci.cha_id + "' class='chanode img-circle img-things-size draggable'>";
 								$(".character-list").append(nodeEle);
 							});
 							$( ".draggable" ).draggable({
@@ -1204,6 +1202,7 @@
  								$(".map-list").append(createEle);
  								//setJscolor();
  								setMapListEvent()
+								d3.select('.mind-area').attr("style","background-color:none;")
  								console.log(data);
  							}
  						});
@@ -1220,6 +1219,7 @@
 			     img.crossOrigin = 'anonymous';
 
 			     img.onload = function() {
+
 			       // we should now be able to draw it without tainting the canvas
 			       var canvas = document.createElement('canvas');
 			       canvas.width = this.width;
@@ -1230,6 +1230,7 @@
 			       image.setAttributeNS(xlinkNS, 'href', canvas.toDataURL("image/png"));
 			       // that was the last one
 			       if (++encoded === total) exportDoc();
+						 ;
 			     };
 
 			     // No CORS set in the response
@@ -1296,7 +1297,7 @@
 			   }
 			   // if there were no <image> element
 			   if (total === 0) exportDoc();
-				 d3.select('.mind-area').attr("style","background-color:none;");
+
 			 }
 			 var exportDoc = function() {
 			   // check if our svgNode has width and height properties set to absolute values
