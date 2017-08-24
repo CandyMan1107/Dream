@@ -12,7 +12,7 @@ function character_event(data){
                     $(this).siblings().removeClass("selected");
                 }
                 event_id = $(this).attr("id");
-                console.log(event_id);
+                // console.log(e);
                 $('.refer_info').remove();
                 $('#name').text("캐릭터 정보");
                 $('#character_id').val(data[e]['id']);
