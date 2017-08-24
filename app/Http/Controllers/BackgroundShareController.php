@@ -71,7 +71,7 @@ class BackgroundShareController extends Controller
     {
         //
     }
-    
+
     public function get_background($kind){
         $novel_has_open_background = new novel_has_open_background();
         $background = new Background;
@@ -88,26 +88,26 @@ class BackgroundShareController extends Controller
         $j = 0;
         // 소설에 등록된 공개 설정 된 설정 id가져오기
         $set_open_background = $novel_has_open_background->get_background_id_by_novel_id($novel_id,$kind);
-        
+
         if(isset($set_open_background[0])){
-            
+
             foreach($set_open_background as $temp_set_open_background){
                 if($temp_set_open_background->background_kind == "characters"){
                     $open_character_data = $open_character->get_open_charcter_with_ownership($temp_set_open_background->open_background_id);
                 }
-                
+
                 // 기존 설정 notin 을 위한 배열
                 $set_open_background_id[$i] = $temp_set_open_background->background_id;
                 $i++;
                 // 설정 되어 있는 설정을 불러오기 위한 처리 희망
             }
         }
-        
+
         // 공개 되지 않은 data id 가져오기
         $none_open_background = $background->get_none_open_background($novel_id,$set_open_background_id,$kind);
         // var_dump($set_open_background);
         $i = 0;
-        
+
         // character 일 경우
         if($kind == "characters") {
             $character = new Character();
@@ -128,17 +128,17 @@ class BackgroundShareController extends Controller
 
                 // 소유 사물 id 가져오기
                 $ownership_data = $ownership->get_ownership($none_open_background_data[$i]['id']);
-                
+
                 foreach($ownership_data as $temp_ownership_data) {
                     $item = new Item();
 
                     $item_id = array();
                     $item_id = explode("+",$temp_ownership_data->item_id);
-                    
+
                     for($j = 0 ; $j < count($item_id) ; $j++ ){
                         // 소유 사물 img 주소 가져오기
                         $ownership_img_src = $item->get_item_src($item_id[$j]);
-                        
+
                         foreach($ownership_img_src as $temp_ownership_img_src) {
                             $none_open_background_data[$i]['ownership_img_src'][$j] = $temp_ownership_img_src->img_src;
                             $none_open_background_data[$i]['ownership_id'][$j] = $temp_ownership_img_src->id;
@@ -216,7 +216,7 @@ class BackgroundShareController extends Controller
                         if($temp_effect_data->affect_table == "characters"){
                             $character = new Character();
                             $character_effect_data = $character->get_affect_data($temp_effect_data->affect_id);
-                            
+
                             foreach($character_effect_data as $temp_character_effect_data) {
                                 $none_open_background_data[$i][$j]['id']= $temp_effect_data->affect_id;
                                 $none_open_background_data[$i][$j]['img_src'] = $temp_character_effect_data->img_src;
@@ -260,8 +260,9 @@ class BackgroundShareController extends Controller
                         $j++;
                     }
                     $none_open_background_data[$i]['effect_count'] = $j;
+                    $i++;
                 }
-                $i++;
+
             }
         }
         // item 일 경우
@@ -297,7 +298,7 @@ class BackgroundShareController extends Controller
 
         $novel_id = $_COOKIE['novel_id'];
 
-        
+
         $character_info = array();
         // $character_info['id'] = $data['id'];
         $character_info['name'] = $data['character_name'];
@@ -315,7 +316,7 @@ class BackgroundShareController extends Controller
                 // var_dump();
                 $open_ownership->insert_open_ownership($table_id,$data['ownership_id'][$i]);
             }
-            
+
         }
         $novel_has_open_background->insert_open_relation($novel_id,"characters",$table_id,$data['id']);
         // var_dump($data);
@@ -361,7 +362,7 @@ class BackgroundShareController extends Controller
 
         $novel_id = $_COOKIE['novel_id'];
 
-        
+
         $item_info = array();
         // $character_info['id'] = $data['id'];
         $item_info['name'] = $data['item_name'];
@@ -498,7 +499,7 @@ class BackgroundShareController extends Controller
         // var_dump($affect_count);
         // var_dump($data);
         // $open_timetable_insert_id = 1;
-        
+
         for($i = 0 ; $i < $affect_count;$i++){
             $open_effect_info = array();
             if($data['affect_content'][$i] == "characters"){
@@ -506,7 +507,7 @@ class BackgroundShareController extends Controller
                 $open_effect_info['characters']['content'] = $data['affect_info'][$i];
                 // var_dump($data['affect_info'][$i]);
                 $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info,"characters");
-                
+
             }
             if($data['affect_content'][$i] == "items"){
                 $open_effect_info['items']['id'] = $data['affect_id'][$i];
@@ -517,18 +518,18 @@ class BackgroundShareController extends Controller
             if($data['affect_content'][$i] == "maps"){
                 $open_effect_info['maps']['id'] = $data['affect_id'][$i];
                 $open_effect_info['maps']['content'] = $data['affect_info'][$i];
-                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info,"maps");   
+                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info,"maps");
             }
             if($data['affect_content'][$i] == "relations"){
                 $open_effect_info['relations']['id'] = $data['affect_id'][$i];
                 $open_effect_info['relations']['content'] = $data['affect_info'][$i];
-                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info,"relations");            
+                $open_effect->insert_open_effect($open_timetable_insert_id,$open_effect_info,"relations");
             }
             // var_dump($data['affect_content'][$i]);
             // var_dump($i);
         }
-        
-        
+
+
         $novel_has_open_background->insert_open_relation($novel_id,"timetables",$open_timetable_insert_id,$data['id']);
     }
     public function get_open_timetable(){
@@ -552,7 +553,7 @@ class BackgroundShareController extends Controller
             $return_novel_open_data[$i]['end_day']= $temp_novel_open_data->end_days;
             $return_novel_open_data[$i]['other']= $temp_novel_open_data->others;
 
-            
+
             // var_dump($return_novel_open_data);
             $effect_data = $open_effect->get_open_effect_data($return_novel_open_data[$i]['id']);
             // var_dump($effect_data);
@@ -562,7 +563,7 @@ class BackgroundShareController extends Controller
                 if($temp_effect_data->affect_table == "characters"){
                     $character = new Character();
                     $character_effect_data = $character->get_affect_data($temp_effect_data->affect_id);
-                    
+
                     foreach($character_effect_data as $temp_character_effect_data) {
                         $return_novel_open_data[$i][$j]['id']= $temp_effect_data->affect_id;
                         $return_novel_open_data[$i][$j]['img_src'] = $temp_character_effect_data->img_src;
