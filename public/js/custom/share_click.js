@@ -188,6 +188,8 @@ $(document).ready(function(){
                     timetable_icon_list += "</nav>"
 
                     $('#timetable_icon').append(timetable_icon_list);
+                    // let timeline_data = array();
+
                     ready(data);
 
                     let get_open_timetable_url = 'share/get_open_timetable';

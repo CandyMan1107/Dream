@@ -17,7 +17,7 @@ google.charts.load('current', {'packages':['timeline']});
 function ready(data, num=null){
 	var datas = data;
 
-	console.log(datas[0]['event_name']);
+	// console.log(datas[0]['event_name']);
 	google.charts.setOnLoadCallback(drawChart);
 
 	function drawChart() {

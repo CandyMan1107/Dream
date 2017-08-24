@@ -260,8 +260,9 @@ class BackgroundShareController extends Controller
                         $j++;
                     }
                     $none_open_background_data[$i]['effect_count'] = $j;
+                    $i++;
                 }
-                $i++;
+                
             }
         }
         // item 일 경우
