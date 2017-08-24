@@ -157,7 +157,6 @@ class cordoController extends Controller
     $task = DB::table('blogs')
                     ->join('user_blog_relations', 'blogs.id', '=', 'user_blog_relations.blog_id')
                     ->select('blogs.*')
-                    ->where('user_blog_relations.user_id', '=', $user_id)
                     ->orderBy('id', 'desc')
                     ->get();
     return $task;
