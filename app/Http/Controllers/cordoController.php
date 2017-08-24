@@ -157,7 +157,6 @@ class cordoController extends Controller
     $task = DB::table('blogs')
                     ->join('user_blog_relations', 'blogs.id', '=', 'user_blog_relations.blog_id')
                     ->select('blogs.*')
-                    ->where('user_blog_relations.user_id', '=', $user_id)
                     ->orderBy('id', 'desc')
                     ->get();
     return $task;
@@ -302,18 +301,20 @@ class cordoController extends Controller
   }
 
   public function getBackgroundSettingsHistoryCharacters(Request $request){
-    $backgroundData = DB::table('open_characters')->get();
-    $data = array(array());
+    $timetableId = $Request->input('id');
+    $task = DB::table('open_effects')->where('id','=',$timetableId)->where('affect_table','=','characters')->get();
 
-    $i = 0;
-    foreach ($backgroundData as $datas){
-        $data[$i]['id'] = $datas->cha_id;
-        $data[$i]['name'] = $datas->name;
-        $data[$i]['img_src'] = $datas->img_src;
-
-        $i++;
-    }
-    return $data;
+    // $data = array(array());
+    //
+    // $i = 0;
+    // foreach ($backgroundData as $datas){
+    //     $data[$i]['id'] = $datas->cha_id;
+    //     $data[$i]['name'] = $datas->name;
+    //     $data[$i]['img_src'] = $datas->img_src;
+    //
+    //     $i++;
+    // }
+    return $task;
   }
 
   public function getBackgroundSettingsHistoryItems(Request $request){

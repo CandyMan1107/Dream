@@ -208,7 +208,6 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				tableEle += "	<tr>";
 				tableEle += "		<td colspan='4' class='novel-info'>";
 				tableEle += "<b>최신 등록</b> " + d.created_at + "<br>";
-				tableEle += "<b>최신 업데이트</b> " + (d.updated_at != null ? d.update_at : "0000-00-00");
 				tableEle += "		</td>";
 				tableEle += "	</tr>";
 				tableEle += "</table>";
@@ -228,14 +227,14 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				$(".background-set-btn").off().on("click",function(){
 					let novelId = $(this).attr("data-novel-id");
 
-					location.href="/background/historyTable/"+novelId+"";  
+					location.href="/background/historyTable/"+novelId+"";
 				})
-				// JJH 2017.08.01 
+				// JJH 2017.08.01
 				// onclick chapter
 				$(".chapter-set-btn").off().on("click",function(){
 					let novelId = $(this).attr("data-novel-id");
-					
-					location.href="/chapter/"+novelId+"";  
+
+					location.href="/chapter/"+novelId+"";
 				});
 			})
 		}
