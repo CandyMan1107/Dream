@@ -47,7 +47,7 @@ class MemberController extends Controller
         $checkRegister = DB::table('users')->where(['user_id' => $user_id, 'name' => $name, 'email' => $email])->get();
         
         if(count($checkRegister) > 0){
-            echo "<script>alert(\"가입 실패\");</script>";
+            echo "<script>alert(\"会員登録失敗\");</script>";
             return view('login.register');
         }else {
             DB::table('users')->insert(
@@ -106,6 +106,6 @@ class MemberController extends Controller
     //로그아웃
     public function logout(Request $req) {
         $req->session()->flush();
-        // return redirect('/');
+        return redirect('/');
     }
 }

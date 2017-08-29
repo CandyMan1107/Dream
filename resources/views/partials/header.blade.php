@@ -7,26 +7,26 @@
   crossorigin="anonymous"></script>
 <script>
 
-// $(document).ready(function(){
-// 	$(".logout").click(function(){
-// 		alert("로그아웃 성공");
-// 	});
-// });
-
 $(document).ready(function(){
 	$(".logout").click(function(){
-		$.ajax({
-			url:'/logout',
-			success:function(data){
-				location.href="/"
-                alert("로그아웃 성공");
-            },
-            error:function(){
-                alert("실패");
-            }
-		})
+		alert("ログアウト成功");
 	});
 });
+
+// $(document).ready(function(){
+// 	$(".logout").click(function(){
+// 		$.ajax({
+// 			url:'/logout',
+// 			success:function(data){
+// 				location.href="/"
+//                 alert("로그아웃 성공");
+//             },
+//             error:function(){
+//                 alert("실패");
+//             }
+// 		})
+// 	});
+// });
 </script>			
 		<style type="text/css">
 			@font-face {
@@ -53,15 +53,15 @@ $(document).ready(function(){
 							<li><a href="/yerriel/blog">Blog</a></li>
 							{{--  <li><a href="#today-novel">오늘의 웹소설</a></li>
 							<li><a href="#best-novel">베스트 웹소설</a></li>  --}}
-							<li><a href="#event">이벤트</a></li>
+							<li><a href="#event">イベント</a></li>
 							<li><a href="#about">고객센터</a></li>
 
 							@if(Session::has('user_id'))
-								<li><a class="logout" href="/logout">로그아웃</a></li>
-								<li><a href="/write_novel/my_novel">마이페이지</a></li>
+								<li><a class="logout" href="/logout">ログアウト</a></li>
+								<li><a href="/write_novel/my_novel">マイページ</a></li>
 							@else
-								<li><a class="login" href="/login">로그인</a></li>
-								<li><a href="/register">회원가입</a></li>
+								<li><a class="login" href="/login">ログイン</a></li>
+								<li><a href="/register">会員登録</a></li>
 							@endif
 						</ul>
 					</div>
