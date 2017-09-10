@@ -87,24 +87,24 @@
   <div class="write_novel_set">
     <div class="container">
       <div class="row set_row">
-        <div class="col-md-12 main_title" draggable="false">작품 목록</div>
+        <div class="col-md-12 main_title" draggable="false">小説リスト</div>
       </div>
 
       <div class="row set_row novel-container">
         <div class="col-md-12">
 					<div class="span2">
 						<div class="btn-group pull-left" data-toggle="buttons-radio">
-								<button class="btn active">통합</button>
-								<button class="btn">필명</button>
-								<button class="btn">작품명</button>
+								<button class="btn active">統合</button>
+								<button class="btn">ニックネーム</button>
+								<button class="btn">作品名</button>
 						</div>
 					</div>
 					<div class="span4">
 						<form class="form-search">
 								<div class="input-append">
 										<input type="text" class="span2 form-control">
-										<button type="submit" class="btn">검색</button>
-										&nbsp;<button type="button" class="btn" onclick="location.href='set'">소설 생성</button>
+										<button type="submit" class="btn">検索</button>
+										&nbsp;<button type="button" class="btn" onclick="location.href='set'">小説登録</button>
 								</div>
 						</form>
 					</div>
@@ -186,11 +186,11 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				var tableEle ="";
 				tableEle += "<table class='table novel-table' align='center'>";
 				tableEle += "	<tr>";
-				tableEle += "		<th>표지</th>";
-				tableEle += "		<th>제목</th>";
-				tableEle += "		<th>필명</th>";
-				tableEle += "		<th>장르</th>";
-				tableEle += "		<th>관리</th>";
+				tableEle += "		<th>カバー</th>";
+				tableEle += "		<th>タイトル</th>";
+				tableEle += "		<th>ニックネーム</th>";
+				tableEle += "		<th>ジャンル</th>";
+				tableEle += "		<th>管理</th>";
 				tableEle += "	</tr>";
 				tableEle += "	<tr>";
 				tableEle += "		<td rowspan='2'><img class='cover-img' src='{{URL::asset('upload/images')}}/"+ d.cover_img_src+ "' width='100px' height='144px'></td>";
@@ -198,16 +198,16 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				tableEle += "		<td>"+ "글반죽 "+"</td>";
 				tableEle += "		<td>"+ genre +"</td>";
 				tableEle += "		<td>"
-				tableEle += "			<button  data-toggle='collapse' href='#collapse" + d.id + "' type='button' class='btn btn-default episode-mng-btn' data-novel-id='"+d.id+"'>회차관리</button>";
-				tableEle += "			<button type='button' class='btn btn-default write-episode-btn' data-novel-id='"+d.id+"'>회차작성</button>";
-				tableEle += "			<button type='button' class='btn btn-default background-set-btn' data-novel-id='"+d.id+"'>배경설정</button>";
-				tableEle += "			<button type='button' class='btn btn-default chapter-set-btn' data-novel-id='"+d.id+"'>챕터설정</button>";
-				tableEle += " 		<button type='button' class='btn btn-default novel-modify-btn' data-novel-id='"+d.id+"'>작품수정</button>";
+				tableEle += "			<button  data-toggle='collapse' href='#collapse" + d.id + "' type='button' class='btn btn-default episode-mng-btn' data-novel-id='"+d.id+"'>作品管理</button>";
+				tableEle += "			<button type='button' class='btn btn-default write-episode-btn' data-novel-id='"+d.id+"'>小説作成</button>";
+				tableEle += "			<button type='button' class='btn btn-default background-set-btn' data-novel-id='"+d.id+"'>背景設定</button>";
+				tableEle += "			<button type='button' class='btn btn-default chapter-set-btn' data-novel-id='"+d.id+"'>チャプター設定</button>";
+				tableEle += " 		<button type='button' class='btn btn-default novel-modify-btn' data-novel-id='"+d.id+"'>作品修正</button>";
 				tableEle += " 	</td>";
 				tableEle += "	</tr>";
 				tableEle += "	<tr>";
 				tableEle += "		<td colspan='4' class='novel-info'>";
-				tableEle += "<b>최신 등록</b> " + d.created_at + "<br>";
+				tableEle += "<b>登録日</b> " + d.created_at + "<br>";
 				tableEle += "		</td>";
 				tableEle += "	</tr>";
 				tableEle += "</table>";
@@ -256,11 +256,11 @@ echo NovelEpisodeController::show($novelId, $d.id);
 						episodeCollapse += "	<div id='collapse" + novelId + "' class='panel-collapse collapse'>";
 						episodeCollapse += "		<ul class='list-group'>";
 						episodeCollapse += "			<div class='col-md-12 list-group-item'>";
-						episodeCollapse += "				<div class='col-md-1'>종류</div>";
-						episodeCollapse += "				<div class='col-md-1'>유/무료</div>";
-						episodeCollapse += "				<div class='col-md-6'>제목</div>";
-						episodeCollapse += "				<div class='col-md-2'>최초 업로드</div>";
-						episodeCollapse += "				<div class='col-md-2'>최근 수정</div>";
+						episodeCollapse += "				<div class='col-md-1'>種類</div>";
+						episodeCollapse += "				<div class='col-md-1'>有・無料</div>";
+						episodeCollapse += "				<div class='col-md-6'>タイトル</div>";
+						episodeCollapse += "				<div class='col-md-2'>最初登録日</div>";
+						episodeCollapse += "				<div class='col-md-2'>最初修正日</div>";
 						episodeCollapse += "			</div>";
 						episodeCollapse += "		</ul>"
 						data.forEach(function(d){
@@ -268,14 +268,14 @@ echo NovelEpisodeController::show($novelId, $d.id);
 							episodeCollapse += "			<div class='col-md-12 list-group-item'>";
 							episodeCollapse += "				<div class='col-md-1'>" + (d.is_notice ? "공지" : "회차") + "</div>";
 							episodeCollapse += "				<div class='col-md-1'>" + (d.is_charge ? "유료" : "무료") + "</div>";
-							episodeCollapse += "				<a href='/novel/read/novel_read_view/" + novelId+"&"+d.id + "'><div class='col-md-6'>" + (data.indexOf(d)+1) + "회. " +d.episode_title + "</div></a>";
+							episodeCollapse += "				<a href='/novel/read/novel_read_view/" + novelId+"&"+d.id + "'><div class='col-md-6'>" + (data.indexOf(d)+1) + "話. " +d.episode_title + "</div></a>";
 							episodeCollapse += "				<div class='col-md-2'>" + d.created_at + "</div>";
 							episodeCollapse += "				<div class='col-md-2'>" + (d.updated_at != null ? d.update_at : "0000-00-00") + "</div>";
 							episodeCollapse += "			</div>";
 							episodeCollapse += "		</ul>"
 						});
 
-						episodeCollapse += "		<div class='panel-footer'>총 회차수 : " + data.length + "</div>";
+						episodeCollapse += "		<div class='panel-footer'>総計 : " + data.length + "</div>";
 						episodeCollapse += "	</div>";
 						episodeCollapse += "</div>";
 
@@ -283,7 +283,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 
 					},
 					error: function (error) {
-						alert("에피소드 호출 오류발생");
+						alert("ERROR");
 					}
 			});
 

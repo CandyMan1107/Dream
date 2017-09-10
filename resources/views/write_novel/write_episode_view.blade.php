@@ -693,40 +693,40 @@ fvcc<div class="default-padding"></div>
   <div class="write_novel_set">
     <div class="container">
       <div class="row set_row">
-        <div class="col-md-12 main_title">회차 / 공지 쓰기</div>
+        <div class="col-md-12 main_title">小説作成</div>
       </div>
 
       <div class="row set_row">
         <div class="col-md-12">
-          <span class="menu_title">소설 제목</span>
+          <span class="menu_title">タイトル</span>
           <span class="novel-title">{{ $tasks['novelTitle'] }}</span>
         </div>
       </div>
 
       <div class="row set_row">
         <div class="col-md-12">
-          <label class="set-notice-btn selected-notice" data-notice="episode">회차</label>
-          <label class="set-notice-btn" data-notice="notice">공지</label>
-          <label class="set-charge-btn selected-charge" data-charge="free">무료</label>
-          <label class="set-charge-btn" data-charge="charge">유료</label>
+          <label class="set-notice-btn selected-notice" data-notice="episode">エピソード</label>
+          <label class="set-notice-btn" data-notice="notice">お知らせ</label>
+          <label class="set-charge-btn selected-charge" data-charge="free">無料</label>
+          <label class="set-charge-btn" data-charge="charge">有料</label>
         </div>
       </div>
 
       <div class="row set_row">
         <div class="col-md-12">
-          <span class="menu_title">회차 제목</span>
-          <input id="episode-title" class="menu_input" type="text" placeholder="회차 제목을 입력해주세요." size=50>
+          <span class="menu_title">タイトル</span>
+          <input id="episode-title" class="menu_input" type="text" placeholder="タイトルを入力してください。" size=50>
         </div>
       </div>
 
       <div class="row set_row cover-div">
-        <div class="col-md-9 menu_title">표지 이미지
+        <div class="col-md-9 menu_title">カバーイメージ
         </div>
 
         <div class="col-md-3">
           <div class="col-md-10">
             <form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="">
-              <label class="img_upload_label">이미지 업로드
+              <label class="img_upload_label">イメージ登録
                 <input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
               </label>
             </form>
@@ -743,7 +743,7 @@ fvcc<div class="default-padding"></div>
       </div>
 
       <div class="row set_row">
-        <div class="col-md-12 menu_title">내용<i class='material-icons pull-right' data-toggle='on' id='helperHideBtn' style='font-size:40px;'>&#xE316;</i></div>
+        <div class="col-md-12 menu_title">内容<i class='material-icons pull-right' data-toggle='on' id='helperHideBtn' style='font-size:40px;'>&#xE316;</i></div>
       </div>
       <div class="timetable-div col-md-12">
         <div class="col-md-12 timetable-content-div" id='timeline'>
@@ -770,8 +770,8 @@ fvcc<div class="default-padding"></div>
       </div>
 
       <div class="row set_row">
-        <div class="col-md-6 btn_div"><div class="func_btn episode-cancel">취소</div></div>
-        <div class="col-md-6 btn_div"><div class="func_btn episode-save">저장</div></div>
+        <div class="col-md-6 btn_div"><div class="func_btn episode-cancel">キャンセル</div></div>
+        <div class="col-md-6 btn_div"><div class="func_btn episode-save">登録</div></div>
       </div>
 
     </div>
@@ -1738,7 +1738,7 @@ fvcc<div class="default-padding"></div>
               addEle += "<div class='window-div'>"
               addEle += "  <div class='col-md-12 window-header'>"
               addEle += "   <div class='col-md-10 window-header-text'>"
-              addEle += "    사건-" + data.event_names;
+              addEle += "    事件-" + data.event_names;
               addEle += "   </div>"
               addEle += "   <div class='col-md-2 window-header-clear' >"
               addEle += "     <i class='pull-right material-icons window-clear-icon' data-case='timetables' data-id='" + data.background_id +"'>clear</i>"
@@ -1748,15 +1748,15 @@ fvcc<div class="default-padding"></div>
               addEle += "   <div class='col-md-12 table-div'>"
               addEle += "    <table class='timetable-info-table'>"
               addEle += "      <tr class='timetable-info-tr'>"
-              addEle += "        <td width='30%' class='subject-td'>사건명</td>"
+              addEle += "        <td width='30%' class='subject-td'>事件名</td>"
               addEle += "        <td width='70%' class='content-td'>" + data.event_names + "</td>"
               addEle += "      </tr>"
               addEle += "      <tr class='timetable-info-tr'>"
-              addEle += "        <td class='subject-td'>사건설명</td>"
+              addEle += "        <td class='subject-td'>事件説明</td>"
               addEle += "        <td class='content-td'>" + data.event_contents + "</td>"
               addEle += "      </tr>"
               addEle += "      <tr class='timetable-info-tr'>"
-              addEle += "        <td class='subject-td'>부가설명</td>"
+              addEle += "        <td class='subject-td'>追加説明</td>"
               addEle += "        <td class='content-td'>"
               data.refer_info.split("^").forEach(function(ri){
                 addEle += ri + "<br>";
@@ -1764,19 +1764,19 @@ fvcc<div class="default-padding"></div>
               addEle += "         </td>";
               addEle += "      </tr>"
               addEle += "      <tr class='timetable-info-tr'>"
-              addEle += "        <td class='subject-td'>사건시작일</td>"
+              addEle += "        <td class='subject-td'>事件開始日</td>"
               addEle += "        <td class='content-td'>" + data.start_days + "</td>"
               addEle += "      </tr>"
               addEle += "      <tr class='timetable-info-tr'>"
-              addEle += "        <td class='subject-td'>사건종료일</td>"
+              addEle += "        <td class='subject-td'>事件終了日</td>"
               addEle += "        <td class='content-td'>" + data.end_days + "</td>"
               addEle += "      </tr>"
               addEle += "    </table>"
               addEle += "   </div>"
-              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='characters' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>인물</div>"
-              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='items' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>사물</div>"
-              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='relations' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>관계</div>"
-              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='maps' class='"+bgCase+"-window-attr-div attr-div-"  + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>지도</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='characters' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>人物</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='items' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>事物</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='relations' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>関係</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='maps' class='"+bgCase+"-window-attr-div attr-div-"  + bgCase + "-" + data.background_id + " col-md-3 window-attr-div'>地図</div>"
               addEle += "  </div>"
               addEle += "  <div class='col-md-12 attr-content-div'>"
               addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-characters-div-" + bgCase + "-" + data.background_id + "'></div>"
@@ -1886,19 +1886,19 @@ fvcc<div class="default-padding"></div>
               addEle += "   <div class='col-md-12 table-div'>"
               addEle += "    <table class='timetable-info-table'>"
               addEle += "      <tr class='timetable-info-tr'>"
-              addEle += "        <td width='30%' class='subject-td'>캐릭터</td>"
+              addEle += "        <td width='30%' class='subject-td'>人物</td>"
               addEle += "        <td width='70%' class='content-td'><img class='img-circle img-things-size' src='" + imgRoot + data.img_src + "'>  <b>" + data.name + "</b></td>"
               addEle += "      </tr>"
               addEle += "      <tr class='timetable-info-tr'>"
-              addEle += "        <td class='subject-td'>정보</td>"
+              addEle += "        <td class='subject-td'>情報</td>"
               addEle += "        <td class='content-td'>" + data.info + "</td>"
               addEle += "      </tr>"
               addEle += "      <tr class='timetable-info-tr'>"
-              addEle += "        <td class='subject-td'>나이/성별</td>"
+              addEle += "        <td class='subject-td'>年/性別</td>"
               addEle += "        <td class='content-td'>" + data.age + " / "+data.gender + "</td>"
               addEle += "      </tr>"
               addEle += "      <tr class='timetable-info-tr'>"
-              addEle += "        <td class='subject-td'>부가설명</td>"
+              addEle += "        <td class='subject-td'>追加説明</td>"
               addEle += "        <td class='content-td'>"
               data.refer_info.split("^").forEach(function(ri){
                 addEle += ri + "<br>";
@@ -1907,9 +1907,9 @@ fvcc<div class="default-padding"></div>
               addEle += "      </tr>"
               addEle += "    </table>"
               addEle += "   </div>"
-              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='own-items' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-4 window-attr-div'>소유사물</div>"
-              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='belong-relations' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-4 window-attr-div'>참여관계</div>"
-              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='belong-timetables' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-4 window-attr-div'>참여사건</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='own-items' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-4 window-attr-div'>所有事物</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='belong-relations' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-4 window-attr-div'>参加関係</div>"
+              addEle += "     <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' data-attr='belong-timetables' class='"+bgCase+"-window-attr-div attr-div-" + bgCase + "-" + data.background_id + " col-md-4 window-attr-div'>参加事件</div>"
               addEle += "  </div>"
               addEle += "  <div class='col-md-12 attr-content-div'>"
               addEle += "   <div data-case='"+bgCase+"' data-timetable-id='"+data.background_id+"' class='col-md-12 attr-content attr-content-" + bgCase + "-" + data.background_id + " attr-own-items-div-" + bgCase + "-" + data.background_id + "'></div>"
@@ -2040,14 +2040,14 @@ fvcc<div class="default-padding"></div>
 
                     // 태그 엘리먼트 생성
                     tagEle += "<select class='" + bgCase + "-" + bgId  + "-" +"select' style='width:60%; height:26px;'>";
-                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>タグ名</option>"
                     tagData.forEach(function(td){
                       if(td.object_id == bgId ){
                         tagEle += "<option data-kind='" + td.kind + "' data-id='" + td.object_id + "' style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
                       }
                     })
                     tagEle += "</select>";
-                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>적용</button>"
+                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>適用</button>"
 
 
                     console.log(dt);
@@ -2107,14 +2107,14 @@ fvcc<div class="default-padding"></div>
 
                     // 태그 엘리먼트 생성
                     tagEle += "<select class='" + bgCase + "-" + bgId  + "-" +"select' style='width:60%; height:26px;'>";
-                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>タグ名</option>"
                     tagData.forEach(function(td){
                       if(td.object_id == bgId){
                         tagEle += "<option style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
                       }
                     })
                     tagEle += "</select>";
-                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>적용</button>"
+                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>適用</button>"
 
                     addEle += "<div class='col-md-12 rellist-info-div'>"
                     addEle += " <div class='col-md-6 cha-img-div'>"
@@ -2204,14 +2204,14 @@ fvcc<div class="default-padding"></div>
 
                     // 태그 엘리먼트 생성
                     tagEle += "<select class='" + bgCase + "-" + bgId  + "-" +"select' style='width:60%; height:26px;'>";
-                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+                    tagEle += "<option selected='selected' disabled='disabled' value='select-default'>タグ名</option>"
                     tagInfo.forEach(function(td){
                       if(td.object_id == bgId){
                         tagEle += "<option style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
                       }
                     })
                     tagEle += "</select>";
-                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>적용</button>"
+                    tagEle += "<button data-case='"+ bgCase +"' data-id='"+ bgId +"' class='tag-set-btn'>適用</button>"
 
                     addEle += "<div class='col-md-12 cha-info-div'>"
                     addEle += " <div class='col-md-6 cha-img-div'>"
@@ -2294,14 +2294,14 @@ fvcc<div class="default-padding"></div>
 
           // 태그 엘리먼트 생성
           tagEle += "<select class='" + dt.affect_table + "-" + dt.affect_id + "-" +"select' style='width:60%; height:26px;'>";
-          tagEle += "<option selected='selected' disabled='disabled' value='select-default'>태그명</option>"
+          tagEle += "<option selected='selected' disabled='disabled' value='select-default'>タグ名</option>"
           tagData.forEach(function(td){
             if(td.object_id == affectId){
               tagEle += "<option style='background-color:" + td.color + "' value='"+td.color+"'>" + td.tag_name + "</option>";
             }
           })
           tagEle += "</select>";
-          tagEle += "<button data-case='"+dt.affect_table+"' data-id='"+dt.affect_id+"' class='tag-set-btn'>적용</button>"
+          tagEle += "<button data-case='"+dt.affect_table+"' data-id='"+dt.affect_id+"' class='tag-set-btn'>適用</button>"
 
           switch(bgCase){
             case "characters":
