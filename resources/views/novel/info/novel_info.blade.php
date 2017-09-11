@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
                         <i class="material-icons" name="star">star_border</i>
-                        <h4>関心登録の数</h4>
+                        <h4>関心数</h4>
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
                         <i class="material-icons">share</i>
@@ -59,7 +59,7 @@
                                 1
                             </div>
                             <div class="col-md-2 upload-day">
-                                <b name="upload_day"></b> 連載日
+                                <b name="upload_day"></b> 連載
                             </div>
                             <div class="col-md-2">
                                 <b name="genre">
@@ -93,13 +93,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <a href="/novel/read/novel_read_view/{{$data[0]['novelId']}}&1">
-                                        <button class="btn btn-default btn-block novel-1st-read-Btn">一話から</button>
+                                        <button class="btn btn-default btn-block novel-1st-read-Btn">第一話から</button>
                                     </a>
                                 </div>
                                 @if (!isset($data[0]['noBack']))
                                     <div class="col-md-4">
                                         <button class="btn btn-default btn-block novel-background-read-Btn" data-toggle="modal" data-target="#backgroundModal">
-                                            小説設定の方へ
+                                            小説設定
                                         </button>
                                     </div>
                                 @endif
@@ -134,7 +134,7 @@
                             <h5>
                                 <span class="sort-text">最近話から</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
                                 &nbsp;&nbsp;&nbsp;
-                                <span class="sort-text">一話から</span> <span><i class="material-icons"  name="check">check</i></span>
+                                <span class="sort-text">第一話から</span> <span><i class="material-icons"  name="check">check</i></span>
                             </h5>
                         </div>
                         

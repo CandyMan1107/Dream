@@ -7,7 +7,7 @@
 					@if (empty($data[0]['title']))
 						<h1>今日の小説</h1>
 					@else
-						<h1><a class="noDeco" href="/novel/kind/today_novel_by_day">今日の小説</a></h1>
+						<h1><a class="noDeco" href="#">今日の小説</a></h1>
 					@endif
 					<p>今日の <br>人気の小説! </p>
 					<hr class="pg-titl-bdr-btm" />

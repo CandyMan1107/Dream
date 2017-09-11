@@ -128,7 +128,7 @@
 			<div class="row white text-center">
 				<h3 class="wd75 fnt-24">「あなたの人生の小説はー」 - 2017小説コンテスト</h3>
 				<p class="cta-sub-title"></p>
-				<a href="#" class="btn btn-default">コンテストの方へ</a>
+				<a href="#" class="btn btn-default">コンテスト</a>
 			</div>
 		</div>
 	</div>

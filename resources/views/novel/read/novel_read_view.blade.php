@@ -72,7 +72,7 @@
                         <li>&nbsp;</li>
                         <li>
                             <span><i class="material-icons" name="star">star_border</i></span>
-                            <span class="mark-text"> 関心登録の数</span>
+                            <span class="mark-text"> 関心数</span>
                         </li>
                         <li>&nbsp;</li>
                         <li>
@@ -122,7 +122,7 @@
                 <div class="col-md-12 text-right">
                     <ul class="list-inline">
                         <li><button class="btn btn-default btn-block"><strong>その他の小説</strong></button></li>
-                        <li><button class="btn btn-default btn-block"><strong>作家の部屋の方へ</strong></button></li>
+                        <li><button class="btn btn-default btn-block"><strong>作家の部屋</strong></button></li>
                     </ul>
                 </div>
             </div>
