@@ -12,17 +12,17 @@
                 </li> --}}
                 <li>
                     <h5>
-                        <strong>블로그</strong>
+                        <strong>ブログ</strong>
                     </h5>
                 </li>
                 <li>
                     <h5>
-                        <strong>메뉴1</strong>
+                        {{--  <strong>메뉴1</strong>  --}}
                     </h5>
                 </li>
                 <li>
                     <h5>
-                        <strong>메뉴2</strong>
+                        {{--  <strong>메뉴2</strong>  --}}
                     </h5>
                 </li>
             </ul>

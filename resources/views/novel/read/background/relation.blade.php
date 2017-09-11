@@ -4,7 +4,7 @@
 <div class="row">
 	@if ($data[0] == 0)
 	<div class="col-md-12" name="relation-view">
-		<strong>아직 공개된 배경 정보가 없습니다.</strong>
+		<strong>まだ公開された小説設定がありません。</strong>
 	@else	
 	<div class="col-md-1" name="relation-view">
 		@foreach ($data as $relation)

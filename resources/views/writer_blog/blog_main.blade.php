@@ -15,7 +15,7 @@
         @endphp
     @elseif ($data[0] === "error")
         <div id="default-padding-big"></div>
-        <h1>웹 소설 작가가 되면 작가의 방을 이용하실 수 있어요!</h1>
+        <h1>小説家になれば、「作家の部屋」を利用できます。</h1>
     @else
         @if ($data[0] == 0)
             {{-- 현재 가지고 있는 user_id를 가지고 넘어가야하는데...   --}}
@@ -38,7 +38,7 @@
                         {{-- BLOG NOTICE START --}}
                         <div class="col-md-12 blog_notice_list text-center autoplay-notice">
                             @if ($data[0] == 0)
-                                <h3>블로그가 텅 비었네요!</h3>
+                                <h3>何もないんですね。</h3>
                             @else
                                 @php
                                      echo BlogController::mainNoticeList($data[0]['blogOwnerId']);  
@@ -67,7 +67,7 @@
                         {{-- BLOG BOARD START (NOTICE) --}}
                         <div class="col-md-12 blog_notice">
                             @if ($data[0] == 0)
-                                <h3>마치 통장 같아! 텅장!</h3>
+                                <h3>何もない．．．</h3>
                             {{-- ELSEIF $_SERVER["REQUEST_URI"] in /blog OR /blog?%%% --}}
                             @elseif (($data[0] !== 0) && (strpos($_SERVER["REQUEST_URI"], "/blog")!==false || strpos($_SERVER["REQUEST_URI"], "/blog?")!==false))
                                 <div name="blog_post">

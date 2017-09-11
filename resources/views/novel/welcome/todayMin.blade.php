@@ -5,15 +5,15 @@
 			<div class="row">
 				<div class="page-title text-center">
 					@if (empty($data[0]['title']))
-						<h1>오늘의 웹소설</h1>
+						<h1>今日の小説</h1>
 					@else
-						<h1><a class="noDeco" href="/novel/kind/today_novel_by_day">오늘의 웹소설</a></h1>
+						<h1><a class="noDeco" href="/novel/kind/today_novel_by_day">今日の小説</a></h1>
 					@endif
-					<p>오늘의 <br>HOT한 소설! </p>
+					<p>今日の <br>人気の小説! </p>
 					<hr class="pg-titl-bdr-btm" />
 				</div>
 					@if (empty($data[0]['title']))
-						<h1>조금만</h1>
+						<h1>ちょっと</h1>
 					@else
 						@for ($i = 0; $i < count($data); $i++)
 							<div class="col-md-4">
@@ -24,7 +24,7 @@
 											<input type="hidden" name="genre" value="{!! $data[$i]['genre'] !!}"/>
 											<h5 class="genre" name="genre"></h5>
 											<h3>{!! $data[$i]['title'] !!}</h3>
-											<p> <i class="fa fa-pencil"></i> 글반죽</p>
+											<p> <i class="fa fa-pencil"></i> 作家さん</p>
 											<p> <b>{!! $data[$i]['summary_intro'] !!}</b></p>
 										</div>
 									</div>

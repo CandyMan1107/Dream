@@ -166,21 +166,21 @@
 		<div class="function-div form-group">
 			<form class="form-inline">
 				<div class="form-group">
-			    <label>선택자</label>
-			    <input type="text" id="selectedNameInput" class="form-control" id="exampleInputName2" placeholder="선택자" readonly="readonly">
+			    <label>選択</label>
+			    <input type="text" id="selectedNameInput" class="form-control" id="exampleInputName2" placeholder="選択" readonly="readonly">
 			  </div>
 			  <div class="form-group">
-			    <label>주체</label>
-			    <input type="text" id="sourceNameInput" class="form-control" id="exampleInputName2" placeholder="주체 이름" readonly="readonly">
+			    <label>主体</label>
+			    <input type="text" id="sourceNameInput" class="form-control" id="exampleInputName2" placeholder="主体" readonly="readonly">
 			  </div>
 			  <div class="form-group">
-			    <label>대상</label>
-			    <input type="email" id="targetNameInput" class="form-control" id="exampleInputEmail2" placeholder="대상 이름" readonly="readonly">
+			    <label>対象</label>
+			    <input type="email" id="targetNameInput" class="form-control" id="exampleInputEmail2" placeholder="対象" readonly="readonly">
 			  </div>
-			  <button type="button" class="btn btn-default" id="createRelationBtn">관계 형성</button>
-				<button type="button" class="btn btn-default" id="removeRelationBtn">관계 삭제</button>
-				<button type="button" class="btn btn-default" id="removeChaNodeBtn">캐릭터 삭제</button>
-				<button type="button"  data-toggle="modal" data-target="#squarespaceModal" class="btn btn-default" id="relationListBtn">관계 리스트</button>
+			  <button type="button" class="btn btn-default" id="createRelationBtn">関係形成</button>
+				<button type="button" class="btn btn-default" id="removeRelationBtn">関係除去</button>
+				<button type="button" class="btn btn-default" id="removeChaNodeBtn">人物除去</button>
+				<button type="button"  data-toggle="modal" data-target="#squarespaceModal" class="btn btn-default" id="relationListBtn">関係リスト</button>
 			</form>
 		</div>
 		<!-- line modal -->
@@ -189,7 +189,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						<h3 class="modal-title" id="lineModalLabel">관계 리스트</h3>
+						<h3 class="modal-title" id="lineModalLabel">関係リスト</h3>
 					</div>
 					<div class="modal-body">
 						<div class="map-list">
@@ -199,7 +199,7 @@
 					<div class="modal-footer">
 						<div class="btn-group btn-group-justified" role="group" aria-label="group button">
 							<div class="btn-group" role="group">
-								<input type="text" class="form-control" id="saveMapTitle" placeholder="제목입력">
+								<input type="text" class="form-control" id="saveMapTitle" placeholder="タイトル">
 							</div>
 							<div class="btn-group" role="group">
 								<button type="button" id="saveMapBtn" class="btn btn-default" role="button">Save</button>
@@ -221,7 +221,7 @@
 				<div class="modal-content">
 					<div id="titleWarningHeader" class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-						<h3 class="modal-title">제목을 입력하세요</h3>
+						<h3 class="modal-title">タイトルを入力してください。</h3>
 					</div>
 				</div>
 			</div>
@@ -412,7 +412,7 @@
 					.attr("dx", "-30")
 					.attr("dy", "-48")
 					.attr("style", "fill:green; font-weight:bold; font-size:30")
-					.text(function(d) { return "선택"} );
+					.text(function(d) { return "選択"} );
 
 					// Input 내용 입력
 					var selectedChaId = selectedInThisEvent.attr("href");
@@ -433,13 +433,13 @@
 					.attr("dx", "-30")
 					.attr("dy", "-45")
 					.attr("style", "fill:red; font-weight:bold; font-size:30")
-					.text(function(d) { return "주체"} )
+					.text(function(d) { return "主体"} )
 
 					targetText = selectedStorage[1].append("text")
 					.attr("dx", "-30")
 					.attr("dy", "-45")
 					.attr("style", "fill:blue; font-weight:bold; font-size:30")
-					.text(function(d) { return "대상"} )
+					.text(function(d) { return "対象"} )
 
 					selectedInThisEvent.classed("targetNode", true);
 					selectedCount++;
@@ -466,7 +466,7 @@
 					.attr("dx", "-30")
 					.attr("dy", "-45")
 					.attr("style", "fill:green; font-weight:bold; font-size:30")
-					.text(function(d) { return "선택"} );
+					.text(function(d) { return "選択"} );
 
 					// Input 내용 입력
 					var selectedChaId = selectedInThisEvent.attr("href");
@@ -1091,10 +1091,10 @@
 				 createEle += "		<img src='" + canvasUrl + "'>"
 				 createEle += "	</div>"
 				 createEle += "	<div class='col-md-9 map-list-content-div'>"
-				 createEle += "		제목 : " 	 + title
-				 createEle += "		<button data-map-id='"+mapId+"' class='tag-toggle-btn form-control'>태그 입력</button><br>"
-				 createEle += "		생성일 : " + data +"<br>"
-				 createEle += "		수정일 : 0000-00-00"
+				 createEle += "		タイトル : " 	 + title
+				 createEle += "		<button data-map-id='"+mapId+"' class='tag-toggle-btn form-control'>タグ登録</button><br>"
+				 createEle += "		登録日 : " + data +"<br>"
+				 createEle += "		修正日 : 0000-00-00"
 				 createEle += "	</div>"
 				 // 정재훈 DIV
 				 createEle += "	<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div' style='height:20vh'>"
@@ -1105,7 +1105,7 @@
 				 createEle += "			<div class='row'>"
 					 createEle += " 			<div class='panel panel-warning col-md-6' style='height:20vh'>"
 						 createEle += "					<div class=panel-heading'>"
-							 createEle += "					<h3 class='panel-titl'>태그 이름</h3>"
+							 createEle += "					<h3 class='panel-titl'>タグ</h3>"
 						 createEle += "					</div>"
 						 createEle += "					<div class='panel-body'>"
 							 createEle += "						<input type='text' id='tag_name"+mapId+"' name='tag_name' class='form-control tag_name' placeholder='Text input' value=''>"
@@ -1113,7 +1113,7 @@
 					 createEle += "				</div>"
 				 createEle += "				<div class='panel panel-warning col-md-6' style='height:20vh'>"
 						 createEle += "					<div class='panel-heading'>"
-							 createEle += "						<h3 class='panel-title'>태그 색상</h3>"
+							 createEle += "						<h3 class='panel-title'>タグカラー</h3>"
 						 createEle += "					</div>"
 				 createEle += "					<div id='colorPalette' class='palette'>"
 				 createEle += "						<input class='tag_color' id='tag_color"+mapId+"' list='colors' name='tag_color' value=''>"
@@ -1160,7 +1160,7 @@
 							 object_id : $id
 								 },
 					 success:function(data){
-						 alert("태그 입력 성공");
+						 alert("タグ入力完了");
 					 },
 					 error:function(request,status,error){
 						 alert("code:"+request.status+"\n"+"error:"+error);

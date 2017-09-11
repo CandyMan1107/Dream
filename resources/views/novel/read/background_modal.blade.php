@@ -10,7 +10,7 @@
         <div class="modal-content huge-size">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="backgroundModalLabel"><i class="material-icons">remove_red_eye</i>&nbsp;<span>소설 배경</span></h4>
+                <h4 class="modal-title" id="backgroundModalLabel"><i class="material-icons">remove_red_eye</i>&nbsp;<span>小説設定</span></h4>
             </div>
             <div class="modal-body">
                     
