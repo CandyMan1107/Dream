@@ -3,7 +3,7 @@
          <a href="/blog/{{ $list['href'] }}" name="blog_click"> 
             <input type="hidden" value="{{ $list['href'] }}" name="blog_href"/>
             <strong>
-                [공지]
+                [ノーティス]
             </strong>
             &nbsp;
             {{ $list['board_title'] }}

@@ -17,7 +17,7 @@
         </div>
         <ul class="pager" id="timetableList">
             @if ($data[0] == 0)
-                <strong>아직 공개된 배경 정보가 없습니다.</strong>
+                <strong>まだ公開された小説設定がありません。</strong>
             @else
                 @for ($i = 0; $i < count($data); $i++)
                     <li name="event_list" id="{{$i}}"><a href="#">{!! $data[$i]['event_name'] !!}</a></li>
@@ -30,7 +30,7 @@
         <table class="table">
             <tr>
                 <td>
-                    <strong>제목</strong>
+                    <strong>タイトル</strong>
                 </td>
                 <td name="event-name">
                     {{-- EVENT NAME --}}
@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td>
-                    <strong>내용</strong>
+                    <strong>内容</strong>
                 </td>
                 <td name="event-content">
                     {{-- EVENT CONTENT --}}
@@ -46,7 +46,7 @@
             </tr>
             {{--  <tr>
                 <td>
-                    <strong>작가의 설정</strong>
+                    <strong>作家の設定</strong>
                 </td>
                 <td>
                     <ul name="event-refer_info" class="list-unstyled">
@@ -57,7 +57,7 @@
             {{--
             <tr>
                 <td>
-                    <strong>기타</strong>
+                    <strong>その他</strong>
                 </td>
                 <td name="event-other">
                     // OTHER
@@ -68,7 +68,7 @@
             {{--
             <tr>
                 <td>
-                    <strong>기간</strong>
+                    <strong>期間</strong>
                 </td>
                 <td name="event-day">
                     // START DAY ~ END DAY 
@@ -78,7 +78,7 @@
 
             <tr>
                 <td>
-                    <strong>등장인물</strong>
+                    <strong>登場人物</strong>
                 </td>
                 <td name="event-character">
                     @if ($data[0] == 0)
@@ -94,7 +94,7 @@
             </tr>
             <tr>
                 <td>
-                    <strong>등장사물</strong>
+                    <strong>登場事物</strong>
                 </td>
                 <td name="event-item">
                     @if ($data[0] == 0)
@@ -109,7 +109,7 @@
             </tr>
             <tr>
                 <td>
-                    <strong>배경 장소</strong>
+                    <strong>背景場所</strong>
                 </td>
                 <td name="event-map">
                     @if ($data[0] == 0)

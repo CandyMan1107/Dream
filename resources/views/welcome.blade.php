@@ -16,10 +16,10 @@
 					<div class="col-md-12">
 						<a href="#">
 							<div class="jumbotron">
-								<h3 class="novel">조금만</h3>
-								<h2 class="small">기다려보아</h2>
+								<h3 class="novel">ちょっと</h3>
+								<h2 class="small">待ってください。</h2>
 								<br/>
-								<p class="big">우하하하하하</p>
+								<p class="big">wwwww</p>
 								<div class="btn btn-banner">자세히 보기<i class="fa fa-search"></i></div>
 							</div>
 						</a>
@@ -83,13 +83,13 @@
 		<div class="container">
 			<div class="row">
 				<div class="page-title text-center">
-					<h1>2017 공모전</h1>
-					<p>누구나 참가 가능한 공모전 개최! <br>작가의 방이 작가님들과 함께합니다. </p>
+					<h1>2017小説コンテスト</h1>
+					<p>誰でも参加OK! <br>「作家の部屋」のコンテスト </p>
 					<hr class="pg-titl-bdr-btm" />
 				</div>
 				<div class="autoplay">
 					@if (empty($data[0]['title']))
-						<h1>곧 소설이 업로드됩니다.</h1>
+						<h1>待ってください。</h1>
 					@else
 						@for ($i = 0; $i < count($data); $i++)
 							<div class="col-md-6">
@@ -100,7 +100,7 @@
 										</div>
 										<div class="fig-caption">
 											<h3>{!! $data[$i]['title'] !!}</h3>
-											<p class="marb-20">작가 글반죽</p>
+											{{--  <p class="marb-20">작가 글반죽</p>  --}}
 											{{-- <p>Follow me:</p>
 											<ul class="team-social">
 												<li class="bgblue-dark"><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -126,9 +126,9 @@
 	<div class="cta2">
 		<div class="container">
 			<div class="row white text-center">
-				<h3 class="wd75 fnt-24">“당신의 인생 작품을 선택하세요.” - 2017 공모전</h3>
+				<h3 class="wd75 fnt-24">「あなたの人生の小説はー」 - 2017小説コンテスト</h3>
 				<p class="cta-sub-title"></p>
-				<a href="#" class="btn btn-default">자세히 보기</a>
+				<a href="#" class="btn btn-default">コンテストの方へ</a>
 			</div>
 		</div>
 	</div>
@@ -139,8 +139,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="page-title text-center">
-					<h1>作家のヘヤ</h1>
-					<p>작가의 안식처, <br>작가의 방 </p>
+					<h1>作家の部屋</h1>
+					{{--  <p>작가의 안식처, <br>作家の部屋 </p>  --}}
 					<hr class="pg-titl-bdr-btm" />
 				</div>
                 {{-- <div id="sendmessage">Your message has been sent. Thank you!</div>

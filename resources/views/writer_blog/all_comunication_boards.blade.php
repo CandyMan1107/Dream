@@ -2,9 +2,9 @@
     <thead>
         <tr>
             <td>No.</td>
-            <td>제목</td>
-            <td>작성자</td>
-            <td>작성일</td>
+            <td>タイトル</td>
+            <td>投稿者</td>
+            <td>投稿日</td>
             {{--  <td>조회수</td>
             <td>추천</td>  --}}
         </tr>
@@ -12,7 +12,7 @@
     <tbody>
         @if (isset($data[0]['empty']))
             <tr>
-                <td>게시글이 존재하지 않습니다.</td>
+                <td>書き込みがありません。</td>
                 <td>.</td>
                 <td>.</td>
                 <td>.</td>
@@ -37,7 +37,7 @@
 
 <div class="row text-right">
     <div class="col-md-12">
-        <a href="/yerriel/blog/community/create" class="btn btn-default">글쓰기</a>
+        <a href="/yerriel/blog/community/create" class="btn btn-default">書く</a>
     </div>
 </div>
 

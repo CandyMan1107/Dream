@@ -51,10 +51,8 @@ $(document).ready(function(){
 							<li class="active"><a href="/">Home</a></li>
 							{{-- SESSION의 user_id string 으로 변경하기 --}}
 							<li><a href="/yerriel/blog">Blog</a></li>
-							{{--  <li><a href="#today-novel">오늘의 웹소설</a></li>
-							<li><a href="#best-novel">베스트 웹소설</a></li>  --}}
 							<li><a href="#event">イベント</a></li>
-							<li><a href="#about">고객센터</a></li>
+							<li><a href="#about">ヘルプ</a></li>
 
 							@if(Session::has('user_id'))
 								<li><a class="logout" href="/logout">ログアウト</a></li>

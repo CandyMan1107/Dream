@@ -41,7 +41,7 @@ $(function () {
                         append_data += "        <ul class='list-inline'>";
 
                         if (data[0]['is_notice'] == "on") {
-                            append_data += "        <li><strong>[공지]</strong></li>";
+                            append_data += "        <li><strong>[ノーティス]</strong></li>";
                         }
 
                         append_data += "            <li>";

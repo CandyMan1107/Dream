@@ -42,13 +42,13 @@
                                     </h4>
                                 </li>
                                 <li>
-                                    <small>| 독자게시판</small>
+                                    <small>| 読者コミュニティー</small>
                                 </li>
                                 <li class="board_timestamp">
                                     <small>{!! $data['created_at'] !!}</small>
                                 </li> 
                             </ul>
-                            <a name="nav-pref" class="btn btn-default text-right" href="javascript:history.back()">이전으로</a>
+                            <a name="nav-pref" class="btn btn-default text-right" href="javascript:history.back()">前へ</a>
                         </div>
                         <div name="title_line"></div>
                         <div class="board_content">
