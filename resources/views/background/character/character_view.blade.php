@@ -24,27 +24,27 @@
 			<input type="hidden" name="page" id="" value="character">
 				{{-- 캐릭터 id를 저장하기 위한 공간 --}}
 				<div id="character_id" value="charcter_value"></div>
-				<h3 id="name">캐릭터 등록</h3>
+				<h3 id="name">人物登録</h3>
 				{{-- 캐릭터 이름 등록 --}}
 				<div class="form-group form-group-lg">
-					<label class="col-sm-2 control-label" for="formGroupInputLarge">이름</label>
+					<label class="col-sm-2 control-label" for="formGroupInputLarge">名前</label>
 					<div class="col-sm-10">
-					<input class="form-control" type="text" id="character_name" name="character_name" placeholder="캐릭터 이름" value="">
+					<input class="form-control" type="text" id="character_name" name="character_name" placeholder="名前" value="">
 					</div>
 				</div>
 				{{-- 캐릭터 내용 등록 --}}
 
 				<div class="form-group form-group-lg">
-					<label class="col-sm-2 control-label" for="formGroupInputLarge">내용</label>
+					<label class="col-sm-2 control-label" for="formGroupInputLarge">内容</label>
 					<div class="col-sm-10">
 					<textarea class="form-control" rows="3" id="character_content" name="character_content"></textarea>
 					</div>
 				</div>
 				{{-- 캐릭터 추가사항 --}}
 				<div class="form-group form-group-lg" scroll="auto" style="overflow-x:hidden; height:100px">
-					<label class="col-sm-3 control-label" for="formGroupInputLarge">추가사항</label>
+					<label class="col-sm-3 control-label" for="formGroupInputLarge">追加事項</label>
 					<div class="col-sm-5 refer_info_div">
-						<input type="text" class="form-control refer_info" name="refer_info[]" placeholder="추가사항">
+						<input type="text" class="form-control refer_info" name="refer_info[]" placeholder="追加事項">
 					</div>
 					<div class="col-sm-2">
 						<i class="fa fa-plus-circle" aria-hidden="true" id="additional_items" style="font-size:200%"></i>
@@ -52,7 +52,7 @@
 				</div>
 				{{-- 이미지 등록 --}}
 				<div class="form-group form-group-lg">
-					<label class="col-sm-3 control-label" for="formGroupInputLarge">이미지 등록</label>
+					<label class="col-sm-3 control-label" for="formGroupInputLarge">イメージ登録</label>
 					<div class="col-sm-10">
 						
 						<input type="file" name="character_img_upload" id="character_img_upload">
@@ -60,18 +60,18 @@
 				</div>
 				{{-- 캐릭터 나이, 성별 등록 --}}
 				<div class="form-group form-group-lg">
-					<label class="col-sm-2 control-label" for="formGroupInputLarge">나이</label>
+					<label class="col-sm-2 control-label" for="formGroupInputLarge">年齢</label>
 					<div class="col-xs-4">
-						<input type="text" class="form-control" id="age" name="age" placeholder="나이">
+						<input type="text" class="form-control" id="age" name="age" placeholder="年齢">
 					</div>
-					<label class="col-sm-2 control-label" for="formGroupInputLarge">성별</label>
+					<label class="col-sm-2 control-label" for="formGroupInputLarge">性別</label>
 					<div class="col-xs-4">
-						<input type="text" class="form-control" id="gender" name="gender" placeholder="성별">
+						<input type="text" class="form-control" id="gender" name="gender" placeholder="性別">
 					</div>
 				</div>
 				{{-- 캐릭터 소유 사물 등록 --}}
 				<div class="form-group form-group-lg">
-					<label class="col-sm-4 control-label" for="formGroupInputLarge">소유 사물</label>
+					<label class="col-sm-4 control-label" for="formGroupInputLarge">所有事物</label>
 				</div>
 				<div>
 					{{-- 소유 사물 아이콘 목록 --}}
@@ -91,7 +91,7 @@
 				</div>
 				
 				
-				<button type="submit" class="btn btn-default">등록</button>
+				<button type="submit" class="btn btn-default">Submit</button>
 			</form >
 		</div>
 
@@ -102,13 +102,13 @@
 			<form class="form-horizontal main-navigation">
 				<div class="form-group form-group-sm">
 					<br>
-					<label class="col-sm-2 control-label" for="formGroupInputSmall">검색</label>
+					<label class="col-sm-2 control-label" for="formGroupInputSmall">検索</label>
 					<div class="col-sm-10">
 						<input class="form-control" type="text" id="formGroupInputSmall" placeholder="Small input">
 					</div>
 					<br>
 					<br>
-					<button type="submit" class="btn btn-default">검색</button>
+					<button type="submit" class="btn btn-default">検索</button>
 				</div>
 			</form>
 			<div class="row">
