@@ -23,7 +23,7 @@ $(document).ready(function(){
                 // alert(img_path);
                 $('.inner_maps').append('<img src='+img_path+' alt="map image" class="img-circle img-things-size effect_map affect_map" style="margin : 17px">');
                 $('.inner_maps').append('<input type="hidden" class="affect_map" name="map_id[]" value="'+map_id[i]+'">');
-                $('.inner_maps').append('<input type="text" class="form-control effect_map affect_map" name="effect_map[]" placeholder="내용" style="width:70%; float:right; margin-top:25px">');
+                $('.inner_maps').append('<input type="text" class="form-control effect_map affect_map" name="effect_map[]" placeholder="内容" style="width:70%; float:right; margin-top:25px">');
                 $('.inner_maps').append('<p></p>');
             }  
         }

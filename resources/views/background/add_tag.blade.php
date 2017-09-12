@@ -12,7 +12,7 @@
     <input type="hidden" id="object_id" name="object_id" value="">
     <div class="panel panel-warning">
         <div class="panel-heading">
-            <h3 class="panel-title">태그 이름</h3>
+            <h3 class="panel-title">タグの名</h3>
         </div>
         <div class="panel-body">
             <input type="text" id="tag_name" name="tag_name" class="form-control" placeholder="Text input">
@@ -21,7 +21,7 @@
 
     <div class="panel panel-warning">
         <div class="panel-heading">
-            <h3 class="panel-title">태그 색상</h3>
+            <h3 class="panel-title">タグの色</h3>
         </div>
         {{-- <div class="panel-body">
             <input type="text" id="tag_color" name="tag_color" class="form-control" placeholder="Text input">
@@ -31,5 +31,5 @@
 				<input class="form-control panel-body" id="chosen-value" name="tag_color" value="000000" size = "6">
 		</div>
     </div>
-    <button type="submit" name="tag_submit" id="tag_submit" class="btn btn-default">등록</button>   
+    <button type="submit" name="tag_submit" id="tag_submit" class="btn btn-default">Submit</button>   
 </form>

@@ -18,10 +18,10 @@
 			</div>
 			<br/>
 			<div id="none_set_open_background">
-				<h5>미공개 설정</h5>
+				<h4>非公開設定</h4>
 			</div>
 			<div id="open_background" style="height:400px; border-top: 2px solid #e0e0e0">
-				<h5>공개 설정</h5>
+				<h4>公開設定</h4>
 			</div>
 		</div>
 		<div class="col-xs-7 col-sm-6 col-md-6 height-max-set" >

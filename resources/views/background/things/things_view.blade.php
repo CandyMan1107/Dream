@@ -19,35 +19,35 @@
 			</div>
 		</div>
 		<div class="col-xs-5 col-sm-5 col-md-5 height-max-set" >
-			<h3 id="name">사물 등록</h3>
+			<h3 id="name">事物登録</h3>
 			<form class="form-horizontal" id="item" name="item" action="{{ route('things.store') }}" method="POST" enctype="multipart/form-data">
 			{!! csrf_field() !!}
 			{{-- 사물 이름 등록 --}}
 				<div class="form-group form-group-lg">
-					<label class="col-sm-2 control-label" for="formGroupInputLarge">이름</label>
+					<label class="col-sm-2 control-label" for="formGroupInputLarge">名前</label>
 					<div class="col-sm-10">
 					<input class="form-control" type="text" id="item_name" name="item_name" placeholder="Large input">
 					</div>
 				</div>
 				{{-- 사물 내용 등록 --}}
 				<div class="form-group form-group-lg">
-					<label class="col-sm-2 control-label" for="formGroupInputLarge">내용</label>
+					<label class="col-sm-2 control-label" for="formGroupInputLarge">内容</label>
 					<div class="col-sm-10">
 					<textarea class="form-control" rows="3" id="item_content" name="item_content"></textarea>
 					</div>
 				</div>
 				{{-- 사물 분류 등록 --}}
 				<div class="form-group form-group-lg">
-					<label class="col-sm-2 control-label" for="formGroupInputLarge">분류</label>
+					<label class="col-sm-2 control-label" for="formGroupInputLarge">分類</label>
 					<div class="col-sm-10">
 					<input class="form-control" type="text" id="item_cate" name="item_cate" placeholder="Large input">
 					</div>
 				</div>
 				{{-- 사물 추가사항 --}}
 				<div class="form-group form-group-lg">
-					<label class="col-sm-3 control-label" for="formGroupInputLarge">추가사항</label>
+					<label class="col-sm-3 control-label" for="formGroupInputLarge">追加事項</label>
 					<div class="col-sm-5 refer_info_div">
-						<input type="text" class="form-control refer_info" name="refer_info[]" placeholder="추가사항">
+						<input type="text" class="form-control refer_info" name="refer_info[]" placeholder="追加事項">
 					</div>
 					<div class="col-sm-2">
 						<i class="fa fa-plus-circle" aria-hidden="true" id="additional_items" style="font-size:200%"></i>
@@ -55,12 +55,12 @@
 				</div>
 				{{-- 이미지 등록 --}}
 				<div class="form-group form-group-lg">
-					<label class="col-sm-3 control-label" for="formGroupInputLarge">이미지 등록</label>
+					<label class="col-sm-3 control-label" for="formGroupInputLarge">イメージ登録</label>
 					<div class="col-sm-10">
 						<input type="file" id="item_img_upload" name="item_img_upload" >
 					</div>
 				</div>
-				<button type="submit" class="btn btn-default">등록</button>
+				<button type="submit" class="btn btn-default">Submit</button>
 			</form>
 		</div>
 		<div class="col-xs-3 col-sm-2 col-md-2 height-max-set background_tag" style="height: 100vh" >
@@ -68,13 +68,13 @@
 			<form class="form-horizontal main-navigation">
 				<div class="form-group form-group-sm">
 					<br>
-					<label class="col-sm-2 control-label" for="formGroupInputSmall">검색</label>
+					<label class="col-sm-2 control-label" for="formGroupInputSmall">検索</label>
 					<div class="col-sm-10">
 						<input class="form-control" type="text" id="formGroupInputSmall" placeholder="Small input">
 					</div>
 					<br>
 					<br>
-					<button type="submit" class="btn btn-default">검색</button>
+					<button type="submit" class="btn btn-default">検索</button>
 				</div>
 			</form>
 			<div class="row">

@@ -22,7 +22,7 @@ $(document).ready(function(){
                 var img_path = img_name[i];
                 $('.inner_items').append('<img src='+img_path+' alt="item image" class="img-circle img-things-size effect_item affect_item" style="margin : 17px">');
                 $('.inner_items').append('<input type="hidden" class="affect_item" name="item_id[]" value="'+item_id[i]+'">');
-                $('.inner_items').append('<input type="text" class="form-control effect_item affect_item" name="effect_item[]" placeholder="내용" style="width:70%; float:right; margin-top:25px">');
+                $('.inner_items').append('<input type="text" class="form-control effect_item affect_item" name="effect_item[]" placeholder="内容" style="width:70%; float:right; margin-top:25px">');
                 $('.inner_items').append('<p></p>');
             }  
         }

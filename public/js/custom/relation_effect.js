@@ -23,7 +23,7 @@ $(document).ready(function () {
                 // alert(img_path);
                 $('.inner_relations').append('<img src=' + img_path + ' alt="map image" class="img-circle img-things-size effect_relation affect_relation" style="margin : 17px">');
                 $('.inner_relations').append('<input type="hidden" class="affect_relation" name="relation_id[]" value="' + relation_id[i] + '">');
-                $('.inner_relations').append('<input type="text" class="form-control effect_relation affect_relation" name="effect_relation[]" placeholder="내용" style="width:70%; float:right; margin-top:25px">');
+                $('.inner_relations').append('<input type="text" class="form-control effect_relation affect_relation" name="effect_relation[]" placeholder="内容" style="width:70%; float:right; margin-top:25px">');
                 $('.inner_relations').append('<p></p>');
             }
         } else {}
