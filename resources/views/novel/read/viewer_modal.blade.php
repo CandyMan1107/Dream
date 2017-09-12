@@ -45,7 +45,7 @@
 
                         <div class="row">
                             <div class="col-md-3 text-left">
-                                <h5><strong>Font-Style</strong></h5>
+                                <h5><strong>書体</strong></h5>
                                 <ul class="list-group">
                                     <li class="list-group-item fontList on-font" value="Meiryo">Meiryo</li>
                                     <li class="list-group-item fontList off-font" value="Yu Gothic">Yu Gothic</li>
@@ -53,7 +53,7 @@
                                 </ul>
                             </div>
                             <div class="col-md-3 text-left">
-                                <h5><strong>Font-Size</strong></h5>
+                                <h5><strong>文サイズ</strong></h5>
                             <ul class="list-group">
                                     <li class="list-group-item sizeList off-font">12px</li>
                                     <li class="list-group-item sizeList on-font">14px</li>
@@ -64,7 +64,7 @@
                                 </ul>
                             </div>
                             <div class="col-md-3 text-left">
-                                <h5><strong>Line-Spacing</strong></h5>
+                                <h5><strong>行間隔</strong></h5>
                                 <ul class="list-group">
                                     <li class="list-group-item lineList off-font">120%</li>
                                     <li class="list-group-item lineList off-font">150%</li>
@@ -75,12 +75,12 @@
                                 </ul>
                             </div>
                             <div class="col-md-3 text-left">
-                                <h5><strong>Font-Color</strong></h5>
+                                <h5><strong>フォント色</strong></h5>
                                 <ul class="list-inline">
                                     <li class="colorBox on-colorBox font-color" value="#000000">{{-- 色1 black --}}</li>
                                     <li class="colorBox off-colorBox font-color" value="#ffffff">{{-- 色5 white --}}</li>
                                 </ul>
-                                <h5><strong>Background-Color</strong></h5>
+                                <h5><strong>背景色</strong></h5>
                                 <ul class="list-inline">
                                     <li class="colorBox on-colorBox back-color" value="#ffffff">{{-- 色1 white --}}</li>
                                     <li class="colorBox off-colorBox back-color" value="#ffd480">{{-- rgb(255, 212, 128) --}}</li>
