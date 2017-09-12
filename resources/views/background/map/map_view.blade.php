@@ -339,7 +339,7 @@ rant @extends('layouts.master')
 
 		<div id="paletteDiv" class="col-md-2">
 			<div class="paletteHeader">
-				색상 지정 팔레트
+				カラーパレット
 			</div>
 			<div id="colorPalette" class="palette">
 				&nbsp;HEX value: <button class="color-palette jscolor {valueElement:'chosen-value'}">Color Picker</button>
@@ -347,17 +347,17 @@ rant @extends('layouts.master')
 			</div>
 
 			<div class="paletteHeader" class="palette">
-				글자 생성 팔레트
+				テキストパレット
 			</div>
 			<div id="textPalette">
 				<!--  -->
 				<div class="dropdown dropdown-lg">
-          <button type="button" class="btn btn-default dropdown-toggle form-control font-set-btn" data-open="false"><i class="material-icons">create</i>글자 입력</button>
+          <button type="button" class="btn btn-default dropdown-toggle form-control font-set-btn" data-open="false"><i class="material-icons">create</i>テキスト入力</button>
 
           <div class="dropdown-menu dropdown-menu-right" role="menu">
               <form class="form-horizontal" role="form">
                 <div class="form-group col-md-12">
-                  <label for="filter">글꼴</label>
+                  <label for="filter">フォント</label>
                   <select id="font-style-set" class="form-control">
                       <option value="NanumGothic" selected>나눔고딕</option>
                       <option value="Jeju Myeongjo">제주명조</option>
@@ -366,19 +366,19 @@ rant @extends('layouts.master')
                   </select>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="contain">크기</label>
+                  <label for="contain">大きさ</label>
 									<select id="font-size-set" class="form-control">
 										@for($i = 20; $i < 61; $i++)
                       <option value="{{$i}}">{{$i}}</option>
 
 										@endfor
                   </select>
-									<label for="contain">글자색</label>
+									<label for="contain">カラー</label>
 									<input class="jscolor {valueElement:'font-color-set'}" type="button" name="" value="TC">
 									<input type="hidden" id="font-color-set" value="000000" size = 6>
                 </div>
                 <div class="form-group col-md-6">
-									<label for="contain">자간</label>
+									<label for="contain">スペース</label>
 									<select id="letter-spacing-set" class="form-control">
 										@for($i = 1; $i < 21; $i++)
 											<option value="{{$i}}">{{$i}}</option>
@@ -386,19 +386,19 @@ rant @extends('layouts.master')
                   </select>
                 </div>
 								<div class="form-group col-md-12">
-									<label for="contain">컨텐츠</label>
+									<label for="contain">内容</label>
 									<input id="font-content-set" class="form-control" type="text" />
                 </div>
               </form>
           </div>
-					<button id="deleteTextBtn" type="button" class="form-control" name="button"><i class="material-icons">delete</i>선택 글자 삭제</button>
+					<button id="deleteTextBtn" type="button" class="form-control" name="button"><i class="material-icons">delete</i>テキスト削除</button>
         </div>
 				<!--  -->
 
 			</div>
 
 			<div class="paletteHeader">
-				이미지 입력 팔레트
+				イメージパレット
 			</div>
 			<div id="imagePalette" class="palette">
 				<div class="container-fluid">
@@ -408,25 +408,25 @@ rant @extends('layouts.master')
 					</div>
 				</div>
 				<form enctype="multipart/form-data" id="upload_form" role="form" method="POST">
-					<button type="button" class="form-control" onclick="document.getElementById('imgFile').click();"><i class="material-icons">picture_in_picture</i> 이미지 생성</button>
+					<button type="button" class="form-control" onclick="document.getElementById('imgFile').click();"><i class="material-icons">picture_in_picture</i>イメージ登録</button>
 					<input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
-					<button type="button" id="deleteImgBtn" class="form-control" name="button"><i class="material-icons">delete</i>선택 이미지 삭제</button>
+					<button type="button" id="deleteImgBtn" class="form-control" name="button"><i class="material-icons">delete</i>イメージ削除</button>
 				</form>
 			</div>
 
 			<div class="paletteHeader">
-				편집 팔레트
+				編集パレット
 			</div>
 			<div id="funcPalette" class="palette">
 				<!-- Modal Div -->
-				<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="form-control"><i class="material-icons">list</i>지도 리스트</button></div>
+				<div class="center"><button data-toggle="modal" data-target="#squarespaceModal" class="form-control"><i class="material-icons">list</i>地図リスト</button></div>
 				<!-- line modal -->
 				<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-								<h3 class="modal-title" id="lineModalLabel">지도 리스트</h3>
+								<h3 class="modal-title" id="lineModalLabel">地図リスト</h3>
 							</div>
 							<div class="modal-body">
 								<div class="map-list">
@@ -436,7 +436,7 @@ rant @extends('layouts.master')
 							<div class="modal-footer">
 								<div class="btn-group btn-group-justified" role="group" aria-label="group button">
 									<div class="btn-group" role="group">
-										<input type="text" class="form-control" id="saveMapTitle" placeholder="제목입력">
+										<input type="text" class="form-control" id="saveMapTitle" placeholder="タイトル">
 									</div>
 									<div class="btn-group" role="group">
 										<button type="button" id="saveMapBtn" class="btn btn-default" role="button">Save</button>
@@ -459,12 +459,12 @@ rant @extends('layouts.master')
 						<div class="modal-content">
 							<div id="titleWarningHeader" class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-								<h3 class="modal-title">제목을 입력하세요</h3>
+								<h3 class="modal-title">タイトルを入力してください。</h3>
 							</div>
 						</div>
 				  </div>
 				</div>
-				<button id="removeAllBtn" type="button" class="form-control" name="button"><i class="material-icons">settings_backup_restore</i>맵 초기화</button>
+				<button id="removeAllBtn" type="button" class="form-control" name="button"><i class="material-icons">settings_backup_restore</i>初期化</button>
 				<!-- Modal End -->
 			</div>
 		</div>
@@ -1007,10 +1007,10 @@ rant @extends('layouts.master')
 				 createEle += "		<img src='" + canvasUrl + "'>"
 				 createEle += "	</div>"
 				 createEle += "	<div class='col-md-9 map-list-content-div'>"
-				 createEle += "		제목 : " 	 + title
-				 createEle += "		<button data-map-id='"+mapId+"' class='tag-toggle-btn form-control'>태그 입력</button><br>"
-				 createEle += "		생성일 : " + data +"<>"
-				 createEle += "		수정일 : 0000-00-00"
+				 createEle += "		タイトル : " 	 + title
+				 createEle += "		<button data-map-id='"+mapId+"' class='tag-toggle-btn form-control'>タグ入力</button><br>"
+				 createEle += "		登録日 : " + data +"<br>"
+				 createEle += "		修正日 : 0000-00-00"
 				 createEle += "	</div>"
 				 // 정재훈 DIV
 				 createEle += "	<div id='tagDiv"+mapId+"' data-toggle='hide' class='col-md-12 map-tag-div' style='height:20vh'>"
@@ -1021,7 +1021,7 @@ rant @extends('layouts.master')
 				 createEle += "			<div class='row'>"
     			 createEle += " 			<div class='panel panel-warning col-md-6' style='height:20vh'>"
         		 createEle += "					<div class=panel-heading'>"
-            	 createEle += "					<h3 class='panel-titl'>태그 이름</h3>"
+            	 createEle += "					<h3 class='panel-titl'>タグ名</h3>"
         		 createEle += "					</div>"
         		 createEle += "					<div class='panel-body'>"
             	 createEle += "						<input type='text' id='tag_name"+mapId+"' name='tag_name' class='form-control tag_name' placeholder='Text input' value=''>"
@@ -1029,7 +1029,7 @@ rant @extends('layouts.master')
     			 createEle += "				</div>"
 				 createEle += "				<div class='panel panel-warning col-md-6' style='height:20vh'>"
         		 createEle += "					<div class='panel-heading'>"
-            	 createEle += "						<h3 class='panel-title'>태그 색상</h3>"
+            	 createEle += "						<h3 class='panel-title'>カラー</h3>"
         		 createEle += "					</div>"
 				 createEle += "					<div id='colorPalette' class='palette'>"
 				 createEle += "						<input class='tag_color' id='tag_color"+mapId+"' list='colors' name='tag_color' value=''>"
@@ -1078,7 +1078,7 @@ rant @extends('layouts.master')
 								object_id : $id
 								  },
 						success:function(data){
-							alert("태그 입력 성공");
+							alert("タグ入力完了");
 						},
 						error:function(request,status,error){
 							alert("code:"+request.status+"\n"+"error:"+error);

@@ -175,55 +175,55 @@
   <div class="write_novel_set">
     <div class="container">
       <div class="row set_row">
-        <div class="col-md-12 main_title">새 소설 쓰기</div>
+        <div class="col-md-12 main_title">小説登録</div>
       </div>
 
       <div class="row set_row">
         <div class="col-md-12">
-          <span class="menu_title">소설 제목</span>
-          <input id="novel-title" class="menu_input" type="text" placeholder="소설 제목을 입력해주세요." size=50>
+          <span class="menu_title">タイトル</span>
+          <input id="novel-title" class="menu_input" type="text" placeholder="小説のタイトルを入力してください。" size=50>
         </div>
       </div>
       <div class="row set_row">
         <div class="col-md-6">
-          <span class="menu_title">장르</span>
+          <span class="menu_title">ジャンル</span>
           <select id="genre" class="menu_select" name="">
-            <option value="romance">로맨스</option>
-            <option value="fantasy">판타지</option>
+            <option value="romance">ロマンス</option>
+            <option value="fantasy">ファンタジー</option>
             <option value="scifi">SF</option>
-            <option value="martial">무협</option>
-            <option value="detective">추리</option>
-            <option value="horror">호러</option>
-            <option value="agenovel">시대극</option>
+            <option value="martial">武侠</option>
+            <option value="detective">推理</option>
+            <option value="horror">ホラー</option>
+            <option value="agenovel">歴史</option>
           </select>
         </div>
 
         <div class="col-md-6">
-          <span class="menu_title">연재 주기</span>
-          <span class="check_novel_period free_publish selected_period" data-case="free-publish"><img src="{{URL::asset('img/write_novel/check.png')}}" class="check_circle">자유 연재</span>
-          <span class="check_novel_period day_publish" data-case="day-publish"><img src="{{URL::asset('img/write_novel/check.png')}}" class="check_circle">요일 연재</span>
+          <span class="menu_title">連載周期</span>
+          <span class="check_novel_period free_publish selected_period" data-case="free-publish"><img src="{{URL::asset('img/write_novel/check.png')}}" class="check_circle">自由連載</span>
+          <span class="check_novel_period day_publish" data-case="day-publish"><img src="{{URL::asset('img/write_novel/check.png')}}" class="check_circle">周期連載</span>
 
           <table class="novel_period_day_table day_activate">
             <tr>
-              <td class="novel_period_day" data-day="mon">월</td>
-              <td class="novel_period_day" data-day="tue">화</td>
-              <td class="novel_period_day" data-day="wed">수</td>
-              <td class="novel_period_day" data-day="thu">목</td>
-              <td class="novel_period_day" data-day="fri">금</td>
-              <td class="novel_period_day" data-day="sat">토</td>
-              <td class="novel_period_day" data-day="sun">일</td>
+              <td class="novel_period_day" data-day="mon">月</td>
+              <td class="novel_period_day" data-day="tue">火</td>
+              <td class="novel_period_day" data-day="wed">水</td>
+              <td class="novel_period_day" data-day="thu">目</td>
+              <td class="novel_period_day" data-day="fri">金</td>
+              <td class="novel_period_day" data-day="sat">土</td>
+              <td class="novel_period_day" data-day="sun">日</td>
             </tr>
           </table>
         </div>
       </div>
 
       <div class="row set_row">
-        <div class="col-md-10 menu_title">표지 이미지
+        <div class="col-md-10 menu_title">カバーイメージ
 
         </div>
         <div class="col-md-2">
           <form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="">
-            <label class="img_upload_label">이미지 업로드
+            <label class="img_upload_label">イメージ登録
               <input class="img_upload_btn" id="imgFile" name="imgFile" type='file'>
             </label>
           </form>
@@ -239,7 +239,7 @@
       </div>
 
       <div class="row set_row">
-        <div class="col-md-12 menu_title">소설 소개</div>
+        <div class="col-md-12 menu_title">小説紹介</div>
       </div>
       <div class="intro_box detail_intro_box" contenteditable="true">
         detail intro box
@@ -249,8 +249,8 @@
       </div>
 
       <div class="row set_row">
-        <div class="col-md-6 btn_div"><div class="func_btn novel-cancel">취소</div></div>
-        <div class="col-md-6 btn_div"><div class="func_btn novel-save">저장</div></div>
+        <div class="col-md-6 btn_div"><div class="func_btn novel-cancel">キャンセル</div></div>
+        <div class="col-md-6 btn_div"><div class="func_btn novel-save">アップロード</div></div>
       </div>
 
     </div>
@@ -368,7 +368,7 @@
                 console.log(data);
               },
               error: function (error) {
-                alert("오류발생");
+                alert("エラー");
               }
           });
 
@@ -510,11 +510,11 @@
             'summaryIntro': summaryIntro
           },
           success: function (data) {
-            alert("소설이 생성 되었습니다!");
+            alert("小説登録完了");
               location.href= "my_novel";
           },
           error: function (error) {
-            alert("오류발생");
+            alert("エラー");
           }
       });
     }

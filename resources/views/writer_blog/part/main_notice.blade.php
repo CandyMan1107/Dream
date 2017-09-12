@@ -2,7 +2,7 @@
     <div class="board_title">
         <ul class="list-inline">
             <li>
-                <strong>[공지]</strong>
+                <strong>[ノーティス]</strong>
             </li>
             <li>
                 <h4>

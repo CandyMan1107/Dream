@@ -31,7 +31,7 @@
                         <div>
                             <i class="material-icons">border_color</i>
                         </div>
-                        <div>포스트</div>
+                        <div>ポスト</div>
                     </a>
                     &nbsp;&nbsp;
                     {{-- 관리 : 사용자의 블로그일 때만 표시   --}}
@@ -39,7 +39,7 @@
                         <div>
                             <i class="material-icons">settings</i>
                         </div>
-                        <div>관리</div>
+                        <div>管理</div>
                     </a>
                 </div>
             </div>
@@ -57,10 +57,10 @@
             </div>
             <hr />
             <div class="blog_menu_nav">
-                <strong>작가의 방</strong>
+                <strong>作家の部屋</strong>
                 {{-- 블로그 메뉴 있을 때 없을 때   --}}
                 @if ($data[0]['blog_menu_id'] == "empty")
-                    <h5>메뉴가 없습니다.</h5>
+                    <h5>メニューがありません。</h5>
                 @else
                     @php
                         echo BlogController::showAllMenu($data[0]['id']); 
@@ -70,23 +70,23 @@
             <hr />
             <div class="blog_reader_menu_nav">
                 <strong>
-                    <a href="/{{$data[0]['blog_owner_id']}}/blog/community">독자 게시판</a>
+                    <a href="/{{$data[0]['blog_owner_id']}}/blog/community">読者コミュニティー</a>
                 </strong>
             </div>
             <hr />
             {{-- BLOG INFO BAR --}}
             <div class="blog_info_bar">
-                <strong>활동정보</strong>
+                <strong>活動情報</strong>
                 {{-- BLOG FOLLOW - NUMBER --}}
                 <div class="blog_follow_info">
                     <div>
                         <h1>000</h1>
                     </div>
                     <div name="blogInfoNumText">
-                        &nbsp; 명이
+                        &nbsp; 人が
                     </div>
                     <br />
-                    작가의 방을 구독중입니다.
+                    この部屋に関心があります。
                 </div>
                 {{-- WRITER NOVEL INFO - NUMBER --}}
                 <div class="writer_novel_info">
@@ -94,16 +94,16 @@
                         <h1>000</h1>
                     </div>
                     <div name="blogInfoNumText">
-                        &nbsp; 편의
+                        &nbsp; 数の
                     </div>
                     <br />
-                    웹 소설을 집필 했습니다.
+                    小説を執筆しました。
                 </div>
             </div>
             <hr />
             {{-- BLOG COUNTER --}}
             <div class="blog_counter">
-                <small>방문자수</small>
+                <small>訪問者の数</small>
                 {{-- <br /> --}}
                 <div class="blog_visit_info">
                     <div>

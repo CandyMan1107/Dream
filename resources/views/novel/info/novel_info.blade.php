@@ -18,7 +18,7 @@
                         <h3><strong>
                             {!! $data[0]['title'] !!}
                         </strong></h3>
-                        <h5><small>글</small>&nbsp;글작가</h5>
+                        <h5><small>作者</small>&nbsp;小説家さん</h5>
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
                         <i class="material-icons" name="favorite">favorite_border</i>
@@ -26,15 +26,15 @@
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
                         <i class="material-icons">chat</i>
-                        <h4>소설리뷰</h4>
+                        <h4>レビュー</h4>
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
                         <i class="material-icons" name="star">star_border</i>
-                        <h4>관심등록</h4>
+                        <h4>関心数</h4>
                     </div>
                     <div class="col-md-1 text-center novel-info-upper-icon">
                         <i class="material-icons">share</i>
-                        <h4>공유하기</h4>
+                        <h4>共有回数</h4>
                     </div>
                 </div>
                 <hr />
@@ -59,7 +59,7 @@
                                 1
                             </div>
                             <div class="col-md-2 upload-day">
-                                <b name="upload_day"></b> 연재
+                                <b name="upload_day"></b> 連載
                             </div>
                             <div class="col-md-2">
                                 <b name="genre">
@@ -78,7 +78,7 @@
                     </div>
                     <div id="default-padding-mid-1" class="col-md-9"></div>
                     @if (isset($data[0]['noEpi']))
-                        <h1>업로드 준비 중입니다.</h1>
+                        <h1>今、準備しています。</h1>
                     @else
                         <div class="col-md-9">
                             <div class="row">
@@ -93,13 +93,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <a href="/novel/read/novel_read_view/{{$data[0]['novelId']}}&1">
-                                        <button class="btn btn-default btn-block novel-1st-read-Btn">첫회보기</button>
+                                        <button class="btn btn-default btn-block novel-1st-read-Btn">第一話から</button>
                                     </a>
                                 </div>
                                 @if (!isset($data[0]['noBack']))
                                     <div class="col-md-4">
                                         <button class="btn btn-default btn-block novel-background-read-Btn" data-toggle="modal" data-target="#backgroundModal">
-                                            소설 배경 설정 보기
+                                            小説設定
                                         </button>
                                     </div>
                                 @endif
@@ -127,14 +127,14 @@
                     <div class="row">
                         <div class="col-md-6 text-left">
                             <h3>
-                                소설회차 <small>({{count($data)}})</small>
+                                話数 <small>({{count($data)}})</small>
                             </h3>
                         </div>
                         <div class="col-md-6 text-right sort">
                             <h5>
-                                <span class="sort-text">최신화부터</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
+                                <span class="sort-text">最近話から</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
                                 &nbsp;&nbsp;&nbsp;
-                                <span class="sort-text">첫화부터</span> <span><i class="material-icons"  name="check">check</i></span>
+                                <span class="sort-text">第一話から</span> <span><i class="material-icons"  name="check">check</i></span>
                             </h5>
                         </div>
                         
@@ -162,7 +162,7 @@
                                                             <i class="fa fa-star" aria-hidden="true"></i>&nbsp;1
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <small>댓글</small>&nbsp;<strong>1</strong>
+                                                            <small>レビュー</small>&nbsp;<strong>1</strong>
                                                         </div>
                                                         <div class="col-md-8">
                                                             {!! $d['created_at'] !!}

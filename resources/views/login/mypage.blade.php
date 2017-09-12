@@ -24,10 +24,10 @@ $(document).ready(function(){
 			url:'/point',
 			success:function(data){
                 location.href="/mypage";
-                alert("충전 성공");
+                alert("充電成功");
             },
             error:function(){
-                alert("충전 실패");
+                alert("充電失敗");
             }
 		})
 	});
@@ -70,51 +70,51 @@ $(document).ready(function(){
     <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
-            <div class="panel-heading">마이페이지</div>
+            <div class="panel-heading">マイページ</div>
             <div class="panel-body">
                   <form class="form-horizontal" role="form" method="POST" action="/modify">  
                  <!-- <form class="form-horizontal" role="form" method="POST">  -->
                     {{ csrf_field() }}  
                     @foreach($user_id as $value)
                     <div class="form-group">
-                        <label class="col-md-4 control-label">아이디</label>
+                        <label class="col-md-4 control-label">ユーザID</label>
                         <div class="col-md-5">
                             <input id="user_id" value="{{$value->user_id}}" class="form-control" readonly>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label">비밀번호</label>
+                        <label class="col-md-4 control-label">パスワード</label>
                         <div class="col-md-5">
                             <input id="password" name="password" value="{{$value->password}}" type="password" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label">비밀번호 확인</label>
+                        <label class="col-md-4 control-label">パスワード確認</label>
                         <div class="col-md-5">
                             <input id="password2" value="{{$value->password}}" type="password" class="form-control" required>
                         </div>
                     </div> 
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label">닉네임</label>
+                        <label class="col-md-4 control-label">ニックネーム</label>
                         <div class="col-md-5">
                             <input name="name" value="{{$value->name}}" type="text" class="form-control" readonly>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label class="col-md-4 control-label">이메일</label>
+                        <label class="col-md-4 control-label">メールアドレス</label>
                         <div class="col-md-5">
                             <input id="readonly" value="{{$value->email}}" type="email" class="form-control" readonly>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label">보유 포인트</label>
+                        <label class="col-md-4 control-label">保有ポイント</label>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                포인트 충전 </button>
+                                ポイント充電</button>
                         <div class="col-md-3">
                             <input id="readonly" value="{{$value->point}}" type="text" class="form-control" readonly>
                         </div>
@@ -123,11 +123,11 @@ $(document).ready(function(){
                         <div class="form-group"> 
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" id="modify_button" class="btn btn-primary">
-                                정보 수정
+                                情報更新
                             </button>
 
                             <button type="reset" class="btn btn-primary col-md-offset-1">
-                                취소
+                                キャンセル
                             </button>
                         </div>
                     </div>
@@ -144,12 +144,12 @@ $(document).ready(function(){
         <form role="form" method="get" action="/point"> 
             <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">포인트 충전</h4>
+                <h4 class="modal-title" id="myModalLabel">ポイント充電</h4>
             </div>
                     <!-- 충전창 바디  -->
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="col-md-4">보유 포인트</label><br><br>
+                            <label class="col-md-4">保有ポイント</label><br><br>
                             <div class="col-md-4"><input value="{{$value->point}} Point" class="form-control" readonly></div>
                         </div>
                     </div>
@@ -158,69 +158,69 @@ $(document).ready(function(){
                                  <div style="float:left;">
                                     <label>
                                         <input type="radio" class="input_radio" value="1000">
-                                        1000 Point
+                                        1000ポイント
                                     </label>
                                 </div>
                                 <div style="float:right;">
                                     <label>
-                                        10000원
+                                        1000円
                                     </label>
                                 </div><br><br><br>
 
                                 <div style="float:left;">
                                     <label>
                                         <input type="radio" class="input_radio" value="2000">
-                                        2000 Point
+                                        2000ポイント
                                     </label>
                                 </div>
                                 <div style="float:right;">
                                     <label>
-                                        20000원
+                                        2000円
                                     </label>
                                 </div><br><br><br> 
                                 
                                  <div style="float:left;">
                                     <label>
                                         <input type="radio" class="input_radio" value="3000">
-                                        3000 Point
+                                        3000ポイント
                                     </label>
                                 </div>
 
                                 <div style="float:right;">
                                     <label>
-                                        30000원
+                                        3000円
                                     </label>
                                 </div><br><br><br>
 
                                 <div style="float:left;">
                                     <label>
                                         <input type="radio" class="input_radio" value="4000">
-                                        4000 Point
+                                        4000ポイント
                                     </label>
                                 </div>
                                 <div style="float:right;">
-                                <label>
-                                    40000원
-                                </label>
+                                    <label>
+                                        4000円
+                                    </label>
                                 </div><br><br><br>
                                 
                                 <div style="float:left;">
                                     <label>
                                         <input type="radio" class="input_radio" value="5000">
-                                        5000 Point
+                                        5000ポイント
                                     </label>
                                 </div>
                                 <div style="float:right;">
                                     <label>
-                                        50000원
+                                        5000円
                                     </label>
                                 </div><br><br><br> 
 
                             </div>
                         </div>
                 <div class="modal-footer">
-                    <button type="submit" id="point_add" class="btn btn-primary">충전</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">취소</button> 
+                    <button type="submit" id="point_add" class="btn btn-primary">充電</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">キャンセル</button> 
                     
                 </div>
             </form>

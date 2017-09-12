@@ -31,7 +31,7 @@
                             <select class="form-control" onchange="location = this.value;">
                                 @for ($i = count($dataE); $i > 0; $i--)
                                     <option class="quickList" name="{{$i}}" value="/novel/read/novel_read_view/{{$dataE[0]['novel_id']}}&{{$i}}">
-                                        {{$i}}화. {!! $dataE[$i-1]['episode_title'] !!}
+                                        {{$i}}話. {!! $dataE[$i-1]['episode_title'] !!}
                                     </option>
                                 @endfor
                             </select>
@@ -41,7 +41,7 @@
                         <td data-toggle="modal" data-target="#viewerModal">
                             <p class="remote">
                                 <a class="setView" href="#">
-                                    <i class="material-icons">settings</i>&nbsp;<span>뷰어설정</span>
+                                    <i class="material-icons">settings</i>&nbsp;<span>ビューアー設定</span>
                                 </a>
                             </p>
                         </td>
@@ -51,7 +51,7 @@
                             <td data-toggle="modal" data-target="#backgroundModal">
                                 <p class="remote">
                                     <a class="novelBackground" href="#">
-                                        <i class="material-icons">remove_red_eye</i>&nbsp;<span>배경보기</span>
+                                        <i class="material-icons">remove_red_eye</i>&nbsp;<span>小説設定</span>
                                     </a>
                                 </p>
                             </td>

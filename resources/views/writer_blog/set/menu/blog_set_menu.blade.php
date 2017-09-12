@@ -4,7 +4,7 @@
     <div class="default-padding"></div>
     {{-- MENU SET FORM SPACE START --}}
     <div id="menu-set-form" class="container">
-        <h4>메뉴 관리</h4>
+        <h4>メニュー管理</h4>
         <div class="row">
             <div class="col-md-6">
                 {{-- menu_title_list   --}}
@@ -19,13 +19,13 @@
                             {{-- menu_title_list --}}
                             <div class="col-md-12">
                                 <h4>
-                                    <strong>작가의 방</strong>
+                                    <strong>作家の部屋</strong>
                                 </h4>
 
                                 {{-- 존재하는 메뉴 개수 만큼 반복   --}}
                                 
                                     @if ($data[0]['id'] == 0)
-                                        메뉴를 생성해 주세요.
+                                        メニューを作って下さい。
                                     @else
                                         @foreach ($data as $list)
                                             <div class="checkbox">
@@ -43,7 +43,7 @@
                         </div>
                                 
                     </div>
-                    <button type="submit" class="btn btn-default">삭제</button>
+                    <button type="submit" class="btn btn-default">Delete</button>
                     
                 </form>
             </div>
@@ -59,14 +59,14 @@
                             <div class="col-md-12">
                                 {{-- 메뉴 관리 창   --}}
                                 {{-- 메뉴 제목 input type text   --}}
-                                <strong>카테고리명</strong>
+                                <strong>カテゴリー名</strong>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <input type="text" name="menu_title" id="menu-title" />
                             </div>
                         </div>
                                 
                     </div>
-                    <button type="submit" class="btn btn-default">등록</button>
+                    <button type="submit" class="btn btn-default">登録</button>
                 </form>
             </div>
         </div>

@@ -14,16 +14,16 @@
                 <h4>
                     <span class="novel-info-text"><a href="/novel/info/novel_info/{{$data['belong_to_novel']}}"><strong>{!! $data['novel_title'] !!}</strong></a></span>
                     <span><i class="material-icons">keyboard_arrow_right</i></span>
-                    <span class="novel-info-text">{!! $data['episode_count'] !!}화 {!! $data['episode_title'] !!}</span>
+                    <span class="novel-info-text">{!! $data['episode_count'] !!}話 {!! $data['episode_title'] !!}</span>
                 </h4>
             </div>
             {{-- <div class="col-md-4 text-right">
                 <ul class="list-inline" name="bookMode">
                     <li class="setView" data-toggle="modal" data-target="#viewerModal">
-                        <i class="material-icons">settings</i>&nbsp;<span>뷰어설정</span>
+                        <i class="material-icons">settings</i>&nbsp;<span>ビューアー設定</span>
                     </li>
                     <li class="novelBackground">
-                        <i class="material-icons">remove_red_eye</i>&nbsp;<span>배경보기</span>
+                        <i class="material-icons">remove_red_eye</i>&nbsp;<span>小説設定</span>
                     </li>
                 </ul>
             </div> --}}
@@ -72,12 +72,12 @@
                         <li>&nbsp;</li>
                         <li>
                             <span><i class="material-icons" name="star">star_border</i></span>
-                            <span class="mark-text"> 관심등록</span>
+                            <span class="mark-text"> 関心数</span>
                         </li>
                         <li>&nbsp;</li>
                         <li>
                             <span><i class="material-icons">share</i></span>
-                            <span class="mark-text"> 공유하기</span>
+                            <span class="mark-text"> 共有回数</span>
                         </li>
                     </ul>
                 </div>
@@ -111,7 +111,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="list-inline">
-                        <li><h5><strong>글작가님의 한마디</strong></h5></li>
+                        <li><h5><strong>「作家ンさん」の一言</strong></h5></li>
                         <li><small>{!! $data['created_at'] !!}</small></li>
                     </ul>
                 </div>
@@ -121,8 +121,8 @@
                 <div id="default-padding-small" class="col-md-12"></div>
                 <div class="col-md-12 text-right">
                     <ul class="list-inline">
-                        <li><button class="btn btn-default btn-block"><strong>작가의 다른 소설</strong></button></li>
-                        <li><button class="btn btn-default btn-block"><strong>작가의 방</strong></button></li>
+                        <li><button class="btn btn-default btn-block"><strong>その他の小説</strong></button></li>
+                        <li><button class="btn btn-default btn-block"><strong>作家の部屋</strong></button></li>
                     </ul>
                 </div>
             </div>
@@ -139,19 +139,19 @@
                 <div class="col-md-4 text-left">
                     <a name="arrow-back" data-id="{{ $data['episode_count']-1 }}" href="/novel/read/novel_read_view/{{$data['belong_to_novel']}}&{{ $data['episode_count']-1 }}">
                         <p><i class="material-icons move-icon">arrow_back</i></p>
-                        <h4 class="move-text">이전화</h4>
+                        <h4 class="move-text">前へ</h4>
                     </a>
                 </div>
                 <div class="col-md-4 text-center">
                     <a href="/novel/info/novel_info/{{$data['belong_to_novel']}}">
                         <p><i class="material-icons move-icon">menu</i></p>
-                        <h4>목록으로</h4>
+                        <h4>目次</h4>
                     </a>
                 </div>
                 <div class="col-md-4 text-right">
                     <a name="arrow-forward" data-id="{{ $data['episode_count']+1 }}" href="/novel/read/novel_read_view/{{$data['belong_to_novel']}}&{{ $data['episode_count']+1 }}">
                         <p><i class="material-icons move-icon">arrow_forward</i></p>
-                        <h4 class="move-text">다음화</h4>
+                        <h4 class="move-text">次へ</h4>
                     </a>
                 </div>
             </div>
@@ -166,13 +166,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-left">
-                        <h3>소설리뷰 <small>(1)</small></h3>
+                        <h3>レビュー <small>(1)</small></h3>
                     </div>
                     <div class="col-md-6 text-right sort">
                         <h5>
-                            <span class="sort-text">최신순</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
+                            <span class="sort-text">最新から</span> <span><i class="material-icons selectedIcon" name="check">check</i></span>
                             &nbsp;&nbsp;&nbsp;
-                            <span class="sort-text">추천순</span> <span><i class="material-icons" name="check">check</i></span>
+                            <span class="sort-text">推薦から</span> <span><i class="material-icons" name="check">check</i></span>
                         </h5>
                     </div>
                     <div id="default-padding-mid" class="col-md-12"></div>
@@ -184,13 +184,13 @@
                             <div class="col-md-12">
                                 {{-- USER COMMENT --}}
                                 <div class="input-group input-group-lg userComment">
-                                    <input type="text" class="form-control" placeholder="로그인 후 이용해주세요.">
-                                    <span class="input-group-addon">등록</span>
+                                    <input type="text" class="form-control" placeholder="ログイン後、利用して下さい。">
+                                    <span class="input-group-addon">登録</span>
                                 </div>
                             </div>
                             <div id="default-padding-big" class="col-md-12"></div>
                             <div class="col-md-9 text-left">
-                                <span><strong>이대감</strong></span>
+                                <span><strong>yeye17</strong></span>
                                 &nbsp;
                                 <span><small>2017-05-01 00:29:24</small></span>
                             </div>
@@ -200,19 +200,19 @@
                             </div>
                             <div id="default-padding-small" class="col-md-12"></div>
                             <div class="col-md-12">
-                                <span><small>{!! $data['episode_count'] !!}화</small></span>
+                                <span><small>{!! $data['episode_count'] !!}話</small></span>
                                 &nbsp;
-                                <span>엄청 재밌어요! 글작가님 글은 항상 재미있었지만 오베는 역대급!</span>
+                                <span>まず、ストーリー、話の中にどんどん引き込まれて、続きが凄く気になる。</span>
                             </div>
                             <div id="default-padding-small-1" class="col-md-12"></div>
                             <div class="col-md-12 review" data-toggle="collapse" href="#collapseComment" aria-expanded="false" aria-controls="collapseComment">
-                                <span class="re-review-text"><small>답글</small></span>
+                                <span class="re-review-text"><small>コメント</small></span>
                                 <span><i class="material-icons" name="arrow">keyboard_arrow_down</i></span>
                             </div>
                             <div class="col-md-12 collapse" id="collapseComment">
                                 <div class="input-group input-group-mg commentReply">
-                                    <input type="text" class="form-control" placeholder="로그인 후 이용해주세요.">
-                                    <span class="input-group-addon">등록</span>
+                                    <input type="text" class="form-control" placeholder="ログイン後、利用して下さい。">
+                                    <span class="input-group-addon">登録</span>
                                 </div>
                             </div>
                             <div id="default-padding-small-1" class="col-md-12"></div>

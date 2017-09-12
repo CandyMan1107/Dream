@@ -16,7 +16,7 @@
         @endforeach
     @else
     <div class="col-md-12" name="map-view">
-        <strong>아직 공개된 배경 정보가 없습니다.</strong>
+        <strong>まだ公開された小説設定がありません。</strong>
     @endif
     </div>
     <div class="col-md-11" name="map-info">

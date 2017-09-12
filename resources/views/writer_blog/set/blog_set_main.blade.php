@@ -4,26 +4,26 @@
 
 @section('content')
     <div class="default-padding"></div>
-    <h2 class="text-center">블로그 설정</h2>
+    <h2 class="text-center">ブログ設定</h2>
     <div class="container">
         <div class="row">
             <div id="blog-set">
                 <div class="col-md-4 text-center blog_menu_set">
                     <a href="/yerriel/blog/{{$blog_id}}/setMap/createMenu">
                         <i class="material-icons">settings</i>
-                        <h4>메뉴 관리</h4>
+                        <h4>メニュー管理</h4>
                     </a>
                 </div>
                 <div class="col-md-4 text-center blog_design_set">
                     <a href="#">
                         <i class="material-icons">format_paint</i>
-                        <h4>디자인 설정</h4>
+                        <h4>デザイン設定</h4>
                     </a>
                 </div>
                 <div class="col-md-4 text-center my_novel_set">
                     <a href="/background">
                         <i class="material-icons">library_books</i>
-                        <h4>내 소설 관리</h4>
+                        <h4>小説管理</h4>
                     </a>
                 </div>
             </div>

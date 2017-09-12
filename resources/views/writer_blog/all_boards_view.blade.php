@@ -5,7 +5,7 @@
             
             @if ($data->is_notice == "on")
                 <li>
-                    <strong>[공지]</strong>
+                    <strong>[ノーティス]</strong>
                 </li>
             @endif
             <li>
