@@ -47,9 +47,9 @@
                             <div class="col-md-3 text-left">
                                 <h5><strong>書体</strong></h5>
                                 <ul class="list-group">
-                                    <li class="list-group-item fontList on-font" value="Meiryo">Meiryo</li>
-                                    <li class="list-group-item fontList off-font" value="Yu Gothic">Yu Gothic</li>
-                                    <li class="list-group-item fontList off-font" value="MS Mincho">MS Mincho</li>
+                                    <li class="list-group-item fontList on-font" value="Noto Sans">Noto Sans</li>
+                                    <li class="list-group-item fontList off-font" value="Kokoro">Kokoro</li>
+                                    <li class="list-group-item fontList off-font" value="Sawarabi Mincho">Sawarabi Mincho</li>
                                 </ul>
                             </div>
                             <div class="col-md-3 text-left">

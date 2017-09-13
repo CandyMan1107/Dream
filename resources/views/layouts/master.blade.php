@@ -20,6 +20,11 @@
         {{--GOOGLE MATERIAL ICON--}}
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+        {{--  JAPANESE FONT  --}}
+        <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/earlyaccess/sawarabimincho.css" rel="stylesheet" />
+
         <style>
             html,body {
                 height : 100%;
