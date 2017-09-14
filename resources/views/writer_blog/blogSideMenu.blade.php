@@ -46,7 +46,7 @@
             <hr />
             {{-- BLOG MENU NAV --}}
             <div class="user_novel_nav">
-                <strong>USER 의 소설</strong>
+                <strong>私の小説</strong>
                 {{-- 소설 있을 때 없을 때   --}}
                 <ul>
                     @php
