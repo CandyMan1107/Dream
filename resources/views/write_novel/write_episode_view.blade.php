@@ -1876,7 +1876,7 @@ fvcc<div class="default-padding"></div>
               addEle += "<div class='window-div'>"
               addEle += "  <div class='col-md-12 window-header'>"
               addEle += "   <div class='col-md-10 window-header-text'>"
-              addEle += "    인물-" + data.name;
+              addEle += "    人物-" + data.name;
               addEle += "   </div>"
               addEle += "   <div class='col-md-2 window-header-clear' >"
               addEle += "     <i class='pull-right material-icons window-clear-icon' data-case='" + bgCase +"' data-id='" + data.background_id +"'>clear</i>"
@@ -2348,7 +2348,7 @@ fvcc<div class="default-padding"></div>
           tagPaintCase = $(this).attr("data-case");
           tagPaintId = $(this).attr("data-id");
           tagPaintColor = selectEle.val();
-          $(".tag-set-btn").html("취소");
+          $(".tag-set-btn").html("キャンセル");
           setMouseCursorPaint();
         } else {
           tagPaintActivated = false;
@@ -2356,7 +2356,7 @@ fvcc<div class="default-padding"></div>
           tagPaintCase = '';
           tagPaintId = '';
           tagPaintColor = '';
-          $(".tag-set-btn").html("적용");
+          $(".tag-set-btn").html("適用");
           disableMouseCursorPaint();
         }
 
@@ -2506,7 +2506,7 @@ fvcc<div class="default-padding"></div>
         tagPaintCase = '';
         tagPaintId = '';
         tagPaintColor = '';
-        $(".tag-set-btn").html("적용");
+        $(".tag-set-btn").html("適用");
         disableMouseCursorPaint();
       }
     })
