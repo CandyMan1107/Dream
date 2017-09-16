@@ -94,7 +94,7 @@
         <div class="col-md-12">
 					<div class="span2">
 						<div class="btn-group pull-left" data-toggle="buttons-radio">
-								<button class="btn active">統合</button>
+								<button class="btn active">全て</button>
 								<button class="btn">ニックネーム</button>
 								<button class="btn">作品名</button>
 						</div>
@@ -195,7 +195,7 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				tableEle += "	<tr>";
 				tableEle += "		<td rowspan='2'><img class='cover-img' src='{{URL::asset('upload/images')}}/"+ d.cover_img_src+ "' width='100px' height='144px'></td>";
 				tableEle += "		<td>"+ d.title +"</td>";
-				tableEle += "		<td>"+ "글반죽 "+"</td>";
+				tableEle += "		<td>"+ "落葉 "+"</td>";
 				tableEle += "		<td>"+ genre +"</td>";
 				tableEle += "		<td>"
 				tableEle += "			<button  data-toggle='collapse' href='#collapse" + d.id + "' type='button' class='btn btn-default episode-mng-btn' data-novel-id='"+d.id+"'>作品管理</button>";
