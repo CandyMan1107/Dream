@@ -31,7 +31,7 @@
                             {{--  blog_menu_id  --}}
                             <div class="col-md-3">
                                 @if (isset($data['community']))
-                                    <p>독자 게시판</p>
+                                    <p>読者コミュニティー</p>
                                 @else
                                     <select name="blog_menu_id" id="post-category" class="form-control">
                                         @php
@@ -42,7 +42,7 @@
                             </div>
                             {{--  board_title  --}}
                             <div class="col-md-9">
-                                <input name="board_title" id="post-title" type="text" placeholder="포스트 제목을 입력하세요." />
+                                <input name="board_title" id="post-title" type="text" placeholder="ポストのタイトルを入力して下さい。" />
                             </div> 
                             @if (isset($data['community']))
                                 {{-- DataType INT --}}
@@ -51,7 +51,7 @@
                                 {{-- is_notice --}}
                                 <div class="col-md-12">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" name="is_notice" id="notice-check"> 공지
+                                        <input type="checkbox" name="is_notice" id="notice-check"> ノーティス
                                     </label>
                                 </div>
                             @endif
@@ -63,9 +63,8 @@
                             </div>
                         </div>
                     </div>
-                    {{--  <button class="btn btn-default">임시저장 구현해주겠니</button>  --}}
                     {{--  &nbsp; &nbsp;  --}}
-                    <button type="submit" class="btn btn-default">등록</button>
+                    <button type="submit" class="btn btn-default">登録</button>
                 </form>
             </div>
             {{-- BOARD WRITE FORM SPACE END --}}

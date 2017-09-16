@@ -4,14 +4,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="viewerModalLabel"><i class="material-icons">settings</i>&nbsp;<span>뷰어 설정</span></h4>
+                    <h4 class="modal-title" id="viewerModalLabel"><i class="material-icons">settings</i>&nbsp;<span>ビューアー設定</span></h4>
                 </div>
                 <div class="modal-body">
                     {{-- Screen MODE --}}
                     <div class="container-fluid">
                         <div class="row">
                             {{--  <div class="col-md-2 text-left">  --}}
-                                {{--  <h5><strong>화면 모드</strong></h5>  --}}
+                                {{--  <h5><strong>画面モード</strong></h5>  --}}
                             {{--  </div>  --}}
                             {{--  <div class="col-md-7 text-left">  --}}
                                 {{-- 50px x 50px 화면 모드 이미지 버튼 2개 --}}
@@ -25,7 +25,7 @@
                                 {{--  </ul>
                             </div>  --}}
                             <div class="col-md-12 text-right">
-                                <button type="button" class="btn btn-default" name="reset"><i class="material-icons">settings_backup_restore</i>원래대로</button>
+                                <button type="button" class="btn btn-default" name="reset"><i class="material-icons">settings_backup_restore</i>元通りに</button>
                             </div>
                         </div>
                     </div>
@@ -33,28 +33,27 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12 text-left">
-                                <h5><strong>열람 설정</strong></h5>
+                                <h5><strong>ビューアー設定</strong></h5>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 example-text">
-                                여인은 초저녁부터 목이 아픈 줄도 모르고 줄창 소리를 뽑아대고, 사내는 그 여인의 소리로 하여 끊임없이 어떤 예감 같은 것을 견디고 있는 듯한 표정으로 북장단을 잡고 있었다. 
-                                소리를 쉬지 않는 여인이나, 묵묵히 장단 가락만 잡고 있는 사내나 양쪽 다 이마에 힘든 땀방울이 솟고 있었다.
+                                むかしむかし、ある所に、おじいさんとおばあさんが住んでいました。二人には子供がなかったので、さびしく暮していました。
+                                毎日、おじいさんは山へ柴刈りに、おばあさんは川へ洗濯に行きました。ある日のこと、おばあさんが川で洗濯をしていると、川上から大きな桃が、どんぶらこどんぶらこと流れてきました。
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-3 text-left">
-                                <h5><strong>글꼴</strong></h5>
+                                <h5><strong>書体</strong></h5>
                                 <ul class="list-group">
-                                    <li class="list-group-item fontList on-font" value="NanumGothic">나눔고딕</li>
-                                    <li class="list-group-item fontList off-font" value="Jeju Myeongjo">제주명조</li>
-                                    <li class="list-group-item fontList off-font" value="Hanna">한나</li>
-                                    {{-- <li class="list-group-item fontList off-font" value="Gungsuh">궁서</li> --}}
+                                    <li class="list-group-item fontList on-font" value="Noto Sans">Noto Sans</li>
+                                    <li class="list-group-item fontList off-font" value="Kokoro">Kokoro</li>
+                                    <li class="list-group-item fontList off-font" value="Sawarabi Mincho">Sawarabi Mincho</li>
                                 </ul>
                             </div>
                             <div class="col-md-3 text-left">
-                                <h5><strong>글크기</strong></h5>
+                                <h5><strong>文サイズ</strong></h5>
                             <ul class="list-group">
                                     <li class="list-group-item sizeList off-font">12px</li>
                                     <li class="list-group-item sizeList on-font">14px</li>
@@ -65,7 +64,7 @@
                                 </ul>
                             </div>
                             <div class="col-md-3 text-left">
-                                <h5><strong>줄간격</strong></h5>
+                                <h5><strong>行間隔</strong></h5>
                                 <ul class="list-group">
                                     <li class="list-group-item lineList off-font">120%</li>
                                     <li class="list-group-item lineList off-font">150%</li>
@@ -76,25 +75,25 @@
                                 </ul>
                             </div>
                             <div class="col-md-3 text-left">
-                                <h5><strong>글씨색</strong></h5>
+                                <h5><strong>フォント色</strong></h5>
                                 <ul class="list-inline">
-                                    <li class="colorBox on-colorBox font-color" value="#000000">{{-- 색1 검정 --}}</li>
-                                    <li class="colorBox off-colorBox font-color" value="#ffffff">{{-- 색5 흰색 --}}</li>
+                                    <li class="colorBox on-colorBox font-color" value="#000000">{{-- 色1 black --}}</li>
+                                    <li class="colorBox off-colorBox font-color" value="#ffffff">{{-- 色5 white --}}</li>
                                 </ul>
-                                <h5><strong>배경색</strong></h5>
+                                <h5><strong>背景色</strong></h5>
                                 <ul class="list-inline">
-                                    <li class="colorBox on-colorBox back-color" value="#ffffff">{{-- 색1 흰색 --}}</li>
+                                    <li class="colorBox on-colorBox back-color" value="#ffffff">{{-- 色1 white --}}</li>
                                     <li class="colorBox off-colorBox back-color" value="#ffd480">{{-- rgb(255, 212, 128) --}}</li>
                                     <li class="colorBox off-colorBox back-color" value="#e6ffe6">{{-- rgb(230, 255, 230) --}}</li>
                                     <li class="colorBox off-colorBox back-color" value="#e0ccff">{{-- rgb(224, 204, 255) --}}</li>
-                                    <li class="colorBox off-colorBox back-color" value="#000000">{{-- 색5 검정 --}}</li>
+                                    <li class="colorBox off-colorBox back-color" value="#000000">{{-- 色5 blac --}}</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                 </div>
             </div>

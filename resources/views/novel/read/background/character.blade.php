@@ -3,7 +3,7 @@
 <div class="row">
     @if ($data[0] == 0) 
     <div class="col-md-12 text-center" name="character-view">
-        <strong>아직 공개된 배경 정보가 없습니다.</strong>
+        <strong>まだ公開された小説設定がありません。</strong>
     @else
         <div class="col-md-3 text-center" name="character-view">
         @foreach ($data as $character)
@@ -15,7 +15,7 @@
 		<table class="table">
             <tr>
                 <td>
-                    <strong>이름</strong>
+                    <strong>名前</strong>
                 </td>
                 <td name="character-name">
                     {{-- NAME --}}
@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td>
-                    <strong>나이</strong>
+                    <strong>年齢</strong>
                 </td>
                 <td name="character-age">
                     {{-- AGE --}}
@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <td>
-                    <strong>성별</strong>
+                    <strong>性別</strong>
                 </td>
                 <td name="character-gender">
                     {{-- GENDER --}}
@@ -39,7 +39,7 @@
             </tr>
             <tr>
                 <td>
-                    <strong>내용</strong>
+                    <strong>内容</strong>
                 </td>
                 <td name="character-info">
                     {{-- INFO --}}
@@ -47,7 +47,7 @@
             </tr>
             <tr>
                 <td>
-                    <strong>작가의 설정</strong>
+                    <strong>作家の設定</strong>
                 </td>
                 <td name="character-refer_info">
                     {{-- REFER INFO --}}

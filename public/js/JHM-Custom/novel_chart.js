@@ -4,7 +4,7 @@ var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'polarArea',
     data: {
-        labels: ["무협", "로맨스", "판타지", "호러", "일반소설", "SF"],
+        labels: ["武侠", "ロマンス", "ファンタジー", "ホラー", "推理", "SF"],
         datasets: [{
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],

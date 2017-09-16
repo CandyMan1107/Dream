@@ -19,7 +19,7 @@
                     {{-- BLOG NOTICE START --}}
                     <div class="col-md-12 blog_notice_list text-center autoplay-notice">
                         @if ($data[0] == "empty")
-                            <h3>메뉴에 작성된 게시글이 없습니다.</h3>
+                            <h3>このメニューに書き込みがありません。</h3>
                         @else
                             @php
                                   echo BlogController::mainNoticeList($data[1]);  
@@ -31,7 +31,7 @@
                     {{-- BLOG BOARD START (NOTICE) --}}
                     <div class="col-md-12 blog_notice">
                         @if ($data[0] == "empty")
-                            <h3>포스트 아이콘을 눌러서 게시글을 작성해주세요.</h3>
+                            <h3>ポストアイコンを押して、書き込みを作成してください。</h3>
                         {{-- ELSEIF $_SERVER["REQUEST_URI"] in /blog OR /blog?%%% --}}
                         @elseif (($data[0] !== 0) && (strpos($_SERVER["REQUEST_URI"], "/blog/menu")!==false || strpos($_SERVER["REQUEST_URI"], "/blog/menu?")!==false))
                         

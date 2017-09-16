@@ -3,17 +3,17 @@ function info_genre(data) {
         $infoGenre = $.trim(data[0]['genre']);
 
         if ($infoGenre == "martial") {
-            $infoGenre = "무협";
+            $infoGenre = "武侠";
         } else if ($infoGenre == "fantasy") {
-            $infoGenre = "판타지";
+            $infoGenre = "ファンタジー";
         } else if ($infoGenre == "romance") {
-            $infoGenre = "로맨스";
+            $infoGenre = "ロマンス";
         } else if ($infoGenre == "scifi") {
             $infoGenre = "SF";
         } else if ($infoGenre == "horror") {
-            $infoGenre = "호러";
+            $infoGenre = "ホラー";
         } else if ($infoGenre == "detective") {
-            $infoGenre = "추리";
+            $infoGenre = "推理";
         } 
 
         $("b[name='genre']").append($infoGenre);

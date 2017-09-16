@@ -58,51 +58,51 @@
 						<li class="fake-circle"></li>
 						<li name="dayCircle">
 							<strong class="circle-icon">
-								월
+								月
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
                         <li name="dayCircle">
 							<strong class="circle-icon">
-                            	화
+                            	火
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
                         <li name="dayCircle">
 							<strong class="circle-icon">
 								{{-- <a href="#wed" class="btn-link-tab" data-day="wed">수</a> --}}
-                            	수
+                            	水
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
                         <li name="dayCircle">
 							<strong class="circle-icon">
-                            	목
+                            	木
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
                         <li name="dayCircle">
 							<strong class="circle-icon">
-                            	금
+                            	金
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
                         <li name="dayCircle">
 							<strong class="circle-icon">
-                            	토
+                            	土
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
                         <li name="dayCircle">
 							<strong class="circle-icon">
-                            	일
+                            	日
 							</strong>
                         </li>
 						<span class="fake-circle"></span>
 
 						<span class="text-right">
 							<a data-toggle="collapse" href="#collapseGenreMenu" aria-expanded="false" aria-controls="collapseGenreMenu">
-								&nbsp; 장르 &nbsp;&nbsp;&nbsp;
+								&nbsp; ジャンル &nbsp;&nbsp;&nbsp;
 							</a>
 						</span>
 						{{-- <span class="text-right"> 정렬</span> --}}

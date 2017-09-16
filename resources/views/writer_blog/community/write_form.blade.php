@@ -30,12 +30,12 @@
                             </div>
                             {{--  board_title  --}}
                             <div class="col-md-9">
-                                <input name="board_title" id="post-title" type="text" placeholder="포스트 제목을 입력하세요." />
+                                <input name="board_title" id="post-title" type="text" placeholder="ポストのタイトルを入力して下さい。" />
                             </div> 
                             {{-- is_notice --}}
                             <div class="col-md-12">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="is_notice" id="notice-check"> 공지
+                                    <input type="checkbox" name="is_notice" id="notice-check"> ノーティス
                                 </label>
                             </div>
                             {{--  board_content  --}}
@@ -46,9 +46,8 @@
                             </div>
                         </div>
                     </div>
-                    {{--  <button class="btn btn-default">임시저장 구현해주겠니</button>  --}}
                     {{--  &nbsp; &nbsp;  --}}
-                    <button type="submit" class="btn btn-default">등록</button>
+                    <button type="submit" class="btn btn-default">登録</button>
                 </form>
             </div>
             {{-- BOARD WRITE FORM SPACE END --}}

@@ -14,7 +14,7 @@ function character_event(data){
                 event_id = $(this).attr("id");
                 // console.log(e);
                 $('.refer_info').remove();
-                $('#name').text("캐릭터 정보");
+                $('#name').text("人物情報");
                 $('#character_id').val(data[e]['id']);
                 $('#character_name').val(data[e]['name']);
                 if(data[e]['refer_info'].e>1){

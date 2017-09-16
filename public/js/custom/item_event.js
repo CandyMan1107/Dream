@@ -12,7 +12,7 @@ function item_event(data){
                 // console.log(e);
                 event_id = $(this).attr("id")-1;
                 $('.refer_info').remove();
-                $('#name').text("사물 정보");
+                $('#name').text("事物情報");
                 $('#item_name').val(data[e]['name']);
                 $('#item_cate').val(data[e]['category']);
                 $('#item_content').val(data[e]['info']);
