@@ -174,14 +174,14 @@ echo NovelEpisodeController::show($novelId, $d.id);
 				// 소설 테이블
 				var genre;
 				switch(d.genre){
-					case "romance" : genre = "로맨스"; break;
-					case "fantasy" : genre = "판타지"; break;
+					case "romance" : genre = "ロマンス"; break;
+					case "fantasy" : genre = "ファンタジー"; break;
 					case "scifi" : genre = "SF"; break;
-					case "martial" : genre = "무협"; break;
-					case "detective" : genre = "추리"; break;
-					case "horror" : genre = "호러"; break;
-					case "agenovel" : genre = "시대극"; break;
-					default: genre = "로멘스"; break;
+					case "martial" : genre = "武侠"; break;
+					case "detective" : genre = "推理"; break;
+					case "horror" : genre = "ホラー"; break;
+					case "agenovel" : genre = "歴史"; break;
+					default: genre = "ロマンス"; break;
 				}
 				var tableEle ="";
 				tableEle += "<table class='table novel-table' align='center'>";
