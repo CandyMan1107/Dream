@@ -2,7 +2,7 @@
 <script type="text/javascript" src="/js/custom/tag_event.js"></script>
 <script> var a = tag_click( <?=json_encode($datas['tag_data'])?>, <?=json_encode($datas['page'])?> ); </script>
 
-<h3>태그 등록</h3>
+<h3>タグ登録</h3>
 <form id="add_tag" name="add_tag" action="{{ route('tagsAdd.store') }}" method="POST">
     {!! csrf_field() !!}
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
