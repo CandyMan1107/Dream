@@ -27,7 +27,7 @@ $(document).ready(function(){
 // 		})
 // 	});
 // });
-</script>			
+</script>
 		<style type="text/css">
 			@font-face {
 				font-family:nav-font; src: url('{{ asset('../public/fonts/APJapanesefontH.ttf') }}');
@@ -50,7 +50,7 @@ $(document).ready(function(){
 						<ul class="nav navbar-nav navbar-right">
 							<li class="active"><a href="/">Home</a></li>
 							{{-- SESSION의 user_id string 으로 변경하기 --}}
-							<li><a href="/yerriel/blog">Blog</a></li>
+								<li><a href="/yerriel/blog">ブログ</a></li>
 							<li><a href="#event">イベント</a></li>
 							<li><a href="#about">ヘルプ</a></li>
 

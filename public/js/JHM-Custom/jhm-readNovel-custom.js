@@ -16,7 +16,8 @@ $(function () {
     $("div[name=webMode]").find("span").removeAttr("data-case");
 
     $("div[name=webMode]").css("font-size", 14);
-    $("div[name=webMode]").css("font-family", "Nanum Gothic");
+    // $("div[name=webMode]").css("font-family", "Nanum Gothic");
+    $("div[name=webMode]").css("font-family", "Noto Sans Japanese");
     $("div[name=webMode]").css("line-height", "170%");
     
     $("div").filter(".example-text").css("line-height", "170%");
@@ -25,13 +26,15 @@ $(function () {
 
     $("button[name=reset]").click(function () {
         $("div[name=webMode]").css("line-height", "170%");
-        $("div[name=webMode]").css("font-family", "Nanum Gothic");
+        // $("div[name=webMode]").css("font-family", "Nanum Gothic");
+        $("div[name=webMode]").css("font-family", "Noto Sans Japanese");
         $("div[name=webMode]").css("font-size", 14);
         $("div[name=webMode]").css("background", "white");
         $("div[name=webMode]").css("color", "black");
 
         $("div").filter(".example-text").css("line-height", "170%");
-        $("div").filter(".example-text").css("font-family", "Nanum Gothic");
+        // $("div").filter(".example-text").css("font-family", "Nanum Gothic");
+        $("div[name=webMode]").css("font-family", "Noto Sans Japanese");
         $("div").filter(".example-text").css("font-size", 14);
         $("div").filter(".example-text").css("background", "white");
         $("div").filter(".example-text").css("color", "black");
