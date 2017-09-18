@@ -15,8 +15,8 @@ $(function () {
             $welcomeGenre = "ホラー";
         } else if ($welcomeGenre == "detective") {
             $welcomeGenre = "推理";
-        } else if ($infoGenre == "agenovel") {
-            $infoGenre = "歴史";
+        } else if ($welcomeGenre == "agenovel") {
+            $welcomeGenre = "歴史";
         } 
 
         $(this).siblings("h3[name='genre']").append($welcomeGenre);
