@@ -14,6 +14,8 @@ function info_genre(data) {
             $infoGenre = "ホラー";
         } else if ($infoGenre == "detective") {
             $infoGenre = "推理";
+        } else if ($infoGenre == "agenovel") {
+            $infoGenre = "歴史";
         } 
 
         $("b[name='genre']").append($infoGenre);

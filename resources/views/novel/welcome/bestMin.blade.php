@@ -21,6 +21,7 @@
 							<div class="filter wrk-title" data-filter=".martial">武侠</div>
 							<div class="filter wrk-title" data-filter=".scifi">SF</div>
 							<div class="filter wrk-title" data-filter=".detective">推理</div>
+							<div class="filter wrk-title" data-filter=".agenovel">歴史</div>
 							<div class="filter wrk-title lst-cld" data-filter=".horror">ホラー</div>
 					</div>
 					<div id="Container">
