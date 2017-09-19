@@ -893,16 +893,16 @@ fvcc<div class="default-padding"></div>
                 appendEle += "  <div class='col-md-6 basic-cha-info'>";
                 appendEle += "    <br>";
                 appendEle += "    <span>";
-                appendEle += "    이름 | " + data.name + "<br>";
-                appendEle += "    나이 | " + data.age + "<br>";
-                appendEle += "    성별 | " + data.gender + "<br>";
+                appendEle += "    名前 | " + data.name + "<br>";
+                appendEle += "    年齢 | " + data.age + "<br>";
+                appendEle += "    性別 | " + data.gender + "<br>";
                 appendEle += "    </span>";
                 appendEle += "  </div>";
                 appendEle += "</div>";
 
                 appendEle += "<div class='col-md-12 info-div background-div'>";
                 appendEle += "  <div class='col-md-12 info-header'>";
-                appendEle += "    주요 정보";
+                appendEle += "    主な情報";
                 appendEle += "  </div>";
                 appendEle += "  <div class='col-md-12 info-content'>";
                 appendEle += data.info;
@@ -911,7 +911,7 @@ fvcc<div class="default-padding"></div>
 
                 appendEle += "<div class='col-md-12 tag-info-div'>";
                 appendEle += "  <div class='col-md-12 tag-info-header'>";
-                appendEle += "    태그 정보";
+                appendEle += "    タグ情報";
                 appendEle += "  </div>";
                 appendEle += "  <div class='col-md-9 tag-info-content'>";
                 appendEle += "    <select class='form-control tag-list-select'>";
@@ -936,15 +936,15 @@ fvcc<div class="default-padding"></div>
                 appendEle += "  <div class='col-md-6 basic-cha-info'>";
                 appendEle += "    <br>";
                 appendEle += "    <span>";
-                appendEle += "    이름 | " + data.name + "<br>";
-                appendEle += "    종류 | " + data.category + "<br>";
+                appendEle += "    名前 | " + data.name + "<br>";
+                appendEle += "    種類 | " + data.category + "<br>";
                 appendEle += "    </span>";
                 appendEle += "  </div>";
                 appendEle += "</div>";
 
                 appendEle += "<div class='col-md-12 info-div background-div'>";
                 appendEle += "  <div class='col-md-12 info-header'>";
-                appendEle += "    주요 정보";
+                appendEle += "    主な情報";
                 appendEle += "  </div>";
                 appendEle += "  <div class='col-md-12 info-content'>";
                 appendEle += data.info;
@@ -953,7 +953,7 @@ fvcc<div class="default-padding"></div>
 
                 appendEle += "<div class='col-md-12 tag-info-div'>";
                 appendEle += "  <div class='col-md-12 tag-info-header'>";
-                appendEle += "    태그 정보";
+                appendEle += "    タグ情報";
                 appendEle += "  </div>";
                 appendEle += "  <div class='col-md-9 tag-info-content'>";
                 appendEle += "    <select class='form-control tag-list-select'>";
@@ -978,15 +978,15 @@ fvcc<div class="default-padding"></div>
                 appendEle += "  <div class='col-md-6 basic-cha-info'>";
                 appendEle += "    <br>";
                 appendEle += "    <span>";
-                appendEle += "    이름 | " + data.event_names + "<br>";
-                appendEle += "    도구 | " + data.add_items + "<br>";
+                appendEle += "    名前 | " + data.event_names + "<br>";
+                appendEle += "    道具 | " + data.add_items + "<br>";
                 appendEle += "    </span>";
                 appendEle += "  </div>";
                 appendEle += "</div>";
 
                 appendEle += "<div class='col-md-12 info-div background-div'>";
                 appendEle += "  <div class='col-md-12 info-header'>";
-                appendEle += "    주요 정보";
+                appendEle += "    主な情報";
                 appendEle += "  </div>";
                 appendEle += "  <div class='col-md-12 info-content'>";
                 appendEle +=      data.event_contents;
@@ -995,7 +995,7 @@ fvcc<div class="default-padding"></div>
 
                 appendEle += "<div class='col-md-12 tag-info-div'>";
                 appendEle += "  <div class='col-md-12 tag-info-header'>";
-                appendEle += "    태그 정보";
+                appendEle += "    タグ情報";
                 appendEle += "  </div>";
                 appendEle += "  <div class='col-md-9 tag-info-content'>";
                 appendEle += "    <select class='form-control tag-list-select'>";
@@ -1238,9 +1238,9 @@ fvcc<div class="default-padding"></div>
                 addEle += "  <div class='col-md-8 basic-cha-info'>";
                 addEle += "    <br>";
                 addEle += "    <span>";
-                addEle += "    이름 | " + data.name + "<br>";
-                addEle += "    나이 | " + data.age + "<br>";
-                addEle += "    성별 | " + data.gender + "<br>";
+                addEle += "    名前 | " + data.name + "<br>";
+                addEle += "    年齢 | " + data.age + "<br>";
+                addEle += "    性別 | " + data.gender + "<br>";
                 addEle += "    </span>";
                 addEle += "  </div>";
                 addEle += "</div>";
@@ -1255,8 +1255,8 @@ fvcc<div class="default-padding"></div>
               addEle += "  <div class='col-md-8 basic-cha-info'>";
               addEle += "    <br>";
               addEle += "    <span>";
-              addEle += "    이름 | " + data.name + "<br>";
-              addEle += "    종류 | " + data.category + "<br>";
+              addEle += "    名前 | " + data.name + "<br>";
+              addEle += "    種類 | " + data.category + "<br>";
               addEle += "    </span>";
               addEle += "  </div>";
               addEle += "</div>";
@@ -1270,7 +1270,7 @@ fvcc<div class="default-padding"></div>
               addEle += "  </div>";
               addEle += "  <div class='col-md-8 basic-cha-info'>";
               addEle += "    <span class='basic-cha-span'><br><br>";
-              addEle += "    제목 | " + data.title;
+              addEle += "    タイトル | " + data.title;
               addEle += "    </span>";
               addEle += "  </div>";
               addEle += "</div>";
@@ -1283,7 +1283,7 @@ fvcc<div class="default-padding"></div>
               addEle += "  </div>";
               addEle += "  <div class='col-md-8 basic-cha-info'>";
               addEle += "    <span class='basic-cha-span'><br><br>";
-              addEle += "    제목 | " + data.title;
+              addEle += "    タイトル | " + data.title;
               addEle += "    </span>";
               addEle += "  </div>";
               addEle += "</div>";
@@ -1609,11 +1609,11 @@ fvcc<div class="default-padding"></div>
             "postScript": postScript
           },
           success: function (data) {
-            alert("소설이 생성되었습니다!");
+            alert("小説を登録しました！");
             location.href ="/write_novel/my_novel";
           },
           error: function (error) {
-            alert("오류발생");
+            alert("ERROR");
           }
       });
     }

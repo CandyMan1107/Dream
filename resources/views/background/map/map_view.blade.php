@@ -359,10 +359,9 @@ rant @extends('layouts.master')
                 <div class="form-group col-md-12">
                   <label for="filter">フォント</label>
                   <select id="font-style-set" class="form-control">
-                      <option value="NanumGothic" selected>나눔고딕</option>
-                      <option value="Jeju Myeongjo">제주명조</option>
-                      <option value="Hanna">한나</option>
-                      <option value="Gungsuh">궁서</option>
+                      <option value="Noto Sans" selected>Noto Sans</option>
+                      <option value="Kokoro">Kokoro</option>
+                      <option value="Sawarabi Mincho">Sawarabi Mincho</option>
                   </select>
                 </div>
                 <div class="form-group col-md-6">

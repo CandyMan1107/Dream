@@ -577,7 +577,7 @@
 
             <div class="input-group col-md-12">
       				<div id="radioBtn" class="btn-group">
-      					<a class="case-btn btn btn-primary btn-sm notActive"  data-title="characters">인물</a>
+      					<a class="case-btn btn btn-primary btn-sm notActive"  data-title="characters"></a>
                 <a class="case-btn btn btn-primary btn-sm notActive" data-title="items">사물</a>
       					<a class="case-btn btn btn-primary btn-sm notActive" data-title="maps">장소</a>
                 <a class="case-btn btn btn-primary btn-sm notActive" data-title="timetables">사건</a>
