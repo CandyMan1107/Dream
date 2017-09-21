@@ -1,4 +1,5 @@
-# Novel Writing Helper
+![summary1](./teamproject1.png)
+![summary2](./teamproject2.png)
 
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
